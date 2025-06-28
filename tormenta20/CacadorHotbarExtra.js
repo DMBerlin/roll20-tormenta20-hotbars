@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Roll20 Hotbar Extra
+// @name         Roll20 Hotbar Extra - Caçador
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20
+// @description  Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20 - Especializada para Caçadores
 // @author       Você
 // @match        https://app.roll20.net/editor/*
 // @grant        none
@@ -18,7 +18,7 @@
     // Sistema de nome do personagem
     const CHAR_NAME_KEY = 'roll20-hotbar-charname';
 
-    // Função global para obter o nome do personagem
+    // Função global para obter o nome do personagema
     function getCharacterName() {
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
     }
@@ -1820,17 +1820,38 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         editIcon.style.opacity = '0';
         editIcon.style.transition = 'all 0.2s';
 
+        // Ícone da classe Caçador
+        const classIcon = document.createElement('div');
+        classIcon.innerHTML = '🏹';
+        classIcon.style.position = 'absolute';
+        classIcon.style.top = '-2px';
+        classIcon.style.left = '-2px';
+        classIcon.style.background = '#8B4513';
+        classIcon.style.borderRadius = '50%';
+        classIcon.style.width = '18px';
+        classIcon.style.height = '18px';
+        classIcon.style.display = 'flex';
+        classIcon.style.alignItems = 'center';
+        classIcon.style.justifyContent = 'center';
+        classIcon.style.fontSize = '10px';
+        classIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        classIcon.style.transition = 'all 0.2s';
+        classIcon.title = 'Caçador';
+
         avatarContainer.appendChild(avatar);
         avatarContainer.appendChild(editIcon);
+        avatarContainer.appendChild(classIcon);
 
         // Hover effects
         avatarContainer.onmouseover = () => {
             avatar.style.transform = 'scale(1.05)';
             editIcon.style.opacity = '1';
+            classIcon.style.transform = 'scale(1.1)';
         };
         avatarContainer.onmouseout = () => {
             avatar.style.transform = 'scale(1)';
             editIcon.style.opacity = '0';
+            classIcon.style.transform = 'scale(1)';
         };
         avatarContainer.onclick = createAvatarPopup;
 
@@ -1885,8 +1906,19 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             }
         };
 
+        // Classe do personagem
+        const characterClass = document.createElement('div');
+        characterClass.textContent = 'Caçador';
+        characterClass.style.color = '#8B4513';
+        characterClass.style.fontSize = '11px';
+        characterClass.style.fontWeight = 'bold';
+        characterClass.style.fontStyle = 'italic';
+        characterClass.style.textTransform = 'uppercase';
+        characterClass.style.letterSpacing = '0.5px';
+
         characterInfo.appendChild(characterName);
         characterInfo.appendChild(characterLevel);
+        characterInfo.appendChild(characterClass);
 
         characterSection.appendChild(avatarContainer);
         characterSection.appendChild(characterInfo);
@@ -1990,15 +2022,15 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             if (charLevel >= 9) {
                 marcaPresaAttackMod = 3;
                 marcaPresaDice = '+1d12';
-                marcaPresaDesc = '+3 acerto, +1d12 dano';
+                marcaPresaDesc = '+3 acerto, +1d12 dano, crit 16+';
             } else if (charLevel >= 5) {
                 marcaPresaAttackMod = 2;
                 marcaPresaDice = '+1d8';
-                marcaPresaDesc = '+2 acerto, +1d8 dano';
+                marcaPresaDesc = '+2 acerto, +1d8 dano, crit 16+';
             } else {
                 marcaPresaAttackMod = 1;
                 marcaPresaDice = '+1d4';
-                marcaPresaDesc = '+1 acerto, +1d4 dano';
+                marcaPresaDesc = '+1 acerto, +1d4 dano, crit 16+';
             }
 
             // Efeitos (checkboxes)
@@ -2006,8 +2038,8 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 { label: 'Espada Solar (+1d6 dano)', value: 'espada_solar', dice: '1d6', desc: '*+ Espada Solar*' },
                 { label: 'Escaramuça (+1d8 dano)', value: 'escaramurca', dice: '1d8', desc: '*+ Escaramuça*' },
                 { label: 'Ataque Furtivo (+1d6 dano)', value: 'ataque_furtivo', dice: '1d6', desc: '*+ Ataque Furtivo*' },
-                { label: `Marca da Presa (${marcaPresaDesc})`, value: 'marca_presa', dice: marcaPresaDice.replace('+', ''), attackMod: marcaPresaAttackMod, desc: `*+ Marca da Presa*` },
-                { label: 'Ponto Fraco (crit 16+)', value: 'ponto_fraco', critMod: -2, desc: '*+ Ponto Fraco*' }
+                { label: `Marca da Presa (${marcaPresaDesc})`, value: 'marca_presa', dice: marcaPresaDice.replace('+', ''), attackMod: marcaPresaAttackMod, critMod: -2, desc: `*+ Marca da Presa*` },
+                { label: 'Inimigo (dobra margem de crítico)', value: 'inimigo', desc: '*+ Inimigo*' }
             ];
             const checkboxes = {};
             effects.forEach(effect => {
@@ -2049,6 +2081,8 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 let extraDescription = '';
                 let critThreshold = 18; // Valor padrão
                 let attackBonus = 0; // Bônus de acerto
+                let marcaPresaActive = false;
+                let inimigoActive = false;
 
                 effects.forEach(effect => {
                     if (checkboxes[effect.value].checked) {
@@ -2062,8 +2096,25 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                             attackBonus += effect.attackMod;
                         }
                         extraDescription += '%NEWLINE% ' + effect.desc;
+
+                        // Marca se Marca da Presa está ativo
+                        if (effect.value === 'marca_presa') {
+                            marcaPresaActive = true;
+                        }
+                        // Marca se Inimigo está ativo
+                        if (effect.value === 'inimigo') {
+                            inimigoActive = true;
+                        }
                     }
                 });
+
+                // Se Inimigo está ativo e Marca da Presa também está, dobra a margem de crítico
+                if (inimigoActive && marcaPresaActive) {
+                    // Se critThreshold já é 16 (devido ao Marca da Presa), muda para 14
+                    if (critThreshold === 16) {
+                        critThreshold = 14;
+                    }
+                }
 
                 // Macro base com modificação do acerto crítico e bônus de acerto
                 const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
