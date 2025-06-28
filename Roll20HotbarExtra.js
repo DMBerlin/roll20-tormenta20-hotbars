@@ -15,6 +15,8 @@
 
     // Sistema de favoritos para skills
     const FAVORITES_KEY = 'roll20-hotbar-favorites';
+    // Sistema de avatar do personagem
+    const AVATAR_KEY = 'roll20-hotbar-avatar';
 
     function getFavorites() {
         try {
@@ -34,6 +36,23 @@
         }
     }
 
+    function getAvatarUrl() {
+        try {
+            return localStorage.getItem(AVATAR_KEY) || null;
+        } catch (error) {
+            console.log('Erro ao carregar avatar:', error);
+            return null;
+        }
+    }
+
+    function saveAvatarUrl(url) {
+        try {
+            localStorage.setItem(AVATAR_KEY, url);
+        } catch (error) {
+            console.log('Erro ao salvar avatar:', error);
+        }
+    }
+
     function toggleFavorite(skillName) {
         const favorites = getFavorites();
         const index = favorites.indexOf(skillName);
@@ -46,6 +65,225 @@
 
         saveFavorites(favorites);
         return favorites;
+    }
+
+    // Função para criar popup de configuração de avatar
+    function createAvatarPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('avatar-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('avatar-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'avatar-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'avatar-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #6ec6ff';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '400px';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Configurar Avatar';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('avatar-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Preview do avatar atual
+        const previewContainer = document.createElement('div');
+        previewContainer.style.display = 'flex';
+        previewContainer.style.justifyContent = 'center';
+        previewContainer.style.marginBottom = '15px';
+
+        const currentAvatarUrl = getAvatarUrl();
+        const previewAvatar = document.createElement('div');
+        previewAvatar.style.width = '80px';
+        previewAvatar.style.height = '80px';
+        previewAvatar.style.borderRadius = '50%';
+        previewAvatar.style.border = '3px solid #6ec6ff';
+        previewAvatar.style.display = 'flex';
+        previewAvatar.style.alignItems = 'center';
+        previewAvatar.style.justifyContent = 'center';
+        previewAvatar.style.fontSize = '24px';
+        previewAvatar.style.fontWeight = 'bold';
+        previewAvatar.style.color = '#ecf0f1';
+        previewAvatar.style.background = '#23243a';
+        previewAvatar.style.overflow = 'hidden';
+
+        if (currentAvatarUrl) {
+            previewAvatar.style.background = `url(${currentAvatarUrl}) center/cover`;
+            previewAvatar.textContent = '';
+        } else {
+            previewAvatar.textContent = 'EE';
+        }
+
+        previewContainer.appendChild(previewAvatar);
+        popup.appendChild(previewContainer);
+
+        // Campo de URL
+        const urlLabel = document.createElement('label');
+        urlLabel.textContent = 'URL da imagem:';
+        urlLabel.style.color = '#ecf0f1';
+        urlLabel.style.fontSize = '14px';
+        urlLabel.style.fontWeight = 'bold';
+        urlLabel.style.marginBottom = '8px';
+        popup.appendChild(urlLabel);
+
+        const urlInput = document.createElement('input');
+        urlInput.type = 'url';
+        urlInput.placeholder = 'https://exemplo.com/imagem.jpg';
+        urlInput.value = currentAvatarUrl || '';
+        urlInput.style.width = '100%';
+        urlInput.style.padding = '10px';
+        urlInput.style.borderRadius = '6px';
+        urlInput.style.border = '1px solid #6ec6ff';
+        urlInput.style.background = '#23243a';
+        urlInput.style.color = '#fff';
+        urlInput.style.fontSize = '14px';
+        urlInput.style.outline = 'none';
+        urlInput.style.boxSizing = 'border-box';
+        urlInput.style.marginBottom = '15px';
+        popup.appendChild(urlInput);
+
+        // Botões
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.gap = '10px';
+
+        const saveBtn = document.createElement('button');
+        saveBtn.textContent = 'Salvar';
+        saveBtn.style.flex = '1';
+        saveBtn.style.padding = '10px';
+        saveBtn.style.background = '#6ec6ff';
+        saveBtn.style.color = '#23243a';
+        saveBtn.style.border = 'none';
+        saveBtn.style.borderRadius = '6px';
+        saveBtn.style.fontSize = '14px';
+        saveBtn.style.fontWeight = 'bold';
+        saveBtn.style.cursor = 'pointer';
+        saveBtn.style.transition = 'all 0.2s';
+
+        saveBtn.onmouseover = () => {
+            saveBtn.style.background = '#5bb8ff';
+        };
+        saveBtn.onmouseout = () => {
+            saveBtn.style.background = '#6ec6ff';
+        };
+
+        saveBtn.onclick = () => {
+            const url = urlInput.value.trim();
+            if (url) {
+                saveAvatarUrl(url);
+                // Atualiza o avatar na hotbar
+                updateCharacterAvatar();
+            }
+            popup.remove();
+            const overlay = document.getElementById('avatar-overlay');
+            if (overlay) overlay.remove();
+        };
+
+        const clearBtn = document.createElement('button');
+        clearBtn.textContent = 'Limpar';
+        clearBtn.style.flex = '1';
+        clearBtn.style.padding = '10px';
+        clearBtn.style.background = '#444';
+        clearBtn.style.color = '#ecf0f1';
+        clearBtn.style.border = 'none';
+        clearBtn.style.borderRadius = '6px';
+        clearBtn.style.fontSize = '14px';
+        clearBtn.style.fontWeight = 'bold';
+        clearBtn.style.cursor = 'pointer';
+        clearBtn.style.transition = 'all 0.2s';
+
+        clearBtn.onmouseover = () => {
+            clearBtn.style.background = '#555';
+        };
+        clearBtn.onmouseout = () => {
+            clearBtn.style.background = '#444';
+        };
+
+        clearBtn.onclick = () => {
+            saveAvatarUrl('');
+            updateCharacterAvatar();
+            popup.remove();
+            const overlay = document.getElementById('avatar-overlay');
+            if (overlay) overlay.remove();
+        };
+
+        buttonContainer.appendChild(saveBtn);
+        buttonContainer.appendChild(clearBtn);
+        popup.appendChild(buttonContainer);
+
+        document.body.appendChild(popup);
+    }
+
+    // Função para atualizar o avatar do personagem na hotbar
+    function updateCharacterAvatar() {
+        const avatarElement = document.getElementById('character-avatar');
+        if (!avatarElement) return;
+
+        const avatarUrl = getAvatarUrl();
+        if (avatarUrl) {
+            avatarElement.style.background = `url(${avatarUrl}) center/cover`;
+            avatarElement.textContent = '';
+        } else {
+            avatarElement.style.background = '#23243a';
+            avatarElement.textContent = 'EE';
+        }
     }
 
     // Aguarda a página carregar completamente
@@ -1406,33 +1644,33 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
         hotbar.style.left = '50%';
         hotbar.style.transform = 'translateX(-50%)';
         hotbar.style.background = 'rgba(30,30,40,0.92)';
-        hotbar.style.padding = '18px 24px 14px 24px';
+        hotbar.style.padding = '0';
         hotbar.style.borderRadius = '16px';
         hotbar.style.zIndex = '9999';
         hotbar.style.display = 'flex';
         hotbar.style.flexDirection = 'column';
-        hotbar.style.gap = '10px';
         hotbar.style.boxShadow = '0 4px 16px rgba(0,0,0,0.5)';
         hotbar.style.userSelect = 'none';
         hotbar.style.border = '2px solid #6ec6ff';
-        hotbar.style.minWidth = '340px';
-        hotbar.style.alignItems = 'center';
+        hotbar.style.minWidth = '500px';
+        hotbar.style.alignItems = 'stretch';
 
-        // Cabeçalho
+        // Cabeçalho que se estende por toda a largura
         const header = document.createElement('div');
         header.style.display = 'flex';
         header.style.alignItems = 'center';
         header.style.justifyContent = 'center';
-        header.style.paddingBottom = '5px';
+        header.style.padding = '18px 24px 5px 24px';
         header.style.borderBottom = '1px solid rgba(110,198,255,0.2)';
         header.style.cursor = 'grab';
         header.style.position = 'relative';
         header.style.width = '100%';
+        header.style.boxSizing = 'border-box';
 
         // Toggle para /talktomyself
         const talkToggle = document.createElement('div');
         talkToggle.style.position = 'absolute';
-        talkToggle.style.left = '5px';
+        talkToggle.style.left = '24px';
         talkToggle.style.top = '50%';
         talkToggle.style.transform = 'translateY(-50%)';
         talkToggle.style.cursor = 'pointer';
@@ -1497,17 +1735,169 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
 
         header.appendChild(talkToggle);
 
+        // Título sem emoji
         const title = document.createElement('span');
-        title.textContent = '🎲 Hotbar';
+        title.textContent = 'Hotbar';
         title.style.color = '#ecf0f1';
         title.style.fontSize = '14px';
         title.style.fontWeight = 'bold';
         title.style.cursor = 'grab';
         title.style.textAlign = 'center';
         header.appendChild(title);
+
         hotbar.appendChild(header);
 
-        // Container dos botões
+        // Container principal com as seções
+        const mainContent = document.createElement('div');
+        mainContent.style.display = 'flex';
+        mainContent.style.flexDirection = 'row';
+        mainContent.style.gap = '20px';
+        mainContent.style.padding = '14px 24px 14px 24px';
+        mainContent.style.alignItems = 'center';
+
+        // Seção do personagem (lado esquerdo)
+        const characterSection = document.createElement('div');
+        characterSection.style.display = 'flex';
+        characterSection.style.alignItems = 'center';
+        characterSection.style.gap = '12px';
+        characterSection.style.padding = '8px 12px';
+        characterSection.style.background = 'rgba(26,26,46,0.8)';
+        characterSection.style.borderRadius = '12px';
+        characterSection.style.border = '1px solid rgba(110,198,255,0.3)';
+        characterSection.style.minWidth = '200px';
+
+        // Avatar do personagem
+        const avatarContainer = document.createElement('div');
+        avatarContainer.style.position = 'relative';
+        avatarContainer.style.cursor = 'pointer';
+        avatarContainer.style.transition = 'all 0.2s';
+
+        const avatar = document.createElement('div');
+        avatar.id = 'character-avatar';
+        avatar.style.width = '48px';
+        avatar.style.height = '48px';
+        avatar.style.borderRadius = '50%';
+        avatar.style.border = '2px solid #6ec6ff';
+        avatar.style.display = 'flex';
+        avatar.style.alignItems = 'center';
+        avatar.style.justifyContent = 'center';
+        avatar.style.fontSize = '16px';
+        avatar.style.fontWeight = 'bold';
+        avatar.style.color = '#ecf0f1';
+        avatar.style.background = '#23243a';
+        avatar.style.overflow = 'hidden';
+        avatar.style.transition = 'all 0.2s';
+
+        // Carrega avatar salvo ou usa iniciais
+        const avatarUrl = getAvatarUrl();
+        if (avatarUrl) {
+            avatar.style.background = `url(${avatarUrl}) center/cover`;
+            avatar.textContent = '';
+        } else {
+            avatar.textContent = 'EE';
+        }
+
+        // Ícone de edição no avatar
+        const editIcon = document.createElement('div');
+        editIcon.innerHTML = '✏️';
+        editIcon.style.position = 'absolute';
+        editIcon.style.bottom = '-2px';
+        editIcon.style.right = '-2px';
+        editIcon.style.background = '#6ec6ff';
+        editIcon.style.borderRadius = '50%';
+        editIcon.style.width = '18px';
+        editIcon.style.height = '18px';
+        editIcon.style.display = 'flex';
+        editIcon.style.alignItems = 'center';
+        editIcon.style.justifyContent = 'center';
+        editIcon.style.fontSize = '10px';
+        editIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        editIcon.style.opacity = '0';
+        editIcon.style.transition = 'all 0.2s';
+
+        avatarContainer.appendChild(avatar);
+        avatarContainer.appendChild(editIcon);
+
+        // Hover effects
+        avatarContainer.onmouseover = () => {
+            avatar.style.transform = 'scale(1.05)';
+            editIcon.style.opacity = '1';
+        };
+        avatarContainer.onmouseout = () => {
+            avatar.style.transform = 'scale(1)';
+            editIcon.style.opacity = '0';
+        };
+        avatarContainer.onclick = createAvatarPopup;
+
+        // Informações do personagem
+        const characterInfo = document.createElement('div');
+        characterInfo.style.display = 'flex';
+        characterInfo.style.flexDirection = 'column';
+        characterInfo.style.gap = '2px';
+
+        // --- NOVO: Buscar nome e nível do localStorage ou permitir configuração manual ---
+        const CHAR_NAME_KEY = 'roll20-hotbar-charname';
+        const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
+        function getCharName() {
+            return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
+        }
+        function getCharLevel() {
+            return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
+        }
+        function saveCharName(name) {
+            localStorage.setItem(CHAR_NAME_KEY, name);
+        }
+        function saveCharLevel(level) {
+            localStorage.setItem(CHAR_LEVEL_KEY, level);
+        }
+
+        // Nome editável
+        const characterName = document.createElement('div');
+        characterName.textContent = getCharName();
+        characterName.style.color = '#ecf0f1';
+        characterName.style.fontSize = '14px';
+        characterName.style.fontWeight = 'bold';
+        characterName.style.whiteSpace = 'nowrap';
+        characterName.style.cursor = 'pointer';
+        characterName.title = 'Clique para editar o nome';
+        characterName.onclick = () => {
+            const novoNome = prompt('Nome do personagem:', getCharName());
+            if (novoNome !== null && novoNome.trim() !== '') {
+                saveCharName(novoNome.trim());
+                characterName.textContent = novoNome.trim();
+            }
+        };
+
+        // Nível editável
+        const characterLevel = document.createElement('div');
+        characterLevel.textContent = `Nível ${getCharLevel()}`;
+        characterLevel.style.color = '#6ec6ff';
+        characterLevel.style.fontSize = '12px';
+        characterLevel.style.fontWeight = 'bold';
+        characterLevel.style.cursor = 'pointer';
+        characterLevel.title = 'Clique para editar o nível';
+        characterLevel.onclick = () => {
+            const novoNivel = prompt('Nível do personagem:', getCharLevel());
+            if (novoNivel !== null && novoNivel.trim() !== '') {
+                saveCharLevel(novoNivel.trim());
+                characterLevel.textContent = `Nível ${novoNivel.trim()}`;
+            }
+        };
+
+        characterInfo.appendChild(characterName);
+        characterInfo.appendChild(characterLevel);
+
+        characterSection.appendChild(avatarContainer);
+        characterSection.appendChild(characterInfo);
+
+        // Linha separadora
+        const separator = document.createElement('div');
+        separator.style.width = '1px';
+        separator.style.height = '60px';
+        separator.style.background = 'rgba(110,198,255,0.3)';
+        separator.style.margin = '0 10px';
+
+        // Container dos botões (lado direito)
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
         buttonContainer.style.gap = '18px';
@@ -1591,12 +1981,31 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
             header.appendChild(closeBtn);
             popup.appendChild(header);
 
+            // Obter nível do personagem
+            const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+            let marcaPresaAttackMod = 0;
+            let marcaPresaDice = '';
+            let marcaPresaDesc = '';
+            if (charLevel >= 9) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+1d12';
+                marcaPresaDesc = '+3 acerto, +1d12 dano';
+            } else if (charLevel >= 5) {
+                marcaPresaAttackMod = 2;
+                marcaPresaDice = '+1d8';
+                marcaPresaDesc = '+2 acerto, +1d8 dano';
+            } else {
+                marcaPresaAttackMod = 1;
+                marcaPresaDice = '+1d4';
+                marcaPresaDesc = '+1 acerto, +1d4 dano';
+            }
+
             // Efeitos (checkboxes)
             const effects = [
                 { label: 'Espada Solar (+1d6 dano)', value: 'espada_solar', dice: '1d6', desc: '*+ Espada Solar*' },
                 { label: 'Escaramuça (+1d8 dano)', value: 'escaramurca', dice: '1d8', desc: '*+ Escaramuça*' },
                 { label: 'Ataque Furtivo (+1d6 dano)', value: 'ataque_furtivo', dice: '1d6', desc: '*+ Ataque Furtivo*' },
-                { label: 'Marca da Presa (+1d12 dano, +3 acerto)', value: 'marca_presa', dice: '1d12', attackMod: 3, desc: '*+ Marca da Presa*' },
+                { label: `Marca da Presa (${marcaPresaDesc})`, value: 'marca_presa', dice: marcaPresaDice.replace('+', ''), attackMod: marcaPresaAttackMod, desc: `*+ Marca da Presa*` },
                 { label: 'Ponto Fraco (crit 16+)', value: 'ponto_fraco', critMod: -2, desc: '*+ Ponto Fraco*' }
             ];
             const checkboxes = {};
@@ -1731,40 +2140,14 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
             btn.onclick = btnData.onClick;
             buttonContainer.appendChild(btn);
         });
-        hotbar.appendChild(buttonContainer);
-        // Botão para minimizar/maximizar
-        const toggleBtn = document.createElement('button');
-        toggleBtn.innerHTML = '−';
-        toggleBtn.style.position = 'absolute';
-        toggleBtn.style.top = '5px';
-        toggleBtn.style.right = '5px';
-        toggleBtn.style.background = 'rgba(255,255,255,0.2)';
-        toggleBtn.style.border = 'none';
-        toggleBtn.style.color = '#ecf0f1';
-        toggleBtn.style.borderRadius = '50%';
-        toggleBtn.style.width = '24px';
-        toggleBtn.style.height = '24px';
-        toggleBtn.style.cursor = 'pointer';
-        toggleBtn.style.fontSize = '16px';
-        toggleBtn.style.fontWeight = 'bold';
-        let isMinimized = false;
-        toggleBtn.onclick = () => {
-            if (isMinimized) {
-                buttonContainer.style.display = 'flex';
-                header.style.display = 'flex';
-                hotbar.style.minWidth = '340px';
-                toggleBtn.innerHTML = '−';
-                isMinimized = false;
-            } else {
-                buttonContainer.style.display = 'none';
-                header.style.display = 'flex';
-                hotbar.style.minWidth = '120px';
-                hotbar.style.padding = '5px 10px';
-                toggleBtn.innerHTML = '+';
-                isMinimized = true;
-            }
-        };
-        hotbar.appendChild(toggleBtn);
+
+        // Adiciona as seções ao conteúdo principal
+        mainContent.appendChild(characterSection);
+        mainContent.appendChild(separator);
+        mainContent.appendChild(buttonContainer);
+
+        hotbar.appendChild(mainContent);
+
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
     }
