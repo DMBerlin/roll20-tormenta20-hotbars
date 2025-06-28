@@ -11,12 +11,17 @@
 (function () {
     'use strict';
 
-    const personagem = 'Eira Egai';
-
     // Sistema de favoritos para skills
     const FAVORITES_KEY = 'roll20-hotbar-favorites';
     // Sistema de avatar do personagem
     const AVATAR_KEY = 'roll20-hotbar-avatar';
+    // Sistema de nome do personagem
+    const CHAR_NAME_KEY = 'roll20-hotbar-charname';
+
+    // Função global para obter o nome do personagem
+    function getCharacterName() {
+        return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
+    }
 
     function getFavorites() {
         try {
@@ -447,36 +452,36 @@
 
         // Lista de skills (nome, comando)
         const skills = [
-            { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Acrobacia}}{{theroll=[[1d20+[[@{${personagem}|acrobaciatotal}]]]]}}` },
-            { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Adestramento}}{{theroll=[[1d20+[[@{${personagem}|adestramentototal}]]]]}}` },
-            { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Atletismo}}{{theroll=[[1d20+[[@{${personagem}|atletismototal}]]]]}}` },
-            { nome: 'Atuação', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Atuação}}{{theroll=[[1d20+[[@{${personagem}|atuacaototal}]]]]}}` },
-            { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Cavalgar}}{{theroll=[[1d20+[[@{${personagem}|cavalgartotal}]]]]}}` },
-            { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Conhecimento}}{{theroll=[[1d20+[[@{${personagem}|conhecimentototal}]]]]}}` },
-            { nome: 'Cura', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Cura}}{{theroll=[[1d20+[[@{${personagem}|curatotal}]]]]}}` },
-            { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Diplomacia}}{{theroll=[[1d20+[[@{${personagem}|diplomaciatotal}]]]]}}` },
-            { nome: 'Enganação', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Enganação}}{{theroll=[[1d20+[[@{${personagem}|enganacaototal}]]]]}}` },
-            { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${personagem}|fortitudetotal}]]]]}}` },
-            { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Furtividade}}{{theroll=[[1d20+[[@{${personagem}|furtividadetotal}]]]]}}` },
-            { nome: 'Guerra', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Guerra}}{{theroll=[[1d20+[[@{${personagem}|guerratotal}]]]]}}` },
-            { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${personagem}|iniciativatotal}]] &{tracker}]]}}` },
-            { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Intimidação}}{{theroll=[[1d20+[[@{${personagem}|intimidacaototal}]]]]}}` },
-            { nome: 'Intuição', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Intuição}}{{theroll=[[1d20+[[@{${personagem}|intuicaototal}]]]]}}` },
-            { nome: 'Investigação', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Investigação}}{{theroll=[[1d20+[[@{${personagem}|investigacaototal}]]]]}}` },
-            { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Jogatina}}{{theroll=[[1d20+[[@{${personagem}|jogatinatotal}]]]]}}` },
-            { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Ladinagem}}{{theroll=[[1d20+[[@{${personagem}|ladinagemtotal}]]]]}}` },
-            { nome: 'Luta', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Luta}}{{theroll=[[1d20+[[@{${personagem}|lutatotal}]]]]}}` },
-            { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${personagem}|misticismototal}]]]]}}` },
-            { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${personagem}|nobrezatotal}]]]]}}` },
-            { nome: 'Ofício', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Ofício @{${personagem}|oficionome}}}{{theroll=[[1d20+[[@{${personagem}|oficiototal}]]]]}}` },
-            { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Ofício @{${personagem}|oficio2nome}}}{{theroll=[[1d20+[[@{${personagem}|oficio2total}]]]]}}` },
-            { nome: 'Percepção', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${personagem}|percepcaototal}]]]]}}` },
-            { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${personagem}|pilotagemtotal}]]]]}}` },
-            { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${personagem}|pontariatotal}]]]]}}` },
-            { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${personagem}|reflexostotal}]]]]}}` },
-            { nome: 'Religião', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Religião}}{{theroll=[[1d20+[[@{${personagem}|religiaototal}]]]]}}` },
-            { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Sobrevivência}}{{theroll=[[1d20+[[@{${personagem}|sobrevivenciatotal}]]]]}}` },
-            { nome: 'Vontade', comando: `&{template:t20}{{character=@{${personagem}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${personagem}|vontadetotal}]]]]}}` }
+            { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Acrobacia}}{{theroll=[[1d20+[[@{${getCharacterName()}|acrobaciatotal}]]]]}}` },
+            { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Adestramento}}{{theroll=[[1d20+[[@{${getCharacterName()}|adestramentototal}]]]]}}` },
+            { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Atletismo}}{{theroll=[[1d20+[[@{${getCharacterName()}|atletismototal}]]]]}}` },
+            { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Atuação}}{{theroll=[[1d20+[[@{${getCharacterName()}|atuacaototal}]]]]}}` },
+            { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Cavalgar}}{{theroll=[[1d20+[[@{${getCharacterName()}|cavalgartotal}]]]]}}` },
+            { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Conhecimento}}{{theroll=[[1d20+[[@{${getCharacterName()}|conhecimentototal}]]]]}}` },
+            { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Cura}}{{theroll=[[1d20+[[@{${getCharacterName()}|curatotal}]]]]}}` },
+            { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Diplomacia}}{{theroll=[[1d20+[[@{${getCharacterName()}|diplomaciatotal}]]]]}}` },
+            { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Enganação}}{{theroll=[[1d20+[[@{${getCharacterName()}|enganacaototal}]]]]}}` },
+            { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${getCharacterName()}|fortitudetotal}]]]]}}` },
+            { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Furtividade}}{{theroll=[[1d20+[[@{${getCharacterName()}|furtividadetotal}]]]]}}` },
+            { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Guerra}}{{theroll=[[1d20+[[@{${getCharacterName()}|guerratotal}]]]]}}` },
+            { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${getCharacterName()}|iniciativatotal}]] &{tracker}]]}}` },
+            { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Intimidação}}{{theroll=[[1d20+[[@{${getCharacterName()}|intimidacaototal}]]]]}}` },
+            { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Intuição}}{{theroll=[[1d20+[[@{${getCharacterName()}|intuicaototal}]]]]}}` },
+            { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Investigação}}{{theroll=[[1d20+[[@{${getCharacterName()}|investigacaototal}]]]]}}` },
+            { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Jogatina}}{{theroll=[[1d20+[[@{${getCharacterName()}|jogatinatotal}]]]]}}` },
+            { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ladinagem}}{{theroll=[[1d20+[[@{${getCharacterName()}|ladinagemtotal}]]]]}}` },
+            { nome: 'Luta', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Luta}}{{theroll=[[1d20+[[@{${getCharacterName()}|lutatotal}]]]]}}` },
+            { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${getCharacterName()}|misticismototal}]]]]}}` },
+            { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${getCharacterName()}|nobrezatotal}]]]]}}` },
+            { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ofício @{${getCharacterName()}|oficionome}}}{{theroll=[[1d20+[[@{${getCharacterName()}|oficiototal}]]]]}}` },
+            { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ofício @{${getCharacterName()}|oficio2nome}}}{{theroll=[[1d20+[[@{${getCharacterName()}|oficio2total}]]]]}}` },
+            { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${getCharacterName()}|percepcaototal}]]]]}}` },
+            { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${getCharacterName()}|pilotagemtotal}]]]]}}` },
+            { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${getCharacterName()}|pontariatotal}]]]]}}` },
+            { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${getCharacterName()}|reflexostotal}]]]]}}` },
+            { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Religião}}{{theroll=[[1d20+[[@{${getCharacterName()}|religiaototal}]]]]}}` },
+            { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Sobrevivência}}{{theroll=[[1d20+[[@{${getCharacterName()}|sobrevivenciatotal}]]]]}}` },
+            { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${getCharacterName()}|vontadetotal}]]]]}}` }
         ];
 
         // Lista visual
@@ -733,7 +738,7 @@
         const spells = [
             spellTemplates.createSpell({
                 nome: 'Escuridão',
-                comando: `&{template:spell}{{character=@{Eira Egai|character_name}}}{{spellname=Escuridão}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
+                comando: `&{template:spell}{{character=@{${getCharacterName()}|character_name}}}{{spellname=Escuridão}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
 
 +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
@@ -745,7 +750,7 @@
 
 +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
 
-JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
+JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             })
         ];
 
@@ -1836,11 +1841,7 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
         characterInfo.style.gap = '2px';
 
         // --- NOVO: Buscar nome e nível do localStorage ou permitir configuração manual ---
-        const CHAR_NAME_KEY = 'roll20-hotbar-charname';
         const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
-        function getCharName() {
-            return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
-        }
         function getCharLevel() {
             return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
         }
@@ -1853,7 +1854,7 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
 
         // Nome editável
         const characterName = document.createElement('div');
-        characterName.textContent = getCharName();
+        characterName.textContent = getCharacterName();
         characterName.style.color = '#ecf0f1';
         characterName.style.fontSize = '14px';
         characterName.style.fontWeight = 'bold';
@@ -1861,7 +1862,7 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
         characterName.style.cursor = 'pointer';
         characterName.title = 'Clique para editar o nome';
         characterName.onclick = () => {
-            const novoNome = prompt('Nome do personagem:', getCharName());
+            const novoNome = prompt('Nome do personagem:', getCharacterName());
             if (novoNome !== null && novoNome.trim() !== '') {
                 saveCharName(novoNome.trim());
                 characterName.textContent = novoNome.trim();
@@ -2065,7 +2066,7 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
                 });
 
                 // Macro base com modificação do acerto crítico e bônus de acerto
-                const macro = `&{template:t20-attack}{{character=@{Eira Egai|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{Eira Egai|pontariatotal}+@{Eira Egai|condicaomodataquedis}+@{Eira Egai|condicaomodataque}]]+${attackBonus}+@{Eira Egai|ataquetemp}]]}} {{damageroll=[[2d8+@{Eira Egai|des_mod}+0+0+@{Eira Egai|danotemp}+@{Eira Egai|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{Eira Egai|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
+                const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
                 executeAttackWithBloodEffect(macro);
 
                 // Fecha popup
@@ -2085,7 +2086,7 @@ JdA:193}}{{cd=[[@{Eira Egai|cdtotal}+0]]}}`
                     if (e && e.ctrlKey) {
                         createAttackEffectsPopup();
                     } else {
-                        const macro = `&{template:t20-attack}{{character=@{Eira Egai|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>18+[[@{Eira Egai|pontariatotal}+@{Eira Egai|condicaomodataquedis}+@{Eira Egai|condicaomodataque}]]+0+@{Eira Egai|ataquetemp}]]}} {{damageroll=[[2d8+@{Eira Egai|des_mod}+0+0+@{Eira Egai|danotemp}+@{Eira Egai|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{Eira Egai|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**}}`;
+                        const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>18+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+0+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**}}`;
                         executeAttackWithBloodEffect(macro);
                     }
                 }
