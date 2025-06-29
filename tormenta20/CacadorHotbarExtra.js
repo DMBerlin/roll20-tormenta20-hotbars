@@ -17,6 +17,10 @@
     const AVATAR_KEY = 'roll20-hotbar-avatar';
     // Sistema de nome do personagem
     const CHAR_NAME_KEY = 'roll20-hotbar-charname';
+    // Sistema de habilidades aprendidas do Caçador
+    const HUNTER_ABILITIES_KEY = 'roll20-hotbar-hunter-abilities';
+    // Sistema de poderes de destino aprendidos
+    const DESTINY_POWERS_KEY = 'roll20-hotbar-destiny-powers';
 
     // Função global para obter o nome do personagema
     function getCharacterName() {
@@ -55,6 +59,145 @@
             localStorage.setItem(AVATAR_KEY, url);
         } catch (error) {
             console.log('Erro ao salvar avatar:', error);
+        }
+    }
+
+    // Funções para gerenciar habilidades aprendidas
+    function getLearnedAbilities() {
+        try {
+            const abilities = localStorage.getItem(HUNTER_ABILITIES_KEY);
+            return abilities ? JSON.parse(abilities) : [];
+        } catch (error) {
+            console.log('Erro ao carregar habilidades aprendidas:', error);
+            return [];
+        }
+    }
+
+    function saveLearnedAbilities(abilities) {
+        try {
+            localStorage.setItem(HUNTER_ABILITIES_KEY, JSON.stringify(abilities));
+        } catch (error) {
+            console.log('Erro ao salvar habilidades aprendidas:', error);
+        }
+    }
+
+    function toggleLearnedAbility(abilityName) {
+        const learnedAbilities = getLearnedAbilities();
+        const index = learnedAbilities.indexOf(abilityName);
+
+        if (index > -1) {
+            learnedAbilities.splice(index, 1);
+        } else {
+            learnedAbilities.push(abilityName);
+        }
+
+        saveLearnedAbilities(learnedAbilities);
+        return learnedAbilities;
+    }
+
+    // Função para obter habilidades automáticas (sempre possuídas)
+    function getAutomaticAbilities() {
+        return ['Marca da Presa', 'Rastreador'];
+    }
+
+    // Função para obter poderes disponíveis baseado no nível
+    function getAvailablePowersByLevel(level) {
+        const powersByLevel = {
+            2: 1,   // 2º nível: 1 poder
+            3: 2,   // 3º nível: 2 poderes (Explorador + 1 poder)
+            4: 3,   // 4º nível: 3 poderes
+            5: 4,   // 5º nível: 4 poderes (Caminho do Explorador + 3 poderes)
+            6: 5,   // 6º nível: 5 poderes
+            7: 6,   // 7º nível: 6 poderes (Explorador + 5 poderes)
+            8: 7,   // 8º nível: 7 poderes
+            9: 8,   // 9º nível: 8 poderes
+            10: 9,  // 10º nível: 9 poderes
+            11: 10, // 11º nível: 10 poderes (Explorador + 9 poderes)
+            12: 11, // 12º nível: 11 poderes
+            13: 12, // 13º nível: 12 poderes
+            14: 13, // 14º nível: 13 poderes
+            15: 14, // 15º nível: 14 poderes (Explorador + 13 poderes)
+            16: 15, // 16º nível: 15 poderes
+            17: 16, // 17º nível: 16 poderes
+            18: 17, // 18º nível: 17 poderes
+            19: 18, // 19º nível: 18 poderes (Explorador + 17 poderes)
+            20: 19  // 20º nível: 19 poderes (Mestre Caçador + 18 poderes)
+        };
+
+        return powersByLevel[level] || 0;
+    }
+
+    // Função para obter habilidades especiais por nível
+    function getSpecialAbilitiesByLevel(level) {
+        const specialAbilities = [];
+
+        if (level >= 3) specialAbilities.push('Explorador');
+        if (level >= 5) specialAbilities.push('Caminho do Explorador');
+        if (level >= 20) specialAbilities.push('Mestre Caçador');
+
+        return specialAbilities;
+    }
+
+    // Função para verificar se uma habilidade está disponível no nível atual
+    function isAbilityAvailableAtLevel(abilityName, level) {
+        // Habilidades automáticas sempre disponíveis
+        if (getAutomaticAbilities().includes(abilityName)) {
+            return true;
+        }
+
+        // Habilidades especiais baseadas no nível
+        if (getSpecialAbilitiesByLevel(level).includes(abilityName)) {
+            return true;
+        }
+
+        // Poderes de Caçador - verifica se o jogador já escolheu poderes suficientes
+        const learnedAbilities = getLearnedAbilities();
+        const availablePowers = getAvailablePowersByLevel(level);
+        const learnedPowers = learnedAbilities.filter(ability =>
+            !getAutomaticAbilities().includes(ability) &&
+            !getSpecialAbilitiesByLevel(level).includes(ability)
+        ).length;
+
+        // Se ainda há poderes disponíveis para escolher
+        return learnedPowers < availablePowers;
+    }
+
+    // Função utilitária para verificar se o personagem possui uma habilidade
+    function hasAbility(abilityName) {
+        const learnedAbilities = getLearnedAbilities();
+        const automaticAbilities = getAutomaticAbilities();
+
+        // Habilidades automáticas sempre possuídas
+        if (automaticAbilities.includes(abilityName)) {
+            return true;
+        }
+
+        return learnedAbilities.includes(abilityName);
+    }
+
+    // Função para obter todas as habilidades aprendidas (útil para debug)
+    function getAllLearnedAbilities() {
+        const learnedAbilities = getLearnedAbilities();
+        const automaticAbilities = getAutomaticAbilities();
+        return [...automaticAbilities, ...learnedAbilities];
+    }
+
+    // Função para inicializar habilidades automáticas (chamada uma vez)
+    function initializeAutomaticAbilities() {
+        const learnedAbilities = getLearnedAbilities();
+        const automaticAbilities = getAutomaticAbilities();
+
+        // Adiciona habilidades automáticas se não existirem
+        let updated = false;
+        automaticAbilities.forEach(ability => {
+            if (!learnedAbilities.includes(ability)) {
+                learnedAbilities.push(ability);
+                updated = true;
+            }
+        });
+
+        if (updated) {
+            saveLearnedAbilities(learnedAbilities);
         }
     }
 
@@ -1899,14 +2042,19 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         characterLevel.style.cursor = 'pointer';
         characterLevel.title = 'Clique para editar o nível';
         characterLevel.onclick = () => {
-            const novoNivel = prompt('Nível do personagem:', getCharLevel());
+            const novoNivel = prompt('Nível do personagem (1-20):', getCharLevel());
             if (novoNivel !== null && novoNivel.trim() !== '') {
-                saveCharLevel(novoNivel.trim());
-                characterLevel.textContent = `Nível ${novoNivel.trim()}`;
+                const nivel = parseInt(novoNivel.trim());
+                if (nivel >= 1 && nivel <= 20) {
+                    saveCharLevel(nivel.toString());
+                    characterLevel.textContent = `Nível ${nivel}`;
+                } else {
+                    alert('O nível deve ser entre 1 e 20!');
+                }
             }
         };
 
-        // Classe do personagem
+        // Classe do personagem (agora como badge clicável)
         const characterClass = document.createElement('div');
         characterClass.textContent = 'Caçador';
         characterClass.style.color = '#8B4513';
@@ -1915,6 +2063,30 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         characterClass.style.fontStyle = 'italic';
         characterClass.style.textTransform = 'uppercase';
         characterClass.style.letterSpacing = '0.5px';
+        characterClass.style.cursor = 'pointer';
+        characterClass.style.padding = '2px 6px';
+        characterClass.style.background = 'rgba(139, 69, 19, 0.2)';
+        characterClass.style.borderRadius = '8px';
+        characterClass.style.border = '1px solid rgba(139, 69, 19, 0.4)';
+        characterClass.style.transition = 'all 0.2s';
+        characterClass.style.display = 'inline-block';
+        characterClass.style.width = 'fit-content';
+        characterClass.style.position = 'relative';
+        characterClass.title = 'Clique para ver informações da classe';
+
+        characterClass.onmouseover = () => {
+            characterClass.style.background = 'rgba(139, 69, 19, 0.3)';
+            characterClass.style.borderColor = 'rgba(139, 69, 19, 0.6)';
+            characterClass.style.transform = 'scale(1.05)';
+        };
+        characterClass.onmouseout = () => {
+            characterClass.style.background = 'rgba(139, 69, 19, 0.2)';
+            characterClass.style.borderColor = 'rgba(139, 69, 19, 0.4)';
+            characterClass.style.transform = 'scale(1)';
+        };
+        characterClass.onclick = () => {
+            createHunterClassModal();
+        };
 
         characterInfo.appendChild(characterName);
         characterInfo.appendChild(characterLevel);
@@ -2019,7 +2191,15 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             let marcaPresaAttackMod = 0;
             let marcaPresaDice = '';
             let marcaPresaDesc = '';
-            if (charLevel >= 9) {
+            if (charLevel >= 17) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+2d10';
+                marcaPresaDesc = '+3 acerto, +2d10 dano, crit 16+';
+            } else if (charLevel >= 13) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+2d8';
+                marcaPresaDesc = '+3 acerto, +2d8 dano, crit 16+';
+            } else if (charLevel >= 9) {
                 marcaPresaAttackMod = 3;
                 marcaPresaDice = '+1d12';
                 marcaPresaDesc = '+3 acerto, +1d12 dano, crit 16+';
@@ -2145,6 +2325,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
             { label: 'Powers', icon: '✨', onClick: createPowersPopup },
+            { label: 'Destino', icon: '⭐', onClick: createDestinyPowersPopup },
             { label: 'Efeitos', icon: '🌀', onClick: () => alert('Em breve!') }
         ];
         buttons.forEach(btnData => {
@@ -2207,6 +2388,9 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
     // Inicializa quando a página carregar
     waitForElement('#textchat-input').then(() => {
         setTimeout(() => {
+            // Inicializa habilidades automáticas
+            initializeAutomaticAbilities();
+
             createHotbar();
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
@@ -2228,4 +2412,1441 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         }, 1000);
     });
 
+    // Função para criar modal da classe Caçador
+    function createHunterClassModal() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('hunter-class-modal');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('hunter-class-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'hunter-class-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'hunter-class-modal';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #8B4513';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '900px';
+        popup.style.maxHeight = '85vh';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.width = '100%';
+        header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
+        header.style.paddingBottom = '15px';
+
+        const title = document.createElement('h2');
+        title.innerHTML = '🏹 Caçador';
+        title.style.color = '#8B4513';
+        title.style.margin = '0';
+        title.style.fontSize = '24px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '28px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '36px';
+        closeBtn.style.height = '36px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('hunter-class-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Sistema de Abas
+        const tabContainer = document.createElement('div');
+        tabContainer.style.marginBottom = '20px';
+
+        const tabButtons = document.createElement('div');
+        tabButtons.style.display = 'flex';
+        tabButtons.style.gap = '5px';
+        tabButtons.style.marginBottom = '15px';
+
+        const tabContents = document.createElement('div');
+        tabContents.style.minHeight = '400px';
+
+        // Aba 1: Características da Classe
+        const tab1Btn = document.createElement('button');
+        tab1Btn.textContent = 'Características da Classe';
+        tab1Btn.style.padding = '10px 15px';
+        tab1Btn.style.background = '#8B4513';
+        tab1Btn.style.color = '#fff';
+        tab1Btn.style.border = 'none';
+        tab1Btn.style.borderRadius = '8px 8px 0 0';
+        tab1Btn.style.fontSize = '14px';
+        tab1Btn.style.fontWeight = 'bold';
+        tab1Btn.style.cursor = 'pointer';
+        tab1Btn.style.transition = 'all 0.2s';
+
+        const tab1Content = document.createElement('div');
+        tab1Content.id = 'tab1-content';
+        tab1Content.style.display = 'block';
+
+        // Conteúdo da Aba 1 (Características)
+        const characteristics = [
+            { label: 'Pontos de Vida', value: 'Um caçador começa com 16 pontos de vida + Constituição e ganha 4 PV + Constituição por nível.' },
+            { label: 'Pontos de Mana', value: '4 PM por nível.' },
+            { label: 'Perícias', value: 'Luta (For) ou Pontaria (Des), Sobrevivência (Sab), mais 6 a sua escolha entre Adestramento (Car), Atletismo (For), Cavalgar (Des), Cura (Sab), Fortitude (Con), Furtividade (Des), Iniciativa (Des), Investigação (Int), Luta (For), Ofício (Int), Percepção (Sab), Pontaria (Des) e Reflexos (Des).' },
+            { label: 'Proficiências', value: 'Armas marciais e escudos.' }
+        ];
+
+        characteristics.forEach(char => {
+            const charContainer = document.createElement('div');
+            charContainer.style.marginBottom = '12px';
+            charContainer.style.padding = '10px';
+            charContainer.style.background = 'rgba(139, 69, 19, 0.1)';
+            charContainer.style.borderRadius = '8px';
+            charContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+            const charLabel = document.createElement('div');
+            charLabel.textContent = char.label;
+            charLabel.style.color = '#8B4513';
+            charLabel.style.fontSize = '14px';
+            charLabel.style.fontWeight = 'bold';
+            charLabel.style.marginBottom = '5px';
+
+            const charValue = document.createElement('div');
+            charValue.textContent = char.value;
+            charValue.style.color = '#ecf0f1';
+            charValue.style.fontSize = '13px';
+            charValue.style.lineHeight = '1.4';
+
+            charContainer.appendChild(charLabel);
+            charContainer.appendChild(charValue);
+            tab1Content.appendChild(charContainer);
+        });
+
+        // Aba 2: Habilidades da Classe
+        const tab2Btn = document.createElement('button');
+        tab2Btn.textContent = 'Habilidades da Classe';
+        tab2Btn.style.padding = '10px 15px';
+        tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+        tab2Btn.style.color = '#ecf0f1';
+        tab2Btn.style.border = 'none';
+        tab2Btn.style.borderRadius = '8px 8px 0 0';
+        tab2Btn.style.fontSize = '14px';
+        tab2Btn.style.fontWeight = 'bold';
+        tab2Btn.style.cursor = 'pointer';
+        tab2Btn.style.transition = 'all 0.2s';
+
+        const tab2Content = document.createElement('div');
+        tab2Content.id = 'tab2-content';
+        tab2Content.style.display = 'none';
+
+        // Conteúdo da Aba 2 (Habilidades)
+        const abilities = [
+            {
+                name: 'Marca da Presa',
+                description: 'Você pode gastar uma ação de movimento e 1 PM para analisar uma criatura em alcance curto. Até o fim da cena, você recebe +1d4 nas rolagens de dano contra essa criatura. A cada quatro níveis, você pode gastar +1 PM para aumentar o bônus de dano (veja a tabela da classe).',
+                level: '1º nível'
+            },
+            {
+                name: 'Rastreador',
+                description: 'Você recebe +2 em Sobrevivência. Além disso, pode se mover com seu deslocamento normal enquanto rastreia sem sofrer penalidades no teste de Sobrevivência.',
+                level: '1º nível'
+            },
+            {
+                name: 'Ambidestria',
+                description: 'Se estiver empunhando duas armas (e pelo menos uma delas for leve) e fizer a ação agredir, você pode fazer dois ataques, um com cada arma. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno.',
+                level: 'Poder de Caçador',
+                prereq: 'Des 2'
+            },
+            {
+                name: 'Armadilha: Arataca',
+                description: 'A vítima sofre 2d6 pontos de dano de perfuração e fica agarrada. Uma criatura agarrada pode escapar com uma ação padrão e um teste de Força ou Acrobacia (CD Sab).',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Armadilha: Espinhos',
+                description: 'A vítima sofre 6d6 pontos de dano de perfuração. Um teste de Reflexos (CD Sab) reduz o dano à metade.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Armadilha: Laço',
+                description: 'A vítima deve fazer um teste de Reflexos (CD Sab). Se passar, fica caída. Se falhar, fica agarrada. Uma criatura agarrada pode se soltar com uma ação padrão e um teste de Força ou Acrobacia (CD Sab).',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Armadilha: Rede',
+                description: 'Todas as criaturas na área ficam enredadas e não podem sair da área. Uma vítima pode se libertar com uma ação padrão e um teste de Força ou Acrobacia (CD 25). Além disso, a área ocupada pela rede é considerada terreno difícil. Nesta armadilha você escolhe quantas criaturas precisam estar na área para ativá-la.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Armadilheiro',
+                description: 'Você soma sua Sabedoria no dano e na CD de suas armadilhas (cumulativo).',
+                level: 'Poder de Caçador',
+                prereq: 'um poder de armadilha, 5º nível de caçador'
+            },
+            {
+                name: 'Arqueiro',
+                description: 'Se estiver usando uma arma de ataque à distância, você soma sua Sabedoria nas rolagens de dano (limitado pelo seu nível).',
+                level: 'Poder de Caçador',
+                prereq: 'Sab 1'
+            },
+            {
+                name: 'Aumento de Atributo',
+                description: 'Você recebe +1 em um atributo. Você pode escolher este poder várias vezes, mas apenas uma vez por patamar para um mesmo atributo.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Bote',
+                description: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária.',
+                level: 'Poder de Caçador',
+                prereq: 'Ambidestria, 6º nível de caçador'
+            },
+            {
+                name: 'Camuflagem',
+                description: 'Você pode gastar 2 PM para se esconder mesmo sem camuflagem ou cobertura disponível.',
+                level: 'Poder de Caçador',
+                prereq: '6º nível de caçador'
+            },
+            {
+                name: 'Chuva de Lâminas',
+                description: 'Uma vez por rodada, quando usa Ambidestria, você pode pagar 2 PM para fazer um ataque adicional com sua arma primária.',
+                level: 'Poder de Caçador',
+                prereq: 'Des 4, Ambidestria, 12º nível de caçador'
+            },
+            {
+                name: 'Companheiro Animal',
+                description: 'Você recebe um companheiro animal. Veja o quadro na página 62.',
+                level: 'Poder de Caçador',
+                prereq: 'Car 1, treinado em Adestramento'
+            },
+            {
+                name: 'Elo com a Natureza',
+                description: 'Você soma sua Sabedoria em seu total de pontos de mana e aprende e pode lançar Caminhos da Natureza (atributo-chave Sabedoria).',
+                level: 'Poder de Caçador',
+                prereq: 'Sab 1, 3º nível de caçador'
+            },
+            {
+                name: 'Emboscar',
+                description: 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate.',
+                level: 'Poder de Caçador',
+                prereq: 'treinado em Furtividade'
+            },
+            {
+                name: 'Empatia Selvagem',
+                description: 'Você pode se comunicar com animais por meio de linguagem corporal e vocalizações. Você pode usar Adestramento com animais para mudar atitude e persuasão (veja Diplomacia, na página 118).',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Escaramuça',
+                description: 'Quando se move 6m ou mais, você recebe +2 na Defesa e Reflexos e +1d8 nas rolagens de dano de ataques corpo a corpo e à distância em alcance curto até o início de seu próximo turno. Você não pode usar esta habilidade se estiver vestindo armadura pesada.',
+                level: 'Poder de Caçador',
+                prereq: 'Des 2, 6º nível de caçador'
+            },
+            {
+                name: 'Escaramuça Superior',
+                description: 'Quando usa Escaramuça, seus bônus aumentam para +5 na Defesa e Reflexos e +1d12 em rolagens de dano.',
+                level: 'Poder de Caçador',
+                prereq: 'Escaramuça, 12º nível de caçador'
+            },
+            {
+                name: 'Espreitar',
+                description: 'Quando usa a habilidade Marca da Presa, você recebe um bônus de +1 em testes de perícia contra a criatura marcada. Esse bônus aumenta em +1 para cada PM adicional gasto na habilidade e também dobra com a habilidade Inimigo.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Ervas Curativas',
+                description: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Ímpeto',
+                description: 'Você pode gastar 1 PM para aumentar seu deslocamento em +6m por uma rodada.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Inimigo de (Criatura)',
+                description: 'Escolha um tipo de criatura entre animal, construto, espírito, monstro ou morto-vivo, ou duas raças humanoides (por exemplo, orcs e gnolls, ou elfos e qareen). Quando você usa a habilidade Marca da Presa contra uma criatura do tipo ou da raça escolhida, dobra os dados de bônus no dano. O nome desta habilidade varia de acordo com o tipo de criatura escolhida (Inimigo de Monstros, Inimigo de Mortos-Vivos etc.). Você pode escolher este poder outras vezes para inimigos diferentes.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Olho do Falcão',
+                description: 'Você pode usar a habilidade Marca da Presa em criaturas em alcance longo.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Ponto Fraco',
+                description: 'Quando usa a habilidade Marca da Presa, seus ataques contra a criatura marcada recebem +2 na margem de ameaça. Esse bônus dobra com a habilidade Inimigo.',
+                level: 'Poder de Caçador'
+            },
+            {
+                name: 'Explorador',
+                description: 'No 3º nível, escolha um tipo de terreno entre aquático, ártico, colina, deserto, floresta, montanha, pântano, planície, subterrâneo ou urbano. A partir do 11º nível, você também pode escolher área de Tormenta. Quando estiver no tipo de terreno escolhido, você soma sua Sabedoria (mínimo +1) na Defesa e nos testes de Acrobacia, Atletismo, Furtividade, Percepção e Sobrevivência. A cada quatro níveis, escolha outro tipo de terreno para receber o bônus ou aumente o bônus em um tipo de terreno já escolhido em +2.',
+                level: '3º nível'
+            },
+            {
+                name: 'Caminho do Explorador',
+                description: 'No 5º nível, você pode atravessar terrenos difíceis sem sofrer redução em seu deslocamento e a CD para rastrear você aumenta em +10. Esta habilidade só funciona em terrenos nos quais você tenha a habilidade Explorador.',
+                level: '5º nível'
+            },
+            {
+                name: 'Mestre Caçador',
+                description: 'No 20º nível, você pode usar a habilidade Marca da Presa como uma ação livre. Além disso, quando usa a habilidade, pode pagar 5 PM para aumentar sua margem de ameaça contra a criatura em +2. Se você reduz uma criatura contra a qual usou Marca da Presa a 0 pontos de vida, recupera 5 PM.',
+                level: '20º nível'
+            }
+        ];
+
+        // Barra de filtros e controles
+        const filterContainer = document.createElement('div');
+        filterContainer.style.marginBottom = '15px';
+        filterContainer.style.padding = '12px';
+        filterContainer.style.background = 'rgba(139, 69, 19, 0.1)';
+        filterContainer.style.borderRadius = '8px';
+        filterContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+        // Filtro de texto
+        const textFilterContainer = document.createElement('div');
+        textFilterContainer.style.position = 'relative';
+        textFilterContainer.style.marginBottom = '10px';
+
+        const textFilterInput = document.createElement('input');
+        textFilterInput.type = 'text';
+        textFilterInput.placeholder = 'Filtrar habilidades...';
+        textFilterInput.style.width = '100%';
+        textFilterInput.style.padding = '10px 28px 10px 12px';
+        textFilterInput.style.borderRadius = '8px';
+        textFilterInput.style.border = '1px solid #6ec6ff';
+        textFilterInput.style.background = '#23243a';
+        textFilterInput.style.color = '#fff';
+        textFilterInput.style.fontSize = '14px';
+        textFilterInput.style.outline = 'none';
+        textFilterInput.style.boxSizing = 'border-box';
+
+        const clearTextBtn = document.createElement('span');
+        clearTextBtn.textContent = '×';
+        clearTextBtn.style.position = 'absolute';
+        clearTextBtn.style.right = '8px';
+        clearTextBtn.style.top = '50%';
+        clearTextBtn.style.transform = 'translateY(-50%)';
+        clearTextBtn.style.cursor = 'pointer';
+        clearTextBtn.style.color = '#6ec6ff';
+        clearTextBtn.style.fontSize = '18px';
+        clearTextBtn.style.display = 'none';
+
+        clearTextBtn.onclick = () => {
+            textFilterInput.value = '';
+            textFilterInput.dispatchEvent(new Event('input'));
+            textFilterInput.focus();
+        };
+
+        textFilterInput.oninput = () => {
+            if (textFilterInput.value.length > 0) {
+                clearTextBtn.style.display = 'block';
+            } else {
+                clearTextBtn.style.display = 'none';
+            }
+            updateAbilityList();
+        };
+
+        textFilterContainer.appendChild(textFilterInput);
+        textFilterContainer.appendChild(clearTextBtn);
+
+        // Filtros de status
+        const statusFiltersContainer = document.createElement('div');
+        statusFiltersContainer.style.display = 'flex';
+        statusFiltersContainer.style.gap = '10px';
+        statusFiltersContainer.style.flexWrap = 'wrap';
+
+        const showAllBtn = document.createElement('button');
+        showAllBtn.textContent = 'Todas';
+        showAllBtn.style.padding = '6px 12px';
+        showAllBtn.style.background = '#8B4513';
+        showAllBtn.style.color = '#fff';
+        showAllBtn.style.border = 'none';
+        showAllBtn.style.borderRadius = '6px';
+        showAllBtn.style.fontSize = '12px';
+        showAllBtn.style.fontWeight = 'bold';
+        showAllBtn.style.cursor = 'pointer';
+        showAllBtn.style.transition = 'all 0.2s';
+
+        const showLearnedBtn = document.createElement('button');
+        showLearnedBtn.textContent = 'Aprendidas';
+        showLearnedBtn.style.padding = '6px 12px';
+        showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+        showLearnedBtn.style.color = '#ecf0f1';
+        showLearnedBtn.style.border = 'none';
+        showLearnedBtn.style.borderRadius = '6px';
+        showLearnedBtn.style.fontSize = '12px';
+        showLearnedBtn.style.fontWeight = 'bold';
+        showLearnedBtn.style.cursor = 'pointer';
+        showLearnedBtn.style.transition = 'all 0.2s';
+
+        const showAvailableBtn = document.createElement('button');
+        showAvailableBtn.textContent = 'Disponíveis';
+        showAvailableBtn.style.padding = '6px 12px';
+        showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+        showAvailableBtn.style.color = '#ecf0f1';
+        showAvailableBtn.style.border = 'none';
+        showAvailableBtn.style.borderRadius = '6px';
+        showAvailableBtn.style.fontSize = '12px';
+        showAvailableBtn.style.fontWeight = 'bold';
+        showAvailableBtn.style.cursor = 'pointer';
+        showAvailableBtn.style.transition = 'all 0.2s';
+
+        statusFiltersContainer.appendChild(showAllBtn);
+        statusFiltersContainer.appendChild(showLearnedBtn);
+        statusFiltersContainer.appendChild(showAvailableBtn);
+
+        filterContainer.appendChild(textFilterContainer);
+        filterContainer.appendChild(statusFiltersContainer);
+        tab2Content.appendChild(filterContainer);
+
+        // Container para a lista de habilidades
+        const abilitiesListContainer = document.createElement('div');
+        abilitiesListContainer.id = 'abilities-list-container';
+        tab2Content.appendChild(abilitiesListContainer);
+
+        // Variáveis de filtro
+        let currentTextFilter = '';
+        let currentStatusFilter = 'all'; // 'all', 'learned', 'available'
+
+        // Função para atualizar a lista de habilidades
+        function updateAbilityList() {
+            const learnedAbilities = getLearnedAbilities();
+            const automaticAbilities = getAutomaticAbilities();
+            const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+            const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
+            const availablePowers = getAvailablePowersByLevel(charLevel);
+
+            abilitiesListContainer.innerHTML = '';
+
+            const filteredAbilities = abilities.filter(ability => {
+                // Filtro de texto
+                const matchesText = ability.name.toLowerCase().includes(currentTextFilter.toLowerCase()) ||
+                    ability.description.toLowerCase().includes(currentTextFilter.toLowerCase());
+
+                // Filtro de status
+                let matchesStatus = true;
+                if (currentStatusFilter === 'learned') {
+                    matchesStatus = hasAbility(ability.name);
+                } else if (currentStatusFilter === 'available') {
+                    matchesStatus = !hasAbility(ability.name) && isAbilityAvailableAtLevel(ability.name, charLevel);
+                }
+
+                return matchesText && matchesStatus;
+            });
+
+            filteredAbilities.forEach(ability => {
+                const abilityContainer = document.createElement('div');
+                const isAutomatic = automaticAbilities.includes(ability.name);
+                const isSpecial = specialAbilities.includes(ability.name);
+                const isLearned = hasAbility(ability.name);
+                const isAvailable = isAbilityAvailableAtLevel(ability.name, charLevel);
+
+                // Define cores baseadas no tipo de habilidade
+                let backgroundColor, borderColor, textColor;
+
+                if (isAutomatic) {
+                    backgroundColor = 'rgba(76, 175, 80, 0.15)';
+                    borderColor = 'rgba(76, 175, 80, 0.4)';
+                    textColor = '#4CAF50';
+                } else if (isSpecial) {
+                    backgroundColor = 'rgba(156, 39, 176, 0.15)';
+                    borderColor = 'rgba(156, 39, 176, 0.4)';
+                    textColor = '#9C27B0';
+                } else if (isLearned) {
+                    backgroundColor = 'rgba(76, 175, 80, 0.1)';
+                    borderColor = 'rgba(76, 175, 80, 0.3)';
+                    textColor = '#4CAF50';
+                } else if (isAvailable) {
+                    backgroundColor = 'rgba(139, 69, 19, 0.1)';
+                    borderColor = 'rgba(139, 69, 19, 0.2)';
+                    textColor = '#8B4513';
+                } else {
+                    backgroundColor = 'rgba(158, 158, 158, 0.1)';
+                    borderColor = 'rgba(158, 158, 158, 0.2)';
+                    textColor = '#9E9E9E';
+                }
+
+                abilityContainer.style.marginBottom = '15px';
+                abilityContainer.style.padding = '12px';
+                abilityContainer.style.background = backgroundColor;
+                abilityContainer.style.borderRadius = '8px';
+                abilityContainer.style.border = `1px solid ${borderColor}`;
+                abilityContainer.style.transition = 'all 0.2s';
+
+                const abilityHeader = document.createElement('div');
+                abilityHeader.style.display = 'flex';
+                abilityHeader.style.justifyContent = 'space-between';
+                abilityHeader.style.alignItems = 'flex-start';
+                abilityHeader.style.marginBottom = '8px';
+                abilityHeader.style.flexWrap = 'wrap';
+                abilityHeader.style.gap = '10px';
+
+                const abilityNameContainer = document.createElement('div');
+                abilityNameContainer.style.display = 'flex';
+                abilityNameContainer.style.alignItems = 'center';
+                abilityNameContainer.style.gap = '8px';
+                abilityNameContainer.style.flex = '1';
+
+                // Checkbox para habilidades aprendidas (exceto automáticas)
+                if (!isAutomatic) {
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = isLearned;
+                    checkbox.disabled = !isAvailable;
+                    checkbox.style.width = '16px';
+                    checkbox.style.height = '16px';
+                    checkbox.style.accentColor = '#4CAF50';
+                    checkbox.style.cursor = isAvailable ? 'pointer' : 'not-allowed';
+                    checkbox.style.opacity = isAvailable ? '1' : '0.5';
+
+                    checkbox.onchange = () => {
+                        if (isAvailable) {
+                            toggleLearnedAbility(ability.name);
+                            updateAbilityList(); // Atualiza a lista para refletir as mudanças
+                        }
+                    };
+
+                    abilityNameContainer.appendChild(checkbox);
+                }
+
+                const abilityName = document.createElement('div');
+                abilityName.textContent = ability.name;
+                abilityName.style.color = textColor;
+                abilityName.style.fontSize = '15px';
+                abilityName.style.fontWeight = 'bold';
+
+                abilityNameContainer.appendChild(abilityName);
+
+                const abilityLevel = document.createElement('div');
+                abilityLevel.textContent = ability.level;
+                abilityLevel.style.color = '#6ec6ff';
+                abilityLevel.style.fontSize = '12px';
+                abilityLevel.style.fontWeight = 'bold';
+                abilityLevel.style.background = 'rgba(110, 198, 255, 0.1)';
+                abilityLevel.style.padding = '2px 6px';
+                abilityLevel.style.borderRadius = '4px';
+                abilityLevel.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+
+                abilityHeader.appendChild(abilityNameContainer);
+                abilityHeader.appendChild(abilityLevel);
+
+                const abilityDescription = document.createElement('div');
+                abilityDescription.textContent = ability.description;
+                abilityDescription.style.color = '#ecf0f1';
+                abilityDescription.style.fontSize = '13px';
+                abilityDescription.style.lineHeight = '1.4';
+                abilityDescription.style.marginBottom = '5px';
+
+                abilityContainer.appendChild(abilityHeader);
+                abilityContainer.appendChild(abilityDescription);
+
+                if (ability.prereq) {
+                    const prereqDiv = document.createElement('div');
+                    prereqDiv.textContent = `Pré-requisito: ${ability.prereq}`;
+                    prereqDiv.style.color = '#ffa726';
+                    prereqDiv.style.fontSize = '11px';
+                    prereqDiv.style.fontStyle = 'italic';
+                    prereqDiv.style.fontWeight = 'bold';
+                    abilityContainer.appendChild(prereqDiv);
+                }
+
+                // Indicadores visuais
+                const indicatorsContainer = document.createElement('div');
+                indicatorsContainer.style.marginTop = '5px';
+                indicatorsContainer.style.display = 'flex';
+                indicatorsContainer.style.gap = '8px';
+                indicatorsContainer.style.flexWrap = 'wrap';
+
+                if (isAutomatic) {
+                    const autoIndicator = document.createElement('div');
+                    autoIndicator.innerHTML = '🔒 Automática';
+                    autoIndicator.style.color = '#4CAF50';
+                    autoIndicator.style.fontSize = '11px';
+                    autoIndicator.style.fontWeight = 'bold';
+                    autoIndicator.style.fontStyle = 'italic';
+                    indicatorsContainer.appendChild(autoIndicator);
+                } else if (isSpecial) {
+                    const specialIndicator = document.createElement('div');
+                    specialIndicator.innerHTML = '⭐ Especial';
+                    specialIndicator.style.color = '#9C27B0';
+                    specialIndicator.style.fontSize = '11px';
+                    specialIndicator.style.fontWeight = 'bold';
+                    specialIndicator.style.fontStyle = 'italic';
+                    indicatorsContainer.appendChild(specialIndicator);
+                } else if (isLearned) {
+                    const learnedIndicator = document.createElement('div');
+                    learnedIndicator.innerHTML = '✓ Aprendida';
+                    learnedIndicator.style.color = '#4CAF50';
+                    learnedIndicator.style.fontSize = '11px';
+                    learnedIndicator.style.fontWeight = 'bold';
+                    learnedIndicator.style.fontStyle = 'italic';
+                    indicatorsContainer.appendChild(learnedIndicator);
+                } else if (!isAvailable) {
+                    const lockedIndicator = document.createElement('div');
+                    lockedIndicator.innerHTML = '🔒 Bloqueada';
+                    lockedIndicator.style.color = '#9E9E9E';
+                    lockedIndicator.style.fontSize = '11px';
+                    lockedIndicator.style.fontWeight = 'bold';
+                    lockedIndicator.style.fontStyle = 'italic';
+                    indicatorsContainer.appendChild(lockedIndicator);
+                }
+
+                if (indicatorsContainer.children.length > 0) {
+                    abilityContainer.appendChild(indicatorsContainer);
+                }
+
+                abilitiesListContainer.appendChild(abilityContainer);
+            });
+
+            // Estatísticas atualizadas
+            const statsContainer = document.createElement('div');
+            statsContainer.style.marginTop = '15px';
+            statsContainer.style.padding = '10px';
+            statsContainer.style.background = 'rgba(26,26,46,0.8)';
+            statsContainer.style.borderRadius = '8px';
+            statsContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+            statsContainer.style.textAlign = 'center';
+
+            const totalPowers = 19; // Total de poderes de caçador disponíveis no nível 20
+            const learnedPowers = learnedAbilities.filter(ability =>
+                !automaticAbilities.includes(ability) &&
+                !specialAbilities.includes(ability)
+            ).length;
+            const availablePowersCount = availablePowers;
+            const progress = Math.round((learnedPowers / totalPowers) * 100);
+
+            const statsText = document.createElement('div');
+            statsText.innerHTML = `
+                <strong>Nível ${charLevel}:</strong> ${availablePowersCount} poderes disponíveis<br>
+                <strong>Poderes Escolhidos:</strong> ${learnedPowers}/${totalPowers} (${progress}%)
+            `;
+            statsText.style.color = '#ecf0f1';
+            statsText.style.fontSize = '13px';
+            statsText.style.lineHeight = '1.4';
+
+            statsContainer.appendChild(statsText);
+            abilitiesListContainer.appendChild(statsContainer);
+        }
+
+        // Event listeners para os filtros de status
+        showAllBtn.onclick = () => {
+            currentStatusFilter = 'all';
+            showAllBtn.style.background = '#8B4513';
+            showAllBtn.style.color = '#fff';
+            showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showLearnedBtn.style.color = '#ecf0f1';
+            showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showAvailableBtn.style.color = '#ecf0f1';
+            updateAbilityList();
+        };
+
+        showLearnedBtn.onclick = () => {
+            currentStatusFilter = 'learned';
+            showAllBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showAllBtn.style.color = '#ecf0f1';
+            showLearnedBtn.style.background = '#8B4513';
+            showLearnedBtn.style.color = '#fff';
+            showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showAvailableBtn.style.color = '#ecf0f1';
+            updateAbilityList();
+        };
+
+        showAvailableBtn.onclick = () => {
+            currentStatusFilter = 'available';
+            showAllBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showAllBtn.style.color = '#ecf0f1';
+            showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
+            showLearnedBtn.style.color = '#ecf0f1';
+            showAvailableBtn.style.background = '#8B4513';
+            showAvailableBtn.style.color = '#fff';
+            updateAbilityList();
+        };
+
+        // Inicializa a lista
+        updateAbilityList();
+
+        // Função para alternar abas
+        function switchTab(tabNumber) {
+            // Esconde todos os conteúdos
+            tab1Content.style.display = 'none';
+            tab2Content.style.display = 'none';
+
+            // Remove estilo ativo de todos os botões
+            tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            tab1Btn.style.color = '#ecf0f1';
+            tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            tab2Btn.style.color = '#ecf0f1';
+
+            // Mostra o conteúdo da aba selecionada
+            if (tabNumber === 1) {
+                tab1Content.style.display = 'block';
+                tab1Btn.style.background = '#8B4513';
+                tab1Btn.style.color = '#fff';
+            } else if (tabNumber === 2) {
+                tab2Content.style.display = 'block';
+                tab2Btn.style.background = '#8B4513';
+                tab2Btn.style.color = '#fff';
+            }
+        }
+
+        // Event listeners para os botões das abas
+        tab1Btn.onclick = () => switchTab(1);
+        tab2Btn.onclick = () => switchTab(2);
+
+        tab1Btn.onmouseover = () => {
+            if (tab1Content.style.display === 'none') {
+                tab1Btn.style.background = 'rgba(139, 69, 19, 0.5)';
+            }
+        };
+        tab1Btn.onmouseout = () => {
+            if (tab1Content.style.display === 'none') {
+                tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            }
+        };
+
+        tab2Btn.onmouseover = () => {
+            if (tab2Content.style.display === 'none') {
+                tab2Btn.style.background = 'rgba(139, 69, 19, 0.5)';
+            }
+        };
+        tab2Btn.onmouseout = () => {
+            if (tab2Content.style.display === 'none') {
+                tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            }
+        };
+
+        // Adiciona os botões das abas
+        tabButtons.appendChild(tab1Btn);
+        tabButtons.appendChild(tab2Btn);
+
+        // Adiciona os conteúdos das abas
+        tabContents.appendChild(tab1Content);
+        tabContents.appendChild(tab2Content);
+
+        tabContainer.appendChild(tabButtons);
+        tabContainer.appendChild(tabContents);
+        popup.appendChild(tabContainer);
+
+        // Tabela de Progressão (mantida na primeira aba)
+        const progressionSection = document.createElement('div');
+        progressionSection.style.marginBottom = '20px';
+
+        const progressionTitle = document.createElement('h3');
+        progressionTitle.textContent = 'Tabela de Progressão';
+        progressionTitle.style.color = '#8B4513';
+        progressionTitle.style.fontSize = '18px';
+        progressionTitle.style.fontWeight = 'bold';
+        progressionTitle.style.marginBottom = '15px';
+        progressionTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
+        progressionTitle.style.paddingBottom = '8px';
+        progressionSection.appendChild(progressionTitle);
+
+        const progressionTable = document.createElement('div');
+        progressionTable.style.background = 'rgba(26,26,46,0.8)';
+        progressionTable.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+        progressionTable.style.borderRadius = '8px';
+        progressionTable.style.overflow = 'hidden';
+
+        // Cabeçalho da tabela
+        const tableHeader = document.createElement('div');
+        tableHeader.style.display = 'grid';
+        tableHeader.style.gridTemplateColumns = '80px 1fr';
+        tableHeader.style.background = 'rgba(139, 69, 19, 0.2)';
+        tableHeader.style.padding = '12px 15px';
+        tableHeader.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
+
+        const levelHeader = document.createElement('div');
+        levelHeader.textContent = 'Nível';
+        levelHeader.style.color = '#8B4513';
+        levelHeader.style.fontWeight = 'bold';
+        levelHeader.style.fontSize = '14px';
+
+        const abilitiesHeader = document.createElement('div');
+        abilitiesHeader.textContent = 'Habilidades de Classe';
+        abilitiesHeader.style.color = '#8B4513';
+        abilitiesHeader.style.fontWeight = 'bold';
+        abilitiesHeader.style.fontSize = '14px';
+
+        tableHeader.appendChild(levelHeader);
+        tableHeader.appendChild(abilitiesHeader);
+        progressionTable.appendChild(tableHeader);
+
+        // Dados da tabela
+        const progressionData = [
+            { level: '1º', abilities: 'Marca da presa +1d4, rastreador' },
+            { level: '2º', abilities: 'Poder de caçador' },
+            { level: '3º', abilities: 'Explorador, poder de caçador' },
+            { level: '4º', abilities: 'Poder de caçador' },
+            { level: '5º', abilities: 'Caminho do explorador, marca da presa +1d8, poder de caçador' },
+            { level: '6º', abilities: 'Poder de caçador' },
+            { level: '7º', abilities: 'Explorador, poder de caçador' },
+            { level: '8º', abilities: 'Poder de caçador' },
+            { level: '9º', abilities: 'Marca da presa +1d12, poder de caçador' },
+            { level: '10º', abilities: 'Poder de caçador' },
+            { level: '11º', abilities: 'Explorador, poder de caçador' },
+            { level: '12º', abilities: 'Poder de caçador' },
+            { level: '13º', abilities: 'Marca da presa +2d8, poder de caçador' },
+            { level: '14º', abilities: 'Poder de caçador' },
+            { level: '15º', abilities: 'Explorador, poder de caçador' },
+            { level: '16º', abilities: 'Poder de caçador' },
+            { level: '17º', abilities: 'Marca da presa +2d10, poder de caçador' },
+            { level: '18º', abilities: 'Poder de caçador' },
+            { level: '19º', abilities: 'Explorador, poder de caçador' },
+            { level: '20º', abilities: 'Mestre caçador, poder de caçador' }
+        ];
+
+        progressionData.forEach((row, index) => {
+            const tableRow = document.createElement('div');
+            tableRow.style.display = 'grid';
+            tableRow.style.gridTemplateColumns = '80px 1fr';
+            tableRow.style.padding = '10px 15px';
+            tableRow.style.borderBottom = index < progressionData.length - 1 ? '1px solid rgba(139, 69, 19, 0.1)' : 'none';
+            tableRow.style.transition = 'background 0.2s';
+
+            tableRow.onmouseover = () => {
+                tableRow.style.background = 'rgba(139, 69, 19, 0.1)';
+            };
+            tableRow.onmouseout = () => {
+                tableRow.style.background = 'transparent';
+            };
+
+            const levelCell = document.createElement('div');
+            levelCell.textContent = row.level;
+            levelCell.style.color = '#8B4513';
+            levelCell.style.fontWeight = 'bold';
+            levelCell.style.fontSize = '13px';
+
+            const abilitiesCell = document.createElement('div');
+            abilitiesCell.textContent = row.abilities;
+            abilitiesCell.style.color = '#ecf0f1';
+            abilitiesCell.style.fontSize = '13px';
+            abilitiesCell.style.lineHeight = '1.3';
+
+            tableRow.appendChild(levelCell);
+            tableRow.appendChild(abilitiesCell);
+            progressionTable.appendChild(tableRow);
+        });
+
+        progressionSection.appendChild(progressionTable);
+        tab1Content.appendChild(progressionSection);
+
+        // Nota sobre o livro
+        const bookNote = document.createElement('div');
+        bookNote.style.textAlign = 'center';
+        bookNote.style.padding = '15px';
+        bookNote.style.background = 'rgba(139, 69, 19, 0.1)';
+        bookNote.style.borderRadius = '8px';
+        bookNote.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+        bookNote.style.marginTop = '15px';
+
+        const noteText = document.createElement('div');
+        noteText.textContent = '📖 Informações baseadas no Livro do Jogador - Tormenta 20';
+        noteText.style.color = '#8B4513';
+        noteText.style.fontSize = '12px';
+        noteText.style.fontStyle = 'italic';
+        noteText.style.fontWeight = 'bold';
+
+        bookNote.appendChild(noteText);
+        popup.appendChild(bookNote);
+
+        document.body.appendChild(popup);
+    }
+
+    // Funções para gerenciar poderes de destino aprendidos
+    function getLearnedDestinyPowers() {
+        try {
+            const powers = localStorage.getItem(DESTINY_POWERS_KEY);
+            return powers ? JSON.parse(powers) : [];
+        } catch (error) {
+            console.log('Erro ao carregar poderes de destino aprendidos:', error);
+            return [];
+        }
+    }
+
+    function saveLearnedDestinyPowers(powers) {
+        try {
+            localStorage.setItem(DESTINY_POWERS_KEY, JSON.stringify(powers));
+        } catch (error) {
+            console.log('Erro ao salvar poderes de destino aprendidos:', error);
+        }
+    }
+
+    function toggleLearnedDestinyPower(powerName) {
+        const learnedPowers = getLearnedDestinyPowers();
+        const index = learnedPowers.indexOf(powerName);
+
+        if (index > -1) {
+            learnedPowers.splice(index, 1);
+        } else {
+            learnedPowers.push(powerName);
+        }
+
+        saveLearnedDestinyPowers(learnedPowers);
+        return learnedPowers;
+    }
+
+    // Função utilitária para verificar se o personagem possui um poder de destino
+    function hasDestinyPower(powerName) {
+        const learnedPowers = getLearnedDestinyPowers();
+        return learnedPowers.includes(powerName);
+    }
+
+    // Função para criar popup de poderes de destino
+    function createDestinyPowersPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('destiny-powers-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('destiny-powers-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'destiny-powers-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'destiny-powers-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #FFD700';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '800px';
+        popup.style.maxHeight = '85vh';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.width = '100%';
+        header.style.borderBottom = '1px solid rgba(255, 215, 0, 0.3)';
+        header.style.paddingBottom = '15px';
+
+        const title = document.createElement('h2');
+        title.innerHTML = '⭐ Poderes de Destino';
+        title.style.color = '#FFD700';
+        title.style.margin = '0';
+        title.style.fontSize = '24px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '28px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '36px';
+        closeBtn.style.height = '36px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('destiny-powers-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Barra de filtros e controles
+        const filterContainer = document.createElement('div');
+        filterContainer.style.marginBottom = '15px';
+        filterContainer.style.padding = '12px';
+        filterContainer.style.background = 'rgba(255, 215, 0, 0.1)';
+        filterContainer.style.borderRadius = '8px';
+        filterContainer.style.border = '1px solid rgba(255, 215, 0, 0.2)';
+
+        // Filtro de texto
+        const textFilterContainer = document.createElement('div');
+        textFilterContainer.style.position = 'relative';
+        textFilterContainer.style.marginBottom = '10px';
+
+        const textFilterInput = document.createElement('input');
+        textFilterInput.type = 'text';
+        textFilterInput.placeholder = 'Filtrar poderes...';
+        textFilterInput.style.width = '100%';
+        textFilterInput.style.padding = '10px 28px 10px 12px';
+        textFilterInput.style.borderRadius = '8px';
+        textFilterInput.style.border = '1px solid #FFD700';
+        textFilterInput.style.background = '#23243a';
+        textFilterInput.style.color = '#ecf0f1';
+        textFilterInput.style.fontSize = '14px';
+
+        // Filtro de status
+        const statusFilterContainer = document.createElement('div');
+        statusFilterContainer.style.display = 'flex';
+        statusFilterContainer.style.gap = '10px';
+        statusFilterContainer.style.marginTop = '10px';
+
+        const statusFilters = [
+            { label: 'Todos', value: 'all' },
+            { label: 'Aprendidos', value: 'learned' },
+            { label: 'Disponíveis', value: 'available' }
+        ];
+
+        let currentTextFilter = '';
+        let currentStatusFilter = 'all';
+
+        statusFilters.forEach(filter => {
+            const filterBtn = document.createElement('button');
+            filterBtn.textContent = filter.label;
+            filterBtn.style.padding = '6px 12px';
+            filterBtn.style.borderRadius = '6px';
+            filterBtn.style.border = '1px solid #FFD700';
+            filterBtn.style.background = filter.value === 'all' ? '#FFD700' : 'transparent';
+            filterBtn.style.color = filter.value === 'all' ? '#23243a' : '#FFD700';
+            filterBtn.style.cursor = 'pointer';
+            filterBtn.style.fontSize = '12px';
+            filterBtn.style.fontWeight = 'bold';
+            filterBtn.style.transition = 'all 0.2s';
+
+            filterBtn.onclick = () => {
+                currentStatusFilter = filter.value;
+                statusFilters.forEach(f => {
+                    const btn = statusFilterContainer.querySelector(`[data-value="${f.value}"]`);
+                    if (btn) {
+                        btn.style.background = f.value === filter.value ? '#FFD700' : 'transparent';
+                        btn.style.color = f.value === filter.value ? '#23243a' : '#FFD700';
+                    }
+                });
+                updateDestinyPowerList();
+            };
+            filterBtn.setAttribute('data-value', filter.value);
+            statusFilterContainer.appendChild(filterBtn);
+        });
+
+        textFilterContainer.appendChild(textFilterInput);
+        filterContainer.appendChild(textFilterContainer);
+        filterContainer.appendChild(statusFilterContainer);
+        popup.appendChild(filterContainer);
+
+        // Container da lista de poderes
+        const powersListContainer = document.createElement('div');
+        powersListContainer.id = 'destiny-powers-list';
+        powersListContainer.style.maxHeight = '400px';
+        powersListContainer.style.overflowY = 'auto';
+        powersListContainer.style.paddingRight = '5px';
+
+        // Lista de poderes de destino
+        const destinyPowers = [
+            {
+                name: 'Acuidade com Arma',
+                description: 'Quando usa uma arma corpo a corpo leve ou uma arma de arremesso, você pode usar sua Destreza em vez de Força nos testes de ataque e rolagens de dano.',
+                prereq: 'Des 1'
+            },
+            {
+                name: 'Arma Secundária Grande',
+                description: 'Você pode empunhar duas armas de uma mão com o poder Estilo de Duas Armas.',
+                prereq: 'Estilo de Duas Armas'
+            },
+            {
+                name: 'Arremesso Potente',
+                description: 'Quando usa uma arma de arremesso, você pode usar sua Força em vez de Destreza nos testes de ataque. Se você possuir o poder Ataque Poderoso, poderá usá-lo com armas de arremesso.',
+                prereq: 'For 1, Estilo de Arremesso'
+            },
+            {
+                name: 'Arremesso Múltiplo',
+                description: 'Uma vez por rodada, quando faz um ataque com uma arma de arremesso, você pode gastar 1 PM para fazer um ataque adicional contra o mesmo alvo, arremessando outra arma de arremesso.',
+                prereq: 'Des 1, Estilo de Arremesso'
+            },
+            {
+                name: 'Ataque com Escudo',
+                description: 'Uma vez por rodada, se estiver empunhando um escudo e fizer a ação agredir, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com o escudo. Este ataque não faz você perder o bônus do escudo na Defesa.',
+                prereq: 'Estilo de Arma e Escudo'
+            },
+            {
+                name: 'Ataque Pesado',
+                description: 'Quando faz um ataque corpo a corpo com uma arma de duas mãos, você pode pagar 1 PM. Se fizer isso e acertar o ataque, além do dano você faz uma manobra derrubar ou empurrar contra o alvo como uma ação livre (use o resultado do ataque como o teste de manobra).',
+                prereq: 'Estilo de Duas Mãos'
+            },
+            {
+                name: 'Ataque Poderoso',
+                description: 'Sempre que faz um ataque corpo a corpo, você pode sofrer –2 no teste de ataque para receber +5 na rolagem de dano.',
+                prereq: 'For 1'
+            },
+            {
+                name: 'Ataque Preciso',
+                description: 'Se estiver empunhando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na margem de ameaça e +1 no multiplicador de crítico com ela.',
+                prereq: 'Estilo de Uma Arma'
+            },
+            {
+                name: 'Bloqueio com Escudo',
+                description: 'Quando sofre dano, você pode gastar 1 PM para receber redução de dano igual ao bônus na Defesa que seu escudo fornece contra este dano. Você só pode usar este poder se estiver usando um escudo.',
+                prereq: 'Estilo de Arma e Escudo'
+            },
+            {
+                name: 'Carga de Cavalaria',
+                description: 'Quando faz uma investida montada, você causa +2d8 pontos de dano. Além disso, pode continuar se movendo depois do ataque. Você deve se mover em linha reta e seu movimento máximo ainda é o dobro do seu deslocamento.',
+                prereq: 'Ginete'
+            },
+            {
+                name: 'Combate Defensivo',
+                description: 'Quando usa a ação agredir, você pode usar este poder. Se fizer isso, até seu próximo turno, sofre –2 em todos os testes de ataque, mas recebe +5 na Defesa.',
+                prereq: 'Int 1'
+            },
+            {
+                name: 'Derrubar Aprimorado',
+                description: 'Você recebe +2 em testes de ataque para derrubar. Quando derruba uma criatura com essa manobra, pode gastar 1 PM para fazer um ataque extra contra ela.',
+                prereq: 'Combate Defensivo'
+            },
+            {
+                name: 'Desarmar Aprimorado',
+                description: 'Você recebe +2 em testes de ataque para desarmar. Quando desarma uma criatura, pode gastar 1 PM para arremessar a arma dela para longe. Para definir onde a arma cai, role 1d8 para a direção (sendo "1" diretamente à sua frente, "2" à frente e à direita e assim por diante) e 1d6 para a distância (medida em quadrados de 1,5m a partir da criatura desarmada).',
+                prereq: 'Combate Defensivo'
+            },
+            {
+                name: 'Disparo Preciso',
+                description: 'Você pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade de –5 no teste de ataque.',
+                prereq: 'Estilo de Disparo ou Estilo de Arremesso'
+            },
+            {
+                name: 'Disparo Rápido',
+                description: 'Se estiver empunhando uma arma de disparo que possa recarregar como ação livre e gastar uma ação completa para agredir, pode fazer um ataque adicional com ela. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno.',
+                prereq: 'Des 1, Estilo de Disparo'
+            },
+            {
+                name: 'Empunhadura Poderosa',
+                description: 'Ao usar uma arma feita para uma categoria de tamanho maior que a sua, a penalidade que você sofre nos testes de ataque diminui para –2 (normalmente, usar uma arma de uma categoria de tamanho maior impõe –5 nos testes de ataque).',
+                prereq: 'For 3'
+            },
+            {
+                name: 'Encouraçado',
+                description: 'Se estiver usando uma armadura pesada, você recebe +2 na Defesa. Esse bônus aumenta em +2 para cada outro poder que você possua que tenha Encouraçado como pré-requisito.',
+                prereq: 'proficiência com armaduras pesadas'
+            },
+            {
+                name: 'Esquiva',
+                description: 'Você recebe +2 na Defesa e Reflexos.',
+                prereq: 'Des 1'
+            },
+            {
+                name: 'Estilo de Arma e Escudo',
+                description: 'Se você estiver usando um escudo, o bônus na Defesa que ele fornece aumenta em +2.',
+                prereq: 'treinado em Luta, proficiência com escudos'
+            },
+            {
+                name: 'Estilo de Arma Longa',
+                description: 'Você recebe +2 em testes de ataque com armas alongadas e pode atacar alvos adjacentes com essas armas.',
+                prereq: 'For 1, treinado em Luta'
+            },
+            {
+                name: 'Estilo de Arremesso',
+                description: 'Você pode sacar armas de arremesso como uma ação livre e recebe +2 nas rolagens de dano com elas. Se também possuir o poder Saque Rápido, também recebe +2 nos testes de ataque com essas armas.',
+                prereq: 'treinado em Pontaria'
+            },
+            {
+                name: 'Estilo de Disparo',
+                description: 'Se estiver usando uma arma de disparo, você soma sua Destreza nas rolagens de dano.',
+                prereq: 'treinado em Pontaria'
+            },
+            {
+                name: 'Estilo de Duas Armas',
+                description: 'Se estiver empunhando duas armas (e pelo menos uma delas for leve) e fizer a ação agredir, você pode fazer dois ataques, um com cada arma. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno. Se possuir Ambidestria, em vez disso não sofre penalidade para usá-lo.',
+                prereq: 'Des 2, treinado em Luta'
+            },
+            {
+                name: 'Estilo de Duas Mãos',
+                description: 'Se estiver usando uma arma corpo a corpo com as duas mãos, você recebe +5 nas rolagens de dano. Este poder não pode ser usado com armas leves.',
+                prereq: 'For 2, Treinado em Luta'
+            },
+            {
+                name: 'Estilo de Uma Arma',
+                description: 'Se estiver usando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na Defesa e nos testes de ataque com essa arma (exceto ataques desarmados).',
+                prereq: 'treinado em Luta'
+            },
+            {
+                name: 'Estilo Desarmado',
+                description: 'Seus ataques desarmados causam 1d6 pontos de dano e podem causar dano letal ou não letal (sem penalidades).',
+                prereq: 'treinado em Luta'
+            },
+            {
+                name: 'Fanático',
+                description: 'Seu deslocamento não é reduzido por usar armaduras pesadas.',
+                prereq: '12º nível de personagem, Encouraçado'
+            },
+            {
+                name: 'Finta Aprimorada',
+                description: 'Você recebe +2 em testes de Enganação para fintar e pode fintar como uma ação de movimento.',
+                prereq: 'treinado em Enganação'
+            },
+            {
+                name: 'Foco em Arma',
+                description: 'Escolha uma arma. Você recebe +2 em testes de ataque com essa arma. Você pode escolher este poder outras vezes para armas diferentes.',
+                prereq: 'proficiência com a arma'
+            },
+            {
+                name: 'Ginete',
+                description: 'Você passa automaticamente em testes de Cavalgar para não cair da montaria quando sofre dano. Além disso, não sofre penalidades para atacar à distância ou lançar magias quando montado.',
+                prereq: 'treinado em Cavalgar'
+            },
+            {
+                name: 'Inexpugnável',
+                description: 'Se estiver usando uma armadura pesada, você recebe +2 em todos os testes de resistência.',
+                prereq: 'Encouraçado, 6º nível de personagem'
+            },
+            {
+                name: 'Mira Apurada',
+                description: 'Quando usa a ação mirar, você recebe +2 em testes de ataque e na margem de ameaça com ataques à distância até o fim do turno.',
+                prereq: 'Sab 1, Disparo Preciso'
+            },
+            {
+                name: 'Piqueiro',
+                description: 'Uma vez por rodada, se estiver empunhando uma arma alongada e um inimigo entrar voluntariamente em seu alcance corpo a corpo, você pode gastar 1 PM para fazer um ataque corpo a corpo contra este oponente com esta arma. Se o oponente tiver se aproximado fazendo uma investida, seu ataque causa dois dados de dano extra do mesmo tipo.',
+                prereq: 'Estilo de Arma Longa'
+            },
+            {
+                name: 'Presença Aterradora',
+                description: 'Você pode gastar uma ação padrão e 1 PM para assustar todas as criaturas a sua escolha em alcance curto. Veja a perícia Intimidação para as regras de assustar.',
+                prereq: 'treinado em Intimidação'
+            },
+            {
+                name: 'Proficiência',
+                description: 'Escolha uma proficiência: armas marciais, armas de fogo, armaduras pesadas ou escudos (se for proficiente em armas marciais, você também pode escolher armas exóticas). Você recebe essa proficiência. Você pode escolher este poder outras vezes para proficiências diferentes.'
+            },
+            {
+                name: 'Quebrar Aprimorado',
+                description: 'Você recebe +2 em testes de ataque para quebrar. Quando reduz os PV de uma arma para 0 ou menos, você pode gastar 1 PM para realizar um ataque extra contra o usuário dela. O ataque adicional usa os mesmos valores de ataque e dano, mas os dados devem ser rolados novamente.',
+                prereq: 'Ataque Poderoso'
+            },
+            {
+                name: 'Reflexos de Combate',
+                description: 'Você ganha uma ação de movimento extra no seu primeiro turno de cada combate.',
+                prereq: 'Des 1'
+            },
+            {
+                name: 'Saque Rápido',
+                description: 'Você recebe +2 em Iniciativa e pode sacar ou guardar itens como uma ação livre (em vez de ação de movimento). Além disso, a ação que você gasta para recarregar armas de disparo diminui em uma categoria (ação completa para padrão, padrão para movimento, movimento para livre).',
+                prereq: 'treinado em Iniciativa'
+            },
+            {
+                name: 'Trespassar',
+                description: 'Quando você faz um ataque corpo a corpo e reduz os pontos de vida do alvo para 0 ou menos, pode gastar 1 PM para fazer um ataque adicional contra outra criatura dentro do seu alcance.',
+                prereq: 'Ataque Poderoso'
+            },
+            {
+                name: 'Vitalidade',
+                description: 'Você recebe +1 PV por nível de personagem e +2 em Fortitude.',
+                prereq: 'Con 1'
+            }
+        ];
+
+        // Função para atualizar a lista de poderes
+        function updateDestinyPowerList() {
+            powersListContainer.innerHTML = '';
+
+            const filteredPowers = destinyPowers.filter(power => {
+                // Filtro de texto
+                const matchesText = power.name.toLowerCase().includes(currentTextFilter.toLowerCase()) ||
+                    power.description.toLowerCase().includes(currentTextFilter.toLowerCase());
+
+                // Filtro de status
+                let matchesStatus = true;
+                if (currentStatusFilter === 'learned') {
+                    matchesStatus = hasDestinyPower(power.name);
+                } else if (currentStatusFilter === 'available') {
+                    matchesStatus = !hasDestinyPower(power.name);
+                }
+
+                return matchesText && matchesStatus;
+            });
+
+            filteredPowers.forEach(power => {
+                const powerContainer = document.createElement('div');
+                const isLearned = hasDestinyPower(power.name);
+
+                // Define cores baseadas no status
+                let backgroundColor, borderColor, textColor;
+
+                if (isLearned) {
+                    backgroundColor = 'rgba(76, 175, 80, 0.1)';
+                    borderColor = 'rgba(76, 175, 80, 0.3)';
+                    textColor = '#4CAF50';
+                } else {
+                    backgroundColor = 'rgba(255, 215, 0, 0.1)';
+                    borderColor = 'rgba(255, 215, 0, 0.2)';
+                    textColor = '#FFD700';
+                }
+
+                powerContainer.style.marginBottom = '15px';
+                powerContainer.style.padding = '12px';
+                powerContainer.style.background = backgroundColor;
+                powerContainer.style.borderRadius = '8px';
+                powerContainer.style.border = `1px solid ${borderColor}`;
+                powerContainer.style.transition = 'all 0.2s';
+
+                const powerHeader = document.createElement('div');
+                powerHeader.style.display = 'flex';
+                powerHeader.style.justifyContent = 'space-between';
+                powerHeader.style.alignItems = 'flex-start';
+                powerHeader.style.marginBottom = '8px';
+                powerHeader.style.flexWrap = 'wrap';
+                powerHeader.style.gap = '10px';
+
+                const powerNameContainer = document.createElement('div');
+                powerNameContainer.style.display = 'flex';
+                powerNameContainer.style.alignItems = 'center';
+                powerNameContainer.style.gap = '8px';
+                powerNameContainer.style.flex = '1';
+
+                // Checkbox para poderes aprendidos
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = isLearned;
+                checkbox.style.width = '16px';
+                checkbox.style.height = '16px';
+                checkbox.style.accentColor = '#FFD700';
+                checkbox.style.cursor = 'pointer';
+
+                checkbox.onchange = () => {
+                    toggleLearnedDestinyPower(power.name);
+                    updateDestinyPowerList(); // Atualiza a lista para refletir as mudanças
+                };
+
+                powerNameContainer.appendChild(checkbox);
+
+                const powerName = document.createElement('div');
+                powerName.textContent = power.name;
+                powerName.style.color = textColor;
+                powerName.style.fontSize = '15px';
+                powerName.style.fontWeight = 'bold';
+
+                powerNameContainer.appendChild(powerName);
+
+                powerHeader.appendChild(powerNameContainer);
+
+                const powerDescription = document.createElement('div');
+                powerDescription.textContent = power.description;
+                powerDescription.style.color = '#ecf0f1';
+                powerDescription.style.fontSize = '13px';
+                powerDescription.style.lineHeight = '1.4';
+                powerDescription.style.marginBottom = '5px';
+
+                powerContainer.appendChild(powerHeader);
+                powerContainer.appendChild(powerDescription);
+
+                if (power.prereq) {
+                    const prereqDiv = document.createElement('div');
+                    prereqDiv.textContent = `Pré-requisito: ${power.prereq}`;
+                    prereqDiv.style.color = '#ffa726';
+                    prereqDiv.style.fontSize = '11px';
+                    prereqDiv.style.fontStyle = 'italic';
+                    prereqDiv.style.fontWeight = 'bold';
+                    powerContainer.appendChild(prereqDiv);
+                }
+
+                // Indicadores visuais
+                const indicatorsContainer = document.createElement('div');
+                indicatorsContainer.style.marginTop = '5px';
+                indicatorsContainer.style.display = 'flex';
+                indicatorsContainer.style.gap = '8px';
+                indicatorsContainer.style.flexWrap = 'wrap';
+
+                if (isLearned) {
+                    const learnedIndicator = document.createElement('div');
+                    learnedIndicator.innerHTML = '✓ Aprendido';
+                    learnedIndicator.style.color = '#4CAF50';
+                    learnedIndicator.style.fontSize = '11px';
+                    learnedIndicator.style.fontWeight = 'bold';
+                    learnedIndicator.style.fontStyle = 'italic';
+                    indicatorsContainer.appendChild(learnedIndicator);
+                }
+
+                if (indicatorsContainer.children.length > 0) {
+                    powerContainer.appendChild(indicatorsContainer);
+                }
+
+                powersListContainer.appendChild(powerContainer);
+            });
+
+            // Estatísticas
+            const statsContainer = document.createElement('div');
+            statsContainer.style.marginTop = '15px';
+            statsContainer.style.padding = '10px';
+            statsContainer.style.background = 'rgba(26,26,46,0.8)';
+            statsContainer.style.borderRadius = '8px';
+            statsContainer.style.border = '1px solid rgba(255, 215, 0, 0.3)';
+            statsContainer.style.textAlign = 'center';
+
+            const learnedPowers = getLearnedDestinyPowers().length;
+            const totalPowers = destinyPowers.length;
+            const progress = Math.round((learnedPowers / totalPowers) * 100);
+
+            const statsText = document.createElement('div');
+            statsText.innerHTML = `<strong>Poderes Aprendidos:</strong> ${learnedPowers}/${totalPowers} (${progress}%)`;
+            statsText.style.color = '#FFD700';
+            statsText.style.fontSize = '14px';
+            statsText.style.fontWeight = 'bold';
+
+            statsContainer.appendChild(statsText);
+            powersListContainer.appendChild(statsContainer);
+        }
+
+        // Event listeners para filtros
+        textFilterInput.addEventListener('input', (e) => {
+            currentTextFilter = e.target.value;
+            updateDestinyPowerList();
+        });
+
+        // Inicializa a lista
+        updateDestinyPowerList();
+
+        popup.appendChild(powersListContainer);
+        document.body.appendChild(popup);
+    }
 })();
