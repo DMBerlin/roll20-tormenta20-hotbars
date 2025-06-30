@@ -2188,39 +2188,8 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
             // Obter nível do personagem
             const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
-            let marcaPresaAttackMod = 0;
-            let marcaPresaDice = '';
-            let marcaPresaDesc = '';
-            if (charLevel >= 17) {
-                marcaPresaAttackMod = 3;
-                marcaPresaDice = '+2d10';
-                marcaPresaDesc = '+3 acerto, +2d10 dano, crit 16+';
-            } else if (charLevel >= 13) {
-                marcaPresaAttackMod = 3;
-                marcaPresaDice = '+2d8';
-                marcaPresaDesc = '+3 acerto, +2d8 dano, crit 16+';
-            } else if (charLevel >= 9) {
-                marcaPresaAttackMod = 3;
-                marcaPresaDice = '+1d12';
-                marcaPresaDesc = '+3 acerto, +1d12 dano, crit 16+';
-            } else if (charLevel >= 5) {
-                marcaPresaAttackMod = 2;
-                marcaPresaDice = '+1d8';
-                marcaPresaDesc = '+2 acerto, +1d8 dano, crit 16+';
-            } else {
-                marcaPresaAttackMod = 1;
-                marcaPresaDice = '+1d4';
-                marcaPresaDesc = '+1 acerto, +1d4 dano, crit 16+';
-            }
-
-            // Efeitos (checkboxes)
-            const effects = [
-                { label: 'Espada Solar (+1d6 dano)', value: 'espada_solar', dice: '1d6', desc: '*+ Espada Solar*' },
-                { label: 'Escaramuça (+1d8 dano)', value: 'escaramurca', dice: '1d8', desc: '*+ Escaramuça*' },
-                { label: 'Ataque Furtivo (+1d6 dano)', value: 'ataque_furtivo', dice: '1d6', desc: '*+ Ataque Furtivo*' },
-                { label: `Marca da Presa (${marcaPresaDesc})`, value: 'marca_presa', dice: marcaPresaDice.replace('+', ''), attackMod: marcaPresaAttackMod, critMod: -2, desc: `*+ Marca da Presa*` },
-                { label: 'Inimigo (dobra margem de crítico)', value: 'inimigo', desc: '*+ Inimigo*' }
-            ];
+            // Efeitos dinâmicos
+            const effects = getDynamicAttackEffects(charLevel);
             const checkboxes = {};
             effects.forEach(effect => {
                 const container = document.createElement('label');
@@ -2236,6 +2205,13 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 span.textContent = effect.label;
                 span.style.color = '#ecf0f1';
                 span.style.fontSize = '15px';
+                // Tag de origem
+                const tag = document.createElement('span');
+                tag.textContent = effect.origin ? ` [${effect.origin}]` : '';
+                tag.style.color = '#6ec6ff';
+                tag.style.fontSize = '12px';
+                tag.style.marginLeft = '4px';
+                span.appendChild(tag);
                 container.appendChild(checkbox);
                 container.appendChild(span);
                 popup.appendChild(container);
@@ -3290,6 +3266,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         };
 
         textFilterInput.oninput = () => {
+            currentTextFilter = textFilterInput.value;
             if (textFilterInput.value.length > 0) {
                 clearTextBtn.style.display = 'block';
             } else {
@@ -3445,10 +3422,110 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                     checkbox.style.accentColor = '#8B4513';
                     checkbox.style.cursor = 'pointer';
 
-                    checkbox.onchange = () => {
-                        toggleLearnedAbility(ability.name);
-                        updateAbilityList(); // Atualiza a lista para refletir as mudanças
-                    };
+                    if (ability.name === 'Companheiro Animal') {
+                        checkbox.onchange = () => {
+                            toggleLearnedAbility(ability.name);
+                            if (checkbox.checked) {
+                                // Cria modal para selecionar tipo do companheiro animal
+                                const existingModal = document.getElementById('animal-companion-modal');
+                                if (existingModal) existingModal.remove();
+                                const existingOverlay = document.getElementById('animal-companion-overlay');
+                                if (existingOverlay) existingOverlay.remove();
+
+                                // Overlay
+                                const overlay = document.createElement('div');
+                                overlay.id = 'animal-companion-overlay';
+                                overlay.style.position = 'fixed';
+                                overlay.style.top = '0';
+                                overlay.style.left = '0';
+                                overlay.style.width = '100%';
+                                overlay.style.height = '100%';
+                                overlay.style.background = 'rgba(0,0,0,0.5)';
+                                overlay.style.zIndex = '10000';
+                                overlay.onclick = () => {
+                                    overlay.remove();
+                                    modal.remove();
+                                };
+                                document.body.appendChild(overlay);
+
+                                // Modal
+                                const modal = document.createElement('div');
+                                modal.id = 'animal-companion-modal';
+                                modal.style.position = 'fixed';
+                                modal.style.top = '50%';
+                                modal.style.left = '50%';
+                                modal.style.transform = 'translate(-50%, -50%)';
+                                modal.style.background = 'rgba(30,30,40,0.98)';
+                                modal.style.border = '2px solid #6ec6ff';
+                                modal.style.borderRadius = '12px';
+                                modal.style.padding = '24px 28px';
+                                modal.style.zIndex = '10001';
+                                modal.style.maxWidth = '340px';
+                                modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+                                modal.style.display = 'flex';
+                                modal.style.flexDirection = 'column';
+                                modal.style.alignItems = 'stretch';
+                                // Título
+                                const title = document.createElement('h3');
+                                title.textContent = 'Tipo de Companheiro Animal';
+                                title.style.color = '#ecf0f1';
+                                title.style.margin = '0 0 18px 0';
+                                title.style.fontSize = '17px';
+                                title.style.fontWeight = 'bold';
+                                modal.appendChild(title);
+                                // Opção única: Assassino
+                                const option = document.createElement('button');
+                                option.textContent = 'Assassino';
+                                option.style.background = '#6ec6ff';
+                                option.style.color = '#23243a';
+                                option.style.border = 'none';
+                                option.style.borderRadius = '8px';
+                                option.style.fontSize = '15px';
+                                option.style.fontWeight = 'bold';
+                                option.style.padding = '12px 0';
+                                option.style.cursor = 'pointer';
+                                option.style.marginBottom = '10px';
+                                option.onmouseover = () => {
+                                    option.style.background = '#5bb8ff';
+                                };
+                                option.onmouseout = () => {
+                                    option.style.background = '#6ec6ff';
+                                };
+                                option.onclick = () => {
+                                    setAnimalCompanionType('assassino');
+                                    overlay.remove();
+                                    modal.remove();
+                                    updateAbilityList();
+                                };
+                                modal.appendChild(option);
+                                // Fechar
+                                const closeBtn = document.createElement('button');
+                                closeBtn.innerHTML = '×';
+                                closeBtn.style.background = 'none';
+                                closeBtn.style.border = 'none';
+                                closeBtn.style.color = '#ecf0f1';
+                                closeBtn.style.fontSize = '24px';
+                                closeBtn.style.cursor = 'pointer';
+                                closeBtn.style.position = 'absolute';
+                                closeBtn.style.top = '8px';
+                                closeBtn.style.right = '12px';
+                                closeBtn.onclick = () => {
+                                    overlay.remove();
+                                    modal.remove();
+                                };
+                                modal.appendChild(closeBtn);
+                                document.body.appendChild(modal);
+                            } else {
+                                setAnimalCompanionType('');
+                            }
+                            updateAbilityList();
+                        };
+                    } else {
+                        checkbox.onchange = () => {
+                            toggleLearnedAbility(ability.name);
+                            updateAbilityList(); // Atualiza a lista para refletir as mudanças
+                        };
+                    }
 
                     abilityNameContainer.appendChild(checkbox);
                 }
@@ -3458,6 +3535,23 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 abilityName.style.color = textColor;
                 abilityName.style.fontSize = '15px';
                 abilityName.style.fontWeight = 'bold';
+
+                // CHIP DO COMPANHEIRO ANIMAL
+                if (ability.name === 'Companheiro Animal' && isLearned && getAnimalCompanionType() === 'assassino') {
+                    const chip = document.createElement('span');
+                    chip.textContent = 'Assassino';
+                    chip.style.background = '#6ec6ff';
+                    chip.style.color = '#23243a';
+                    chip.style.borderRadius = '8px';
+                    chip.style.padding = '2px 10px';
+                    chip.style.fontSize = '12px';
+                    chip.style.fontWeight = 'bold';
+                    chip.style.marginLeft = '8px';
+                    chip.style.display = 'inline-block';
+                    chip.style.letterSpacing = '0.5px';
+                    chip.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+                    abilityName.appendChild(chip);
+                }
 
                 abilityNameContainer.appendChild(abilityName);
 
@@ -3848,5 +3942,108 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
         saveLearnedDestinyPowers(learnedPowers);
         return learnedPowers;
+    }
+
+    // === NOVO: utilitários para Companheiro Animal ===
+    const ANIMAL_COMPANION_TYPE_KEY = 'roll20-hotbar-animal-companion-type';
+    function getAnimalCompanionType() {
+        return localStorage.getItem(ANIMAL_COMPANION_TYPE_KEY) || '';
+    }
+    function setAnimalCompanionType(type) {
+        localStorage.setItem(ANIMAL_COMPANION_TYPE_KEY, type);
+    }
+
+    // Função para obter efeitos de ataque dinâmicos
+    function getDynamicAttackEffects(charLevel) {
+        const effects = [];
+        // Espada Solar (exemplo de efeito fixo, origem: Divindade)
+        effects.push({
+            label: 'Espada Solar (+1d6 dano)',
+            value: 'espada_solar',
+            dice: '1d6',
+            desc: '*+ Espada Solar*',
+            origin: 'Divindade: Azgher'
+        });
+        // Escaramuça
+        if (hasAbility('Escaramuça')) {
+            effects.push({
+                label: 'Escaramuça (+1d8 dano)',
+                value: 'escaramurca',
+                dice: '1d8',
+                desc: '*+ Escaramuça*',
+                origin: 'Habilidade de Caçador'
+            });
+        }
+        // Marca da Presa
+        if (hasAbility('Marca da Presa')) {
+            let marcaPresaAttackMod = 0;
+            let marcaPresaDice = '';
+            let marcaPresaDesc = '';
+            if (charLevel >= 17) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+2d10';
+                marcaPresaDesc = '+3 acerto, +2d10 dano, crit 16+';
+            } else if (charLevel >= 13) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+2d8';
+                marcaPresaDesc = '+3 acerto, +2d8 dano, crit 16+';
+            } else if (charLevel >= 9) {
+                marcaPresaAttackMod = 3;
+                marcaPresaDice = '+1d12';
+                marcaPresaDesc = '+3 acerto, +1d12 dano, crit 16+';
+            } else if (charLevel >= 5) {
+                marcaPresaAttackMod = 2;
+                marcaPresaDice = '+1d8';
+                marcaPresaDesc = '+2 acerto, +1d8 dano, crit 16+';
+            } else {
+                marcaPresaAttackMod = 1;
+                marcaPresaDice = '+1d4';
+                marcaPresaDesc = '+1 acerto, +1d4 dano, crit 16+';
+            }
+            effects.push({
+                label: `Marca da Presa (${marcaPresaDesc})`,
+                value: 'marca_presa',
+                dice: marcaPresaDice.replace('+', ''),
+                attackMod: marcaPresaAttackMod,
+                critMod: -2,
+                desc: '*+ Marca da Presa*',
+                origin: 'Habilidade de Caçador'
+            });
+        }
+        // Inimigo
+        if (hasAbility('Inimigo de (Criatura)')) {
+            effects.push({
+                label: 'Inimigo (dobra margem de crítico)',
+                value: 'inimigo',
+                desc: '*+ Inimigo*',
+                origin: 'Habilidade de Caçador'
+            });
+        }
+        // Ataque Furtivo (Companheiro Animal do tipo Assassino)
+        if (hasAbility('Companheiro Animal') && getAnimalCompanionType() === 'assassino') {
+            // Dano e bônus de acerto dependem do nível
+            let dice = '1d6';
+            let attackMod = 0;
+            let desc = '*+ Ataque Furtivo*';
+            const charLevelNum = parseInt(charLevel, 10) || 1;
+            if (charLevelNum >= 15) {
+                dice = '2d6';
+                attackMod = 2;
+                desc = '*+ Ataque Furtivo (2d6, +2 acerto)*';
+            } else if (charLevelNum >= 11) {
+                dice = '1d6';
+                attackMod = 2;
+                desc = '*+ Ataque Furtivo (+2 acerto)*';
+            }
+            effects.push({
+                label: `Ataque Furtivo (+${dice} dano${attackMod ? ', +2 acerto' : ''})`,
+                value: 'ataque_furtivo',
+                dice,
+                attackMod,
+                desc,
+                origin: 'Companheiro Animal: Assassino'
+            });
+        }
+        return effects;
     }
 })();
