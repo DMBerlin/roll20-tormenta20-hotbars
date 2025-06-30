@@ -175,13 +175,6 @@
         return learnedAbilities.includes(abilityName);
     }
 
-    // Função para obter todas as habilidades aprendidas (útil para debug)
-    function getAllLearnedAbilities() {
-        const learnedAbilities = getLearnedAbilities();
-        const automaticAbilities = getAutomaticAbilities();
-        return [...automaticAbilities, ...learnedAbilities];
-    }
-
     // Função para inicializar habilidades automáticas (chamada uma vez)
     function initializeAutomaticAbilities() {
         const learnedAbilities = getLearnedAbilities();
@@ -441,7 +434,7 @@
                 return resolve(document.querySelector(selector));
             }
 
-            const observer = new MutationObserver(mutations => {
+            const observer = new MutationObserver(() => {
                 if (document.querySelector(selector)) {
                     observer.disconnect();
                     resolve(document.querySelector(selector));
@@ -744,15 +737,15 @@
     };
 
     // Templates reutilizáveis para Powers
-    const powerTemplates = {
-        createPower: (powerData) => {
-            return {
-                nome: powerData.nome,
-                descricao: powerData.descricao,
-                onClick: () => createPowerCastPopup(powerData.nome, powerData.nome)
-            };
-        }
-    };
+    // const powerTemplates = {
+    //     createPower: (powerData) => {
+    //         return {
+    //             nome: powerData.nome,
+    //             descricao: powerData.descricao,
+    //             onClick: () => createPowerCastPopup(powerData.nome, powerData.nome)
+    //         };
+    //     }
+    // };
 
     // Função para criar o popup de spells
     function createSpellsPopup() {
@@ -880,8 +873,8 @@
         // Lista de spells (nome, comando)
         const spells = [
             spellTemplates.createSpell({
-                nome: 'Escuridão',
-                comando: `&{template:spell}{{character=@{${getCharacterName()}|character_name}}}{{spellname=Escuridão}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
+                nome: 'Sombras Profanas',
+                comando: `&{template:spell}{{character=@{${getCharacterName()}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
 
 +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
@@ -939,7 +932,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
     }
 
     // Função para criar popup de detalhes de spell
-    function createSpellCastPopup(spellName, spellDisplayName, spellCommand) {
+    function createSpellCastPopup(spellName, spellDisplayName) {
         // Remove popup existente se houver
         const existingPopup = document.getElementById('spell-cast-popup');
         if (existingPopup) existingPopup.remove();
@@ -990,42 +983,38 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         header.style.marginBottom = '15px';
         header.style.width = '100%';
 
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.flexDirection = 'column';
+        titleContainer.style.alignItems = 'flex-start';
+        titleContainer.style.gap = '2px';
+
         const title = document.createElement('h3');
         title.textContent = spellDisplayName;
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '18px';
         title.style.fontWeight = 'bold';
+        titleContainer.appendChild(title);
 
-        // Botão de compartilhar descrição
-        const shareBtn = document.createElement('button');
-        shareBtn.innerHTML = '📤';
-        shareBtn.style.background = 'none';
-        shareBtn.style.border = 'none';
-        shareBtn.style.color = '#6ec6ff';
-        shareBtn.style.fontSize = '16px';
-        shareBtn.style.cursor = 'pointer';
-        shareBtn.style.padding = '4px';
-        shareBtn.style.borderRadius = '4px';
-        shareBtn.style.transition = 'all 0.2s';
-        shareBtn.style.marginRight = '8px';
-        shareBtn.title = 'Compartilhar spell no chat';
+        // Tag de origem
+        const originTag = document.createElement('span');
+        originTag.textContent = 'Sulfure';
+        originTag.style.background = '#6ec6ff';
+        originTag.style.color = '#23243a';
+        originTag.style.fontSize = '12px';
+        originTag.style.fontWeight = 'bold';
+        originTag.style.borderRadius = '8px';
+        originTag.style.padding = '2px 10px';
+        originTag.style.marginTop = '2px';
+        originTag.style.display = 'inline-block';
+        originTag.style.letterSpacing = '0.5px';
+        originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+        titleContainer.appendChild(originTag);
 
-        shareBtn.onmouseover = () => {
-            shareBtn.style.background = '#6ec6ff';
-            shareBtn.style.color = '#23243a';
-        };
-        shareBtn.onmouseout = () => {
-            shareBtn.style.background = 'none';
-            shareBtn.style.color = '#6ec6ff';
-        };
-        shareBtn.onclick = () => {
-            sendToChat(spellCommand);
-            popup.remove();
-            const overlay = document.getElementById('spell-cast-overlay');
-            if (overlay) overlay.remove();
-        };
+        header.appendChild(titleContainer);
 
+        // Botão de fechar
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '×';
         closeBtn.style.background = 'none';
@@ -1041,15 +1030,6 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             const overlay = document.getElementById('spell-cast-overlay');
             if (overlay) overlay.remove();
         };
-
-        // Container para título e botão de compartilhar
-        const titleContainer = document.createElement('div');
-        titleContainer.style.display = 'flex';
-        titleContainer.style.alignItems = 'center';
-        titleContainer.appendChild(title);
-        titleContainer.appendChild(shareBtn);
-
-        header.appendChild(titleContainer);
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
@@ -1099,320 +1079,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
         popup.appendChild(characteristicsContainer);
 
-        // Descrição da spell
-        const description = document.createElement('div');
-        description.style.color = '#ecf0f1';
-        description.style.marginBottom = '15px';
-        description.style.fontSize = '14px';
-        description.style.lineHeight = '1.4';
-        description.textContent = 'O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.';
-        popup.appendChild(description);
-
-        // Ícone para enviar descrição ao chat
-        const sendIcon = document.createElement('button');
-        sendIcon.innerHTML = '📤';
-        sendIcon.style.position = 'absolute';
-        sendIcon.style.top = '8px';
-        sendIcon.style.right = '8px';
-        sendIcon.style.background = 'none';
-        sendIcon.style.border = 'none';
-        sendIcon.style.color = '#6ec6ff';
-        sendIcon.style.fontSize = '16px';
-        sendIcon.style.cursor = 'pointer';
-        sendIcon.style.padding = '4px';
-        sendIcon.style.borderRadius = '4px';
-        sendIcon.style.transition = 'all 0.2s';
-        sendIcon.title = 'Enviar descrição ao chat';
-
-        sendIcon.onmouseover = () => {
-            sendIcon.style.background = '#6ec6ff';
-            sendIcon.style.color = '#23243a';
-        };
-        sendIcon.onmouseout = () => {
-            sendIcon.style.background = 'none';
-            sendIcon.style.color = '#6ec6ff';
-        };
-        sendIcon.onclick = () => {
-            const descMessage = `/em ${description.textContent}`;
-            sendToChat(descMessage);
-        };
-
-        document.body.appendChild(popup);
-    }
-
-    // Função para criar o popup de poderes
-    function createPowersPopup() {
-        // Remove popup existente se houver
-        const existingPopup = document.getElementById('powers-popup');
-        if (existingPopup) existingPopup.remove();
-        const existingOverlay = document.getElementById('powers-overlay');
-        if (existingOverlay) existingOverlay.remove();
-
-        // Overlay para fechar ao clicar fora
-        const overlay = document.createElement('div');
-        overlay.id = 'powers-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10000';
-        overlay.onclick = () => {
-            overlay.remove();
-            popup.remove();
-        };
-        document.body.appendChild(overlay);
-
-        // Popup principal
-        const popup = document.createElement('div');
-        popup.id = 'powers-popup';
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = 'rgba(30,30,40,0.98)';
-        popup.style.border = '2px solid #6ec6ff';
-        popup.style.borderRadius = '12px';
-        popup.style.padding = '18px 20px 16px 20px';
-        popup.style.zIndex = '10001';
-        popup.style.maxWidth = '400px';
-        popup.style.maxHeight = '600px';
-        popup.style.overflowY = 'auto';
-        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
-        header.style.width = '100%';
-
-        const title = document.createElement('h3');
-        title.textContent = 'Powers';
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('powers-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(title);
-        header.appendChild(closeBtn);
-        popup.appendChild(header);
-
-        // Lista de poderes
-        const powers = [
-            powerTemplates.createPower({
-                nome: 'Ervas Curativas',
-                descricao: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)'
-            })
-        ];
-
-        // Barra de filtro
-        const filterContainer = document.createElement('div');
-        filterContainer.style.position = 'relative';
-        filterContainer.style.marginBottom = '10px';
-        const filterInput = document.createElement('input');
-        filterInput.type = 'text';
-        filterInput.placeholder = 'Filter powers...';
-        filterInput.style.width = '100%';
-        filterInput.style.padding = '10px 28px 10px 12px';
-        filterInput.style.borderRadius = '8px';
-        filterInput.style.border = '1px solid #6ec6ff';
-        filterInput.style.background = '#23243a';
-        filterInput.style.color = '#fff';
-        filterInput.style.fontSize = '14px';
-        filterInput.style.outline = 'none';
-        filterInput.style.boxSizing = 'border-box';
-        filterInput.style.fontSize = '15px';
-        // Botão X para limpar
-        const clearBtn = document.createElement('span');
-        clearBtn.textContent = '×';
-        clearBtn.style.position = 'absolute';
-        clearBtn.style.right = '10px';
-        clearBtn.style.top = '50%';
-        clearBtn.style.transform = 'translateY(-50%)';
-        clearBtn.style.cursor = 'pointer';
-        clearBtn.style.color = '#6ec6ff';
-        clearBtn.style.fontSize = '18px';
-        clearBtn.style.display = 'none';
-        clearBtn.onclick = () => {
-            filterInput.value = '';
-            filterInput.dispatchEvent(new Event('input'));
-            filterInput.focus();
-        };
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
-            }
-            updatePowerList();
-        };
-        filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
-        popup.appendChild(filterContainer);
-
-        // Lista visual de poderes
-        const powerList = document.createElement('div');
-        powerList.style.display = 'flex';
-        powerList.style.flexDirection = 'column';
-        powerList.style.gap = '8px';
-        powerList.style.marginTop = '2px';
-        popup.appendChild(powerList);
-
-        function updatePowerList() {
-            const filter = filterInput.value.trim().toLowerCase();
-            powerList.innerHTML = '';
-            powers.filter(p => p.nome.toLowerCase().includes(filter)).forEach(power => {
-                const btn = document.createElement('button');
-                btn.textContent = power.nome;
-                btn.style.width = '100%';
-                btn.style.background = '#23243a';
-                btn.style.color = '#fff';
-                btn.style.border = '1px solid #6ec6ff';
-                btn.style.borderRadius = '6px';
-                btn.style.padding = '10px 0';
-                btn.style.fontSize = '15px';
-                btn.style.fontWeight = 'bold';
-                btn.style.cursor = 'pointer';
-                btn.style.transition = 'all 0.2s';
-                btn.onmouseover = () => {
-                    btn.style.background = '#6ec6ff';
-                    btn.style.color = '#23243a';
-                };
-                btn.onmouseout = () => {
-                    btn.style.background = '#23243a';
-                    btn.style.color = '#fff';
-                };
-                btn.onclick = power.onClick;
-                powerList.appendChild(btn);
-            });
-        }
-        updatePowerList();
-
-        document.body.appendChild(popup);
-    }
-
-    // Função para criar popup de conjuração de poder
-    function createPowerCastPopup(powerName, powerDisplayName) {
-        // Remove popup existente se houver
-        const existingPopup = document.getElementById('power-cast-popup');
-        if (existingPopup) existingPopup.remove();
-        const existingOverlay = document.getElementById('power-cast-overlay');
-        if (existingOverlay) existingOverlay.remove();
-
-        // Overlay para fechar ao clicar fora
-        const overlay = document.createElement('div');
-        overlay.id = 'power-cast-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10002';
-        overlay.onclick = () => {
-            overlay.remove();
-            popup.remove();
-        };
-        document.body.appendChild(overlay);
-
-        // Popup principal
-        const popup = document.createElement('div');
-        popup.id = 'power-cast-popup';
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = 'rgba(30,30,40,0.98)';
-        popup.style.border = '2px solid #6ec6ff';
-        popup.style.borderRadius = '12px';
-        popup.style.padding = '20px';
-        popup.style.zIndex = '10003';
-        popup.style.maxWidth = '400px';
-        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '10px';
-        header.style.width = '100%';
-
-        const titleContainer = document.createElement('div');
-        titleContainer.style.display = 'flex';
-        titleContainer.style.flexDirection = 'column';
-        titleContainer.style.alignItems = 'flex-start';
-        titleContainer.style.gap = '2px';
-
-        const title = document.createElement('h3');
-        title.textContent = powerDisplayName;
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '18px';
-        title.style.fontWeight = 'bold';
-        titleContainer.appendChild(title);
-
-        // Tag de origem
-        const originTag = document.createElement('span');
-        originTag.textContent = 'Habilidade de Classe';
-        originTag.style.background = '#6ec6ff';
-        originTag.style.color = '#23243a';
-        originTag.style.fontSize = '12px';
-        originTag.style.fontWeight = 'bold';
-        originTag.style.borderRadius = '8px';
-        originTag.style.padding = '2px 10px';
-        originTag.style.marginTop = '2px';
-        originTag.style.display = 'inline-block';
-        originTag.style.letterSpacing = '0.5px';
-        originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
-        titleContainer.appendChild(originTag);
-
-        header.appendChild(titleContainer);
-
-        // Botão de fechar
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('power-cast-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
-        popup.appendChild(header);
-
-        // Descrição em uma box
+        // Descrição da spell em uma box
         const descBox = document.createElement('div');
         descBox.style.background = '#1a1a2e';
         descBox.style.border = '1px solid #6ec6ff';
@@ -1435,8 +1102,65 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         description.style.color = '#ecf0f1';
         description.style.fontSize = '14px';
         description.style.lineHeight = '1.4';
-        description.textContent = 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)';
+        description.textContent = 'O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.';
         descBox.appendChild(description);
+
+        // Aprimoramentos
+        const upgrades = [
+            { label: '+1 PM: aumenta a área da escuridão em +1,5m de raio.', cost: 1 },
+            { label: '+2 PM: camuflagem total por escuridão total.', cost: 2 },
+            { label: '+2 PM: alvo 1 criatura, resistência Fortitude parcial, cego pela cena (requer 2º círculo).', cost: 2 },
+            { label: '+3 PM: duração de um dia.', cost: 3 },
+            { label: '+5 PM: alcance pessoal, alvo você, +10 Furtividade/camuflagem (requer 2º círculo).', cost: 5 }
+        ];
+        const upgradesHeader = document.createElement('div');
+        upgradesHeader.textContent = 'Aprimoramentos:';
+        upgradesHeader.style.color = '#6ec6ff';
+        upgradesHeader.style.fontSize = '13px';
+        upgradesHeader.style.fontWeight = 'bold';
+        upgradesHeader.style.margin = '10px 0 4px 0';
+        descBox.appendChild(upgradesHeader);
+        const upgradesList = document.createElement('div');
+        upgradesList.style.display = 'flex';
+        upgradesList.style.flexDirection = 'column';
+        upgradesList.style.gap = '4px';
+        const upgradeCheckboxes = [];
+        upgrades.forEach((upg, idx) => {
+            const upgDiv = document.createElement('label');
+            upgDiv.style.display = 'flex';
+            upgDiv.style.alignItems = 'center';
+            upgDiv.style.gap = '8px';
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.value = idx;
+            upgradeCheckboxes.push(cb);
+            upgDiv.appendChild(cb);
+            const span = document.createElement('span');
+            span.textContent = upg.label;
+            span.style.color = '#ecf0f1';
+            span.style.fontSize = '13px';
+            upgDiv.appendChild(span);
+            upgradesList.appendChild(upgDiv);
+        });
+        descBox.appendChild(upgradesList);
+
+        // Custo total
+        const costDiv = document.createElement('div');
+        costDiv.style.color = '#6ec6ff';
+        costDiv.style.fontWeight = 'bold';
+        costDiv.style.marginTop = '10px';
+        function updateTotalCost() {
+            let total = 1;
+            upgradeCheckboxes.forEach((cb, idx) => {
+                if (cb.checked) total += upgrades[idx].cost;
+            });
+            costDiv.textContent = `Custo total: ${total} PM`;
+        }
+        upgradeCheckboxes.forEach(cb => {
+            cb.onchange = updateTotalCost;
+        });
+        updateTotalCost();
+        descBox.appendChild(costDiv);
 
         // Botão compartilhar dentro da box
         const shareBtn = document.createElement('button');
@@ -1461,133 +1185,68 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             shareBtn.style.color = '#6ec6ff';
         };
         shareBtn.onclick = () => {
-            const descMessage = '&{template:t20-info}{{infoname=Ervas Curativas}}{{description=Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)}}';
-            sendToChat(descMessage);
+            const charName = getCharacterName();
+            const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${description.textContent}
+
++1 PM: aumenta a área da escuridão em +1,5m de raio.
+
++2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
+
++2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
+
++3 PM: muda a duração para um dia.
+
++5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
+
+JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
+            sendToChat(msg);
         };
         descBox.appendChild(shareBtn);
-        popup.appendChild(descBox);
 
-        // Seletor de PMs
-        const pmSection = document.createElement('div');
-        pmSection.style.marginBottom = '20px';
-
-        const pmLabel = document.createElement('div');
-        pmLabel.textContent = 'Custo em PM:';
-        pmLabel.style.color = '#ecf0f1';
-        pmLabel.style.fontSize = '14px';
-        pmLabel.style.fontWeight = 'bold';
-        pmLabel.style.marginBottom = '10px';
-        pmSection.appendChild(pmLabel);
-
-        const pmContainer = document.createElement('div');
-        pmContainer.style.display = 'flex';
-        pmContainer.style.gap = '8px';
-        pmContainer.style.justifyContent = 'center';
-        pmContainer.style.background = '#1a1a2e';
-        pmContainer.style.border = '1px solid #6ec6ff';
-        pmContainer.style.borderRadius = '12px';
-        pmContainer.style.padding = '15px';
-        pmContainer.style.marginTop = '5px';
-
-        let selectedPMs = 0;
-        const pmButtons = [];
-
-        for (let i = 1; i <= 5; i++) {
-            const pmBtn = document.createElement('button');
-            pmBtn.textContent = i;
-            pmBtn.style.width = '40px';
-            pmBtn.style.height = '40px';
-            pmBtn.style.borderRadius = '50%';
-            pmBtn.style.border = '2px solid #6ec6ff';
-            pmBtn.style.background = '#23243a';
-            pmBtn.style.color = '#6ec6ff';
-            pmBtn.style.fontSize = '16px';
-            pmBtn.style.fontWeight = 'bold';
-            pmBtn.style.cursor = 'pointer';
-            pmBtn.style.transition = 'all 0.2s';
-            pmButtons.push(pmBtn);
-
-            pmBtn.onclick = () => {
-                // Seleção escalar: seleciona todos os níveis até o clicado
-                selectedPMs = i;
-
-                // Atualiza visual de todos os botões
-                pmButtons.forEach((btn, index) => {
-                    if (index < i) {
-                        btn.style.background = '#6ec6ff';
-                        btn.style.color = '#23243a';
-                    } else {
-                        btn.style.background = '#23243a';
-                        btn.style.color = '#6ec6ff';
-                    }
-                });
-            };
-
-            pmContainer.appendChild(pmBtn);
-        }
-        pmSection.appendChild(pmContainer);
-        popup.appendChild(pmSection);
-
-        // Botão de conjurar
-        const castBtn = document.createElement('button');
-        castBtn.textContent = 'Usar';
-        castBtn.style.width = '100%';
-        castBtn.style.padding = '12px 0';
-        castBtn.style.background = '#6ec6ff';
-        castBtn.style.color = '#23243a';
-        castBtn.style.border = 'none';
-        castBtn.style.borderRadius = '8px';
-        castBtn.style.fontSize = '16px';
-        castBtn.style.fontWeight = 'bold';
-        castBtn.style.cursor = 'pointer';
-        castBtn.style.transition = 'all 0.2s';
-        castBtn.style.marginTop = '10px';
-
-        castBtn.onmouseover = () => {
-            castBtn.style.background = '#5bb8ff';
+        // Botão Usar
+        const useBtn = document.createElement('button');
+        useBtn.textContent = 'Usar';
+        useBtn.style.width = '100%';
+        useBtn.style.padding = '12px 0';
+        useBtn.style.background = '#6ec6ff';
+        useBtn.style.color = '#23243a';
+        useBtn.style.border = 'none';
+        useBtn.style.borderRadius = '8px';
+        useBtn.style.fontSize = '16px';
+        useBtn.style.fontWeight = 'bold';
+        useBtn.style.cursor = 'pointer';
+        useBtn.style.transition = 'all 0.2s';
+        useBtn.style.marginTop = '10px';
+        useBtn.onmouseover = () => {
+            useBtn.style.background = '#5bb8ff';
         };
-        castBtn.onmouseout = () => {
-            castBtn.style.background = '#6ec6ff';
+        useBtn.onmouseout = () => {
+            useBtn.style.background = '#6ec6ff';
         };
-
-        castBtn.onclick = () => {
-            if (selectedPMs === 0) {
-                alert('Selecione pelo menos 1 PM para usar!');
-                return;
-            }
-
+        useBtn.onclick = () => {
             // Fecha todos os popups relacionados imediatamente
-            const powerCastPopup = document.getElementById('power-cast-popup');
-            if (powerCastPopup) powerCastPopup.remove();
-
-            const powerCastOverlay = document.getElementById('power-cast-overlay');
-            if (powerCastOverlay) powerCastOverlay.remove();
-
-            const powersPopup = document.getElementById('powers-popup');
-            if (powersPopup) powersPopup.remove();
-
-            const powersOverlay = document.getElementById('powers-overlay');
-            if (powersOverlay) powersOverlay.remove();
-
-            const abilitiesPopup = document.getElementById('abilities-popup');
-            if (abilitiesPopup) abilitiesPopup.remove();
-
-            const abilitiesOverlay = document.getElementById('abilities-overlay');
-            if (abilitiesOverlay) abilitiesOverlay.remove();
-
-            // Calcula o total de dados (2d6 por PM)
-            const totalDice = selectedPMs * 2;
-            const diceSides = 6;
-            const rollCommand = `/roll ${totalDice}d${diceSides}`;
-
-            // Envia a mensagem de descrição
-            const message = `/em usou o poder "${powerDisplayName}"`;
-
-            // Executa o poder com efeito holy
-            executeHealingPowerWithHolyEffect(rollCommand, message);
+            const spellCastPopup = document.getElementById('spell-cast-popup');
+            if (spellCastPopup) spellCastPopup.remove();
+            const spellCastOverlay = document.getElementById('spell-cast-overlay');
+            if (spellCastOverlay) spellCastOverlay.remove();
+            const spellsPopup = document.getElementById('spells-popup');
+            if (spellsPopup) spellsPopup.remove();
+            const spellsOverlay = document.getElementById('spells-overlay');
+            if (spellsOverlay) spellsOverlay.remove();
+            // Monta a mensagem
+            let total = 1;
+            let upgradesDesc = [];
+            upgradeCheckboxes.forEach((cb, idx) => {
+                if (cb.checked) {
+                    total += upgrades[idx].cost;
+                    upgradesDesc.push(upgrades[idx].label);
+                }
+            });
+            const msg = `/em conjura Sombras Profanas (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('; ') : ''}`;
+            sendToChat(msg);
         };
-
-        popup.appendChild(castBtn);
+        descBox.appendChild(useBtn);
+        popup.appendChild(descBox);
 
         document.body.appendChild(popup);
     }
@@ -1733,7 +1392,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             audio.preload = 'auto';
             audio.play();
         } catch (e) {
-            console.log('Erro ao criar áudio de ataque:', error);
+            console.log('Erro ao criar áudio de ataque:', e);
             // Fallback: tenta tocar um beep simples
             playFallbackSound();
         }
@@ -1816,7 +1475,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
         }
 
-        function dragEnd(e) {
+        function dragEnd() {
             initialX = currentX;
             initialY = currentY;
             isDragging = false;
@@ -3384,7 +3043,6 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             const automaticAbilities = getAutomaticAbilities();
             const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
             const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
-            const availablePowers = getAvailablePowersByLevel(charLevel);
 
             abilitiesListContainer.innerHTML = '';
 
@@ -4070,11 +3728,9 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             if (charLevelNum >= 15) {
                 dice = '2d6';
                 attackMod = 2;
-                desc = '*+ Ataque Furtivo (2d6, +2 acerto)*';
             } else if (charLevelNum >= 11) {
                 dice = '1d6';
                 attackMod = 2;
-                desc = '*+ Ataque Furtivo (+2 acerto)*';
             }
             effects.push({
                 label: `Ataque Furtivo (+${dice} dano${attackMod ? ', +2 acerto' : ''})`,
@@ -4285,13 +3941,264 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
     // Função para criar popup de conjuração de habilidade
     function createAbilityCastPopup(abilityName, abilityDisplayName) {
-        // Para Ervas Curativas, usar o mesmo modal detalhado de createPowerCastPopup
+        // Modal para Ervas Curativas
         if (abilityName === 'Ervas Curativas') {
-            createPowerCastPopup('Ervas Curativas', 'Ervas Curativas');
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('power-cast-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('power-cast-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'power-cast-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'power-cast-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #6ec6ff';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '20px';
+            popup.style.zIndex = '10003';
+            popup.style.maxWidth = '400px';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '10px';
+            header.style.width = '100%';
+
+            const titleContainer = document.createElement('div');
+            titleContainer.style.display = 'flex';
+            titleContainer.style.flexDirection = 'column';
+            titleContainer.style.alignItems = 'flex-start';
+            titleContainer.style.gap = '2px';
+
+            const title = document.createElement('h3');
+            title.textContent = abilityDisplayName;
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = 'bold';
+            titleContainer.appendChild(title);
+
+            // Tag de origem
+            const originTag = document.createElement('span');
+            originTag.textContent = 'Habilidade de Classe';
+            originTag.style.background = '#6ec6ff';
+            originTag.style.color = '#23243a';
+            originTag.style.fontSize = '12px';
+            originTag.style.fontWeight = 'bold';
+            originTag.style.borderRadius = '8px';
+            originTag.style.padding = '2px 10px';
+            originTag.style.marginTop = '2px';
+            originTag.style.display = 'inline-block';
+            originTag.style.letterSpacing = '0.5px';
+            originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+            titleContainer.appendChild(originTag);
+
+            header.appendChild(titleContainer);
+
+            // Botão de fechar
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('power-cast-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Descrição em uma box
+            const descBox = document.createElement('div');
+            descBox.style.background = '#1a1a2e';
+            descBox.style.border = '1px solid #6ec6ff';
+            descBox.style.borderRadius = '8px';
+            descBox.style.padding = '12px';
+            descBox.style.marginBottom = '15px';
+            descBox.style.display = 'flex';
+            descBox.style.flexDirection = 'column';
+            descBox.style.gap = '6px';
+
+            const descHeader = document.createElement('div');
+            descHeader.textContent = 'Descrição';
+            descHeader.style.color = '#6ec6ff';
+            descHeader.style.fontSize = '13px';
+            descHeader.style.fontWeight = 'bold';
+            descHeader.style.marginBottom = '2px';
+            descBox.appendChild(descHeader);
+
+            const description = document.createElement('div');
+            description.style.color = '#ecf0f1';
+            description.style.fontSize = '14px';
+            description.style.lineHeight = '1.4';
+            description.textContent = 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)';
+            descBox.appendChild(description);
+
+            // Botão compartilhar dentro da box
+            const shareBtn = document.createElement('button');
+            shareBtn.textContent = 'Compartilhar';
+            shareBtn.style.background = 'none';
+            shareBtn.style.border = '1px solid #6ec6ff';
+            shareBtn.style.color = '#6ec6ff';
+            shareBtn.style.fontSize = '14px';
+            shareBtn.style.fontWeight = 'bold';
+            shareBtn.style.borderRadius = '6px';
+            shareBtn.style.padding = '8px 0';
+            shareBtn.style.marginTop = '10px';
+            shareBtn.style.width = '100%';
+            shareBtn.style.cursor = 'pointer';
+            shareBtn.style.transition = 'all 0.2s';
+            shareBtn.onmouseover = () => {
+                shareBtn.style.background = '#6ec6ff';
+                shareBtn.style.color = '#23243a';
+            };
+            shareBtn.onmouseout = () => {
+                shareBtn.style.background = 'none';
+                shareBtn.style.color = '#6ec6ff';
+            };
+            shareBtn.onclick = () => {
+                const msg = `&{template:t20-info}{{infoname=Ervas Curativas}}{{description=${description.textContent}}}`;
+                sendToChat(msg);
+            };
+            descBox.appendChild(shareBtn);
+            popup.appendChild(descBox);
+
+            // Seletor de PMs
+            const pmSection = document.createElement('div');
+            pmSection.style.marginBottom = '20px';
+
+            const pmLabel = document.createElement('div');
+            pmLabel.textContent = 'Custo em PM:';
+            pmLabel.style.color = '#ecf0f1';
+            pmLabel.style.fontSize = '14px';
+            pmLabel.style.fontWeight = 'bold';
+            pmLabel.style.marginBottom = '10px';
+            pmSection.appendChild(pmLabel);
+
+            const pmContainer = document.createElement('div');
+            pmContainer.style.display = 'flex';
+            pmContainer.style.gap = '8px';
+            pmContainer.style.justifyContent = 'center';
+            pmContainer.style.background = '#1a1a2e';
+            pmContainer.style.border = '1px solid #6ec6ff';
+            pmContainer.style.borderRadius = '12px';
+            pmContainer.style.padding = '15px';
+            pmContainer.style.marginTop = '5px';
+
+            let selectedPMs = 0;
+            const pmButtons = [];
+
+            for (let i = 1; i <= 5; i++) {
+                const pmBtn = document.createElement('button');
+                pmBtn.textContent = i;
+                pmBtn.style.width = '40px';
+                pmBtn.style.height = '40px';
+                pmBtn.style.borderRadius = '50%';
+                pmBtn.style.border = '2px solid #6ec6ff';
+                pmBtn.style.background = '#23243a';
+                pmBtn.style.color = '#6ec6ff';
+                pmBtn.style.fontSize = '16px';
+                pmBtn.style.fontWeight = 'bold';
+                pmBtn.style.cursor = 'pointer';
+                pmBtn.style.transition = 'all 0.2s';
+                pmButtons.push(pmBtn);
+
+                pmBtn.onclick = () => {
+                    selectedPMs = i;
+                    pmButtons.forEach((btn, index) => {
+                        if (index < i) {
+                            btn.style.background = '#6ec6ff';
+                            btn.style.color = '#23243a';
+                        } else {
+                            btn.style.background = '#23243a';
+                            btn.style.color = '#6ec6ff';
+                        }
+                    });
+                };
+                pmContainer.appendChild(pmBtn);
+            }
+            pmSection.appendChild(pmContainer);
+            popup.appendChild(pmSection);
+
+            // Botão Usar
+            const useBtn = document.createElement('button');
+            useBtn.textContent = 'Usar';
+            useBtn.style.width = '100%';
+            useBtn.style.padding = '12px 0';
+            useBtn.style.background = '#6ec6ff';
+            useBtn.style.color = '#23243a';
+            useBtn.style.border = 'none';
+            useBtn.style.borderRadius = '8px';
+            useBtn.style.fontSize = '16px';
+            useBtn.style.fontWeight = 'bold';
+            useBtn.style.cursor = 'pointer';
+            useBtn.style.transition = 'all 0.2s';
+            useBtn.style.marginTop = '10px';
+            useBtn.onmouseover = () => {
+                useBtn.style.background = '#5bb8ff';
+            };
+            useBtn.onmouseout = () => {
+                useBtn.style.background = '#6ec6ff';
+            };
+            useBtn.onclick = () => {
+                if (selectedPMs === 0) {
+                    alert('Selecione pelo menos 1 PM para usar!');
+                    return;
+                }
+                // Fecha todos os popups relacionados imediatamente
+                const powerCastPopup = document.getElementById('power-cast-popup');
+                if (powerCastPopup) powerCastPopup.remove();
+                const powerCastOverlay = document.getElementById('power-cast-overlay');
+                if (powerCastOverlay) powerCastOverlay.remove();
+                const abilitiesPopup = document.getElementById('abilities-popup');
+                if (abilitiesPopup) abilitiesPopup.remove();
+                const abilitiesOverlay = document.getElementById('abilities-overlay');
+                if (abilitiesOverlay) abilitiesOverlay.remove();
+                // Calcula o total de dados (2d6 por PM)
+                const totalDice = selectedPMs * 2;
+                const diceSides = 6;
+                const rollCommand = `/roll ${totalDice}d${diceSides}`;
+                const message = `/em usou o poder "${abilityDisplayName}"`;
+                executeHealingPowerWithHolyEffect(rollCommand, message);
+            };
+            popup.appendChild(useBtn);
+            document.body.appendChild(popup);
             return;
         }
         // (Expandir para outras habilidades futuras)
-        // (Pode ser expandido conforme necessário, similar ao createPowerCastPopup)
         alert(`Habilidade: ${abilityDisplayName}`);
     }
 })();
