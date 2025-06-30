@@ -1359,8 +1359,14 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         header.style.display = 'flex';
         header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
+        header.style.marginBottom = '10px';
         header.style.width = '100%';
+
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.flexDirection = 'column';
+        titleContainer.style.alignItems = 'flex-start';
+        titleContainer.style.gap = '2px';
 
         const title = document.createElement('h3');
         title.textContent = powerDisplayName;
@@ -1368,34 +1374,26 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
         title.style.margin = '0';
         title.style.fontSize = '18px';
         title.style.fontWeight = 'bold';
+        titleContainer.appendChild(title);
 
-        // Botão de compartilhar descrição
-        const shareBtn = document.createElement('button');
-        shareBtn.innerHTML = '📤';
-        shareBtn.style.background = 'none';
-        shareBtn.style.border = 'none';
-        shareBtn.style.color = '#6ec6ff';
-        shareBtn.style.fontSize = '16px';
-        shareBtn.style.cursor = 'pointer';
-        shareBtn.style.padding = '4px';
-        shareBtn.style.borderRadius = '4px';
-        shareBtn.style.transition = 'all 0.2s';
-        shareBtn.style.marginRight = '8px';
-        shareBtn.title = 'Compartilhar descrição do poder';
+        // Tag de origem
+        const originTag = document.createElement('span');
+        originTag.textContent = 'Habilidade de Classe';
+        originTag.style.background = '#6ec6ff';
+        originTag.style.color = '#23243a';
+        originTag.style.fontSize = '12px';
+        originTag.style.fontWeight = 'bold';
+        originTag.style.borderRadius = '8px';
+        originTag.style.padding = '2px 10px';
+        originTag.style.marginTop = '2px';
+        originTag.style.display = 'inline-block';
+        originTag.style.letterSpacing = '0.5px';
+        originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+        titleContainer.appendChild(originTag);
 
-        shareBtn.onmouseover = () => {
-            shareBtn.style.background = '#6ec6ff';
-            shareBtn.style.color = '#23243a';
-        };
-        shareBtn.onmouseout = () => {
-            shareBtn.style.background = 'none';
-            shareBtn.style.color = '#6ec6ff';
-        };
-        shareBtn.onclick = () => {
-            const descMessage = '&{template:t20-info}{{infoname=Ervas Curativas}}{{description=Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)}}';
-            sendToChat(descMessage);
-        };
+        header.appendChild(titleContainer);
 
+        // Botão de fechar
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '×';
         closeBtn.style.background = 'none';
@@ -1411,33 +1409,70 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             const overlay = document.getElementById('power-cast-overlay');
             if (overlay) overlay.remove();
         };
-
-        // Container para título e botão de compartilhar
-        const titleContainer = document.createElement('div');
-        titleContainer.style.display = 'flex';
-        titleContainer.style.alignItems = 'center';
-        titleContainer.appendChild(title);
-        titleContainer.appendChild(shareBtn);
-
-        header.appendChild(titleContainer);
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Descrição do poder
+        // Descrição em uma box
+        const descBox = document.createElement('div');
+        descBox.style.background = '#1a1a2e';
+        descBox.style.border = '1px solid #6ec6ff';
+        descBox.style.borderRadius = '8px';
+        descBox.style.padding = '12px';
+        descBox.style.marginBottom = '15px';
+        descBox.style.display = 'flex';
+        descBox.style.flexDirection = 'column';
+        descBox.style.gap = '6px';
+
+        const descHeader = document.createElement('div');
+        descHeader.textContent = 'Descrição';
+        descHeader.style.color = '#6ec6ff';
+        descHeader.style.fontSize = '13px';
+        descHeader.style.fontWeight = 'bold';
+        descHeader.style.marginBottom = '2px';
+        descBox.appendChild(descHeader);
+
         const description = document.createElement('div');
         description.style.color = '#ecf0f1';
-        description.style.marginBottom = '15px';
         description.style.fontSize = '14px';
         description.style.lineHeight = '1.4';
         description.textContent = 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)';
-        popup.appendChild(description);
+        descBox.appendChild(description);
+
+        // Botão compartilhar dentro da box
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar';
+        shareBtn.style.background = 'none';
+        shareBtn.style.border = '1px solid #6ec6ff';
+        shareBtn.style.color = '#6ec6ff';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.style.fontWeight = 'bold';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.padding = '8px 0';
+        shareBtn.style.marginTop = '10px';
+        shareBtn.style.width = '100%';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.transition = 'all 0.2s';
+        shareBtn.onmouseover = () => {
+            shareBtn.style.background = '#6ec6ff';
+            shareBtn.style.color = '#23243a';
+        };
+        shareBtn.onmouseout = () => {
+            shareBtn.style.background = 'none';
+            shareBtn.style.color = '#6ec6ff';
+        };
+        shareBtn.onclick = () => {
+            const descMessage = '&{template:t20-info}{{infoname=Ervas Curativas}}{{description=Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)}}';
+            sendToChat(descMessage);
+        };
+        descBox.appendChild(shareBtn);
+        popup.appendChild(descBox);
 
         // Seletor de PMs
         const pmSection = document.createElement('div');
         pmSection.style.marginBottom = '20px';
 
         const pmLabel = document.createElement('div');
-        pmLabel.textContent = 'Nível do Poder (2d6 por nível):';
+        pmLabel.textContent = 'Custo em PM:';
         pmLabel.style.color = '#ecf0f1';
         pmLabel.style.fontSize = '14px';
         pmLabel.style.fontWeight = 'bold';
@@ -1495,7 +1530,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
         // Botão de conjurar
         const castBtn = document.createElement('button');
-        castBtn.textContent = 'Cast';
+        castBtn.textContent = 'Usar';
         castBtn.style.width = '100%';
         castBtn.style.padding = '12px 0';
         castBtn.style.background = '#6ec6ff';
@@ -1521,18 +1556,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 return;
             }
 
-            // Calcula o total de dados (2d6 por PM)
-            const totalDice = selectedPMs * 2;
-            const diceSides = 6;
-            const rollCommand = `/roll ${totalDice}d${diceSides}`;
-
-            // Envia a mensagem de descrição
-            const message = `/em usou o poder "${powerDisplayName}"`;
-
-            // Executa o poder com efeito holy
-            executeHealingPowerWithHolyEffect(rollCommand, message);
-
-            // Fecha todos os popups relacionados
+            // Fecha todos os popups relacionados imediatamente
             const powerCastPopup = document.getElementById('power-cast-popup');
             if (powerCastPopup) powerCastPopup.remove();
 
@@ -1544,6 +1568,23 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
 
             const powersOverlay = document.getElementById('powers-overlay');
             if (powersOverlay) powersOverlay.remove();
+
+            const abilitiesPopup = document.getElementById('abilities-popup');
+            if (abilitiesPopup) abilitiesPopup.remove();
+
+            const abilitiesOverlay = document.getElementById('abilities-overlay');
+            if (abilitiesOverlay) abilitiesOverlay.remove();
+
+            // Calcula o total de dados (2d6 por PM)
+            const totalDice = selectedPMs * 2;
+            const diceSides = 6;
+            const rollCommand = `/roll ${totalDice}d${diceSides}`;
+
+            // Envia a mensagem de descrição
+            const message = `/em usou o poder "${powerDisplayName}"`;
+
+            // Executa o poder com efeito holy
+            executeHealingPowerWithHolyEffect(rollCommand, message);
         };
 
         popup.appendChild(castBtn);
@@ -2300,7 +2341,7 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             },
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
-            { label: 'Powers', icon: '✨', onClick: createPowersPopup },
+            { label: 'Habilidades', icon: '✨', onClick: createAbilitiesPopup },
             { label: 'Efeitos', icon: '🌀', onClick: () => alert('Em breve!') }
         ];
         buttons.forEach(btnData => {
@@ -4045,5 +4086,212 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
             });
         }
         return effects;
+    }
+
+    // Templates reutilizáveis para Abilities
+    const abilityTemplates = {
+        createAbility: (abilityData) => {
+            return {
+                nome: abilityData.nome,
+                descricao: abilityData.descricao,
+                onClick: () => createAbilityCastPopup(abilityData.nome, abilityData.nome)
+            };
+        }
+    };
+
+    // Função para criar o popup de habilidades
+    function createAbilitiesPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('abilities-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('abilities-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'abilities-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'abilities-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #6ec6ff';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '18px 20px 16px 20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '400px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Habilidades';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('abilities-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Barra de filtro
+        const filterContainer = document.createElement('div');
+        filterContainer.style.position = 'relative';
+        filterContainer.style.marginBottom = '10px';
+        const filterInput = document.createElement('input');
+        filterInput.type = 'text';
+        filterInput.placeholder = 'Filtrar habilidades...';
+        filterInput.style.width = '100%';
+        filterInput.style.padding = '10px 28px 10px 12px';
+        filterInput.style.borderRadius = '8px';
+        filterInput.style.border = '1px solid #6ec6ff';
+        filterInput.style.background = '#23243a';
+        filterInput.style.color = '#fff';
+        filterInput.style.fontSize = '14px';
+        filterInput.style.outline = 'none';
+        filterInput.style.boxSizing = 'border-box';
+        filterInput.style.fontSize = '15px';
+        // Botão X para limpar
+        const clearBtn = document.createElement('span');
+        clearBtn.textContent = '×';
+        clearBtn.style.position = 'absolute';
+        clearBtn.style.right = '8px';
+        clearBtn.style.top = '50%';
+        clearBtn.style.transform = 'translateY(-50%)';
+        clearBtn.style.cursor = 'pointer';
+        clearBtn.style.color = '#6ec6ff';
+        clearBtn.style.fontSize = '18px';
+        clearBtn.style.display = 'none';
+        clearBtn.onclick = () => {
+            filterInput.value = '';
+            filterInput.dispatchEvent(new Event('input'));
+            filterInput.focus();
+        };
+        filterInput.oninput = () => {
+            if (filterInput.value.length > 0) {
+                clearBtn.style.display = 'block';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+            updateAbilityList();
+        };
+        filterContainer.appendChild(filterInput);
+        filterContainer.appendChild(clearBtn);
+        popup.appendChild(filterContainer);
+
+        // Lista visual
+        const abilityList = document.createElement('div');
+        abilityList.style.display = 'flex';
+        abilityList.style.flexDirection = 'column';
+        abilityList.style.gap = '8px';
+        abilityList.style.marginTop = '2px';
+        popup.appendChild(abilityList);
+
+        function updateAbilityList() {
+            const filter = filterInput.value.trim().toLowerCase();
+            abilityList.innerHTML = '';
+            // Lista dinâmica de habilidades disponíveis
+            const dynamicAbilities = [];
+            if (hasAbility('Ervas Curativas')) {
+                dynamicAbilities.push(abilityTemplates.createAbility({
+                    nome: 'Ervas Curativas',
+                    descricao: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)'
+                }));
+            }
+            // Filtrar pelo texto
+            const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
+            if (filteredAbilities.length === 0) {
+                const emptyMsg = document.createElement('div');
+                emptyMsg.textContent = 'Nenhuma habilidade disponível.';
+                emptyMsg.style.color = '#aaa';
+                emptyMsg.style.textAlign = 'center';
+                emptyMsg.style.padding = '24px 0 12px 0';
+                emptyMsg.style.fontSize = '15px';
+                abilityList.appendChild(emptyMsg);
+            } else {
+                filteredAbilities.forEach(ability => {
+                    const btn = document.createElement('button');
+                    btn.textContent = ability.nome;
+                    btn.style.width = '100%';
+                    btn.style.background = '#23243a';
+                    btn.style.color = '#fff';
+                    btn.style.border = '1px solid #6ec6ff';
+                    btn.style.borderRadius = '6px';
+                    btn.style.padding = '10px 0';
+                    btn.style.fontSize = '15px';
+                    btn.style.fontWeight = 'bold';
+                    btn.style.cursor = 'pointer';
+                    btn.style.transition = 'all 0.2s';
+                    btn.onmouseover = () => {
+                        btn.style.background = '#6ec6ff';
+                        btn.style.color = '#23243a';
+                    };
+                    btn.onmouseout = () => {
+                        btn.style.background = '#23243a';
+                        btn.style.color = '#fff';
+                    };
+                    btn.onclick = ability.onClick;
+                    abilityList.appendChild(btn);
+                });
+            }
+        }
+        updateAbilityList();
+
+        document.body.appendChild(popup);
+    }
+
+    // Função para criar popup de conjuração de habilidade
+    function createAbilityCastPopup(abilityName, abilityDisplayName) {
+        // Para Ervas Curativas, usar o mesmo modal detalhado de createPowerCastPopup
+        if (abilityName === 'Ervas Curativas') {
+            createPowerCastPopup('Ervas Curativas', 'Ervas Curativas');
+            return;
+        }
+        // (Expandir para outras habilidades futuras)
+        // (Pode ser expandido conforme necessário, similar ao createPowerCastPopup)
+        alert(`Habilidade: ${abilityDisplayName}`);
     }
 })();
