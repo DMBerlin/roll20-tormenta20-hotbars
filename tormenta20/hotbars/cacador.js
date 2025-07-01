@@ -914,14 +914,123 @@ JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
                 btn.style.fontWeight = 'bold';
                 btn.style.cursor = 'pointer';
                 btn.style.transition = 'all 0.2s';
+                btn.style.position = 'relative';
+
+                // Tooltip container
+                let tooltip = null;
+                let tooltipTimeout = null;
+
                 btn.onmouseover = () => {
                     btn.style.background = '#6ec6ff';
                     btn.style.color = '#23243a';
+
+                    // Criar tooltip após um pequeno delay
+                    tooltipTimeout = setTimeout(() => {
+                        // Remover tooltip existente se houver
+                        if (tooltip) tooltip.remove();
+
+                        tooltip = document.createElement('div');
+                        tooltip.style.position = 'fixed';
+                        tooltip.style.background = 'rgba(20,20,30,0.98)';
+                        tooltip.style.border = '2px solid #6ec6ff';
+                        tooltip.style.borderRadius = '8px';
+                        tooltip.style.padding = '12px';
+                        tooltip.style.minWidth = '280px';
+                        tooltip.style.maxWidth = '320px';
+                        tooltip.style.zIndex = '10004';
+                        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
+                        tooltip.style.pointerEvents = 'none';
+
+                        // Calcular posição baseada na posição do botão
+                        const btnRect = btn.getBoundingClientRect();
+                        tooltip.style.left = (btnRect.right + 10) + 'px';
+                        tooltip.style.top = btnRect.top + 'px';
+
+                        // Conteúdo do tooltip
+                        const tooltipContent = document.createElement('div');
+                        tooltipContent.style.display = 'flex';
+                        tooltipContent.style.flexDirection = 'column';
+                        tooltipContent.style.gap = '8px';
+
+                        // Título da magia
+                        const tooltipTitle = document.createElement('div');
+                        tooltipTitle.textContent = spell.nome;
+                        tooltipTitle.style.color = '#6ec6ff';
+                        tooltipTitle.style.fontSize = '16px';
+                        tooltipTitle.style.fontWeight = 'bold';
+                        tooltipTitle.style.marginBottom = '4px';
+                        tooltipContent.appendChild(tooltipTitle);
+
+                        // Tag de classificação
+                        const classificationTag = document.createElement('div');
+                        classificationTag.textContent = 'Magia Arcana';
+                        classificationTag.style.background = '#6ec6ff';
+                        classificationTag.style.color = '#23243a';
+                        classificationTag.style.fontSize = '11px';
+                        classificationTag.style.fontWeight = 'bold';
+                        classificationTag.style.borderRadius = '4px';
+                        classificationTag.style.padding = '2px 8px';
+                        classificationTag.style.display = 'inline-block';
+                        classificationTag.style.width = 'fit-content';
+                        tooltipContent.appendChild(classificationTag);
+
+                        // Tag de ciclo
+                        const cycleTag = document.createElement('div');
+                        cycleTag.textContent = '1º Ciclo';
+                        cycleTag.style.background = '#9b59b6';
+                        cycleTag.style.color = '#fff';
+                        cycleTag.style.fontSize = '11px';
+                        cycleTag.style.fontWeight = 'bold';
+                        cycleTag.style.borderRadius = '4px';
+                        cycleTag.style.padding = '2px 8px';
+                        cycleTag.style.display = 'inline-block';
+                        cycleTag.style.width = 'fit-content';
+                        cycleTag.style.marginTop = '2px';
+                        tooltipContent.appendChild(cycleTag);
+
+                        // Tag de escola
+                        const schoolTag = document.createElement('div');
+                        schoolTag.textContent = 'Necromancia';
+                        schoolTag.style.background = '#e74c3c';
+                        schoolTag.style.color = '#fff';
+                        schoolTag.style.fontSize = '11px';
+                        schoolTag.style.fontWeight = 'bold';
+                        schoolTag.style.borderRadius = '4px';
+                        schoolTag.style.padding = '2px 8px';
+                        schoolTag.style.display = 'inline-block';
+                        schoolTag.style.width = 'fit-content';
+                        schoolTag.style.marginTop = '2px';
+                        tooltipContent.appendChild(schoolTag);
+
+                        // Descrição resumida
+                        const tooltipDesc = document.createElement('div');
+                        tooltipDesc.textContent = 'Ação padrão: Objeto emana sombras de 6m de raio. Criaturas na área recebem camuflagem leve. Sombras não podem ser iluminadas por luz natural.';
+                        tooltipDesc.style.color = '#ecf0f1';
+                        tooltipDesc.style.fontSize = '13px';
+                        tooltipDesc.style.lineHeight = '1.4';
+                        tooltipDesc.style.marginTop = '6px';
+                        tooltipContent.appendChild(tooltipDesc);
+
+                        tooltip.appendChild(tooltipContent);
+                        document.body.appendChild(tooltip);
+                    }, 300); // Delay de 300ms antes de mostrar o tooltip
                 };
+
                 btn.onmouseout = () => {
                     btn.style.background = '#23243a';
                     btn.style.color = '#fff';
+
+                    // Limpar timeout e remover tooltip
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
+                    }
+                    if (tooltip) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
                 };
+
                 btn.onclick = spell.onClick;
                 spellList.appendChild(btn);
             });
@@ -3921,14 +4030,109 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     btn.style.fontWeight = 'bold';
                     btn.style.cursor = 'pointer';
                     btn.style.transition = 'all 0.2s';
+                    btn.style.position = 'relative';
+
+                    // Tooltip container
+                    let tooltip = null;
+                    let tooltipTimeout = null;
+
                     btn.onmouseover = () => {
                         btn.style.background = '#6ec6ff';
                         btn.style.color = '#23243a';
+
+                        // Criar tooltip após um pequeno delay
+                        tooltipTimeout = setTimeout(() => {
+                            // Remover tooltip existente se houver
+                            if (tooltip) tooltip.remove();
+
+                            tooltip = document.createElement('div');
+                            tooltip.style.position = 'fixed';
+                            tooltip.style.background = 'rgba(20,20,30,0.98)';
+                            tooltip.style.border = '2px solid #6ec6ff';
+                            tooltip.style.borderRadius = '8px';
+                            tooltip.style.padding = '12px';
+                            tooltip.style.minWidth = '280px';
+                            tooltip.style.maxWidth = '320px';
+                            tooltip.style.zIndex = '10004';
+                            tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
+                            tooltip.style.pointerEvents = 'none';
+
+                            // Calcular posição baseada na posição do botão
+                            const btnRect = btn.getBoundingClientRect();
+                            tooltip.style.left = (btnRect.right + 10) + 'px';
+                            tooltip.style.top = btnRect.top + 'px';
+
+                            // Conteúdo do tooltip
+                            const tooltipContent = document.createElement('div');
+                            tooltipContent.style.display = 'flex';
+                            tooltipContent.style.flexDirection = 'column';
+                            tooltipContent.style.gap = '8px';
+
+                            // Título da habilidade
+                            const tooltipTitle = document.createElement('div');
+                            tooltipTitle.textContent = ability.nome;
+                            tooltipTitle.style.color = '#6ec6ff';
+                            tooltipTitle.style.fontSize = '16px';
+                            tooltipTitle.style.fontWeight = 'bold';
+                            tooltipTitle.style.marginBottom = '4px';
+                            tooltipContent.appendChild(tooltipTitle);
+
+                            // Tag de classificação
+                            const classificationTag = document.createElement('div');
+                            classificationTag.textContent = 'Habilidade de Classe';
+                            classificationTag.style.background = '#6ec6ff';
+                            classificationTag.style.color = '#23243a';
+                            classificationTag.style.fontSize = '11px';
+                            classificationTag.style.fontWeight = 'bold';
+                            classificationTag.style.borderRadius = '4px';
+                            classificationTag.style.padding = '2px 8px';
+                            classificationTag.style.display = 'inline-block';
+                            classificationTag.style.width = 'fit-content';
+                            tooltipContent.appendChild(classificationTag);
+
+                            // Tag de tipo
+                            const typeTag = document.createElement('div');
+                            typeTag.textContent = 'Poder de Caçador';
+                            typeTag.style.background = '#4a90e2';
+                            typeTag.style.color = '#fff';
+                            typeTag.style.fontSize = '11px';
+                            typeTag.style.fontWeight = 'bold';
+                            typeTag.style.borderRadius = '4px';
+                            typeTag.style.padding = '2px 8px';
+                            typeTag.style.display = 'inline-block';
+                            typeTag.style.width = 'fit-content';
+                            typeTag.style.marginTop = '2px';
+                            tooltipContent.appendChild(typeTag);
+
+                            // Descrição resumida
+                            const tooltipDesc = document.createElement('div');
+                            tooltipDesc.textContent = 'Ação completa: Gaste PM para curar 2d6 PV por PM ou remover condição envenenado de você ou aliado adjacente.';
+                            tooltipDesc.style.color = '#ecf0f1';
+                            tooltipDesc.style.fontSize = '13px';
+                            tooltipDesc.style.lineHeight = '1.4';
+                            tooltipDesc.style.marginTop = '6px';
+                            tooltipContent.appendChild(tooltipDesc);
+
+                            tooltip.appendChild(tooltipContent);
+                            document.body.appendChild(tooltip);
+                        }, 300); // Delay de 300ms antes de mostrar o tooltip
                     };
+
                     btn.onmouseout = () => {
                         btn.style.background = '#23243a';
                         btn.style.color = '#fff';
+
+                        // Limpar timeout e remover tooltip
+                        if (tooltipTimeout) {
+                            clearTimeout(tooltipTimeout);
+                            tooltipTimeout = null;
+                        }
+                        if (tooltip) {
+                            tooltip.remove();
+                            tooltip = null;
+                        }
                     };
+
                     btn.onclick = ability.onClick;
                     abilityList.appendChild(btn);
                 });
