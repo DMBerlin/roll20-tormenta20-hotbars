@@ -2110,7 +2110,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
             { label: 'Habilidades', icon: '✨', onClick: createAbilitiesPopup },
-            { label: 'Efeitos', icon: '🌀', onClick: () => alert('Em breve!') }
+            { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup }
         ];
         buttons.forEach(btnData => {
             const btn = document.createElement('button');
@@ -2155,6 +2155,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             label.style.marginTop = '2px';
             btn.appendChild(label);
             btn.onclick = btnData.onClick;
+
+            // Adicionar atributo data-label para identificação
+            btn.setAttribute('data-label', btnData.label);
+
+            // Adicionar indicador de efeitos ativos
+            if (btnData.label === 'Efeitos') {
+                btn.style.position = 'relative';
+                updateEffectsBadge();
+            }
+
             buttonContainer.appendChild(btn);
         });
 
@@ -3829,27 +3839,44 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
         // Ataque Furtivo (Companheiro Animal do tipo Assassino)
         if (hasAbility('Companheiro Animal') && getAnimalCompanionType() === 'assassino') {
-            // Dano e bônus de acerto dependem do nível
+            // Dano dependente do nível (sem bônus de acerto)
             let dice = '1d6';
-            let attackMod = 0;
             let desc = '*+ Ataque Furtivo*';
             const charLevelNum = parseInt(charLevel, 10) || 1;
             if (charLevelNum >= 15) {
                 dice = '2d6';
-                attackMod = 2;
-            } else if (charLevelNum >= 11) {
-                dice = '1d6';
-                attackMod = 2;
             }
             effects.push({
-                label: `Ataque Furtivo (+${dice} dano${attackMod ? ', +2 acerto' : ''})`,
+                label: `Ataque Furtivo (+${dice} dano)`,
                 value: 'ataque_furtivo',
                 dice,
-                attackMod,
                 desc,
                 origin: 'Companheiro Animal: Assassino'
             });
         }
+
+        // Cachecol Sombrio (Efeito de Item)
+        if (isEffectActive('cachecol_sombrio')) {
+            effects.push({
+                label: 'Ataque Sombrio (+1d6 dano furtivo)',
+                value: 'ataque_sombrio',
+                dice: '1d6',
+                desc: '*+ Ataque Sombrio*',
+                origin: 'Item: Cachecol Sombrio'
+            });
+        }
+
+        // Flanqueado (Efeito Especial)
+        if (isEffectActive('flanqueado')) {
+            effects.push({
+                label: 'Flanqueado (+2 acerto)',
+                value: 'flanqueado',
+                attackMod: 2,
+                desc: '*+ Flanqueado*',
+                origin: 'Condição de Combate'
+            });
+        }
+
         return effects;
     }
 
@@ -4404,5 +4431,258 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
         // (Expandir para outras habilidades futuras)
         alert(`Habilidade: ${abilityDisplayName}`);
+    }
+
+    // Função para obter efeitos ativos
+    function getActiveEffects() {
+        const activeEffects = localStorage.getItem('roll20-hotbar-active-effects');
+        return activeEffects ? JSON.parse(activeEffects) : [];
+    }
+
+    // Função para salvar efeitos ativos
+    function saveActiveEffects(effects) {
+        localStorage.setItem('roll20-hotbar-active-effects', JSON.stringify(effects));
+    }
+
+    // Função para verificar se um efeito está ativo
+    function isEffectActive(effectName) {
+        const activeEffects = getActiveEffects();
+        return activeEffects.includes(effectName);
+    }
+
+    // Função para ativar/desativar efeito
+    function toggleEffect(effectName) {
+        const activeEffects = getActiveEffects();
+        const index = activeEffects.indexOf(effectName);
+
+        if (index > -1) {
+            activeEffects.splice(index, 1);
+        } else {
+            activeEffects.push(effectName);
+        }
+
+        saveActiveEffects(activeEffects);
+        updateEffectsBadge();
+        return activeEffects;
+    }
+
+    // Função para atualizar o badge de efeitos
+    function updateEffectsBadge() {
+        const effectsButton = document.querySelector('#roll20-hotbar button[data-label="Efeitos"]');
+        if (!effectsButton) return;
+
+        // Remove badge existente se houver
+        const existingBadge = effectsButton.querySelector('.effects-badge');
+        if (existingBadge) {
+            existingBadge.remove();
+        }
+
+        // Verifica efeitos ativos
+        const activeEffects = getActiveEffects();
+
+        // Cria novo badge se há efeitos ativos
+        if (activeEffects.length > 0) {
+            const badge = document.createElement('div');
+            badge.className = 'effects-badge';
+            badge.style.position = 'absolute';
+            badge.style.top = '-2px';
+            badge.style.right = '-2px';
+            badge.style.background = '#4caf50';
+            badge.style.color = '#fff';
+            badge.style.borderRadius = '50%';
+            badge.style.width = '16px';
+            badge.style.height = '16px';
+            badge.style.fontSize = '10px';
+            badge.style.fontWeight = 'bold';
+            badge.style.display = 'flex';
+            badge.style.alignItems = 'center';
+            badge.style.justifyContent = 'center';
+            badge.style.border = '2px solid #23243a';
+            badge.textContent = activeEffects.length;
+            effectsButton.appendChild(badge);
+        }
+    }
+
+    // Função para criar popup de efeitos
+    function createEffectsPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('effects-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('effects-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'effects-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'effects-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #6ec6ff';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '18px 20px 16px 20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '400px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Efeitos';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('effects-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Lista de efeitos disponíveis
+        const effects = [
+            {
+                name: 'Cachecol Sombrio',
+                description: 'Ataque Sombrio: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
+                type: 'Item',
+                effectKey: 'cachecol_sombrio'
+            },
+            {
+                name: 'Flanqueado',
+                description: 'Condição de combate: Você recebe +2 em testes de ataque contra o alvo flanqueado.',
+                type: 'Especial',
+                effectKey: 'flanqueado'
+            }
+        ];
+
+        // Lista visual
+        const effectsList = document.createElement('div');
+        effectsList.style.display = 'flex';
+        effectsList.style.flexDirection = 'column';
+        effectsList.style.gap = '8px';
+        effectsList.style.marginTop = '2px';
+        popup.appendChild(effectsList);
+
+        function updateEffectsList() {
+            effectsList.innerHTML = '';
+
+            effects.forEach(effect => {
+                const isActive = isEffectActive(effect.effectKey);
+
+                const effectContainer = document.createElement('div');
+                effectContainer.style.background = isActive ? '#2d4a3e' : '#23243a';
+                effectContainer.style.border = `1px solid ${isActive ? '#4caf50' : '#6ec6ff'}`;
+                effectContainer.style.borderRadius = '8px';
+                effectContainer.style.padding = '12px';
+                effectContainer.style.cursor = 'pointer';
+                effectContainer.style.transition = 'all 0.2s';
+
+                effectContainer.onmouseover = () => {
+                    effectContainer.style.background = isActive ? '#3d5a4e' : '#2a2b4a';
+                };
+
+                effectContainer.onmouseout = () => {
+                    effectContainer.style.background = isActive ? '#2d4a3e' : '#23243a';
+                };
+
+                effectContainer.onclick = () => {
+                    toggleEffect(effect.effectKey);
+                    updateEffectsList();
+                    updateEffectsBadge();
+                };
+
+                // Cabeçalho do efeito
+                const effectHeader = document.createElement('div');
+                effectHeader.style.display = 'flex';
+                effectHeader.style.justifyContent = 'space-between';
+                effectHeader.style.alignItems = 'center';
+                effectHeader.style.marginBottom = '6px';
+
+                const effectName = document.createElement('div');
+                effectName.textContent = effect.name;
+                effectName.style.color = isActive ? '#4caf50' : '#6ec6ff';
+                effectName.style.fontSize = '15px';
+                effectName.style.fontWeight = 'bold';
+
+                const statusIndicator = document.createElement('div');
+                statusIndicator.textContent = isActive ? '●' : '○';
+                statusIndicator.style.color = isActive ? '#4caf50' : '#6ec6ff';
+                statusIndicator.style.fontSize = '18px';
+                statusIndicator.style.fontWeight = 'bold';
+
+                effectHeader.appendChild(effectName);
+                effectHeader.appendChild(statusIndicator);
+                effectContainer.appendChild(effectHeader);
+
+                // Tipo do efeito
+                const effectType = document.createElement('div');
+                effectType.textContent = effect.type;
+                effectType.style.background = '#6ec6ff';
+                effectType.style.color = '#23243a';
+                effectType.style.fontSize = '11px';
+                effectType.style.fontWeight = 'bold';
+                effectType.style.borderRadius = '4px';
+                effectType.style.padding = '2px 8px';
+                effectType.style.display = 'inline-block';
+                effectType.style.width = 'fit-content';
+                effectType.style.marginBottom = '6px';
+                effectContainer.appendChild(effectType);
+
+                // Descrição do efeito
+                const effectDesc = document.createElement('div');
+                effectDesc.textContent = effect.description;
+                effectDesc.style.color = '#ecf0f1';
+                effectDesc.style.fontSize = '13px';
+                effectDesc.style.lineHeight = '1.4';
+                effectContainer.appendChild(effectDesc);
+
+                effectsList.appendChild(effectContainer);
+            });
+        }
+
+        updateEffectsList();
+        document.body.appendChild(popup);
     }
 })();
