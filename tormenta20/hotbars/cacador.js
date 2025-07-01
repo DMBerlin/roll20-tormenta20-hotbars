@@ -1351,7 +1351,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     upgradesDesc.push(upgrades[idx].label);
                 }
             });
-            const msg = `/em conjura Sombras Profanas (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('; ') : ''}`;
+            const msg = `/em conjura Sombras Profanas (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('%NEWLINE%') : ''}`;
             sendToChat(msg);
         };
         descBox.appendChild(useBtn);
@@ -2000,6 +2000,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Efeitos dinâmicos
             const effects = getDynamicAttackEffects(charLevel);
             const checkboxes = {};
+            // Chave para persistência
+            const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+            // Carregar seleção anterior
+            let savedAttackEffects = [];
+            try {
+                const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                if (saved) savedAttackEffects = JSON.parse(saved);
+            } catch (e) {
+                console.error('Erro ao carregar seleção:', e);
+                savedAttackEffects = [];
+            }
             effects.forEach(effect => {
                 const container = document.createElement('label');
                 container.style.display = 'flex';
@@ -2010,6 +2021,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 checkbox.type = 'checkbox';
                 checkbox.value = effect.value;
                 checkboxes[effect.value] = checkbox;
+                // Restaurar seleção anterior
+                if (savedAttackEffects.includes(effect.value)) {
+                    checkbox.checked = true;
+                }
                 const span = document.createElement('span');
                 span.textContent = effect.label;
                 span.style.color = '#ecf0f1';
@@ -2026,71 +2041,40 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 popup.appendChild(container);
             });
 
-            // Botão de atacar
-            const attackBtn = document.createElement('button');
-            attackBtn.textContent = 'Atacar';
-            attackBtn.style.width = '100%';
-            attackBtn.style.padding = '12px 0';
-            attackBtn.style.background = '#6ec6ff';
-            attackBtn.style.color = '#23243a';
-            attackBtn.style.border = 'none';
-            attackBtn.style.borderRadius = '8px';
-            attackBtn.style.fontSize = '16px';
-            attackBtn.style.fontWeight = 'bold';
-            attackBtn.style.cursor = 'pointer';
-            attackBtn.style.transition = 'all 0.2s';
-            attackBtn.style.marginTop = '10px';
-            attackBtn.onclick = () => {
-                // Monta os dados extras e a descrição
-                let extraDamage = '';
-                let extraDescription = '';
-                let critThreshold = 18; // Valor padrão
-                let attackBonus = 0; // Bônus de acerto
-                let marcaPresaActive = false;
-                let inimigoActive = false;
-
-                effects.forEach(effect => {
-                    if (checkboxes[effect.value].checked) {
-                        if (effect.dice) {
-                            extraDamage += `+${effect.dice}`;
-                        }
-                        if (effect.critMod) {
-                            critThreshold += effect.critMod;
-                        }
-                        if (effect.attackMod) {
-                            attackBonus += effect.attackMod;
-                        }
-                        extraDescription += '%NEWLINE% ' + effect.desc;
-
-                        // Marca se Marca da Presa está ativo
-                        if (effect.value === 'marca_presa') {
-                            marcaPresaActive = true;
-                        }
-                        // Marca se Inimigo está ativo
-                        if (effect.value === 'inimigo') {
-                            inimigoActive = true;
-                        }
-                    }
-                });
-
-                // Se Inimigo está ativo e Marca da Presa também está, dobra a margem de crítico
-                if (inimigoActive && marcaPresaActive) {
-                    // Se critThreshold já é 16 (devido ao Marca da Presa), muda para 14
-                    if (critThreshold === 16) {
-                        critThreshold = 14;
-                    }
+            // Botão de salvar seleção
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Salvar';
+            saveBtn.style.width = '100%';
+            saveBtn.style.padding = '12px 0';
+            saveBtn.style.background = '#6ec6ff';
+            saveBtn.style.color = '#23243a';
+            saveBtn.style.border = 'none';
+            saveBtn.style.borderRadius = '8px';
+            saveBtn.style.fontSize = '16px';
+            saveBtn.style.fontWeight = 'bold';
+            saveBtn.style.cursor = 'pointer';
+            saveBtn.style.transition = 'all 0.2s';
+            saveBtn.style.marginTop = '10px';
+            saveBtn.onmouseover = () => {
+                saveBtn.style.background = '#5bb8ff';
+            };
+            saveBtn.onmouseout = () => {
+                saveBtn.style.background = '#6ec6ff';
+            };
+            saveBtn.onclick = () => {
+                // Salvar seleção atual
+                const selected = Object.keys(checkboxes).filter(key => checkboxes[key].checked);
+                try {
+                    localStorage.setItem(ATTACK_EFFECTS_KEY, JSON.stringify(selected));
+                } catch (e) {
+                    console.error('Erro ao salvar seleção:', e);
                 }
-
-                // Macro base com modificação do acerto crítico e bônus de acerto
-                const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
-                executeAttackWithBloodEffect(macro);
-
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
             };
-            popup.appendChild(attackBtn);
+            popup.appendChild(saveBtn);
 
             document.body.appendChild(popup);
         }
@@ -2102,7 +2086,44 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     if (e && e.ctrlKey) {
                         createAttackEffectsPopup();
                     } else {
-                        const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>18+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+0+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**}}`;
+                        // Novo: aplicar bônus persistidos
+                        const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                        let savedAttackEffects = [];
+                        try {
+                            const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                            if (saved) savedAttackEffects = JSON.parse(saved);
+                        } catch (err) {
+                            console.error('Erro ao carregar seleção:', err);
+                            savedAttackEffects = [];
+                        }
+                        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                        const effects = getDynamicAttackEffects(charLevel);
+                        let extraDamage = '';
+                        let extraDescription = '';
+                        let critThreshold = 18;
+                        let attackBonus = 0;
+                        let marcaPresaActive = false;
+                        let inimigoActive = false;
+                        effects.forEach(effect => {
+                            if (savedAttackEffects.includes(effect.value)) {
+                                if (effect.dice) {
+                                    extraDamage += `+${effect.dice}`;
+                                }
+                                if (effect.critMod) {
+                                    critThreshold += effect.critMod;
+                                }
+                                if (effect.attackMod) {
+                                    attackBonus += effect.attackMod;
+                                }
+                                extraDescription += '%NEWLINE% ' + effect.desc;
+                                if (effect.value === 'marca_presa') marcaPresaActive = true;
+                                if (effect.value === 'inimigo') inimigoActive = true;
+                            }
+                        });
+                        if (inimigoActive && marcaPresaActive) {
+                            if (critThreshold === 16) critThreshold = 14;
+                        }
+                        const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
                         executeAttackWithBloodEffect(macro);
                     }
                 }
@@ -2162,7 +2183,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Adicionar indicador de efeitos ativos
             if (btnData.label === 'Efeitos') {
                 btn.style.position = 'relative';
-                updateEffectsBadge();
             }
 
             buttonContainer.appendChild(btn);
@@ -2177,6 +2197,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
+
+        // Atualiza o badge de efeitos após o hotbar estar no DOM
+        updateEffectsBadge();
     }
 
     // Inicializa quando a página carregar
@@ -3774,14 +3797,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
-        // Espada Solar (exemplo de efeito fixo, origem: Divindade)
-        effects.push({
-            label: 'Espada Solar (+1d6 dano)',
-            value: 'espada_solar',
-            dice: '1d6',
-            desc: '*+ Espada Solar*',
-            origin: 'Divindade: Azgher'
-        });
+        // Espada Solar (agora togglable)
+        if (isEffectActive('espada_solar')) {
+            effects.push({
+                label: 'Espada Solar (+1d6 dano)',
+                value: 'espada_solar',
+                dice: '1d6',
+                desc: '*+ Espada Solar*',
+                origin: 'Divindade'
+            });
+        }
         // Escaramuça
         if (hasAbility('Escaramuça')) {
             effects.push({
@@ -4422,7 +4447,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const totalDice = selectedPMs * 2;
                 const diceSides = 6;
                 const rollCommand = `/roll ${totalDice}d${diceSides}`;
-                const message = `/em usou o poder "${abilityDisplayName}"`;
+                const message = `/em usou o poder "${abilityDisplayName}" (${selectedPMs} PM)`;
                 executeHealingPowerWithHolyEffect(rollCommand, message);
             };
             popup.appendChild(useBtn);
@@ -4584,14 +4609,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Lista de efeitos disponíveis
         const effects = [
             {
+                name: 'Espada Solar',
+                description: 'Efeito de Dano: Todos os ataques melees recebem +1d6 de dano extra.',
+                type: 'Divindade',
+                effectKey: 'espada_solar'
+            },
+            {
                 name: 'Cachecol Sombrio',
-                description: 'Ataque Sombrio: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
+                description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
                 type: 'Item',
                 effectKey: 'cachecol_sombrio'
             },
             {
                 name: 'Flanqueado',
-                description: 'Condição de combate: Você recebe +2 em testes de ataque contra o alvo flanqueado.',
+                description: 'Condição de Combate: Você recebe +2 em testes de ataque contra o alvo flanqueado.',
                 type: 'Especial',
                 effectKey: 'flanqueado'
             }
