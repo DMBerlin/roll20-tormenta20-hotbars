@@ -2106,6 +2106,18 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     description: 'Você pode tentar desarmar um oponente como uma ação padrão. Faça um teste de Força (Luta) oposto ao teste de Força (Luta) do oponente. Se você vencer, o oponente solta a arma.',
                     icon: '🗡️',
                     shortDesc: 'Ação padrão: Teste de Luta (rolagem: 1d20 + Luta total) para fazer oponente soltar arma.'
+                },
+                {
+                    name: 'Derrubar',
+                    description: 'Você deixa o alvo caído. Esta queda normalmente não causa dano. Se você vencer o teste oposto por 5 pontos ou mais, derruba o oponente com tanta força que também o empurra um quadrado em uma direção a sua escolha. Se isso o jogar além de um parapeito ou precipício, ele pode fazer um teste de Reflexos (CD 20) para se agarrar numa beirada.',
+                    icon: '🔻',
+                    shortDesc: 'Ação padrão: Deixe o alvo caído (teste de manobra oposto). Se vencer por 5+, empurre o alvo 1 quadrado. Se cair de um parapeito, teste Reflexos (CD 20) para se segurar.'
+                },
+                {
+                    name: 'Empurrar',
+                    description: 'Você empurra a criatura 1,5m. Para cada 5 pontos de diferença entre os testes, você empurra o alvo mais 1,5m. Você pode gastar uma ação de movimento para avançar junto com a criatura (até o limite do seu deslocamento).',
+                    icon: '➡️',
+                    shortDesc: 'Ação padrão: Empurre o alvo 1,5m (teste de manobra oposto). Para cada 5 pontos de diferença, empurre mais 1,5m. Pode avançar junto usando ação de movimento.'
                 }
             ];
 
@@ -2281,15 +2293,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                         executeAttackWithBloodEffect(macro);
                     } else if (maneuver.name === 'Atropelar') {
                         // Teste de Força (Atletismo) para atropelar
-                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atletismo - Manobra Atropelar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}`;
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Atropelar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}`;
                         sendToChat(macro);
                     } else if (maneuver.name === 'Agarrar') {
                         // Teste de Força (Luta) para agarrar
-                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta - Manobra Agarrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Agarrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
                         sendToChat(macro);
                     } else if (maneuver.name === 'Desarmar') {
                         // Teste de Força (Luta) para desarmar
-                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta - Manobra Desarmar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Desarmar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Derrubar') {
+                        // Teste de Força (Luta) para derrubar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Derrubar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Empurrar') {
+                        // Teste de Força (Luta) para empurrar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Empurrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
                         sendToChat(macro);
                     }
 
