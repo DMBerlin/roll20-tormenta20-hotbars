@@ -22,9 +22,16 @@
     // Sistema de poderes de destino aprendidos
     const DESTINY_POWERS_KEY = 'roll20-hotbar-destiny-powers';
 
-    // Função global para obter o nome do personagema
+    // Função global para obter o nome do personagem
     function getCharacterName() {
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
+    }
+
+    // Função para obter o nome do personagem sem aspas para uso em macros
+    function getCharacterNameForMacro() {
+        const name = getCharacterName();
+        // Remove aspas simples e duplas do nome
+        return name.replace(/['"]/g, '');
     }
 
     function getFavorites() {
@@ -588,36 +595,36 @@
 
         // Lista de skills (nome, comando)
         const skills = [
-            { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Acrobacia}}{{theroll=[[1d20+[[@{${getCharacterName()}|acrobaciatotal}]]]]}}` },
-            { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Adestramento}}{{theroll=[[1d20+[[@{${getCharacterName()}|adestramentototal}]]]]}}` },
-            { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Atletismo}}{{theroll=[[1d20+[[@{${getCharacterName()}|atletismototal}]]]]}}` },
-            { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Atuação}}{{theroll=[[1d20+[[@{${getCharacterName()}|atuacaototal}]]]]}}` },
-            { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Cavalgar}}{{theroll=[[1d20+[[@{${getCharacterName()}|cavalgartotal}]]]]}}` },
-            { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Conhecimento}}{{theroll=[[1d20+[[@{${getCharacterName()}|conhecimentototal}]]]]}}` },
-            { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Cura}}{{theroll=[[1d20+[[@{${getCharacterName()}|curatotal}]]]]}}` },
-            { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Diplomacia}}{{theroll=[[1d20+[[@{${getCharacterName()}|diplomaciatotal}]]]]}}` },
-            { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Enganação}}{{theroll=[[1d20+[[@{${getCharacterName()}|enganacaototal}]]]]}}` },
-            { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${getCharacterName()}|fortitudetotal}]]]]}}` },
-            { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Furtividade}}{{theroll=[[1d20+[[@{${getCharacterName()}|furtividadetotal}]]]]}}` },
-            { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Guerra}}{{theroll=[[1d20+[[@{${getCharacterName()}|guerratotal}]]]]}}` },
-            { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${getCharacterName()}|iniciativatotal}]] &{tracker}]]}}` },
-            { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Intimidação}}{{theroll=[[1d20+[[@{${getCharacterName()}|intimidacaototal}]]]]}}` },
-            { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Intuição}}{{theroll=[[1d20+[[@{${getCharacterName()}|intuicaototal}]]]]}}` },
-            { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Investigação}}{{theroll=[[1d20+[[@{${getCharacterName()}|investigacaototal}]]]]}}` },
-            { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Jogatina}}{{theroll=[[1d20+[[@{${getCharacterName()}|jogatinatotal}]]]]}}` },
-            { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ladinagem}}{{theroll=[[1d20+[[@{${getCharacterName()}|ladinagemtotal}]]]]}}` },
-            { nome: 'Luta', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Luta}}{{theroll=[[1d20+[[@{${getCharacterName()}|lutatotal}]]]]}}` },
-            { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${getCharacterName()}|misticismototal}]]]]}}` },
-            { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${getCharacterName()}|nobrezatotal}]]]]}}` },
-            { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ofício @{${getCharacterName()}|oficionome}}}{{theroll=[[1d20+[[@{${getCharacterName()}|oficiototal}]]]]}}` },
-            { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Ofício @{${getCharacterName()}|oficio2nome}}}{{theroll=[[1d20+[[@{${getCharacterName()}|oficio2total}]]]]}}` },
-            { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${getCharacterName()}|percepcaototal}]]]]}}` },
-            { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${getCharacterName()}|pilotagemtotal}]]]]}}` },
-            { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${getCharacterName()}|pontariatotal}]]]]}}` },
-            { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${getCharacterName()}|reflexostotal}]]]]}}` },
-            { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Religião}}{{theroll=[[1d20+[[@{${getCharacterName()}|religiaototal}]]]]}}` },
-            { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Sobrevivência}}{{theroll=[[1d20+[[@{${getCharacterName()}|sobrevivenciatotal}]]]]}}` },
-            { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterName()}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${getCharacterName()}|vontadetotal}]]]]}}` }
+            { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Acrobacia}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}` },
+            { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Adestramento}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|adestramentototal}]]]]}}` },
+            { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atletismo}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}` },
+            { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atuação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atuacaototal}]]]]}}` },
+            { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cavalgar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|cavalgartotal}]]]]}}` },
+            { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Conhecimento}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|conhecimentototal}]]]]}}` },
+            { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cura}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|curatotal}]]]]}}` },
+            { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Diplomacia}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|diplomaciatotal}]]]]}}` },
+            { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Enganação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|enganacaototal}]]]]}}` },
+            { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|fortitudetotal}]]]]}}` },
+            { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Furtividade}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|furtividadetotal}]]]]}}` },
+            { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Guerra}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|guerratotal}]]]]}}` },
+            { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|iniciativatotal}]] &{tracker}]]}}` },
+            { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intimidação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intimidacaototal}]]]]}}` },
+            { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intuição}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intuicaototal}]]]]}}` },
+            { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Investigação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|investigacaototal}]]]]}}` },
+            { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Jogatina}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|jogatinatotal}]]]]}}` },
+            { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ladinagem}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|ladinagemtotal}]]]]}}` },
+            { nome: 'Luta', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}` },
+            { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
+            { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
+            { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficionome}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
+            { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficio2nome}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficio2total}]]]]}}` },
+            { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
+            { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
+            { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
+            { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|reflexostotal}]]]]}}` },
+            { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Religião}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|religiaototal}]]]]}}` },
+            { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Sobrevivência}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|sobrevivenciatotal}]]]]}}` },
+            { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|vontadetotal}]]]]}}` }
         ];
 
         // Lista visual
@@ -874,7 +881,7 @@
         const spells = [
             spellTemplates.createSpell({
                 nome: 'Sombras Profanas',
-                comando: `&{template:spell}{{character=@{${getCharacterName()}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
+                comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
 
 +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
@@ -886,7 +893,7 @@
 
 +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
 
-JdA:193}}{{cd=[[@{${getCharacterName()}|cdtotal}+0]]}}`
+JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             })
         ];
 
@@ -1712,7 +1719,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         mainContent.style.padding = '14px 24px 14px 24px';
         mainContent.style.alignItems = 'center';
 
-        // Seção do personagem (lado esquerdo)
+        // Seção 1: Avatar do personagem (lado esquerdo)
         const characterSection = document.createElement('div');
         characterSection.style.display = 'flex';
         characterSection.style.alignItems = 'center';
@@ -1904,20 +1911,420 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         characterSection.appendChild(avatarContainer);
         characterSection.appendChild(characterInfo);
 
-        // Linha separadora
-        const separator = document.createElement('div');
-        separator.style.width = '1px';
-        separator.style.height = '60px';
-        separator.style.background = 'rgba(110,198,255,0.3)';
-        separator.style.margin = '0 10px';
+        // Linha separadora 1
+        const separator1 = document.createElement('div');
+        separator1.style.width = '1px';
+        separator1.style.height = '60px';
+        separator1.style.background = 'rgba(110,198,255,0.3)';
+        separator1.style.margin = '0 10px';
 
-        // Container dos botões (lado direito)
-        const buttonContainer = document.createElement('div');
-        buttonContainer.style.display = 'flex';
-        buttonContainer.style.gap = '18px';
-        buttonContainer.style.flexWrap = 'nowrap';
-        buttonContainer.style.justifyContent = 'center';
-        buttonContainer.style.alignItems = 'center';
+        // Seção 2: Combate (botões Atacar e Manobras)
+        const combatSection = document.createElement('div');
+        combatSection.style.display = 'flex';
+        combatSection.style.alignItems = 'center';
+        combatSection.style.gap = '12px';
+        combatSection.style.padding = '8px 12px';
+        combatSection.style.background = 'rgba(46,26,26,0.8)';
+        combatSection.style.borderRadius = '12px';
+        combatSection.style.border = '1px solid rgba(255,110,110,0.3)';
+        combatSection.style.minWidth = '160px';
+        combatSection.style.justifyContent = 'center';
+
+        // Linha separadora 2
+        const separator2 = document.createElement('div');
+        separator2.style.width = '1px';
+        separator2.style.height = '60px';
+        separator2.style.background = 'rgba(110,198,255,0.3)';
+        separator2.style.margin = '0 10px';
+
+        // Seção 3: Outros botões (Skills, Spells, Habilidades, Efeitos)
+        const otherButtonsSection = document.createElement('div');
+        otherButtonsSection.style.display = 'flex';
+        otherButtonsSection.style.gap = '18px';
+        otherButtonsSection.style.flexWrap = 'nowrap';
+        otherButtonsSection.style.justifyContent = 'center';
+        otherButtonsSection.style.alignItems = 'center';
+
+        // Função para abrir popup de manobras de combate
+        function createManeuversPopup() {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('maneuvers-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('maneuvers-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'maneuvers-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10000';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'maneuvers-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ff6e6e';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '18px 20px 16px 20px';
+            popup.style.zIndex = '10001';
+            popup.style.maxWidth = '340px';
+            popup.style.maxHeight = '480px';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
+
+            const title = document.createElement('h3');
+            title.textContent = 'Manobras de Combate';
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = 'bold';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('maneuvers-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Campo de filtro
+            const filterContainer = document.createElement('div');
+            filterContainer.style.position = 'relative';
+            filterContainer.style.marginBottom = '10px';
+            const filterInput = document.createElement('input');
+            filterInput.type = 'text';
+            filterInput.placeholder = 'Filtrar manobras...';
+            filterInput.style.width = '100%';
+            filterInput.style.padding = '10px 28px 10px 12px';
+            filterInput.style.borderRadius = '8px';
+            filterInput.style.border = '1px solid #ff6e6e';
+            filterInput.style.background = '#23243a';
+            filterInput.style.color = '#fff';
+            filterInput.style.fontSize = '14px';
+            filterInput.style.outline = 'none';
+            filterInput.style.boxSizing = 'border-box';
+            filterInput.style.fontSize = '15px';
+            // Botão X para limpar
+            const clearBtn = document.createElement('span');
+            clearBtn.textContent = '×';
+            clearBtn.style.position = 'absolute';
+            clearBtn.style.right = '8px';
+            clearBtn.style.top = '50%';
+            clearBtn.style.transform = 'translateY(-50%)';
+            clearBtn.style.cursor = 'pointer';
+            clearBtn.style.color = '#ff6e6e';
+            clearBtn.style.fontSize = '18px';
+            clearBtn.style.display = 'none';
+            clearBtn.onclick = () => {
+                filterInput.value = '';
+                filterInput.dispatchEvent(new Event('input'));
+                filterInput.focus();
+            };
+            filterInput.oninput = () => {
+                if (filterInput.value.length > 0) {
+                    clearBtn.style.display = 'block';
+                } else {
+                    clearBtn.style.display = 'none';
+                }
+                filterManeuvers();
+            };
+            filterInput.onfocus = () => {
+                filterInput.style.borderColor = '#ff8e8e';
+            };
+            filterInput.onblur = () => {
+                filterInput.style.borderColor = '#ff6e6e';
+            };
+            filterContainer.appendChild(filterInput);
+            filterContainer.appendChild(clearBtn);
+            popup.appendChild(filterContainer);
+
+            // Container para a lista de manobras
+            const maneuversList = document.createElement('div');
+            maneuversList.style.display = 'flex';
+            maneuversList.style.flexDirection = 'column';
+            maneuversList.style.gap = '6px';
+            maneuversList.style.marginTop = '2px';
+
+            // Lista de manobras
+            const maneuvers = [
+                {
+                    name: 'Investida',
+                    description: 'Você avança até o dobro de seu deslocamento (e no mínimo 3m) em linha reta e, no fim do movimento, faz um ataque corpo a corpo. Você recebe +2 no teste de ataque, mas sofre –2 na Defesa até o seu próximo turno, porque sua guarda fica aberta. Você não pode fazer uma investida em terreno difícil. Durante uma investida, você pode fazer a manobra atropelar como uma ação livre (mas não pode atropelar e atacar o mesmo alvo).',
+                    icon: '⚡',
+                    shortDesc: 'Ação completa: Ataque corpo a corpo com +2 no teste de ataque (rolagem: 1d20 + Pontaria + bônus da investida), mas sofra –2 na Defesa até o próximo turno.'
+                },
+                {
+                    name: 'Atropelar',
+                    description: 'Você pode tentar atropelar um oponente como uma ação de movimento. Faça um teste de Força (Atletismo) oposto ao teste de Força (Atletismo) do oponente. Se você vencer, empurra o oponente 1,5m para trás e pode continuar seu movimento. Se você perder, para no espaço do oponente.',
+                    icon: '💨',
+                    shortDesc: 'Ação de movimento: Teste de Atletismo (rolagem: 1d20 + Atletismo total) para empurrar oponente 1,5m para trás.'
+                },
+                {
+                    name: 'Agarrar',
+                    description: 'Você pode tentar agarrar um oponente como uma ação padrão. Faça um teste de Força (Luta) oposto ao teste de Força (Luta) ou Destreza (Acrobacia) do oponente. Se você vencer, o oponente fica agarrado.',
+                    icon: '🤝',
+                    shortDesc: 'Ação padrão: Teste de Luta (rolagem: 1d20 + Luta total) para agarrar oponente.'
+                },
+                {
+                    name: 'Desarmar',
+                    description: 'Você pode tentar desarmar um oponente como uma ação padrão. Faça um teste de Força (Luta) oposto ao teste de Força (Luta) do oponente. Se você vencer, o oponente solta a arma.',
+                    icon: '🗡️',
+                    shortDesc: 'Ação padrão: Teste de Luta (rolagem: 1d20 + Luta total) para fazer oponente soltar arma.'
+                }
+            ];
+
+            maneuvers.forEach((maneuver, index) => {
+                const btn = document.createElement('button');
+                btn.id = `maneuver-btn-${index}`;
+                btn.textContent = `${maneuver.icon} ${maneuver.name}`;
+                btn.style.width = '100%';
+                btn.style.background = '#23243a';
+                btn.style.color = '#fff';
+                btn.style.border = '1px solid #ff6e6e';
+                btn.style.borderRadius = '6px';
+                btn.style.padding = '8px 0';
+                btn.style.fontSize = '15px';
+                btn.style.fontWeight = 'bold';
+                btn.style.cursor = 'pointer';
+                btn.style.transition = 'all 0.2s';
+                btn.style.position = 'relative';
+                btn.style.display = 'block';
+
+                // Tooltip container
+                let tooltip = null;
+                let tooltipTimeout = null;
+
+                btn.onmouseover = () => {
+                    btn.style.background = '#ff6e6e';
+                    btn.style.color = '#23243a';
+
+                    // Criar tooltip após um pequeno delay
+                    tooltipTimeout = setTimeout(() => {
+                        // Remover tooltip existente se houver
+                        if (tooltip) tooltip.remove();
+
+                        tooltip = document.createElement('div');
+                        tooltip.style.position = 'fixed';
+                        tooltip.style.background = 'rgba(20,20,30,0.98)';
+                        tooltip.style.border = '2px solid #ff6e6e';
+                        tooltip.style.borderRadius = '8px';
+                        tooltip.style.padding = '12px';
+                        tooltip.style.minWidth = '280px';
+                        tooltip.style.maxWidth = '320px';
+                        tooltip.style.zIndex = '10004';
+                        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
+                        tooltip.style.pointerEvents = 'none';
+
+                        // Calcular posição baseada na posição do botão
+                        const btnRect = btn.getBoundingClientRect();
+                        tooltip.style.left = (btnRect.right + 10) + 'px';
+                        tooltip.style.top = btnRect.top + 'px';
+
+                        // Conteúdo do tooltip
+                        const tooltipContent = document.createElement('div');
+                        tooltipContent.style.display = 'flex';
+                        tooltipContent.style.flexDirection = 'column';
+                        tooltipContent.style.gap = '8px';
+
+                        // Título da manobra
+                        const tooltipTitle = document.createElement('div');
+                        tooltipTitle.textContent = maneuver.name;
+                        tooltipTitle.style.color = '#ff6e6e';
+                        tooltipTitle.style.fontSize = '16px';
+                        tooltipTitle.style.fontWeight = 'bold';
+                        tooltipTitle.style.marginBottom = '4px';
+                        tooltipContent.appendChild(tooltipTitle);
+
+                        // Tag de classificação
+                        const classificationTag = document.createElement('div');
+                        classificationTag.textContent = 'Manobra de Combate';
+                        classificationTag.style.background = '#ff6e6e';
+                        classificationTag.style.color = '#23243a';
+                        classificationTag.style.fontSize = '11px';
+                        classificationTag.style.fontWeight = 'bold';
+                        classificationTag.style.borderRadius = '4px';
+                        classificationTag.style.padding = '2px 8px';
+                        classificationTag.style.display = 'inline-block';
+                        classificationTag.style.width = 'fit-content';
+                        tooltipContent.appendChild(classificationTag);
+
+                        // Tag de tipo
+                        const typeTag = document.createElement('div');
+                        typeTag.textContent = 'Ação Completa';
+                        typeTag.style.background = '#8B4513';
+                        typeTag.style.color = '#fff';
+                        typeTag.style.fontSize = '11px';
+                        typeTag.style.fontWeight = 'bold';
+                        typeTag.style.borderRadius = '4px';
+                        typeTag.style.padding = '2px 8px';
+                        typeTag.style.display = 'inline-block';
+                        typeTag.style.width = 'fit-content';
+                        typeTag.style.marginTop = '2px';
+                        tooltipContent.appendChild(typeTag);
+
+                        // Descrição resumida
+                        const tooltipDesc = document.createElement('div');
+                        tooltipDesc.textContent = maneuver.shortDesc;
+                        tooltipDesc.style.color = '#ecf0f1';
+                        tooltipDesc.style.fontSize = '13px';
+                        tooltipDesc.style.lineHeight = '1.4';
+                        tooltipDesc.style.marginTop = '6px';
+                        tooltipContent.appendChild(tooltipDesc);
+
+                        tooltip.appendChild(tooltipContent);
+                        document.body.appendChild(tooltip);
+                    }, 300); // Delay de 300ms antes de mostrar o tooltip
+                };
+
+                btn.onmouseout = () => {
+                    btn.style.background = '#23243a';
+                    btn.style.color = '#fff';
+
+                    // Limpar timeout e remover tooltip
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
+                    }
+                    if (tooltip) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
+                };
+
+                btn.onclick = () => {
+                    // Remover tooltip se estiver visível
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
+                    }
+                    if (tooltip) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
+
+                    // Executar manobra baseada no tipo
+                    if (maneuver.name === 'Investida') {
+                        // Executar investida com +2 no ataque
+                        const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                        let savedAttackEffects = [];
+                        try {
+                            const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                            if (saved) savedAttackEffects = JSON.parse(saved);
+                        } catch (err) {
+                            console.error('Erro ao carregar seleção:', err);
+                            savedAttackEffects = [];
+                        }
+                        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                        const effects = getDynamicAttackEffects(charLevel);
+                        let extraDamage = '';
+                        let extraDescription = '';
+                        let critThreshold = 18;
+                        let attackBonus = 2; // +2 da investida
+                        let marcaPresaActive = false;
+                        let inimigoActive = false;
+                        effects.forEach(effect => {
+                            if (savedAttackEffects.includes(effect.value)) {
+                                if (effect.dice) {
+                                    extraDamage += `+${effect.dice}`;
+                                }
+                                if (effect.critMod) {
+                                    critThreshold += effect.critMod;
+                                }
+                                if (effect.attackMod) {
+                                    attackBonus += effect.attackMod;
+                                }
+                                extraDescription += '%NEWLINE% ' + effect.desc;
+                                if (effect.value === 'marca_presa') marcaPresaActive = true;
+                                if (effect.value === 'inimigo') inimigoActive = true;
+                            }
+                        });
+                        if (inimigoActive && marcaPresaActive) {
+                            if (critThreshold === 16) critThreshold = 14;
+                        }
+                        const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Investida - Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Investida c/ Espada Longa** (+2 ataque, -2 defesa até próximo turno)${extraDescription}}}`;
+                        executeAttackWithBloodEffect(macro);
+                    } else if (maneuver.name === 'Atropelar') {
+                        // Teste de Força (Atletismo) para atropelar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atletismo - Manobra Atropelar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Agarrar') {
+                        // Teste de Força (Luta) para agarrar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta - Manobra Agarrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Desarmar') {
+                        // Teste de Força (Luta) para desarmar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta - Manobra Desarmar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        sendToChat(macro);
+                    }
+
+                    // Fechar popup
+                    popup.remove();
+                    const overlay = document.getElementById('maneuvers-overlay');
+                    if (overlay) overlay.remove();
+                };
+
+                maneuversList.appendChild(btn);
+            });
+
+            // Função de filtro
+            const filterManeuvers = () => {
+                const filterValue = filterInput.value.toLowerCase();
+                const buttons = maneuversList.querySelectorAll('button');
+
+                buttons.forEach((btn, index) => {
+                    const maneuver = maneuvers[index];
+                    const matchesFilter = maneuver.name.toLowerCase().includes(filterValue) ||
+                        maneuver.shortDesc.toLowerCase().includes(filterValue);
+
+                    if (matchesFilter) {
+                        btn.style.display = 'block';
+                    } else {
+                        btn.style.display = 'none';
+                    }
+                });
+            };
+
+
+
+            popup.appendChild(maneuversList);
+            document.body.appendChild(popup);
+        }
 
         // Função para abrir popup de efeitos extras no ataque
         function createAttackEffectsPopup() {
@@ -2079,70 +2486,77 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             document.body.appendChild(popup);
         }
 
-        // Botões quadrados
-        const buttons = [
-            {
-                label: 'Atacar', icon: '⚔️', onClick: (e) => {
-                    if (e && e.ctrlKey) {
-                        createAttackEffectsPopup();
-                    } else {
-                        // Novo: aplicar bônus persistidos
-                        const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
-                        let savedAttackEffects = [];
-                        try {
-                            const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
-                            if (saved) savedAttackEffects = JSON.parse(saved);
-                        } catch (err) {
-                            console.error('Erro ao carregar seleção:', err);
-                            savedAttackEffects = [];
-                        }
-                        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
-                        const effects = getDynamicAttackEffects(charLevel);
-                        let extraDamage = '';
-                        let extraDescription = '';
-                        let critThreshold = 18;
-                        let attackBonus = 0;
-                        let marcaPresaActive = false;
-                        let inimigoActive = false;
-                        effects.forEach(effect => {
-                            if (savedAttackEffects.includes(effect.value)) {
-                                if (effect.dice) {
-                                    extraDamage += `+${effect.dice}`;
-                                }
-                                if (effect.critMod) {
-                                    critThreshold += effect.critMod;
-                                }
-                                if (effect.attackMod) {
-                                    attackBonus += effect.attackMod;
-                                }
-                                extraDescription += '%NEWLINE% ' + effect.desc;
-                                if (effect.value === 'marca_presa') marcaPresaActive = true;
-                                if (effect.value === 'inimigo') inimigoActive = true;
-                            }
-                        });
-                        if (inimigoActive && marcaPresaActive) {
-                            if (critThreshold === 16) critThreshold = 14;
-                        }
-                        const macro = `&{template:t20-attack}{{character=@{${getCharacterName()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterName()}|pontariatotal}+@{${getCharacterName()}|condicaomodataquedis}+@{${getCharacterName()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterName()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterName()}|des_mod}+0+0+@{${getCharacterName()}|danotemp}+@{${getCharacterName()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterName()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
-                        executeAttackWithBloodEffect(macro);
+        // Botões de combate
+        const attackButton = {
+            label: 'Atacar', icon: '⚔️', onClick: (e) => {
+                if (e && e.ctrlKey) {
+                    createAttackEffectsPopup();
+                } else {
+                    // Novo: aplicar bônus persistidos
+                    const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                    let savedAttackEffects = [];
+                    try {
+                        const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                        if (saved) savedAttackEffects = JSON.parse(saved);
+                    } catch (err) {
+                        console.error('Erro ao carregar seleção:', err);
+                        savedAttackEffects = [];
                     }
+                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const effects = getDynamicAttackEffects(charLevel);
+                    let extraDamage = '';
+                    let extraDescription = '';
+                    let critThreshold = 18;
+                    let attackBonus = 0;
+                    let marcaPresaActive = false;
+                    let inimigoActive = false;
+                    effects.forEach(effect => {
+                        if (savedAttackEffects.includes(effect.value)) {
+                            if (effect.dice) {
+                                extraDamage += `+${effect.dice}`;
+                            }
+                            if (effect.critMod) {
+                                critThreshold += effect.critMod;
+                            }
+                            if (effect.attackMod) {
+                                attackBonus += effect.attackMod;
+                            }
+                            extraDescription += '%NEWLINE% ' + effect.desc;
+                            if (effect.value === 'marca_presa') marcaPresaActive = true;
+                            if (effect.value === 'inimigo') inimigoActive = true;
+                        }
+                    });
+                    if (inimigoActive && marcaPresaActive) {
+                        if (critThreshold === 16) critThreshold = 14;
+                    }
+                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
+                    executeAttackWithBloodEffect(macro);
                 }
-            },
+            }
+        };
+
+        const maneuversButton = {
+            label: 'Manobras', icon: '⚡', onClick: createManeuversPopup
+        };
+
+        // Outros botões
+        const otherButtons = [
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
             { label: 'Habilidades', icon: '✨', onClick: createAbilitiesPopup },
             { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup }
         ];
-        buttons.forEach(btnData => {
+        // Função para criar botão
+        function createButton(btnData, isCombatButton = false) {
             const btn = document.createElement('button');
             btn.style.display = 'flex';
             btn.style.flexDirection = 'column';
             btn.style.alignItems = 'center';
             btn.style.justifyContent = 'center';
             btn.style.padding = '0';
-            btn.style.background = 'rgba(60,80,120,0.95)';
+            btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
             btn.style.color = '#fff';
-            btn.style.border = '2px solid #6ec6ff';
+            btn.style.border = isCombatButton ? '2px solid #ff6e6e' : '2px solid #6ec6ff';
             btn.style.borderRadius = '8px';
             btn.style.cursor = 'pointer';
             btn.style.fontSize = '13px';
@@ -2154,12 +2568,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             btn.style.textAlign = 'center';
             btn.style.lineHeight = '1.1';
             btn.onmouseover = () => {
-                btn.style.background = '#6ec6ff';
+                btn.style.background = isCombatButton ? '#ff6e6e' : '#6ec6ff';
                 btn.style.color = '#222';
                 btn.style.transform = 'scale(1.08)';
             };
             btn.onmouseout = () => {
-                btn.style.background = 'rgba(60,80,120,0.95)';
+                btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
                 btn.style.color = '#fff';
                 btn.style.transform = 'scale(1)';
             };
@@ -2185,13 +2599,27 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 btn.style.position = 'relative';
             }
 
-            buttonContainer.appendChild(btn);
+            return btn;
+        }
+
+        // Criar botões de combate para seção de combate
+        const attackBtn = createButton(attackButton, true);
+        const maneuversBtn = createButton(maneuversButton, true);
+        combatSection.appendChild(attackBtn);
+        combatSection.appendChild(maneuversBtn);
+
+        // Criar outros botões para seção de outros
+        otherButtons.forEach(btnData => {
+            const btn = createButton(btnData, false);
+            otherButtonsSection.appendChild(btn);
         });
 
         // Adiciona as seções ao conteúdo principal
         mainContent.appendChild(characterSection);
-        mainContent.appendChild(separator);
-        mainContent.appendChild(buttonContainer);
+        mainContent.appendChild(separator1);
+        mainContent.appendChild(combatSection);
+        mainContent.appendChild(separator2);
+        mainContent.appendChild(otherButtonsSection);
 
         hotbar.appendChild(mainContent);
 
@@ -4058,6 +4486,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     descricao: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)'
                 }));
             }
+            if (hasAbility('Bote')) {
+                dynamicAbilities.push(abilityTemplates.createAbility({
+                    nome: 'Bote',
+                    descricao: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária. Pré-requisito: Ambidestria, 6º nível de caçador.'
+                }));
+            }
             // Filtrar pelo texto
             const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
             if (filteredAbilities.length === 0) {
@@ -4144,8 +4578,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                             // Tag de tipo
                             const typeTag = document.createElement('div');
-                            typeTag.textContent = 'Poder de Caçador';
-                            typeTag.style.background = '#4a90e2';
+                            if (ability.nome === 'Bote') {
+                                typeTag.textContent = 'Ação Livre';
+                                typeTag.style.background = '#ff6e6e';
+                            } else {
+                                typeTag.textContent = 'Poder de Caçador';
+                                typeTag.style.background = '#4a90e2';
+                            }
                             typeTag.style.color = '#fff';
                             typeTag.style.fontSize = '11px';
                             typeTag.style.fontWeight = 'bold';
@@ -4158,7 +4597,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                             // Descrição resumida
                             const tooltipDesc = document.createElement('div');
-                            tooltipDesc.textContent = 'Ação completa: Gaste PM para curar 2d6 PV por PM ou remover condição envenenado de você ou aliado adjacente.';
+                            if (ability.nome === 'Ervas Curativas') {
+                                tooltipDesc.textContent = 'Ação completa: Gaste PM para curar 2d6 PV por PM ou remover condição envenenado de você ou aliado adjacente.';
+                            } else if (ability.nome === 'Bote') {
+                                tooltipDesc.textContent = 'Ação livre: Pague 1 PM para fazer um ataque adicional com arma secundária durante uma investida.';
+                            }
                             tooltipDesc.style.color = '#ecf0f1';
                             tooltipDesc.style.fontSize = '13px';
                             tooltipDesc.style.lineHeight = '1.4';
@@ -4197,8 +4640,252 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
     // Função para criar popup de conjuração de habilidade
     function createAbilityCastPopup(abilityName, abilityDisplayName) {
+        // Modal para Bote
+        if (abilityName === 'Bote') {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('power-cast-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('power-cast-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'power-cast-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'power-cast-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ff6e6e';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '20px';
+            popup.style.zIndex = '10003';
+            popup.style.maxWidth = '400px';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '10px';
+            header.style.width = '100%';
+
+            const titleContainer = document.createElement('div');
+            titleContainer.style.display = 'flex';
+            titleContainer.style.flexDirection = 'column';
+            titleContainer.style.alignItems = 'flex-start';
+            titleContainer.style.gap = '2px';
+
+            const title = document.createElement('h3');
+            title.textContent = abilityDisplayName;
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = 'bold';
+            titleContainer.appendChild(title);
+
+            // Tag de origem
+            const originTag = document.createElement('span');
+            originTag.textContent = 'Habilidade de Combate';
+            originTag.style.background = '#ff6e6e';
+            originTag.style.color = '#23243a';
+            originTag.style.fontSize = '12px';
+            originTag.style.fontWeight = 'bold';
+            originTag.style.borderRadius = '8px';
+            originTag.style.padding = '2px 10px';
+            originTag.style.marginTop = '2px';
+            originTag.style.display = 'inline-block';
+            originTag.style.letterSpacing = '0.5px';
+            originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+            titleContainer.appendChild(originTag);
+
+            header.appendChild(titleContainer);
+
+            // Botão de fechar
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('power-cast-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Descrição em uma box
+            const descBox = document.createElement('div');
+            descBox.style.background = '#1a1a2e';
+            descBox.style.border = '1px solid #ff6e6e';
+            descBox.style.borderRadius = '8px';
+            descBox.style.padding = '12px';
+            descBox.style.marginBottom = '15px';
+            descBox.style.display = 'flex';
+            descBox.style.flexDirection = 'column';
+            descBox.style.gap = '6px';
+
+            const descHeader = document.createElement('div');
+            descHeader.textContent = 'Descrição';
+            descHeader.style.color = '#ff6e6e';
+            descHeader.style.fontSize = '13px';
+            descHeader.style.fontWeight = 'bold';
+            descHeader.style.marginBottom = '2px';
+            descBox.appendChild(descHeader);
+
+            const description = document.createElement('div');
+            description.style.color = '#ecf0f1';
+            description.style.fontSize = '14px';
+            description.style.lineHeight = '1.4';
+            description.textContent = 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária. Pré-requisito: Ambidestria, 6º nível de caçador.';
+            descBox.appendChild(description);
+
+            // Botão compartilhar dentro da box
+            const shareBtn = document.createElement('button');
+            shareBtn.textContent = 'Compartilhar';
+            shareBtn.style.background = 'none';
+            shareBtn.style.border = '1px solid #ff6e6e';
+            shareBtn.style.color = '#ff6e6e';
+            shareBtn.style.fontSize = '14px';
+            shareBtn.style.fontWeight = 'bold';
+            shareBtn.style.borderRadius = '6px';
+            shareBtn.style.padding = '8px 0';
+            shareBtn.style.marginTop = '10px';
+            shareBtn.style.width = '100%';
+            shareBtn.style.cursor = 'pointer';
+            shareBtn.style.transition = 'all 0.2s';
+            shareBtn.onmouseover = () => {
+                shareBtn.style.background = '#ff6e6e';
+                shareBtn.style.color = '#23243a';
+            };
+            shareBtn.onmouseout = () => {
+                shareBtn.style.background = 'none';
+                shareBtn.style.color = '#ff6e6e';
+            };
+            shareBtn.onclick = () => {
+                const msg = `&{template:t20-info}{{infoname=Bote}}{{description=${description.textContent}}}`;
+                sendToChat(msg);
+            };
+            descBox.appendChild(shareBtn);
+            popup.appendChild(descBox);
+
+            // Botão de executar ataque
+            const executeBtn = document.createElement('button');
+            executeBtn.textContent = 'Executar Ataque com Bote';
+            executeBtn.style.background = '#ff6e6e';
+            executeBtn.style.color = '#23243a';
+            executeBtn.style.border = 'none';
+            executeBtn.style.borderRadius = '8px';
+            executeBtn.style.padding = '12px 0';
+            executeBtn.style.fontSize = '16px';
+            executeBtn.style.fontWeight = 'bold';
+            executeBtn.style.cursor = 'pointer';
+            executeBtn.style.transition = 'all 0.2s';
+            executeBtn.style.marginBottom = '10px';
+            executeBtn.onmouseover = () => {
+                executeBtn.style.background = '#ff8e8e';
+            };
+            executeBtn.onmouseout = () => {
+                executeBtn.style.background = '#ff6e6e';
+            };
+            executeBtn.onclick = () => {
+                // Executar ataque com Bote (1 PM)
+                const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                let savedAttackEffects = [];
+                try {
+                    const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                    if (saved) savedAttackEffects = JSON.parse(saved);
+                } catch (err) {
+                    console.error('Erro ao carregar seleção:', err);
+                    savedAttackEffects = [];
+                }
+                const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                const effects = getDynamicAttackEffects(charLevel);
+                let extraDamage = '';
+                let extraDescription = '';
+                let critThreshold = 18;
+                let attackBonus = 2; // +2 da investida
+                let marcaPresaActive = false;
+                let inimigoActive = false;
+                effects.forEach(effect => {
+                    if (savedAttackEffects.includes(effect.value)) {
+                        if (effect.dice) {
+                            extraDamage += `+${effect.dice}`;
+                        }
+                        if (effect.critMod) {
+                            critThreshold += effect.critMod;
+                        }
+                        if (effect.attackMod) {
+                            attackBonus += effect.attackMod;
+                        }
+                        extraDescription += '%NEWLINE% ' + effect.desc;
+                        if (effect.value === 'marca_presa') marcaPresaActive = true;
+                        if (effect.value === 'inimigo') inimigoActive = true;
+                    }
+                });
+                if (inimigoActive && marcaPresaActive) {
+                    if (critThreshold === 16) critThreshold = 14;
+                }
+                const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Bote}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque Adicional** %NEWLINE% (1 PM, +2 ataque da investida, -2 defesa até próximo turno)${extraDescription}}}`;
+                executeAttackWithBloodEffect(macro);
+
+                // Fechar todos os popups do hotbar para liberar espaço para FX
+                const popupsToClose = [
+                    'power-cast-popup',
+                    'power-cast-overlay',
+                    'abilities-popup',
+                    'abilities-overlay',
+                    'skills-popup',
+                    'skills-overlay',
+                    'spells-popup',
+                    'spells-overlay',
+                    'maneuvers-popup',
+                    'maneuvers-overlay',
+                    'attack-effects-popup',
+                    'attack-effects-overlay',
+                    'effects-popup',
+                    'effects-overlay',
+                    'avatar-popup',
+                    'avatar-overlay'
+                ];
+
+                popupsToClose.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.remove();
+                });
+            };
+            popup.appendChild(executeBtn);
+
+            document.body.appendChild(popup);
+        }
         // Modal para Ervas Curativas
-        if (abilityName === 'Ervas Curativas') {
+        else if (abilityName === 'Ervas Curativas') {
             // Remove popup existente se houver
             const existingPopup = document.getElementById('power-cast-popup');
             if (existingPopup) existingPopup.remove();
@@ -4454,8 +5141,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             document.body.appendChild(popup);
             return;
         }
-        // (Expandir para outras habilidades futuras)
-        alert(`Habilidade: ${abilityDisplayName}`);
     }
 
     // Função para obter efeitos ativos
