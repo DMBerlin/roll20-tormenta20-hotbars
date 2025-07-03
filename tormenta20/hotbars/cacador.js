@@ -4492,6 +4492,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     descricao: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária. Pré-requisito: Ambidestria, 6º nível de caçador.'
                 }));
             }
+            if (hasAbility('Emboscar')) {
+                dynamicAbilities.push(abilityTemplates.createAbility({
+                    nome: 'Emboscar',
+                    descricao: 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate. Pré-requisito: treinado em Furtividade.'
+                }));
+            }
             // Filtrar pelo texto
             const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
             if (filteredAbilities.length === 0) {
@@ -4578,7 +4584,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                             // Tag de tipo
                             const typeTag = document.createElement('div');
-                            if (ability.nome === 'Bote') {
+                            if (ability.nome === 'Bote' || ability.nome === 'Emboscar') {
                                 typeTag.textContent = 'Ação Livre';
                                 typeTag.style.background = '#ff6e6e';
                             } else {
@@ -4601,6 +4607,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                                 tooltipDesc.textContent = 'Ação completa: Gaste PM para curar 2d6 PV por PM ou remover condição envenenado de você ou aliado adjacente.';
                             } else if (ability.nome === 'Bote') {
                                 tooltipDesc.textContent = 'Ação livre: Pague 1 PM para fazer um ataque adicional com arma secundária durante uma investida.';
+                            } else if (ability.nome === 'Emboscar') {
+                                tooltipDesc.textContent = 'Ação livre: Pague 2 PM para realizar uma ação padrão adicional na primeira rodada de combate.';
                             }
                             tooltipDesc.style.color = '#ecf0f1';
                             tooltipDesc.style.fontSize = '13px';
@@ -4852,8 +4860,220 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 if (inimigoActive && marcaPresaActive) {
                     if (critThreshold === 16) critThreshold = 14;
                 }
+                // Enviar mensagem de emote descrevendo a ação
+                const emoteMsg = `/em ${getCharacterName()} usa **Bote** (1 PM) para fazer um ataque adicional com sua arma secundária!`;
+                sendToChat(emoteMsg);
+
                 const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Ataque Adicional}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Bote c/ Espada Longa (1PM)** ${extraDescription}}}`;
                 executeAttackWithBloodEffect(macro);
+
+                // Fechar todos os popups do hotbar para liberar espaço para FX
+                const popupsToClose = [
+                    'power-cast-popup',
+                    'power-cast-overlay',
+                    'abilities-popup',
+                    'abilities-overlay',
+                    'skills-popup',
+                    'skills-overlay',
+                    'spells-popup',
+                    'spells-overlay',
+                    'maneuvers-popup',
+                    'maneuvers-overlay',
+                    'attack-effects-popup',
+                    'attack-effects-overlay',
+                    'effects-popup',
+                    'effects-overlay',
+                    'avatar-popup',
+                    'avatar-overlay'
+                ];
+
+                popupsToClose.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) element.remove();
+                });
+            };
+            popup.appendChild(executeBtn);
+
+            document.body.appendChild(popup);
+        }
+        // Modal para Emboscar
+        else if (abilityName === 'Emboscar') {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('power-cast-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('power-cast-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'power-cast-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'power-cast-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ff6e6e';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '20px';
+            popup.style.zIndex = '10003';
+            popup.style.maxWidth = '400px';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '10px';
+            header.style.width = '100%';
+
+            const titleContainer = document.createElement('div');
+            titleContainer.style.display = 'flex';
+            titleContainer.style.flexDirection = 'column';
+            titleContainer.style.alignItems = 'flex-start';
+            titleContainer.style.gap = '2px';
+
+            const title = document.createElement('h3');
+            title.textContent = abilityDisplayName;
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = 'bold';
+            titleContainer.appendChild(title);
+
+            // Tag de origem
+            const originTag = document.createElement('span');
+            originTag.textContent = 'Habilidade de Combate';
+            originTag.style.background = '#ff6e6e';
+            originTag.style.color = '#23243a';
+            originTag.style.fontSize = '12px';
+            originTag.style.fontWeight = 'bold';
+            originTag.style.borderRadius = '8px';
+            originTag.style.padding = '2px 10px';
+            originTag.style.marginTop = '2px';
+            originTag.style.display = 'inline-block';
+            originTag.style.letterSpacing = '0.5px';
+            originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
+            titleContainer.appendChild(originTag);
+
+            header.appendChild(titleContainer);
+
+            // Botão de fechar
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('power-cast-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Descrição em uma box
+            const descBox = document.createElement('div');
+            descBox.style.background = '#1a1a2e';
+            descBox.style.border = '1px solid #ff6e6e';
+            descBox.style.borderRadius = '8px';
+            descBox.style.padding = '12px';
+            descBox.style.marginBottom = '15px';
+            descBox.style.display = 'flex';
+            descBox.style.flexDirection = 'column';
+            descBox.style.gap = '6px';
+
+            const descHeader = document.createElement('div');
+            descHeader.textContent = 'Descrição';
+            descHeader.style.color = '#ff6e6e';
+            descHeader.style.fontSize = '13px';
+            descHeader.style.fontWeight = 'bold';
+            descHeader.style.marginBottom = '2px';
+            descBox.appendChild(descHeader);
+
+            const description = document.createElement('div');
+            description.style.color = '#ecf0f1';
+            description.style.fontSize = '14px';
+            description.style.lineHeight = '1.4';
+            description.textContent = 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate. Pré-requisito: treinado em Furtividade.';
+            descBox.appendChild(description);
+
+            // Botão compartilhar dentro da box
+            const shareBtn = document.createElement('button');
+            shareBtn.textContent = 'Compartilhar';
+            shareBtn.style.background = 'none';
+            shareBtn.style.border = '1px solid #ff6e6e';
+            shareBtn.style.color = '#ff6e6e';
+            shareBtn.style.fontSize = '14px';
+            shareBtn.style.fontWeight = 'bold';
+            shareBtn.style.borderRadius = '6px';
+            shareBtn.style.padding = '8px 0';
+            shareBtn.style.marginTop = '10px';
+            shareBtn.style.width = '100%';
+            shareBtn.style.cursor = 'pointer';
+            shareBtn.style.transition = 'all 0.2s';
+            shareBtn.onmouseover = () => {
+                shareBtn.style.background = '#ff6e6e';
+                shareBtn.style.color = '#23243a';
+            };
+            shareBtn.onmouseout = () => {
+                shareBtn.style.background = 'none';
+                shareBtn.style.color = '#ff6e6e';
+            };
+            shareBtn.onclick = () => {
+                const msg = `&{template:t20-info}{{infoname=Emboscar}}{{description=${description.textContent}}}`;
+                sendToChat(msg);
+            };
+            descBox.appendChild(shareBtn);
+            popup.appendChild(descBox);
+
+            // Botão de executar ação
+            const executeBtn = document.createElement('button');
+            executeBtn.textContent = 'Executar Ação Adicional';
+            executeBtn.style.background = '#ff6e6e';
+            executeBtn.style.color = '#23243a';
+            executeBtn.style.border = 'none';
+            executeBtn.style.borderRadius = '8px';
+            executeBtn.style.padding = '12px 0';
+            executeBtn.style.fontSize = '16px';
+            executeBtn.style.fontWeight = 'bold';
+            executeBtn.style.cursor = 'pointer';
+            executeBtn.style.transition = 'all 0.2s';
+            executeBtn.style.marginBottom = '10px';
+            executeBtn.onmouseover = () => {
+                executeBtn.style.background = '#ff8e8e';
+            };
+            executeBtn.onmouseout = () => {
+                executeBtn.style.background = '#ff6e6e';
+            };
+            executeBtn.onclick = () => {
+                // Enviar mensagem de emote descrevendo a ação
+                const emoteMsg = `/em ${getCharacterName()} usa **Emboscar** (2 PM) para realizar uma ação padrão adicional!`;
+                sendToChat(emoteMsg);
 
                 // Fechar todos os popups do hotbar para liberar espaço para FX
                 const popupsToClose = [
