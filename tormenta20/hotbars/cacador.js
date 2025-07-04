@@ -3388,19 +3388,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 devotees: 'Aggelus, qareen, arcanistas, bárbaros, caçadores, cavaleiros, guerreiros, nobres, paladinos',
                 powers: [
                     {
-                        name: 'Espada Solar Azgher',
+                        name: 'Espada Solar',
                         description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.'
                     },
                     {
-                        name: 'Fulgor Solar Azgher',
+                        name: 'Fulgor Solar',
                         description: 'Você recebe redução de frio e trevas 5. Além disso, quando é alvo de um ataque você pode gastar 1 PM para emitir um clarão solar que deixa o atacante ofuscado por uma rodada.'
                     },
                     {
-                        name: 'Habitante do Deserto Azgher',
+                        name: 'Habitante do Deserto',
                         description: 'Você recebe redução de fogo 10 e pode pagar 1 PM para criar água pura e potável suficiente para um odre (ou outro recipiente pequeno).'
                     },
                     {
-                        name: 'Inimigo de Tenebra Azgher',
+                        name: 'Inimigo de Tenebra',
                         description: 'Seus ataques e habilidades causam +1d6 pontos de dano contra mortos-vivos. Quando você usa um efeito que gera luz, o alcance da iluminação dobra.'
                     }
                 ],
@@ -3722,7 +3722,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 // Cabeçalho do poder
                 const powerHeader = document.createElement('div');
                 powerHeader.style.display = 'flex';
-                powerHeader.style.justifyContent = 'space-between';
+                powerHeader.style.justifyContent = 'flex-start';
                 powerHeader.style.alignItems = 'center';
                 powerHeader.style.marginBottom = '6px';
 
@@ -3732,14 +3732,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 powerName.style.fontSize = '14px';
                 powerName.style.fontWeight = 'bold';
 
-                const selectionIndicator = document.createElement('div');
-                selectionIndicator.textContent = isSelected ? '●' : '○';
-                selectionIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-                selectionIndicator.style.fontSize = '16px';
-                selectionIndicator.style.fontWeight = 'bold';
-
                 powerHeader.appendChild(powerName);
-                powerHeader.appendChild(selectionIndicator);
                 powerContainer.appendChild(powerHeader);
 
                 // Descrição do poder
