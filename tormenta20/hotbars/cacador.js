@@ -3058,6 +3058,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tab3Content.id = 'tab3-content';
         tab3Content.style.display = 'none';
 
+        // Aba 4: Divindade
+        const tab4Btn = document.createElement('button');
+        tab4Btn.textContent = 'Divindade';
+        tab4Btn.style.padding = '10px 15px';
+        tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+        tab4Btn.style.color = '#ecf0f1';
+        tab4Btn.style.border = 'none';
+        tab4Btn.style.borderRadius = '8px 8px 0 0';
+        tab4Btn.style.fontSize = '14px';
+        tab4Btn.style.fontWeight = 'bold';
+        tab4Btn.style.cursor = 'pointer';
+        tab4Btn.style.transition = 'all 0.2s';
+
+        const tab4Content = document.createElement('div');
+        tab4Content.id = 'tab4-content';
+        tab4Content.style.display = 'none';
+
         // === NOVO: Barra de pesquisa e filtros para Poderes de Combate ===
         const powerFilterContainer = document.createElement('div');
         powerFilterContainer.style.marginBottom = '15px';
@@ -3356,6 +3373,446 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         updateCombatPowerList();
 
         tab3Content.appendChild(combatPowersListContainer);
+
+        // Conteúdo da Aba 4 (Divindade)
+        const divinities = [
+            {
+                name: 'Azgher',
+                title: 'Deus-Sol',
+                shortDescription: 'Deus da luz e do calor, venerado por viajantes e combatentes das trevas.',
+                description: 'Venerado pelos povos do Deserto da Perdição, o Deus-Sol é também cultuado por viajantes, mercadores honestos e todos aqueles que combatem as trevas. É um deus generoso; sua jornada diária derrama calor e conforto sobre Arton. Azgher é como um pai severo: responsável, provedor, mas que também exige respeito de seus filhos. Como um olho sempre vigilante nos céus, nada acontece à luz do dia sem que Azgher perceba.',
+                beliefs: 'Praticar a gratidão pela proteção e generosidade do sol. Promover a honestidade, expor embustes e mentiras. Praticar a caridade e o altruísmo. Proteger os necessitados. Oferecer clemência, perdão e redenção. Combater o mal.',
+                symbol: 'Um sol dourado',
+                energy: 'Positiva',
+                weapon: 'Cimitarra',
+                devotees: 'Aggelus, qareen, arcanistas, bárbaros, caçadores, cavaleiros, guerreiros, nobres, paladinos',
+                powers: [
+                    {
+                        name: 'Espada Solar Azgher',
+                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.'
+                    },
+                    {
+                        name: 'Fulgor Solar Azgher',
+                        description: 'Você recebe redução de frio e trevas 5. Além disso, quando é alvo de um ataque você pode gastar 1 PM para emitir um clarão solar que deixa o atacante ofuscado por uma rodada.'
+                    },
+                    {
+                        name: 'Habitante do Deserto Azgher',
+                        description: 'Você recebe redução de fogo 10 e pode pagar 1 PM para criar água pura e potável suficiente para um odre (ou outro recipiente pequeno).'
+                    },
+                    {
+                        name: 'Inimigo de Tenebra Azgher',
+                        description: 'Seus ataques e habilidades causam +1d6 pontos de dano contra mortos-vivos. Quando você usa um efeito que gera luz, o alcance da iluminação dobra.'
+                    }
+                ],
+                obligations: 'O devoto de Azgher deve manter o rosto sempre coberto (com uma máscara, capuz ou trapos). Sua face pode ser revelada apenas ao sumo-sacerdote ou em seu funeral. Devotos do Sol também devem doar para a igreja de Azgher 20% de qualquer tesouro obtido. Essa doação deve ser feita em ouro, seja na forma de moedas ou itens.'
+            }
+        ];
+
+        // Lista resumida de divindades
+        const divinitiesList = document.createElement('div');
+        divinitiesList.style.display = 'flex';
+        divinitiesList.style.flexDirection = 'column';
+        divinitiesList.style.gap = '12px';
+
+        divinities.forEach(divinity => {
+            const isSelected = getSelectedDivinity() === divinity.name;
+
+            const divinityContainer = document.createElement('div');
+            divinityContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
+            divinityContainer.style.border = `2px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
+            divinityContainer.style.borderRadius = '8px';
+            divinityContainer.style.padding = '12px';
+            divinityContainer.style.cursor = 'pointer';
+            divinityContainer.style.transition = 'all 0.3s';
+
+            divinityContainer.onmouseover = () => {
+                if (!isSelected) {
+                    divinityContainer.style.background = '#2a2b4a';
+                }
+            };
+
+            divinityContainer.onmouseout = () => {
+                if (!isSelected) {
+                    divinityContainer.style.background = '#23243a';
+                }
+            };
+
+            divinityContainer.onclick = () => {
+                createDivinityDetailModal(divinity);
+            };
+
+            // Cabeçalho da divindade
+            const divinityHeader = document.createElement('div');
+            divinityHeader.style.display = 'flex';
+            divinityHeader.style.justifyContent = 'space-between';
+            divinityHeader.style.alignItems = 'center';
+            divinityHeader.style.marginBottom = '8px';
+
+            const divinityTitle = document.createElement('div');
+            divinityTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${divinity.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${divinity.title}</em>`;
+
+            const statusIndicator = document.createElement('div');
+            statusIndicator.textContent = isSelected ? '✓ Selecionada' : 'Clique para ver detalhes';
+            statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
+            statusIndicator.style.fontSize = '12px';
+            statusIndicator.style.fontWeight = 'bold';
+            statusIndicator.style.fontStyle = 'italic';
+
+            divinityHeader.appendChild(divinityTitle);
+            divinityHeader.appendChild(statusIndicator);
+            divinityContainer.appendChild(divinityHeader);
+
+            // Descrição resumida
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.textContent = divinity.shortDescription;
+            descriptionDiv.style.color = '#ecf0f1';
+            descriptionDiv.style.fontSize = '12px';
+            descriptionDiv.style.lineHeight = '1.4';
+            divinityContainer.appendChild(descriptionDiv);
+
+            divinitiesList.appendChild(divinityContainer);
+        });
+
+        tab4Content.appendChild(divinitiesList);
+
+        // Função para criar modal detalhado da divindade
+        function createDivinityDetailModal(divinity) {
+            // Remove modal existente se houver
+            const existingModal = document.getElementById('divinity-detail-modal');
+            if (existingModal) existingModal.remove();
+            const existingOverlay = document.getElementById('divinity-detail-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'divinity-detail-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                modal.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Modal principal
+            const modal = document.createElement('div');
+            modal.id = 'divinity-detail-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.background = 'rgba(30,30,40,0.98)';
+            modal.style.border = '2px solid #8B4513';
+            modal.style.borderRadius = '12px';
+            modal.style.padding = '20px';
+            modal.style.zIndex = '10003';
+            modal.style.maxWidth = '800px';
+            modal.style.maxHeight = '85vh';
+            modal.style.overflowY = 'auto';
+            modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '20px';
+            header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
+            header.style.paddingBottom = '15px';
+
+            const title = document.createElement('h2');
+            title.innerHTML = `☀️ ${divinity.name} - ${divinity.title}`;
+            title.style.color = '#8B4513';
+            title.style.margin = '0';
+            title.style.fontSize = '24px';
+            title.style.fontWeight = 'bold';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '28px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '36px';
+            closeBtn.style.height = '36px';
+            closeBtn.onclick = () => {
+                modal.remove();
+                overlay.remove();
+            };
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            modal.appendChild(header);
+
+            // Descrição
+            const descriptionSection = document.createElement('div');
+            descriptionSection.style.marginBottom = '20px';
+            descriptionSection.style.padding = '15px';
+            descriptionSection.style.background = 'rgba(139, 69, 19, 0.1)';
+            descriptionSection.style.borderRadius = '8px';
+            descriptionSection.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+            const descriptionTitle = document.createElement('h3');
+            descriptionTitle.textContent = 'Descrição';
+            descriptionTitle.style.color = '#8B4513';
+            descriptionTitle.style.fontSize = '16px';
+            descriptionTitle.style.fontWeight = 'bold';
+            descriptionTitle.style.marginBottom = '10px';
+
+            const descriptionText = document.createElement('div');
+            descriptionText.textContent = divinity.description;
+            descriptionText.style.color = '#ecf0f1';
+            descriptionText.style.fontSize = '14px';
+            descriptionText.style.lineHeight = '1.6';
+
+            descriptionSection.appendChild(descriptionTitle);
+            descriptionSection.appendChild(descriptionText);
+            modal.appendChild(descriptionSection);
+
+            // Informações básicas
+            const infoSection = document.createElement('div');
+            infoSection.style.marginBottom = '20px';
+
+            const infoTitle = document.createElement('h3');
+            infoTitle.textContent = 'Informações da Divindade';
+            infoTitle.style.color = '#8B4513';
+            infoTitle.style.fontSize = '16px';
+            infoTitle.style.fontWeight = 'bold';
+            infoTitle.style.marginBottom = '15px';
+            infoTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
+            infoTitle.style.paddingBottom = '8px';
+            infoSection.appendChild(infoTitle);
+
+            const infoGrid = document.createElement('div');
+            infoGrid.style.display = 'grid';
+            infoGrid.style.gridTemplateColumns = '1fr 1fr';
+            infoGrid.style.gap = '12px';
+
+            const infoItems = [
+                { label: 'Crenças e Objetivos', value: divinity.beliefs },
+                { label: 'Símbolo Sagrado', value: divinity.symbol },
+                { label: 'Canalizar Energia', value: divinity.energy },
+                { label: 'Arma Preferida', value: divinity.weapon },
+                { label: 'Devotos', value: divinity.devotees }
+            ];
+
+            infoItems.forEach(item => {
+                const infoItem = document.createElement('div');
+                infoItem.style.background = 'rgba(139, 69, 19, 0.1)';
+                infoItem.style.padding = '12px';
+                infoItem.style.borderRadius = '8px';
+                infoItem.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+                const label = document.createElement('div');
+                label.textContent = item.label;
+                label.style.color = '#8B4513';
+                label.style.fontSize = '12px';
+                label.style.fontWeight = 'bold';
+                label.style.marginBottom = '5px';
+
+                const value = document.createElement('div');
+                value.textContent = item.value;
+                value.style.color = '#ecf0f1';
+                value.style.fontSize = '13px';
+                value.style.lineHeight = '1.4';
+
+                infoItem.appendChild(label);
+                infoItem.appendChild(value);
+                infoGrid.appendChild(infoItem);
+            });
+
+            infoSection.appendChild(infoGrid);
+            modal.appendChild(infoSection);
+
+            // Obrigações
+            const obligationsSection = document.createElement('div');
+            obligationsSection.style.marginBottom = '20px';
+            obligationsSection.style.padding = '15px';
+            obligationsSection.style.background = 'rgba(255, 167, 38, 0.1)';
+            obligationsSection.style.borderRadius = '8px';
+            obligationsSection.style.border = '1px solid rgba(255, 167, 38, 0.3)';
+
+            const obligationsTitle = document.createElement('h3');
+            obligationsTitle.textContent = 'Obrigações & Restrições';
+            obligationsTitle.style.color = '#ffa726';
+            obligationsTitle.style.fontSize = '16px';
+            obligationsTitle.style.fontWeight = 'bold';
+            obligationsTitle.style.marginBottom = '10px';
+
+            const obligationsText = document.createElement('div');
+            obligationsText.textContent = divinity.obligations;
+            obligationsText.style.color = '#ecf0f1';
+            obligationsText.style.fontSize = '14px';
+            obligationsText.style.lineHeight = '1.6';
+
+            obligationsSection.appendChild(obligationsTitle);
+            obligationsSection.appendChild(obligationsText);
+            modal.appendChild(obligationsSection);
+
+            // Poderes Concedidos
+            const powersSection = document.createElement('div');
+            powersSection.style.marginBottom = '20px';
+
+            const powersTitle = document.createElement('h3');
+            powersTitle.textContent = 'Poderes Concedidos';
+            powersTitle.style.color = '#8B4513';
+            powersTitle.style.fontSize = '16px';
+            powersTitle.style.fontWeight = 'bold';
+            powersTitle.style.marginBottom = '15px';
+            powersTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
+            powersTitle.style.paddingBottom = '8px';
+            powersSection.appendChild(powersTitle);
+
+            const powersList = document.createElement('div');
+            powersList.style.display = 'flex';
+            powersList.style.flexDirection = 'column';
+            powersList.style.gap = '10px';
+
+            let selectedPower = getSelectedDivinityPower();
+
+            divinity.powers.forEach(power => {
+                const isSelected = selectedPower === power.name;
+
+                const powerContainer = document.createElement('div');
+                powerContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
+                powerContainer.style.border = `1px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
+                powerContainer.style.borderRadius = '8px';
+                powerContainer.style.padding = '12px';
+                powerContainer.style.cursor = 'pointer';
+                powerContainer.style.transition = 'all 0.2s';
+
+                powerContainer.onmouseover = () => {
+                    if (!isSelected) {
+                        powerContainer.style.background = '#2a2b4a';
+                    }
+                };
+
+                powerContainer.onmouseout = () => {
+                    if (!isSelected) {
+                        powerContainer.style.background = '#23243a';
+                    }
+                };
+
+                powerContainer.onclick = () => {
+                    // Remove seleção anterior
+                    const previousSelected = powersList.querySelector('.selected-power');
+                    if (previousSelected) {
+                        previousSelected.classList.remove('selected-power');
+                        previousSelected.style.background = '#23243a';
+                        previousSelected.style.border = '1px solid #6ec6ff';
+                    }
+
+                    // Seleciona novo poder
+                    powerContainer.classList.add('selected-power');
+                    powerContainer.style.background = '#2d4a3e';
+                    powerContainer.style.border = '1px solid #4caf50';
+
+                    selectedPower = power.name;
+                };
+
+                // Cabeçalho do poder
+                const powerHeader = document.createElement('div');
+                powerHeader.style.display = 'flex';
+                powerHeader.style.justifyContent = 'space-between';
+                powerHeader.style.alignItems = 'center';
+                powerHeader.style.marginBottom = '6px';
+
+                const powerName = document.createElement('div');
+                powerName.textContent = power.name;
+                powerName.style.color = isSelected ? '#4caf50' : '#6ec6ff';
+                powerName.style.fontSize = '14px';
+                powerName.style.fontWeight = 'bold';
+
+                const selectionIndicator = document.createElement('div');
+                selectionIndicator.textContent = isSelected ? '●' : '○';
+                selectionIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
+                selectionIndicator.style.fontSize = '16px';
+                selectionIndicator.style.fontWeight = 'bold';
+
+                powerHeader.appendChild(powerName);
+                powerHeader.appendChild(selectionIndicator);
+                powerContainer.appendChild(powerHeader);
+
+                // Descrição do poder
+                const powerDesc = document.createElement('div');
+                powerDesc.textContent = power.description;
+                powerDesc.style.color = '#ecf0f1';
+                powerDesc.style.fontSize = '12px';
+                powerDesc.style.lineHeight = '1.4';
+                powerContainer.appendChild(powerDesc);
+
+                powersList.appendChild(powerContainer);
+            });
+
+            powersSection.appendChild(powersList);
+            modal.appendChild(powersSection);
+
+            // Botões de ação
+            const actionButtons = document.createElement('div');
+            actionButtons.style.display = 'flex';
+            actionButtons.style.gap = '12px';
+            actionButtons.style.justifyContent = 'center';
+            actionButtons.style.marginTop = '20px';
+
+            const isCurrentlySelected = getSelectedDivinity() === divinity.name;
+            const buttonText = isCurrentlySelected ? 'Remover Divindade' : 'Definir como Divindade Atual';
+            const buttonColor = isCurrentlySelected ? '#f44336' : '#4caf50';
+
+            const actionButton = document.createElement('button');
+            actionButton.textContent = buttonText;
+            actionButton.style.padding = '12px 24px';
+            actionButton.style.background = buttonColor;
+            actionButton.style.color = '#fff';
+            actionButton.style.border = 'none';
+            actionButton.style.borderRadius = '8px';
+            actionButton.style.fontSize = '14px';
+            actionButton.style.fontWeight = 'bold';
+            actionButton.style.cursor = 'pointer';
+            actionButton.style.transition = 'all 0.2s';
+
+            actionButton.onmouseover = () => {
+                actionButton.style.opacity = '0.8';
+            };
+
+            actionButton.onmouseout = () => {
+                actionButton.style.opacity = '1';
+            };
+
+            actionButton.onclick = () => {
+                if (isCurrentlySelected) {
+                    // Remove a divindade atual
+                    saveSelectedDivinity(null);
+                    saveSelectedDivinityPower(null);
+                } else {
+                    // Define nova divindade
+                    saveSelectedDivinity(divinity.name);
+                    if (selectedPower) {
+                        saveSelectedDivinityPower(selectedPower);
+                    }
+                }
+
+                // Fecha o modal
+                modal.remove();
+                overlay.remove();
+
+                // Atualiza a interface principal
+                createHunterClassModal();
+            };
+
+            actionButtons.appendChild(actionButton);
+            modal.appendChild(actionButtons);
+
+            document.body.appendChild(modal);
+        }
 
         // Conteúdo da Aba 2 (Habilidades)
         const abilities = [
@@ -3988,6 +4445,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             tab1Content.style.display = 'none';
             tab2Content.style.display = 'none';
             tab3Content.style.display = 'none';
+            tab4Content.style.display = 'none';
 
             // Remove estilo ativo de todos os botões
             tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
@@ -3996,6 +4454,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             tab2Btn.style.color = '#ecf0f1';
             tab3Btn.style.background = 'rgba(139, 69, 19, 0.3)';
             tab3Btn.style.color = '#ecf0f1';
+            tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            tab4Btn.style.color = '#ecf0f1';
 
             // Mostra o conteúdo da aba selecionada
             if (tabNumber === 1) {
@@ -4010,6 +4470,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 tab3Content.style.display = 'block';
                 tab3Btn.style.background = '#8B4513';
                 tab3Btn.style.color = '#fff';
+            } else if (tabNumber === 4) {
+                tab4Content.style.display = 'block';
+                tab4Btn.style.background = '#8B4513';
+                tab4Btn.style.color = '#fff';
             }
         }
 
@@ -4017,6 +4481,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tab1Btn.onclick = () => switchTab(1);
         tab2Btn.onclick = () => switchTab(2);
         tab3Btn.onclick = () => switchTab(3);
+        tab4Btn.onclick = () => switchTab(4);
 
         tab1Btn.onmouseover = () => {
             if (tab1Content.style.display === 'none') {
@@ -4051,15 +4516,28 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         };
 
+        tab4Btn.onmouseover = () => {
+            if (tab4Content.style.display === 'none') {
+                tab4Btn.style.background = 'rgba(139, 69, 19, 0.5)';
+            }
+        };
+        tab4Btn.onmouseout = () => {
+            if (tab4Content.style.display === 'none') {
+                tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            }
+        };
+
         // Adiciona os botões das abas
         tabButtons.appendChild(tab1Btn);
         tabButtons.appendChild(tab2Btn);
         tabButtons.appendChild(tab3Btn);
+        tabButtons.appendChild(tab4Btn);
 
         // Adiciona os conteúdos das abas
         tabContents.appendChild(tab1Content);
         tabContents.appendChild(tab2Content);
         tabContents.appendChild(tab3Content);
+        tabContents.appendChild(tab4Content);
 
         tabContainer.appendChild(tabButtons);
         tabContainer.appendChild(tabContents);
@@ -4242,6 +4720,31 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         localStorage.setItem(ANIMAL_COMPANION_TYPE_KEY, type);
     }
 
+    // === NOVO: Funções para gerenciar divindades e poderes concedidos ===
+    const SELECTED_DIVINITY_KEY = 'roll20-hotbar-selected-divinity';
+    const SELECTED_DIVINITY_POWER_KEY = 'roll20-hotbar-selected-divinity-power';
+
+    function getSelectedDivinity() {
+        return localStorage.getItem(SELECTED_DIVINITY_KEY) || null;
+    }
+
+    function saveSelectedDivinity(divinityName) {
+        localStorage.setItem(SELECTED_DIVINITY_KEY, divinityName);
+    }
+
+    function getSelectedDivinityPower() {
+        return localStorage.getItem(SELECTED_DIVINITY_POWER_KEY) || null;
+    }
+
+    function saveSelectedDivinityPower(powerName) {
+        localStorage.setItem(SELECTED_DIVINITY_POWER_KEY, powerName);
+    }
+
+    function hasDivinityPower(powerName) {
+        const selectedPower = getSelectedDivinityPower();
+        return selectedPower === powerName;
+    }
+
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
@@ -4255,14 +4758,25 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             origin: 'Condição de Combate'
         });
 
-        // Espada Solar (agora togglable)
-        if (isEffectActive('espada_solar')) {
+        // Espada Solar (Poder de Divindade)
+        if (hasDivinityPower('Espada Solar Azgher')) {
             effects.push({
                 label: 'Espada Solar (+1d6 dano)',
                 value: 'espada_solar',
                 dice: '1d6',
                 desc: '*+ Espada Solar*',
-                origin: 'Divindade'
+                origin: 'Divindade: Azgher'
+            });
+        }
+
+        // Inimigo de Tenebra (Poder de Divindade)
+        if (hasDivinityPower('Inimigo de Tenebra Azgher')) {
+            effects.push({
+                label: 'Inimigo de Tenebra (+1d6 vs mortos-vivos)',
+                value: 'inimigo_tenebra',
+                dice: '1d6',
+                desc: '*+ Inimigo de Tenebra*',
+                origin: 'Divindade: Azgher'
             });
         }
         // Escaramuça
@@ -5418,7 +5932,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     // Função para atualizar o badge de efeitos
     function updateEffectsBadge() {
         const effectsButton = document.querySelector('#roll20-hotbar button[data-label="Efeitos"]');
-        if (!effectsButton) return;
+        if (!effectsButton) {
+            console.log('Botão de efeitos não encontrado');
+            return;
+        }
 
         // Remove badge existente se houver
         const existingBadge = effectsButton.querySelector('.effects-badge');
@@ -5428,6 +5945,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Verifica efeitos ativos
         const activeEffects = getActiveEffects();
+        console.log('Efeitos ativos:', activeEffects);
 
         // Cria novo badge se há efeitos ativos
         if (activeEffects.length > 0) {
@@ -5447,8 +5965,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             badge.style.alignItems = 'center';
             badge.style.justifyContent = 'center';
             badge.style.border = '2px solid #23243a';
+            badge.style.zIndex = '1000';
             badge.textContent = activeEffects.length;
             effectsButton.appendChild(badge);
+            console.log('Badge criado com valor:', activeEffects.length);
+        } else {
+            console.log('Nenhum efeito ativo, badge não criado');
         }
     }
 
@@ -5473,6 +5995,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         overlay.onclick = () => {
             overlay.remove();
             popup.remove();
+            // Atualiza o badge após fechar o popup
+            setTimeout(() => {
+                updateEffectsBadge();
+            }, 100);
         };
         document.body.appendChild(overlay);
 
@@ -5525,6 +6051,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.remove();
             const overlay = document.getElementById('effects-overlay');
             if (overlay) overlay.remove();
+
+            // Atualiza o badge após fechar o popup
+            setTimeout(() => {
+                updateEffectsBadge();
+            }, 100);
         };
         header.appendChild(title);
         header.appendChild(closeBtn);
@@ -5532,12 +6063,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Lista de efeitos disponíveis
         const effects = [
-            {
-                name: 'Espada Solar',
-                description: 'Efeito de Dano: Todos os ataques melees recebem +1d6 de dano extra.',
-                type: 'Divindade',
-                effectKey: 'espada_solar'
-            },
             {
                 name: 'Cachecol Sombrio',
                 description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
