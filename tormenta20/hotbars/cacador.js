@@ -5406,7 +5406,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         });
 
         // Espada Solar (Poder de Divindade)
-        if (hasDivinityPower('Espada Solar Azgher')) {
+        if (hasDivinityPower('Espada Solar')) {
             effects.push({
                 label: 'Espada Solar (+1d6 dano)',
                 value: 'espada_solar',
@@ -5417,7 +5417,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
 
         // Inimigo de Tenebra (Poder de Divindade)
-        if (hasDivinityPower('Inimigo de Tenebra Azgher')) {
+        if (hasDivinityPower('Inimigo de Tenebra')) {
             effects.push({
                 label: 'Inimigo de Tenebra (+1d6 vs mortos-vivos)',
                 value: 'inimigo_tenebra',
