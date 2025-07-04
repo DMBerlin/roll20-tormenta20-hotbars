@@ -4245,6 +4245,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
+
+        // Flanqueado (Bônus Permanente de Combate)
+        effects.push({
+            label: 'Flanqueado (+2 acerto)',
+            value: 'flanqueado',
+            attackMod: 2,
+            desc: '*+ Flanqueado*',
+            origin: 'Condição de Combate'
+        });
+
         // Espada Solar (agora togglable)
         if (isEffectActive('espada_solar')) {
             effects.push({
@@ -4336,17 +4346,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 dice: '1d6',
                 desc: '*+ Ataque Sombrio*',
                 origin: 'Item: Cachecol Sombrio'
-            });
-        }
-
-        // Flanqueado (Efeito Especial)
-        if (isEffectActive('flanqueado')) {
-            effects.push({
-                label: 'Flanqueado (+2 acerto)',
-                value: 'flanqueado',
-                attackMod: 2,
-                desc: '*+ Flanqueado*',
-                origin: 'Condição de Combate'
             });
         }
 
@@ -5544,12 +5543,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
                 type: 'Item',
                 effectKey: 'cachecol_sombrio'
-            },
-            {
-                name: 'Flanqueado',
-                description: 'Condição de Combate: Você recebe +2 em testes de ataque contra o alvo flanqueado.',
-                type: 'Especial',
-                effectKey: 'flanqueado'
             }
         ];
 
