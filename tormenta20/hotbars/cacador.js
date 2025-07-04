@@ -21,6 +21,10 @@
     const HUNTER_ABILITIES_KEY = 'roll20-hotbar-hunter-abilities';
     // Sistema de poderes de destino aprendidos
     const DESTINY_POWERS_KEY = 'roll20-hotbar-destiny-powers';
+    // Sistema de raça selecionada
+    const SELECTED_RACE_KEY = 'roll20-hotbar-selected-race';
+    // Sistema de tipo de raça selecionado (para raças com subtipos)
+    const SELECTED_RACE_TYPE_KEY = 'roll20-hotbar-selected-race-type';
 
     // Função global para obter o nome do personagem
     function getCharacterName() {
@@ -894,11 +898,32 @@
 +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
 
 JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
+            }),
+            spellTemplates.createSpell({
+                nome: 'Luz Sagrada',
+                comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Luz Sagrada}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.
+
++1 PM: aumenta a área iluminada em +3m de raio.
+
++2 PM: muda a duração para um dia.
+
++2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
+
++0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
+
++2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Você pode enviar um à frente, outra para trás, outra para cima e manter um perto de você, por exemplo. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
+
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
+
++5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
+
+JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             })
         ];
 
         // Lista visual
         const spellList = document.createElement('div');
+        spellList.id = 'spells-list';
         spellList.style.display = 'flex';
         spellList.style.flexDirection = 'column';
         spellList.style.gap = '6px';
@@ -908,7 +933,56 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         function updateSpellList() {
             const filter = filterInput.value.trim().toLowerCase();
             spellList.innerHTML = '';
-            spells.filter(s => s.nome.toLowerCase().includes(filter)).forEach(spell => {
+
+            // Filtra spells baseado na raça selecionada
+            const availableSpells = spells.filter(spell => {
+                // Mostra Sombras Profanas apenas se for Suraggel Sulfure
+                if (spell.nome === 'Sombras Profanas') {
+                    return hasRacePower('Sombras Profanas');
+                }
+
+                // Mostra Luz Sagrada apenas se for Suraggel Aggelus
+                if (spell.nome === 'Luz Sagrada') {
+                    return hasRacePower('Luz Sagrada');
+                }
+
+                return false;
+            });
+
+            const filteredSpells = availableSpells.filter(s => s.nome.toLowerCase().includes(filter));
+
+            if (filteredSpells.length === 0) {
+                const noSpellsMessage = document.createElement('div');
+                noSpellsMessage.style.textAlign = 'center';
+                noSpellsMessage.style.padding = '20px';
+                noSpellsMessage.style.color = '#6ec6ff';
+                noSpellsMessage.style.fontSize = '14px';
+                noSpellsMessage.style.fontStyle = 'italic';
+                noSpellsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
+                noSpellsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+                noSpellsMessage.style.borderRadius = '8px';
+                noSpellsMessage.style.marginTop = '10px';
+
+                if (filter) {
+                    noSpellsMessage.textContent = `Nenhuma magia encontrada para "${filter}"`;
+                } else {
+                    const selectedRace = getSelectedRace();
+                    const selectedRaceType = getSelectedRaceType();
+
+                    if (!selectedRace) {
+                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais</small>';
+                    } else if (!selectedRaceType) {
+                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais</small>';
+                    } else {
+                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Esta raça não possui magias especiais</small>';
+                    }
+                }
+
+                spellList.appendChild(noSpellsMessage);
+                return;
+            }
+
+            filteredSpells.forEach(spell => {
                 const btn = document.createElement('button');
                 btn.textContent = spell.nome;
                 btn.style.width = '100%';
@@ -997,7 +1071,11 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
                         // Tag de escola
                         const schoolTag = document.createElement('div');
-                        schoolTag.textContent = 'Necromancia';
+                        if (spell.nome === 'Luz Sagrada') {
+                            schoolTag.textContent = 'Evocação';
+                        } else if (spell.nome === 'Sombras Profanas') {
+                            schoolTag.textContent = 'Necromancia';
+                        }
                         schoolTag.style.background = '#e74c3c';
                         schoolTag.style.color = '#fff';
                         schoolTag.style.fontSize = '11px';
@@ -1011,7 +1089,11 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
                         // Descrição resumida
                         const tooltipDesc = document.createElement('div');
-                        tooltipDesc.textContent = 'Ação padrão: Objeto emana sombras de 6m de raio. Criaturas na área recebem camuflagem leve. Sombras não podem ser iluminadas por luz natural.';
+                        if (spell.nome === 'Luz Sagrada') {
+                            tooltipDesc.textContent = 'Ação padrão: Objeto emite luz de 6m de raio. A luz não produz calor e pode ser interrompida guardando o objeto. Luz anula Escuridão.';
+                        } else if (spell.nome === 'Sombras Profanas') {
+                            tooltipDesc.textContent = 'Ação padrão: Objeto emana sombras de 6m de raio. Criaturas na área recebem camuflagem leve. Sombras não podem ser iluminadas por luz natural.';
+                        }
                         tooltipDesc.style.color = '#ecf0f1';
                         tooltipDesc.style.fontSize = '13px';
                         tooltipDesc.style.lineHeight = '1.4';
@@ -1115,7 +1197,11 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Tag de origem
         const originTag = document.createElement('span');
-        originTag.textContent = 'Sulfure';
+        if (spellName === 'Luz Sagrada') {
+            originTag.textContent = 'Aggelus';
+        } else if (spellName === 'Sombras Profanas') {
+            originTag.textContent = 'Sulfure';
+        }
         originTag.style.background = '#6ec6ff';
         originTag.style.color = '#23243a';
         originTag.style.fontSize = '12px';
@@ -1218,17 +1304,36 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         description.style.color = '#ecf0f1';
         description.style.fontSize = '14px';
         description.style.lineHeight = '1.4';
-        description.textContent = 'O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.';
+
+        if (spellName === 'Luz Sagrada') {
+            description.textContent = 'O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.';
+        } else if (spellName === 'Sombras Profanas') {
+            description.textContent = 'O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.';
+        }
+
         descBox.appendChild(description);
 
         // Aprimoramentos
-        const upgrades = [
-            { label: '+1 PM: aumenta a área da escuridão em +1,5m de raio.', cost: 1 },
-            { label: '+2 PM: camuflagem total por escuridão total.', cost: 2 },
-            { label: '+2 PM: alvo 1 criatura, resistência Fortitude parcial, cego pela cena (requer 2º círculo).', cost: 2 },
-            { label: '+3 PM: duração de um dia.', cost: 3 },
-            { label: '+5 PM: alcance pessoal, alvo você, +10 Furtividade/camuflagem (requer 2º círculo).', cost: 5 }
-        ];
+        let upgrades = [];
+        if (spellName === 'Luz Sagrada') {
+            upgrades = [
+                { label: '+1 PM: aumenta a área iluminada em +3m de raio.', cost: 1 },
+                { label: '+2 PM: muda a duração para um dia.', cost: 2 },
+                { label: '+2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.', cost: 2 },
+                { label: '+0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.', cost: 0 },
+                { label: '+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.', cost: 2 },
+                { label: '+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.', cost: 2 },
+                { label: '+5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.', cost: 5 }
+            ];
+        } else if (spellName === 'Sombras Profanas') {
+            upgrades = [
+                { label: '+1 PM: aumenta a área da escuridão em +1,5m de raio.', cost: 1 },
+                { label: '+2 PM: camuflagem total por escuridão total.', cost: 2 },
+                { label: '+2 PM: alvo 1 criatura, resistência Fortitude parcial, cego pela cena (requer 2º círculo).', cost: 2 },
+                { label: '+3 PM: duração de um dia.', cost: 3 },
+                { label: '+5 PM: alcance pessoal, alvo você, +10 Furtividade/camuflagem (requer 2º círculo).', cost: 5 }
+            ];
+        }
         const upgradesHeader = document.createElement('div');
         upgradesHeader.textContent = 'Aprimoramentos:';
         upgradesHeader.style.color = '#6ec6ff';
@@ -1302,7 +1407,26 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         };
         shareBtn.onclick = () => {
             const charName = getCharacterName();
-            const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${description.textContent}
+            let spellDescription = '';
+
+            if (spellName === 'Luz Sagrada') {
+                spellDescription = `${description.textContent}
+
++1 PM: aumenta a área iluminada em +3m de raio.
+
++2 PM: muda a duração para um dia.
+
++2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
+
++0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
+
++2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
+
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
+
++5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.`;
+            } else if (spellName === 'Sombras Profanas') {
+                spellDescription = `${description.textContent}
 
 +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
@@ -1312,7 +1436,10 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
 +3 PM: muda a duração para um dia.
 
-+5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
++5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.`;
+            }
+
+            const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellName}}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${spellDescription}
 
 JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             sendToChat(msg);
@@ -1358,7 +1485,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     upgradesDesc.push(upgrades[idx].label);
                 }
             });
-            const msg = `/em conjura Sombras Profanas (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('%NEWLINE%') : ''}`;
+            const msg = `/em conjura ${spellName} (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('%NEWLINE%') : ''}`;
             sendToChat(msg);
         };
         descBox.appendChild(useBtn);
@@ -2924,6 +3051,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // NÃO adicionar o popup aqui!
         // Adicione o popup ao DOM só no final, após todo o conteúdo ser adicionado
 
+        // Listener para atualizar spells quando raça for alterada
+        document.addEventListener('race-selection-changed', () => {
+            // Atualiza a lista de spells se o popup estiver aberto
+            const spellsPopup = document.getElementById('spells-popup');
+            if (spellsPopup) {
+                // Recria o popup de spells para atualizar a lista
+                spellsPopup.remove();
+                const overlay = document.getElementById('spells-overlay');
+                if (overlay) overlay.remove();
+                createSpellsPopup();
+            }
+        });
+
         // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
@@ -3491,6 +3631,432 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         });
 
         tab4Content.appendChild(divinitiesList);
+
+        // Conteúdo da Aba 5 (Raça)
+        const races = [
+            {
+                name: 'Suraggel',
+                title: 'Descendentes de Extraplanares Divinos',
+                shortDescription: 'Seres com traços angelicais ou demoníacos, ligados às forças opostas da luz e trevas.',
+                description: 'Descendentes de extraplanares divinos, esta raça é formada por seres com traços angelicais ou demoníacos — ou ambos. Por serem ligados às forças opostas da luz e trevas, suraggel têm traços diferentes quando orientados para seu lado celestial, sendo então conhecidos como aggelus; ou para o lado abissal, assim sendo chamados sulfure. Sua natureza em geral combina com a ascendência, lembrando habitantes dos Mundos dos Deuses, mas eles também podem ser surpreendentes e contraditórios: não se espante muito ao conhecer um aggelus ladino ou um sulfure paladino.',
+                attributes: 'Sabedoria +2, Carisma +1 (Aggelus); Destreza +2, Inteligência +1 (Sulfure)',
+                heritage: 'Herança Divina. Você é uma criatura do tipo espírito e recebe visão no escuro.',
+                types: [
+                    {
+                        name: 'Aggelus',
+                        title: 'Lado Celestial',
+                        description: 'Você recebe +2 em Diplomacia e Intuição. Além disso, pode lançar Luz (como uma magia divina; atributo-chave Carisma). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.',
+                        power: 'Luz Sagrada'
+                    },
+                    {
+                        name: 'Sulfure',
+                        title: 'Lado Abissal',
+                        description: 'Você recebe +2 em Enganação e Furtividade. Além disso, pode lançar Escuridão (como uma magia divina; atributo-chave Inteligência). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.',
+                        power: 'Sombras Profanas'
+                    }
+                ]
+            }
+        ];
+
+        // Lista resumida de raças
+        const racesList = document.createElement('div');
+        racesList.style.display = 'flex';
+        racesList.style.flexDirection = 'column';
+        racesList.style.gap = '15px';
+
+        races.forEach(race => {
+            const isSelected = getSelectedRace() === race.name;
+            const selectedType = getSelectedRaceType();
+
+            const raceContainer = document.createElement('div');
+            raceContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
+            raceContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
+            raceContainer.style.borderRadius = '12px';
+            raceContainer.style.padding = '15px';
+            raceContainer.style.cursor = 'pointer';
+            raceContainer.style.transition = 'all 0.2s';
+
+            raceContainer.onclick = () => {
+                if (isSelected) {
+                    // Se já está selecionada, abre o modal de detalhes
+                    createRaceDetailModal(race);
+                } else {
+                    // Se não está selecionada, seleciona e abre o modal
+                    saveSelectedRace(race.name);
+                    createRaceDetailModal(race);
+                    // Atualiza a lista para mostrar a seleção
+                    setTimeout(() => {
+                        const event = new Event('race-selection-changed');
+                        document.dispatchEvent(event);
+                    }, 100);
+                }
+            };
+
+            raceContainer.onmouseover = () => {
+                if (!isSelected) {
+                    raceContainer.style.background = 'rgba(139, 69, 19, 0.2)';
+                    raceContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
+                }
+            };
+
+            raceContainer.onmouseout = () => {
+                if (!isSelected) {
+                    raceContainer.style.background = 'rgba(139, 69, 19, 0.1)';
+                    raceContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                }
+            };
+
+            // Cabeçalho da raça
+            const raceHeader = document.createElement('div');
+            raceHeader.style.display = 'flex';
+            raceHeader.style.justifyContent = 'space-between';
+            raceHeader.style.alignItems = 'flex-start';
+            raceHeader.style.marginBottom = '8px';
+
+            const raceTitle = document.createElement('div');
+            raceTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${race.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${race.title}</em>`;
+
+            const statusIndicator = document.createElement('div');
+            if (isSelected) {
+                if (selectedType) {
+                    statusIndicator.innerHTML = `✓ Selecionada<br><small style="color: #4caf50;">${selectedType}</small>`;
+                } else {
+                    statusIndicator.innerHTML = `✓ Selecionada<br><small style="color: #ffa726;">Tipo não definido</small>`;
+                }
+            } else {
+                statusIndicator.textContent = 'Clique para ver detalhes';
+            }
+            statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
+            statusIndicator.style.fontSize = '12px';
+            statusIndicator.style.fontWeight = 'bold';
+            statusIndicator.style.fontStyle = 'italic';
+            statusIndicator.style.textAlign = 'right';
+
+            raceHeader.appendChild(raceTitle);
+            raceHeader.appendChild(statusIndicator);
+            raceContainer.appendChild(raceHeader);
+
+            // Descrição resumida
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.textContent = race.shortDescription;
+            descriptionDiv.style.color = '#ecf0f1';
+            descriptionDiv.style.fontSize = '12px';
+            descriptionDiv.style.lineHeight = '1.4';
+            raceContainer.appendChild(descriptionDiv);
+
+            racesList.appendChild(raceContainer);
+        });
+
+        tab5Content.appendChild(racesList);
+
+        // Função para criar modal detalhado da raça
+        function createRaceDetailModal(race) {
+            // Remove modal existente se houver
+            const existingModal = document.getElementById('race-detail-modal');
+            if (existingModal) existingModal.remove();
+            const existingOverlay = document.getElementById('race-detail-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'race-detail-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                modal.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Modal principal
+            const modal = document.createElement('div');
+            modal.id = 'race-detail-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.background = 'rgba(30,30,40,0.98)';
+            modal.style.border = '2px solid #8B4513';
+            modal.style.borderRadius = '12px';
+            modal.style.padding = '20px';
+            modal.style.zIndex = '10003';
+            modal.style.maxWidth = '800px';
+            modal.style.maxHeight = '85vh';
+            modal.style.overflowY = 'auto';
+            modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '20px';
+            header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
+            header.style.paddingBottom = '15px';
+
+            const title = document.createElement('h2');
+            title.innerHTML = `👥 ${race.name} - ${race.title}`;
+            title.style.color = '#8B4513';
+            title.style.margin = '0';
+            title.style.fontSize = '24px';
+            title.style.fontWeight = 'bold';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '28px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '36px';
+            closeBtn.style.height = '36px';
+            closeBtn.onclick = () => {
+                modal.remove();
+                overlay.remove();
+            };
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            modal.appendChild(header);
+
+            // Descrição
+            const descriptionSection = document.createElement('div');
+            descriptionSection.style.marginBottom = '20px';
+            descriptionSection.style.padding = '15px';
+            descriptionSection.style.background = 'rgba(139, 69, 19, 0.1)';
+            descriptionSection.style.borderRadius = '8px';
+            descriptionSection.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+            const descriptionTitle = document.createElement('h3');
+            descriptionTitle.textContent = 'Descrição';
+            descriptionTitle.style.color = '#8B4513';
+            descriptionTitle.style.fontSize = '16px';
+            descriptionTitle.style.fontWeight = 'bold';
+            descriptionTitle.style.marginBottom = '10px';
+
+            const descriptionText = document.createElement('div');
+            descriptionText.textContent = race.description;
+            descriptionText.style.color = '#ecf0f1';
+            descriptionText.style.fontSize = '14px';
+            descriptionText.style.lineHeight = '1.6';
+
+            descriptionSection.appendChild(descriptionTitle);
+            descriptionSection.appendChild(descriptionText);
+            modal.appendChild(descriptionSection);
+
+            // Informações básicas
+            const infoSection = document.createElement('div');
+            infoSection.style.marginBottom = '20px';
+
+            const infoTitle = document.createElement('h3');
+            infoTitle.textContent = 'Características da Raça';
+            infoTitle.style.color = '#8B4513';
+            infoTitle.style.fontSize = '16px';
+            infoTitle.style.fontWeight = 'bold';
+            infoTitle.style.marginBottom = '15px';
+            infoTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
+            infoTitle.style.paddingBottom = '8px';
+            infoSection.appendChild(infoTitle);
+
+            const infoGrid = document.createElement('div');
+            infoGrid.style.display = 'grid';
+            infoGrid.style.gridTemplateColumns = '1fr 1fr';
+            infoGrid.style.gap = '12px';
+
+            const infoItems = [
+                { label: 'Atributos', value: race.attributes },
+                { label: 'Herança', value: race.heritage }
+            ];
+
+            infoItems.forEach(item => {
+                const infoItem = document.createElement('div');
+                infoItem.style.background = 'rgba(139, 69, 19, 0.1)';
+                infoItem.style.padding = '12px';
+                infoItem.style.borderRadius = '8px';
+                infoItem.style.border = '1px solid rgba(139, 69, 19, 0.2)';
+
+                const label = document.createElement('div');
+                label.textContent = item.label;
+                label.style.color = '#8B4513';
+                label.style.fontSize = '12px';
+                label.style.fontWeight = 'bold';
+                label.style.marginBottom = '5px';
+
+                const value = document.createElement('div');
+                value.textContent = item.value;
+                value.style.color = '#ecf0f1';
+                value.style.fontSize = '13px';
+                value.style.lineHeight = '1.4';
+
+                infoItem.appendChild(label);
+                infoItem.appendChild(value);
+                infoGrid.appendChild(infoItem);
+            });
+
+            infoSection.appendChild(infoGrid);
+            modal.appendChild(infoSection);
+
+            // Tipos de raça
+            const typesSection = document.createElement('div');
+            typesSection.style.marginBottom = '20px';
+
+            const typesTitle = document.createElement('h3');
+            typesTitle.textContent = 'Tipos de Raça';
+            typesTitle.style.color = '#8B4513';
+            typesTitle.style.fontSize = '16px';
+            typesTitle.style.fontWeight = 'bold';
+            typesTitle.style.marginBottom = '15px';
+            typesTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
+            typesTitle.style.paddingBottom = '8px';
+            typesSection.appendChild(typesTitle);
+
+            const typesContainer = document.createElement('div');
+            typesContainer.style.display = 'flex';
+            typesContainer.style.flexDirection = 'column';
+            typesContainer.style.gap = '15px';
+
+            race.types.forEach(type => {
+                const isSelected = getSelectedRace() === race.name && getSelectedRaceType() === type.name;
+
+                const typeContainer = document.createElement('div');
+                typeContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
+                typeContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
+                typeContainer.style.borderRadius = '10px';
+                typeContainer.style.padding = '15px';
+                typeContainer.style.cursor = 'pointer';
+                typeContainer.style.transition = 'all 0.2s';
+
+                typeContainer.onclick = () => {
+                    saveSelectedRace(race.name);
+                    saveSelectedRaceType(type.name);
+
+                    // Atualiza a interface
+                    modal.remove();
+                    overlay.remove();
+
+                    // Recria o modal para mostrar a seleção
+                    setTimeout(() => {
+                        createRaceDetailModal(race);
+                    }, 100);
+                };
+
+                typeContainer.onmouseover = () => {
+                    if (!isSelected) {
+                        typeContainer.style.background = 'rgba(139, 69, 19, 0.2)';
+                        typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
+                    }
+                };
+
+                typeContainer.onmouseout = () => {
+                    if (!isSelected) {
+                        typeContainer.style.background = 'rgba(139, 69, 19, 0.1)';
+                        typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                    }
+                };
+
+                // Cabeçalho do tipo
+                const typeHeader = document.createElement('div');
+                typeHeader.style.display = 'flex';
+                typeHeader.style.justifyContent = 'space-between';
+                typeHeader.style.alignItems = 'center';
+                typeHeader.style.marginBottom = '10px';
+
+                const typeTitle = document.createElement('div');
+                typeTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${type.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${type.title}</em>`;
+
+                const typeStatus = document.createElement('div');
+                if (isSelected) {
+                    typeStatus.innerHTML = '✓ Selecionado';
+                    typeStatus.style.color = '#4caf50';
+                } else {
+                    typeStatus.innerHTML = 'Clique para selecionar';
+                    typeStatus.style.color = '#6ec6ff';
+                }
+                typeStatus.style.fontSize = '12px';
+                typeStatus.style.fontWeight = 'bold';
+                typeStatus.style.fontStyle = 'italic';
+
+                typeHeader.appendChild(typeTitle);
+                typeHeader.appendChild(typeStatus);
+                typeContainer.appendChild(typeHeader);
+
+                // Descrição do tipo
+                const typeDescription = document.createElement('div');
+                typeDescription.textContent = type.description;
+                typeDescription.style.color = '#ecf0f1';
+                typeDescription.style.fontSize = '13px';
+                typeDescription.style.lineHeight = '1.4';
+                typeContainer.appendChild(typeDescription);
+
+                typesContainer.appendChild(typeContainer);
+            });
+
+            typesSection.appendChild(typesContainer);
+            modal.appendChild(typesSection);
+
+            // Botões de ação
+            const actionButtons = document.createElement('div');
+            actionButtons.style.display = 'flex';
+            actionButtons.style.gap = '12px';
+            actionButtons.style.justifyContent = 'center';
+            actionButtons.style.marginTop = '20px';
+
+            const isCurrentlySelected = getSelectedRace() === race.name;
+            const buttonText = isCurrentlySelected ? 'Remover Raça' : 'Definir como Raça Atual';
+            const buttonColor = isCurrentlySelected ? '#f44336' : '#4caf50';
+
+            const actionButton = document.createElement('button');
+            actionButton.textContent = buttonText;
+            actionButton.style.padding = '12px 24px';
+            actionButton.style.background = buttonColor;
+            actionButton.style.color = '#fff';
+            actionButton.style.border = 'none';
+            actionButton.style.borderRadius = '8px';
+            actionButton.style.fontSize = '14px';
+            actionButton.style.fontWeight = 'bold';
+            actionButton.style.cursor = 'pointer';
+            actionButton.style.transition = 'all 0.2s';
+
+            actionButton.onmouseover = () => {
+                actionButton.style.opacity = '0.8';
+            };
+
+            actionButton.onmouseout = () => {
+                actionButton.style.opacity = '1';
+            };
+
+            actionButton.onclick = () => {
+                if (isCurrentlySelected) {
+                    // Remove a raça atual
+                    saveSelectedRace(null);
+                    saveSelectedRaceType(null);
+                } else {
+                    // Define nova raça
+                    saveSelectedRace(race.name);
+                    // O tipo será definido quando o usuário clicar em um tipo específico
+                }
+
+                // Fecha o modal
+                modal.remove();
+                overlay.remove();
+
+                // Atualiza a interface principal
+                createHunterClassModal();
+            };
+
+            actionButtons.appendChild(actionButton);
+            modal.appendChild(actionButtons);
+
+            document.body.appendChild(modal);
+        }
 
         // Função para criar modal detalhado da divindade
         function createDivinityDetailModal(divinity) {
@@ -4456,6 +5022,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             tab2Content.style.display = 'none';
             tab3Content.style.display = 'none';
             tab4Content.style.display = 'none';
+            tab5Content.style.display = 'none';
 
             // Remove estilo ativo de todos os botões
             tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
@@ -4466,6 +5033,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             tab3Btn.style.color = '#ecf0f1';
             tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
             tab4Btn.style.color = '#ecf0f1';
+            tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            tab5Btn.style.color = '#ecf0f1';
 
             // Mostra o conteúdo da aba selecionada
             if (tabNumber === 1) {
@@ -4484,6 +5053,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 tab4Content.style.display = 'block';
                 tab4Btn.style.background = '#8B4513';
                 tab4Btn.style.color = '#fff';
+            } else if (tabNumber === 5) {
+                tab5Content.style.display = 'block';
+                tab5Btn.style.background = '#8B4513';
+                tab5Btn.style.color = '#fff';
             }
         }
 
@@ -4492,6 +5065,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tab2Btn.onclick = () => switchTab(2);
         tab3Btn.onclick = () => switchTab(3);
         tab4Btn.onclick = () => switchTab(4);
+        tab5Btn.onclick = () => switchTab(5);
 
         tab1Btn.onmouseover = () => {
             if (tab1Content.style.display === 'none') {
@@ -4537,17 +5111,30 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         };
 
+        tab5Btn.onmouseover = () => {
+            if (tab5Content.style.display === 'none') {
+                tab5Btn.style.background = 'rgba(139, 69, 19, 0.5)';
+            }
+        };
+        tab5Btn.onmouseout = () => {
+            if (tab5Content.style.display === 'none') {
+                tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+            }
+        };
+
         // Adiciona os botões das abas
         tabButtons.appendChild(tab1Btn);
         tabButtons.appendChild(tab2Btn);
         tabButtons.appendChild(tab3Btn);
         tabButtons.appendChild(tab4Btn);
+        tabButtons.appendChild(tab5Btn);
 
         // Adiciona os conteúdos das abas
         tabContents.appendChild(tab1Content);
         tabContents.appendChild(tab2Content);
         tabContents.appendChild(tab3Content);
         tabContents.appendChild(tab4Content);
+        tabContents.appendChild(tab5Content);
 
         tabContainer.appendChild(tabButtons);
         tabContainer.appendChild(tabContents);
@@ -4753,6 +5340,56 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function hasDivinityPower(powerName) {
         const selectedPower = getSelectedDivinityPower();
         return selectedPower === powerName;
+    }
+
+    // Funções para gerenciar raça selecionada
+    function getSelectedRace() {
+        try {
+            return localStorage.getItem(SELECTED_RACE_KEY) || null;
+        } catch (error) {
+            console.log('Erro ao carregar raça selecionada:', error);
+            return null;
+        }
+    }
+
+    function saveSelectedRace(raceName) {
+        try {
+            localStorage.setItem(SELECTED_RACE_KEY, raceName);
+        } catch (error) {
+            console.log('Erro ao salvar raça selecionada:', error);
+        }
+    }
+
+    function getSelectedRaceType() {
+        try {
+            return localStorage.getItem(SELECTED_RACE_TYPE_KEY) || null;
+        } catch (error) {
+            console.log('Erro ao carregar tipo de raça selecionado:', error);
+            return null;
+        }
+    }
+
+    function saveSelectedRaceType(raceType) {
+        try {
+            localStorage.setItem(SELECTED_RACE_TYPE_KEY, raceType);
+        } catch (error) {
+            console.log('Erro ao salvar tipo de raça selecionado:', error);
+        }
+    }
+
+    function hasRacePower(powerName) {
+        const selectedRace = getSelectedRace();
+        const selectedRaceType = getSelectedRaceType();
+
+        if (selectedRace === 'Suraggel') {
+            if (selectedRaceType === 'Aggelus' && powerName === 'Luz Sagrada') {
+                return true;
+            }
+            if (selectedRaceType === 'Sulfure' && powerName === 'Sombras Profanas') {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Função para obter efeitos de ataque dinâmicos
