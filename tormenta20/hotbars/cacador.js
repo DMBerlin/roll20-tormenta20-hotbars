@@ -3075,6 +3075,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tab4Content.id = 'tab4-content';
         tab4Content.style.display = 'none';
 
+        // Aba 5: Raça
+        const tab5Btn = document.createElement('button');
+        tab5Btn.textContent = 'Raça';
+        tab5Btn.style.padding = '10px 15px';
+        tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
+        tab5Btn.style.color = '#ecf0f1';
+        tab5Btn.style.border = 'none';
+        tab5Btn.style.borderRadius = '8px 8px 0 0';
+        tab5Btn.style.fontSize = '14px';
+        tab5Btn.style.fontWeight = 'bold';
+        tab5Btn.style.cursor = 'pointer';
+        tab5Btn.style.transition = 'all 0.2s';
+
+        const tab5Content = document.createElement('div');
+        tab5Content.id = 'tab5-content';
+        tab5Content.style.display = 'none';
+
         // === NOVO: Barra de pesquisa e filtros para Poderes de Combate ===
         const powerFilterContainer = document.createElement('div');
         powerFilterContainer.style.marginBottom = '15px';
@@ -4752,7 +4769,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         });
 
         // Espada Solar (Poder de Divindade)
-        if (hasDivinityPower('Espada Solar Azgher')) {
+        if (hasDivinityPower('Espada Solar')) {
             effects.push({
                 label: 'Espada Solar (+1d6 dano)',
                 value: 'espada_solar',
@@ -4763,7 +4780,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
 
         // Inimigo de Tenebra (Poder de Divindade)
-        if (hasDivinityPower('Inimigo de Tenebra Azgher')) {
+        if (hasDivinityPower('Inimigo de Tenebra')) {
             effects.push({
                 label: 'Inimigo de Tenebra (+1d6 vs mortos-vivos)',
                 value: 'inimigo_tenebra',
