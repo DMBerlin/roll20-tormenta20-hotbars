@@ -642,7 +642,6 @@
             { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
             { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
             { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficionome}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
-            { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficio2nome}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficio2total}]]]]}}` },
             { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
             { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
             { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
@@ -709,9 +708,86 @@
                     btn.style.color = '#fff';
                 };
 
-                // Adiciona tooltip para indicar o uso do CTRL
-                btn.title = `Clique para rolagem normal\nSegure CTRL + Clique para detalhes da perícia`;
+                // Adiciona hover com descrição breve da skill
+                let tooltip = null;
+
+                btn.onmouseenter = () => {
+                    // Verifica se existe descrição para esta skill
+                    const skillData = SKILLS_DATA[skill.nome];
+                    if (!skillData || !skillData.descricao) return;
+
+                    // Remove tooltip existente
+                    if (tooltip) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
+
+                    // Cria tooltip personalizado
+                    tooltip = document.createElement('div');
+                    tooltip.style.position = 'fixed';
+                    tooltip.style.background = 'rgba(0, 0, 0, 0.9)';
+                    tooltip.style.color = '#ecf0f1';
+                    tooltip.style.padding = '8px 12px';
+                    tooltip.style.borderRadius = '6px';
+                    tooltip.style.fontSize = '12px';
+                    tooltip.style.lineHeight = '1.4';
+                    tooltip.style.maxWidth = '250px';
+                    tooltip.style.wordWrap = 'break-word';
+                    tooltip.style.zIndex = '10002';
+                    tooltip.style.border = '1px solid #6ec6ff';
+                    tooltip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+                    tooltip.style.pointerEvents = 'none';
+                    tooltip.style.opacity = '0';
+                    tooltip.style.transition = 'opacity 0.2s';
+
+                    tooltip.textContent = skillData.descricao;
+
+                    document.body.appendChild(tooltip);
+
+                    // Posiciona o tooltip
+                    const rect = btn.getBoundingClientRect();
+                    const tooltipRect = tooltip.getBoundingClientRect();
+
+                    let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+                    let top = rect.top - tooltipRect.height - 8;
+
+                    // Ajusta se sair da tela
+                    if (left < 10) left = 10;
+                    if (left + tooltipRect.width > window.innerWidth - 10) {
+                        left = window.innerWidth - tooltipRect.width - 10;
+                    }
+                    if (top < 10) {
+                        top = rect.bottom + 8;
+                    }
+
+                    tooltip.style.left = left + 'px';
+                    tooltip.style.top = top + 'px';
+
+                    // Mostra o tooltip com fade in
+                    setTimeout(() => {
+                        if (tooltip) tooltip.style.opacity = '1';
+                    }, 50);
+                };
+
+                btn.onmouseleave = () => {
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                        setTimeout(() => {
+                            if (tooltip) {
+                                tooltip.remove();
+                                tooltip = null;
+                            }
+                        }, 200);
+                    }
+                };
+
                 btn.onclick = (e) => {
+                    // Remove tooltip se existir
+                    if (tooltip) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
+
                     // Se CTRL está pressionado, abre o modal de detalhamento
                     if (e.ctrlKey) {
                         createSkillDetailModal(skill.nome);
@@ -2073,8 +2149,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             usos: [
                 {
                     titulo: 'Apostar',
-                    descricao: 'Para resolver uma noite de jogatina, pague T$ 1d10, faça um teste de perícia e consulte a tabela para determinar quanto você ganha. O mestre pode variar o valor da aposta básica.',
-                    cd: 'CD variável conforme o jogo'
+                    descricao: 'Para resolver uma noite de jogatina, pague T$ 1d10, faça um teste de perícia e consulte a tabela para determinar quanto você ganha. O mestre pode variar o valor da aposta básica. De T$ 1d3, para uma taverna no porto frequentada por marujos e estivadores, a 1d10 x T$ 1.000, para um cassino de luxo em Valkaria.',
+                    cd: 'CD variável conforme o jogo',
+                    tabela: {
+                        titulo: 'Tabela de Lucros da Jogatina',
+                        linhas: [
+                            { teste: '9 ou menos', ganho: 'Nenhum.' },
+                            { teste: '10 a 14', ganho: 'Metade da aposta.' },
+                            { teste: '15 a 19', ganho: 'Valor da aposta (você "empata").' },
+                            { teste: '20 a 29', ganho: 'Dobro da aposta.' },
+                            { teste: '30 a 39', ganho: 'Triplo da aposta.' },
+                            { teste: '40 ou mais', ganho: 'Quíntuplo da aposta.' }
+                        ]
+                    }
                 }
             ]
         },
@@ -2499,12 +2586,87 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             usoContainer.appendChild(usoDesc);
 
             const usoCD = document.createElement('p');
-            usoCD.textContent = `CD: ${uso.cd}`;
+            usoCD.textContent = `Dificuldade: ${uso.cd}`;
             usoCD.style.color = '#ffd700';
             usoCD.style.margin = '0';
             usoCD.style.fontSize = '12px';
             usoCD.style.fontWeight = 'bold';
             usoContainer.appendChild(usoCD);
+
+            // Adiciona tabela se existir
+            if (uso.tabela) {
+                const tabelaContainer = document.createElement('div');
+                tabelaContainer.style.marginTop = '10px';
+                tabelaContainer.style.padding = '8px';
+                tabelaContainer.style.background = 'rgba(255, 215, 0, 0.1)';
+                tabelaContainer.style.borderRadius = '6px';
+                tabelaContainer.style.border = '1px solid rgba(255, 215, 0, 0.3)';
+
+                const tabelaTitle = document.createElement('h5');
+                tabelaTitle.textContent = uso.tabela.titulo;
+                tabelaTitle.style.color = '#ffd700';
+                tabelaTitle.style.margin = '0 0 8px 0';
+                tabelaTitle.style.fontSize = '12px';
+                tabelaTitle.style.fontWeight = 'bold';
+                tabelaContainer.appendChild(tabelaTitle);
+
+                const tabela = document.createElement('table');
+                tabela.style.width = '100%';
+                tabela.style.borderCollapse = 'collapse';
+                tabela.style.fontSize = '11px';
+
+                // Cabeçalho da tabela
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+
+                const thTeste = document.createElement('th');
+                thTeste.textContent = 'Teste';
+                thTeste.style.padding = '4px 6px';
+                thTeste.style.border = '1px solid rgba(255, 215, 0, 0.3)';
+                thTeste.style.backgroundColor = 'rgba(255, 215, 0, 0.2)';
+                thTeste.style.color = '#ffd700';
+                thTeste.style.fontWeight = 'bold';
+                thTeste.style.textAlign = 'left';
+
+                const thGanho = document.createElement('th');
+                thGanho.textContent = 'Ganho';
+                thGanho.style.padding = '4px 6px';
+                thGanho.style.border = '1px solid rgba(255, 215, 0, 0.3)';
+                thGanho.style.backgroundColor = 'rgba(255, 215, 0, 0.2)';
+                thGanho.style.color = '#ffd700';
+                thGanho.style.fontWeight = 'bold';
+                thGanho.style.textAlign = 'left';
+
+                headerRow.appendChild(thTeste);
+                headerRow.appendChild(thGanho);
+                thead.appendChild(headerRow);
+                tabela.appendChild(thead);
+
+                // Corpo da tabela
+                const tbody = document.createElement('tbody');
+                uso.tabela.linhas.forEach(linha => {
+                    const tr = document.createElement('tr');
+
+                    const tdTeste = document.createElement('td');
+                    tdTeste.textContent = linha.teste;
+                    tdTeste.style.padding = '4px 6px';
+                    tdTeste.style.border = '1px solid rgba(255, 215, 0, 0.2)';
+                    tdTeste.style.color = '#ecf0f1';
+
+                    const tdGanho = document.createElement('td');
+                    tdGanho.textContent = linha.ganho;
+                    tdGanho.style.padding = '4px 6px';
+                    tdGanho.style.border = '1px solid rgba(255, 215, 0, 0.2)';
+                    tdGanho.style.color = '#ecf0f1';
+
+                    tr.appendChild(tdTeste);
+                    tr.appendChild(tdGanho);
+                    tbody.appendChild(tr);
+                });
+                tabela.appendChild(tbody);
+                tabelaContainer.appendChild(tabela);
+                usoContainer.appendChild(tabelaContainer);
+            }
 
             // Eventos de mouse para feedback visual
             usoContainer.onmouseover = () => {
@@ -2625,7 +2787,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Misticismo - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
                 { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Nobreza - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
                 { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficionome} - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
-                { nome: 'Ofício 2', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficio2nome} - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficio2total}]]]]}}` },
                 { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Percepção - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
                 { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pilotagem - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
                 { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pontaria - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
