@@ -2451,7 +2451,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         usosSection.appendChild(usosTitle);
 
         // Lista de usos
-        skillData.usos.forEach((uso, index) => {
+        skillData.usos.forEach((uso) => {
             const usoContainer = document.createElement('div');
             usoContainer.style.marginBottom = '15px';
             usoContainer.style.padding = '12px';
