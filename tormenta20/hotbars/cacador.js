@@ -8129,7 +8129,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         let comidaEffects = [];
         try {
             comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
-        } catch (e) { comidaEffects = []; }
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de comida:', e);
+            comidaEffects = [];
+        }
         // Só mostra efeitos de comida que estão ativos
         const activeEffects = getActiveEffects();
         const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
