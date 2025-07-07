@@ -595,14 +595,6 @@
             filterInput.dispatchEvent(new Event('input'));
             filterInput.focus();
         };
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
-            }
-            updateSkillList();
-        };
         filterContainer.appendChild(filterInput);
         filterContainer.appendChild(clearBtn);
         popup.appendChild(filterContainer);
@@ -853,16 +845,128 @@
         }
     };
 
-    // Templates reutilizáveis para Powers
-    // const powerTemplates = {
-    //     createPower: (powerData) => {
-    //         return {
-    //             nome: powerData.nome,
-    //             descricao: powerData.descricao,
-    //             onClick: () => createPowerCastPopup(powerData.nome, powerData.nome)
-    //         };
-    //     }
-    // };
+    // Função para criar popup de Miscelâneos
+    function createMiscPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('misc-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('misc-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'misc-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'misc-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #ffb86c';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '18px 20px 16px 20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '400px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Miscelâneos';
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Lista de módulos (cards)
+        const modulesList = document.createElement('div');
+        modulesList.style.display = 'flex';
+        modulesList.style.flexDirection = 'column';
+        modulesList.style.gap = '16px';
+        modulesList.style.marginTop = '10px';
+        popup.appendChild(modulesList);
+
+        // Card: Pratos Especiais
+        const pratosCard = document.createElement('div');
+        pratosCard.style.background = '#23243a';
+        pratosCard.style.border = '1.5px solid #ffb86c';
+        pratosCard.style.borderRadius = '8px';
+        pratosCard.style.padding = '16px';
+        pratosCard.style.cursor = 'pointer';
+        pratosCard.style.transition = 'all 0.2s';
+        pratosCard.onmouseover = () => {
+            pratosCard.style.background = '#2d2e4a';
+        };
+        pratosCard.onmouseout = () => {
+            pratosCard.style.background = '#23243a';
+        };
+        pratosCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createPratosEspeciaisPopup();
+        };
+        const pratosTitle = document.createElement('div');
+        pratosTitle.textContent = 'Pratos Especiais';
+        pratosTitle.style.color = '#ffb86c';
+        pratosTitle.style.fontSize = '16px';
+        pratosTitle.style.fontWeight = 'bold';
+        pratosTitle.style.marginBottom = '6px';
+        pratosCard.appendChild(pratosTitle);
+        const pratosDesc = document.createElement('div');
+        pratosDesc.textContent = 'Comidas raras que concedem bônus únicos. Disponibilidade e efeitos definidos pelo mestre.';
+        pratosDesc.style.color = '#ecf0f1';
+        pratosDesc.style.fontSize = '13px';
+        pratosCard.appendChild(pratosDesc);
+        modulesList.appendChild(pratosCard);
+
+        document.body.appendChild(popup);
+    }
 
     // Função para criar o popup de spells
     function createSpellsPopup() {
@@ -1019,7 +1123,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
 +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Você pode enviar um à frente, outra para trás, outra para cima e manter um perto de você, por exemplo. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
 
 +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
 
@@ -1600,6 +1704,227 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(popup);
     }
 
+    function createPratosEspeciaisPopup() {
+        console.log('Abrindo Pratos Especiais');
+        try {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('pratos-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('pratos-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'pratos-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10000';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'pratos-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ffb86c';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '18px 20px 16px 20px';
+            popup.style.zIndex = '10001';
+            popup.style.maxWidth = '480px';
+            popup.style.maxHeight = '600px';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
+
+            const title = document.createElement('h3');
+            title.textContent = 'Pratos Especiais';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('pratos-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Campo de filtro
+            const filterContainer = document.createElement('div');
+            filterContainer.style.position = 'relative';
+            filterContainer.style.marginBottom = '10px';
+            const filterInput = document.createElement('input');
+            filterInput.type = 'text';
+            filterInput.placeholder = 'Filtrar pratos...';
+            filterInput.style.width = '100%';
+            filterInput.style.padding = '10px 12px';
+            filterInput.style.borderRadius = '8px';
+            filterInput.style.border = '1px solid #ffb86c';
+            filterInput.style.background = '#23243a';
+            filterInput.style.color = '#fff';
+            filterInput.style.fontSize = '14px';
+            filterInput.style.outline = 'none';
+            filterInput.style.boxSizing = 'border-box';
+            filterInput.style.fontSize = '15px';
+            filterContainer.appendChild(filterInput);
+            popup.appendChild(filterContainer);
+
+            // Lista de pratos (cards)
+            const pratosList = document.createElement('div');
+            pratosList.style.display = 'flex';
+            pratosList.style.flexDirection = 'column';
+            pratosList.style.gap = '14px';
+            pratosList.style.marginTop = '10px';
+            popup.appendChild(pratosList);
+
+            // Conteúdo dos pratos (copiado do markdown)
+            const pratos = [
+                { nome: 'Assado de Carnes', descricao: 'Um prato muito apreciado no Reinado, mas mal visto no Império de Tauron. Pura proteína, deixa qualquer um mais forte.', bonus: '+2 em rolagens de dano corpo a corpo.' },
+                { nome: 'Balinhas', descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias. Claro… Apesar do ceticismo dos outros, você recebe +2 em rolagens de dano de magias.', bonus: '+2 em rolagens de dano de magias.' },
+                { nome: 'Banquete dos Heróis', descricao: 'Uma mesa repleta das melhores comidas que o dinheiro pode pagar.', bonus: '+1 em um atributo a sua escolha. Esse aumento não oferece PV, PM e perícias adicionais.' },
+                { nome: 'Batata Valkariana', descricao: 'Batatas cortadas em tiras e mergulhadas em óleo fervente. Gordurentas e pouco nutritivas, são o tipo de prato que só é servido numa metrópole como Valkaria. Apesar disso, são saborosas e deixam qualquer um empolgado.', bonus: '+1d6 em um teste a sua escolha realizado até o fim do dia.' },
+                { nome: 'Bolo de Cenoura', descricao: 'Uma sobremesa simples, que "faz bem para a vista", segundo anciões de todo o Reinado. Aparentemente, os anciões estão certos, pois o bolo de cenoura fornece +2 em testes de Percepção.', bonus: '+2 em testes de Percepção.' },
+                { nome: 'Bolo do Panteão', descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos. Dizem que o gorad usado no bolo é uma das fontes de energia do Panteão.', bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).' },
+                { nome: 'Ensopado Reforçado', descricao: 'Um prato nutritivo, mas pesado.', bonus: '+20 PV temporários, mas seu deslocamento diminui em –1,5m.' },
+                { nome: 'Estrogonofe', descricao: 'Essa iguaria deliciosa foi inventada nas cortes do antigo Reino de Yudennach — dizem que é uma das poucas coisas boas a sair daquele lugar. Comer estrogonofe deixa você firme em suas convicções.', bonus: '+2 em testes de Vontade.' },
+                { nome: 'Fritada Monstruosa', descricao: 'A receita é simples — o segredo está nos ingredientes. Feita com ovos de monstros, esta omelete é extremamente nutritiva.', bonus: '+10 PV temporários.' },
+                { nome: 'Futomaki', descricao: 'Criado no Império de Jade, este prato consiste em um rolo de arroz recheado com peixes, folhas e raízes. Uma refeição elegante, que deixa todos dispostos a dialogar.', bonus: '+2 em testes de Diplomacia.' },
+                { nome: 'Gorad Quente', descricao: 'Gorad e leite, servidos fumegando. Não tem erro. O gorad ativa o cérebro.', bonus: '+2 PM temporários.' },
+                { nome: 'Gorvelã', descricao: 'Gorad com avelã de Norba. É uma sobremesa cara, mas deliciosa.', bonus: '+5 PM temporários.' },
+                { nome: 'Macarrão de Yuvalin', descricao: 'Yuvalin é uma cidade mineradora em Zakharov, na fronteira com as Montanhas Uivantes. Seus habitantes criaram este prato reforçado (macarrão, bacon e creme de leite) para encarar suas árduas jornadas de trabalho nas minas. Deliciosa, a receita se espalhou por outras cidades e reinos.', bonus: '+5 PV temporários.' },
+                { nome: 'Pão de Queijo', descricao: 'Um bom pão de queijo deixa qualquer aventureiro bem nutrido e saudável.', bonus: '+2 em testes de Fortitude.' },
+                { nome: 'Pizza', descricao: 'Um disco de massa coberto com molho de tomate e queijo, este prato foi criado por Guido Venusto, um nobre de Ahlen que queria ascender socialmente. Inepto nas artes da intriga, Venusto resolveu manipular a corte pela barriga. Funcionou — o prato foi um sucesso e o nobre cozinheiro teve muita  influência por anos. Certa noite, um espião conseguiu roubar a receita. O segredo da pizza se espalhou e, sem seu trunfo, Venusto foi assassinado logo depois. Comer uma pizza deixa-o pronto para encarar qualquer perigo.', bonus: '+1 em todos os testes de resistência.' },
+                { nome: 'Porco Assado', descricao: 'Um prato típico e popular em Deheon, que já se alastrou pelo Reinado. Comer um porco assado o deixa valente e brigão.', bonus: '+1 em testes de Luta.' },
+                { nome: 'Prato do Aventureiro', descricao: 'Um cozido de frango com legumes, esta é uma refeição simples, mas mantém qualquer um bem alimentado.', bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de vida em +1 por nível.' },
+                { nome: 'Salada de Salistick', descricao: 'Com folhas e carne de frango, esta salada foi criada no Reino dos Médicos, onde a saúde é uma grande preocupação. Uma alimentação leve, mas nutritiva.', bonus: 'Aumenta seu deslocamento em +1,5m (1 quadrado).' },
+                { nome: 'Salada Élfica', descricao: 'Esta salada vegetariana leva uma mistura de folhas, frutas e legumes. Segundo os relatos, a receita foi inventada em Lenórienn e passada aos reinos humanos de Lamnor, antes do isolamento dos povos. Felizmente, a salada se espalhou por Arton antes da queda do continente. Um prato leve e equilibrado, inspira disparos precisos.', bonus: '+1 em testes de Pontaria.' },
+                { nome: 'Salada Imperial', descricao: 'Uma mistura de folhas com bacon e queijo, esta salada é leve, mas empolgante.', bonus: '+2 em testes de Iniciativa.' },
+                { nome: 'Sashimi', descricao: 'Uma iguaria da culinária tamuraniana, este prato consiste de peixes e frutos do mar fatiados em pequenos pedaços e servidos com um molho típico do Império de Jade. Uma refeição refinada, leve e equilibrada.', bonus: '+2 em rolagens de dano à distância.' },
+                { nome: 'Sopa de Cogumelos', descricao: 'Esta sopa expande sua percepção mística.', bonus: '+2 em testes de Misticismo.' },
+                { nome: 'Sopa de Peixe', descricao: 'Um cozido  de peixe com verduras, é um prato simples e humilde, mas garante descanso relaxante.', bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de mana em +1 por nível.' },
+                { nome: 'Torta de Maçã', descricao: 'Dizem que, após uma bruxa usar uma maçã envenenada para matar uma princesa, Thantalla-Dhaedelin, a Rainha das Fadas, decretou que maçãs nunca mais fariam mal a ninguém. Se a lenda é verdade, ou se maçãs são simplesmente saudáveis, ninguém sabe dizer, mas comer este prato fornece resistência a veneno +5.', bonus: 'Resistência a veneno +5.' }
+            ];
+
+            function renderPratosList(filterText = '') {
+                pratosList.innerHTML = '';
+                const filtered = pratos.filter(prato =>
+                    prato.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+                    prato.descricao.toLowerCase().includes(filterText.toLowerCase()) ||
+                    prato.bonus.toLowerCase().includes(filterText.toLowerCase())
+                );
+                filtered.forEach(prato => {
+                    const card = document.createElement('div');
+                    card.style.background = '#23243a';
+                    card.style.border = '1px solid #ffb86c';
+                    card.style.borderRadius = '8px';
+                    card.style.padding = '12px 14px';
+                    card.style.display = 'flex';
+                    card.style.flexDirection = 'column';
+                    card.style.gap = '4px';
+
+                    const nome = document.createElement('div');
+                    nome.textContent = prato.nome;
+                    nome.style.color = '#ffb86c';
+                    nome.style.fontWeight = 'bold';
+                    nome.style.fontSize = '15px';
+                    card.appendChild(nome);
+
+                    const desc = document.createElement('div');
+                    desc.textContent = prato.descricao;
+                    desc.style.color = '#ecf0f1';
+                    desc.style.fontSize = '13px';
+                    card.appendChild(desc);
+
+                    const bonus = document.createElement('div');
+                    bonus.textContent = prato.bonus;
+                    bonus.style.color = '#6ec6ff';
+                    bonus.style.fontSize = '13px';
+                    bonus.style.fontWeight = 'bold';
+                    card.appendChild(bonus);
+
+                    // Evento de clique para ativar efeito de comida
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        const effectKey = 'prato_' + prato.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+                        const effect = {
+                            name: prato.nome,
+                            description: prato.descricao + ' ' + prato.bonus,
+                            type: 'Comida',
+                            effectKey: effectKey
+                        };
+                        // Salva efeito de comida em localStorage se não existir
+                        let activeEffects = getActiveEffects();
+                        if (!activeEffects.includes(effectKey)) {
+                            // Salva o objeto completo em uma lista separada
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey); // evita duplicatas
+                            comidaEffects.push(effect);
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            // Ativa o efeito
+                            activeEffects.push(effectKey);
+                            saveActiveEffects(activeEffects);
+                            updateEffectsBadge();
+                        }
+                        // Fecha o popup de pratos
+                        popup.remove();
+                        const overlay = document.getElementById('pratos-overlay');
+                        if (overlay) overlay.remove();
+                    };
+
+                    pratosList.appendChild(card);
+                });
+            }
+
+            // Atualiza a lista ao digitar
+            filterInput.addEventListener('input', () => {
+                renderPratosList(filterInput.value);
+            });
+
+            // Render inicial
+            renderPratosList();
+
+            // Adiciona o popup ao body
+            document.body.appendChild(popup);
+        } catch (e) {
+            console.error('Erro ao abrir Pratos Especiais:', e);
+            alert('Erro ao abrir Pratos Especiais. Veja o console para detalhes.');
+        }
+    }
+
     // Função para mostrar efeito de cura
     function showHealingEffect() {
         // Remove efeito anterior se existir
@@ -1627,7 +1952,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const leaf = document.createElement('div');
             leaf.style.position = 'absolute';
             leaf.style.bottom = '10px';
-            leaf.style.left = '-50px';
+            leaf.left = '-50px';
             leaf.style.width = '20px';
             leaf.style.height = '20px';
             leaf.style.background = 'radial-gradient(circle, #4CAF50 0%, #388E3C 70%, #2E7D32 100%)';
@@ -2069,7 +2394,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 },
                 {
                     titulo: 'Seguir',
-                    descricao: 'Faça um teste de Furtividade oposto ao teste de Percepção da pessoa sendo seguida. Você sofre –5 se estiver em um lugar sem esconderijos ou sem movimento, como um descampado ou rua deserta.',
+                    descricao: 'Faça um teste de Furtividade oposto ao teste de Percepção da pessoa sendo seguida. Você sofre –5 se estiver em um lugar sem esconderijos ou sem movimento, como uma descampado ou rua deserta.',
                     cd: 'Teste oposto contra Percepção'
                 }
             ]
@@ -2295,7 +2620,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             usos: [
                 {
                     titulo: 'Conduzir em Situações Difíceis',
-                    descricao: 'Conduzir um veículo em situações ruins (terreno acidentado para veículos terrestres, chuva ou ventania para veículos aquáticos ou aéreos), exige uma ação de movimento e um teste de Pilotagem contra CD 15 por turno ou cena, de acordo com o mestre. Se falhar, você avança metade do deslocamento. Se falhar por 5 ou mais, se acidenta de alguma forma. Situações extremas (terreno com obstáculos, tempestade...) aumentam a CD para 25.',
+                    descricao: 'Conduzir um veículo em situações ruins (terreno acidentado para veículos terrestres, chuva ou ventania para veículos aquáticos ou aéreos, ou aéreos) exige uma ação de movimento e um teste de Pilotagem contra CD 15 por turno ou cena, de acordo com o mestre. Se falhar, você avança metade do deslocamento. Se falhar por 5 ou mais, se acidenta de alguma forma. Situações extremas (terreno com obstáculos, tempestade...) aumentam a CD para 25.',
                     cd: 'CD 15 para situações ruins, CD 25 para situações extremas'
                 }
             ]
@@ -3276,9 +3601,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             filterInput.onfocus = () => {
                 filterInput.style.borderColor = '#ff8e8e';
             };
-            filterInput.onblur = () => {
-                filterInput.style.borderColor = '#ff6e6e';
-            };
+            filterInput.style.borderColor = '#ff6e6e';
             filterContainer.appendChild(filterInput);
             filterContainer.appendChild(clearBtn);
             popup.appendChild(filterContainer);
@@ -3549,7 +3872,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 });
             };
 
-
+            // Atualiza a lista ao digitar
+            filterInput.addEventListener('input', filterManeuvers);
 
             popup.appendChild(maneuversList);
             document.body.appendChild(popup);
@@ -3773,7 +4097,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
             { label: 'Habilidades', icon: '✨', onClick: createAbilitiesPopup },
-            { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup }
+            { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup },
+            { label: 'Misc.', icon: '📦', onClick: createMiscPopup } // Novo botão Misc.
         ];
         // Função para criar botão
         function createButton(btnData, isCombatButton = false) {
@@ -4628,7 +4953,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 powers: [
                     {
                         name: 'Espada Solar',
-                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.'
+                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhada causar +1d6 de dano por fogo até o fim da cena.'
                     },
                     {
                         name: 'Fulgor Solar',
@@ -7800,6 +8125,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         ];
 
+        // Efeitos de comida
+        let comidaEffects = [];
+        try {
+            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de comida:', e);
+            comidaEffects = [];
+        }
+        // Só mostra efeitos de comida que estão ativos
+        const activeEffects = getActiveEffects();
+        const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
+        // Junta efeitos normais e de comida
+        const allEffects = [...effects, ...activeComidaEffects];
+
         // Lista visual
         const effectsList = document.createElement('div');
         effectsList.style.display = 'flex';
@@ -7811,7 +8150,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         function updateEffectsList() {
             effectsList.innerHTML = '';
 
-            effects.forEach(effect => {
+            allEffects.forEach(effect => {
                 const isActive = isEffectActive(effect.effectKey);
 
                 const effectContainer = document.createElement('div');
@@ -7880,6 +8219,37 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 effectDesc.style.fontSize = '13px';
                 effectDesc.style.lineHeight = '1.4';
                 effectContainer.appendChild(effectDesc);
+
+                // Se for efeito de comida, destaque o bônus
+                if (effect.type === 'Comida') {
+                    // Tenta extrair o bônus do final da descrição
+                    let bonus = '';
+                    let desc = effect.description;
+                    // Procura o último ponto final e separa
+                    const ponto = desc.lastIndexOf('.');
+                    if (ponto !== -1 && ponto < desc.length - 1) {
+                        bonus = desc.substring(ponto + 1).trim();
+                        desc = desc.substring(0, ponto + 1).trim();
+                    } else {
+                        // Se não encontrar ponto, tenta achar o último '+'
+                        const plus = desc.lastIndexOf('+');
+                        if (plus !== -1) {
+                            bonus = desc.substring(plus).trim();
+                            desc = desc.substring(0, plus).trim();
+                        }
+                    }
+                    // Atualiza a descrição
+                    effectDesc.textContent = desc;
+                    if (bonus) {
+                        const bonusDiv = document.createElement('div');
+                        bonusDiv.textContent = bonus;
+                        bonusDiv.style.color = '#ffb86c';
+                        bonusDiv.style.fontWeight = 'bold';
+                        bonusDiv.style.fontSize = '14px';
+                        bonusDiv.style.marginTop = '2px';
+                        effectContainer.appendChild(bonusDiv);
+                    }
+                }
 
                 effectsList.appendChild(effectContainer);
             });
