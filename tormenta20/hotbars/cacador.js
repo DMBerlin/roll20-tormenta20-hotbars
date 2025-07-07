@@ -1818,7 +1818,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 { nome: 'Banquete dos Heróis', descricao: 'Uma mesa repleta das melhores comidas que o dinheiro pode pagar.', bonus: '+1 em um atributo a sua escolha. Esse aumento não oferece PV, PM e perícias adicionais.' },
                 { nome: 'Batata Valkariana', descricao: 'Batatas cortadas em tiras e mergulhadas em óleo fervente. Gordurentas e pouco nutritivas, são o tipo de prato que só é servido numa metrópole como Valkaria. Apesar disso, são saborosas e deixam qualquer um empolgado.', bonus: '+1d6 em um teste a sua escolha realizado até o fim do dia.' },
                 { nome: 'Bolo de Cenoura', descricao: 'Uma sobremesa simples, que "faz bem para a vista", segundo anciões de todo o Reinado. Aparentemente, os anciões estão certos, pois o bolo de cenoura fornece +2 em testes de Percepção.', bonus: '+2 em testes de Percepção.' },
-                { nome: 'Bolo do Panteão', descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos.', bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).' },
+                { nome: 'Bolo do Panteão', descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos. Dizem que o gorad usado no bolo é uma das fontes de energia do Panteão.', bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).' },
                 { nome: 'Ensopado Reforçado', descricao: 'Um prato nutritivo, mas pesado.', bonus: '+20 PV temporários, mas seu deslocamento diminui em –1,5m.' },
                 { nome: 'Estrogonofe', descricao: 'Essa iguaria deliciosa foi inventada nas cortes do antigo Reino de Yudennach — dizem que é uma das poucas coisas boas a sair daquele lugar. Comer estrogonofe deixa você firme em suas convicções.', bonus: '+2 em testes de Vontade.' },
                 { nome: 'Fritada Monstruosa', descricao: 'A receita é simples — o segredo está nos ingredientes. Feita com ovos de monstros, esta omelete é extremamente nutritiva.', bonus: '+10 PV temporários.' },
@@ -1875,6 +1875,35 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     bonus.style.fontSize = '13px';
                     bonus.style.fontWeight = 'bold';
                     card.appendChild(bonus);
+
+                    // Evento de clique para ativar efeito de comida
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        const effectKey = 'prato_' + prato.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+                        const effect = {
+                            name: prato.nome,
+                            description: prato.descricao + ' ' + prato.bonus,
+                            type: 'Comida',
+                            effectKey: effectKey
+                        };
+                        // Salva efeito de comida em localStorage se não existir
+                        let activeEffects = getActiveEffects();
+                        if (!activeEffects.includes(effectKey)) {
+                            // Salva o objeto completo em uma lista separada
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey); // evita duplicatas
+                            comidaEffects.push(effect);
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            // Ativa o efeito
+                            activeEffects.push(effectKey);
+                            saveActiveEffects(activeEffects);
+                            updateEffectsBadge();
+                        }
+                        // Fecha o popup de pratos
+                        popup.remove();
+                        const overlay = document.getElementById('pratos-overlay');
+                        if (overlay) overlay.remove();
+                    };
 
                     pratosList.appendChild(card);
                 });
@@ -2365,7 +2394,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 },
                 {
                     titulo: 'Seguir',
-                    descricao: 'Faça um teste de Furtividade oposto ao teste de Percepção da pessoa sendo seguida. Você sofre –5 se estiver em um lugar sem esconderijos ou sem movimento, como um descampado ou rua deserta.',
+                    descricao: 'Faça um teste de Furtividade oposto ao teste de Percepção da pessoa sendo seguida. Você sofre –5 se estiver em um lugar sem esconderijos ou sem movimento, como uma descampado ou rua deserta.',
                     cd: 'Teste oposto contra Percepção'
                 }
             ]
@@ -4924,7 +4953,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 powers: [
                     {
                         name: 'Espada Solar',
-                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.'
+                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhada causar +1d6 de dano por fogo até o fim da cena.'
                     },
                     {
                         name: 'Fulgor Solar',
@@ -8096,6 +8125,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         ];
 
+        // Efeitos de comida
+        let comidaEffects = [];
+        try {
+            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+        } catch (e) { comidaEffects = []; }
+        // Só mostra efeitos de comida que estão ativos
+        const activeEffects = getActiveEffects();
+        const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
+        // Junta efeitos normais e de comida
+        const allEffects = [...effects, ...activeComidaEffects];
+
         // Lista visual
         const effectsList = document.createElement('div');
         effectsList.style.display = 'flex';
@@ -8107,7 +8147,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         function updateEffectsList() {
             effectsList.innerHTML = '';
 
-            effects.forEach(effect => {
+            allEffects.forEach(effect => {
                 const isActive = isEffectActive(effect.effectKey);
 
                 const effectContainer = document.createElement('div');
@@ -8176,6 +8216,37 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 effectDesc.style.fontSize = '13px';
                 effectDesc.style.lineHeight = '1.4';
                 effectContainer.appendChild(effectDesc);
+
+                // Se for efeito de comida, destaque o bônus
+                if (effect.type === 'Comida') {
+                    // Tenta extrair o bônus do final da descrição
+                    let bonus = '';
+                    let desc = effect.description;
+                    // Procura o último ponto final e separa
+                    const ponto = desc.lastIndexOf('.');
+                    if (ponto !== -1 && ponto < desc.length - 1) {
+                        bonus = desc.substring(ponto + 1).trim();
+                        desc = desc.substring(0, ponto + 1).trim();
+                    } else {
+                        // Se não encontrar ponto, tenta achar o último '+'
+                        const plus = desc.lastIndexOf('+');
+                        if (plus !== -1) {
+                            bonus = desc.substring(plus).trim();
+                            desc = desc.substring(0, plus).trim();
+                        }
+                    }
+                    // Atualiza a descrição
+                    effectDesc.textContent = desc;
+                    if (bonus) {
+                        const bonusDiv = document.createElement('div');
+                        bonusDiv.textContent = bonus;
+                        bonusDiv.style.color = '#ffb86c';
+                        bonusDiv.style.fontWeight = 'bold';
+                        bonusDiv.style.fontSize = '14px';
+                        bonusDiv.style.marginTop = '2px';
+                        effectContainer.appendChild(bonusDiv);
+                    }
+                }
 
                 effectsList.appendChild(effectContainer);
             });
