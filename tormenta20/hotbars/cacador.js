@@ -1704,6 +1704,474 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(popup);
     }
 
+    // Funções auxiliares para pratos especiais
+    function getPratosFavoritos() {
+        return JSON.parse(localStorage.getItem('roll20-hotbar-pratos-favoritos') || '[]');
+    }
+
+    function savePratosFavoritos(favoritos) {
+        localStorage.setItem('roll20-hotbar-pratos-favoritos', JSON.stringify(favoritos));
+    }
+
+    function togglePratoFavorito(nomePrato) {
+        let favoritos = getPratosFavoritos();
+        const index = favoritos.indexOf(nomePrato);
+        if (index > -1) {
+            favoritos.splice(index, 1);
+        } else {
+            favoritos.push(nomePrato);
+        }
+        savePratosFavoritos(favoritos);
+    }
+
+    function isPratoFavorito(nomePrato) {
+        const favoritos = getPratosFavoritos();
+        return favoritos.includes(nomePrato);
+    }
+
+    // Dados completos dos pratos baseados no arquivo MD
+    function getPratosCompletos() {
+        return [
+            {
+                nome: 'Assado de Carnes',
+                descricao: 'Um prato muito apreciado no Reinado, mas mal visto no Império de Tauron. Pura proteína, deixa qualquer um mais forte.',
+                bonus: '+2 em rolagens de dano corpo a corpo.',
+                preco: 'T$ 30',
+                ingredientes: 'Carne, carne de caça, porco',
+                custoIngredientes: 'T$ 56',
+                cdTeste: '20'
+            },
+            {
+                nome: 'Balinhas',
+                descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias. Claro… Apesar do ceticismo dos outros, você recebe +2 em rolagens de dano de magias.',
+                bonus: '+2 em rolagens de dano de magias.',
+                preco: 'T$ 30',
+                ingredientes: 'Açúcar das fadas, fruta',
+                custoIngredientes: 'T$ 53',
+                cdTeste: '20'
+            },
+            {
+                nome: 'Banquete dos Heróis',
+                descricao: 'Uma mesa repleta das melhores comidas que o dinheiro pode pagar.',
+                bonus: '+1 em um atributo a sua escolha. Esse aumento não oferece PV, PM e perícias adicionais.',
+                preco: 'T$ 150',
+                ingredientes: 'Carne de caça, ovo de monstro, avelã de Norba',
+                custoIngredientes: 'T$ 82',
+                cdTeste: '25'
+            },
+            {
+                nome: 'Batata Valkariana',
+                descricao: 'Batatas cortadas em tiras e mergulhadas em óleo fervente. Gordurentas e pouco nutritivas, são o tipo de prato que só é servido numa metrópole como Valkaria. Apesar disso, são saborosas e deixam qualquer um empolgado.',
+                bonus: '+1d6 em um teste a sua escolha realizado até o fim do dia.',
+                preco: 'T$ 2',
+                ingredientes: 'Óleo, legume',
+                custoIngredientes: 'T$ 4',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Bolo de Cenoura',
+                descricao: 'Uma sobremesa simples, que "faz bem para a vista", segundo anciões de todo o Reinado. Aparentemente, os anciões estão certos, pois o bolo de cenoura fornece +2 em testes de Percepção.',
+                bonus: '+2 em testes de Percepção.',
+                preco: 'T$ 4',
+                ingredientes: 'Farinha, fruta, óleo',
+                custoIngredientes: 'T$ 7',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Bolo do Panteão',
+                descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos. Dizem que o gorad usado no bolo é uma das fontes de energia do Panteão.',
+                bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).',
+                preco: 'T$ 150',
+                ingredientes: 'Açúcar das fadas, avelã de Norba, farinha, gorad',
+                custoIngredientes: 'T$ 121',
+                cdTeste: '25'
+            },
+            {
+                nome: 'Ensopado Reforçado',
+                descricao: 'Um prato nutritivo, mas pesado.',
+                bonus: '+20 PV temporários, mas seu deslocamento diminui em –1,5m.',
+                preco: 'T$ 6',
+                ingredientes: 'Cereal, porco, verdura',
+                custoIngredientes: 'T$ 10',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Estrogonofe',
+                descricao: 'Essa iguaria deliciosa foi inventada nas cortes do antigo Reino de Yudennach — dizem que é uma das poucas coisas boas a sair daquele lugar. Comer estrogonofe deixa você firme em suas convicções.',
+                bonus: '+2 em testes de Vontade.',
+                preco: 'T$ 12',
+                ingredientes: 'Carne, cogumelo, leite',
+                custoIngredientes: 'T$ 22',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Fritada Monstruosa',
+                descricao: 'A receita é simples — o segredo está nos ingredientes. Feita com ovos de monstros, esta omelete é extremamente nutritiva.',
+                bonus: '+10 PV temporários.',
+                preco: 'T$ 30',
+                ingredientes: 'Ovo de monstro, óleo',
+                custoIngredientes: 'T$ 53',
+                cdTeste: '20'
+            },
+            {
+                nome: 'Futomaki',
+                descricao: 'Criado no Império de Jade, este prato consiste em um rolo de arroz recheado com peixes, folhas e raízes. Uma refeição elegante, que deixa todos dispostos a dialogar.',
+                bonus: '+2 em testes de Diplomacia.',
+                preco: 'T$ 12',
+                ingredientes: 'Cereal, peixe',
+                custoIngredientes: 'T$ 8',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Gorad Quente',
+                descricao: 'Gorad e leite, servidos fumegando. Não tem erro. O gorad ativa o cérebro.',
+                bonus: '+2 PM temporários.',
+                preco: 'T$ 18',
+                ingredientes: 'Gorad, leite',
+                custoIngredientes: 'T$ 31',
+                cdTeste: '20'
+            },
+            {
+                nome: 'Gorvelã',
+                descricao: 'Gorad com avelã de Norba. É uma sobremesa cara, mas deliciosa.',
+                bonus: '+5 PM temporários.',
+                preco: 'T$ 42',
+                ingredientes: 'Gorad, avelã de Norba',
+                custoIngredientes: 'T$ 70',
+                cdTeste: '25'
+            },
+            {
+                nome: 'Macarrão de Yuvalin',
+                descricao: 'Yuvalin é uma cidade mineradora em Zakharov, na fronteira com as Montanhas Uivantes. Seus habitantes criaram este prato reforçado (macarrão, bacon e creme de leite) para encarar suas árduas jornadas de trabalho nas minas. Deliciosa, a receita se espalhou por outras cidades e reinos.',
+                bonus: '+5 PV temporários.',
+                preco: 'T$ 6',
+                ingredientes: 'Farinha, leite, porco',
+                custoIngredientes: 'T$ 10',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Pão de Queijo',
+                descricao: 'Um bom pão de queijo deixa qualquer aventureiro bem nutrido e saudável.',
+                bonus: '+2 em testes de Fortitude.',
+                preco: 'T$ 10',
+                ingredientes: 'Farinha, queijo',
+                custoIngredientes: 'T$ 7',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Pizza',
+                descricao: 'Um disco de massa coberto com molho de tomate e queijo, este prato foi criado por Guido Venusto, um nobre de Ahlen que queria ascender socialmente. Inepto nas artes da intriga, Venusto resolveu manipular a corte pela barriga. Funcionou — o prato foi um sucesso e o nobre cozinheiro teve muita influência por anos. Certa noite, um espião conseguiu roubar a receita. O segredo da pizza se espalhou e, sem seu trunfo, Venusto foi assassinado logo depois. Comer uma pizza deixa-o pronto para encarar qualquer perigo.',
+                bonus: '+1 em todos os testes de resistência.',
+                preco: 'T$ 6',
+                ingredientes: 'Farinha, fruta, queijo',
+                custoIngredientes: 'T$ 10',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Porco Assado',
+                descricao: 'Um prato típico e popular em Deheon, que já se alastrou pelo Reinado. Comer um porco assado o deixa valente e brigão.',
+                bonus: '+1 em testes de Luta.',
+                preco: 'T$ 36',
+                ingredientes: 'Porco, frutas, legume',
+                custoIngredientes: 'T$ 12',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Prato do Aventureiro',
+                descricao: 'Um cozido de frango com legumes, esta é uma refeição simples, mas mantém qualquer um bem alimentado.',
+                bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de vida em +1 por nível.',
+                preco: 'T$ 2',
+                ingredientes: 'Ave, legume',
+                custoIngredientes: 'T$ 5',
+                cdTeste: '10'
+            },
+            {
+                nome: 'Salada de Salistick',
+                descricao: 'Com folhas e carne de frango, esta salada foi criada no Reino dos Médicos, onde a saúde é uma grande preocupação. Uma alimentação leve, mas nutritiva.',
+                bonus: 'Aumenta seu deslocamento em +1,5m (1 quadrado).',
+                preco: 'T$ 4',
+                ingredientes: 'Ave, fruta, legume',
+                custoIngredientes: 'T$ 8',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Salada Élfica',
+                descricao: 'Esta salada vegetariana leva uma mistura de folhas, frutas e legumes. Segundo os relatos, a receita foi inventada em Lenórienn e passada aos reinos humanos de Lamnor, antes do isolamento dos povos. Felizmente, a salada se espalhou por Arton antes da queda do continente. Um prato leve e equilibrado, inspira disparos precisos.',
+                bonus: '+1 em testes de Pontaria.',
+                preco: 'T$ 4',
+                ingredientes: 'Fruta, legume, verdura',
+                custoIngredientes: 'T$ 5',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Salada Imperial',
+                descricao: 'Uma mistura de folhas com bacon e queijo, esta salada é leve, mas empolgante.',
+                bonus: '+2 em testes de Iniciativa.',
+                preco: 'T$ 6',
+                ingredientes: 'Porco, queijo, verdura',
+                custoIngredientes: 'T$ 15',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Sashimi',
+                descricao: 'Uma iguaria da culinária tamuraniana, este prato consiste de peixes e frutos do mar fatiados em pequenos pedaços e servidos com um molho típico do Império de Jade. Uma refeição refinada, leve e equilibrada.',
+                bonus: '+2 em rolagens de dano à distância.',
+                preco: 'T$ 22',
+                ingredientes: 'Peixe, molho tamuraniano',
+                custoIngredientes: 'T$ 37',
+                cdTeste: '20'
+            },
+            {
+                nome: 'Sopa de Cogumelos',
+                descricao: 'Esta sopa expande sua percepção mística.',
+                bonus: '+2 em testes de Misticismo.',
+                preco: 'T$ 6',
+                ingredientes: 'Cogumelo, legume, verdura',
+                custoIngredientes: 'T$ 7',
+                cdTeste: '15'
+            },
+            {
+                nome: 'Sopa de Peixe',
+                descricao: 'Um cozido de peixe com verduras, é um prato simples e humilde, mas garante descanso relaxante.',
+                bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de mana em +1 por nível.',
+                preco: 'T$ 3',
+                ingredientes: 'Verdura, peixe',
+                custoIngredientes: 'T$ 8',
+                cdTeste: '10'
+            },
+            {
+                nome: 'Torta de Maçã',
+                descricao: 'Dizem que, após uma bruxa usar uma maçã envenenada para matar uma princesa, Thantalla-Dhaedelin, a Rainha das Fadas, decretou que maçãs nunca mais fariam mal a ninguém. Se a lenda é verdade, ou se maçãs são simplesmente saudáveis, ninguém sabe dizer, mas comer este prato fornece resistência a veneno +5.',
+                bonus: 'Resistência a veneno +5.',
+                preco: 'T$ 2',
+                ingredientes: 'Farinha, fruta',
+                custoIngredientes: 'T$ 4',
+                cdTeste: '15'
+            }
+        ];
+    }
+
+    function createPratoDetailModal(prato) {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('prato-detail-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('prato-detail-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'prato-detail-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'prato-detail-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #ffb86c';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '500px';
+        modal.style.maxHeight = '80vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+
+        const title = document.createElement('h2');
+        title.textContent = prato.nome;
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '20px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            modal.remove();
+            overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        modal.appendChild(header);
+
+        // Descrição
+        const descSection = document.createElement('div');
+        descSection.style.marginBottom = '15px';
+        const descTitle = document.createElement('h3');
+        descTitle.textContent = 'Descrição';
+        descTitle.style.color = '#6ec6ff';
+        descTitle.style.fontSize = '16px';
+        descTitle.style.margin = '0 0 8px 0';
+        descSection.appendChild(descTitle);
+        const descText = document.createElement('p');
+        descText.textContent = prato.descricao;
+        descText.style.color = '#ecf0f1';
+        descText.style.fontSize = '14px';
+        descText.style.margin = '0';
+        descText.style.lineHeight = '1.4';
+        descSection.appendChild(descText);
+        modal.appendChild(descSection);
+
+        // Benefício
+        const bonusSection = document.createElement('div');
+        bonusSection.style.marginBottom = '15px';
+        const bonusTitle = document.createElement('h3');
+        bonusTitle.textContent = 'Benefício';
+        bonusTitle.style.color = '#6ec6ff';
+        bonusTitle.style.fontSize = '16px';
+        bonusTitle.style.margin = '0 0 8px 0';
+        bonusSection.appendChild(bonusTitle);
+        const bonusText = document.createElement('p');
+        bonusText.textContent = prato.bonus;
+        bonusText.style.color = '#ffb86c';
+        bonusText.style.fontSize = '14px';
+        bonusText.style.fontWeight = 'bold';
+        bonusText.style.margin = '0';
+        bonusSection.appendChild(bonusText);
+        modal.appendChild(bonusSection);
+
+        // Informações de Culinária
+        const culinariaSection = document.createElement('div');
+        culinariaSection.style.marginBottom = '20px';
+        const culinariaTitle = document.createElement('h3');
+        culinariaTitle.textContent = 'Informações de Culinária';
+        culinariaTitle.style.color = '#6ec6ff';
+        culinariaTitle.style.fontSize = '16px';
+        culinariaTitle.style.margin = '0 0 8px 0';
+        culinariaSection.appendChild(culinariaTitle);
+
+        const culinariaGrid = document.createElement('div');
+        culinariaGrid.style.display = 'grid';
+        culinariaGrid.style.gridTemplateColumns = '1fr 1fr';
+        culinariaGrid.style.gap = '10px';
+
+        const infoItems = [
+            { label: 'Preço', value: prato.preco, color: '#ffb86c' },
+            { label: 'CD do Teste', value: prato.cdTeste, color: '#ffb86c' },
+            { label: 'Ingredientes', value: prato.ingredientes, color: '#ecf0f1' },
+            { label: 'Custo dos Ingredientes', value: prato.custoIngredientes, color: '#ecf0f1' }
+        ];
+
+        infoItems.forEach(item => {
+            const infoItem = document.createElement('div');
+            infoItem.style.background = '#23243a';
+            infoItem.style.padding = '8px 10px';
+            infoItem.style.borderRadius = '6px';
+            infoItem.style.border = '1px solid #444';
+
+            const label = document.createElement('div');
+            label.textContent = item.label;
+            label.style.color = '#888';
+            label.style.fontSize = '12px';
+            label.style.marginBottom = '2px';
+            infoItem.appendChild(label);
+
+            const value = document.createElement('div');
+            value.textContent = item.value;
+            value.style.color = item.color;
+            value.style.fontSize = '13px';
+            value.style.fontWeight = 'bold';
+            infoItem.appendChild(value);
+
+            culinariaGrid.appendChild(infoItem);
+        });
+
+        culinariaSection.appendChild(culinariaGrid);
+        modal.appendChild(culinariaSection);
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.display = 'flex';
+        buttonsContainer.style.gap = '10px';
+        buttonsContainer.style.marginTop = '20px';
+
+        // Botão Compartilhar
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.style.flex = '1';
+        shareBtn.style.padding = '10px 15px';
+        shareBtn.style.background = '#2c3e50';
+        shareBtn.style.border = '1px solid #34495e';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.color = '#ecf0f1';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.onclick = () => {
+            const template = `&{template:t20-info}{{infoname=${prato.nome}}}{{description=${prato.descricao} ${prato.bonus}}}`;
+            sendToChat(template);
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(shareBtn);
+
+        // Botão Usar
+        const useBtn = document.createElement('button');
+        useBtn.textContent = 'Usar Prato';
+        useBtn.style.flex = '1';
+        useBtn.style.padding = '10px 15px';
+        useBtn.style.background = '#27ae60';
+        useBtn.style.border = '1px solid #2ecc71';
+        useBtn.style.borderRadius = '6px';
+        useBtn.style.color = '#ecf0f1';
+        useBtn.style.cursor = 'pointer';
+        useBtn.style.fontSize = '14px';
+        useBtn.onclick = () => {
+            const effectKey = 'prato_' + prato.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+            const effect = {
+                name: prato.nome,
+                description: prato.descricao + ' ' + prato.bonus,
+                type: 'Comida',
+                effectKey: effectKey
+            };
+
+            let activeEffects = getActiveEffects();
+            if (!activeEffects.includes(effectKey)) {
+                let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey);
+                comidaEffects.push(effect);
+                localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                activeEffects.push(effectKey);
+                saveActiveEffects(activeEffects);
+                updateEffectsBadge();
+            }
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(useBtn);
+
+        modal.appendChild(buttonsContainer);
+        document.body.appendChild(modal);
+    }
+
     function createPratosEspeciaisPopup() {
         console.log('Abrindo Pratos Especiais');
         try {
@@ -1811,33 +2279,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             pratosList.style.marginTop = '10px';
             popup.appendChild(pratosList);
 
-            // Conteúdo dos pratos (copiado do markdown)
-            const pratos = [
-                { nome: 'Assado de Carnes', descricao: 'Um prato muito apreciado no Reinado, mas mal visto no Império de Tauron. Pura proteína, deixa qualquer um mais forte.', bonus: '+2 em rolagens de dano corpo a corpo.' },
-                { nome: 'Balinhas', descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias. Claro… Apesar do ceticismo dos outros, você recebe +2 em rolagens de dano de magias.', bonus: '+2 em rolagens de dano de magias.' },
-                { nome: 'Banquete dos Heróis', descricao: 'Uma mesa repleta das melhores comidas que o dinheiro pode pagar.', bonus: '+1 em um atributo a sua escolha. Esse aumento não oferece PV, PM e perícias adicionais.' },
-                { nome: 'Batata Valkariana', descricao: 'Batatas cortadas em tiras e mergulhadas em óleo fervente. Gordurentas e pouco nutritivas, são o tipo de prato que só é servido numa metrópole como Valkaria. Apesar disso, são saborosas e deixam qualquer um empolgado.', bonus: '+1d6 em um teste a sua escolha realizado até o fim do dia.' },
-                { nome: 'Bolo de Cenoura', descricao: 'Uma sobremesa simples, que "faz bem para a vista", segundo anciões de todo o Reinado. Aparentemente, os anciões estão certos, pois o bolo de cenoura fornece +2 em testes de Percepção.', bonus: '+2 em testes de Percepção.' },
-                { nome: 'Bolo do Panteão', descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos. Dizem que o gorad usado no bolo é uma das fontes de energia do Panteão.', bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).' },
-                { nome: 'Ensopado Reforçado', descricao: 'Um prato nutritivo, mas pesado.', bonus: '+20 PV temporários, mas seu deslocamento diminui em –1,5m.' },
-                { nome: 'Estrogonofe', descricao: 'Essa iguaria deliciosa foi inventada nas cortes do antigo Reino de Yudennach — dizem que é uma das poucas coisas boas a sair daquele lugar. Comer estrogonofe deixa você firme em suas convicções.', bonus: '+2 em testes de Vontade.' },
-                { nome: 'Fritada Monstruosa', descricao: 'A receita é simples — o segredo está nos ingredientes. Feita com ovos de monstros, esta omelete é extremamente nutritiva.', bonus: '+10 PV temporários.' },
-                { nome: 'Futomaki', descricao: 'Criado no Império de Jade, este prato consiste em um rolo de arroz recheado com peixes, folhas e raízes. Uma refeição elegante, que deixa todos dispostos a dialogar.', bonus: '+2 em testes de Diplomacia.' },
-                { nome: 'Gorad Quente', descricao: 'Gorad e leite, servidos fumegando. Não tem erro. O gorad ativa o cérebro.', bonus: '+2 PM temporários.' },
-                { nome: 'Gorvelã', descricao: 'Gorad com avelã de Norba. É uma sobremesa cara, mas deliciosa.', bonus: '+5 PM temporários.' },
-                { nome: 'Macarrão de Yuvalin', descricao: 'Yuvalin é uma cidade mineradora em Zakharov, na fronteira com as Montanhas Uivantes. Seus habitantes criaram este prato reforçado (macarrão, bacon e creme de leite) para encarar suas árduas jornadas de trabalho nas minas. Deliciosa, a receita se espalhou por outras cidades e reinos.', bonus: '+5 PV temporários.' },
-                { nome: 'Pão de Queijo', descricao: 'Um bom pão de queijo deixa qualquer aventureiro bem nutrido e saudável.', bonus: '+2 em testes de Fortitude.' },
-                { nome: 'Pizza', descricao: 'Um disco de massa coberto com molho de tomate e queijo, este prato foi criado por Guido Venusto, um nobre de Ahlen que queria ascender socialmente. Inepto nas artes da intriga, Venusto resolveu manipular a corte pela barriga. Funcionou — o prato foi um sucesso e o nobre cozinheiro teve muita  influência por anos. Certa noite, um espião conseguiu roubar a receita. O segredo da pizza se espalhou e, sem seu trunfo, Venusto foi assassinado logo depois. Comer uma pizza deixa-o pronto para encarar qualquer perigo.', bonus: '+1 em todos os testes de resistência.' },
-                { nome: 'Porco Assado', descricao: 'Um prato típico e popular em Deheon, que já se alastrou pelo Reinado. Comer um porco assado o deixa valente e brigão.', bonus: '+1 em testes de Luta.' },
-                { nome: 'Prato do Aventureiro', descricao: 'Um cozido de frango com legumes, esta é uma refeição simples, mas mantém qualquer um bem alimentado.', bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de vida em +1 por nível.' },
-                { nome: 'Salada de Salistick', descricao: 'Com folhas e carne de frango, esta salada foi criada no Reino dos Médicos, onde a saúde é uma grande preocupação. Uma alimentação leve, mas nutritiva.', bonus: 'Aumenta seu deslocamento em +1,5m (1 quadrado).' },
-                { nome: 'Salada Élfica', descricao: 'Esta salada vegetariana leva uma mistura de folhas, frutas e legumes. Segundo os relatos, a receita foi inventada em Lenórienn e passada aos reinos humanos de Lamnor, antes do isolamento dos povos. Felizmente, a salada se espalhou por Arton antes da queda do continente. Um prato leve e equilibrado, inspira disparos precisos.', bonus: '+1 em testes de Pontaria.' },
-                { nome: 'Salada Imperial', descricao: 'Uma mistura de folhas com bacon e queijo, esta salada é leve, mas empolgante.', bonus: '+2 em testes de Iniciativa.' },
-                { nome: 'Sashimi', descricao: 'Uma iguaria da culinária tamuraniana, este prato consiste de peixes e frutos do mar fatiados em pequenos pedaços e servidos com um molho típico do Império de Jade. Uma refeição refinada, leve e equilibrada.', bonus: '+2 em rolagens de dano à distância.' },
-                { nome: 'Sopa de Cogumelos', descricao: 'Esta sopa expande sua percepção mística.', bonus: '+2 em testes de Misticismo.' },
-                { nome: 'Sopa de Peixe', descricao: 'Um cozido  de peixe com verduras, é um prato simples e humilde, mas garante descanso relaxante.', bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de mana em +1 por nível.' },
-                { nome: 'Torta de Maçã', descricao: 'Dizem que, após uma bruxa usar uma maçã envenenada para matar uma princesa, Thantalla-Dhaedelin, a Rainha das Fadas, decretou que maçãs nunca mais fariam mal a ninguém. Se a lenda é verdade, ou se maçãs são simplesmente saudáveis, ninguém sabe dizer, mas comer este prato fornece resistência a veneno +5.', bonus: 'Resistência a veneno +5.' }
-            ];
+            // Dados dos pratos
+            const pratos = getPratosCompletos();
 
             function renderPratosList(filterText = '') {
                 pratosList.innerHTML = '';
@@ -1846,6 +2289,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     prato.descricao.toLowerCase().includes(filterText.toLowerCase()) ||
                     prato.bonus.toLowerCase().includes(filterText.toLowerCase())
                 );
+
+                // Ordena favoritos primeiro
+                const favoritos = getPratosFavoritos();
+                filtered.sort((a, b) => {
+                    const aFavorito = favoritos.includes(a.nome);
+                    const bFavorito = favoritos.includes(b.nome);
+                    if (aFavorito && !bFavorito) return -1;
+                    if (!aFavorito && bFavorito) return 1;
+                    return a.nome.localeCompare(b.nome);
+                });
+
                 filtered.forEach(prato => {
                     const card = document.createElement('div');
                     card.style.background = '#23243a';
@@ -1853,56 +2307,55 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     card.style.borderRadius = '8px';
                     card.style.padding = '12px 14px';
                     card.style.display = 'flex';
-                    card.style.flexDirection = 'column';
-                    card.style.gap = '4px';
+                    card.style.justifyContent = 'space-between';
+                    card.style.alignItems = 'center';
+                    card.style.gap = '10px';
+
+                    // Informações do prato
+                    const pratoInfo = document.createElement('div');
+                    pratoInfo.style.flex = '1';
+                    pratoInfo.style.display = 'flex';
+                    pratoInfo.style.flexDirection = 'column';
+                    pratoInfo.style.gap = '4px';
 
                     const nome = document.createElement('div');
                     nome.textContent = prato.nome;
                     nome.style.color = '#ffb86c';
                     nome.style.fontWeight = 'bold';
                     nome.style.fontSize = '15px';
-                    card.appendChild(nome);
-
-                    const desc = document.createElement('div');
-                    desc.textContent = prato.descricao;
-                    desc.style.color = '#ecf0f1';
-                    desc.style.fontSize = '13px';
-                    card.appendChild(desc);
+                    pratoInfo.appendChild(nome);
 
                     const bonus = document.createElement('div');
                     bonus.textContent = prato.bonus;
                     bonus.style.color = '#6ec6ff';
                     bonus.style.fontSize = '13px';
                     bonus.style.fontWeight = 'bold';
-                    card.appendChild(bonus);
+                    pratoInfo.appendChild(bonus);
 
-                    // Evento de clique para ativar efeito de comida
+                    // Botão de favorito
+                    const favoriteBtn = document.createElement('button');
+                    favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
+                    favoriteBtn.style.background = 'none';
+                    favoriteBtn.style.border = 'none';
+                    favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
+                    favoriteBtn.style.fontSize = '18px';
+                    favoriteBtn.style.cursor = 'pointer';
+                    favoriteBtn.style.padding = '5px';
+                    favoriteBtn.style.minWidth = '30px';
+                    favoriteBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        togglePratoFavorito(prato.nome);
+                        favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
+                        favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
+                        renderPratosList(filterInput.value);
+                    };
+                    card.appendChild(pratoInfo);
+                    card.appendChild(favoriteBtn);
+
+                    // Evento de clique para abrir modal de detalhes
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
-                        const effectKey = 'prato_' + prato.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
-                        const effect = {
-                            name: prato.nome,
-                            description: prato.descricao + ' ' + prato.bonus,
-                            type: 'Comida',
-                            effectKey: effectKey
-                        };
-                        // Salva efeito de comida em localStorage se não existir
-                        let activeEffects = getActiveEffects();
-                        if (!activeEffects.includes(effectKey)) {
-                            // Salva o objeto completo em uma lista separada
-                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
-                            comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey); // evita duplicatas
-                            comidaEffects.push(effect);
-                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
-                            // Ativa o efeito
-                            activeEffects.push(effectKey);
-                            saveActiveEffects(activeEffects);
-                            updateEffectsBadge();
-                        }
-                        // Fecha o popup de pratos
-                        popup.remove();
-                        const overlay = document.getElementById('pratos-overlay');
-                        if (overlay) overlay.remove();
+                        createPratoDetailModal(prato);
                     };
 
                     pratosList.appendChild(card);
@@ -4654,16 +5107,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         const powerTextFilterInput = document.createElement('input');
         powerTextFilterInput.type = 'text';
-        powerTextFilterInput.placeholder = 'Filtrar poderes...';
+        powerTextFilterInput.placeholder = 'Filtrar pratos...';
         powerTextFilterInput.style.width = '100%';
-        powerTextFilterInput.style.padding = '10px 28px 10px 12px';
+        powerTextFilterInput.style.padding = '10px 12px';
         powerTextFilterInput.style.borderRadius = '8px';
-        powerTextFilterInput.style.border = '1px solid #6ec6ff';
+        powerTextFilterInput.style.border = '1px solid #ffb86c';
         powerTextFilterInput.style.background = '#23243a';
         powerTextFilterInput.style.color = '#fff';
         powerTextFilterInput.style.fontSize = '14px';
         powerTextFilterInput.style.outline = 'none';
         powerTextFilterInput.style.boxSizing = 'border-box';
+        powerTextFilterInput.style.fontSize = '15px';
 
         const powerClearTextBtn = document.createElement('span');
         powerClearTextBtn.textContent = '×';
@@ -4672,7 +5126,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         powerClearTextBtn.style.top = '50%';
         powerClearTextBtn.style.transform = 'translateY(-50%)';
         powerClearTextBtn.style.cursor = 'pointer';
-        powerClearTextBtn.style.color = '#6ec6ff';
+        powerClearTextBtn.style.color = '#ffb86c';
         powerClearTextBtn.style.fontSize = '18px';
         powerClearTextBtn.style.display = 'none';
 
@@ -7051,7 +7505,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             updateAbilityList();
         };
         filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
         popup.appendChild(filterContainer);
 
         // Lista visual
