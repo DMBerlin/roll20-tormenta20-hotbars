@@ -1123,7 +1123,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
 +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Você pode enviar um à frente, outra para trás, outra para cima e manter um perto de você, por exemplo. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
 
 +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
 
@@ -1734,219 +1734,291 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return [
             {
                 nome: 'Assado de Carnes',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_60.jpg', // Roasted Clefthoof
+                raridade: 'Comum',
                 descricao: 'Um prato muito apreciado no Reinado, mas mal visto no Império de Tauron. Pura proteína, deixa qualquer um mais forte.',
                 bonus: '+2 em rolagens de dano corpo a corpo.',
                 preco: 'T$ 30',
                 ingredientes: 'Carne, carne de caça, porco',
                 custoIngredientes: 'T$ 56',
-                cdTeste: '20'
+                cdTeste: '20',
+                icone: '🥩'
             },
             {
                 nome: 'Balinhas',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/achievement_halloween_candy_01.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias. Claro… Apesar do ceticismo dos outros, você recebe +2 em rolagens de dano de magias.',
                 bonus: '+2 em rolagens de dano de magias.',
                 preco: 'T$ 30',
                 ingredientes: 'Açúcar das fadas, fruta',
                 custoIngredientes: 'T$ 53',
-                cdTeste: '20'
+                cdTeste: '20',
+                icone: '🍬'
             },
             {
                 nome: 'Banquete dos Heróis',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_cauldron_frost.jpg', // Feast of Friends
+                raridade: 'Comum',
                 descricao: 'Uma mesa repleta das melhores comidas que o dinheiro pode pagar.',
                 bonus: '+1 em um atributo a sua escolha. Esse aumento não oferece PV, PM e perícias adicionais.',
                 preco: 'T$ 150',
                 ingredientes: 'Carne de caça, ovo de monstro, avelã de Norba',
                 custoIngredientes: 'T$ 82',
-                cdTeste: '25'
+                cdTeste: '25',
+                icone: '🍽️'
             },
             {
                 nome: 'Batata Valkariana',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_103_potatobread.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Batatas cortadas em tiras e mergulhadas em óleo fervente. Gordurentas e pouco nutritivas, são o tipo de prato que só é servido numa metrópole como Valkaria. Apesar disso, são saborosas e deixam qualquer um empolgado.',
                 bonus: '+1d6 em um teste a sua escolha realizado até o fim do dia.',
                 preco: 'T$ 2',
                 ingredientes: 'Óleo, legume',
                 custoIngredientes: 'T$ 4',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍟'
             },
             {
                 nome: 'Bolo de Cenoura',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_fishcake.jpg', // Carrot Cake
+                raridade: 'Comum',
                 descricao: 'Uma sobremesa simples, que "faz bem para a vista", segundo anciões de todo o Reinado. Aparentemente, os anciões estão certos, pois o bolo de cenoura fornece +2 em testes de Percepção.',
                 bonus: '+2 em testes de Percepção.',
                 preco: 'T$ 4',
                 ingredientes: 'Farinha, fruta, óleo',
                 custoIngredientes: 'T$ 7',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍰'
             },
             {
                 nome: 'Bolo do Panteão',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_144_cakeslice.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Uma sobremesa divina! Este bolo de gorad é preparado com os melhores ingredientes, por isso é caríssimo, servido apenas em banquetes reais — ou em tavernas que atendem aventureiros famosos. Dizem que o gorad usado no bolo é uma das fontes de energia do Panteão.',
                 bonus: 'Seu custo para ativar habilidades e lançar magias diminui em -1 PM (mínimo 1).',
                 preco: 'T$ 150',
                 ingredientes: 'Açúcar das fadas, avelã de Norba, farinha, gorad',
                 custoIngredientes: 'T$ 121',
-                cdTeste: '25'
+                cdTeste: '25',
+                icone: '🍰'
             },
             {
                 nome: 'Ensopado Reforçado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_swirlingmistsoup.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um prato nutritivo, mas pesado.',
                 bonus: '+20 PV temporários, mas seu deslocamento diminui em –1,5m.',
                 preco: 'T$ 6',
                 ingredientes: 'Cereal, porco, verdura',
                 custoIngredientes: 'T$ 10',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍲'
             },
             {
                 nome: 'Estrogonofe',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_sauteedcarrots.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Essa iguaria deliciosa foi inventada nas cortes do antigo Reino de Yudennach — dizem que é uma das poucas coisas boas a sair daquele lugar. Comer estrogonofe deixa você firme em suas convicções.',
                 bonus: '+2 em testes de Vontade.',
                 preco: 'T$ 12',
                 ingredientes: 'Carne, cogumelo, leite',
                 custoIngredientes: 'T$ 22',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍲'
             },
             {
                 nome: 'Fritada Monstruosa',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_06.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'A receita é simples — o segredo está nos ingredientes. Feita com ovos de monstros, esta omelete é extremamente nutritiva.',
                 bonus: '+10 PV temporários.',
                 preco: 'T$ 30',
                 ingredientes: 'Ovo de monstro, óleo',
                 custoIngredientes: 'T$ 53',
-                cdTeste: '20'
+                cdTeste: '20',
+                icone: '🍳'
             },
             {
                 nome: 'Futomaki',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_161_fish_white.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Criado no Império de Jade, este prato consiste em um rolo de arroz recheado com peixes, folhas e raízes. Uma refeição elegante, que deixa todos dispostos a dialogar.',
                 bonus: '+2 em testes de Diplomacia.',
                 preco: 'T$ 12',
                 ingredientes: 'Cereal, peixe',
                 custoIngredientes: 'T$ 8',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍣'
             },
             {
                 nome: 'Gorad Quente',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_meat_cooked_08.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Gorad e leite, servidos fumegando. Não tem erro. O gorad ativa o cérebro.',
                 bonus: '+2 PM temporários.',
                 preco: 'T$ 18',
                 ingredientes: 'Gorad, leite',
                 custoIngredientes: 'T$ 31',
-                cdTeste: '20'
+                cdTeste: '20',
+                icone: '🥛'
             },
             {
                 nome: 'Gorvelã',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_cask_04.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Gorad com avelã de Norba. É uma sobremesa cara, mas deliciosa.',
                 bonus: '+5 PM temporários.',
                 preco: 'T$ 42',
                 ingredientes: 'Gorad, avelã de Norba',
                 custoIngredientes: 'T$ 70',
-                cdTeste: '25'
+                cdTeste: '25',
+                icone: '🍰'
             },
             {
                 nome: 'Macarrão de Yuvalin',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_cooking_90_cinnamonbonefishstew.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Yuvalin é uma cidade mineradora em Zakharov, na fronteira com as Montanhas Uivantes. Seus habitantes criaram este prato reforçado (macarrão, bacon e creme de leite) para encarar suas árduas jornadas de trabalho nas minas. Deliciosa, a receita se espalhou por outras cidades e reinos.',
                 bonus: '+5 PV temporários.',
                 preco: 'T$ 6',
                 ingredientes: 'Farinha, leite, porco',
                 custoIngredientes: 'T$ 10',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍝'
             },
             {
                 nome: 'Pão de Queijo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_orchardfruit01.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um bom pão de queijo deixa qualquer aventureiro bem nutrido e saudável.',
                 bonus: '+2 em testes de Fortitude.',
                 preco: 'T$ 10',
                 ingredientes: 'Farinha, queijo',
                 custoIngredientes: 'T$ 7',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🥨'
             },
             {
                 nome: 'Pizza',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_deliciouspizza.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um disco de massa coberto com molho de tomate e queijo, este prato foi criado por Guido Venusto, um nobre de Ahlen que queria ascender socialmente. Inepto nas artes da intriga, Venusto resolveu manipular a corte pela barriga. Funcionou — o prato foi um sucesso e o nobre cozinheiro teve muita influência por anos. Certa noite, um espião conseguiu roubar a receita. O segredo da pizza se espalhou e, sem seu trunfo, Venusto foi assassinado logo depois. Comer uma pizza deixa-o pronto para encarar qualquer perigo.',
                 bonus: '+1 em todos os testes de resistência.',
                 preco: 'T$ 6',
                 ingredientes: 'Farinha, fruta, queijo',
                 custoIngredientes: 'T$ 10',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍕'
             },
             {
                 nome: 'Porco Assado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_123_roast.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um prato típico e popular em Deheon, que já se alastrou pelo Reinado. Comer um porco assado o deixa valente e brigão.',
                 bonus: '+1 em testes de Luta.',
                 preco: 'T$ 36',
                 ingredientes: 'Porco, frutas, legume',
                 custoIngredientes: 'T$ 12',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍖'
             },
             {
                 nome: 'Prato do Aventureiro',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_fish_18.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um cozido de frango com legumes, esta é uma refeição simples, mas mantém qualquer um bem alimentado.',
                 bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de vida em +1 por nível.',
                 preco: 'T$ 2',
                 ingredientes: 'Ave, legume',
                 custoIngredientes: 'T$ 5',
-                cdTeste: '10'
+                cdTeste: '10',
+                icone: '🍲'
             },
             {
                 nome: 'Salada de Salistick',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_goldcarpconsomme.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Com folhas e carne de frango, esta salada foi criada no Reino dos Médicos, onde a saúde é uma grande preocupação. Uma alimentação leve, mas nutritiva.',
                 bonus: 'Aumenta seu deslocamento em +1,5m (1 quadrado).',
                 preco: 'T$ 4',
                 ingredientes: 'Ave, fruta, legume',
                 custoIngredientes: 'T$ 8',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🥗'
             },
             {
                 nome: 'Salada Élfica',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_swirlingmistsoup.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Esta salada vegetariana leva uma mistura de folhas, frutas e legumes. Segundo os relatos, a receita foi inventada em Lenórienn e passada aos reinos humanos de Lamnor, antes do isolamento dos povos. Felizmente, a salada se espalhou por Arton antes da queda do continente. Um prato leve e equilibrado, inspira disparos precisos.',
                 bonus: '+1 em testes de Pontaria.',
                 preco: 'T$ 4',
                 ingredientes: 'Fruta, legume, verdura',
                 custoIngredientes: 'T$ 5',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🥗'
             },
             {
                 nome: 'Salada Imperial',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_braisedturtle.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Uma mistura de folhas com bacon e queijo, esta salada é leve, mas empolgante.',
                 bonus: '+2 em testes de Iniciativa.',
                 preco: 'T$ 6',
                 ingredientes: 'Porco, queijo, verdura',
                 custoIngredientes: 'T$ 15',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🥗'
             },
             {
                 nome: 'Sashimi',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_valleystirfry.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Uma iguaria da culinária tamuraniana, este prato consiste de peixes e frutos do mar fatiados em pequenos pedaços e servidos com um molho típico do Império de Jade. Uma refeição refinada, leve e equilibrada.',
                 bonus: '+2 em rolagens de dano à distância.',
                 preco: 'T$ 22',
                 ingredientes: 'Peixe, molho tamuraniano',
                 custoIngredientes: 'T$ 37',
-                cdTeste: '20'
+                cdTeste: '20',
+                icone: '🍣'
             },
             {
                 nome: 'Sopa de Cogumelos',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_slime_02.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Esta sopa expande sua percepção mística.',
                 bonus: '+2 em testes de Misticismo.',
                 preco: 'T$ 6',
                 ingredientes: 'Cogumelo, legume, verdura',
                 custoIngredientes: 'T$ 7',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍲'
             },
             {
                 nome: 'Sopa de Peixe',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_63.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Um cozido de peixe com verduras, é um prato simples e humilde, mas garante descanso relaxante.',
                 bonus: 'Em sua próxima noite de sono, você aumenta a sua recuperação de pontos de mana em +1 por nível.',
                 preco: 'T$ 3',
                 ingredientes: 'Verdura, peixe',
                 custoIngredientes: 'T$ 8',
-                cdTeste: '10'
+                cdTeste: '10',
+                icone: '🍲'
             },
             {
                 nome: 'Torta de Maçã',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Candy
+                raridade: 'Comum',
                 descricao: 'Dizem que, após uma bruxa usar uma maçã envenenada para matar uma princesa, Thantalla-Dhaedelin, a Rainha das Fadas, decretou que maçãs nunca mais fariam mal a ninguém. Se a lenda é verdade, ou se maçãs são simplesmente saudáveis, ninguém sabe dizer, mas comer este prato fornece resistência a veneno +5.',
                 bonus: 'Resistência a veneno +5.',
                 preco: 'T$ 2',
                 ingredientes: 'Farinha, fruta',
                 custoIngredientes: 'T$ 4',
-                cdTeste: '15'
+                cdTeste: '15',
+                icone: '🍰'
             }
         ];
     }
@@ -1991,20 +2063,59 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         modal.style.overflowY = 'auto';
         modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
 
-        // Cabeçalho
+        // Cabeçalho com ícone, nome e raridade
         const header = document.createElement('div');
         header.style.display = 'flex';
         header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
+        header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
-        const title = document.createElement('h2');
-        title.textContent = prato.nome;
-        title.style.color = '#ffb86c';
-        title.style.margin = '0';
-        title.style.fontSize = '20px';
-        title.style.fontWeight = 'bold';
+        // Container do ícone e informações do prato
+        const pratoInfo = document.createElement('div');
+        pratoInfo.style.display = 'flex';
+        pratoInfo.style.alignItems = 'center';
+        pratoInfo.style.gap = '12px';
+        pratoInfo.style.flex = '1';
 
+        // Ícone do prato com borda
+        if (prato.iconeUrl) {
+            const icone = document.createElement('img');
+            icone.src = prato.iconeUrl;
+            icone.alt = prato.nome;
+            icone.style.width = '3rem';
+            icone.style.height = '3rem';
+            icone.style.border = '2px solid #ffb86c';
+            icone.style.borderRadius = '8px';
+            icone.style.padding = '2px';
+            icone.style.backgroundColor = '#23243a';
+            pratoInfo.appendChild(icone);
+        }
+
+        // Container do nome e raridade
+        const nomeRaridade = document.createElement('div');
+        nomeRaridade.style.display = 'flex';
+        nomeRaridade.style.flexDirection = 'column';
+        nomeRaridade.style.gap = '4px';
+
+        // Nome do prato
+        const pratoTitle = document.createElement('div');
+        pratoTitle.textContent = prato.nome;
+        pratoTitle.style.color = '#ffb86c';
+        pratoTitle.style.fontSize = '18px';
+        pratoTitle.style.fontWeight = 'bold';
+        nomeRaridade.appendChild(pratoTitle);
+
+        // Raridade
+        const raridade = document.createElement('div');
+        raridade.textContent = `Raridade: ${prato.raridade || 'Comum'}`;
+        raridade.style.color = '#6ec6ff';
+        raridade.style.fontSize = '14px';
+        nomeRaridade.appendChild(raridade);
+
+        pratoInfo.appendChild(nomeRaridade);
+        header.appendChild(pratoInfo);
+
+        // Botão de fechar
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '×';
         closeBtn.style.background = 'none';
@@ -2019,7 +2130,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             modal.remove();
             overlay.remove();
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
         modal.appendChild(header);
 
@@ -2311,6 +2421,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     card.style.alignItems = 'center';
                     card.style.gap = '10px';
 
+                    // Removido ícone da lista - agora só aparece no modal de detalhes
+
                     // Informações do prato
                     const pratoInfo = document.createElement('div');
                     pratoInfo.style.flex = '1';
@@ -2324,6 +2436,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     nome.style.fontWeight = 'bold';
                     nome.style.fontSize = '15px';
                     pratoInfo.appendChild(nome);
+
+                    // Resumo da descrição
+                    const resumo = document.createElement('div');
+                    const palavras = prato.descricao.split(/\s+/);
+                    let resumoTexto = palavras.slice(0, 10).join(' ');
+                    if (palavras.length > 10) resumoTexto += '...';
+                    resumo.textContent = resumoTexto;
+                    resumo.style.color = '#bdbdbd';
+                    resumo.style.fontSize = '12px';
+                    resumo.style.fontStyle = 'italic';
+                    pratoInfo.appendChild(resumo);
 
                     const bonus = document.createElement('div');
                     bonus.textContent = prato.bonus;
@@ -5575,7 +5698,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             raceHeader.style.marginBottom = '8px';
 
             const raceTitle = document.createElement('div');
-            raceTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${race.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${race.title}</em>`;
+            raceTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 15px;">${race.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${race.title}</em>`;
 
             const statusIndicator = document.createElement('div');
             if (isSelected) {
