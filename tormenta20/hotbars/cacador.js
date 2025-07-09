@@ -212,11 +212,6 @@
         }
     }
 
-    // Funções de conveniência para diferentes tipos de notificação
-    function showNotification(message, duration = 5000) {
-        return createNotification(message, 'info', duration);
-    }
-
     function showSuccessNotification(message, duration = 5000) {
         return createNotification(message, 'success', duration);
     }
