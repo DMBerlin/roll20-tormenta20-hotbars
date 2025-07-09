@@ -1123,7 +1123,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
 +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Você pode enviar um à frente, outra para trás, outra para cima e manter um perto de você, por exemplo. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
 
 +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
 
@@ -5008,15 +5008,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         popup.style.background = 'rgba(30,30,40,0.98)';
         popup.style.border = '2px solid #8B4513';
         popup.style.borderRadius = '12px';
-        popup.style.padding = '20px';
         popup.style.zIndex = '10001';
         popup.style.maxWidth = '900px';
         popup.style.maxHeight = '85vh';
-        popup.style.overflowY = 'auto';
         popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
         popup.style.display = 'flex';
         popup.style.flexDirection = 'column';
         popup.style.alignItems = 'stretch';
+        popup.style.overflow = 'hidden'; // Remove overflow do container principal
 
         // Overlay para fechar ao clicar fora
         const overlay = document.createElement('div');
@@ -5047,45 +5046,68 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         });
 
-        // Cabeçalho
+        // Cabeçalho fixo
         const header = document.createElement('div');
         header.style.display = 'flex';
         header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
-        header.style.marginBottom = '20px';
         header.style.width = '100%';
         header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-        header.style.paddingBottom = '15px';
+        header.style.padding = '15px 20px';
+        header.style.background = 'rgba(30,30,40,0.98)';
+        header.style.borderRadius = '12px 12px 0 0';
+        header.style.flexShrink = '0'; // Impede que o header encolha
+        header.style.minHeight = '60px'; // Altura mínima para garantir espaço
+        header.style.boxSizing = 'border-box'; // Garante que padding não afete o tamanho
 
         const title = document.createElement('h2');
         title.innerHTML = '🏹 Caçador';
         title.style.color = '#8B4513';
         title.style.margin = '0';
-        title.style.fontSize = '24px';
+        title.style.fontSize = '22px';
         title.style.fontWeight = 'bold';
+        title.style.flex = '1'; // Ocupa o espaço disponível
+        title.style.minWidth = '0'; // Permite que o texto seja cortado se necessário
 
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = '×';
         closeBtn.style.background = 'none';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '28px';
+        closeBtn.style.fontSize = '24px';
         closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '36px';
-        closeBtn.style.height = '36px';
+        closeBtn.style.padding = '8px';
+        closeBtn.style.width = '40px';
+        closeBtn.style.height = '40px';
+        closeBtn.style.display = 'flex';
+        closeBtn.style.alignItems = 'center';
+        closeBtn.style.justifyContent = 'center';
+        closeBtn.style.borderRadius = '4px';
+        closeBtn.style.transition = 'background-color 0.2s';
+        closeBtn.style.flexShrink = '0'; // Impede que o botão encolha
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('hunter-class-overlay');
             if (overlay) overlay.remove();
         };
+
+        // Efeitos hover para o botão de fechar
+        closeBtn.onmouseover = () => {
+            closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        };
+        closeBtn.onmouseout = () => {
+            closeBtn.style.backgroundColor = 'transparent';
+        };
         header.appendChild(title);
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Sistema de Abas
+        // Sistema de Abas fixo
         const tabContainer = document.createElement('div');
-        tabContainer.style.marginBottom = '20px';
+        tabContainer.style.padding = '15px 20px 0 20px';
+        tabContainer.style.background = 'rgba(30,30,40,0.98)';
+        tabContainer.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
+        tabContainer.style.flexShrink = '0'; // Impede que as abas encolham
 
         const tabButtons = document.createElement('div');
         tabButtons.style.display = 'flex';
@@ -5094,6 +5116,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         const tabContents = document.createElement('div');
         tabContents.style.minHeight = '400px';
+        tabContents.style.overflowY = 'auto'; // Torna o conteúdo scrollable
+        tabContents.style.padding = '20px';
+        tabContents.style.flex = '1'; // Ocupa o espaço restante
+        tabContents.style.maxHeight = 'calc(85vh - 180px)'; // Altura máxima ajustada para o novo header
+        tabContents.style.boxSizing = 'border-box'; // Garante que o padding não afete o tamanho total
 
         // Aba 1: Características da Classe
         const tab1Btn = document.createElement('button');
@@ -5553,7 +5580,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const divinitiesList = document.createElement('div');
         divinitiesList.style.display = 'flex';
         divinitiesList.style.flexDirection = 'column';
-        divinitiesList.style.gap = '12px';
+        divinitiesList.style.gap = '15px';
 
         divinities.forEach(divinity => {
             const isSelected = getSelectedDivinity() === divinity.name;
@@ -5562,9 +5589,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             divinityContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
             divinityContainer.style.border = `2px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
             divinityContainer.style.borderRadius = '8px';
-            divinityContainer.style.padding = '12px';
+            divinityContainer.style.padding = '10px';
             divinityContainer.style.cursor = 'pointer';
             divinityContainer.style.transition = 'all 0.3s';
+            divinityContainer.style.width = '100%';
+            divinityContainer.style.boxSizing = 'border-box';
 
             divinityContainer.onmouseover = () => {
                 if (!isSelected) {
@@ -5590,12 +5619,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             divinityHeader.style.marginBottom = '8px';
 
             const divinityTitle = document.createElement('div');
-            divinityTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${divinity.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${divinity.title}</em>`;
+            divinityTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 15px;">${divinity.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${divinity.title}</em>`;
 
             const statusIndicator = document.createElement('div');
             statusIndicator.textContent = isSelected ? '✓ Selecionada' : 'Clique para ver detalhes';
             statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-            statusIndicator.style.fontSize = '12px';
+            statusIndicator.style.fontSize = '11px';
             statusIndicator.style.fontWeight = 'bold';
             statusIndicator.style.fontStyle = 'italic';
 
@@ -5607,7 +5636,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const descriptionDiv = document.createElement('div');
             descriptionDiv.textContent = divinity.shortDescription;
             descriptionDiv.style.color = '#ecf0f1';
-            descriptionDiv.style.fontSize = '12px';
+            descriptionDiv.style.fontSize = '11px';
             descriptionDiv.style.lineHeight = '1.4';
             divinityContainer.appendChild(descriptionDiv);
 
@@ -5655,10 +5684,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const raceContainer = document.createElement('div');
             raceContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
             raceContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
-            raceContainer.style.borderRadius = '12px';
-            raceContainer.style.padding = '15px';
+            raceContainer.style.borderRadius = '8px';
+            raceContainer.style.padding = '10px';
             raceContainer.style.cursor = 'pointer';
             raceContainer.style.transition = 'all 0.2s';
+            raceContainer.style.width = '100%';
+            raceContainer.style.boxSizing = 'border-box';
 
             raceContainer.onclick = () => {
                 if (isSelected) {
@@ -5711,7 +5742,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 statusIndicator.textContent = 'Clique para ver detalhes';
             }
             statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-            statusIndicator.style.fontSize = '12px';
+            statusIndicator.style.fontSize = '11px';
             statusIndicator.style.fontWeight = 'bold';
             statusIndicator.style.fontStyle = 'italic';
             statusIndicator.style.textAlign = 'right';
@@ -5724,7 +5755,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const descriptionDiv = document.createElement('div');
             descriptionDiv.textContent = race.shortDescription;
             descriptionDiv.style.color = '#ecf0f1';
-            descriptionDiv.style.fontSize = '12px';
+            descriptionDiv.style.fontSize = '11px';
             descriptionDiv.style.lineHeight = '1.4';
             raceContainer.appendChild(descriptionDiv);
 
@@ -7121,8 +7152,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tabContents.appendChild(tab5Content);
 
         tabContainer.appendChild(tabButtons);
-        tabContainer.appendChild(tabContents);
         popup.appendChild(tabContainer);
+
+        // Container para conteúdo scrollable
+        const contentContainer = document.createElement('div');
+        contentContainer.style.flex = '1';
+        contentContainer.style.overflow = 'hidden';
+        contentContainer.appendChild(tabContents);
+        popup.appendChild(contentContainer);
 
         // Tabela de Progressão (mantida na primeira aba)
         const progressionSection = document.createElement('div');
@@ -7244,7 +7281,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         noteText.style.fontWeight = 'bold';
 
         bookNote.appendChild(noteText);
-        popup.appendChild(bookNote);
+        tab1Content.appendChild(bookNote);
 
         // Só agora adiciona o popup ao DOM
         document.body.appendChild(popup);
