@@ -26,6 +26,209 @@
     // Sistema de tipo de raça selecionado (para raças com subtipos)
     const SELECTED_RACE_TYPE_KEY = 'roll20-hotbar-selected-race-type';
 
+    // Sistema de notificações customizadas
+    let notificationContainer = null;
+
+    // Função para criar o container de notificações
+    function createNotificationContainer() {
+        if (notificationContainer) return notificationContainer;
+
+        notificationContainer = document.createElement('div');
+        notificationContainer.id = 'roll20-notification-container';
+        notificationContainer.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        `;
+
+        document.body.appendChild(notificationContainer);
+        return notificationContainer;
+    }
+
+    // Função para criar uma notificação
+    function createNotification(message, type = 'info', duration = 5000) {
+        const container = createNotificationContainer();
+
+        const notification = document.createElement('div');
+        notification.className = `roll20-notification roll20-notification-${type}`;
+        notification.style.cssText = `
+            background: ${getNotificationBackground(type)};
+            border: 1px solid ${getNotificationBorder(type)};
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: ${getNotificationTextColor(type)};
+        `;
+
+        // Ícone
+        const icon = document.createElement('div');
+        icon.innerHTML = getNotificationIcon(type);
+        icon.style.cssText = `
+            font-size: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        `;
+        notification.appendChild(icon);
+
+        // Mensagem
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = message;
+        messageDiv.style.cssText = `
+            flex: 1;
+            line-height: 1.4;
+        `;
+        notification.appendChild(messageDiv);
+
+        // Botão de fechar
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.cssText = `
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+            flex-shrink: 0;
+        `;
+        closeBtn.onmouseenter = () => closeBtn.style.opacity = '1';
+        closeBtn.onmouseleave = () => closeBtn.style.opacity = '0.7';
+        closeBtn.onclick = () => removeNotification(notification);
+        notification.appendChild(closeBtn);
+
+        container.appendChild(notification);
+
+        // Animar entrada
+        setTimeout(() => {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+
+        // Auto-remover após duração
+        if (duration > 0) {
+            setTimeout(() => {
+                removeNotification(notification);
+            }, duration);
+        }
+
+        return notification;
+    }
+
+    // Função para remover notificação
+    function removeNotification(notification) {
+        if (!notification || !notification.parentNode) return;
+
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }
+
+    // Função para obter cor de fundo baseada no tipo
+    function getNotificationBackground(type) {
+        switch (type) {
+            case 'success':
+                return '#d4edda';
+            case 'warning':
+                return '#fff3cd';
+            case 'error':
+                return '#f8d7da';
+            default:
+                return '#d1ecf1';
+        }
+    }
+
+    // Função para obter cor da borda baseada no tipo
+    function getNotificationBorder(type) {
+        switch (type) {
+            case 'success':
+                return '#c3e6cb';
+            case 'warning':
+                return '#ffeaa7';
+            case 'error':
+                return '#f5c6cb';
+            default:
+                return '#bee5eb';
+        }
+    }
+
+    // Função para obter cor do texto baseada no tipo
+    function getNotificationTextColor(type) {
+        switch (type) {
+            case 'success':
+                return '#155724';
+            case 'warning':
+                return '#856404';
+            case 'error':
+                return '#721c24';
+            default:
+                return '#0c5460';
+        }
+    }
+
+    // Função para obter ícone baseado no tipo
+    function getNotificationIcon(type) {
+        switch (type) {
+            case 'success':
+                return '✓';
+            case 'warning':
+                return '⚠';
+            case 'error':
+                return '✗';
+            default:
+                return 'ℹ';
+        }
+    }
+
+    // Funções de conveniência para diferentes tipos de notificação
+    function showNotification(message, duration = 5000) {
+        return createNotification(message, 'info', duration);
+    }
+
+    function showSuccessNotification(message, duration = 5000) {
+        return createNotification(message, 'success', duration);
+    }
+
+    function showWarningNotification(message, duration = 5000) {
+        return createNotification(message, 'warning', duration);
+    }
+
+    function showErrorNotification(message, duration = 5000) {
+        return createNotification(message, 'error', duration);
+    }
+
     // Função global para obter o nome do personagem
     function getCharacterName() {
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
@@ -98,8 +301,10 @@
 
         if (index > -1) {
             learnedAbilities.splice(index, 1);
+            showWarningNotification(`Habilidade "${abilityName}" removida da lista de aprendidas.`);
         } else {
             learnedAbilities.push(abilityName);
+            showSuccessNotification(`Habilidade "${abilityName}" adicionada à lista de aprendidas!`);
         }
 
         saveLearnedAbilities(learnedAbilities);
@@ -211,8 +416,10 @@
 
         if (index > -1) {
             favorites.splice(index, 1);
+            showWarningNotification(`Skill "${skillName}" removida dos favoritos.`);
         } else {
             favorites.push(skillName);
+            showSuccessNotification(`Skill "${skillName}" adicionada aos favoritos!`);
         }
 
         saveFavorites(favorites);
@@ -382,6 +589,7 @@
                 saveAvatarUrl(url);
                 // Atualiza o avatar na hotbar
                 updateCharacterAvatar();
+                showSuccessNotification('Avatar do personagem atualizado!');
             }
             popup.remove();
             const overlay = document.getElementById('avatar-overlay');
@@ -411,6 +619,7 @@
         clearBtn.onclick = () => {
             saveAvatarUrl('');
             updateCharacterAvatar();
+            showWarningNotification('Avatar do personagem removido.');
             popup.remove();
             const overlay = document.getElementById('avatar-overlay');
             if (overlay) overlay.remove();
@@ -1718,8 +1927,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const index = favoritos.indexOf(nomePrato);
         if (index > -1) {
             favoritos.splice(index, 1);
+            showWarningNotification(`Prato "${nomePrato}" removido dos favoritos.`);
         } else {
             favoritos.push(nomePrato);
+            showSuccessNotification(`Prato "${nomePrato}" adicionado aos favoritos!`);
         }
         savePratosFavoritos(favoritos);
     }
@@ -2301,6 +2512,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         shareBtn.onclick = () => {
             const template = `&{template:t20-info}{{infoname=${prato.nome}}}{{description=${prato.descricao} ${prato.bonus}}}`;
             sendToChat(template);
+            showSuccessNotification(`Prato "${prato.nome}" compartilhado no chat!`);
             modal.remove();
             overlay.remove();
         };
@@ -2333,8 +2545,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 comidaEffects.push(effect);
                 localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
                 activeEffects.push(effectKey);
+                showSuccessNotification(`Prato "${prato.nome}" consumido! Efeito ativo por 1 hora.`);
                 saveActiveEffects(activeEffects);
                 updateEffectsBadge();
+            } else {
+                showWarningNotification(`Prato "${prato.nome}" já está ativo nos efeitos!`);
             }
             modal.remove();
             overlay.remove();
@@ -4019,6 +4234,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             if (novoNome !== null && novoNome.trim() !== '') {
                 saveCharName(novoNome.trim());
                 characterName.textContent = novoNome.trim();
+                showSuccessNotification(`Nome do personagem alterado para "${novoNome.trim()}"!`);
             }
         };
 
@@ -4037,8 +4253,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 if (nivel >= 1 && nivel <= 20) {
                     saveCharLevel(nivel.toString());
                     characterLevel.textContent = `Nível ${nivel}`;
+                    showSuccessNotification(`Nível do personagem alterado para ${nivel}!`);
                 } else {
-                    alert('O nível deve ser entre 1 e 20!');
+                    showErrorNotification('O nível deve ser entre 1 e 20!');
                 }
             }
         };
@@ -7384,8 +7601,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         if (index > -1) {
             learnedPowers.splice(index, 1);
+            showWarningNotification(`Poder de Destino "${powerName}" removido da lista de aprendidos.`);
         } else {
             learnedPowers.push(powerName);
+            showSuccessNotification(`Poder de Destino "${powerName}" adicionado à lista de aprendidos!`);
         }
 
         saveLearnedDestinyPowers(learnedPowers);
@@ -8650,8 +8869,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         if (index > -1) {
             activeEffects.splice(index, 1);
+            showWarningNotification(`Efeito "${effectName}" desativado.`);
         } else {
             activeEffects.push(effectName);
+            showSuccessNotification(`Efeito "${effectName}" ativado!`);
         }
 
         saveActiveEffects(activeEffects);
