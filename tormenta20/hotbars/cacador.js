@@ -1548,6 +1548,119 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         document.body.appendChild(popup);
     }
 
+    // Função para obter dados das magias
+    function getSpellData(spellName) {
+        const spellDatabase = {
+            'Luz Sagrada': {
+                tipo: 'Divina',
+                ciclo: 1,
+                escola: 'Evocação'
+            },
+            'Sombras Profanas': {
+                tipo: 'Universal',
+                ciclo: 1,
+                escola: 'Necromancia'
+            },
+            'Cura Ferimentos Leves': {
+                tipo: 'Divina',
+                ciclo: 1,
+                escola: 'Cura'
+            },
+            'Proteção Divina': {
+                tipo: 'Divina',
+                ciclo: 1,
+                escola: 'Abjuração'
+            },
+            'Bênção': {
+                tipo: 'Divina',
+                ciclo: 1,
+                escola: 'Encantamento'
+            },
+            'Raio de Energia': {
+                tipo: 'Arcana',
+                ciclo: 1,
+                escola: 'Evocação'
+            },
+            'Escudo Mágico': {
+                tipo: 'Arcana',
+                ciclo: 1,
+                escola: 'Abjuração'
+            },
+            'Disfarce Ilusório': {
+                tipo: 'Arcana',
+                ciclo: 1,
+                escola: 'Ilusão'
+            },
+            'Detectar Magia': {
+                tipo: 'Universal',
+                ciclo: 1,
+                escola: 'Adivinhação'
+            },
+            'Compreender Idiomas': {
+                tipo: 'Universal',
+                ciclo: 1,
+                escola: 'Adivinhação'
+            },
+            'Cura Ferimentos Moderados': {
+                tipo: 'Divina',
+                ciclo: 2,
+                escola: 'Cura'
+            },
+            'Silêncio': {
+                tipo: 'Divina',
+                ciclo: 2,
+                escola: 'Ilusão'
+            },
+            'Bola de Fogo': {
+                tipo: 'Arcana',
+                ciclo: 3,
+                escola: 'Evocação'
+            },
+            'Relâmpago': {
+                tipo: 'Arcana',
+                ciclo: 3,
+                escola: 'Evocação'
+            },
+            'Invisibilidade': {
+                tipo: 'Arcana',
+                ciclo: 2,
+                escola: 'Ilusão'
+            },
+            'Sugestão': {
+                tipo: 'Arcana',
+                ciclo: 2,
+                escola: 'Encantamento'
+            },
+            'Dissipar Magia': {
+                tipo: 'Universal',
+                ciclo: 3,
+                escola: 'Abjuração'
+            },
+            'Voo': {
+                tipo: 'Arcana',
+                ciclo: 3,
+                escola: 'Transmutação'
+            },
+            'Teleporte': {
+                tipo: 'Arcana',
+                ciclo: 4,
+                escola: 'Conjuração'
+            },
+            'Ressurreição': {
+                tipo: 'Divina',
+                ciclo: 5,
+                escola: 'Cura'
+            },
+            'Meteoro': {
+                tipo: 'Arcana',
+                ciclo: 6,
+                escola: 'Evocação'
+            }
+        };
+
+        return spellDatabase[spellName] || {};
+    }
+
     // Função para criar popup de detalhes de spell
     function createSpellCastPopup(spellName, spellDisplayName) {
         // Remove popup existente se houver
@@ -1614,24 +1727,73 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         title.style.fontWeight = 'bold';
         titleContainer.appendChild(title);
 
-        // Tag de origem
-        const originTag = document.createElement('span');
-        if (spellName === 'Luz Sagrada') {
-            originTag.textContent = 'Aggelus';
-        } else if (spellName === 'Sombras Profanas') {
-            originTag.textContent = 'Sulfure';
+        // Container para chips
+        const chipsContainer = document.createElement('div');
+        chipsContainer.style.display = 'flex';
+        chipsContainer.style.flexWrap = 'wrap';
+        chipsContainer.style.gap = '6px';
+        chipsContainer.style.marginTop = '8px';
+
+        // Função para criar chip
+        function createChip(text, color, bgColor) {
+            const chip = document.createElement('span');
+            chip.textContent = text;
+            chip.style.background = bgColor;
+            chip.style.color = color;
+            chip.style.fontSize = '11px';
+            chip.style.fontWeight = 'bold';
+            chip.style.borderRadius = '12px';
+            chip.style.padding = '3px 8px';
+            chip.style.display = 'inline-block';
+            chip.style.letterSpacing = '0.3px';
+            chip.style.boxShadow = '0 1px 3px rgba(0,0,0,0.2)';
+            chip.style.border = '1px solid rgba(255,255,255,0.1)';
+            return chip;
         }
-        originTag.style.background = '#6ec6ff';
-        originTag.style.color = '#23243a';
-        originTag.style.fontSize = '12px';
-        originTag.style.fontWeight = 'bold';
-        originTag.style.borderRadius = '8px';
-        originTag.style.padding = '2px 10px';
-        originTag.style.marginTop = '2px';
-        originTag.style.display = 'inline-block';
-        originTag.style.letterSpacing = '0.5px';
-        originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
-        titleContainer.appendChild(originTag);
+
+        // Dados das magias
+        const spellData = getSpellData(spellName);
+
+        // Chip de Tipo (Arcana/Divina)
+        if (spellData.tipo) {
+            const tipoChip = createChip(
+                spellData.tipo,
+                '#23243a',
+                spellData.tipo === 'Arcana' ? '#9c27b0' : '#ff9800'
+            );
+            chipsContainer.appendChild(tipoChip);
+        }
+
+        // Chip de Ciclo
+        if (spellData.ciclo) {
+            const cicloChip = createChip(
+                `${spellData.ciclo}º Círculo`,
+                '#23243a',
+                '#2196f3'
+            );
+            chipsContainer.appendChild(cicloChip);
+        }
+
+        // Chip de Escola
+        if (spellData.escola) {
+            const escolaChip = createChip(
+                spellData.escola,
+                '#23243a',
+                '#4caf50'
+            );
+            chipsContainer.appendChild(escolaChip);
+        }
+
+        // Tag de origem (mantida para compatibilidade)
+        if (spellName === 'Luz Sagrada') {
+            const originTag = createChip('Aggelus', '#23243a', '#6ec6ff');
+            chipsContainer.appendChild(originTag);
+        } else if (spellName === 'Sombras Profanas') {
+            const originTag = createChip('Sulfure', '#23243a', '#6ec6ff');
+            chipsContainer.appendChild(originTag);
+        }
+
+        titleContainer.appendChild(chipsContainer);
 
         header.appendChild(titleContainer);
 
