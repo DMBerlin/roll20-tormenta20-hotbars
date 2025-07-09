@@ -2079,6 +2079,45 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Ícone do prato com borda
         if (prato.iconeUrl) {
+            // Container para skeleton e imagem
+            const iconeContainer = document.createElement('div');
+            iconeContainer.style.position = 'relative';
+            iconeContainer.style.width = '3rem';
+            iconeContainer.style.height = '3rem';
+            iconeContainer.style.display = 'flex';
+            iconeContainer.style.alignItems = 'center';
+            iconeContainer.style.justifyContent = 'center';
+
+            // Skeleton loader
+            const skeleton = document.createElement('div');
+            skeleton.style.width = '100%';
+            skeleton.style.height = '100%';
+            skeleton.style.borderRadius = '8px';
+            skeleton.style.background = 'linear-gradient(90deg, #23243a 25%, #2c2d4a 50%, #23243a 75%)';
+            skeleton.style.animation = 'skeleton-loading 1.2s infinite linear';
+            skeleton.style.position = 'absolute';
+            skeleton.style.top = '0';
+            skeleton.style.left = '0';
+            skeleton.style.zIndex = '1';
+            iconeContainer.appendChild(skeleton);
+
+            // Emoji fallback (inicialmente oculto)
+            const emojiFallback = document.createElement('div');
+            emojiFallback.textContent = '🍲';
+            emojiFallback.style.fontSize = '2rem';
+            emojiFallback.style.display = 'none';
+            emojiFallback.style.position = 'absolute';
+            emojiFallback.style.top = '0';
+            emojiFallback.style.left = '0';
+            emojiFallback.style.width = '100%';
+            emojiFallback.style.height = '100%';
+            emojiFallback.style.display = 'flex';
+            emojiFallback.style.alignItems = 'center';
+            emojiFallback.style.justifyContent = 'center';
+            emojiFallback.style.zIndex = '2';
+            iconeContainer.appendChild(emojiFallback);
+
+            // Imagem do prato
             const icone = document.createElement('img');
             icone.src = prato.iconeUrl;
             icone.alt = prato.nome;
@@ -2088,7 +2127,31 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             icone.style.borderRadius = '8px';
             icone.style.padding = '2px';
             icone.style.backgroundColor = '#23243a';
-            pratoInfo.appendChild(icone);
+            icone.style.position = 'relative';
+            icone.style.zIndex = '3';
+            icone.style.objectFit = 'cover';
+            icone.style.display = 'block';
+            // Ao carregar, remove skeleton
+            icone.onload = () => {
+                skeleton.style.display = 'none';
+            };
+            // Ao erro, mostra emoji e esconde imagem
+            icone.onerror = () => {
+                skeleton.style.display = 'none';
+                icone.style.display = 'none';
+                emojiFallback.style.display = 'flex';
+            };
+            iconeContainer.appendChild(icone);
+
+            // Adiciona animação do skeleton ao head se não existir
+            if (!document.getElementById('skeleton-loader-style')) {
+                const style = document.createElement('style');
+                style.id = 'skeleton-loader-style';
+                style.textContent = `@keyframes skeleton-loading { 0% { background-position: -200px 0; } 100% { background-position: calc(200px + 100%) 0; } }`;
+                document.head.appendChild(style);
+            }
+
+            pratoInfo.appendChild(iconeContainer);
         }
 
         // Container do nome e raridade
@@ -2245,7 +2308,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Botão Usar
         const useBtn = document.createElement('button');
-        useBtn.textContent = 'Usar Prato';
+        useBtn.textContent = 'Consumir Prato';
         useBtn.style.flex = '1';
         useBtn.style.padding = '10px 15px';
         useBtn.style.background = '#27ae60';
