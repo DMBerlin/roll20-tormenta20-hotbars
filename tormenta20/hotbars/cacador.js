@@ -1201,6 +1201,40 @@
         pratosCard.appendChild(pratosDesc);
         modulesList.appendChild(pratosCard);
 
+        // Card: Lista de Condições
+        const conditionsCard = document.createElement('div');
+        conditionsCard.style.background = '#23243a';
+        conditionsCard.style.border = '1.5px solid #ffb86c';
+        conditionsCard.style.borderRadius = '8px';
+        conditionsCard.style.padding = '16px';
+        conditionsCard.style.cursor = 'pointer';
+        conditionsCard.style.transition = 'all 0.2s';
+        conditionsCard.onmouseover = () => {
+            conditionsCard.style.background = '#2d2e4a';
+        };
+        conditionsCard.onmouseout = () => {
+            conditionsCard.style.background = '#23243a';
+        };
+        conditionsCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createConditionsPopup();
+        };
+        const conditionsTitle = document.createElement('div');
+        conditionsTitle.textContent = 'Lista de Condições';
+        conditionsTitle.style.color = '#ffb86c';
+        conditionsTitle.style.fontSize = '16px';
+        conditionsTitle.style.fontWeight = 'bold';
+        conditionsTitle.style.marginBottom = '6px';
+        conditionsCard.appendChild(conditionsTitle);
+        const conditionsDesc = document.createElement('div');
+        conditionsDesc.textContent = 'Condições que afetam o personagem.';
+        conditionsDesc.style.color = '#ecf0f1';
+        conditionsDesc.style.fontSize = '13px';
+        conditionsCard.appendChild(conditionsDesc);
+        modulesList.appendChild(conditionsCard);
+
         document.body.appendChild(popup);
     }
 
@@ -5241,6 +5275,27 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         foodIndicatorsSection.appendChild(foodIconsContainer);
         hotbar.appendChild(foodIndicatorsSection);
 
+        // NOVA SEÇÃO: Indicadores Visuais de Condições
+        const conditionsIndicatorsSection = document.createElement('div');
+        conditionsIndicatorsSection.id = 'conditions-indicators-section';
+        conditionsIndicatorsSection.style.display = 'none'; // Inicialmente oculto
+        conditionsIndicatorsSection.style.padding = '8px 24px 12px 24px';
+        conditionsIndicatorsSection.style.borderTop = '1px solid rgba(255,107,107,0.2)';
+        conditionsIndicatorsSection.style.width = '100%';
+        conditionsIndicatorsSection.style.boxSizing = 'border-box';
+
+        // Container para os ícones das condições
+        const conditionsIconsContainer = document.createElement('div');
+        conditionsIconsContainer.id = 'conditions-icons-container';
+        conditionsIconsContainer.style.display = 'flex';
+        conditionsIconsContainer.style.gap = '6px';
+        conditionsIconsContainer.style.justifyContent = 'flex-start';
+        conditionsIconsContainer.style.alignItems = 'center';
+        conditionsIconsContainer.style.flexWrap = 'wrap';
+
+        conditionsIndicatorsSection.appendChild(conditionsIconsContainer);
+        hotbar.appendChild(conditionsIndicatorsSection);
+
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
 
@@ -5248,6 +5303,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         updateEffectsBadge();
         // Atualiza os indicadores visuais de pratos
         updateFoodVisualIndicators();
+        // Atualiza os indicadores visuais de condições
+        updateConditionsVisualIndicators();
 
         // NOVO: Inicia o pré-carregamento de imagens em background
         setTimeout(() => {
@@ -9124,16 +9181,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     }
 
     // Função para ativar/desativar efeito
-    function toggleEffect(effectName) {
+    function toggleEffect(effectName, silent = false) {
         const activeEffects = getActiveEffects();
         const index = activeEffects.indexOf(effectName);
 
         if (index > -1) {
             activeEffects.splice(index, 1);
-            showWarningNotification(`Efeito "${effectName}" desativado.`);
+            if (!silent) {
+                showWarningNotification(`Efeito "${effectName}" desativado.`);
+            }
         } else {
             activeEffects.push(effectName);
-            showSuccessNotification(`Efeito "${effectName}" ativado!`);
+            if (!silent) {
+                showSuccessNotification(`Efeito "${effectName}" ativado!`);
+            }
         }
 
         saveActiveEffects(activeEffects);
@@ -9208,6 +9269,186 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             console.error('Erro ao carregar cache de imagens:', error);
             return { version: IMAGE_CACHE_VERSION, images: {} };
         }
+    }
+
+    // NOVO: Sistema de Condições
+
+    // Função para obter condições ativas
+    function getActiveConditions() {
+        const activeConditions = localStorage.getItem('roll20-hotbar-active-conditions');
+        return activeConditions ? JSON.parse(activeConditions) : [];
+    }
+
+    // Função para salvar condições ativas
+    function saveActiveConditions(conditions) {
+        localStorage.setItem('roll20-hotbar-active-conditions', JSON.stringify(conditions));
+    }
+
+    // Função para verificar se uma condição está ativa
+    function isConditionActive(conditionName) {
+        const activeConditions = getActiveConditions();
+        return activeConditions.includes(conditionName);
+    }
+
+    // Função para ativar/desativar condição
+    function toggleCondition(conditionName) {
+        const activeConditions = getActiveConditions();
+        const index = activeConditions.indexOf(conditionName);
+
+        if (index > -1) {
+            activeConditions.splice(index, 1);
+            // Remove também do sistema de efeitos ativos
+            toggleEffect(conditionName, true); // Modo silencioso
+            showWarningNotification(`Condição "${conditionName}" removida.`);
+        } else {
+            activeConditions.push(conditionName);
+            // Adiciona também ao sistema de efeitos ativos
+            toggleEffect(conditionName, true); // Modo silencioso
+            showSuccessNotification(`Condição "${conditionName}" aplicada!`);
+        }
+
+        saveActiveConditions(activeConditions);
+        updateConditionsVisualIndicators();
+        updateEffectsBadge(); // Atualiza o badge de efeitos
+        return activeConditions;
+    }
+
+    // Função para obter dados de uma condição
+    function getConditionData(conditionName) {
+        const conditions = getConditionsList();
+        return conditions.find(condition => condition.nome === conditionName);
+    }
+
+    // Função para obter lista completa de condições
+    function getConditionsList() {
+        return [
+            {
+                nome: 'Cego',
+                descricao: 'O personagem não consegue ver nada.',
+                efeitos: '-5 em testes de Percepção, -2 em ataques corpo a corpo, Imunidade a efeitos visuais',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+                icone: '👁️'
+            },
+            {
+                nome: 'Confuso',
+                descricao: 'O personagem age de forma aleatória e imprevisível.',
+                efeitos: 'Ações aleatórias a cada rodada, Não pode usar habilidades que exijam concentração',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+                icone: '🤪'
+            },
+            {
+                nome: 'Enfeitiçado',
+                descricao: 'O personagem está sob controle mágico.',
+                efeitos: 'Considera o conjurador como aliado, Não pode atacar o conjurador, Pode ser forçado a fazer ações específicas',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_charm.jpg',
+                icone: '💫'
+            },
+            {
+                nome: 'Enjoado',
+                descricao: 'O personagem sente náuseas e mal-estar.',
+                efeitos: '-2 em testes de Força e Constituição, -2 em ataques corpo a corpo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+                icone: '🤢'
+            },
+            {
+                nome: 'Exausto',
+                descricao: 'O personagem está extremamente cansado.',
+                efeitos: '-2 em todos os testes, -2 em CA, Redução de velocidade',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😴'
+            },
+            {
+                nome: 'Fadigado',
+                descricao: 'O personagem está cansado.',
+                efeitos: '-1 em todos os testes, -1 em CA',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
+                icone: '😪'
+            },
+            {
+                nome: 'Fascinado',
+                descricao: 'O personagem está hipnotizado por algo.',
+                efeitos: 'Não pode fazer ações ofensivas, -2 em testes de Vontade',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg',
+                icone: '😵'
+            },
+            {
+                nome: 'Fugindo',
+                descricao: 'O personagem está em pânico e tentando fugir.',
+                efeitos: 'Deve se mover para longe da fonte do medo, Não pode fazer ações ofensivas, -2 em CA',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
+                icone: '🏃'
+            },
+            {
+                nome: 'Imóvel',
+                descricao: 'O personagem não pode se mover.',
+                efeitos: 'Não pode se mover, -2 em CA, Pode ainda fazer ações que não envolvem movimento',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '🛑'
+            },
+            {
+                nome: 'Inconsciente',
+                descricao: 'O personagem está desmaiado.',
+                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
+                icone: '😵'
+            },
+            {
+                nome: 'Invisível',
+                descricao: 'O personagem não pode ser visto.',
+                efeitos: '+20 em testes de Furtividade, Imunidade a ataques que dependem de visão, Primeiro ataque tem bônus',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_stealth.jpg',
+                icone: '👻'
+            },
+            {
+                nome: 'Lento',
+                descricao: 'O personagem se move mais devagar.',
+                efeitos: 'Velocidade reduzida pela metade, -1 em CA, -1 em Reflexos',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_slow.jpg',
+                icone: '🐌'
+            },
+            {
+                nome: 'Paralisado',
+                descricao: 'O personagem está completamente paralisado.',
+                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
+                icone: '🧊'
+            },
+            {
+                nome: 'Petrificado',
+                descricao: 'O personagem foi transformado em pedra.',
+                efeitos: 'Não pode fazer nenhuma ação, Imunidade a dano, Não pode ser curado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg',
+                icone: '🗿'
+            },
+            {
+                nome: 'Surdo',
+                descricao: 'O personagem não consegue ouvir.',
+                efeitos: '-5 em testes de Percepção auditiva, Imunidade a efeitos sonoros, Não pode usar magias com componente verbal',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech.jpg',
+                icone: '🔇'
+            },
+            {
+                nome: 'Tremendo',
+                descricao: 'O personagem está tremendo de medo.',
+                efeitos: '-2 em ataques, -2 em testes de perícias, Não pode usar magias',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathpact.jpg',
+                icone: '😰'
+            },
+            {
+                nome: 'Vulnerável',
+                descricao: 'O personagem está mais suscetível a dano.',
+                efeitos: '-2 em CA, Ataques contra o personagem têm +2',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '💔'
+            },
+            {
+                nome: 'Zangado',
+                descricao: 'O personagem está em fúria.',
+                efeitos: '+2 em ataques corpo a corpo, +2 em dano corpo a corpo, -2 em CA',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unholyfrenzy.jpg',
+                icone: '😠'
+            }
+        ];
     }
 
     // Função para salvar o cache de imagens
@@ -9308,8 +9549,28 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_orchardfruit01.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_deliciouspizza.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_123_roast.jpg',
-            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_fish_18.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_18.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_goldcarpconsomme.jpg',
+
+            // Ícones de condições
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_charm.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/ability_stealth.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_slow.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathpact.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unholyfrenzy.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_braisedturtle.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_valleystirfry.jpg',
             'https://wow.zamimg.com/images/wow/icons/large/inv_misc_slime_02.jpg',
@@ -9529,7 +9790,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Click handler para remover o efeito
         indicator.onclick = () => {
-            removeFoodEffect(effect.effectKey, pratoData.nome);
+            removeFoodEffect(effect.effectKey);
         };
 
         // Usa o sistema de cache para carregar a imagem
@@ -9636,7 +9897,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     }
 
     // Função para remover efeito de prato
-    function removeFoodEffect(effectKey, pratoNome) {
+    function removeFoodEffect(effectKey) {
         // Remove do localStorage de efeitos de comida
         let comidaEffects = [];
         try {
@@ -9647,20 +9908,383 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             console.error('Erro ao remover efeito de comida:', e);
         }
 
-        // Remove dos efeitos ativos
-        const activeEffects = getActiveEffects();
-        const updatedEffects = activeEffects.filter(e => e !== effectKey);
-        saveActiveEffects(updatedEffects);
+        // Remove do sistema de efeitos ativos
+        toggleEffect(effectKey);
 
-        // Atualiza interfaces
-        updateEffectsBadge();
+        // Atualiza indicadores visuais
         updateFoodVisualIndicators();
+    }
 
-        // Notificação de sucesso
-        showWarningNotification(`Efeito do prato "${pratoNome}" removido.`);
+    // NOVO: Sistema de Indicadores Visuais de Condições
 
-        // Esconde tooltip
-        hideFoodTooltip();
+    // Função para atualizar indicadores visuais de condições
+    function updateConditionsVisualIndicators() {
+        const conditionsSection = document.getElementById('conditions-indicators-section');
+        const conditionsContainer = document.getElementById('conditions-icons-container');
+
+        if (!conditionsSection || !conditionsContainer) {
+            console.log('Seção de indicadores de condições não encontrada');
+            return;
+        }
+
+        // Limpa os indicadores existentes
+        conditionsContainer.innerHTML = '';
+
+        // Obtém condições ativas
+        const activeConditions = getActiveConditions();
+
+        if (activeConditions.length === 0) {
+            // Oculta a seção se não há condições ativas
+            conditionsSection.style.display = 'none';
+            return;
+        }
+
+        // Mostra a seção e popula com ícones das condições
+        conditionsSection.style.display = 'block';
+
+        activeConditions.forEach(conditionName => {
+            const conditionData = getConditionData(conditionName);
+
+            if (!conditionData) {
+                console.warn(`Dados não encontrados para a condição: ${conditionName}`);
+                return;
+            }
+
+            // Cria o ícone da condição
+            createConditionIndicatorIcon(conditionData);
+        });
+    }
+
+    // Função para criar um ícone indicador de condição
+    function createConditionIndicatorIcon(conditionData) {
+        const conditionsContainer = document.getElementById('conditions-icons-container');
+        if (!conditionsContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'condition-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #ff6b6b';
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#ff5252';
+            // Mostra tooltip
+            showConditionTooltip(indicator, conditionData);
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#ff6b6b';
+            // Esconde tooltip
+            hideConditionTooltip();
+        };
+
+        // Click handler para remover a condição
+        indicator.onclick = () => {
+            toggleCondition(conditionData.nome);
+        };
+
+        // Usa o sistema de cache para carregar a imagem
+        const iconUrl = conditionData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg';
+
+        const cachedImageElement = createCachedImageElement(
+            iconUrl,
+            conditionData.nome,
+            conditionData.icone || '⚠️',
+            {
+                width: '100%',
+                height: '100%',
+                borderRadius: '4px',
+                objectFit: 'cover',
+                showSkeleton: true
+            }
+        );
+
+        indicator.appendChild(cachedImageElement);
+
+        conditionsContainer.appendChild(indicator);
+    }
+
+    // Tooltip global para condições
+    let currentConditionTooltip = null;
+
+    // Função para mostrar tooltip da condição
+    function showConditionTooltip(element, conditionData) {
+        // Remove tooltip existente
+        hideConditionTooltip();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'condition-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = 'rgba(20,20,30,0.98)';
+        tooltip.style.border = '2px solid #ff6b6b';
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.zIndex = '10002';
+        tooltip.style.maxWidth = '250px';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
+        tooltip.style.pointerEvents = 'none';
+
+        // Conteúdo do tooltip
+        const title = document.createElement('div');
+        title.textContent = conditionData.nome;
+        title.style.color = '#ff6b6b';
+        title.style.fontSize = '14px';
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '4px';
+
+        const description = document.createElement('div');
+        description.textContent = conditionData.descricao;
+        description.style.color = '#ecf0f1';
+        description.style.fontSize = '12px';
+        description.style.lineHeight = '1.3';
+        description.style.marginBottom = '4px';
+
+        const effects = document.createElement('div');
+        effects.textContent = conditionData.efeitos;
+        effects.style.color = '#ffa726';
+        effects.style.fontSize = '12px';
+        effects.style.fontWeight = 'bold';
+        effects.style.lineHeight = '1.3';
+
+        const clickHint = document.createElement('div');
+        clickHint.textContent = 'Clique para remover';
+        clickHint.style.color = '#6ec6ff';
+        clickHint.style.fontSize = '11px';
+        clickHint.style.fontStyle = 'italic';
+        clickHint.style.marginTop = '6px';
+        clickHint.style.textAlign = 'center';
+
+        tooltip.appendChild(title);
+        tooltip.appendChild(description);
+        tooltip.appendChild(effects);
+        tooltip.appendChild(clickHint);
+
+        // Posicionamento do tooltip
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+
+        document.body.appendChild(tooltip);
+        currentConditionTooltip = tooltip;
+
+        // Ajusta posição se sair da tela
+        setTimeout(() => {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            if (tooltipRect.left < 10) {
+                tooltip.style.left = '10px';
+            } else if (tooltipRect.right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            }
+        }, 10);
+    }
+
+    // Função para esconder tooltip da condição
+    function hideConditionTooltip() {
+        if (currentConditionTooltip) {
+            currentConditionTooltip.remove();
+            currentConditionTooltip = null;
+        }
+    }
+
+    // Função para criar o popup de condições
+    function createConditionsPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('conditions-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('conditions-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'conditions-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'conditions-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #ff6b6b';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '18px 20px 16px 20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '500px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Lista de Condições';
+        title.style.color = '#ff6b6b';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('conditions-overlay');
+            if (overlay) overlay.remove();
+        };
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        popup.appendChild(header);
+
+        // Campo de busca
+        const searchContainer = document.createElement('div');
+        searchContainer.style.marginBottom = '15px';
+
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Buscar condições...';
+        searchInput.style.width = '100%';
+        searchInput.style.padding = '8px 12px';
+        searchInput.style.border = '1px solid #ff6b6b';
+        searchInput.style.borderRadius = '6px';
+        searchInput.style.background = '#23243a';
+        searchInput.style.color = '#ecf0f1';
+        searchInput.style.fontSize = '14px';
+        searchInput.style.boxSizing = 'border-box';
+
+        searchInput.oninput = () => {
+            renderConditionsList(searchInput.value);
+        };
+
+        searchContainer.appendChild(searchInput);
+        popup.appendChild(searchContainer);
+
+        // Lista de condições
+        const conditionsList = document.createElement('div');
+        conditionsList.style.display = 'flex';
+        conditionsList.style.flexDirection = 'column';
+        conditionsList.style.gap = '8px';
+        conditionsList.style.marginTop = '2px';
+        popup.appendChild(conditionsList);
+
+        function renderConditionsList(filterText = '') {
+            conditionsList.innerHTML = '';
+
+            const conditions = getConditionsList();
+            const filteredConditions = conditions.filter(condition =>
+                condition.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+                condition.descricao.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            filteredConditions.forEach(condition => {
+                const isActive = isConditionActive(condition.nome);
+
+                const conditionContainer = document.createElement('div');
+                conditionContainer.style.background = isActive ? '#3d2a2a' : '#23243a';
+                conditionContainer.style.border = `1px solid ${isActive ? '#ff6b6b' : '#4a4a5a'}`;
+                conditionContainer.style.borderRadius = '8px';
+                conditionContainer.style.padding = '12px';
+                conditionContainer.style.cursor = 'pointer';
+                conditionContainer.style.transition = 'all 0.2s';
+
+                conditionContainer.onmouseover = () => {
+                    conditionContainer.style.background = isActive ? '#4d3a3a' : '#2a2b4a';
+                };
+
+                conditionContainer.onmouseout = () => {
+                    conditionContainer.style.background = isActive ? '#3d2a2a' : '#23243a';
+                };
+
+                conditionContainer.onclick = () => {
+                    toggleCondition(condition.nome);
+                    renderConditionsList(searchInput.value);
+                };
+
+                // Cabeçalho da condição
+                const conditionHeader = document.createElement('div');
+                conditionHeader.style.display = 'flex';
+                conditionHeader.style.justifyContent = 'space-between';
+                conditionHeader.style.alignItems = 'center';
+                conditionHeader.style.marginBottom = '6px';
+
+                const conditionName = document.createElement('div');
+                conditionName.textContent = condition.nome;
+                conditionName.style.color = isActive ? '#ff6b6b' : '#ecf0f1';
+                conditionName.style.fontSize = '15px';
+                conditionName.style.fontWeight = 'bold';
+
+                const statusIndicator = document.createElement('div');
+                statusIndicator.textContent = isActive ? '●' : '○';
+                statusIndicator.style.color = isActive ? '#ff6b6b' : '#4a4a5a';
+                statusIndicator.style.fontSize = '18px';
+                statusIndicator.style.fontWeight = 'bold';
+
+                conditionHeader.appendChild(conditionName);
+                conditionHeader.appendChild(statusIndicator);
+                conditionContainer.appendChild(conditionHeader);
+
+                // Descrição da condição
+                const conditionDesc = document.createElement('div');
+                conditionDesc.textContent = condition.descricao;
+                conditionDesc.style.color = '#ecf0f1';
+                conditionDesc.style.fontSize = '13px';
+                conditionDesc.style.lineHeight = '1.4';
+                conditionDesc.style.marginBottom = '6px';
+                conditionContainer.appendChild(conditionDesc);
+
+                // Efeitos da condição
+                const conditionEffects = document.createElement('div');
+                conditionEffects.textContent = condition.efeitos;
+                conditionEffects.style.color = '#ffa726';
+                conditionEffects.style.fontSize = '12px';
+                conditionEffects.style.fontWeight = 'bold';
+                conditionEffects.style.lineHeight = '1.3';
+                conditionContainer.appendChild(conditionEffects);
+
+                conditionsList.appendChild(conditionContainer);
+            });
+        }
+
+        renderConditionsList();
+        document.body.appendChild(popup);
     }
 
     // Função para criar popup de efeitos
@@ -9771,8 +10395,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Só mostra efeitos de comida que estão ativos
         const activeEffects = getActiveEffects();
         const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
-        // Junta efeitos normais e de comida
-        const allEffects = [...effects, ...activeComidaEffects];
+
+        // Efeitos de condições
+        const activeConditions = getActiveConditions();
+        const conditionsEffects = activeConditions.map(conditionName => {
+            const conditionData = getConditionData(conditionName);
+            return {
+                name: conditionData ? conditionData.nome : conditionName,
+                description: conditionData ? conditionData.descricao : '',
+                type: 'Condição',
+                effectKey: conditionName
+            };
+        });
+
+        // Junta efeitos normais, de comida e condições
+        const allEffects = [...effects, ...activeComidaEffects, ...conditionsEffects];
 
         // Lista visual
         const effectsList = document.createElement('div');
@@ -9805,10 +10442,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 };
 
                 effectContainer.onclick = () => {
-                    toggleEffect(effect.effectKey);
+                    // Se for uma condição, também remove do sistema de condições
+                    if (effect.type === 'Condição') {
+                        toggleCondition(effect.effectKey);
+                    } else {
+                        toggleEffect(effect.effectKey);
+                    }
                     updateEffectsList();
                     updateEffectsBadge();
-                    updateFoodVisualIndicators(); // NOVO: Atualiza indicadores visuais
+                    updateFoodVisualIndicators(); // Atualiza indicadores visuais de comida
+                    updateConditionsVisualIndicators(); // Atualiza indicadores visuais de condições
                 };
 
                 // Cabeçalho do efeito
