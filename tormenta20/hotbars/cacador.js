@@ -5939,6 +5939,39 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 }
                 return matchesText && matchesStatus;
             });
+
+            // Se não há poderes filtrados, mostra mensagem
+            if (filteredPowers.length === 0) {
+                const noResultsMessage = document.createElement('div');
+                noResultsMessage.style.textAlign = 'center';
+                noResultsMessage.style.padding = '20px';
+                noResultsMessage.style.color = '#8B4513';
+                noResultsMessage.style.fontSize = '14px';
+                noResultsMessage.style.fontStyle = 'italic';
+                noResultsMessage.style.background = 'rgba(139, 69, 19, 0.1)';
+                noResultsMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                noResultsMessage.style.borderRadius = '8px';
+                noResultsMessage.style.marginTop = '10px';
+
+                const filterText = powerTextFilterInput.value.trim();
+                if (filterText) {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhum poder encontrado para "<strong style="color: #8B4513;">${filterText}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                } else {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">⚔️</div>
+                        <div>Nenhum poder disponível</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                    `;
+                }
+
+                combatPowersListContainer.appendChild(noResultsMessage);
+                return;
+            }
+
             filteredPowers.forEach(power => {
                 const isLearned = hasDestinyPower(power.name);
                 // Define cores baseadas no status
@@ -7266,6 +7299,37 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 return matchesText && matchesStatus;
             });
+
+            // Se não há habilidades filtradas, mostra mensagem
+            if (filteredAbilities.length === 0) {
+                const noResultsMessage = document.createElement('div');
+                noResultsMessage.style.textAlign = 'center';
+                noResultsMessage.style.padding = '20px';
+                noResultsMessage.style.color = '#8B4513';
+                noResultsMessage.style.fontSize = '14px';
+                noResultsMessage.style.fontStyle = 'italic';
+                noResultsMessage.style.background = 'rgba(139, 69, 19, 0.1)';
+                noResultsMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                noResultsMessage.style.borderRadius = '8px';
+                noResultsMessage.style.marginTop = '10px';
+
+                if (currentTextFilter) {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhuma habilidade encontrada para "<strong style="color: #8B4513;">${currentTextFilter}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                } else {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">⚔️</div>
+                        <div>Nenhuma habilidade disponível</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                    `;
+                }
+
+                abilitiesListContainer.appendChild(noResultsMessage);
+                return;
+            }
 
             filteredAbilities.forEach(ability => {
                 const abilityContainer = document.createElement('div');
@@ -9790,6 +9854,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Click handler para remover o efeito
         indicator.onclick = () => {
+            // Esconde o tooltip antes de remover o efeito
+            hideFoodTooltip();
             removeFoodEffect(effect.effectKey);
         };
 
@@ -9990,6 +10056,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Click handler para remover a condição
         indicator.onclick = () => {
+            // Esconde o tooltip antes de remover a condição
+            hideConditionTooltip();
             toggleCondition(conditionData.nome);
         };
 
@@ -10213,6 +10281,37 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 condition.nome.toLowerCase().includes(filterText.toLowerCase()) ||
                 condition.descricao.toLowerCase().includes(filterText.toLowerCase())
             );
+
+            // Se não há condições filtradas, mostra mensagem
+            if (filteredConditions.length === 0) {
+                const noResultsMessage = document.createElement('div');
+                noResultsMessage.style.textAlign = 'center';
+                noResultsMessage.style.padding = '20px';
+                noResultsMessage.style.color = '#ff6b6b';
+                noResultsMessage.style.fontSize = '14px';
+                noResultsMessage.style.fontStyle = 'italic';
+                noResultsMessage.style.background = 'rgba(255, 107, 107, 0.1)';
+                noResultsMessage.style.border = '1px solid rgba(255, 107, 107, 0.3)';
+                noResultsMessage.style.borderRadius = '8px';
+                noResultsMessage.style.marginTop = '10px';
+
+                if (filterText) {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhuma condição encontrada para "<strong style="color: #ff6b6b;">${filterText}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                } else {
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">⚠️</div>
+                        <div>Nenhuma condição disponível</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                    `;
+                }
+
+                conditionsList.appendChild(noResultsMessage);
+                return;
+            }
 
             filteredConditions.forEach(condition => {
                 const isActive = isConditionActive(condition.nome);
