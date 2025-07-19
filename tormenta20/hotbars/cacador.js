@@ -26,6 +26,10 @@
     // Sistema de tipo de raça selecionado (para raças com subtipos)
     const SELECTED_RACE_TYPE_KEY = 'roll20-hotbar-selected-race-type';
 
+    // NOVO: Sistema de cache de imagens
+    const IMAGE_CACHE_KEY = 'roll20-hotbar-image-cache';
+    const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
+
     // Sistema de notificações customizadas
     let notificationContainer = null;
 
@@ -2481,9 +2485,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         pratoInfo.style.gap = '12px';
         pratoInfo.style.flex = '1';
 
-        // Ícone do prato com borda
+        // Ícone do prato com borda (usando cache)
         if (prato.iconeUrl) {
-            // Container para skeleton e imagem
             const iconeContainer = document.createElement('div');
             iconeContainer.style.position = 'relative';
             iconeContainer.style.width = '3rem';
@@ -2491,70 +2494,26 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             iconeContainer.style.display = 'flex';
             iconeContainer.style.alignItems = 'center';
             iconeContainer.style.justifyContent = 'center';
+            iconeContainer.style.border = '2px solid #ffb86c';
+            iconeContainer.style.borderRadius = '8px';
+            iconeContainer.style.padding = '2px';
+            iconeContainer.style.backgroundColor = '#23243a';
 
-            // Skeleton loader
-            const skeleton = document.createElement('div');
-            skeleton.style.width = '100%';
-            skeleton.style.height = '100%';
-            skeleton.style.borderRadius = '8px';
-            skeleton.style.background = 'linear-gradient(90deg, #23243a 25%, #2c2d4a 50%, #23243a 75%)';
-            skeleton.style.animation = 'skeleton-loading 1.2s infinite linear';
-            skeleton.style.position = 'absolute';
-            skeleton.style.top = '0';
-            skeleton.style.left = '0';
-            skeleton.style.zIndex = '1';
-            iconeContainer.appendChild(skeleton);
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                prato.iconeUrl,
+                prato.nome,
+                prato.icone || '🍲',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '6px',
+                    objectFit: 'cover',
+                    showSkeleton: true
+                }
+            );
 
-            // Emoji fallback (inicialmente oculto)
-            const emojiFallback = document.createElement('div');
-            emojiFallback.textContent = '🍲';
-            emojiFallback.style.fontSize = '2rem';
-            emojiFallback.style.display = 'none';
-            emojiFallback.style.position = 'absolute';
-            emojiFallback.style.top = '0';
-            emojiFallback.style.left = '0';
-            emojiFallback.style.width = '100%';
-            emojiFallback.style.height = '100%';
-            emojiFallback.style.display = 'flex';
-            emojiFallback.style.alignItems = 'center';
-            emojiFallback.style.justifyContent = 'center';
-            emojiFallback.style.zIndex = '2';
-            iconeContainer.appendChild(emojiFallback);
-
-            // Imagem do prato
-            const icone = document.createElement('img');
-            icone.src = prato.iconeUrl;
-            icone.alt = prato.nome;
-            icone.style.width = '3rem';
-            icone.style.height = '3rem';
-            icone.style.border = '2px solid #ffb86c';
-            icone.style.borderRadius = '8px';
-            icone.style.padding = '2px';
-            icone.style.backgroundColor = '#23243a';
-            icone.style.position = 'relative';
-            icone.style.zIndex = '3';
-            icone.style.objectFit = 'cover';
-            icone.style.display = 'block';
-            // Ao carregar, remove skeleton
-            icone.onload = () => {
-                skeleton.style.display = 'none';
-            };
-            // Ao erro, mostra emoji e esconde imagem
-            icone.onerror = () => {
-                skeleton.style.display = 'none';
-                icone.style.display = 'none';
-                emojiFallback.style.display = 'flex';
-            };
-            iconeContainer.appendChild(icone);
-
-            // Adiciona animação do skeleton ao head se não existir
-            if (!document.getElementById('skeleton-loader-style')) {
-                const style = document.createElement('style');
-                style.id = 'skeleton-loader-style';
-                style.textContent = `@keyframes skeleton-loading { 0% { background-position: -200px 0; } 100% { background-position: calc(200px + 100%) 0; } }`;
-                document.head.appendChild(style);
-            }
-
+            iconeContainer.appendChild(cachedImageElement);
             pratoInfo.appendChild(iconeContainer);
         }
 
@@ -2752,6 +2711,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 showSuccessNotification(`Prato "${prato.nome}" consumido! Efeito ativo por 1 hora.`);
                 saveActiveEffects(activeEffects);
                 updateEffectsBadge();
+                updateFoodVisualIndicators(); // NOVO: Atualiza indicadores visuais
 
                 // Enviar mensagem no chat informando que o personagem consumiu o prato
                 const emoteMessage = `/em ${getCharacterName()} consumiu **${prato.nome}** ${prato.icone || '🍽️'}`;
@@ -5260,11 +5220,41 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         hotbar.appendChild(mainContent);
 
+        // NOVA SEÇÃO: Indicadores Visuais de Pratos Consumidos
+        const foodIndicatorsSection = document.createElement('div');
+        foodIndicatorsSection.id = 'food-indicators-section';
+        foodIndicatorsSection.style.display = 'none'; // Inicialmente oculto
+        foodIndicatorsSection.style.padding = '8px 24px 12px 24px';
+        foodIndicatorsSection.style.borderTop = '1px solid rgba(110,198,255,0.2)';
+        foodIndicatorsSection.style.width = '100%';
+        foodIndicatorsSection.style.boxSizing = 'border-box';
+
+        // Container para os ícones dos pratos
+        const foodIconsContainer = document.createElement('div');
+        foodIconsContainer.id = 'food-icons-container';
+        foodIconsContainer.style.display = 'flex';
+        foodIconsContainer.style.gap = '6px';
+        foodIconsContainer.style.justifyContent = 'flex-start';
+        foodIconsContainer.style.alignItems = 'center';
+        foodIconsContainer.style.flexWrap = 'wrap';
+
+        foodIndicatorsSection.appendChild(foodIconsContainer);
+        hotbar.appendChild(foodIndicatorsSection);
+
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
 
         // Atualiza o badge de efeitos após o hotbar estar no DOM
         updateEffectsBadge();
+        // Atualiza os indicadores visuais de pratos
+        updateFoodVisualIndicators();
+
+        // NOVO: Inicia o pré-carregamento de imagens em background
+        setTimeout(() => {
+            preloadKnownImages().catch(error => {
+                console.warn('Erro no pré-carregamento de imagens:', error);
+            });
+        }, 1000);
     }
 
     // Inicializa quando a página carregar
@@ -5272,6 +5262,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         setTimeout(() => {
             // Inicializa habilidades automáticas
             initializeAutomaticAbilities();
+
+            // NOVO: Adiciona CSS para animação do skeleton loader
+            if (!document.getElementById('skeleton-loader-style')) {
+                const style = document.createElement('style');
+                style.id = 'skeleton-loader-style';
+                style.textContent = `
+                        @keyframes skeleton-loading { 
+                            0% { background-position: -200px 0; } 
+                            100% { background-position: calc(200px + 100%) 0; } 
+                        }
+                    `;
+                document.head.appendChild(style);
+            }
 
             createHotbar();
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
@@ -9183,6 +9186,483 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
     }
 
+    // NOVO: Sistema de Cache de Imagens
+
+    // Função para obter o cache de imagens
+    function getImageCache() {
+        try {
+            const cache = localStorage.getItem(IMAGE_CACHE_KEY);
+            if (!cache) return { version: IMAGE_CACHE_VERSION, images: {} };
+
+            const parsedCache = JSON.parse(cache);
+
+            // Verifica se a versão do cache é compatível
+            if (parsedCache.version !== IMAGE_CACHE_VERSION) {
+                console.log('Versão do cache de imagens desatualizada, limpando...');
+                clearImageCache();
+                return { version: IMAGE_CACHE_VERSION, images: {} };
+            }
+
+            return parsedCache;
+        } catch (error) {
+            console.error('Erro ao carregar cache de imagens:', error);
+            return { version: IMAGE_CACHE_VERSION, images: {} };
+        }
+    }
+
+    // Função para salvar o cache de imagens
+    function saveImageCache(cache) {
+        try {
+            localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify(cache));
+        } catch (error) {
+            console.error('Erro ao salvar cache de imagens:', error);
+        }
+    }
+
+    // Função para limpar o cache de imagens
+    function clearImageCache() {
+        try {
+            localStorage.removeItem(IMAGE_CACHE_KEY);
+            console.log('Cache de imagens limpo');
+        } catch (error) {
+            console.error('Erro ao limpar cache de imagens:', error);
+        }
+    }
+
+    // Função para obter uma imagem do cache ou carregar e cachear
+    function getCachedImage(url) {
+        return new Promise((resolve) => {
+            const cache = getImageCache();
+
+            // Verifica se a imagem está no cache
+            if (cache.images[url]) {
+                console.log(`Imagem carregada do cache: ${url}`);
+                resolve(cache.images[url]);
+                return;
+            }
+
+            // Se não está no cache, carrega e cacheia
+            console.log(`Carregando e cacheando imagem: ${url}`);
+
+            // Cria um canvas para converter a imagem para base64
+            const img = new Image();
+            img.crossOrigin = 'anonymous'; // Permite CORS para imagens externas
+
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Define o tamanho do canvas baseado na imagem
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+
+                    // Desenha a imagem no canvas
+                    ctx.drawImage(img, 0, 0);
+
+                    // Converte para base64
+                    const dataUrl = canvas.toDataURL('image/png');
+
+                    // Salva no cache
+                    cache.images[url] = dataUrl;
+                    saveImageCache(cache);
+
+                    console.log(`Imagem cacheada com sucesso: ${url}`);
+                    resolve(dataUrl);
+                } catch (error) {
+                    console.error(`Erro ao cachear imagem ${url}:`, error);
+                    // Em caso de erro, retorna null para usar fallback
+                    resolve(null);
+                }
+            };
+
+            img.onerror = () => {
+                console.warn(`Erro ao carregar imagem ${url}, usando fallback`);
+                resolve(null);
+            };
+
+            img.src = url;
+        });
+    }
+
+    // Função para pré-carregar todas as imagens conhecidas
+    async function preloadKnownImages() {
+        console.log('Iniciando pré-carregamento de imagens...');
+
+        // Lista de todas as URLs de imagens conhecidas
+        const knownImageUrls = [
+            // Ícones de pratos
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_60.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/achievement_halloween_candy_01.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_cauldron_frost.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_103_potatobread.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_fishcake.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_144_cakeslice.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_swirlingmistsoup.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_sauteedcarrots.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_06.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_161_fish_white.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_meat_cooked_08.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_cask_04.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_cooking_90_cinnamonbonefishstew.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_orchardfruit01.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_deliciouspizza.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_123_roast.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_fish_18.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_goldcarpconsomme.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_braisedturtle.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_valleystirfry.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_slime_02.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_63.jpg',
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg',
+            // Ícone padrão
+            'https://wow.zamimg.com/images/wow/icons/large/inv_misc_fork-knife.jpg'
+        ];
+
+        const cache = getImageCache();
+        let loadedCount = 0;
+        let cachedCount = 0;
+
+        // Carrega imagens em paralelo (máximo 5 por vez para não sobrecarregar)
+        const batchSize = 5;
+        for (let i = 0; i < knownImageUrls.length; i += batchSize) {
+            const batch = knownImageUrls.slice(i, i + batchSize);
+
+            await Promise.all(batch.map(async (url) => {
+                if (cache.images[url]) {
+                    cachedCount++;
+                    return;
+                }
+
+                try {
+                    await getCachedImage(url);
+                    loadedCount++;
+                } catch (error) {
+                    console.warn(`Erro ao pré-carregar ${url}:`, error);
+                }
+            }));
+
+            // Pequena pausa entre batches para não sobrecarregar
+            if (i + batchSize < knownImageUrls.length) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+
+        console.log(`Pré-carregamento concluído: ${loadedCount} novas imagens carregadas, ${cachedCount} já estavam no cache`);
+    }
+
+    // Função para criar elemento de imagem com cache
+    function createCachedImageElement(url, alt, fallbackEmoji = '🍽️', options = {}) {
+        const {
+            width = '100%',
+            height = '100%',
+            borderRadius = '4px',
+            objectFit = 'cover',
+            showSkeleton = true,
+            onLoad = null,
+            onError = null
+        } = options;
+
+        // Container principal
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.width = '100%';
+        container.style.height = '100%';
+
+        // Skeleton loader (se habilitado)
+        let skeleton = null;
+        if (showSkeleton) {
+            skeleton = document.createElement('div');
+            skeleton.style.width = '100%';
+            skeleton.style.height = '100%';
+            skeleton.style.background = 'linear-gradient(90deg, #23243a 25%, #2c2d4a 50%, #23243a 75%)';
+            skeleton.style.backgroundSize = '200px 100%';
+            skeleton.style.animation = 'skeleton-loading 1.2s infinite linear';
+            skeleton.style.borderRadius = borderRadius;
+            container.appendChild(skeleton);
+        }
+
+        // Emoji fallback (inicialmente oculto)
+        const emojiFallback = document.createElement('div');
+        emojiFallback.textContent = fallbackEmoji;
+        emojiFallback.style.fontSize = '20px';
+        emojiFallback.style.display = 'none';
+        emojiFallback.style.position = 'absolute';
+        emojiFallback.style.top = '0';
+        emojiFallback.style.left = '0';
+        emojiFallback.style.width = '100%';
+        emojiFallback.style.height = '100%';
+        emojiFallback.style.display = 'flex';
+        emojiFallback.style.alignItems = 'center';
+        emojiFallback.style.justifyContent = 'center';
+        emojiFallback.style.zIndex = '2';
+        container.appendChild(emojiFallback);
+
+        // Imagem
+        const img = document.createElement('img');
+        img.alt = alt;
+        img.style.width = width;
+        img.style.height = height;
+        img.style.objectFit = objectFit;
+        img.style.borderRadius = borderRadius;
+        img.style.position = 'absolute';
+        img.style.top = '0';
+        img.style.left = '0';
+        img.style.zIndex = '3';
+
+        // Carrega a imagem do cache ou da URL
+        getCachedImage(url).then(cachedUrl => {
+            if (cachedUrl) {
+                img.src = cachedUrl;
+            } else {
+                // Se não conseguiu cachear, tenta carregar diretamente
+                img.src = url;
+            }
+        });
+
+        // Event handlers
+        img.onload = () => {
+            if (skeleton) skeleton.style.display = 'none';
+            if (onLoad) onLoad(img);
+        };
+
+        img.onerror = () => {
+            if (skeleton) skeleton.style.display = 'none';
+            img.style.display = 'none';
+            emojiFallback.style.display = 'flex';
+            if (onError) onError();
+        };
+
+        container.appendChild(img);
+        return container;
+    }
+
+    // NOVO: Funções do Sistema de Indicadores Visuais de Pratos
+
+    // Função para obter dados completos de um prato pelo nome
+    function getPratoDataByName(nomePrato) {
+        const pratos = getPratosCompletos();
+        return pratos.find(prato => prato.nome === nomePrato);
+    }
+
+    // Função para atualizar os indicadores visuais dos pratos consumidos
+    function updateFoodVisualIndicators() {
+        const foodSection = document.getElementById('food-indicators-section');
+        const foodContainer = document.getElementById('food-icons-container');
+
+        if (!foodSection || !foodContainer) {
+            console.log('Seção de indicadores de comida não encontrada');
+            return;
+        }
+
+        // Limpa os indicadores existentes
+        foodContainer.innerHTML = '';
+
+        // Obtém efeitos de comida ativos
+        let comidaEffects = [];
+        try {
+            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de comida:', e);
+            comidaEffects = [];
+        }
+
+        const activeEffects = getActiveEffects();
+        const activeFoodEffects = comidaEffects.filter(effect => activeEffects.includes(effect.effectKey));
+
+        if (activeFoodEffects.length === 0) {
+            // Oculta a seção se não há pratos ativos
+            foodSection.style.display = 'none';
+            return;
+        }
+
+        // Mostra a seção e popula com ícones dos pratos
+        foodSection.style.display = 'block';
+
+        activeFoodEffects.forEach(effect => {
+            // Extrai o nome do prato do effectKey
+            const pratoNome = effect.name;
+            const pratoData = getPratoDataByName(pratoNome);
+
+            if (!pratoData) {
+                console.warn(`Dados não encontrados para o prato: ${pratoNome}`);
+                return;
+            }
+
+            // Cria o ícone do prato
+            createFoodIndicatorIcon(pratoData, effect);
+        });
+    }
+
+    // Função para criar um ícone indicador de prato consumido
+    function createFoodIndicatorIcon(pratoData, effect) {
+        const foodContainer = document.getElementById('food-icons-container');
+        if (!foodContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'food-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #ffb86c';
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#ffa726';
+            // Mostra tooltip
+            showFoodTooltip(indicator, pratoData);
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#ffb86c';
+            // Esconde tooltip
+            hideFoodTooltip();
+        };
+
+        // Click handler para remover o efeito
+        indicator.onclick = () => {
+            removeFoodEffect(effect.effectKey, pratoData.nome);
+        };
+
+        // Usa o sistema de cache para carregar a imagem
+        const iconUrl = pratoData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_fork-knife.jpg';
+
+        const cachedImageElement = createCachedImageElement(
+            iconUrl,
+            pratoData.nome,
+            pratoData.icone || '🍽️',
+            {
+                width: '100%',
+                height: '100%',
+                borderRadius: '4px',
+                objectFit: 'cover',
+                showSkeleton: true
+            }
+        );
+
+        indicator.appendChild(cachedImageElement);
+
+        foodContainer.appendChild(indicator);
+    }
+
+    // Tooltip global para pratos
+    let currentFoodTooltip = null;
+
+    // Função para mostrar tooltip do prato
+    function showFoodTooltip(element, pratoData) {
+        // Remove tooltip existente
+        hideFoodTooltip();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'food-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = 'rgba(20,20,30,0.98)';
+        tooltip.style.border = '2px solid #ffb86c';
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.zIndex = '10002';
+        tooltip.style.maxWidth = '250px';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
+        tooltip.style.pointerEvents = 'none';
+
+        // Conteúdo do tooltip
+        const title = document.createElement('div');
+        title.textContent = pratoData.nome;
+        title.style.color = '#ffb86c';
+        title.style.fontSize = '14px';
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '4px';
+
+        const description = document.createElement('div');
+        description.textContent = pratoData.descricao;
+        description.style.color = '#ecf0f1';
+        description.style.fontSize = '12px';
+        description.style.lineHeight = '1.3';
+        description.style.marginBottom = '4px';
+
+        const bonus = document.createElement('div');
+        bonus.textContent = pratoData.bonus;
+        bonus.style.color = '#4caf50';
+        bonus.style.fontSize = '12px';
+        bonus.style.fontWeight = 'bold';
+        bonus.style.lineHeight = '1.3';
+
+        const clickHint = document.createElement('div');
+        clickHint.textContent = 'Clique para remover';
+        clickHint.style.color = '#6ec6ff';
+        clickHint.style.fontSize = '11px';
+        clickHint.style.fontStyle = 'italic';
+        clickHint.style.marginTop = '6px';
+        clickHint.style.textAlign = 'center';
+
+        tooltip.appendChild(title);
+        tooltip.appendChild(description);
+        tooltip.appendChild(bonus);
+        tooltip.appendChild(clickHint);
+
+        // Posicionamento do tooltip
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+
+        document.body.appendChild(tooltip);
+        currentFoodTooltip = tooltip;
+
+        // Ajusta posição se sair da tela
+        setTimeout(() => {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            if (tooltipRect.left < 10) {
+                tooltip.style.left = '10px';
+            } else if (tooltipRect.right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            }
+        }, 10);
+    }
+
+    // Função para esconder tooltip do prato
+    function hideFoodTooltip() {
+        if (currentFoodTooltip) {
+            currentFoodTooltip.remove();
+            currentFoodTooltip = null;
+        }
+    }
+
+    // Função para remover efeito de prato
+    function removeFoodEffect(effectKey, pratoNome) {
+        // Remove do localStorage de efeitos de comida
+        let comidaEffects = [];
+        try {
+            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+            comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey);
+            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+        } catch (e) {
+            console.error('Erro ao remover efeito de comida:', e);
+        }
+
+        // Remove dos efeitos ativos
+        const activeEffects = getActiveEffects();
+        const updatedEffects = activeEffects.filter(e => e !== effectKey);
+        saveActiveEffects(updatedEffects);
+
+        // Atualiza interfaces
+        updateEffectsBadge();
+        updateFoodVisualIndicators();
+
+        // Notificação de sucesso
+        showWarningNotification(`Efeito do prato "${pratoNome}" removido.`);
+
+        // Esconde tooltip
+        hideFoodTooltip();
+    }
+
     // Função para criar popup de efeitos
     function createEffectsPopup() {
         // Remove popup existente se houver
@@ -9328,6 +9808,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     toggleEffect(effect.effectKey);
                     updateEffectsList();
                     updateEffectsBadge();
+                    updateFoodVisualIndicators(); // NOVO: Atualiza indicadores visuais
                 };
 
                 // Cabeçalho do efeito
