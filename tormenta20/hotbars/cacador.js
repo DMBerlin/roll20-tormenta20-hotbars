@@ -2706,6 +2706,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const template = `&{template:t20-info}{{infoname=${prato.nome}}}{{description=${prato.descricao} ${prato.bonus}}}`;
             sendToChat(template);
             showSuccessNotification(`Prato "${prato.nome}" compartilhado no chat!`);
+
+            // Fechar todos os popups relacionados aos pratos especiais para limpar a cena
+            const pratosPopup = document.getElementById('pratos-popup');
+            if (pratosPopup) pratosPopup.remove();
+            const pratosOverlay = document.getElementById('pratos-overlay');
+            if (pratosOverlay) pratosOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
             modal.remove();
             overlay.remove();
         };
@@ -2741,9 +2752,24 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 showSuccessNotification(`Prato "${prato.nome}" consumido! Efeito ativo por 1 hora.`);
                 saveActiveEffects(activeEffects);
                 updateEffectsBadge();
+
+                // Enviar mensagem no chat informando que o personagem consumiu o prato
+                const emoteMessage = `/em ${getCharacterName()} consumiu **${prato.nome}** ${prato.icone || '🍽️'}`;
+                sendToChat(emoteMessage);
             } else {
                 showWarningNotification(`Prato "${prato.nome}" já está ativo nos efeitos!`);
             }
+
+            // Fechar todos os popups relacionados aos pratos especiais para limpar a cena
+            const pratosPopup = document.getElementById('pratos-popup');
+            if (pratosPopup) pratosPopup.remove();
+            const pratosOverlay = document.getElementById('pratos-overlay');
+            if (pratosOverlay) pratosOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
             modal.remove();
             overlay.remove();
         };
