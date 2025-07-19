@@ -799,6 +799,17 @@
             filterInput.dispatchEvent(new Event('input'));
             filterInput.focus();
         };
+
+        // Event listener para filtrar enquanto o usuário digita
+        filterInput.oninput = () => {
+            if (filterInput.value.length > 0) {
+                clearBtn.style.display = 'block';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+            updateSkillList();
+        };
+
         filterContainer.appendChild(filterInput);
         filterContainer.appendChild(clearBtn);
         popup.appendChild(filterContainer);
@@ -870,6 +881,23 @@
             const orderedSkills = [...favoriteSkills, ...nonFavoriteSkills];
 
             skillList.innerHTML = '';
+
+            // Verifica se não há skills encontradas durante a filtragem
+            if (orderedSkills.length === 0 && filter.length > 0) {
+                const noResultsMessage = document.createElement('div');
+                noResultsMessage.style.textAlign = 'center';
+                noResultsMessage.style.padding = '20px';
+                noResultsMessage.style.color = '#999';
+                noResultsMessage.style.fontSize = '14px';
+                noResultsMessage.style.fontStyle = 'italic';
+                noResultsMessage.innerHTML = `
+                    <div style="margin-bottom: 8px;">🔍</div>
+                    <div>Nenhuma skill encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
+                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                `;
+                skillList.appendChild(noResultsMessage);
+                return;
+            }
 
             orderedSkills.forEach(skill => {
                 const isFavorite = favorites.includes(skill.nome);
@@ -1369,26 +1397,34 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
                 const noSpellsMessage = document.createElement('div');
                 noSpellsMessage.style.textAlign = 'center';
                 noSpellsMessage.style.padding = '20px';
-                noSpellsMessage.style.color = '#6ec6ff';
+                noSpellsMessage.style.color = '#999';
                 noSpellsMessage.style.fontSize = '14px';
                 noSpellsMessage.style.fontStyle = 'italic';
-                noSpellsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
-                noSpellsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
-                noSpellsMessage.style.borderRadius = '8px';
-                noSpellsMessage.style.marginTop = '10px';
 
-                if (filter) {
-                    noSpellsMessage.textContent = `Nenhuma magia encontrada para "${filter}"`;
+                if (filter.length > 0) {
+                    // Mensagem quando há filtro mas nenhum resultado
+                    noSpellsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhuma magia encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
                 } else {
+                    // Mensagem quando não há magias disponíveis
                     const selectedRace = getSelectedRace();
                     const selectedRaceType = getSelectedRaceType();
 
+                    noSpellsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
+                    noSpellsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+                    noSpellsMessage.style.borderRadius = '8px';
+                    noSpellsMessage.style.marginTop = '10px';
+                    noSpellsMessage.style.color = '#6ec6ff';
+
                     if (!selectedRace) {
-                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais</small>';
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais</small>';
                     } else if (!selectedRaceType) {
-                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais</small>';
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais</small>';
                     } else {
-                        noSpellsMessage.innerHTML = 'Nenhuma magia disponível<br><small>Esta raça não possui magias especiais</small>';
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Esta raça não possui magias especiais</small>';
                     }
                 }
 
@@ -2918,6 +2954,22 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                     pratosList.appendChild(card);
                 });
+
+                // Verifica se não há pratos encontrados durante a filtragem
+                if (filtered.length === 0 && filterText.length > 0) {
+                    const noResultsMessage = document.createElement('div');
+                    noResultsMessage.style.textAlign = 'center';
+                    noResultsMessage.style.padding = '20px';
+                    noResultsMessage.style.color = '#999';
+                    noResultsMessage.style.fontSize = '14px';
+                    noResultsMessage.style.fontStyle = 'italic';
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhum prato especial encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                    pratosList.appendChild(noResultsMessage);
+                }
             }
 
             // Atualiza a lista ao digitar
@@ -3866,7 +3918,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         usosSection.style.marginBottom = '20px';
 
         const usosTitle = document.createElement('h3');
-        usosTitle.textContent = 'Usos da Perícia';
+        usosTitle.textContent = 'Usos da Perícia: Selecione uma especialização';
         usosTitle.style.color = '#6ec6ff';
         usosTitle.style.margin = '0 0 15px 0';
         usosTitle.style.fontSize = '16px';
@@ -4053,14 +4105,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Seção de seleção de especialização
         const specializationSection = document.createElement('div');
         specializationSection.style.marginBottom = '20px';
-
-        const specializationTitle = document.createElement('h3');
-        specializationTitle.textContent = 'Selecionar Especialização';
-        specializationTitle.style.color = '#6ec6ff';
-        specializationTitle.style.margin = '0 0 15px 0';
-        specializationTitle.style.fontSize = '16px';
-        specializationTitle.style.fontWeight = 'bold';
-        specializationSection.appendChild(specializationTitle);
 
         // Botão para fazer rolagem especializada
         const rollButton = document.createElement('button');
@@ -5109,7 +5153,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const otherButtons = [
             { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
             { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
-            { label: 'Habilidades', icon: '✨', onClick: createAbilitiesPopup },
+            { label: 'Habilid.', icon: '✨', onClick: createAbilitiesPopup },
             { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup },
             { label: 'Misc.', icon: '📦', onClick: createMiscPopup } // Novo botão Misc.
         ];
@@ -7407,6 +7451,22 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 abilitiesListContainer.appendChild(abilityContainer);
             });
 
+            // Verifica se não há habilidades encontradas durante a filtragem
+            if (filteredAbilities.length === 0 && currentTextFilter.length > 0) {
+                const noResultsMessage = document.createElement('div');
+                noResultsMessage.style.textAlign = 'center';
+                noResultsMessage.style.padding = '20px';
+                noResultsMessage.style.color = '#999';
+                noResultsMessage.style.fontSize = '14px';
+                noResultsMessage.style.fontStyle = 'italic';
+                noResultsMessage.innerHTML = `
+                    <div style="margin-bottom: 8px;">🔍</div>
+                    <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${currentTextFilter}</strong>"</div>
+                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                `;
+                abilitiesListContainer.appendChild(noResultsMessage);
+            }
+
             // Estatísticas
             const statsContainer = document.createElement('div');
             statsContainer.style.marginTop = '15px';
@@ -8141,11 +8201,26 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
             if (filteredAbilities.length === 0) {
                 const emptyMsg = document.createElement('div');
-                emptyMsg.textContent = 'Nenhuma habilidade disponível.';
-                emptyMsg.style.color = '#aaa';
                 emptyMsg.style.textAlign = 'center';
-                emptyMsg.style.padding = '24px 0 12px 0';
-                emptyMsg.style.fontSize = '15px';
+                emptyMsg.style.padding = '20px';
+                emptyMsg.style.color = '#999';
+                emptyMsg.style.fontSize = '14px';
+                emptyMsg.style.fontStyle = 'italic';
+
+                if (filter.length > 0) {
+                    emptyMsg.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                } else {
+                    emptyMsg.innerHTML = `
+                        <div style="margin-bottom: 8px;">✨</div>
+                        <div>Nenhuma habilidade disponível</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Aprenda habilidades no modal da classe para vê-las aqui</div>
+                    `;
+                }
+
                 abilityList.appendChild(emptyMsg);
             } else {
                 filteredAbilities.forEach(ability => {
