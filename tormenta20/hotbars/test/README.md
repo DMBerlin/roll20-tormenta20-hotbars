@@ -35,7 +35,7 @@
 
 ### 3. Testando Modificações
 
-1. **Faça alterações** no arquivo `cacador.js`
+1. **Faça alterações** no arquivo `main.js`
 2. **Salve o arquivo**
 3. **Recarregue** usando uma das opções:
    - Clique no botão "Recarregar Script"
@@ -53,8 +53,8 @@
 ### 5. Troubleshooting
 
 #### ❌ Script não carrega
-- Verifique se o arquivo `../cacador.js` existe (relativo à pasta __test__)
-- O arquivo deve estar em `tormenta20/hotbars/cacador.js`
+- Verifique se o arquivo `../main.js` existe (relativo à pasta __test__)
+- O arquivo deve estar em `tormenta20/hotbars/main.js`
 - Verifique se não há erros de sintaxe no JavaScript
 - Observe os logs para detalhes do erro
 

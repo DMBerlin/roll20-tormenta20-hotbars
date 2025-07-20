@@ -2742,10 +2742,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 comidaEffects.push(effect);
                 localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
                 activeEffects.push(effectKey);
+
+                // Adiciona à ordem dos efeitos
+                addEffectToOrder(effectKey, 'food');
+
                 showSuccessNotification(`Prato "${prato.nome}" consumido! Efeito ativo por 1 hora.`);
                 saveActiveEffects(activeEffects);
                 updateEffectsBadge();
-                updateFoodVisualIndicators(); // NOVO: Atualiza indicadores visuais
+                updateEffectsVisualIndicators(); // NOVO: Atualiza indicadores visuais unificados
 
                 // Enviar mensagem no chat informando que o personagem consumiu o prato
                 const emoteMessage = `/em ${getCharacterName()} consumiu **${prato.nome}** ${prato.icone || '🍽️'}`;
@@ -5254,57 +5258,34 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         hotbar.appendChild(mainContent);
 
-        // NOVA SEÇÃO: Indicadores Visuais de Pratos Consumidos
-        const foodIndicatorsSection = document.createElement('div');
-        foodIndicatorsSection.id = 'food-indicators-section';
-        foodIndicatorsSection.style.display = 'none'; // Inicialmente oculto
-        foodIndicatorsSection.style.padding = '8px 24px 12px 24px';
-        foodIndicatorsSection.style.borderTop = '1px solid rgba(110,198,255,0.2)';
-        foodIndicatorsSection.style.width = '100%';
-        foodIndicatorsSection.style.boxSizing = 'border-box';
+        // NOVA SEÇÃO: Indicadores Visuais Unificados (Pratos e Condições)
+        const effectsIndicatorsSection = document.createElement('div');
+        effectsIndicatorsSection.id = 'effects-indicators-section';
+        effectsIndicatorsSection.style.display = 'none'; // Inicialmente oculto
+        effectsIndicatorsSection.style.padding = '8px 24px 12px 24px';
+        effectsIndicatorsSection.style.borderTop = '1px solid rgba(255,255,255,0.1)';
+        effectsIndicatorsSection.style.width = '100%';
+        effectsIndicatorsSection.style.boxSizing = 'border-box';
 
-        // Container para os ícones dos pratos
-        const foodIconsContainer = document.createElement('div');
-        foodIconsContainer.id = 'food-icons-container';
-        foodIconsContainer.style.display = 'flex';
-        foodIconsContainer.style.gap = '6px';
-        foodIconsContainer.style.justifyContent = 'flex-start';
-        foodIconsContainer.style.alignItems = 'center';
-        foodIconsContainer.style.flexWrap = 'wrap';
+        // Container unificado para os ícones de pratos e condições
+        const effectsIconsContainer = document.createElement('div');
+        effectsIconsContainer.id = 'effects-icons-container';
+        effectsIconsContainer.style.display = 'flex';
+        effectsIconsContainer.style.gap = '6px';
+        effectsIconsContainer.style.justifyContent = 'flex-start';
+        effectsIconsContainer.style.alignItems = 'center';
+        effectsIconsContainer.style.flexWrap = 'wrap';
 
-        foodIndicatorsSection.appendChild(foodIconsContainer);
-        hotbar.appendChild(foodIndicatorsSection);
-
-        // NOVA SEÇÃO: Indicadores Visuais de Condições
-        const conditionsIndicatorsSection = document.createElement('div');
-        conditionsIndicatorsSection.id = 'conditions-indicators-section';
-        conditionsIndicatorsSection.style.display = 'none'; // Inicialmente oculto
-        conditionsIndicatorsSection.style.padding = '8px 24px 12px 24px';
-        conditionsIndicatorsSection.style.borderTop = '1px solid rgba(255,107,107,0.2)';
-        conditionsIndicatorsSection.style.width = '100%';
-        conditionsIndicatorsSection.style.boxSizing = 'border-box';
-
-        // Container para os ícones das condições
-        const conditionsIconsContainer = document.createElement('div');
-        conditionsIconsContainer.id = 'conditions-icons-container';
-        conditionsIconsContainer.style.display = 'flex';
-        conditionsIconsContainer.style.gap = '6px';
-        conditionsIconsContainer.style.justifyContent = 'flex-start';
-        conditionsIconsContainer.style.alignItems = 'center';
-        conditionsIconsContainer.style.flexWrap = 'wrap';
-
-        conditionsIndicatorsSection.appendChild(conditionsIconsContainer);
-        hotbar.appendChild(conditionsIndicatorsSection);
+        effectsIndicatorsSection.appendChild(effectsIconsContainer);
+        hotbar.appendChild(effectsIndicatorsSection);
 
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
 
         // Atualiza o badge de efeitos após o hotbar estar no DOM
         updateEffectsBadge();
-        // Atualiza os indicadores visuais de pratos
-        updateFoodVisualIndicators();
-        // Atualiza os indicadores visuais de condições
-        updateConditionsVisualIndicators();
+        // Atualiza os indicadores visuais unificados (pratos e condições)
+        updateEffectsVisualIndicators();
 
         // NOVO: Inicia o pré-carregamento de imagens em background
         setTimeout(() => {
@@ -9250,12 +9231,32 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const index = activeEffects.indexOf(effectName);
 
         if (index > -1) {
+            // Remove o efeito
             activeEffects.splice(index, 1);
+
+            // Remove da ordem
+            const itemEffectData = getItemEffectData(effectName);
+            if (itemEffectData) {
+                removeEffectFromOrder(effectName, 'item');
+            } else {
+                removeEffectFromOrder(effectName, 'food');
+            }
+
             if (!silent) {
                 showWarningNotification(`Efeito "${effectName}" desativado.`);
             }
         } else {
+            // Adiciona o efeito
             activeEffects.push(effectName);
+
+            // Adiciona à ordem
+            const itemEffectData = getItemEffectData(effectName);
+            if (itemEffectData) {
+                addEffectToOrder(effectName, 'item');
+            } else {
+                addEffectToOrder(effectName, 'food');
+            }
+
             if (!silent) {
                 showSuccessNotification(`Efeito "${effectName}" ativado!`);
             }
@@ -9263,6 +9264,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         saveActiveEffects(activeEffects);
         updateEffectsBadge();
+        updateEffectsVisualIndicators(); // Atualiza indicadores visuais
         return activeEffects;
     }
 
@@ -9363,16 +9365,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             activeConditions.splice(index, 1);
             // Remove também do sistema de efeitos ativos
             toggleEffect(conditionName, true); // Modo silencioso
+            // Remove da ordem
+            removeEffectFromOrder(conditionName, 'condition');
             showWarningNotification(`Condição "${conditionName}" removida.`);
         } else {
             activeConditions.push(conditionName);
             // Adiciona também ao sistema de efeitos ativos
             toggleEffect(conditionName, true); // Modo silencioso
+            // Adiciona à ordem
+            addEffectToOrder(conditionName, 'condition');
             showSuccessNotification(`Condição "${conditionName}" aplicada!`);
         }
 
         saveActiveConditions(activeConditions);
-        updateConditionsVisualIndicators();
+        updateEffectsVisualIndicators(); // Atualiza indicadores visuais unificados
         updateEffectsBadge(); // Atualiza o badge de efeitos
         return activeConditions;
     }
@@ -9381,6 +9387,101 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getConditionData(conditionName) {
         const conditions = getConditionsList();
         return conditions.find(condition => condition.nome === conditionName);
+    }
+
+    // Função para obter dados de um efeito de item
+    function getItemEffectData(effectKey) {
+        const itemEffects = getItemEffectsList();
+        return itemEffects.find(effect => effect.effectKey === effectKey);
+    }
+
+    // Função para obter lista de efeitos de item
+    function getItemEffectsList() {
+        return [
+            {
+                name: 'Cachecol Sombrio',
+                description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
+                type: 'Item',
+                effectKey: 'cachecol_sombrio',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_ritualofsacrifice.jpg',
+                icone: '⚔️'
+            }
+        ];
+    }
+
+    // Sistema de ordem dos efeitos
+    const EFFECTS_ORDER_KEY = 'roll20-hotbar-effects-order';
+
+    // Função para obter a ordem dos efeitos
+    function getEffectsOrder() {
+        try {
+            return JSON.parse(localStorage.getItem(EFFECTS_ORDER_KEY) || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar ordem dos efeitos:', e);
+            return [];
+        }
+    }
+
+    // Função para salvar a ordem dos efeitos
+    function saveEffectsOrder(order) {
+        try {
+            localStorage.setItem(EFFECTS_ORDER_KEY, JSON.stringify(order));
+        } catch (e) {
+            console.error('Erro ao salvar ordem dos efeitos:', e);
+        }
+    }
+
+    // Função para adicionar um efeito à ordem
+    function addEffectToOrder(effectKey, effectType) {
+        const order = getEffectsOrder();
+        const effectId = `${effectType}:${effectKey}`;
+
+        // Remove se já existe (para readicionar no início)
+        const existingIndex = order.findIndex(item => item.id === effectId);
+        if (existingIndex !== -1) {
+            order.splice(existingIndex, 1);
+        }
+
+        // Adiciona no início da lista
+        order.unshift({
+            id: effectId,
+            effectKey: effectKey,
+            effectType: effectType,
+            timestamp: Date.now()
+        });
+
+        saveEffectsOrder(order);
+    }
+
+    // Função para remover um efeito da ordem
+    function removeEffectFromOrder(effectKey, effectType) {
+        const order = getEffectsOrder();
+        const effectId = `${effectType}:${effectKey}`;
+
+        const index = order.findIndex(item => item.id === effectId);
+        if (index !== -1) {
+            order.splice(index, 1);
+            saveEffectsOrder(order);
+        }
+    }
+
+    // Função para obter efeitos ordenados
+    function getOrderedEffects() {
+        const order = getEffectsOrder();
+        const activeEffects = getActiveEffects();
+        const activeConditions = getActiveConditions();
+
+        // Filtra apenas efeitos ativos e mantém a ordem
+        return order.filter(item => {
+            if (item.effectType === 'condition') {
+                return activeConditions.includes(item.effectKey);
+            } else if (item.effectType === 'food') {
+                return activeEffects.includes(item.effectKey);
+            } else if (item.effectType === 'item') {
+                return activeEffects.includes(item.effectKey);
+            }
+            return false;
+        });
     }
 
     // Função para obter lista completa de condições
@@ -9770,59 +9871,71 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return pratos.find(prato => prato.nome === nomePrato);
     }
 
-    // Função para atualizar os indicadores visuais dos pratos consumidos
-    function updateFoodVisualIndicators() {
-        const foodSection = document.getElementById('food-indicators-section');
-        const foodContainer = document.getElementById('food-icons-container');
+    // Função para atualizar os indicadores visuais unificados (pratos e condições)
+    function updateEffectsVisualIndicators() {
+        const effectsSection = document.getElementById('effects-indicators-section');
+        const effectsContainer = document.getElementById('effects-icons-container');
 
-        if (!foodSection || !foodContainer) {
-            console.log('Seção de indicadores de comida não encontrada');
+        if (!effectsSection || !effectsContainer) {
+            console.log('Seção de indicadores de efeitos não encontrada');
             return;
         }
 
         // Limpa os indicadores existentes
-        foodContainer.innerHTML = '';
+        effectsContainer.innerHTML = '';
 
-        // Obtém efeitos de comida ativos
-        let comidaEffects = [];
-        try {
-            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
-        } catch (e) {
-            console.error('Erro ao carregar efeitos de comida:', e);
-            comidaEffects = [];
-        }
+        // Obtém efeitos ordenados
+        const orderedEffects = getOrderedEffects();
 
-        const activeEffects = getActiveEffects();
-        const activeFoodEffects = comidaEffects.filter(effect => activeEffects.includes(effect.effectKey));
-
-        if (activeFoodEffects.length === 0) {
-            // Oculta a seção se não há pratos ativos
-            foodSection.style.display = 'none';
+        // Verifica se há algum efeito ativo
+        if (orderedEffects.length === 0) {
+            // Oculta a seção se não há efeitos ativos
+            effectsSection.style.display = 'none';
             return;
         }
 
-        // Mostra a seção e popula com ícones dos pratos
-        foodSection.style.display = 'block';
+        // Mostra a seção
+        effectsSection.style.display = 'block';
 
-        activeFoodEffects.forEach(effect => {
-            // Extrai o nome do prato do effectKey
-            const pratoNome = effect.name;
-            const pratoData = getPratoDataByName(pratoNome);
+        // Renderiza os efeitos na ordem correta
+        orderedEffects.forEach(orderedEffect => {
+            if (orderedEffect.effectType === 'food') {
+                // Busca os dados do efeito de comida
+                let comidaEffects = [];
+                try {
+                    comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                } catch (e) {
+                    console.error('Erro ao carregar efeitos de comida:', e);
+                    comidaEffects = [];
+                }
 
-            if (!pratoData) {
-                console.warn(`Dados não encontrados para o prato: ${pratoNome}`);
-                return;
+                const foodEffect = comidaEffects.find(effect => effect.effectKey === orderedEffect.effectKey);
+                if (foodEffect) {
+                    const pratoData = getPratoDataByName(foodEffect.name);
+                    if (pratoData) {
+                        createFoodIndicatorIcon(pratoData, foodEffect);
+                    }
+                }
+            } else if (orderedEffect.effectType === 'condition') {
+                // Busca os dados da condição
+                const conditionData = getConditionData(orderedEffect.effectKey);
+                if (conditionData) {
+                    createConditionIndicatorIcon(conditionData);
+                }
+            } else if (orderedEffect.effectType === 'item') {
+                // Busca os dados do efeito de item
+                const itemEffectData = getItemEffectData(orderedEffect.effectKey);
+                if (itemEffectData) {
+                    createItemEffectIndicatorIcon(itemEffectData);
+                }
             }
-
-            // Cria o ícone do prato
-            createFoodIndicatorIcon(pratoData, effect);
         });
     }
 
     // Função para criar um ícone indicador de prato consumido
     function createFoodIndicatorIcon(pratoData, effect) {
-        const foodContainer = document.getElementById('food-icons-container');
-        if (!foodContainer) return;
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
 
         // Container principal do indicador
         const indicator = document.createElement('div');
@@ -9831,7 +9944,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.style.width = '32px';
         indicator.style.height = '32px';
         indicator.style.borderRadius = '6px';
-        indicator.style.border = '2px solid #ffb86c';
+        indicator.style.border = '2px solid #4caf50'; // Borda verde para pratos
         indicator.style.background = '#23243a';
         indicator.style.cursor = 'pointer';
         indicator.style.transition = 'all 0.2s';
@@ -9840,14 +9953,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Efeitos de hover
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
-            indicator.style.borderColor = '#ffa726';
+            indicator.style.borderColor = '#66bb6a'; // Verde mais claro no hover
             // Mostra tooltip
             showFoodTooltip(indicator, pratoData);
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
-            indicator.style.borderColor = '#ffb86c';
+            indicator.style.borderColor = '#4caf50'; // Volta para verde normal
             // Esconde tooltip
             hideFoodTooltip();
         };
@@ -9877,7 +9990,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         indicator.appendChild(cachedImageElement);
 
-        foodContainer.appendChild(indicator);
+        effectsContainer.appendChild(indicator);
     }
 
     // Tooltip global para pratos
@@ -9977,54 +10090,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Remove do sistema de efeitos ativos
         toggleEffect(effectKey);
 
-        // Atualiza indicadores visuais
-        updateFoodVisualIndicators();
+        // Remove da ordem
+        removeEffectFromOrder(effectKey, 'food');
+
+        // Atualiza indicadores visuais unificados
+        updateEffectsVisualIndicators();
     }
 
     // NOVO: Sistema de Indicadores Visuais de Condições
-
-    // Função para atualizar indicadores visuais de condições
-    function updateConditionsVisualIndicators() {
-        const conditionsSection = document.getElementById('conditions-indicators-section');
-        const conditionsContainer = document.getElementById('conditions-icons-container');
-
-        if (!conditionsSection || !conditionsContainer) {
-            console.log('Seção de indicadores de condições não encontrada');
-            return;
-        }
-
-        // Limpa os indicadores existentes
-        conditionsContainer.innerHTML = '';
-
-        // Obtém condições ativas
-        const activeConditions = getActiveConditions();
-
-        if (activeConditions.length === 0) {
-            // Oculta a seção se não há condições ativas
-            conditionsSection.style.display = 'none';
-            return;
-        }
-
-        // Mostra a seção e popula com ícones das condições
-        conditionsSection.style.display = 'block';
-
-        activeConditions.forEach(conditionName => {
-            const conditionData = getConditionData(conditionName);
-
-            if (!conditionData) {
-                console.warn(`Dados não encontrados para a condição: ${conditionName}`);
-                return;
-            }
-
-            // Cria o ícone da condição
-            createConditionIndicatorIcon(conditionData);
-        });
-    }
+    // (Agora integrado na função updateEffectsVisualIndicators)
 
     // Função para criar um ícone indicador de condição
     function createConditionIndicatorIcon(conditionData) {
-        const conditionsContainer = document.getElementById('conditions-icons-container');
-        if (!conditionsContainer) return;
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
 
         // Container principal do indicador
         const indicator = document.createElement('div');
@@ -10033,7 +10112,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.style.width = '32px';
         indicator.style.height = '32px';
         indicator.style.borderRadius = '6px';
-        indicator.style.border = '2px solid #ff6b6b';
+        indicator.style.border = '2px solid #ff6e6e'; // Borda vermelha (mesma cor do botão de manobras)
         indicator.style.background = '#23243a';
         indicator.style.cursor = 'pointer';
         indicator.style.transition = 'all 0.2s';
@@ -10042,14 +10121,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Efeitos de hover
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
-            indicator.style.borderColor = '#ff5252';
+            indicator.style.borderColor = '#ff8a8a'; // Vermelho mais claro no hover
             // Mostra tooltip
             showConditionTooltip(indicator, conditionData);
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
-            indicator.style.borderColor = '#ff6b6b';
+            indicator.style.borderColor = '#ff6e6e'; // Volta para vermelho normal
             // Esconde tooltip
             hideConditionTooltip();
         };
@@ -10079,7 +10158,150 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         indicator.appendChild(cachedImageElement);
 
-        conditionsContainer.appendChild(indicator);
+        effectsContainer.appendChild(indicator);
+    }
+
+    // Função para criar um ícone indicador de efeito de item
+    function createItemEffectIndicatorIcon(itemEffectData) {
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'item-effect-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #ff6e6e'; // Borda vermelha (mesma cor do botão de manobras)
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#ff8a8a'; // Vermelho mais claro no hover
+            // Mostra tooltip
+            showItemEffectTooltip(indicator, itemEffectData);
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#ff6e6e'; // Volta para vermelho normal
+            // Esconde tooltip
+            hideItemEffectTooltip();
+        };
+
+        // Click handler para remover o efeito
+        indicator.onclick = () => {
+            // Esconde o tooltip antes de remover o efeito
+            hideItemEffectTooltip();
+            toggleEffect(itemEffectData.effectKey);
+        };
+
+        // Usa o sistema de cache para carregar a imagem
+        const iconUrl = itemEffectData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg';
+
+        const cachedImageElement = createCachedImageElement(
+            iconUrl,
+            itemEffectData.name,
+            itemEffectData.icone || '⚔️',
+            {
+                width: '100%',
+                height: '100%',
+                borderRadius: '4px',
+                objectFit: 'cover',
+                showSkeleton: true
+            }
+        );
+
+        indicator.appendChild(cachedImageElement);
+
+        effectsContainer.appendChild(indicator);
+    }
+
+    // Tooltip global para efeitos de item
+    let currentItemEffectTooltip = null;
+
+    // Função para mostrar tooltip do efeito de item
+    function showItemEffectTooltip(element, itemEffectData) {
+        // Remove tooltip existente
+        hideItemEffectTooltip();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'item-effect-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = 'rgba(20,20,30,0.98)';
+        tooltip.style.border = '2px solid #ff6e6e';
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.zIndex = '10002';
+        tooltip.style.maxWidth = '250px';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
+        tooltip.style.pointerEvents = 'none';
+
+        // Conteúdo do tooltip
+        const title = document.createElement('div');
+        title.textContent = itemEffectData.name;
+        title.style.color = '#ff6e6e';
+        title.style.fontSize = '14px';
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '4px';
+
+        const description = document.createElement('div');
+        description.textContent = itemEffectData.description;
+        description.style.color = '#ecf0f1';
+        description.style.fontSize = '12px';
+        description.style.lineHeight = '1.3';
+        description.style.marginBottom = '4px';
+
+        const type = document.createElement('div');
+        type.textContent = itemEffectData.type;
+        type.style.color = '#ffb86c';
+        type.style.fontSize = '12px';
+        type.style.fontWeight = 'bold';
+        type.style.lineHeight = '1.3';
+
+        const clickHint = document.createElement('div');
+        clickHint.textContent = 'Clique para remover';
+        clickHint.style.color = '#6ec6ff';
+        clickHint.style.fontSize = '11px';
+        clickHint.style.fontStyle = 'italic';
+        clickHint.style.marginTop = '6px';
+        clickHint.style.textAlign = 'center';
+
+        tooltip.appendChild(title);
+        tooltip.appendChild(description);
+        tooltip.appendChild(type);
+        tooltip.appendChild(clickHint);
+
+        // Posicionamento do tooltip
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+
+        document.body.appendChild(tooltip);
+        currentItemEffectTooltip = tooltip;
+
+        // Ajusta posição se sair da tela
+        setTimeout(() => {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            if (tooltipRect.left < 10) {
+                tooltip.style.left = '10px';
+            } else if (tooltipRect.right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            }
+        }, 10);
+    }
+
+    // Função para esconder tooltip do efeito de item
+    function hideItemEffectTooltip() {
+        if (currentItemEffectTooltip) {
+            currentItemEffectTooltip.remove();
+            currentItemEffectTooltip = null;
+        }
     }
 
     // Tooltip global para condições
@@ -10094,7 +10316,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tooltip.className = 'condition-tooltip';
         tooltip.style.position = 'fixed';
         tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.border = '2px solid #ff6b6b';
+        tooltip.style.border = '2px solid #ff6e6e';
         tooltip.style.borderRadius = '8px';
         tooltip.style.padding = '8px 12px';
         tooltip.style.zIndex = '10002';
@@ -10105,7 +10327,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Conteúdo do tooltip
         const title = document.createElement('div');
         title.textContent = conditionData.nome;
-        title.style.color = '#ff6b6b';
+        title.style.color = '#ff6e6e';
         title.style.fontSize = '14px';
         title.style.fontWeight = 'bold';
         title.style.marginBottom = '4px';
@@ -10549,8 +10771,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     }
                     updateEffectsList();
                     updateEffectsBadge();
-                    updateFoodVisualIndicators(); // Atualiza indicadores visuais de comida
-                    updateConditionsVisualIndicators(); // Atualiza indicadores visuais de condições
+                    updateEffectsVisualIndicators(); // Atualiza indicadores visuais unificados
                 };
 
                 // Cabeçalho do efeito

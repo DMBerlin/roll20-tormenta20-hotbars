@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste Caçador.js - Roll20 Simulator</title>
+  <title>Teste Hotbar - Roll20 Simulator</title>
   <style>
     body {
       margin: 0;
@@ -218,7 +218,7 @@
 
 <body>
   <div class="header">
-    <h1>🏹 Teste Caçador.js - Hot Reload</h1>
+    <h1>🏹 Teste Hotbar - Hot Reload</h1>
     <div class="controls">
       <button class="reload-btn" onclick="reloadScript()">🔄 Recarregar Script</button>
       <div class="auto-reload-toggle">
@@ -269,12 +269,12 @@
   <div class="logs">
     <div id="logContainer">
       <div class="log-entry log-info">🚀 Sistema de teste iniciado</div>
-      <div class="log-entry log-info">📁 Aguardando carregamento do script cacador.js</div>
+      <div class="log-entry log-info">📁 Aguardando carregamento do script main.js</div>
     </div>
   </div>
 
   <div class="footer">
-    <p>Simulador para desenvolvimento do script cacador.js</p>
+    <p>Simulador para desenvolvimento do script main.js</p>
     <p>Pressione <kbd>Ctrl + '</kbd> para mostrar/ocultar a hotbar (quando carregada)</p>
   </div>
 
@@ -355,7 +355,7 @@
     function loadScript() {
       const timestamp = new Date().getTime();
       scriptElement = document.createElement('script');
-      scriptElement.src = `../cacador.js?t=${timestamp}`;
+      scriptElement.src = `../main.js?t=${timestamp}`;
       scriptElement.type = 'text/javascript';
 
       scriptElement.onload = function () {

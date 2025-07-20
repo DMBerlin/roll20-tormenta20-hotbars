@@ -13,12 +13,12 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     ├── eslint.config.mjs
     └── tormenta20/
         └── hotbars/
-            └── cacador.js
+            └── main.js
 ```
 
 ## 🎯 Scripts Disponíveis
 
-### Hotbar Extra - Caçador (`cacador.js`)
+### Hotbar Extra - Caçador (`main.js`)
 
 Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, especializada para a classe Caçador do Tormenta20.
 
@@ -42,7 +42,7 @@ Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, es
 
 1. **Instalação**:
    - Instale a extensão Tampermonkey no seu navegador
-   - Copie o conteúdo do arquivo `cacador.js`
+   - Copie o conteúdo do arquivo `main.js`
    - Crie um novo script no Tampermonkey e cole o código
    - Salve e ative o script
 
