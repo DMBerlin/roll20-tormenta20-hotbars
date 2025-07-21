@@ -4159,13 +4159,79 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         };
 
+        // Seção de bônus disponíveis (antes do botão de rolagem)
+        const bonusSection = document.createElement('div');
+        bonusSection.style.marginBottom = '20px';
+        bonusSection.style.padding = '15px';
+        bonusSection.style.background = 'rgba(255, 184, 108, 0.1)';
+        bonusSection.style.borderRadius = '8px';
+        bonusSection.style.border = '1px solid rgba(255, 184, 108, 0.3)';
+
+        const bonusTitle = document.createElement('h3');
+        bonusTitle.textContent = 'Bônus Disponíveis para esta Rolagem';
+        bonusTitle.style.color = '#ffb86c';
+        bonusTitle.style.margin = '0 0 15px 0';
+        bonusTitle.style.fontSize = '16px';
+        bonusTitle.style.fontWeight = 'bold';
+        bonusSection.appendChild(bonusTitle);
+
+        // Verifica se a Batata Valkariana está ativa
+        const batataValkarianaActive = isEffectActive('prato_batata_valkariana');
+
+        if (batataValkarianaActive) {
+            const batataBonusContainer = document.createElement('div');
+            batataBonusContainer.style.display = 'flex';
+            batataBonusContainer.style.alignItems = 'center';
+            batataBonusContainer.style.gap = '10px';
+            batataBonusContainer.style.marginBottom = '10px';
+
+            const batataCheckbox = document.createElement('input');
+            batataCheckbox.type = 'checkbox';
+            batataCheckbox.id = 'batata-valkariana-bonus';
+            batataCheckbox.style.width = '16px';
+            batataCheckbox.style.height = '16px';
+
+            const batataLabel = document.createElement('label');
+            batataLabel.htmlFor = 'batata-valkariana-bonus';
+            batataLabel.textContent = 'Batata Valkariana (+1d6 no teste)';
+            batataLabel.style.color = '#ecf0f1';
+            batataLabel.style.fontSize = '14px';
+            batataLabel.style.fontWeight = 'bold';
+            batataLabel.style.cursor = 'pointer';
+
+            const batataDesc = document.createElement('span');
+            batataDesc.textContent = ' - Consome o efeito após a rolagem';
+            batataDesc.style.color = '#ffb86c';
+            batataDesc.style.fontSize = '12px';
+            batataDesc.style.fontStyle = 'italic';
+
+            batataLabel.appendChild(batataDesc);
+            batataBonusContainer.appendChild(batataCheckbox);
+            batataBonusContainer.appendChild(batataLabel);
+            bonusSection.appendChild(batataBonusContainer);
+        } else {
+            const noBonusMessage = document.createElement('div');
+            noBonusMessage.textContent = 'Nenhum bônus disponível para esta rolagem.';
+            noBonusMessage.style.color = '#999';
+            noBonusMessage.style.fontSize = '14px';
+            noBonusMessage.style.fontStyle = 'italic';
+            noBonusMessage.style.textAlign = 'center';
+            noBonusMessage.style.padding = '10px';
+            bonusSection.appendChild(noBonusMessage);
+        }
+
         // Adiciona os elementos ao modal na ordem correta
         modal.appendChild(usosSection);
+        modal.appendChild(bonusSection);
         modal.appendChild(specializationSection);
         modal.appendChild(rollButton);
 
         rollButton.onclick = () => {
             if (!selectedSpecialization) return;
+
+            // Verifica se a Batata Valkariana foi selecionada
+            const batataValkarianaSelected = document.getElementById('batata-valkariana-bonus') &&
+                document.getElementById('batata-valkariana-bonus').checked;
 
             // Encontra o comando da skill na lista de skills
             const skills = [
@@ -4202,7 +4268,43 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             const skill = skills.find(s => s.nome === skillName);
             if (skill) {
-                sendToChat(skill.comando);
+                let finalCommand = skill.comando;
+                let extraDescription = '';
+
+                // Adiciona bônus da Batata Valkariana se selecionada
+                if (batataValkarianaSelected) {
+                    // Modifica o comando para incluir +1d6
+                    finalCommand = finalCommand.replace(
+                        /theroll=\[\[(.*?)\]\]/,
+                        'theroll=[[$1+1d6]]'
+                    );
+                    extraDescription = '%NEWLINE% *+ Batata Valkariana (+1d6)*';
+                }
+
+                // Adiciona descrição extra se houver
+                if (extraDescription) {
+                    finalCommand = finalCommand.replace(
+                        /theroll=\[\[(.*?)\]\]/,
+                        `theroll=[[$1]]${extraDescription}`
+                    );
+                }
+
+                sendToChat(finalCommand);
+
+                // Remove o efeito da Batata Valkariana se foi usado
+                if (batataValkarianaSelected) {
+                    setTimeout(() => {
+                        // Remove o efeito dos efeitos ativos
+                        toggleEffect('prato_batata_valkariana');
+
+                        // Remove também da lista de efeitos de comida
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+
+                        showSuccessNotification('Efeito da Batata Valkariana consumido no teste!');
+                    }, 500);
+                }
 
                 // Fecha todos os popups de skills
                 closeAllSkillPopups();
@@ -5113,14 +5215,15 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 // Verifica se o Assado de Carnes foi selecionado para removê-lo após o ataque
                 const assadoCarnesSelected = selected.includes('assado_carnes');
+                const batataValkarianaSelected = selected.includes('batata_valkariana');
 
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
 
-                // Se o Assado de Carnes foi selecionado, executa o ataque e remove o efeito
-                if (assadoCarnesSelected) {
+                // Se o Assado de Carnes ou Batata Valkariana foi selecionado, executa o ataque e remove o efeito
+                if (assadoCarnesSelected || batataValkarianaSelected) {
                     // Executa o ataque com os efeitos selecionados
                     const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
@@ -5140,7 +5243,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                                 critThreshold += effect.critMod;
                             }
                             if (effect.attackMod) {
-                                attackBonus += effect.attackMod;
+                                if (typeof effect.attackMod === 'string' && effect.attackMod.includes('d')) {
+                                    // Para efeitos como Batata Valkariana que adicionam dados
+                                    attackBonus += `+${effect.attackMod}`;
+                                } else {
+                                    // Para efeitos que adicionam bônus fixos
+                                    attackBonus += effect.attackMod;
+                                }
                             }
                             extraDescription += '%NEWLINE% ' + effect.desc;
                             if (effect.value === 'marca_presa') marcaPresaActive = true;
@@ -5157,17 +5266,31 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     // Executa o ataque
                     executeAttackWithBloodEffect(macro);
 
-                    // Remove o efeito do Assado de Carnes após um delay
+                    // Remove os efeitos selecionados após um delay
                     setTimeout(() => {
-                        // Remove o efeito dos efeitos ativos
-                        toggleEffect('prato_assado_de_carnes');
+                        if (assadoCarnesSelected) {
+                            // Remove o efeito do Assado de Carnes
+                            toggleEffect('prato_assado_de_carnes');
 
-                        // Remove também da lista de efeitos de comida
-                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
-                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_assado_de_carnes');
-                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            // Remove também da lista de efeitos de comida
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_assado_de_carnes');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
 
-                        showSuccessNotification('Efeito do Assado de Carnes consumido no ataque!');
+                            showSuccessNotification('Efeito do Assado de Carnes consumido no ataque!');
+                        }
+
+                        if (batataValkarianaSelected) {
+                            // Remove o efeito da Batata Valkariana
+                            toggleEffect('prato_batata_valkariana');
+
+                            // Remove também da lista de efeitos de comida
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+
+                            showSuccessNotification('Efeito da Batata Valkariana consumido no ataque!');
+                        }
                     }, 1000); // Delay para garantir que o ataque foi processado
                 }
             };
@@ -8110,6 +8233,18 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 value: 'assado_carnes',
                 dice: '2',
                 desc: '*+ Assado de Carnes (+2 dano)*',
+                origin: 'Prato Especial',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
+        // Batata Valkariana (Efeito de Comida) - SEMPRE NO TOPO
+        if (isEffectActive('prato_batata_valkariana')) {
+            effects.push({
+                label: 'Batata Valkariana (+1d6 acerto)',
+                value: 'batata_valkariana',
+                attackMod: '1d6',
+                desc: '*+ Batata Valkariana (+1d6 acerto)*',
                 origin: 'Prato Especial',
                 priority: 1 // Prioridade máxima para ficar no topo
             });
