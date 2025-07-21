@@ -4159,13 +4159,174 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         };
 
+        // Seção de bônus disponíveis (antes do botão de rolagem)
+        const bonusSection = document.createElement('div');
+        bonusSection.style.marginBottom = '20px';
+        bonusSection.style.padding = '15px';
+        bonusSection.style.background = 'rgba(255, 184, 108, 0.1)';
+        bonusSection.style.borderRadius = '8px';
+        bonusSection.style.border = '1px solid rgba(255, 184, 108, 0.3)';
+
+        const bonusTitle = document.createElement('h3');
+        bonusTitle.textContent = 'Bônus Disponíveis para esta Rolagem';
+        bonusTitle.style.color = '#ffb86c';
+        bonusTitle.style.margin = '0 0 15px 0';
+        bonusTitle.style.fontSize = '16px';
+        bonusTitle.style.fontWeight = 'bold';
+        bonusSection.appendChild(bonusTitle);
+
+        // Verifica quais efeitos de comida estão ativos
+        const batataValkarianaActive = isEffectActive('prato_batata_valkariana');
+        const boloCenouraActive = isEffectActive('prato_bolo_de_cenoura');
+        const estrogonofeActive = isEffectActive('prato_estrogonofe');
+        const futomakiActive = isEffectActive('prato_futomaki');
+        const paoQueijoActive = isEffectActive('prato_pao_de_queijo');
+        const porcoAssadoActive = isEffectActive('prato_porco_assado');
+        const saladaElficaActive = isEffectActive('prato_salada_elfica');
+        const saladaImperialActive = isEffectActive('prato_salada_imperial');
+        const sopaCogumeloActive = isEffectActive('prato_sopa_de_cogumelo');
+        const pizzaActive = isEffectActive('prato_pizza');
+
+        // Função para criar um bônus de comida
+        function createFoodBonus(id, label, description, isActive) {
+            if (!isActive) return null;
+
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.alignItems = 'center';
+            container.style.gap = '10px';
+            container.style.marginBottom = '10px';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = id;
+            checkbox.style.width = '16px';
+            checkbox.style.height = '16px';
+
+            const labelElement = document.createElement('label');
+            labelElement.htmlFor = id;
+            labelElement.textContent = label;
+            labelElement.style.color = '#ecf0f1';
+            labelElement.style.fontSize = '14px';
+            labelElement.style.fontWeight = 'bold';
+            labelElement.style.cursor = 'pointer';
+
+            const desc = document.createElement('span');
+            desc.textContent = ' - Consome o efeito após a rolagem';
+            desc.style.color = '#ffb86c';
+            desc.style.fontSize = '12px';
+            desc.style.fontStyle = 'italic';
+
+            labelElement.appendChild(desc);
+            container.appendChild(checkbox);
+            container.appendChild(labelElement);
+            return container;
+        }
+
+        // Adiciona os bônus disponíveis
+        let hasAnyBonus = false;
+
+        if (batataValkarianaActive) {
+            const bonus = createFoodBonus('batata-valkariana-bonus', '🍟 Batata Valkariana (+1d6 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (boloCenouraActive && skillName === 'Percepção') {
+            const bonus = createFoodBonus('bolo-cenoura-bonus', '🥕 Bolo de Cenoura (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (estrogonofeActive && skillName === 'Vontade') {
+            const bonus = createFoodBonus('estrogonofe-bonus', '🍝 Estrogonofe (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (futomakiActive && skillName === 'Diplomacia') {
+            const bonus = createFoodBonus('futomaki-bonus', '🍣 Futomaki (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (paoQueijoActive && skillName === 'Fortitude') {
+            const bonus = createFoodBonus('pao-queijo-bonus', '🧀 Pão de Queijo (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (porcoAssadoActive && skillName === 'Luta') {
+            const bonus = createFoodBonus('porco-assado-bonus', '🐷 Porco Assado (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (saladaElficaActive && skillName === 'Pontaria') {
+            const bonus = createFoodBonus('salada-elfica-bonus', '🥗 Salada Elfica (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (saladaImperialActive && skillName === 'Iniciativa') {
+            const bonus = createFoodBonus('salada-imperial-bonus', '🥗 Salada Imperial (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (sopaCogumeloActive && skillName === 'Misticismo') {
+            const bonus = createFoodBonus('sopa-cogumelo-bonus', '🍄 Sopa de Cogumelo (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (pizzaActive && (skillName === 'Vontade' || skillName === 'Reflexos' || skillName === 'Fortitude')) {
+            const bonus = createFoodBonus('pizza-bonus', '🍕 Pizza (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (!hasAnyBonus) {
+            const noBonusMessage = document.createElement('div');
+            noBonusMessage.textContent = 'Nenhum bônus disponível para esta rolagem.';
+            noBonusMessage.style.color = '#999';
+            noBonusMessage.style.fontSize = '14px';
+            noBonusMessage.style.fontStyle = 'italic';
+            noBonusMessage.style.textAlign = 'center';
+            noBonusMessage.style.padding = '10px';
+            bonusSection.appendChild(noBonusMessage);
+        }
+
         // Adiciona os elementos ao modal na ordem correta
         modal.appendChild(usosSection);
+        modal.appendChild(bonusSection);
         modal.appendChild(specializationSection);
         modal.appendChild(rollButton);
 
         rollButton.onclick = () => {
             if (!selectedSpecialization) return;
+
+            // Verifica quais efeitos de comida foram selecionados
+            const batataValkarianaSelected = document.getElementById('batata-valkariana-bonus') &&
+                document.getElementById('batata-valkariana-bonus').checked;
+            const boloCenouraSelected = document.getElementById('bolo-cenoura-bonus') &&
+                document.getElementById('bolo-cenoura-bonus').checked;
+            const estrogonofeSelected = document.getElementById('estrogonofe-bonus') &&
+                document.getElementById('estrogonofe-bonus').checked;
+            const futomakiSelected = document.getElementById('futomaki-bonus') &&
+                document.getElementById('futomaki-bonus').checked;
+            const paoQueijoSelected = document.getElementById('pao-queijo-bonus') &&
+                document.getElementById('pao-queijo-bonus').checked;
+            const porcoAssadoSelected = document.getElementById('porco-assado-bonus') &&
+                document.getElementById('porco-assado-bonus').checked;
+            const saladaElficaSelected = document.getElementById('salada-elfica-bonus') &&
+                document.getElementById('salada-elfica-bonus').checked;
+            const saladaImperialSelected = document.getElementById('salada-imperial-bonus') &&
+                document.getElementById('salada-imperial-bonus').checked;
+            const sopaCogumeloSelected = document.getElementById('sopa-cogumelo-bonus') &&
+                document.getElementById('sopa-cogumelo-bonus').checked;
+            const pizzaSelected = document.getElementById('pizza-bonus') &&
+                document.getElementById('pizza-bonus').checked;
 
             // Encontra o comando da skill na lista de skills
             const skills = [
@@ -4202,7 +4363,171 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             const skill = skills.find(s => s.nome === skillName);
             if (skill) {
-                sendToChat(skill.comando);
+                let finalCommand = skill.comando;
+
+                // Adiciona bônus dos efeitos de comida selecionados
+                let numericBonus = 0;
+                let diceBonus = '';
+                let bonusDescription = '';
+
+                if (batataValkarianaSelected) {
+                    diceBonus += '+1d6';
+                    bonusDescription += '%NEWLINE% *+ Batata Valkariana (+1d6)*';
+                }
+
+                if (boloCenouraSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Bolo de Cenoura (+2)*';
+                }
+
+                if (estrogonofeSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Estrogonofe (+2)*';
+                }
+
+                if (futomakiSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Futomaki (+2)*';
+                }
+
+                if (paoQueijoSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Pão de Queijo (+2)*';
+                }
+
+                if (porcoAssadoSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Porco Assado (+1)*';
+                }
+
+                if (saladaElficaSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Salada Elfica (+1)*';
+                }
+
+                if (saladaImperialSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Salada Imperial (+2)*';
+                }
+
+                if (sopaCogumeloSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Sopa de Cogumelo (+2)*';
+                }
+
+                if (pizzaSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Pizza (+1)*';
+                }
+
+                // Aplica os bônus se houver algum
+                if (numericBonus !== 0 || diceBonus !== '') {
+                    // Adiciona o bônus na rolagem
+                    if (diceBonus !== '') {
+                        // Se há dados, coloca-os logo após o 1d20
+                        finalCommand = finalCommand.replace(
+                            /theroll=\[\[1d20\+\[\[(.*?)\]\]\]\]/,
+                            `theroll=[[1d20${diceBonus}+[[$1]]${numericBonus !== 0 ? `+${numericBonus}` : ''}]]`
+                        );
+                    } else {
+                        // Se só há bônus numéricos, adiciona no final
+                        finalCommand = finalCommand.replace(
+                            /theroll=\[\[(.*?)\]\]/,
+                            `theroll=[[$1+${numericBonus}]]`
+                        );
+                    }
+
+                    // Adiciona a descrição dos bônus dentro do rollname
+                    finalCommand = finalCommand.replace(
+                        /(\{\{rollname=)(.*?)(\}\})/,
+                        `$1$2${bonusDescription}$3`
+                    );
+                }
+
+                sendToChat(finalCommand);
+
+                // Remove os efeitos de comida usados
+                setTimeout(() => {
+                    if (batataValkarianaSelected) {
+                        toggleEffect('prato_batata_valkariana');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍟 Efeito da Batata Valkariana consumido no teste!');
+                    }
+
+                    if (boloCenouraSelected) {
+                        toggleEffect('prato_bolo_de_cenoura');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_bolo_de_cenoura');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🥕 Efeito do Bolo de Cenoura consumido no teste!');
+                    }
+
+                    if (estrogonofeSelected) {
+                        toggleEffect('prato_estrogonofe');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_estrogonofe');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍝 Efeito do Estrogonofe consumido no teste!');
+                    }
+
+                    if (futomakiSelected) {
+                        toggleEffect('prato_futomaki');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_futomaki');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍣 Efeito do Futomaki consumido no teste!');
+                    }
+
+                    if (paoQueijoSelected) {
+                        toggleEffect('prato_pao_de_queijo');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pao_de_queijo');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🧀 Efeito do Pão de Queijo consumido no teste!');
+                    }
+
+                    if (porcoAssadoSelected) {
+                        toggleEffect('prato_porco_assado');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_porco_assado');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🐷 Efeito do Porco Assado consumido no teste!');
+                    }
+
+                    if (saladaElficaSelected) {
+                        toggleEffect('prato_salada_elfica');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_salada_elfica');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🥗 Efeito da Salada Elfica consumido no teste!');
+                    }
+
+                    if (saladaImperialSelected) {
+                        toggleEffect('prato_salada_imperial');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_salada_imperial');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🥗 Efeito da Salada Imperial consumido no teste!');
+                    }
+
+                    if (sopaCogumeloSelected) {
+                        toggleEffect('prato_sopa_de_cogumelo');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_sopa_de_cogumelo');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍄 Efeito da Sopa de Cogumelo consumido no teste!');
+                    }
+
+                    if (pizzaSelected) {
+                        toggleEffect('prato_pizza');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pizza');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍕 Efeito da Pizza consumido no teste!');
+                    }
+                }, 500);
 
                 // Fecha todos os popups de skills
                 closeAllSkillPopups();
@@ -5110,10 +5435,171 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 } catch (e) {
                     console.error('Erro ao salvar seleção:', e);
                 }
+
+                // Verifica se algum efeito de comida foi selecionado para removê-lo após o ataque
+                const assadoCarnesSelected = selected.includes('assado_carnes');
+                const batataValkarianaSelected = selected.includes('batata_valkariana');
+                const boloCenouraSelected = selected.includes('bolo_cenoura');
+                const estrogonofeSelected = selected.includes('estrogonofe');
+                const futomakiSelected = selected.includes('futomaki');
+                const paoQueijoSelected = selected.includes('pao_queijo');
+                const porcoAssadoSelected = selected.includes('porco_assado');
+                const saladaElficaSelected = selected.includes('salada_elfica');
+                const saladaImperialSelected = selected.includes('salada_imperial');
+                const sopaCogumeloSelected = selected.includes('sopa_cogumelo');
+                const pizzaSelected = selected.includes('pizza');
+
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
+
+                // Se algum efeito de comida foi selecionado, executa o ataque e remove o efeito
+                if (assadoCarnesSelected || batataValkarianaSelected || boloCenouraSelected ||
+                    estrogonofeSelected || futomakiSelected || paoQueijoSelected ||
+                    porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
+                    sopaCogumeloSelected || pizzaSelected) {
+                    // Executa o ataque com os efeitos selecionados
+                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const effects = getDynamicAttackEffects(charLevel);
+                    let extraDamage = '';
+                    let extraDescription = '';
+                    let critThreshold = 18;
+                    let attackBonus = 0;
+                    let marcaPresaActive = false;
+                    let inimigoActive = false;
+
+                    effects.forEach(effect => {
+                        if (selected.includes(effect.value)) {
+                            if (effect.dice) {
+                                extraDamage += `+${effect.dice}`;
+                            }
+                            if (effect.critMod) {
+                                critThreshold += effect.critMod;
+                            }
+                            if (effect.attackMod) {
+                                if (typeof effect.attackMod === 'string' && effect.attackMod.includes('d')) {
+                                    // Para efeitos como Batata Valkariana que adicionam dados
+                                    attackBonus += `+${effect.attackMod}`;
+                                } else {
+                                    // Para efeitos que adicionam bônus fixos
+                                    attackBonus += effect.attackMod;
+                                }
+                            }
+                            extraDescription += '%NEWLINE% ' + effect.desc;
+                            if (effect.value === 'marca_presa') marcaPresaActive = true;
+                            if (effect.value === 'inimigo') inimigoActive = true;
+                        }
+                    });
+
+                    if (inimigoActive && marcaPresaActive) {
+                        if (critThreshold === 16) critThreshold = 14;
+                    }
+
+                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
+
+                    // Executa o ataque
+                    executeAttackWithBloodEffect(macro);
+
+                    // Remove os efeitos selecionados após um delay
+                    setTimeout(() => {
+                        if (assadoCarnesSelected) {
+                            // Remove o efeito do Assado de Carnes
+                            toggleEffect('prato_assado_de_carnes');
+
+                            // Remove também da lista de efeitos de comida
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_assado_de_carnes');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+
+                            showSuccessNotification('Efeito do Assado de Carnes consumido no ataque!');
+                        }
+
+                        if (batataValkarianaSelected) {
+                            // Remove o efeito da Batata Valkariana
+                            toggleEffect('prato_batata_valkariana');
+
+                            // Remove também da lista de efeitos de comida
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+
+                            showSuccessNotification('Efeito da Batata Valkariana consumido no ataque!');
+                        }
+
+                        if (boloCenouraSelected) {
+                            toggleEffect('prato_bolo_de_cenoura');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_bolo_de_cenoura');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🥕 Efeito do Bolo de Cenoura consumido no ataque!');
+                        }
+
+                        if (estrogonofeSelected) {
+                            toggleEffect('prato_estrogonofe');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_estrogonofe');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🍝 Efeito do Estrogonofe consumido no ataque!');
+                        }
+
+                        if (futomakiSelected) {
+                            toggleEffect('prato_futomaki');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_futomaki');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🍣 Efeito do Futomaki consumido no ataque!');
+                        }
+
+                        if (paoQueijoSelected) {
+                            toggleEffect('prato_pao_de_queijo');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pao_de_queijo');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🧀 Efeito do Pão de Queijo consumido no ataque!');
+                        }
+
+                        if (porcoAssadoSelected) {
+                            toggleEffect('prato_porco_assado');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_porco_assado');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🐷 Efeito do Porco Assado consumido no ataque!');
+                        }
+
+                        if (saladaElficaSelected) {
+                            toggleEffect('prato_salada_elfica');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_salada_elfica');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🥗 Efeito da Salada Elfica consumido no ataque!');
+                        }
+
+                        if (saladaImperialSelected) {
+                            toggleEffect('prato_salada_imperial');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_salada_imperial');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🥗 Efeito da Salada Imperial consumido no ataque!');
+                        }
+
+                        if (sopaCogumeloSelected) {
+                            toggleEffect('prato_sopa_de_cogumelo');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_sopa_de_cogumelo');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🍄 Efeito da Sopa de Cogumelo consumido no ataque!');
+                        }
+
+                        if (pizzaSelected) {
+                            toggleEffect('prato_pizza');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pizza');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🍕 Efeito da Pizza consumido no ataque!');
+                        }
+                    }, 1000); // Delay para garantir que o ataque foi processado
+                }
             };
             popup.appendChild(saveBtn);
 
@@ -8047,6 +8533,138 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
 
+        // Assado de Carnes (Efeito de Comida) - SEMPRE NO TOPO
+        if (isEffectActive('prato_assado_de_carnes')) {
+            effects.push({
+                label: 'Assado de Carnes (+2 dano)',
+                value: 'assado_carnes',
+                dice: '2',
+                desc: '*+ Assado de Carnes (+2 dano)*',
+                origin: 'Prato Especial',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
+        // Batata Valkariana (Efeito de Comida) - SEMPRE NO TOPO
+        if (isEffectActive('prato_batata_valkariana')) {
+            effects.push({
+                label: 'Batata Valkariana (+1d6 acerto)',
+                value: 'batata_valkariana',
+                attackMod: '1d6',
+                desc: '*+ Batata Valkariana (+1d6 acerto)*',
+                origin: 'Prato Especial',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
+        // Bolo de Cenoura (Efeito de Comida)
+        if (isEffectActive('prato_bolo_de_cenoura')) {
+            effects.push({
+                label: '🥕 Bolo de Cenoura (+2 Percepção)',
+                value: 'bolo_cenoura',
+                attackMod: 2,
+                desc: '*+ Bolo de Cenoura (+2 Percepção)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Estrogonofe (Efeito de Comida)
+        if (isEffectActive('prato_estrogonofe')) {
+            effects.push({
+                label: '🍝 Estrogonofe (+2 Vontade)',
+                value: 'estrogonofe',
+                attackMod: 2,
+                desc: '*+ Estrogonofe (+2 Vontade)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Futomaki (Efeito de Comida)
+        if (isEffectActive('prato_futomaki')) {
+            effects.push({
+                label: '🍣 Futomaki (+2 Diplomacia)',
+                value: 'futomaki',
+                attackMod: 2,
+                desc: '*+ Futomaki (+2 Diplomacia)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Pão de Queijo (Efeito de Comida)
+        if (isEffectActive('prato_pao_de_queijo')) {
+            effects.push({
+                label: '🧀 Pão de Queijo (+2 Fortitude)',
+                value: 'pao_queijo',
+                attackMod: 2,
+                desc: '*+ Pão de Queijo (+2 Fortitude)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Porco Assado (Efeito de Comida)
+        if (isEffectActive('prato_porco_assado')) {
+            effects.push({
+                label: '🐷 Porco Assado (+1 Luta)',
+                value: 'porco_assado',
+                attackMod: 1,
+                desc: '*+ Porco Assado (+1 Luta)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Salada Elfica (Efeito de Comida)
+        if (isEffectActive('prato_salada_elfica')) {
+            effects.push({
+                label: '🥗 Salada Elfica (+1 Pontaria)',
+                value: 'salada_elfica',
+                attackMod: 1,
+                desc: '*+ Salada Elfica (+1 Pontaria)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Salada Imperial (Efeito de Comida)
+        if (isEffectActive('prato_salada_imperial')) {
+            effects.push({
+                label: '🥗 Salada Imperial (+2 Iniciativa)',
+                value: 'salada_imperial',
+                attackMod: 2,
+                desc: '*+ Salada Imperial (+2 Iniciativa)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Sopa de Cogumelo (Efeito de Comida)
+        if (isEffectActive('prato_sopa_de_cogumelo')) {
+            effects.push({
+                label: '🍄 Sopa de Cogumelo (+2 Misticismo)',
+                value: 'sopa_cogumelo',
+                attackMod: 2,
+                desc: '*+ Sopa de Cogumelo (+2 Misticismo)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Pizza (Efeito de Comida)
+        if (isEffectActive('prato_pizza')) {
+            effects.push({
+                label: '🍕 Pizza (+1 Vontade/Reflexos/Fortitude)',
+                value: 'pizza',
+                attackMod: 1,
+                desc: '*+ Pizza (+1 Vontade/Reflexos/Fortitude)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
         // Flanqueado (Bônus Permanente de Combate)
         effects.push({
             label: 'Flanqueado (+2 acerto)',
@@ -8160,6 +8778,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 origin: 'Item: Cachecol Sombrio'
             });
         }
+
+        // Ordena os efeitos por prioridade (efeitos com priority: 1 ficam no topo)
+        effects.sort((a, b) => {
+            const priorityA = a.priority || 0;
+            const priorityB = b.priority || 0;
+            return priorityB - priorityA;
+        });
 
         return effects;
     }
