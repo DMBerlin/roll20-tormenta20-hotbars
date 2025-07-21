@@ -5110,10 +5110,66 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 } catch (e) {
                     console.error('Erro ao salvar seleção:', e);
                 }
+
+                // Verifica se o Assado de Carnes foi selecionado para removê-lo após o ataque
+                const assadoCarnesSelected = selected.includes('assado_carnes');
+
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
+
+                // Se o Assado de Carnes foi selecionado, executa o ataque e remove o efeito
+                if (assadoCarnesSelected) {
+                    // Executa o ataque com os efeitos selecionados
+                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const effects = getDynamicAttackEffects(charLevel);
+                    let extraDamage = '';
+                    let extraDescription = '';
+                    let critThreshold = 18;
+                    let attackBonus = 0;
+                    let marcaPresaActive = false;
+                    let inimigoActive = false;
+
+                    effects.forEach(effect => {
+                        if (selected.includes(effect.value)) {
+                            if (effect.dice) {
+                                extraDamage += `+${effect.dice}`;
+                            }
+                            if (effect.critMod) {
+                                critThreshold += effect.critMod;
+                            }
+                            if (effect.attackMod) {
+                                attackBonus += effect.attackMod;
+                            }
+                            extraDescription += '%NEWLINE% ' + effect.desc;
+                            if (effect.value === 'marca_presa') marcaPresaActive = true;
+                            if (effect.value === 'inimigo') inimigoActive = true;
+                        }
+                    });
+
+                    if (inimigoActive && marcaPresaActive) {
+                        if (critThreshold === 16) critThreshold = 14;
+                    }
+
+                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
+
+                    // Executa o ataque
+                    executeAttackWithBloodEffect(macro);
+
+                    // Remove o efeito do Assado de Carnes após um delay
+                    setTimeout(() => {
+                        // Remove o efeito dos efeitos ativos
+                        toggleEffect('prato_assado_de_carnes');
+
+                        // Remove também da lista de efeitos de comida
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_assado_de_carnes');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+
+                        showSuccessNotification('Efeito do Assado de Carnes consumido no ataque!');
+                    }, 1000); // Delay para garantir que o ataque foi processado
+                }
             };
             popup.appendChild(saveBtn);
 
@@ -8047,6 +8103,18 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
 
+        // Assado de Carnes (Efeito de Comida) - SEMPRE NO TOPO
+        if (isEffectActive('prato_assado_de_carnes')) {
+            effects.push({
+                label: 'Assado de Carnes (+2 dano)',
+                value: 'assado_carnes',
+                dice: '2',
+                desc: '*+ Assado de Carnes (+2 dano)*',
+                origin: 'Prato Especial',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
         // Flanqueado (Bônus Permanente de Combate)
         effects.push({
             label: 'Flanqueado (+2 acerto)',
@@ -8160,6 +8228,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 origin: 'Item: Cachecol Sombrio'
             });
         }
+
+        // Ordena os efeitos por prioridade (efeitos com priority: 1 ficam no topo)
+        effects.sort((a, b) => {
+            const priorityA = a.priority || 0;
+            const priorityB = b.priority || 0;
+            return priorityB - priorityA;
+        });
 
         return effects;
     }
