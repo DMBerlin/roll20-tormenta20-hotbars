@@ -213,6 +213,24 @@
       color: #666;
       font-size: 12px;
     }
+
+    /* Novas classes para substituir estilos inline */
+    .chat-intro {
+      color: #6ec6ff;
+      margin-bottom: 10px;
+    }
+
+    .chat-message {
+      margin-bottom: 8px;
+      padding: 5px;
+      background: rgba(110, 198, 255, 0.1);
+      border-radius: 3px;
+      border-left: 3px solid #6ec6ff;
+    }
+
+    .chat-message strong {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -224,7 +242,8 @@
       <div class="auto-reload-toggle">
         <label>Auto-reload:</label>
         <label class="toggle">
-          <input type="checkbox" id="autoReloadToggle" onchange="toggleAutoReload()">
+          <input title="Ativar/desativar auto-reload" type="checkbox" id="autoReloadToggle"
+            onchange="toggleAutoReload()">
           <span class="slider"></span>
         </label>
         <span id="autoReloadInterval">5s</span>
@@ -256,7 +275,7 @@
 
     <!-- Simula o chat do Roll20 -->
     <div class="roll20-chat" id="chatOutput">
-      <div style="color: #6ec6ff; margin-bottom: 10px;">💬 Chat simulado do Roll20 - comandos aparecerão aqui:</div>
+      <div class="chat-intro">💬 Chat simulado do Roll20 - comandos aparecerão aqui:</div>
     </div>
 
     <!-- Simula o input do chat -->
@@ -307,11 +326,7 @@
 
       if (textarea.value.trim()) {
         const message = document.createElement('div');
-        message.style.marginBottom = '8px';
-        message.style.padding = '5px';
-        message.style.background = 'rgba(110, 198, 255, 0.1)';
-        message.style.borderRadius = '3px';
-        message.style.borderLeft = '3px solid #6ec6ff';
+        message.className = 'chat-message';
         message.innerHTML = `<strong>Comando:</strong> ${textarea.value}`;
         chatOutput.appendChild(message);
         chatOutput.scrollTop = chatOutput.scrollHeight;
