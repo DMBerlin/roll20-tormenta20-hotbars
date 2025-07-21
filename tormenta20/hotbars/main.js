@@ -4185,6 +4185,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const saladaElficaActive = isEffectActive('prato_salada_elfica');
         const saladaImperialActive = isEffectActive('prato_salada_imperial');
         const sopaCogumeloActive = isEffectActive('prato_sopa_de_cogumelo');
+        const pizzaActive = isEffectActive('prato_pizza');
 
         // Função para criar um bônus de comida
         function createFoodBonus(id, label, description, isActive) {
@@ -4279,6 +4280,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             hasAnyBonus = true;
         }
 
+        if (pizzaActive && (skillName === 'Vontade' || skillName === 'Reflexos' || skillName === 'Fortitude')) {
+            const bonus = createFoodBonus('pizza-bonus', '🍕 Pizza (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
         if (!hasAnyBonus) {
             const noBonusMessage = document.createElement('div');
             noBonusMessage.textContent = 'Nenhum bônus disponível para esta rolagem.';
@@ -4318,6 +4325,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 document.getElementById('salada-imperial-bonus').checked;
             const sopaCogumeloSelected = document.getElementById('sopa-cogumelo-bonus') &&
                 document.getElementById('sopa-cogumelo-bonus').checked;
+            const pizzaSelected = document.getElementById('pizza-bonus') &&
+                document.getElementById('pizza-bonus').checked;
 
             // Encontra o comando da skill na lista de skills
             const skills = [
@@ -4403,6 +4412,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 if (sopaCogumeloSelected) {
                     totalBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Sopa de Cogumelo (+2)*';
+                }
+
+                if (pizzaSelected) {
+                    totalBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Pizza (+1)*';
                 }
 
                 // Aplica o bônus total se houver algum
@@ -4491,6 +4505,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                         comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_sopa_de_cogumelo');
                         localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
                         showSuccessNotification('🍄 Efeito da Sopa de Cogumelo consumido no teste!');
+                    }
+
+                    if (pizzaSelected) {
+                        toggleEffect('prato_pizza');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pizza');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🍕 Efeito da Pizza consumido no teste!');
                     }
                 }, 500);
 
@@ -5412,6 +5434,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const saladaElficaSelected = selected.includes('salada_elfica');
                 const saladaImperialSelected = selected.includes('salada_imperial');
                 const sopaCogumeloSelected = selected.includes('sopa_cogumelo');
+                const pizzaSelected = selected.includes('pizza');
 
                 // Fecha popup
                 popup.remove();
@@ -5422,7 +5445,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 if (assadoCarnesSelected || batataValkarianaSelected || boloCenouraSelected ||
                     estrogonofeSelected || futomakiSelected || paoQueijoSelected ||
                     porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
-                    sopaCogumeloSelected) {
+                    sopaCogumeloSelected || pizzaSelected) {
                     // Executa o ataque com os efeitos selecionados
                     const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
@@ -5553,6 +5576,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                             comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_sopa_de_cogumelo');
                             localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
                             showSuccessNotification('🍄 Efeito da Sopa de Cogumelo consumido no ataque!');
+                        }
+
+                        if (pizzaSelected) {
+                            toggleEffect('prato_pizza');
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pizza');
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            showSuccessNotification('🍕 Efeito da Pizza consumido no ataque!');
                         }
                     }, 1000); // Delay para garantir que o ataque foi processado
                 }
@@ -8604,6 +8635,18 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 value: 'sopa_cogumelo',
                 attackMod: 2,
                 desc: '*+ Sopa de Cogumelo (+2 Misticismo)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Pizza (Efeito de Comida)
+        if (isEffectActive('prato_pizza')) {
+            effects.push({
+                label: '🍕 Pizza (+1 Vontade/Reflexos/Fortitude)',
+                value: 'pizza',
+                attackMod: 1,
+                desc: '*+ Pizza (+1 Vontade/Reflexos/Fortitude)*',
                 origin: 'Prato Especial',
                 priority: 2
             });
