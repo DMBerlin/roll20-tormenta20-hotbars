@@ -4366,68 +4366,81 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 let finalCommand = skill.comando;
 
                 // Adiciona bônus dos efeitos de comida selecionados
-                let totalBonus = 0;
+                let numericBonus = 0;
+                let diceBonus = '';
                 let bonusDescription = '';
 
                 if (batataValkarianaSelected) {
-                    totalBonus += '1d6';
+                    diceBonus += '+1d6';
                     bonusDescription += '%NEWLINE% *+ Batata Valkariana (+1d6)*';
                 }
 
                 if (boloCenouraSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Bolo de Cenoura (+2)*';
                 }
 
                 if (estrogonofeSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Estrogonofe (+2)*';
                 }
 
                 if (futomakiSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Futomaki (+2)*';
                 }
 
                 if (paoQueijoSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Pão de Queijo (+2)*';
                 }
 
                 if (porcoAssadoSelected) {
-                    totalBonus += 1;
+                    numericBonus += 1;
                     bonusDescription += '%NEWLINE% *+ Porco Assado (+1)*';
                 }
 
                 if (saladaElficaSelected) {
-                    totalBonus += 1;
+                    numericBonus += 1;
                     bonusDescription += '%NEWLINE% *+ Salada Elfica (+1)*';
                 }
 
                 if (saladaImperialSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Salada Imperial (+2)*';
                 }
 
                 if (sopaCogumeloSelected) {
-                    totalBonus += 2;
+                    numericBonus += 2;
                     bonusDescription += '%NEWLINE% *+ Sopa de Cogumelo (+2)*';
                 }
 
                 if (pizzaSelected) {
-                    totalBonus += 1;
+                    numericBonus += 1;
                     bonusDescription += '%NEWLINE% *+ Pizza (+1)*';
                 }
 
-                // Aplica o bônus total se houver algum
-                if (totalBonus > 0) {
+                // Aplica os bônus se houver algum
+                if (numericBonus !== 0 || diceBonus !== '') {
+                    // Adiciona o bônus na rolagem
+                    if (diceBonus !== '') {
+                        // Se há dados, coloca-os logo após o 1d20
+                        finalCommand = finalCommand.replace(
+                            /theroll=\[\[1d20\+\[\[(.*?)\]\]\]\]/,
+                            `theroll=[[1d20${diceBonus}+[[$1]]${numericBonus !== 0 ? `+${numericBonus}` : ''}]]`
+                        );
+                    } else {
+                        // Se só há bônus numéricos, adiciona no final
+                        finalCommand = finalCommand.replace(
+                            /theroll=\[\[(.*?)\]\]/,
+                            `theroll=[[$1+${numericBonus}]]`
+                        );
+                    }
+
+                    // Adiciona a descrição dos bônus dentro do rollname
                     finalCommand = finalCommand.replace(
-                        /theroll=\[\[(.*?)\]\]/,
-                        `theroll=[[$1+${totalBonus}]]`
-                    );
-                    finalCommand = finalCommand.replace(
-                        /theroll=\[\[(.*?)\]\]/,
-                        `theroll=[[$1]]${bonusDescription}`
+                        /(\{\{rollname=)(.*?)(\}\})/,
+                        `$1$2${bonusDescription}$3`
                     );
                 }
 
