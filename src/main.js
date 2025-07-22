@@ -31,7 +31,7 @@
     const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = 'v0.0.1'; // Última tag Git
+    const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
 
     // Função para aplicar estilo consistente aos botões de fechar
     function applyCloseButtonStyle(closeBtn) {

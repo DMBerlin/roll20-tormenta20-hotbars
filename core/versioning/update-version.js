@@ -40,7 +40,7 @@ function updateVersionInFile(filePath, newVersion) {
 // Função para atualizar a versão no package.json
 function updatePackageJsonVersion(newVersion) {
   try {
-    const packageJsonPath = path.join(__dirname, 'package.json');
+    const packageJsonPath = path.join(__dirname, '..', '..', 'package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
     packageJson.version = newVersion;
@@ -56,7 +56,7 @@ function updatePackageJsonVersion(newVersion) {
 
 // Função principal
 function main() {
-  const scriptPath = path.join(__dirname, 'src', 'main.js');
+  const scriptPath = path.join(__dirname, '..', '..', 'src', 'main.js');
 
   // Verificar se o arquivo existe
   if (!fs.existsSync(scriptPath)) {
