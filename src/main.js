@@ -30,6 +30,9 @@
     const IMAGE_CACHE_KEY = 'roll20-hotbar-image-cache';
     const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
 
+    // Sistema de versão do script (atualizar manualmente conforme as tags Git)
+    const SCRIPT_VERSION = 'v0.0.1'; // Última tag Git
+
     // Sistema de notificações customizadas
     let notificationContainer = null;
 
@@ -4584,6 +4587,22 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
     }
 
+    // Função para obter a versão atual do script
+    function getGitVersion() {
+        // Retorna a versão definida na constante SCRIPT_VERSION
+        // Esta constante deve ser atualizada manualmente quando uma nova tag Git for criada
+        return SCRIPT_VERSION;
+    }
+
+    // Função para atualizar o indicador de versão
+    function updateVersionIndicator() {
+        const versionText = document.getElementById('hotbar-version-text');
+        if (versionText) {
+            const version = getGitVersion();
+            versionText.textContent = version;
+        }
+    }
+
     // Cria a hotbar
     function createHotbar() {
         const hotbar = document.createElement('div');
@@ -4693,6 +4712,68 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.cursor = 'grab';
         title.style.textAlign = 'center';
         header.appendChild(title);
+
+        // Indicador de versão (tag Git)
+        const versionIndicator = document.createElement('div');
+        versionIndicator.style.position = 'absolute';
+        versionIndicator.style.right = '24px';
+        versionIndicator.style.top = '50%';
+        versionIndicator.style.transform = 'translateY(-50%)';
+        versionIndicator.style.cursor = 'default';
+        versionIndicator.style.display = 'flex';
+        versionIndicator.style.alignItems = 'center';
+        versionIndicator.style.gap = '4px';
+        versionIndicator.style.fontSize = '10px';
+        versionIndicator.style.color = '#6ec6ff';
+        versionIndicator.style.userSelect = 'none';
+        versionIndicator.style.background = 'rgba(110,198,255,0.1)';
+        versionIndicator.style.padding = '4px 8px';
+        versionIndicator.style.borderRadius = '8px';
+        versionIndicator.style.border = '1px solid rgba(110,198,255,0.3)';
+        versionIndicator.style.fontWeight = 'bold';
+        versionIndicator.style.transition = 'all 0.2s ease';
+        versionIndicator.style.cursor = 'pointer';
+
+        // Efeito hover
+        versionIndicator.onmouseover = () => {
+            versionIndicator.style.background = 'rgba(110,198,255,0.2)';
+            versionIndicator.style.borderColor = 'rgba(110,198,255,0.6)';
+            versionIndicator.style.transform = 'translateY(-50%) scale(1.05)';
+        };
+
+        versionIndicator.onmouseout = () => {
+            versionIndicator.style.background = 'rgba(110,198,255,0.1)';
+            versionIndicator.style.borderColor = 'rgba(110,198,255,0.3)';
+            versionIndicator.style.transform = 'translateY(-50%) scale(1)';
+        };
+
+        const versionIcon = document.createElement('span');
+        versionIcon.textContent = '🏷️';
+        versionIcon.style.fontSize = '10px';
+
+        const versionText = document.createElement('span');
+        versionText.textContent = 'v0.0.1'; // Última tag Git (será atualizada dinamicamente)
+        versionText.style.fontSize = '10px';
+        versionText.id = 'hotbar-version-text';
+
+        versionIndicator.appendChild(versionIcon);
+        versionIndicator.appendChild(versionText);
+
+        // Adicionar tooltip ao indicador de versão
+        versionIndicator.title = `Versão atual do script: ${getGitVersion()}\nClique para copiar a versão`;
+
+        // Adicionar funcionalidade de clique para copiar a versão
+        versionIndicator.onclick = (e) => {
+            e.stopPropagation(); // Previne que o header seja arrastado
+            const version = getGitVersion();
+            navigator.clipboard.writeText(version).then(() => {
+                createNotification(`Versão ${version} copiada para a área de transferência!`, 'success', 2000);
+            }).catch(() => {
+                createNotification('Erro ao copiar versão', 'error', 2000);
+            });
+        };
+
+        header.appendChild(versionIndicator);
 
         hotbar.appendChild(header);
 
@@ -5776,6 +5857,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         document.body.appendChild(hotbar);
         makeDraggable(hotbar, header);
+
+        // Atualiza o indicador de versão
+        updateVersionIndicator();
 
         // Atualiza o badge de efeitos após o hotbar estar no DOM
         updateEffectsBadge();
