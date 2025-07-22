@@ -4601,7 +4601,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         hotbar.style.boxShadow = '0 4px 16px rgba(0,0,0,0.5)';
         hotbar.style.userSelect = 'none';
         hotbar.style.border = '2px solid #6ec6ff';
-        hotbar.style.minWidth = '500px';
+        hotbar.style.minWidth = '600px';
         hotbar.style.alignItems = 'stretch';
 
         // Cabeçalho que se estende por toda a largura
@@ -4924,13 +4924,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         separator2.style.background = 'rgba(110,198,255,0.3)';
         separator2.style.margin = '0 10px';
 
-        // Seção 3: Outros botões (Skills, Spells, Habilidades, Efeitos)
+        // Seção 3: Outros botões (Skills, Spells, Habilidades, Efeitos, Misc) - Agrupados
         const otherButtonsSection = document.createElement('div');
         otherButtonsSection.style.display = 'flex';
-        otherButtonsSection.style.gap = '18px';
-        otherButtonsSection.style.flexWrap = 'nowrap';
-        otherButtonsSection.style.justifyContent = 'center';
         otherButtonsSection.style.alignItems = 'center';
+        otherButtonsSection.style.gap = '8px';
+        otherButtonsSection.style.padding = '8px 12px';
+        otherButtonsSection.style.background = 'rgba(26,26,46,0.8)';
+        otherButtonsSection.style.borderRadius = '12px';
+        otherButtonsSection.style.border = '1px solid rgba(110,198,255,0.3)';
+        otherButtonsSection.style.minWidth = '340px';
+        otherButtonsSection.style.justifyContent = 'center';
 
         // Função para abrir popup de manobras de combate
         function createManeuversPopup() {
