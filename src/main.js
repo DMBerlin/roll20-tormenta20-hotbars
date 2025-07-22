@@ -33,6 +33,33 @@
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = 'v0.0.1'; // Última tag Git
 
+    // Função para aplicar estilo consistente aos botões de fechar
+    function applyCloseButtonStyle(closeBtn) {
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '8px';
+        closeBtn.style.width = '40px';
+        closeBtn.style.height = '40px';
+        closeBtn.style.display = 'flex';
+        closeBtn.style.alignItems = 'center';
+        closeBtn.style.justifyContent = 'center';
+        closeBtn.style.borderRadius = '4px';
+        closeBtn.style.transition = 'background-color 0.2s';
+        closeBtn.style.flexShrink = '0';
+
+        // Efeitos hover
+        closeBtn.onmouseover = () => {
+            closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        };
+        closeBtn.onmouseout = () => {
+            closeBtn.style.backgroundColor = 'transparent';
+        };
+    }
+
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
         const style = document.createElement('style');
@@ -1219,15 +1246,7 @@
         tip.style.width = '100%';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('skills-overlay');
@@ -1612,15 +1631,7 @@
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('misc-overlay');
@@ -1807,15 +1818,7 @@
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('spells-overlay');
@@ -5207,15 +5210,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             modal.remove();
             const overlay = document.getElementById('skill-detail-overlay');
@@ -7541,33 +7536,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.minWidth = '0'; // Permite que o texto seja cortado se necessário
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '8px';
-        closeBtn.style.width = '40px';
-        closeBtn.style.height = '40px';
-        closeBtn.style.display = 'flex';
-        closeBtn.style.alignItems = 'center';
-        closeBtn.style.justifyContent = 'center';
-        closeBtn.style.borderRadius = '4px';
-        closeBtn.style.transition = 'background-color 0.2s';
-        closeBtn.style.flexShrink = '0'; // Impede que o botão encolha
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('hunter-class-overlay');
             if (overlay) overlay.remove();
-        };
-
-        // Efeitos hover para o botão de fechar
-        closeBtn.onmouseover = () => {
-            closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-        };
-        closeBtn.onmouseout = () => {
-            closeBtn.style.backgroundColor = 'transparent';
         };
         header.appendChild(title);
         header.appendChild(closeBtn);
@@ -8329,15 +8302,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '28px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '36px';
-            closeBtn.style.height = '36px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 modal.remove();
                 overlay.remove();
@@ -8641,15 +8606,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '28px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '36px';
-            closeBtn.style.height = '36px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 modal.remove();
                 overlay.remove();
@@ -10366,15 +10323,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('abilities-overlay');
@@ -12962,15 +12911,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('conditions-overlay');
@@ -13191,15 +13132,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontWeight = 'bold';
 
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('effects-overlay');
