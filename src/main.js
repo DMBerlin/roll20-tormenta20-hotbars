@@ -1204,6 +1204,40 @@
         pratosCard.appendChild(pratosDesc);
         modulesList.appendChild(pratosCard);
 
+        // Card: Bebidas Artonianas
+        const bebidasCard = document.createElement('div');
+        bebidasCard.style.background = '#23243a';
+        bebidasCard.style.border = '1.5px solid #ffb86c';
+        bebidasCard.style.borderRadius = '8px';
+        bebidasCard.style.padding = '16px';
+        bebidasCard.style.cursor = 'pointer';
+        bebidasCard.style.transition = 'all 0.2s';
+        bebidasCard.onmouseover = () => {
+            bebidasCard.style.background = '#2d2e4a';
+        };
+        bebidasCard.onmouseout = () => {
+            bebidasCard.style.background = '#23243a';
+        };
+        bebidasCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createBebidasArtonianasPopup();
+        };
+        const bebidasTitle = document.createElement('div');
+        bebidasTitle.textContent = 'Bebidas Artonianas';
+        bebidasTitle.style.color = '#ffb86c';
+        bebidasTitle.style.fontSize = '16px';
+        bebidasTitle.style.fontWeight = 'bold';
+        bebidasTitle.style.marginBottom = '6px';
+        bebidasCard.appendChild(bebidasTitle);
+        const bebidasDesc = document.createElement('div');
+        bebidasDesc.textContent = 'Bebidas alcoólicas e não alcoólicas que concedem bônus únicos. Efeitos duram 24 horas.';
+        bebidasDesc.style.color = '#ecf0f1';
+        bebidasDesc.style.fontSize = '13px';
+        bebidasCard.appendChild(bebidasDesc);
+        modulesList.appendChild(bebidasCard);
+
         // Card: Lista de Condições
         const conditionsCard = document.createElement('div');
         conditionsCard.style.background = '#23243a';
@@ -2174,6 +2208,33 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return favoritos.includes(nomePrato);
     }
 
+    // Funções auxiliares para bebidas artonianas
+    function getBebidasFavoritas() {
+        return JSON.parse(localStorage.getItem('roll20-hotbar-bebidas-favoritas') || '[]');
+    }
+
+    function saveBebidasFavoritas(favoritas) {
+        localStorage.setItem('roll20-hotbar-bebidas-favoritas', JSON.stringify(favoritas));
+    }
+
+    function toggleBebidaFavorita(nomeBebida) {
+        let favoritas = getBebidasFavoritas();
+        const index = favoritas.indexOf(nomeBebida);
+        if (index > -1) {
+            favoritas.splice(index, 1);
+            showWarningNotification(`Bebida "${nomeBebida}" removida dos favoritos.`);
+        } else {
+            favoritas.push(nomeBebida);
+            showSuccessNotification(`Bebida "${nomeBebida}" adicionada aos favoritos!`);
+        }
+        saveBebidasFavoritas(favoritas);
+    }
+
+    function isBebidaFavorita(nomeBebida) {
+        const favoritas = getBebidasFavoritas();
+        return favoritas.includes(nomeBebida);
+    }
+
     // Dados completos dos pratos baseados no arquivo MD
     function getPratosCompletos() {
         return [
@@ -2500,6 +2561,112 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 custoIngredientes: 'T$ 28',
                 cdTeste: '22',
                 icone: '🌑'
+            }
+        ];
+    }
+
+    // Dados completos das bebidas baseados no arquivo MD
+    function getBebidasCompletas() {
+        return [
+            {
+                nome: 'Baba de Troll',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_136.jpg', // Milk
+                tipo: 'Não alcoólica',
+                descricao: 'Uma bebida sem álcool, à base de leite, castanhas, nozes e mel.',
+                efeito: '+1d4 em um teste à sua escolha até o fim do dia.',
+                cd: '—',
+                icone: '🧃'
+            },
+            {
+                nome: 'Barba Queimada',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_05.jpg', // Beer
+                tipo: 'Alcoólica',
+                descricao: 'Forte e amarga, esta cerveja anã fortalece o corpo e o espírito.',
+                efeito: 'Redução de Dano 2.',
+                cd: '20',
+                icone: '🍺'
+            },
+            {
+                nome: 'Cerveja Deheoni',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_08.jpg', // Beer
+                tipo: 'Alcoólica',
+                descricao: 'A bebida mais comum nas tavernas do Reinado.',
+                efeito: '+1 em testes de resistência.',
+                cd: '15',
+                icone: '🍻'
+            },
+            {
+                nome: 'Dilínio',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_11.jpg', // Whiskey
+                tipo: 'Alcoólica',
+                descricao: 'Destilado tradicional de Mortenstenn, feito com um cereal que só cresce no continente sul. A receita se perdeu após as invasões duyshidakk, e poucos barris chegaram ao Reinado.',
+                efeito: 'O limite de gasto de PM aumenta em +1.',
+                cd: '20',
+                observacao: 'Não pode ser fabricado',
+                icone: '🥃'
+            },
+            {
+                nome: 'Grogue Negro',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_12.jpg', // Rum
+                tipo: 'Alcoólica',
+                descricao: 'Rum misturado com especiarias. Seu nome vem de sua origem — piratas do Conclave, que atuam no Mar Negro — e não da cor da bebida, que é dourada clara.',
+                efeito: 'Quando você usa Audácia, o bônus fornecido pelo poder aumenta em +1.',
+                cd: '15',
+                icone: '🏴‍☠️'
+            },
+            {
+                nome: 'Grogue Rubro',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_13.jpg', // Spiced Rum
+                tipo: 'Alcoólica',
+                descricao: 'Variação do grogue negro, com especiarias picantes que fazem a bebida adquirir uma coloração avermelhada — e quem a bebe, certa inclinação para a violência.',
+                efeito: 'Você pode usar Audácia para testes de ataque.',
+                cd: '20',
+                icone: '🔥'
+            },
+            {
+                nome: 'Hidromel Uivante',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_14.jpg', // Mead
+                tipo: 'Alcoólica',
+                descricao: 'Fabricada nas montanhas geladas, esta bebida aquece e incita.',
+                efeito: '+2 em rolagens de dano corpo a corpo.',
+                cd: '20',
+                icone: '❄️'
+            },
+            {
+                nome: 'Licor Feérico',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_15.jpg', // Fairy Wine
+                tipo: 'Alcoólica',
+                descricao: 'De aparência enevoada e gosto adocicado, dizem que é feito na Pondsmânia e trazido com dificuldade ao Reinado. Alguns acham que é invenção dos taverneiros, até provarem uma dose.',
+                efeito: 'Escolha uma habilidade. O custo para ativá-la diminui em –1 PM.',
+                cd: '25',
+                icone: '✨'
+            },
+            {
+                nome: 'Sidra Ahleniense',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_16.jpg', // Cider
+                tipo: 'Alcoólica',
+                descricao: 'Esta bebida doce deixa qualquer um mais falante.',
+                efeito: '+2 em testes de perícias originalmente baseadas em Carisma.',
+                cd: '15',
+                icone: '🍏'
+            },
+            {
+                nome: 'Vinho Pruss',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_17.jpg', // Wine
+                tipo: 'Alcoólica',
+                descricao: 'Batizado em homenagem ao antigo Rei-Imperador Thormy — dizem que era o favorito do monarca.',
+                efeito: 'Concede 3 pontos de mana temporários.',
+                cd: '15',
+                icone: '🍷'
+            },
+            {
+                nome: 'Vinho Élfico',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_18.jpg', // Elven Wine
+                tipo: 'Alcoólica',
+                descricao: 'De sabor complexo, aguça a mente.',
+                efeito: '+1 na CD para resistir às suas habilidades.',
+                cd: '20',
+                icone: '🌿'
             }
         ];
     }
@@ -2844,6 +3011,354 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
     }
 
+    // Função para criar modal de detalhes da bebida
+    function createBebidaDetailModal(bebida) {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('bebida-detail-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('bebida-detail-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'bebida-detail-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'bebida-detail-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #ffb86c';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '500px';
+        modal.style.maxHeight = '80vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho com ícone, nome e tipo
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'flex-start';
+        header.style.marginBottom = '15px';
+
+        // Container do ícone e informações da bebida
+        const bebidaInfo = document.createElement('div');
+        bebidaInfo.style.display = 'flex';
+        bebidaInfo.style.alignItems = 'center';
+        bebidaInfo.style.gap = '12px';
+        bebidaInfo.style.flex = '1';
+
+        // Ícone da bebida com borda (usando cache)
+        if (bebida.iconeUrl) {
+            const iconeContainer = document.createElement('div');
+            iconeContainer.style.position = 'relative';
+            iconeContainer.style.width = '3rem';
+            iconeContainer.style.height = '3rem';
+            iconeContainer.style.display = 'flex';
+            iconeContainer.style.alignItems = 'center';
+            iconeContainer.style.justifyContent = 'center';
+            iconeContainer.style.border = '2px solid #ffb86c';
+            iconeContainer.style.borderRadius = '8px';
+            iconeContainer.style.padding = '2px';
+            iconeContainer.style.backgroundColor = '#23243a';
+
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                bebida.iconeUrl,
+                bebida.nome,
+                bebida.icone || '🍺',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '6px',
+                    objectFit: 'cover',
+                    showSkeleton: true
+                }
+            );
+
+            iconeContainer.appendChild(cachedImageElement);
+            bebidaInfo.appendChild(iconeContainer);
+        }
+
+        // Container do nome e tipo
+        const nomeTipo = document.createElement('div');
+        nomeTipo.style.display = 'flex';
+        nomeTipo.style.flexDirection = 'column';
+        nomeTipo.style.gap = '4px';
+
+        // Nome da bebida
+        const bebidaTitle = document.createElement('div');
+        bebidaTitle.textContent = bebida.nome;
+        bebidaTitle.style.color = '#ffb86c';
+        bebidaTitle.style.fontSize = '18px';
+        bebidaTitle.style.fontWeight = 'bold';
+        nomeTipo.appendChild(bebidaTitle);
+
+        // Tipo
+        const tipo = document.createElement('div');
+        tipo.textContent = `Tipo: ${bebida.tipo}`;
+        tipo.style.color = '#6ec6ff';
+        tipo.style.fontSize = '14px';
+        nomeTipo.appendChild(tipo);
+
+        bebidaInfo.appendChild(nomeTipo);
+        header.appendChild(bebidaInfo);
+
+        // Botão de fechar
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '0';
+        closeBtn.style.width = '32px';
+        closeBtn.style.height = '32px';
+        closeBtn.onclick = () => {
+            modal.remove();
+            overlay.remove();
+        };
+        header.appendChild(closeBtn);
+        modal.appendChild(header);
+
+        // Descrição
+        const descSection = document.createElement('div');
+        descSection.style.marginBottom = '15px';
+        const descTitle = document.createElement('h3');
+        descTitle.textContent = 'Descrição';
+        descTitle.style.color = '#6ec6ff';
+        descTitle.style.fontSize = '16px';
+        descTitle.style.margin = '0 0 8px 0';
+        descSection.appendChild(descTitle);
+        const descText = document.createElement('p');
+        descText.textContent = bebida.descricao;
+        descText.style.color = '#ecf0f1';
+        descText.style.fontSize = '14px';
+        descText.style.margin = '0';
+        descText.style.lineHeight = '1.4';
+        descSection.appendChild(descText);
+        modal.appendChild(descSection);
+
+        // Efeito
+        const efeitoSection = document.createElement('div');
+        efeitoSection.style.marginBottom = '15px';
+        const efeitoTitle = document.createElement('h3');
+        efeitoTitle.textContent = 'Efeito';
+        efeitoTitle.style.color = '#6ec6ff';
+        efeitoTitle.style.fontSize = '16px';
+        efeitoTitle.style.margin = '0 0 8px 0';
+        efeitoSection.appendChild(efeitoTitle);
+        const efeitoText = document.createElement('p');
+        efeitoText.textContent = bebida.efeito;
+        efeitoText.style.color = '#ffb86c';
+        efeitoText.style.fontSize = '14px';
+        efeitoText.style.fontWeight = 'bold';
+        efeitoText.style.margin = '0';
+        efeitoSection.appendChild(efeitoText);
+        modal.appendChild(efeitoSection);
+
+        // Duração do Efeito
+        const duracaoSection = document.createElement('div');
+        duracaoSection.style.marginBottom = '15px';
+        const duracaoTitle = document.createElement('h3');
+        duracaoTitle.textContent = 'Duração do Efeito';
+        duracaoTitle.style.color = '#6ec6ff';
+        duracaoTitle.style.fontSize = '16px';
+        duracaoTitle.style.margin = '0 0 8px 0';
+        duracaoSection.appendChild(duracaoTitle);
+
+        const duracaoText = document.createElement('p');
+        // Determina a duração baseada no nome da bebida
+        let duracao = '1 dia (24 horas)';
+        if (bebida.nome === 'Baba de Troll') {
+            duracao = 'Até o bônus ser aplicado (consumível)';
+        }
+        duracaoText.textContent = duracao;
+        duracaoText.style.color = '#27ae60';
+        duracaoText.style.fontSize = '14px';
+        duracaoText.style.fontWeight = 'bold';
+        duracaoText.style.margin = '0';
+        duracaoText.style.padding = '8px 12px';
+        duracaoText.style.background = '#1a1a2e';
+        duracaoText.style.border = '1px solid #27ae60';
+        duracaoText.style.borderRadius = '6px';
+        duracaoSection.appendChild(duracaoText);
+        modal.appendChild(duracaoSection);
+
+        // Informações de Bebida
+        const bebidaInfoSection = document.createElement('div');
+        bebidaInfoSection.style.marginBottom = '20px';
+        const bebidaInfoTitle = document.createElement('h3');
+        bebidaInfoTitle.textContent = 'Informações da Bebida';
+        bebidaInfoTitle.style.color = '#6ec6ff';
+        bebidaInfoTitle.style.fontSize = '16px';
+        bebidaInfoTitle.style.margin = '0 0 8px 0';
+        bebidaInfoSection.appendChild(bebidaInfoTitle);
+
+        const bebidaInfoGrid = document.createElement('div');
+        bebidaInfoGrid.style.display = 'grid';
+        bebidaInfoGrid.style.gridTemplateColumns = '1fr 1fr';
+        bebidaInfoGrid.style.gap = '10px';
+
+        const infoItems = [
+            { label: 'CD Fortitude', value: bebida.cd, color: '#ffb86c' }
+        ];
+
+        // Adiciona observação se existir
+        if (bebida.observacao) {
+            infoItems.push({ label: 'Observação', value: bebida.observacao, color: '#ecf0f1' });
+        }
+
+        infoItems.forEach(item => {
+            const infoItem = document.createElement('div');
+            infoItem.style.background = '#23243a';
+            infoItem.style.padding = '8px 10px';
+            infoItem.style.borderRadius = '6px';
+            infoItem.style.border = '1px solid #444';
+
+            const label = document.createElement('div');
+            label.textContent = item.label;
+            label.style.color = '#888';
+            label.style.fontSize = '12px';
+            label.style.marginBottom = '2px';
+            infoItem.appendChild(label);
+
+            const value = document.createElement('div');
+            value.textContent = item.value;
+            value.style.color = item.color;
+            value.style.fontSize = '13px';
+            value.style.fontWeight = 'bold';
+            infoItem.appendChild(value);
+
+            bebidaInfoGrid.appendChild(infoItem);
+        });
+
+        bebidaInfoSection.appendChild(bebidaInfoGrid);
+        modal.appendChild(bebidaInfoSection);
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.display = 'flex';
+        buttonsContainer.style.gap = '10px';
+        buttonsContainer.style.marginTop = '20px';
+
+        // Botão Compartilhar
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.style.flex = '1';
+        shareBtn.style.padding = '10px 15px';
+        shareBtn.style.background = '#2c3e50';
+        shareBtn.style.border = '1px solid #34495e';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.color = '#ecf0f1';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.onclick = () => {
+            const template = `&{template:t20-info}{{infoname=${bebida.nome}}}{{description=${bebida.descricao} ${bebida.efeito}}}`;
+            sendToChat(template);
+            showSuccessNotification(`Bebida "${bebida.nome}" compartilhada no chat!`);
+
+            // Fechar todos os popups relacionados às bebidas para limpar a cena
+            const bebidasPopup = document.getElementById('bebidas-popup');
+            if (bebidasPopup) bebidasPopup.remove();
+            const bebidasOverlay = document.getElementById('bebidas-overlay');
+            if (bebidasOverlay) bebidasOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(shareBtn);
+
+        // Botão Usar
+        const useBtn = document.createElement('button');
+        useBtn.textContent = 'Consumir Bebida';
+        useBtn.style.flex = '1';
+        useBtn.style.padding = '10px 15px';
+        useBtn.style.background = '#27ae60';
+        useBtn.style.border = '1px solid #2ecc71';
+        useBtn.style.borderRadius = '6px';
+        useBtn.style.color = '#ecf0f1';
+        useBtn.style.cursor = 'pointer';
+        useBtn.style.fontSize = '14px';
+        useBtn.onclick = () => {
+            const effectKey = 'bebida_' + bebida.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+            const effect = {
+                name: bebida.nome,
+                description: bebida.descricao + ' ' + bebida.efeito,
+                type: 'Bebida',
+                effectKey: effectKey
+            };
+
+            let activeEffects = getActiveEffects();
+            if (!activeEffects.includes(effectKey)) {
+                let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effectKey);
+                bebidaEffects.push(effect);
+                localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                activeEffects.push(effectKey);
+
+                // Adiciona à ordem dos efeitos
+                addEffectToOrder(effectKey, 'drink');
+
+                // Mensagem personalizada baseada no tipo de bebida
+                let notificationMessage = `Bebida "${bebida.nome}" consumida! Efeito ativo por 1 dia (24 horas).`;
+                if (bebida.nome === 'Baba de Troll') {
+                    notificationMessage = `Bebida "${bebida.nome}" consumida! Bônus disponível para uso.`;
+                }
+                showSuccessNotification(notificationMessage);
+                saveActiveEffects(activeEffects);
+                updateEffectsBadge();
+                updateEffectsVisualIndicators(); // NOVO: Atualiza indicadores visuais unificados
+
+                // Enviar mensagem no chat informando que o personagem consumiu a bebida
+                const emoteMessage = `/em ${getCharacterName()} consumiu **${bebida.nome}** ${bebida.icone || '🍺'}`;
+                sendToChat(emoteMessage);
+            } else {
+                showWarningNotification(`Bebida "${bebida.nome}" já está ativa nos efeitos!`);
+            }
+
+            // Fechar todos os popups relacionados às bebidas para limpar a cena
+            const bebidasPopup = document.getElementById('bebidas-popup');
+            if (bebidasPopup) bebidasPopup.remove();
+            const bebidasOverlay = document.getElementById('bebidas-overlay');
+            if (bebidasOverlay) bebidasOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(useBtn);
+
+        modal.appendChild(buttonsContainer);
+        document.body.appendChild(modal);
+    }
+
     function createPratosEspeciaisPopup() {
         console.log('Abrindo Pratos Especiais');
         try {
@@ -3076,6 +3591,240 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         } catch (e) {
             console.error('Erro ao abrir Pratos Especiais:', e);
             alert('Erro ao abrir Pratos Especiais. Veja o console para detalhes.');
+        }
+    }
+
+    // Função para criar popup de Bebidas Artonianas
+    function createBebidasArtonianasPopup() {
+        console.log('Abrindo Bebidas Artonianas');
+        try {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('bebidas-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('bebidas-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'bebidas-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10000';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'bebidas-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ffb86c';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '18px 20px 16px 20px';
+            popup.style.zIndex = '10001';
+            popup.style.maxWidth = '480px';
+            popup.style.maxHeight = '600px';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
+
+            const title = document.createElement('h3');
+            title.textContent = 'Bebidas Artonianas';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#ecf0f1';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.padding = '0';
+            closeBtn.style.width = '32px';
+            closeBtn.style.height = '32px';
+            closeBtn.onclick = () => {
+                popup.remove();
+                const overlay = document.getElementById('bebidas-overlay');
+                if (overlay) overlay.remove();
+            };
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            popup.appendChild(header);
+
+            // Campo de filtro
+            const filterContainer = document.createElement('div');
+            filterContainer.style.position = 'relative';
+            filterContainer.style.marginBottom = '10px';
+            const filterInput = document.createElement('input');
+            filterInput.type = 'text';
+            filterInput.placeholder = 'Filtrar bebidas...';
+            filterInput.style.width = '100%';
+            filterInput.style.padding = '10px 12px';
+            filterInput.style.borderRadius = '8px';
+            filterInput.style.border = '1px solid #ffb86c';
+            filterInput.style.background = '#23243a';
+            filterInput.style.color = '#fff';
+            filterInput.style.fontSize = '14px';
+            filterInput.style.outline = 'none';
+            filterInput.style.boxSizing = 'border-box';
+            filterInput.style.fontSize = '15px';
+            filterContainer.appendChild(filterInput);
+            popup.appendChild(filterContainer);
+
+            // Lista de bebidas (cards)
+            const bebidasList = document.createElement('div');
+            bebidasList.style.display = 'flex';
+            bebidasList.style.flexDirection = 'column';
+            bebidasList.style.gap = '14px';
+            bebidasList.style.marginTop = '10px';
+            popup.appendChild(bebidasList);
+
+            // Dados das bebidas
+            const bebidas = getBebidasCompletas();
+
+            function renderBebidasList(filterText = '') {
+                bebidasList.innerHTML = '';
+                const filtered = bebidas.filter(bebida =>
+                    bebida.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+                    bebida.descricao.toLowerCase().includes(filterText.toLowerCase()) ||
+                    bebida.efeito.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                // Ordena favoritos primeiro
+                const favoritas = getBebidasFavoritas();
+                filtered.sort((a, b) => {
+                    const aFavorita = favoritas.includes(a.nome);
+                    const bFavorita = favoritas.includes(b.nome);
+                    if (aFavorita && !bFavorita) return -1;
+                    if (!aFavorita && bFavorita) return 1;
+                    return a.nome.localeCompare(b.nome);
+                });
+
+                filtered.forEach(bebida => {
+                    const card = document.createElement('div');
+                    card.style.background = '#23243a';
+                    card.style.border = '1px solid #ffb86c';
+                    card.style.borderRadius = '8px';
+                    card.style.padding = '12px 14px';
+                    card.style.display = 'flex';
+                    card.style.justifyContent = 'space-between';
+                    card.style.alignItems = 'center';
+                    card.style.gap = '10px';
+
+                    // Informações da bebida
+                    const bebidaInfo = document.createElement('div');
+                    bebidaInfo.style.flex = '1';
+                    bebidaInfo.style.display = 'flex';
+                    bebidaInfo.style.flexDirection = 'column';
+                    bebidaInfo.style.gap = '4px';
+
+                    const nome = document.createElement('div');
+                    nome.textContent = bebida.nome;
+                    nome.style.color = '#ffb86c';
+                    nome.style.fontWeight = 'bold';
+                    nome.style.fontSize = '15px';
+                    bebidaInfo.appendChild(nome);
+
+                    // Resumo da descrição
+                    const resumo = document.createElement('div');
+                    const palavras = bebida.descricao.split(/\s+/);
+                    let resumoTexto = palavras.slice(0, 10).join(' ');
+                    if (palavras.length > 10) resumoTexto += '...';
+                    resumo.textContent = resumoTexto;
+                    resumo.style.color = '#bdbdbd';
+                    resumo.style.fontSize = '12px';
+                    resumo.style.fontStyle = 'italic';
+                    bebidaInfo.appendChild(resumo);
+
+                    const efeito = document.createElement('div');
+                    efeito.textContent = bebida.efeito;
+                    efeito.style.color = '#6ec6ff';
+                    efeito.style.fontSize = '13px';
+                    efeito.style.fontWeight = 'bold';
+                    bebidaInfo.appendChild(efeito);
+
+                    // Botão de favorito
+                    const favoriteBtn = document.createElement('button');
+                    favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
+                    favoriteBtn.style.background = 'none';
+                    favoriteBtn.style.border = 'none';
+                    favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
+                    favoriteBtn.style.fontSize = '18px';
+                    favoriteBtn.style.cursor = 'pointer';
+                    favoriteBtn.style.padding = '5px';
+                    favoriteBtn.style.minWidth = '30px';
+                    favoriteBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        toggleBebidaFavorita(bebida.nome);
+                        favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
+                        favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
+                        renderBebidasList(filterInput.value);
+                    };
+                    card.appendChild(bebidaInfo);
+                    card.appendChild(favoriteBtn);
+
+                    // Evento de clique para abrir modal de detalhes
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        createBebidaDetailModal(bebida);
+                    };
+
+                    bebidasList.appendChild(card);
+                });
+
+                // Verifica se não há bebidas encontradas durante a filtragem
+                if (filtered.length === 0 && filterText.length > 0) {
+                    const noResultsMessage = document.createElement('div');
+                    noResultsMessage.style.textAlign = 'center';
+                    noResultsMessage.style.padding = '20px';
+                    noResultsMessage.style.color = '#999';
+                    noResultsMessage.style.fontSize = '14px';
+                    noResultsMessage.style.fontStyle = 'italic';
+                    noResultsMessage.innerHTML = `
+                        <div style="margin-bottom: 8px;">🔍</div>
+                        <div>Nenhuma bebida encontrada para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                    `;
+                    bebidasList.appendChild(noResultsMessage);
+                }
+            }
+
+            // Atualiza a lista ao digitar
+            filterInput.addEventListener('input', () => {
+                renderBebidasList(filterInput.value);
+            });
+
+            // Render inicial
+            renderBebidasList();
+
+            // Adiciona o popup ao body
+            document.body.appendChild(popup);
+        } catch (e) {
+            console.error('Erro ao abrir Bebidas Artonianas:', e);
+            alert('Erro ao abrir Bebidas Artonianas. Veja o console para detalhes.');
         }
     }
 
@@ -4255,6 +5004,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const pizzaActive = isEffectActive('prato_pizza');
         const cozidoDePimentaActive = isEffectActive('prato_cozido_de_pimenta');
 
+        // Verifica quais efeitos de bebidas estão ativos
+        const babaDeTrollActive = isEffectActive('bebida_baba_de_troll');
+        const cervejaDeheoniActive = isEffectActive('bebida_cerveja_deheoni');
+        const sidraAhlenienseActive = isEffectActive('bebida_sidra_ahleniense');
+
         // Função para criar um bônus de comida
         function createFoodBonus(id, label, description, isActive) {
             if (!isActive) return null;
@@ -4280,7 +5034,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             labelElement.style.cursor = 'pointer';
 
             const desc = document.createElement('span');
-            desc.textContent = ' - Consome o efeito após a rolagem';
+            desc.textContent = ` - ${description}`;
             desc.style.color = '#ffb86c';
             desc.style.fontSize = '12px';
             desc.style.fontStyle = 'italic';
@@ -4358,6 +5112,29 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const bonus = createFoodBonus('cozido-de-pimenta-bonus', 'Cozido de Pimenta (+1 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
+        }
+
+        // Efeitos de bebidas nos testes de perícias
+        if (babaDeTrollActive) {
+            const bonus = createFoodBonus('baba-de-troll-bonus', 'Baba de Troll (+1d4 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (cervejaDeheoniActive && (skillName === 'Fortitude' || skillName === 'Vontade' || skillName === 'Reflexos')) {
+            const bonus = createFoodBonus('cerveja-deheoni-bonus', 'Cerveja Deheoni (+1 no teste de resistência)', 'Efeito ativo por 24 horas', true);
+            if (bonus) {
+                bonusSection.appendChild(bonus);
+                hasAnyBonus = true;
+            }
+        }
+
+        if (sidraAhlenienseActive && (skillName === 'Adestramento' || skillName === 'Atuação' || skillName === 'Diplomacia' || skillName === 'Enganação' || skillName === 'Intimidação' || skillName === 'Jogatina')) {
+            const bonus = createFoodBonus('sidra-ahleniense-bonus', 'Sidra Ahleniense (+2 no teste de Carisma)', 'Efeito ativo por 24 horas', true);
+            if (bonus) {
+                bonusSection.appendChild(bonus);
+                hasAnyBonus = true;
+            }
         }
 
         if (!hasAnyBonus) {
@@ -4501,6 +5278,29 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     bonusDescription += '%NEWLINE% *+ Cozido de Pimenta (+1)*';
                 }
 
+                // Efeitos de bebidas nos testes de perícias
+                const babaDeTrollSelected = document.getElementById('baba-de-troll-bonus') &&
+                    document.getElementById('baba-de-troll-bonus').checked;
+                const cervejaDeheoniSelected = document.getElementById('cerveja-deheoni-bonus') &&
+                    document.getElementById('cerveja-deheoni-bonus').checked;
+                const sidraAhlenienseSelected = document.getElementById('sidra-ahleniense-bonus') &&
+                    document.getElementById('sidra-ahleniense-bonus').checked;
+
+                if (babaDeTrollSelected) {
+                    diceBonus += '+1d4';
+                    bonusDescription += '%NEWLINE% *+ Baba de Troll (+1d4)*';
+                }
+
+                if (cervejaDeheoniSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Cerveja Deheoni (+1)*';
+                }
+
+                if (sidraAhlenienseSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Sidra Ahleniense (+2)*';
+                }
+
                 // Aplica os bônus se houver algum
                 if (numericBonus !== 0 || diceBonus !== '') {
                     // Adiciona o bônus na rolagem
@@ -4576,6 +5376,27 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                     if (cozidoDePimentaSelected) {
                         showSuccessNotification('🌶️ Bônus do Cozido de Pimenta aplicado no teste!');
+                    }
+
+                    // Tratamento das bebidas após o teste
+                    if (babaDeTrollSelected) {
+                        // Remove o efeito da Baba de Troll (consumível)
+                        toggleEffect('bebida_baba_de_troll');
+
+                        // Remove também da lista de efeitos de bebida
+                        let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                        bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
+                        localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+
+                        showSuccessNotification('🧃 Efeito da Baba de Troll consumido no teste!');
+                    }
+
+                    if (cervejaDeheoniSelected) {
+                        showSuccessNotification('🍻 Bônus da Cerveja Deheoni aplicado no teste!');
+                    }
+
+                    if (sidraAhlenienseSelected) {
+                        showSuccessNotification('🍏 Bônus da Sidra Ahleniense aplicado no teste!');
                     }
                 }, 500);
 
@@ -5581,16 +6402,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const sopaCogumeloSelected = selected.includes('sopa_cogumelo');
                 const pizzaSelected = selected.includes('pizza');
 
+                // Verifica se algum efeito de bebida foi selecionado
+                const babaDeTrollSelected = selected.includes('baba_de_troll');
+                const hidromelUivanteSelected = selected.includes('hidromel_uivante');
+
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
 
-                // Se algum efeito de comida foi selecionado, executa o ataque e remove o efeito
+                // Se algum efeito de comida ou bebida foi selecionado, executa o ataque e remove o efeito
                 if (assadoCarnesSelected || batataValkarianaSelected || boloCenouraSelected ||
                     estrogonofeSelected || futomakiSelected || paoQueijoSelected ||
                     porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
-                    sopaCogumeloSelected || pizzaSelected) {
+                    sopaCogumeloSelected || pizzaSelected || babaDeTrollSelected || hidromelUivanteSelected) {
                     // Executa o ataque com os efeitos selecionados
                     const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
@@ -5686,6 +6511,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                         if (pizzaSelected) {
                             showSuccessNotification('🍕 Bônus da Pizza aplicado no ataque!');
+                        }
+
+                        // Tratamento das bebidas
+                        if (babaDeTrollSelected) {
+                            // Remove o efeito da Baba de Troll (consumível)
+                            toggleEffect('bebida_baba_de_troll');
+
+                            // Remove também da lista de efeitos de bebida
+                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
+                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+
+                            showSuccessNotification('🧃 Efeito da Baba de Troll consumido no ataque!');
+                        }
+
+                        if (hidromelUivanteSelected) {
+                            showSuccessNotification('🔥 Bônus do Hidromel Uivante aplicado no ataque!');
                         }
                     }, 1000); // Delay para garantir que o ataque foi processado
                 }
@@ -8653,7 +9495,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Bolo de Cenoura (Efeito de Comida)
         if (isEffectActive('prato_bolo_de_cenoura')) {
             effects.push({
-                label: '🥕 Bolo de Cenoura (+2 Percepção)',
+                label: 'Bolo de Cenoura (+2 Percepção)',
                 value: 'bolo_cenoura',
                 attackMod: 2,
                 desc: '*+ Bolo de Cenoura (+2 Percepção)*',
@@ -8665,7 +9507,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Estrogonofe (Efeito de Comida)
         if (isEffectActive('prato_estrogonofe')) {
             effects.push({
-                label: '🍝 Estrogonofe (+2 Vontade)',
+                label: 'Estrogonofe (+2 Vontade)',
                 value: 'estrogonofe',
                 attackMod: 2,
                 desc: '*+ Estrogonofe (+2 Vontade)*',
@@ -8677,7 +9519,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Futomaki (Efeito de Comida)
         if (isEffectActive('prato_futomaki')) {
             effects.push({
-                label: '🍣 Futomaki (+2 Diplomacia)',
+                label: 'Futomaki (+2 Diplomacia)',
                 value: 'futomaki',
                 attackMod: 2,
                 desc: '*+ Futomaki (+2 Diplomacia)*',
@@ -8689,7 +9531,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Pão de Queijo (Efeito de Comida)
         if (isEffectActive('prato_pao_de_queijo')) {
             effects.push({
-                label: '🧀 Pão de Queijo (+2 Fortitude)',
+                label: 'Pão de Queijo (+2 Fortitude)',
                 value: 'pao_queijo',
                 attackMod: 2,
                 desc: '*+ Pão de Queijo (+2 Fortitude)*',
@@ -8701,7 +9543,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Porco Assado (Efeito de Comida)
         if (isEffectActive('prato_porco_assado')) {
             effects.push({
-                label: '🐷 Porco Assado (+1 Luta)',
+                label: 'Porco Assado (+1 Luta)',
                 value: 'porco_assado',
                 attackMod: 1,
                 desc: '*+ Porco Assado (+1 Luta)*',
@@ -8713,7 +9555,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Salada Elfica (Efeito de Comida)
         if (isEffectActive('prato_salada_elfica')) {
             effects.push({
-                label: '🥗 Salada Elfica (+1 Pontaria)',
+                label: 'Salada Elfica (+1 Pontaria)',
                 value: 'salada_elfica',
                 attackMod: 1,
                 desc: '*+ Salada Elfica (+1 Pontaria)*',
@@ -8725,7 +9567,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Salada Imperial (Efeito de Comida)
         if (isEffectActive('prato_salada_imperial')) {
             effects.push({
-                label: '🥗 Salada Imperial (+2 Iniciativa)',
+                label: 'Salada Imperial (+2 Iniciativa)',
                 value: 'salada_imperial',
                 attackMod: 2,
                 desc: '*+ Salada Imperial (+2 Iniciativa)*',
@@ -8737,7 +9579,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Sopa de Cogumelo (Efeito de Comida)
         if (isEffectActive('prato_sopa_de_cogumelo')) {
             effects.push({
-                label: '🍄 Sopa de Cogumelo (+2 Misticismo)',
+                label: 'Sopa de Cogumelo (+2 Misticismo)',
                 value: 'sopa_cogumelo',
                 attackMod: 2,
                 desc: '*+ Sopa de Cogumelo (+2 Misticismo)*',
@@ -8749,7 +9591,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Pizza (Efeito de Comida)
         if (isEffectActive('prato_pizza')) {
             effects.push({
-                label: '🍕 Pizza (+1 Vontade/Reflexos/Fortitude)',
+                label: 'Pizza (+1 Vontade/Reflexos/Fortitude)',
                 value: 'pizza',
                 attackMod: 1,
                 desc: '*+ Pizza (+1 Vontade/Reflexos/Fortitude)*',
@@ -8761,7 +9603,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Baga Celeste Cozida (Efeito de Comida)
         if (isEffectActive('prato_baga_celeste_cozida')) {
             effects.push({
-                label: '🌟 Baga Celeste Cozida (Reduz dano de queda)',
+                label: 'Baga Celeste Cozida (Reduz dano de queda)',
                 value: 'baga_celeste_cozida',
                 desc: '*+ Baga Celeste Cozida (Dano de queda reduzido em −1d6)*',
                 origin: 'Prato Especial',
@@ -8772,7 +9614,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Cozido de Pimenta (Efeito de Comida)
         if (isEffectActive('prato_cozido_de_pimenta')) {
             effects.push({
-                label: '🌶️ Cozido de Pimenta (+1 Fortitude)',
+                label: 'Cozido de Pimenta (+1 Fortitude)',
                 value: 'cozido_de_pimenta',
                 attackMod: 1,
                 desc: '*+ Cozido de Pimenta (+1 Fortitude)*',
@@ -8784,10 +9626,35 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Manjar de Sombras (Efeito de Comida)
         if (isEffectActive('prato_manjar_de_sombras')) {
             effects.push({
-                label: '🌑 Manjar de Sombras (Proteção contra trevas)',
+                label: 'Manjar de Sombras (Proteção contra trevas)',
                 value: 'manjar_de_sombras',
                 desc: '*+ Manjar de Sombras (Ignora próximos 10 pontos de dano de trevas)*',
                 origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Efeitos de Bebidas Artonianas
+        // Baba de Troll (Efeito de Bebida) - Consumível
+        if (isEffectActive('bebida_baba_de_troll')) {
+            effects.push({
+                label: 'Baba de Troll (+1d4 acerto)',
+                value: 'baba_de_troll',
+                attackMod: '1d4',
+                desc: '*+ Baba de Troll (+1d4 acerto)*',
+                origin: 'Bebida Artoniana',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
+        // Hidromel Uivante (Efeito de Bebida) - Dano corpo a corpo
+        if (isEffectActive('bebida_hidromel_uivante')) {
+            effects.push({
+                label: 'Hidromel Uivante (+2 dano corpo a corpo)',
+                value: 'hidromel_uivante',
+                dice: '2',
+                desc: '*+ Hidromel Uivante (+2 dano corpo a corpo)*',
+                origin: 'Bebida Artoniana',
                 priority: 2
             });
         }
@@ -10229,6 +11096,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 return activeConditions.includes(item.effectKey);
             } else if (item.effectType === 'food') {
                 return activeEffects.includes(item.effectKey);
+            } else if (item.effectType === 'drink') {
+                return activeEffects.includes(item.effectKey);
             } else if (item.effectType === 'item') {
                 return activeEffects.includes(item.effectKey);
             }
@@ -10240,130 +11109,256 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getConditionsList() {
         return [
             {
+                nome: 'Abalado',
+                descricao: 'Condição de medo que afeta a confiança do personagem.',
+                efeitos: '-2 em testes de perícia • Progressão: se aplicado novamente, torna-se apavorado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+                icone: '😰'
+            },
+            {
+                nome: 'Agarrado',
+                descricao: 'O personagem está sendo segurado ou imobilizado por uma criatura.',
+                efeitos: '-2 em testes de ataque • Só pode usar armas leves • Ataques à distância têm 50% de chance de errar o alvo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '🤝'
+            },
+            {
+                nome: 'Alquebrado',
+                descricao: 'O personagem está mentalmente esgotado, dificultando o uso de habilidades.',
+                efeitos: '+1 PM no custo de todas as habilidades',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '🧠'
+            },
+            {
+                nome: 'Apavorado',
+                descricao: 'Medo extremo que paralisa o personagem diante da fonte do terror.',
+                efeitos: '-5 em testes de perícia • Não pode se aproximar voluntariamente da fonte do medo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
+                icone: '😱'
+            },
+            {
+                nome: 'Atordoado',
+                descricao: 'O personagem está confuso e desorientado, incapaz de agir.',
+                efeitos: 'Não pode fazer ações • Fica desprevenido',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+                icone: '💫'
+            },
+            {
+                nome: 'Caído',
+                descricao: 'O personagem está no chão, em posição vulnerável.',
+                efeitos: '-5 na Defesa vs ataques corpo a corpo • +5 na Defesa vs ataques à distância • -5 em ataques corpo a corpo • Deslocamento 1,5m',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
+                icone: '🛐'
+            },
+            {
                 nome: 'Cego',
-                descricao: 'O personagem não consegue ver nada.',
-                efeitos: '-5 em testes de Percepção, -2 em ataques corpo a corpo, Imunidade a efeitos visuais',
+                descricao: 'O personagem não consegue ver, perdendo a capacidade de perceber visualmente.',
+                efeitos: '-5 em testes de Força/Destreza • Todos os alvos recebem camuflagem total • Fica desprevenido e lento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
                 icone: '👁️'
             },
             {
                 nome: 'Confuso',
                 descricao: 'O personagem age de forma aleatória e imprevisível.',
-                efeitos: 'Ações aleatórias a cada rodada, Não pode usar habilidades que exijam concentração',
+                efeitos: 'Role 1d6 no início do turno: 1) Move aleatoriamente • 2-3) Não age • 4-5) Ataca mais próximo • 6) Recupera',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
                 icone: '🤪'
             },
             {
+                nome: 'Debilitado',
+                descricao: 'Fraqueza física severa que afeta todos os atributos físicos.',
+                efeitos: '-5 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se inconsciente',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😵'
+            },
+            {
+                nome: 'Desprevenido',
+                descricao: 'O personagem não está preparado para reagir a ameaças.',
+                efeitos: '-5 na Defesa • -5 em Reflexos • Vulnerável a ataques surpresa',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '😳'
+            },
+            {
+                nome: 'Doente',
+                descricao: 'O personagem está sofrendo os efeitos de uma doença.',
+                efeitos: 'Efeitos variam conforme a doença específica',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+                icone: '🤒'
+            },
+            {
+                nome: 'Em Chamas',
+                descricao: 'O personagem está queimando e sofrendo dano contínuo.',
+                efeitos: '1d6 dano de fogo por turno • Ação padrão para apagar • Água também apaga',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_immolation.jpg',
+                icone: '🔥'
+            },
+            {
                 nome: 'Enfeitiçado',
-                descricao: 'O personagem está sob controle mágico.',
-                efeitos: 'Considera o conjurador como aliado, Não pode atacar o conjurador, Pode ser forçado a fazer ações específicas',
+                descricao: 'O personagem vê a fonte da condição de forma extremamente favorável.',
+                efeitos: 'A fonte recebe +10 em Diplomacia • Não fica sob controle direto',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_charm.jpg',
                 icone: '💫'
             },
             {
                 nome: 'Enjoado',
-                descricao: 'O personagem sente náuseas e mal-estar.',
-                efeitos: '-2 em testes de Força e Constituição, -2 em ataques corpo a corpo',
+                descricao: 'Náuseas e mal-estar que limitam as ações do personagem.',
+                efeitos: 'Apenas 1 ação por rodada (padrão OU movimento) • Investida limitada ao deslocamento normal',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
                 icone: '🤢'
             },
             {
+                nome: 'Enredado',
+                descricao: 'O personagem está preso por teias, cordas ou similar.',
+                efeitos: '-2 em testes de ataque • Fica lento e vulnerável',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '🕸️'
+            },
+            {
+                nome: 'Envenenado',
+                descricao: 'O personagem está sob efeito de um veneno.',
+                efeitos: 'Efeitos variam conforme o veneno • Dano recorrente é cumulativo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+                icone: '☠️'
+            },
+            {
+                nome: 'Esmorecido',
+                descricao: 'Fraqueza mental severa que afeta todos os atributos mentais.',
+                efeitos: '-5 em Inteligência, Sabedoria, Carisma e perícias mentais',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😞'
+            },
+            {
                 nome: 'Exausto',
-                descricao: 'O personagem está extremamente cansado.',
-                efeitos: '-2 em todos os testes, -2 em CA, Redução de velocidade',
+                descricao: 'Cansaço extremo que combina múltiplas condições.',
+                efeitos: 'Combina debilitado + lento + vulnerável • Progressão: se aplicado novamente, torna-se inconsciente',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😴'
             },
             {
-                nome: 'Fadigado',
-                descricao: 'O personagem está cansado.',
-                efeitos: '-1 em todos os testes, -1 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
-                icone: '😪'
-            },
-            {
                 nome: 'Fascinado',
-                descricao: 'O personagem está hipnotizado por algo.',
-                efeitos: 'Não pode fazer ações ofensivas, -2 em testes de Vontade',
+                descricao: 'O personagem está hipnotizado por algo específico.',
+                efeitos: '-5 em Percepção • Só pode observar o que o fascinou • Quebrado por ações hostis',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg',
                 icone: '😵'
             },
             {
-                nome: 'Fugindo',
-                descricao: 'O personagem está em pânico e tentando fugir.',
-                efeitos: 'Deve se mover para longe da fonte do medo, Não pode fazer ações ofensivas, -2 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
-                icone: '🏃'
+                nome: 'Fatigado',
+                descricao: 'Cansaço moderado que afeta a performance do personagem.',
+                efeitos: 'Combina fraco + vulnerável • Progressão: se aplicado novamente, torna-se exausto',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
+                icone: '😪'
+            },
+            {
+                nome: 'Fraco',
+                descricao: 'Fraqueza física leve que afeta os atributos físicos.',
+                efeitos: '-2 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se debilitado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😣'
+            },
+            {
+                nome: 'Frustrado',
+                descricao: 'Fraqueza mental leve que afeta os atributos mentais.',
+                efeitos: '-2 em Inteligência, Sabedoria, Carisma e perícias mentais • Progressão: se aplicado novamente, torna-se esmorecido',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😤'
             },
             {
                 nome: 'Imóvel',
-                descricao: 'O personagem não pode se mover.',
-                efeitos: 'Não pode se mover, -2 em CA, Pode ainda fazer ações que não envolvem movimento',
+                descricao: 'O personagem não consegue se mover de forma alguma.',
+                efeitos: 'Deslocamento reduzido a 0m • Pode ainda realizar ações que não envolvem movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '🛑'
             },
             {
                 nome: 'Inconsciente',
-                descricao: 'O personagem está desmaiado.',
-                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                descricao: 'O personagem está desmaiado e completamente indefeso.',
+                efeitos: 'Fica indefeso • Não pode fazer ações ou reações • Ainda pode fazer testes automáticos • Balançar para acordar gasta ação padrão',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
                 icone: '😵'
             },
             {
+                nome: 'Indefeso',
+                descricao: 'Vulnerabilidade extrema que deixa o personagem completamente exposto.',
+                efeitos: '-10 na Defesa • Falha automaticamente em Reflexos • Pode sofrer golpes de misericórdia',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '💀'
+            },
+            {
                 nome: 'Invisível',
-                descricao: 'O personagem não pode ser visto.',
-                efeitos: '+20 em testes de Furtividade, Imunidade a ataques que dependem de visão, Primeiro ataque tem bônus',
+                descricao: 'O personagem não pode ser visto por meios normais.',
+                efeitos: '+20 em Furtividade • Imunidade a ataques que dependem de visão • Primeiro ataque tem bônus',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_stealth.jpg',
                 icone: '👻'
             },
             {
                 nome: 'Lento',
-                descricao: 'O personagem se move mais devagar.',
-                efeitos: 'Velocidade reduzida pela metade, -1 em CA, -1 em Reflexos',
+                descricao: 'O personagem se move com dificuldade, reduzindo sua mobilidade.',
+                efeitos: 'Deslocamento reduzido à metade • Não pode correr ou fazer investidas',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_slow.jpg',
                 icone: '🐌'
             },
             {
+                nome: 'Ofuscado',
+                descricao: 'Visão prejudicada que afeta a precisão e percepção.',
+                efeitos: '-2 em testes de ataque • -2 em testes de Percepção',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+                icone: '😵‍💫'
+            },
+            {
                 nome: 'Paralisado',
-                descricao: 'O personagem está completamente paralisado.',
-                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                descricao: 'O personagem está completamente paralisado, incapaz de se mover.',
+                efeitos: 'Fica imóvel e indefeso • Só pode realizar ações puramente mentais',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
                 icone: '🧊'
             },
             {
+                nome: 'Pasmo',
+                descricao: 'Choque ou surpresa que impede qualquer ação.',
+                efeitos: 'Não pode fazer ações • Condição temporária',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+                icone: '😶'
+            },
+            {
                 nome: 'Petrificado',
                 descricao: 'O personagem foi transformado em pedra.',
-                efeitos: 'Não pode fazer nenhuma ação, Imunidade a dano, Não pode ser curado',
+                efeitos: 'Fica inconsciente • Recebe redução de dano 8 • Imunidade a dano',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg',
                 icone: '🗿'
             },
             {
+                nome: 'Sangrando',
+                descricao: 'O personagem está perdendo sangue continuamente.',
+                efeitos: 'Teste de Constituição (CD 15) por turno • Falha = 1d6 dano • Sucesso = remove condição',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
+                icone: '🩸'
+            },
+            {
+                nome: 'Sobrecarregado',
+                descricao: 'O personagem está carregando peso excessivo.',
+                efeitos: 'Penalidade de armadura -5 • Deslocamento reduzido em -3m',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '⚖️'
+            },
+            {
                 nome: 'Surdo',
-                descricao: 'O personagem não consegue ouvir.',
-                efeitos: '-5 em testes de Percepção auditiva, Imunidade a efeitos sonoros, Não pode usar magias com componente verbal',
+                descricao: 'O personagem não consegue ouvir sons.',
+                efeitos: '-5 em Iniciativa • Não pode fazer testes de Percepção auditiva • Condição ruim para magias',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech.jpg',
                 icone: '🔇'
             },
             {
-                nome: 'Tremendo',
-                descricao: 'O personagem está tremendo de medo.',
-                efeitos: '-2 em ataques, -2 em testes de perícias, Não pode usar magias',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathpact.jpg',
-                icone: '😰'
+                nome: 'Surpreendido',
+                descricao: 'O personagem foi pego desprevenido no início do combate.',
+                efeitos: 'Fica desprevenido • Não pode fazer ações • Condição do primeiro turno',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '😲'
             },
             {
                 nome: 'Vulnerável',
-                descricao: 'O personagem está mais suscetível a dano.',
-                efeitos: '-2 em CA, Ataques contra o personagem têm +2',
+                descricao: 'O personagem está em posição que facilita ataques inimigos.',
+                efeitos: '-2 na Defesa • Mais suscetível a ataques',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '💔'
-            },
-            {
-                nome: 'Zangado',
-                descricao: 'O personagem está em fúria.',
-                efeitos: '+2 em ataques corpo a corpo, +2 em dano corpo a corpo, -2 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unholyfrenzy.jpg',
-                icone: '😠'
             }
         ];
     }
@@ -10623,6 +11618,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return pratos.find(prato => prato.nome === nomePrato);
     }
 
+    // Função para obter dados completos de uma bebida pelo nome
+    function getBebidaDataByName(nomeBebida) {
+        const bebidas = getBebidasCompletas();
+        return bebidas.find(bebida => bebida.nome === nomeBebida);
+    }
+
     // Função para atualizar os indicadores visuais unificados (pratos e condições)
     function updateEffectsVisualIndicators() {
         const effectsSection = document.getElementById('effects-indicators-section');
@@ -10679,6 +11680,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const itemEffectData = getItemEffectData(orderedEffect.effectKey);
                 if (itemEffectData) {
                     createItemEffectIndicatorIcon(itemEffectData);
+                }
+            } else if (orderedEffect.effectType === 'drink') {
+                // Busca os dados do efeito de bebida
+                let bebidaEffects = [];
+                try {
+                    bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                } catch (e) {
+                    console.error('Erro ao carregar efeitos de bebida:', e);
+                    bebidaEffects = [];
+                }
+
+                const bebidaEffect = bebidaEffects.find(effect => effect.effectKey === orderedEffect.effectKey);
+                if (bebidaEffect) {
+                    const bebidaData = getBebidaDataByName(bebidaEffect.name);
+                    if (bebidaData) {
+                        createBebidaIndicatorIcon(bebidaData, bebidaEffect);
+                    }
                 }
             }
         });
@@ -10872,6 +11890,208 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Remove da ordem
         removeEffectFromOrder(effectKey, 'food');
+
+        // Atualiza indicadores visuais unificados
+        updateEffectsVisualIndicators();
+    }
+
+    // Variável global para tooltip de bebida
+    let currentBebidaTooltip = null;
+
+    // Função para criar um ícone indicador de bebida consumida
+    function createBebidaIndicatorIcon(bebidaData, effect) {
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'bebida-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #4caf50'; // Borda verde para bebidas (mesma cor dos pratos)
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#66bb6a'; // Verde mais claro no hover (mesma cor dos pratos)
+            // Mostra tooltip
+            showBebidaTooltip(indicator, bebidaData);
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#4caf50'; // Volta para verde normal (mesma cor dos pratos)
+            // Esconde tooltip
+            hideBebidaTooltip();
+        };
+
+        // Click handler para remover o efeito
+        indicator.onclick = () => {
+            // Esconde o tooltip antes de remover o efeito
+            hideBebidaTooltip();
+            removeBebidaEffect(effect.effectKey);
+        };
+
+        // Ícone da bebida
+        if (bebidaData.iconeUrl) {
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                bebidaData.iconeUrl,
+                bebidaData.nome,
+                bebidaData.icone || '🍺',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '4px',
+                    objectFit: 'cover',
+                    showSkeleton: false
+                }
+            );
+            indicator.appendChild(cachedImageElement);
+        } else {
+            // Fallback para emoji
+            const emojiElement = document.createElement('div');
+            emojiElement.textContent = bebidaData.icone || '🍺';
+            emojiElement.style.width = '100%';
+            emojiElement.style.height = '100%';
+            emojiElement.style.display = 'flex';
+            emojiElement.style.alignItems = 'center';
+            emojiElement.style.justifyContent = 'center';
+            emojiElement.style.fontSize = '16px';
+            indicator.appendChild(emojiElement);
+        }
+
+        // Adiciona indicador de duração no canto inferior direito
+        const durationIndicator = document.createElement('div');
+        durationIndicator.style.position = 'absolute';
+        durationIndicator.style.bottom = '0';
+        durationIndicator.style.right = '0';
+        durationIndicator.style.background = 'rgba(0, 0, 0, 0.7)';
+        durationIndicator.style.color = '#ffffff';
+        durationIndicator.style.fontSize = '8px';
+        durationIndicator.style.fontWeight = 'bold';
+        durationIndicator.style.padding = '1px 3px';
+        durationIndicator.style.borderRadius = '3px 0 4px 0';
+        durationIndicator.style.lineHeight = '1';
+        durationIndicator.style.minWidth = '12px';
+        durationIndicator.style.textAlign = 'center';
+        durationIndicator.style.border = '1px solid #000000';
+        durationIndicator.style.zIndex = '10';
+        durationIndicator.style.pointerEvents = 'none';
+
+        // Determina o texto da duração baseado no nome da bebida
+        if (bebidaData.nome === 'Baba de Troll') {
+            durationIndicator.textContent = '1x';
+        } else {
+            durationIndicator.textContent = '24h';
+        }
+
+        indicator.appendChild(durationIndicator);
+        effectsContainer.appendChild(indicator);
+    }
+
+    // Função para mostrar tooltip da bebida
+    function showBebidaTooltip(element, bebidaData) {
+        // Remove tooltip existente
+        hideBebidaTooltip();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'bebida-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = 'rgba(20,20,30,0.98)';
+        tooltip.style.border = '2px solid #ff9800';
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.zIndex = '10002';
+        tooltip.style.maxWidth = '250px';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
+        tooltip.style.pointerEvents = 'none';
+
+        // Conteúdo do tooltip
+        const title = document.createElement('div');
+        title.textContent = bebidaData.nome;
+        title.style.color = '#ff9800';
+        title.style.fontSize = '14px';
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '4px';
+
+        const description = document.createElement('div');
+        description.textContent = bebidaData.descricao;
+        description.style.color = '#ecf0f1';
+        description.style.fontSize = '12px';
+        description.style.lineHeight = '1.3';
+        description.style.marginBottom = '4px';
+
+        const efeito = document.createElement('div');
+        efeito.textContent = bebidaData.efeito;
+        efeito.style.color = '#4caf50';
+        efeito.style.fontSize = '12px';
+        efeito.style.fontWeight = 'bold';
+        efeito.style.lineHeight = '1.3';
+
+        const clickHint = document.createElement('div');
+        clickHint.textContent = 'Clique para remover';
+        clickHint.style.color = '#6ec6ff';
+        clickHint.style.fontSize = '11px';
+        clickHint.style.fontStyle = 'italic';
+        clickHint.style.marginTop = '6px';
+        clickHint.style.textAlign = 'center';
+
+        tooltip.appendChild(title);
+        tooltip.appendChild(description);
+        tooltip.appendChild(efeito);
+        tooltip.appendChild(clickHint);
+
+        // Posicionamento do tooltip
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+
+        document.body.appendChild(tooltip);
+        currentBebidaTooltip = tooltip;
+
+        // Ajusta posição se sair da tela
+        setTimeout(() => {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            if (tooltipRect.left < 10) {
+                tooltip.style.left = '10px';
+            } else if (tooltipRect.right > window.innerWidth - 10) {
+                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+            }
+        }, 10);
+    }
+
+    // Função para esconder tooltip da bebida
+    function hideBebidaTooltip() {
+        if (currentBebidaTooltip) {
+            currentBebidaTooltip.remove();
+            currentBebidaTooltip = null;
+        }
+    }
+
+    // Função para remover efeito de bebida
+    function removeBebidaEffect(effectKey) {
+        // Remove do localStorage de efeitos de bebida
+        let bebidaEffects = [];
+        try {
+            bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effectKey);
+            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+        } catch (e) {
+            console.error('Erro ao remover efeito de bebida:', e);
+        }
+
+        // Remove do sistema de efeitos ativos
+        toggleEffect(effectKey);
+
+        // Remove da ordem
+        removeEffectFromOrder(effectKey, 'drink');
 
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
@@ -11497,6 +12717,17 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const activeEffects = getActiveEffects();
         const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
 
+        // Efeitos de bebida
+        let bebidaEffects = [];
+        try {
+            bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de bebida:', e);
+            bebidaEffects = [];
+        }
+        // Só mostra efeitos de bebida que estão ativos
+        const activeBebidaEffects = bebidaEffects.filter(e => activeEffects.includes(e.effectKey));
+
         // Efeitos de condições
         const activeConditions = getActiveConditions();
         const conditionsEffects = activeConditions.map(conditionName => {
@@ -11509,8 +12740,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             };
         });
 
-        // Junta efeitos normais, de comida e condições
-        const allEffects = [...effects, ...activeComidaEffects, ...conditionsEffects];
+        // Junta efeitos normais, de comida, bebida e condições
+        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...conditionsEffects];
 
         // Lista visual
         const effectsList = document.createElement('div');
