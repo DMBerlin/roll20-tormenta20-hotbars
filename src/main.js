@@ -7090,9 +7090,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Outros botões
         const otherButtons = [
-            { label: 'Skills', icon: '🧠', onClick: createSkillsPopup },
-            { label: 'Spells', icon: '🔮', onClick: createSpellsPopup },
-            { label: 'Habilid.', icon: '✨', onClick: createAbilitiesPopup },
+            { label: 'Perícias', icon: '🧠', onClick: createSkillsPopup },
+            { label: 'Magias', icon: '🔮', onClick: createSpellsPopup },
+            { label: 'Poderes', icon: '✨', onClick: createAbilitiesPopup },
             { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup },
             { label: 'Misc.', icon: '📦', onClick: createMiscPopup } // Novo botão Misc.
         ];
