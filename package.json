@@ -8,11 +8,15 @@
   "main": "./src/main.js",
   "scripts": {
     "lint": "eslint --fix",
-    "update-version": "node update-version.js"
+    "update-version": "node core/versioning/update-version.js",
+    "build": "node core/build/build.js",
+    "dev": "node core/toggle-env.js && echo 'Ambiente alterado para desenvolvimento'",
+    "prod": "node core/toggle-env.js && echo 'Ambiente alterado para produção'"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
     "eslint": "^9.30.0",
-    "globals": "^16.2.0"
+    "globals": "^16.2.0",
+    "terser": "^5.28.1"
   }
 }

@@ -370,7 +370,7 @@
     function loadScript() {
       const timestamp = new Date().getTime();
       scriptElement = document.createElement('script');
-      scriptElement.src = `../main.js?t=${timestamp}`;
+      scriptElement.src = `../../dist/tormenta20hotbar.dev.js?t=${timestamp}`;
       scriptElement.type = 'text/javascript';
 
       scriptElement.onload = function () {
