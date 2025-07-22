@@ -2129,7 +2129,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'purple');
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Função para obter dados das magias
@@ -2660,7 +2660,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'purple');
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Funções auxiliares para pratos especiais
@@ -3841,6 +3841,140 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
     }
 
+    // Template reutilizável para itens de lista (pratos e bebidas)
+    function createListItemCard(item, itemType, onFavoriteToggle) {
+        const card = document.createElement('div');
+        card.style.background = '#23243a';
+        card.style.border = '1px solid #ffb86c';
+        card.style.borderRadius = '8px';
+        card.style.padding = '12px 14px';
+        card.style.display = 'flex';
+        card.style.justifyContent = 'space-between';
+        card.style.alignItems = 'center';
+        card.style.gap = '10px';
+        card.style.cursor = 'pointer';
+        card.style.transition = 'all 0.2s';
+
+        // Efeitos de hover
+        card.onmouseover = () => {
+            card.style.background = '#2d2e4a';
+            card.style.borderColor = '#ffc97a';
+        };
+        card.onmouseout = () => {
+            card.style.background = '#23243a';
+            card.style.borderColor = '#ffb86c';
+        };
+
+        // Informações do item
+        const itemInfo = document.createElement('div');
+        itemInfo.style.flex = '1';
+        itemInfo.style.display = 'flex';
+        itemInfo.style.flexDirection = 'column';
+        itemInfo.style.gap = '4px';
+
+        const nome = document.createElement('div');
+        nome.textContent = item.nome;
+        nome.style.color = '#ffb86c';
+        nome.style.fontWeight = 'bold';
+        nome.style.fontSize = '15px';
+        itemInfo.appendChild(nome);
+
+        // Resumo da descrição
+        const resumo = document.createElement('div');
+        const palavras = item.descricao.split(/\s+/);
+        let resumoTexto = palavras.slice(0, 10).join(' ');
+        if (palavras.length > 10) resumoTexto += '...';
+        resumo.textContent = resumoTexto;
+        resumo.style.color = '#bdbdbd';
+        resumo.style.fontSize = '12px';
+        resumo.style.fontStyle = 'italic';
+        itemInfo.appendChild(resumo);
+
+        // Campo específico baseado no tipo (bonus para pratos, efeito para bebidas)
+        const effectField = document.createElement('div');
+        if (itemType === 'food') {
+            effectField.textContent = item.bonus;
+        } else if (itemType === 'drink') {
+            effectField.textContent = item.efeito;
+        }
+        effectField.style.color = '#6ec6ff';
+        effectField.style.fontSize = '13px';
+        effectField.style.fontWeight = 'bold';
+        itemInfo.appendChild(effectField);
+
+        // Botão de favorito
+        const favoriteBtn = document.createElement('button');
+        const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
+        favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
+        favoriteBtn.style.background = 'none';
+        favoriteBtn.style.border = 'none';
+        favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+        favoriteBtn.style.fontSize = '18px';
+        favoriteBtn.style.cursor = 'pointer';
+        favoriteBtn.style.padding = '5px';
+        favoriteBtn.style.minWidth = '30px';
+        favoriteBtn.style.transition = 'all 0.2s';
+
+        // Efeitos de hover no botão
+        favoriteBtn.onmouseover = () => {
+            favoriteBtn.style.background = 'rgba(255, 184, 108, 0.2)';
+            favoriteBtn.style.color = '#ffb86c';
+        };
+        favoriteBtn.onmouseout = () => {
+            favoriteBtn.style.background = 'none';
+            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+        };
+
+        favoriteBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (itemType === 'food') {
+                togglePratoFavorito(item.nome);
+            } else if (itemType === 'drink') {
+                toggleBebidaFavorita(item.nome);
+            }
+
+            // Atualiza o botão imediatamente
+            const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
+            favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
+            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+
+            // Chama o callback para re-renderizar a lista
+            if (onFavoriteToggle) {
+                onFavoriteToggle();
+            }
+        };
+
+        card.appendChild(itemInfo);
+        card.appendChild(favoriteBtn);
+
+        // Evento de clique para abrir modal de detalhes
+        card.onclick = () => {
+            if (itemType === 'food') {
+                createPratoDetailModal(item);
+            } else if (itemType === 'drink') {
+                createBebidaDetailModal(item);
+            }
+        };
+
+        return card;
+    }
+
+    // Função para criar mensagem de "nenhum resultado encontrado"
+    function createNoResultsMessage(filterText, itemType) {
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.style.textAlign = 'center';
+        noResultsMessage.style.padding = '20px';
+        noResultsMessage.style.color = '#999';
+        noResultsMessage.style.fontSize = '14px';
+        noResultsMessage.style.fontStyle = 'italic';
+        noResultsMessage.innerHTML = `
+            <div style="margin-bottom: 8px;">🔍</div>
+            <div>Nenhum ${itemType === 'food' ? 'prato especial' : 'bebida artoniana'} encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+            <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+        `;
+        return noResultsMessage;
+    }
+
     function createPratosEspeciaisPopup() {
         console.log('Abrindo Pratos Especiais');
         try {
@@ -3952,6 +4086,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Dados dos pratos
             const pratos = getPratosCompletos();
 
+
+
             function renderPratosList(filterText = '') {
                 pratosList.innerHTML = '';
                 const filtered = pratos.filter(prato =>
@@ -3971,92 +4107,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 });
 
                 filtered.forEach(prato => {
-                    const card = document.createElement('div');
-                    card.style.background = '#23243a';
-                    card.style.border = '1px solid #ffb86c';
-                    card.style.borderRadius = '8px';
-                    card.style.padding = '12px 14px';
-                    card.style.display = 'flex';
-                    card.style.justifyContent = 'space-between';
-                    card.style.alignItems = 'center';
-                    card.style.gap = '10px';
-
-                    // Removido ícone da lista - agora só aparece no modal de detalhes
-
-                    // Informações do prato
-                    const pratoInfo = document.createElement('div');
-                    pratoInfo.style.flex = '1';
-                    pratoInfo.style.display = 'flex';
-                    pratoInfo.style.flexDirection = 'column';
-                    pratoInfo.style.gap = '4px';
-
-                    const nome = document.createElement('div');
-                    nome.textContent = prato.nome;
-                    nome.style.color = '#ffb86c';
-                    nome.style.fontWeight = 'bold';
-                    nome.style.fontSize = '15px';
-                    pratoInfo.appendChild(nome);
-
-                    // Resumo da descrição
-                    const resumo = document.createElement('div');
-                    const palavras = prato.descricao.split(/\s+/);
-                    let resumoTexto = palavras.slice(0, 10).join(' ');
-                    if (palavras.length > 10) resumoTexto += '...';
-                    resumo.textContent = resumoTexto;
-                    resumo.style.color = '#bdbdbd';
-                    resumo.style.fontSize = '12px';
-                    resumo.style.fontStyle = 'italic';
-                    pratoInfo.appendChild(resumo);
-
-                    const bonus = document.createElement('div');
-                    bonus.textContent = prato.bonus;
-                    bonus.style.color = '#6ec6ff';
-                    bonus.style.fontSize = '13px';
-                    bonus.style.fontWeight = 'bold';
-                    pratoInfo.appendChild(bonus);
-
-                    // Botão de favorito
-                    const favoriteBtn = document.createElement('button');
-                    favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
-                    favoriteBtn.style.background = 'none';
-                    favoriteBtn.style.border = 'none';
-                    favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
-                    favoriteBtn.style.fontSize = '18px';
-                    favoriteBtn.style.cursor = 'pointer';
-                    favoriteBtn.style.padding = '5px';
-                    favoriteBtn.style.minWidth = '30px';
-                    favoriteBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        togglePratoFavorito(prato.nome);
-                        favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
-                        favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
-                        renderPratosList(filterInput.value);
-                    };
-                    card.appendChild(pratoInfo);
-                    card.appendChild(favoriteBtn);
-
-                    // Evento de clique para abrir modal de detalhes
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        createPratoDetailModal(prato);
-                    };
-
+                    const card = createListItemCard(prato, 'food', () => renderPratosList(filterInput.value));
                     pratosList.appendChild(card);
                 });
 
                 // Verifica se não há pratos encontrados durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = document.createElement('div');
-                    noResultsMessage.style.textAlign = 'center';
-                    noResultsMessage.style.padding = '20px';
-                    noResultsMessage.style.color = '#999';
-                    noResultsMessage.style.fontSize = '14px';
-                    noResultsMessage.style.fontStyle = 'italic';
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhum prato especial encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'food');
                     pratosList.appendChild(noResultsMessage);
                 }
             }
@@ -4211,90 +4268,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 });
 
                 filtered.forEach(bebida => {
-                    const card = document.createElement('div');
-                    card.style.background = '#23243a';
-                    card.style.border = '1px solid #ffb86c';
-                    card.style.borderRadius = '8px';
-                    card.style.padding = '12px 14px';
-                    card.style.display = 'flex';
-                    card.style.justifyContent = 'space-between';
-                    card.style.alignItems = 'center';
-                    card.style.gap = '10px';
-
-                    // Informações da bebida
-                    const bebidaInfo = document.createElement('div');
-                    bebidaInfo.style.flex = '1';
-                    bebidaInfo.style.display = 'flex';
-                    bebidaInfo.style.flexDirection = 'column';
-                    bebidaInfo.style.gap = '4px';
-
-                    const nome = document.createElement('div');
-                    nome.textContent = bebida.nome;
-                    nome.style.color = '#ffb86c';
-                    nome.style.fontWeight = 'bold';
-                    nome.style.fontSize = '15px';
-                    bebidaInfo.appendChild(nome);
-
-                    // Resumo da descrição
-                    const resumo = document.createElement('div');
-                    const palavras = bebida.descricao.split(/\s+/);
-                    let resumoTexto = palavras.slice(0, 10).join(' ');
-                    if (palavras.length > 10) resumoTexto += '...';
-                    resumo.textContent = resumoTexto;
-                    resumo.style.color = '#bdbdbd';
-                    resumo.style.fontSize = '12px';
-                    resumo.style.fontStyle = 'italic';
-                    bebidaInfo.appendChild(resumo);
-
-                    const efeito = document.createElement('div');
-                    efeito.textContent = bebida.efeito;
-                    efeito.style.color = '#6ec6ff';
-                    efeito.style.fontSize = '13px';
-                    efeito.style.fontWeight = 'bold';
-                    bebidaInfo.appendChild(efeito);
-
-                    // Botão de favorito
-                    const favoriteBtn = document.createElement('button');
-                    favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
-                    favoriteBtn.style.background = 'none';
-                    favoriteBtn.style.border = 'none';
-                    favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
-                    favoriteBtn.style.fontSize = '18px';
-                    favoriteBtn.style.cursor = 'pointer';
-                    favoriteBtn.style.padding = '5px';
-                    favoriteBtn.style.minWidth = '30px';
-                    favoriteBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        toggleBebidaFavorita(bebida.nome);
-                        favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
-                        favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
-                        renderBebidasList(filterInput.value);
-                    };
-                    card.appendChild(bebidaInfo);
-                    card.appendChild(favoriteBtn);
-
-                    // Evento de clique para abrir modal de detalhes
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        createBebidaDetailModal(bebida);
-                    };
-
+                    const card = createListItemCard(bebida, 'drink', () => renderBebidasList(filterInput.value));
                     bebidasList.appendChild(card);
                 });
 
                 // Verifica se não há bebidas encontradas durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = document.createElement('div');
-                    noResultsMessage.style.textAlign = 'center';
-                    noResultsMessage.style.padding = '20px';
-                    noResultsMessage.style.color = '#999';
-                    noResultsMessage.style.fontSize = '14px';
-                    noResultsMessage.style.fontStyle = 'italic';
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma bebida encontrada para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'drink');
                     bebidasList.appendChild(noResultsMessage);
                 }
             }
@@ -5891,7 +5871,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(modal, 'brown');
+        applyDirectScrollbarStyles(modal, 'blue');
     }
 
     // Função para obter a versão atual do script
@@ -12633,9 +12613,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
 
         // Efeitos/Bônus
-        if (effectData.efeitos || effectData.bonus || effectData.effects) {
+        if (effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects) {
             const effects = document.createElement('div');
-            effects.textContent = effectData.efeitos || effectData.bonus || effectData.effects;
+            effects.textContent = effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects;
             effects.style.color = config.effectsColor;
             effects.style.fontSize = '12px';
             effects.style.fontWeight = 'bold';
