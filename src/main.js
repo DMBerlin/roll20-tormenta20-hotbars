@@ -33,6 +33,464 @@
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = 'v0.0.1'; // Última tag Git
 
+    // Sistema de scrollbars customizadas
+    function createCustomScrollbarStyles() {
+        const style = document.createElement('style');
+        style.id = 'roll20-custom-scrollbar-styles';
+        style.textContent = `
+            /* Scrollbars customizadas para todos os elementos do script */
+            #roll20-hotbar *::-webkit-scrollbar,
+            .roll20-popup *::-webkit-scrollbar,
+            .roll20-modal *::-webkit-scrollbar,
+            #roll20-notification-container *::-webkit-scrollbar,
+            #skills-popup *::-webkit-scrollbar,
+            #spells-popup *::-webkit-scrollbar,
+            #misc-popup *::-webkit-scrollbar,
+            #avatar-popup *::-webkit-scrollbar,
+            #spell-cast-popup *::-webkit-scrollbar,
+            #pratos-popup *::-webkit-scrollbar,
+            #bebidas-popup *::-webkit-scrollbar,
+            #conditions-popup *::-webkit-scrollbar,
+            #hunter-class-modal *::-webkit-scrollbar,
+            #skill-detail-modal *::-webkit-scrollbar {
+                width: 8px !important;
+                height: 8px !important;
+            }
+
+            #roll20-hotbar *::-webkit-scrollbar-track,
+            .roll20-popup *::-webkit-scrollbar-track,
+            .roll20-modal *::-webkit-scrollbar-track,
+            #roll20-notification-container *::-webkit-scrollbar-track,
+            #skills-popup *::-webkit-scrollbar-track,
+            #spells-popup *::-webkit-scrollbar-track,
+            #misc-popup *::-webkit-scrollbar-track,
+            #avatar-popup *::-webkit-scrollbar-track,
+            #spell-cast-popup *::-webkit-scrollbar-track,
+            #pratos-popup *::-webkit-scrollbar-track,
+            #bebidas-popup *::-webkit-scrollbar-track,
+            #conditions-popup *::-webkit-scrollbar-track,
+            #hunter-class-modal *::-webkit-scrollbar-track,
+            #skill-detail-modal *::-webkit-scrollbar-track {
+                background: rgba(35, 36, 58, 0.3) !important;
+                border-radius: 4px !important;
+                margin: 2px !important;
+            }
+
+            #roll20-hotbar *::-webkit-scrollbar-thumb,
+            .roll20-popup *::-webkit-scrollbar-thumb,
+            .roll20-modal *::-webkit-scrollbar-thumb,
+            #roll20-notification-container *::-webkit-scrollbar-thumb,
+            #skills-popup *::-webkit-scrollbar-thumb,
+            #spells-popup *::-webkit-scrollbar-thumb,
+            #misc-popup *::-webkit-scrollbar-thumb,
+            #avatar-popup *::-webkit-scrollbar-thumb,
+            #spell-cast-popup *::-webkit-scrollbar-thumb,
+            #pratos-popup *::-webkit-scrollbar-thumb,
+            #bebidas-popup *::-webkit-scrollbar-thumb,
+            #conditions-popup *::-webkit-scrollbar-thumb,
+            #hunter-class-modal *::-webkit-scrollbar-thumb,
+            #skill-detail-modal *::-webkit-scrollbar-thumb {
+                background: rgba(110, 198, 255, 0.6) !important;
+                border-radius: 4px !important;
+                border: 1px solid rgba(110, 198, 255, 0.2) !important;
+                transition: all 0.2s ease !important;
+            }
+
+            #roll20-hotbar *::-webkit-scrollbar-thumb:hover,
+            .roll20-popup *::-webkit-scrollbar-thumb:hover,
+            .roll20-modal *::-webkit-scrollbar-thumb:hover,
+            #roll20-notification-container *::-webkit-scrollbar-thumb:hover,
+            #skills-popup *::-webkit-scrollbar-thumb:hover,
+            #spells-popup *::-webkit-scrollbar-thumb:hover,
+            #misc-popup *::-webkit-scrollbar-thumb:hover,
+            #avatar-popup *::-webkit-scrollbar-thumb:hover,
+            #spell-cast-popup *::-webkit-scrollbar-thumb:hover,
+            #pratos-popup *::-webkit-scrollbar-thumb:hover,
+            #bebidas-popup *::-webkit-scrollbar-thumb:hover,
+            #conditions-popup *::-webkit-scrollbar-thumb:hover,
+            #hunter-class-modal *::-webkit-scrollbar-thumb:hover,
+            #skill-detail-modal *::-webkit-scrollbar-thumb:hover {
+                background: rgba(110, 198, 255, 0.8) !important;
+                border-color: rgba(110, 198, 255, 0.4) !important;
+            }
+
+            #roll20-hotbar *::-webkit-scrollbar-thumb:active,
+            .roll20-popup *::-webkit-scrollbar-thumb:active,
+            .roll20-modal *::-webkit-scrollbar-thumb:active,
+            #roll20-notification-container *::-webkit-scrollbar-thumb:active,
+            #skills-popup *::-webkit-scrollbar-thumb:active,
+            #spells-popup *::-webkit-scrollbar-thumb:active,
+            #misc-popup *::-webkit-scrollbar-thumb:active,
+            #avatar-popup *::-webkit-scrollbar-thumb:active,
+            #spell-cast-popup *::-webkit-scrollbar-thumb:active,
+            #pratos-popup *::-webkit-scrollbar-thumb:active,
+            #bebidas-popup *::-webkit-scrollbar-thumb:active,
+            #conditions-popup *::-webkit-scrollbar-thumb:active,
+            #hunter-class-modal *::-webkit-scrollbar-thumb:active,
+            #skill-detail-modal *::-webkit-scrollbar-thumb:active {
+                background: rgba(110, 198, 255, 1) !important;
+                border-color: rgba(110, 198, 255, 0.6) !important;
+            }
+
+            #roll20-hotbar *::-webkit-scrollbar-corner,
+            .roll20-popup *::-webkit-scrollbar-corner,
+            .roll20-modal *::-webkit-scrollbar-corner,
+            #roll20-notification-container *::-webkit-scrollbar-corner,
+            #skills-popup *::-webkit-scrollbar-corner,
+            #spells-popup *::-webkit-scrollbar-corner,
+            #misc-popup *::-webkit-scrollbar-corner,
+            #avatar-popup *::-webkit-scrollbar-corner,
+            #spell-cast-popup *::-webkit-scrollbar-corner,
+            #pratos-popup *::-webkit-scrollbar-corner,
+            #bebidas-popup *::-webkit-scrollbar-corner,
+            #conditions-popup *::-webkit-scrollbar-corner,
+            #hunter-class-modal *::-webkit-scrollbar-corner,
+            #skill-detail-modal *::-webkit-scrollbar-corner {
+                background: rgba(35, 36, 58, 0.3) !important;
+                border-radius: 4px !important;
+            }
+
+            /* Scrollbars para Firefox */
+            #roll20-hotbar *,
+            .roll20-popup *,
+            .roll20-modal *,
+            #roll20-notification-container *,
+            #skills-popup *,
+            #spells-popup *,
+            #misc-popup *,
+            #avatar-popup *,
+            #spell-cast-popup *,
+            #pratos-popup *,
+            #bebidas-popup *,
+            #conditions-popup *,
+            #hunter-class-modal *,
+            #skill-detail-modal * {
+                scrollbar-width: thin !important;
+                scrollbar-color: rgba(110, 198, 255, 0.6) rgba(35, 36, 58, 0.3) !important;
+            }
+
+            /* Scrollbars para elementos específicos com cores diferentes */
+            .roll20-popup-orange *::-webkit-scrollbar-thumb,
+            #misc-popup *::-webkit-scrollbar-thumb,
+            #pratos-popup *::-webkit-scrollbar-thumb,
+            #bebidas-popup *::-webkit-scrollbar-thumb {
+                background: rgba(255, 184, 108, 0.6) !important;
+                border-color: rgba(255, 184, 108, 0.2) !important;
+            }
+
+            .roll20-popup-orange *::-webkit-scrollbar-thumb:hover,
+            #misc-popup *::-webkit-scrollbar-thumb:hover,
+            #pratos-popup *::-webkit-scrollbar-thumb:hover,
+            #bebidas-popup *::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 184, 108, 0.8) !important;
+                border-color: rgba(255, 184, 108, 0.4) !important;
+            }
+
+            .roll20-popup-orange *::-webkit-scrollbar-thumb:active,
+            #misc-popup *::-webkit-scrollbar-thumb:active,
+            #pratos-popup *::-webkit-scrollbar-thumb:active,
+            #bebidas-popup *::-webkit-scrollbar-thumb:active {
+                background: rgba(255, 184, 108, 1) !important;
+                border-color: rgba(255, 184, 108, 0.6) !important;
+            }
+
+            .roll20-popup-orange *,
+            #misc-popup *,
+            #pratos-popup *,
+            #bebidas-popup * {
+                scrollbar-color: rgba(255, 184, 108, 0.6) rgba(35, 36, 58, 0.3) !important;
+            }
+
+            /* Scrollbars para elementos com tema verde */
+            .roll20-popup-green *::-webkit-scrollbar-thumb,
+            #hunter-class-modal *::-webkit-scrollbar-thumb {
+                background: rgba(76, 175, 80, 0.6) !important;
+                border-color: rgba(76, 175, 80, 0.2) !important;
+            }
+
+            .roll20-popup-green *::-webkit-scrollbar-thumb:hover,
+            #hunter-class-modal *::-webkit-scrollbar-thumb:hover {
+                background: rgba(76, 175, 80, 0.8) !important;
+                border-color: rgba(76, 175, 80, 0.4) !important;
+            }
+
+            .roll20-popup-green *::-webkit-scrollbar-thumb:active,
+            #hunter-class-modal *::-webkit-scrollbar-thumb:active {
+                background: rgba(76, 175, 80, 1) !important;
+                border-color: rgba(76, 175, 80, 0.6) !important;
+            }
+
+            .roll20-popup-green *,
+            #hunter-class-modal * {
+                scrollbar-color: rgba(76, 175, 80, 0.6) rgba(35, 36, 58, 0.3) !important;
+            }
+
+            /* Scrollbars para elementos com tema roxo */
+            .roll20-popup-purple *::-webkit-scrollbar-thumb,
+            #spells-popup *::-webkit-scrollbar-thumb,
+            #spell-cast-popup *::-webkit-scrollbar-thumb {
+                background: rgba(156, 39, 176, 0.6) !important;
+                border-color: rgba(156, 39, 176, 0.2) !important;
+            }
+
+            .roll20-popup-purple *::-webkit-scrollbar-thumb:hover,
+            #spells-popup *::-webkit-scrollbar-thumb:hover,
+            #spell-cast-popup *::-webkit-scrollbar-thumb:hover {
+                background: rgba(156, 39, 176, 0.8) !important;
+                border-color: rgba(156, 39, 176, 0.4) !important;
+            }
+
+            .roll20-popup-purple *::-webkit-scrollbar-thumb:active,
+            #spells-popup *::-webkit-scrollbar-thumb:active,
+            #spell-cast-popup *::-webkit-scrollbar-thumb:active {
+                background: rgba(156, 39, 176, 1) !important;
+                border-color: rgba(156, 39, 176, 0.6) !important;
+            }
+
+            .roll20-popup-purple *,
+            #spells-popup *,
+            #spell-cast-popup * {
+                scrollbar-color: rgba(156, 39, 176, 0.6) rgba(35, 36, 58, 0.3) !important;
+            }
+
+            /* Scrollbars para elementos com tema vermelho */
+            .roll20-popup-red *::-webkit-scrollbar-thumb,
+            #conditions-popup *::-webkit-scrollbar-thumb {
+                background: rgba(244, 67, 54, 0.6) !important;
+                border-color: rgba(244, 67, 54, 0.2) !important;
+            }
+
+            .roll20-popup-red *::-webkit-scrollbar-thumb:hover,
+            #conditions-popup *::-webkit-scrollbar-thumb:hover {
+                background: rgba(244, 67, 54, 0.8) !important;
+                border-color: rgba(244, 67, 54, 0.4) !important;
+            }
+
+            .roll20-popup-red *::-webkit-scrollbar-thumb:active,
+            #conditions-popup *::-webkit-scrollbar-thumb:active {
+                background: rgba(244, 67, 54, 1) !important;
+                border-color: rgba(244, 67, 54, 0.6) !important;
+            }
+
+            .roll20-popup-red *,
+            #conditions-popup * {
+                scrollbar-color: rgba(244, 67, 54, 0.6) rgba(35, 36, 58, 0.3) !important;
+            }
+
+            /* Animações suaves para scrollbars */
+            #roll20-hotbar *::-webkit-scrollbar-thumb,
+            .roll20-popup *::-webkit-scrollbar-thumb,
+            .roll20-modal *::-webkit-scrollbar-thumb,
+            #roll20-notification-container *::-webkit-scrollbar-thumb {
+                transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease !important;
+            }
+
+            /* Scrollbars mais finas para elementos pequenos */
+            .roll20-scrollbar-thin *::-webkit-scrollbar {
+                width: 6px !important;
+                height: 6px !important;
+            }
+
+            .roll20-scrollbar-thin *::-webkit-scrollbar-thumb {
+                border-radius: 3px !important;
+            }
+
+            .roll20-scrollbar-thin *::-webkit-scrollbar-track {
+                border-radius: 3px !important;
+                margin: 1px !important;
+            }
+
+            /* Scrollbars mais grossas para elementos grandes */
+            .roll20-scrollbar-thick *::-webkit-scrollbar {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .roll20-scrollbar-thick *::-webkit-scrollbar-thumb {
+                border-radius: 6px !important;
+            }
+
+            .roll20-scrollbar-thick *::-webkit-scrollbar-track {
+                border-radius: 6px !important;
+                margin: 3px !important;
+            }
+
+            /* Esconder scrollbars quando não necessário */
+            .roll20-scrollbar-auto *::-webkit-scrollbar {
+                width: 8px !important;
+                height: 8px !important;
+            }
+
+            .roll20-scrollbar-auto *::-webkit-scrollbar-thumb {
+                background: rgba(110, 198, 255, 0.3) !important;
+            }
+
+            .roll20-scrollbar-auto *:hover::-webkit-scrollbar-thumb {
+                background: rgba(110, 198, 255, 0.6) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Função para aplicar scrollbars diretamente nos elementos scrolláveis
+    function applyDirectScrollbarStyles(popup, theme = 'blue') {
+        const scrollbarColors = {
+            blue: {
+                thumb: 'rgba(110, 198, 255, 0.6)',
+                thumbHover: 'rgba(110, 198, 255, 0.8)',
+                thumbActive: 'rgba(110, 198, 255, 1)',
+                border: 'rgba(110, 198, 255, 0.2)',
+                borderHover: 'rgba(110, 198, 255, 0.4)',
+                borderActive: 'rgba(110, 198, 255, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            },
+            orange: {
+                thumb: 'rgba(255, 184, 108, 0.6)',
+                thumbHover: 'rgba(255, 184, 108, 0.8)',
+                thumbActive: 'rgba(255, 184, 108, 1)',
+                border: 'rgba(255, 184, 108, 0.2)',
+                borderHover: 'rgba(255, 184, 108, 0.4)',
+                borderActive: 'rgba(255, 184, 108, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            },
+            purple: {
+                thumb: 'rgba(156, 39, 176, 0.6)',
+                thumbHover: 'rgba(156, 39, 176, 0.8)',
+                thumbActive: 'rgba(156, 39, 176, 1)',
+                border: 'rgba(156, 39, 176, 0.2)',
+                borderHover: 'rgba(156, 39, 176, 0.4)',
+                borderActive: 'rgba(156, 39, 176, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            },
+            green: {
+                thumb: 'rgba(76, 175, 80, 0.6)',
+                thumbHover: 'rgba(76, 175, 80, 0.8)',
+                thumbActive: 'rgba(76, 175, 80, 1)',
+                border: 'rgba(76, 175, 80, 0.2)',
+                borderHover: 'rgba(76, 175, 80, 0.4)',
+                borderActive: 'rgba(76, 175, 80, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            },
+            red: {
+                thumb: 'rgba(244, 67, 54, 0.6)',
+                thumbHover: 'rgba(244, 67, 54, 0.8)',
+                thumbActive: 'rgba(244, 67, 54, 1)',
+                border: 'rgba(244, 67, 54, 0.2)',
+                borderHover: 'rgba(244, 67, 54, 0.4)',
+                borderActive: 'rgba(244, 67, 54, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            },
+            brown: {
+                thumb: 'rgba(139, 69, 19, 0.6)',
+                thumbHover: 'rgba(139, 69, 19, 0.8)',
+                thumbActive: 'rgba(139, 69, 19, 1)',
+                border: 'rgba(139, 69, 19, 0.2)',
+                borderHover: 'rgba(139, 69, 19, 0.4)',
+                borderActive: 'rgba(139, 69, 19, 0.6)',
+                track: 'rgba(35, 36, 58, 0.3)'
+            }
+        };
+
+        const colors = scrollbarColors[theme] || scrollbarColors.blue;
+
+        // Encontra todos os elementos scrolláveis dentro do popup
+        const scrollableElements = popup.querySelectorAll('*');
+
+        scrollableElements.forEach(element => {
+            const computedStyle = window.getComputedStyle(element);
+            const overflowY = computedStyle.overflowY;
+            const overflow = computedStyle.overflow;
+
+            // Verifica se o elemento é scrollável
+            if (overflowY === 'auto' || overflowY === 'scroll' ||
+                overflow === 'auto' || overflow === 'scroll') {
+
+                console.log('Found scrollable element:', element.id || element.className, 'in popup:', popup.id);
+
+                // Aplica estilos diretamente no elemento
+                element.style.setProperty('scrollbar-width', 'thin', 'important');
+                element.style.setProperty('scrollbar-color', `${colors.thumb} ${colors.track}`, 'important');
+
+                // Cria um estilo específico para este elemento
+                const elementId = element.id || `scrollable-${Math.random().toString(36).substr(2, 9)}`;
+                if (!element.id) element.id = elementId;
+
+                const scrollbarStyle = document.createElement('style');
+                scrollbarStyle.textContent = `
+                    #${elementId}::-webkit-scrollbar {
+                        width: 8px !important;
+                        height: 8px !important;
+                    }
+                    #${elementId}::-webkit-scrollbar-track {
+                        background: ${colors.track} !important;
+                        border-radius: 4px !important;
+                        margin: 2px !important;
+                    }
+                    #${elementId}::-webkit-scrollbar-thumb {
+                        background: ${colors.thumb} !important;
+                        border-radius: 4px !important;
+                        border: 1px solid ${colors.border} !important;
+                        transition: all 0.2s ease !important;
+                    }
+                    #${elementId}::-webkit-scrollbar-thumb:hover {
+                        background: ${colors.thumbHover} !important;
+                        border-color: ${colors.borderHover} !important;
+                    }
+                    #${elementId}::-webkit-scrollbar-thumb:active {
+                        background: ${colors.thumbActive} !important;
+                        border-color: ${colors.borderActive} !important;
+                    }
+                    #${elementId}::-webkit-scrollbar-corner {
+                        background: ${colors.track} !important;
+                        border-radius: 4px !important;
+                    }
+                `;
+                document.head.appendChild(scrollbarStyle);
+            }
+        });
+
+        // Também aplica no próprio popup se ele for scrollável
+        const popupComputedStyle = window.getComputedStyle(popup);
+        if (popupComputedStyle.overflowY === 'auto' || popupComputedStyle.overflowY === 'scroll') {
+            console.log('Popup itself is scrollable:', popup.id);
+
+            popup.style.setProperty('scrollbar-width', 'thin', 'important');
+            popup.style.setProperty('scrollbar-color', `${colors.thumb} ${colors.track}`, 'important');
+
+            const popupScrollbarStyle = document.createElement('style');
+            popupScrollbarStyle.textContent = `
+                #${popup.id}::-webkit-scrollbar {
+                    width: 8px !important;
+                    height: 8px !important;
+                }
+                #${popup.id}::-webkit-scrollbar-track {
+                    background: ${colors.track} !important;
+                    border-radius: 4px !important;
+                    margin: 2px !important;
+                }
+                #${popup.id}::-webkit-scrollbar-thumb {
+                    background: ${colors.thumb} !important;
+                    border-radius: 4px !important;
+                    border: 1px solid ${colors.border} !important;
+                    transition: all 0.2s ease !important;
+                }
+                #${popup.id}::-webkit-scrollbar-thumb:hover {
+                    background: ${colors.thumbHover} !important;
+                    border-color: ${colors.borderHover} !important;
+                }
+                #${popup.id}::-webkit-scrollbar-thumb:active {
+                    background: ${colors.thumbActive} !important;
+                    border-color: ${colors.borderActive} !important;
+                }
+                #${popup.id}::-webkit-scrollbar-corner {
+                    background: ${colors.track} !important;
+                    border-radius: 4px !important;
+                }
+            `;
+            document.head.appendChild(popupScrollbarStyle);
+        }
+    }
+
     // Sistema de notificações customizadas
     let notificationContainer = null;
 
@@ -42,6 +500,7 @@
 
         notificationContainer = document.createElement('div');
         notificationContainer.id = 'roll20-notification-container';
+        notificationContainer.className = 'roll20-scrollbar-thin';
         notificationContainer.style.cssText = `
             position: fixed;
             top: 20px;
@@ -455,6 +914,7 @@
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'avatar-popup';
+        popup.className = 'roll20-popup';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -632,6 +1092,9 @@
         popup.appendChild(buttonContainer);
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Função para atualizar o avatar do personagem na hotbar
@@ -712,6 +1175,7 @@
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'skills-popup';
+        popup.className = 'roll20-popup';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -1071,6 +1535,9 @@
         updateSkillList();
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Templates reutilizáveis para Spells
@@ -1111,6 +1578,7 @@
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'misc-popup';
+        popup.className = 'roll20-popup roll20-popup-orange';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -1273,6 +1741,9 @@
         modulesList.appendChild(conditionsCard);
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'orange');
     }
 
     // Função para criar o popup de spells
@@ -1302,6 +1773,7 @@
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'spells-popup';
+        popup.className = 'roll20-popup roll20-popup-purple';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -1652,6 +2124,9 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         updateSpellList();
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'purple');
     }
 
     // Função para obter dados das magias
@@ -1794,6 +2269,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'spell-cast-popup';
+        popup.className = 'roll20-modal roll20-popup-purple';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -2179,6 +2655,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         popup.appendChild(descBox);
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'purple');
     }
 
     // Funções auxiliares para pratos especiais
@@ -3387,6 +3866,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Popup principal
             const popup = document.createElement('div');
             popup.id = 'pratos-popup';
+            popup.className = 'roll20-popup roll20-popup-orange';
             popup.style.position = 'fixed';
             popup.style.top = '50%';
             popup.style.left = '50%';
@@ -3588,6 +4068,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Adiciona o popup ao body
             document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'orange');
         } catch (e) {
             console.error('Erro ao abrir Pratos Especiais:', e);
             alert('Erro ao abrir Pratos Especiais. Veja o console para detalhes.');
@@ -3623,6 +4106,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Popup principal
             const popup = document.createElement('div');
             popup.id = 'bebidas-popup';
+            popup.className = 'roll20-popup roll20-popup-orange';
             popup.style.position = 'fixed';
             popup.style.top = '50%';
             popup.style.left = '50%';
@@ -3822,6 +4306,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Adiciona o popup ao body
             document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'orange');
         } catch (e) {
             console.error('Erro ao abrir Bebidas Artonianas:', e);
             alert('Erro ao abrir Bebidas Artonianas. Veja o console para detalhes.');
@@ -4683,6 +5170,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Modal principal
         const modal = document.createElement('div');
         modal.id = 'skill-detail-modal';
+        modal.className = 'roll20-modal';
         modal.style.position = 'fixed';
         modal.style.top = '50%';
         modal.style.left = '50%';
@@ -5406,6 +5894,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         };
 
         document.body.appendChild(modal);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(modal, 'brown');
     }
 
     // Função para obter a versão atual do script
@@ -5428,6 +5919,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function createHotbar() {
         const hotbar = document.createElement('div');
         hotbar.id = 'roll20-hotbar';
+        hotbar.className = 'roll20-scrollbar-auto';
         hotbar.style.position = 'fixed';
         hotbar.style.bottom = '24px';
         hotbar.style.left = '50%';
@@ -6236,6 +6728,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             popup.appendChild(maneuversList);
             document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'red');
         }
 
         // Função para abrir popup de efeitos extras no ataque
@@ -6535,6 +7030,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.appendChild(saveBtn);
 
             document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'blue');
         }
 
         // Botões de combate
@@ -6721,6 +7219,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         setTimeout(() => {
             // Inicializa habilidades automáticas
             initializeAutomaticAbilities();
+
+            // Adiciona estilos de scrollbar customizada
+            createCustomScrollbarStyles();
 
             // NOVO: Adiciona CSS para animação do skeleton loader
             if (!document.getElementById('skeleton-loader-style')) {
@@ -6970,6 +7471,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'hunter-class-modal';
+        popup.className = 'roll20-modal roll20-popup-green';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -8073,6 +8575,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             modal.appendChild(actionButtons);
 
             document.body.appendChild(modal);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(modal, 'brown');
         }
 
         // Função para criar modal detalhado da divindade
@@ -8405,6 +8910,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             modal.appendChild(actionButtons);
 
             document.body.appendChild(modal);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(modal, 'brown');
         }
 
         // Conteúdo da Aba 2 (Habilidades)
@@ -9334,6 +9842,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Só agora adiciona o popup ao DOM
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'brown');
+
         overlay.onclick = () => {
             overlay.remove();
             popup.remove();
@@ -10108,6 +10620,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         updateAbilityList();
 
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Função para criar popup de conjuração de habilidade
@@ -12413,6 +12928,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Popup principal
         const popup = document.createElement('div');
         popup.id = 'conditions-popup';
+        popup.className = 'roll20-popup roll20-popup-red';
         popup.style.position = 'fixed';
         popup.style.top = '50%';
         popup.style.left = '50%';
@@ -12606,6 +13122,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         renderConditionsList();
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'red');
     }
 
     // Função para criar popup de efeitos
@@ -12867,5 +13386,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         updateEffectsList();
         document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 })();
