@@ -2129,7 +2129,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'purple');
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Função para obter dados das magias
@@ -2660,7 +2660,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'purple');
+        applyDirectScrollbarStyles(popup, 'blue');
     }
 
     // Funções auxiliares para pratos especiais
@@ -3841,6 +3841,140 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
     }
 
+    // Template reutilizável para itens de lista (pratos e bebidas)
+    function createListItemCard(item, itemType, onFavoriteToggle) {
+        const card = document.createElement('div');
+        card.style.background = '#23243a';
+        card.style.border = '1px solid #ffb86c';
+        card.style.borderRadius = '8px';
+        card.style.padding = '12px 14px';
+        card.style.display = 'flex';
+        card.style.justifyContent = 'space-between';
+        card.style.alignItems = 'center';
+        card.style.gap = '10px';
+        card.style.cursor = 'pointer';
+        card.style.transition = 'all 0.2s';
+
+        // Efeitos de hover
+        card.onmouseover = () => {
+            card.style.background = '#2d2e4a';
+            card.style.borderColor = '#ffc97a';
+        };
+        card.onmouseout = () => {
+            card.style.background = '#23243a';
+            card.style.borderColor = '#ffb86c';
+        };
+
+        // Informações do item
+        const itemInfo = document.createElement('div');
+        itemInfo.style.flex = '1';
+        itemInfo.style.display = 'flex';
+        itemInfo.style.flexDirection = 'column';
+        itemInfo.style.gap = '4px';
+
+        const nome = document.createElement('div');
+        nome.textContent = item.nome;
+        nome.style.color = '#ffb86c';
+        nome.style.fontWeight = 'bold';
+        nome.style.fontSize = '15px';
+        itemInfo.appendChild(nome);
+
+        // Resumo da descrição
+        const resumo = document.createElement('div');
+        const palavras = item.descricao.split(/\s+/);
+        let resumoTexto = palavras.slice(0, 10).join(' ');
+        if (palavras.length > 10) resumoTexto += '...';
+        resumo.textContent = resumoTexto;
+        resumo.style.color = '#bdbdbd';
+        resumo.style.fontSize = '12px';
+        resumo.style.fontStyle = 'italic';
+        itemInfo.appendChild(resumo);
+
+        // Campo específico baseado no tipo (bonus para pratos, efeito para bebidas)
+        const effectField = document.createElement('div');
+        if (itemType === 'food') {
+            effectField.textContent = item.bonus;
+        } else if (itemType === 'drink') {
+            effectField.textContent = item.efeito;
+        }
+        effectField.style.color = '#6ec6ff';
+        effectField.style.fontSize = '13px';
+        effectField.style.fontWeight = 'bold';
+        itemInfo.appendChild(effectField);
+
+        // Botão de favorito
+        const favoriteBtn = document.createElement('button');
+        const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
+        favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
+        favoriteBtn.style.background = 'none';
+        favoriteBtn.style.border = 'none';
+        favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+        favoriteBtn.style.fontSize = '18px';
+        favoriteBtn.style.cursor = 'pointer';
+        favoriteBtn.style.padding = '5px';
+        favoriteBtn.style.minWidth = '30px';
+        favoriteBtn.style.transition = 'all 0.2s';
+
+        // Efeitos de hover no botão
+        favoriteBtn.onmouseover = () => {
+            favoriteBtn.style.background = 'rgba(255, 184, 108, 0.2)';
+            favoriteBtn.style.color = '#ffb86c';
+        };
+        favoriteBtn.onmouseout = () => {
+            favoriteBtn.style.background = 'none';
+            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+        };
+
+        favoriteBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (itemType === 'food') {
+                togglePratoFavorito(item.nome);
+            } else if (itemType === 'drink') {
+                toggleBebidaFavorita(item.nome);
+            }
+
+            // Atualiza o botão imediatamente
+            const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
+            favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
+            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
+
+            // Chama o callback para re-renderizar a lista
+            if (onFavoriteToggle) {
+                onFavoriteToggle();
+            }
+        };
+
+        card.appendChild(itemInfo);
+        card.appendChild(favoriteBtn);
+
+        // Evento de clique para abrir modal de detalhes
+        card.onclick = () => {
+            if (itemType === 'food') {
+                createPratoDetailModal(item);
+            } else if (itemType === 'drink') {
+                createBebidaDetailModal(item);
+            }
+        };
+
+        return card;
+    }
+
+    // Função para criar mensagem de "nenhum resultado encontrado"
+    function createNoResultsMessage(filterText, itemType) {
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.style.textAlign = 'center';
+        noResultsMessage.style.padding = '20px';
+        noResultsMessage.style.color = '#999';
+        noResultsMessage.style.fontSize = '14px';
+        noResultsMessage.style.fontStyle = 'italic';
+        noResultsMessage.innerHTML = `
+            <div style="margin-bottom: 8px;">🔍</div>
+            <div>Nenhum ${itemType === 'food' ? 'prato especial' : 'bebida artoniana'} encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+            <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+        `;
+        return noResultsMessage;
+    }
+
     function createPratosEspeciaisPopup() {
         console.log('Abrindo Pratos Especiais');
         try {
@@ -3952,6 +4086,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Dados dos pratos
             const pratos = getPratosCompletos();
 
+
+
             function renderPratosList(filterText = '') {
                 pratosList.innerHTML = '';
                 const filtered = pratos.filter(prato =>
@@ -3971,92 +4107,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 });
 
                 filtered.forEach(prato => {
-                    const card = document.createElement('div');
-                    card.style.background = '#23243a';
-                    card.style.border = '1px solid #ffb86c';
-                    card.style.borderRadius = '8px';
-                    card.style.padding = '12px 14px';
-                    card.style.display = 'flex';
-                    card.style.justifyContent = 'space-between';
-                    card.style.alignItems = 'center';
-                    card.style.gap = '10px';
-
-                    // Removido ícone da lista - agora só aparece no modal de detalhes
-
-                    // Informações do prato
-                    const pratoInfo = document.createElement('div');
-                    pratoInfo.style.flex = '1';
-                    pratoInfo.style.display = 'flex';
-                    pratoInfo.style.flexDirection = 'column';
-                    pratoInfo.style.gap = '4px';
-
-                    const nome = document.createElement('div');
-                    nome.textContent = prato.nome;
-                    nome.style.color = '#ffb86c';
-                    nome.style.fontWeight = 'bold';
-                    nome.style.fontSize = '15px';
-                    pratoInfo.appendChild(nome);
-
-                    // Resumo da descrição
-                    const resumo = document.createElement('div');
-                    const palavras = prato.descricao.split(/\s+/);
-                    let resumoTexto = palavras.slice(0, 10).join(' ');
-                    if (palavras.length > 10) resumoTexto += '...';
-                    resumo.textContent = resumoTexto;
-                    resumo.style.color = '#bdbdbd';
-                    resumo.style.fontSize = '12px';
-                    resumo.style.fontStyle = 'italic';
-                    pratoInfo.appendChild(resumo);
-
-                    const bonus = document.createElement('div');
-                    bonus.textContent = prato.bonus;
-                    bonus.style.color = '#6ec6ff';
-                    bonus.style.fontSize = '13px';
-                    bonus.style.fontWeight = 'bold';
-                    pratoInfo.appendChild(bonus);
-
-                    // Botão de favorito
-                    const favoriteBtn = document.createElement('button');
-                    favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
-                    favoriteBtn.style.background = 'none';
-                    favoriteBtn.style.border = 'none';
-                    favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
-                    favoriteBtn.style.fontSize = '18px';
-                    favoriteBtn.style.cursor = 'pointer';
-                    favoriteBtn.style.padding = '5px';
-                    favoriteBtn.style.minWidth = '30px';
-                    favoriteBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        togglePratoFavorito(prato.nome);
-                        favoriteBtn.innerHTML = isPratoFavorito(prato.nome) ? '★' : '☆';
-                        favoriteBtn.style.color = isPratoFavorito(prato.nome) ? '#ffb86c' : '#666';
-                        renderPratosList(filterInput.value);
-                    };
-                    card.appendChild(pratoInfo);
-                    card.appendChild(favoriteBtn);
-
-                    // Evento de clique para abrir modal de detalhes
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        createPratoDetailModal(prato);
-                    };
-
+                    const card = createListItemCard(prato, 'food', () => renderPratosList(filterInput.value));
                     pratosList.appendChild(card);
                 });
 
                 // Verifica se não há pratos encontrados durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = document.createElement('div');
-                    noResultsMessage.style.textAlign = 'center';
-                    noResultsMessage.style.padding = '20px';
-                    noResultsMessage.style.color = '#999';
-                    noResultsMessage.style.fontSize = '14px';
-                    noResultsMessage.style.fontStyle = 'italic';
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhum prato especial encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'food');
                     pratosList.appendChild(noResultsMessage);
                 }
             }
@@ -4211,90 +4268,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 });
 
                 filtered.forEach(bebida => {
-                    const card = document.createElement('div');
-                    card.style.background = '#23243a';
-                    card.style.border = '1px solid #ffb86c';
-                    card.style.borderRadius = '8px';
-                    card.style.padding = '12px 14px';
-                    card.style.display = 'flex';
-                    card.style.justifyContent = 'space-between';
-                    card.style.alignItems = 'center';
-                    card.style.gap = '10px';
-
-                    // Informações da bebida
-                    const bebidaInfo = document.createElement('div');
-                    bebidaInfo.style.flex = '1';
-                    bebidaInfo.style.display = 'flex';
-                    bebidaInfo.style.flexDirection = 'column';
-                    bebidaInfo.style.gap = '4px';
-
-                    const nome = document.createElement('div');
-                    nome.textContent = bebida.nome;
-                    nome.style.color = '#ffb86c';
-                    nome.style.fontWeight = 'bold';
-                    nome.style.fontSize = '15px';
-                    bebidaInfo.appendChild(nome);
-
-                    // Resumo da descrição
-                    const resumo = document.createElement('div');
-                    const palavras = bebida.descricao.split(/\s+/);
-                    let resumoTexto = palavras.slice(0, 10).join(' ');
-                    if (palavras.length > 10) resumoTexto += '...';
-                    resumo.textContent = resumoTexto;
-                    resumo.style.color = '#bdbdbd';
-                    resumo.style.fontSize = '12px';
-                    resumo.style.fontStyle = 'italic';
-                    bebidaInfo.appendChild(resumo);
-
-                    const efeito = document.createElement('div');
-                    efeito.textContent = bebida.efeito;
-                    efeito.style.color = '#6ec6ff';
-                    efeito.style.fontSize = '13px';
-                    efeito.style.fontWeight = 'bold';
-                    bebidaInfo.appendChild(efeito);
-
-                    // Botão de favorito
-                    const favoriteBtn = document.createElement('button');
-                    favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
-                    favoriteBtn.style.background = 'none';
-                    favoriteBtn.style.border = 'none';
-                    favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
-                    favoriteBtn.style.fontSize = '18px';
-                    favoriteBtn.style.cursor = 'pointer';
-                    favoriteBtn.style.padding = '5px';
-                    favoriteBtn.style.minWidth = '30px';
-                    favoriteBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        toggleBebidaFavorita(bebida.nome);
-                        favoriteBtn.innerHTML = isBebidaFavorita(bebida.nome) ? '★' : '☆';
-                        favoriteBtn.style.color = isBebidaFavorita(bebida.nome) ? '#ffb86c' : '#666';
-                        renderBebidasList(filterInput.value);
-                    };
-                    card.appendChild(bebidaInfo);
-                    card.appendChild(favoriteBtn);
-
-                    // Evento de clique para abrir modal de detalhes
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        createBebidaDetailModal(bebida);
-                    };
-
+                    const card = createListItemCard(bebida, 'drink', () => renderBebidasList(filterInput.value));
                     bebidasList.appendChild(card);
                 });
 
                 // Verifica se não há bebidas encontradas durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = document.createElement('div');
-                    noResultsMessage.style.textAlign = 'center';
-                    noResultsMessage.style.padding = '20px';
-                    noResultsMessage.style.color = '#999';
-                    noResultsMessage.style.fontSize = '14px';
-                    noResultsMessage.style.fontStyle = 'italic';
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma bebida encontrada para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'drink');
                     bebidasList.appendChild(noResultsMessage);
                 }
             }
@@ -5891,7 +5871,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         document.body.appendChild(modal);
 
         // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(modal, 'brown');
+        applyDirectScrollbarStyles(modal, 'blue');
     }
 
     // Função para obter a versão atual do script
@@ -12190,21 +12170,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
             indicator.style.borderColor = '#66bb6a'; // Verde mais claro no hover
-            // Mostra tooltip
-            showFoodTooltip(indicator, pratoData);
+            // Mostra tooltip usando o template reutilizável
+            createEffectHoverTooltip(indicator, pratoData, 'food');
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
             indicator.style.borderColor = '#4caf50'; // Volta para verde normal
             // Esconde tooltip
-            hideFoodTooltip();
+            hideEffectTooltip();
         };
 
         // Click handler para remover o efeito
         indicator.onclick = () => {
             // Esconde o tooltip antes de remover o efeito
-            hideFoodTooltip();
+            hideEffectTooltip();
             removeFoodEffect(effect.effectKey);
         };
 
@@ -12255,87 +12235,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-    // Tooltip global para pratos
-    let currentFoodTooltip = null;
 
-    // Função para mostrar tooltip do prato
-    function showFoodTooltip(element, pratoData) {
-        // Remove tooltip existente
-        hideFoodTooltip();
-
-        const tooltip = document.createElement('div');
-        tooltip.className = 'food-tooltip';
-        tooltip.style.position = 'fixed';
-        tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.border = '2px solid #ffb86c';
-        tooltip.style.borderRadius = '8px';
-        tooltip.style.padding = '8px 12px';
-        tooltip.style.zIndex = '10002';
-        tooltip.style.maxWidth = '250px';
-        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
-        tooltip.style.pointerEvents = 'none';
-
-        // Conteúdo do tooltip
-        const title = document.createElement('div');
-        title.textContent = pratoData.nome;
-        title.style.color = '#ffb86c';
-        title.style.fontSize = '14px';
-        title.style.fontWeight = 'bold';
-        title.style.marginBottom = '4px';
-
-        const description = document.createElement('div');
-        description.textContent = pratoData.descricao;
-        description.style.color = '#ecf0f1';
-        description.style.fontSize = '12px';
-        description.style.lineHeight = '1.3';
-        description.style.marginBottom = '4px';
-
-        const bonus = document.createElement('div');
-        bonus.textContent = pratoData.bonus;
-        bonus.style.color = '#4caf50';
-        bonus.style.fontSize = '12px';
-        bonus.style.fontWeight = 'bold';
-        bonus.style.lineHeight = '1.3';
-
-        const clickHint = document.createElement('div');
-        clickHint.textContent = 'Clique para remover';
-        clickHint.style.color = '#6ec6ff';
-        clickHint.style.fontSize = '11px';
-        clickHint.style.fontStyle = 'italic';
-        clickHint.style.marginTop = '6px';
-        clickHint.style.textAlign = 'center';
-
-        tooltip.appendChild(title);
-        tooltip.appendChild(description);
-        tooltip.appendChild(bonus);
-        tooltip.appendChild(clickHint);
-
-        // Posicionamento do tooltip
-        const rect = element.getBoundingClientRect();
-        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
-        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
-
-        document.body.appendChild(tooltip);
-        currentFoodTooltip = tooltip;
-
-        // Ajusta posição se sair da tela
-        setTimeout(() => {
-            const tooltipRect = tooltip.getBoundingClientRect();
-            if (tooltipRect.left < 10) {
-                tooltip.style.left = '10px';
-            } else if (tooltipRect.right > window.innerWidth - 10) {
-                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
-            }
-        }, 10);
-    }
-
-    // Função para esconder tooltip do prato
-    function hideFoodTooltip() {
-        if (currentFoodTooltip) {
-            currentFoodTooltip.remove();
-            currentFoodTooltip = null;
-        }
-    }
 
     // Função para remover efeito de prato
     function removeFoodEffect(effectKey) {
@@ -12359,8 +12259,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         updateEffectsVisualIndicators();
     }
 
-    // Variável global para tooltip de bebida
-    let currentBebidaTooltip = null;
+
+
 
     // Função para criar um ícone indicador de bebida consumida
     function createBebidaIndicatorIcon(bebidaData, effect) {
@@ -12384,21 +12284,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
             indicator.style.borderColor = '#66bb6a'; // Verde mais claro no hover (mesma cor dos pratos)
-            // Mostra tooltip
-            showBebidaTooltip(indicator, bebidaData);
+            // Mostra tooltip usando o template reutilizável
+            createEffectHoverTooltip(indicator, bebidaData, 'drink');
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
             indicator.style.borderColor = '#4caf50'; // Volta para verde normal (mesma cor dos pratos)
             // Esconde tooltip
-            hideBebidaTooltip();
+            hideEffectTooltip();
         };
 
         // Click handler para remover o efeito
         indicator.onclick = () => {
             // Esconde o tooltip antes de remover o efeito
-            hideBebidaTooltip();
+            hideEffectTooltip();
             removeBebidaEffect(effect.effectKey);
         };
 
@@ -12460,84 +12360,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-    // Função para mostrar tooltip da bebida
-    function showBebidaTooltip(element, bebidaData) {
-        // Remove tooltip existente
-        hideBebidaTooltip();
 
-        const tooltip = document.createElement('div');
-        tooltip.className = 'bebida-tooltip';
-        tooltip.style.position = 'fixed';
-        tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.border = '2px solid #ff9800';
-        tooltip.style.borderRadius = '8px';
-        tooltip.style.padding = '8px 12px';
-        tooltip.style.zIndex = '10002';
-        tooltip.style.maxWidth = '250px';
-        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
-        tooltip.style.pointerEvents = 'none';
-
-        // Conteúdo do tooltip
-        const title = document.createElement('div');
-        title.textContent = bebidaData.nome;
-        title.style.color = '#ff9800';
-        title.style.fontSize = '14px';
-        title.style.fontWeight = 'bold';
-        title.style.marginBottom = '4px';
-
-        const description = document.createElement('div');
-        description.textContent = bebidaData.descricao;
-        description.style.color = '#ecf0f1';
-        description.style.fontSize = '12px';
-        description.style.lineHeight = '1.3';
-        description.style.marginBottom = '4px';
-
-        const efeito = document.createElement('div');
-        efeito.textContent = bebidaData.efeito;
-        efeito.style.color = '#4caf50';
-        efeito.style.fontSize = '12px';
-        efeito.style.fontWeight = 'bold';
-        efeito.style.lineHeight = '1.3';
-
-        const clickHint = document.createElement('div');
-        clickHint.textContent = 'Clique para remover';
-        clickHint.style.color = '#6ec6ff';
-        clickHint.style.fontSize = '11px';
-        clickHint.style.fontStyle = 'italic';
-        clickHint.style.marginTop = '6px';
-        clickHint.style.textAlign = 'center';
-
-        tooltip.appendChild(title);
-        tooltip.appendChild(description);
-        tooltip.appendChild(efeito);
-        tooltip.appendChild(clickHint);
-
-        // Posicionamento do tooltip
-        const rect = element.getBoundingClientRect();
-        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
-        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
-
-        document.body.appendChild(tooltip);
-        currentBebidaTooltip = tooltip;
-
-        // Ajusta posição se sair da tela
-        setTimeout(() => {
-            const tooltipRect = tooltip.getBoundingClientRect();
-            if (tooltipRect.left < 10) {
-                tooltip.style.left = '10px';
-            } else if (tooltipRect.right > window.innerWidth - 10) {
-                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
-            }
-        }, 10);
-    }
-
-    // Função para esconder tooltip da bebida
-    function hideBebidaTooltip() {
-        if (currentBebidaTooltip) {
-            currentBebidaTooltip.remove();
-            currentBebidaTooltip = null;
-        }
-    }
 
     // Função para remover efeito de bebida
     function removeBebidaEffect(effectKey) {
@@ -12586,21 +12409,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
             indicator.style.borderColor = '#ff8a8a'; // Vermelho mais claro no hover
-            // Mostra tooltip
-            showConditionTooltip(indicator, conditionData);
+            // Mostra tooltip usando o template reutilizável
+            createEffectHoverTooltip(indicator, conditionData, 'condition');
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
             indicator.style.borderColor = '#ff6e6e'; // Volta para vermelho normal
             // Esconde tooltip
-            hideConditionTooltip();
+            hideEffectTooltip();
         };
 
         // Click handler para remover a condição
         indicator.onclick = () => {
             // Esconde o tooltip antes de remover a condição
-            hideConditionTooltip();
+            hideEffectTooltip();
             toggleCondition(conditionData.nome);
         };
 
@@ -12647,21 +12470,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.onmouseover = () => {
             indicator.style.transform = 'scale(1.1)';
             indicator.style.borderColor = '#ff8a8a'; // Vermelho mais claro no hover
-            // Mostra tooltip
-            showItemEffectTooltip(indicator, itemEffectData);
+            // Mostra tooltip usando o template reutilizável
+            createEffectHoverTooltip(indicator, itemEffectData, 'item');
         };
 
         indicator.onmouseout = () => {
             indicator.style.transform = 'scale(1)';
             indicator.style.borderColor = '#ff6e6e'; // Volta para vermelho normal
             // Esconde tooltip
-            hideItemEffectTooltip();
+            hideEffectTooltip();
         };
 
         // Click handler para remover o efeito
         indicator.onclick = () => {
             // Esconde o tooltip antes de remover o efeito
-            hideItemEffectTooltip();
+            hideEffectTooltip();
             toggleEffect(itemEffectData.effectKey);
         };
 
@@ -12686,60 +12509,132 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-    // Tooltip global para efeitos de item
-    let currentItemEffectTooltip = null;
 
-    // Função para mostrar tooltip do efeito de item
-    function showItemEffectTooltip(element, itemEffectData) {
+
+
+
+    // Template reutilizável para tooltips de efeitos (buff/debuff)
+    function createEffectHoverTooltip(element, effectData, effectType = 'condition') {
         // Remove tooltip existente
-        hideItemEffectTooltip();
+        hideEffectTooltip();
 
         const tooltip = document.createElement('div');
-        tooltip.className = 'item-effect-tooltip';
+        tooltip.className = 'effect-tooltip';
         tooltip.style.position = 'fixed';
         tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.border = '2px solid #ff6e6e';
         tooltip.style.borderRadius = '8px';
-        tooltip.style.padding = '8px 12px';
+        tooltip.style.padding = '12px 16px';
         tooltip.style.zIndex = '10002';
-        tooltip.style.maxWidth = '250px';
+        tooltip.style.maxWidth = '280px';
         tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
         tooltip.style.pointerEvents = 'none';
+        tooltip.style.display = 'flex';
+        tooltip.style.flexDirection = 'column';
+        tooltip.style.gap = '8px';
 
-        // Conteúdo do tooltip
+        // Configurações baseadas no tipo de efeito
+        const config = getEffectTooltipConfig(effectType);
+        tooltip.style.border = `2px solid ${config.borderColor}`;
+
+        // Cabeçalho com ícone e título
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.alignItems = 'center';
+        header.style.gap = '10px';
+
+        // Ícone do efeito
+        if (effectData.iconeUrl || effectData.icone) {
+            const iconContainer = document.createElement('div');
+            iconContainer.style.width = '24px';
+            iconContainer.style.height = '24px';
+            iconContainer.style.borderRadius = '4px';
+            iconContainer.style.border = `1px solid ${config.borderColor}`;
+            iconContainer.style.display = 'flex';
+            iconContainer.style.alignItems = 'center';
+            iconContainer.style.justifyContent = 'center';
+            iconContainer.style.background = '#23243a';
+            iconContainer.style.overflow = 'hidden';
+
+            if (effectData.iconeUrl) {
+                const cachedImageElement = createCachedImageElement(
+                    effectData.iconeUrl,
+                    effectData.nome || effectData.name,
+                    effectData.icone || '⚠️',
+                    {
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '3px',
+                        objectFit: 'cover',
+                        showSkeleton: false
+                    }
+                );
+                iconContainer.appendChild(cachedImageElement);
+            } else {
+                iconContainer.textContent = effectData.icone || '⚠️';
+                iconContainer.style.fontSize = '12px';
+            }
+
+            header.appendChild(iconContainer);
+        }
+
+        // Título do efeito
         const title = document.createElement('div');
-        title.textContent = itemEffectData.name;
-        title.style.color = '#ff6e6e';
-        title.style.fontSize = '14px';
+        title.textContent = effectData.nome || effectData.name;
+        title.style.color = config.titleColor;
+        title.style.fontSize = '15px';
         title.style.fontWeight = 'bold';
-        title.style.marginBottom = '4px';
+        title.style.flex = '1';
+        header.appendChild(title);
 
-        const description = document.createElement('div');
-        description.textContent = itemEffectData.description;
-        description.style.color = '#ecf0f1';
-        description.style.fontSize = '12px';
-        description.style.lineHeight = '1.3';
-        description.style.marginBottom = '4px';
+        // Tag do tipo de efeito
+        const typeTag = document.createElement('div');
+        typeTag.textContent = config.typeLabel;
+        typeTag.style.background = config.tagBackground;
+        typeTag.style.color = config.tagColor;
+        typeTag.style.fontSize = '10px';
+        typeTag.style.fontWeight = 'bold';
+        typeTag.style.padding = '2px 6px';
+        typeTag.style.borderRadius = '4px';
+        typeTag.style.textTransform = 'uppercase';
+        typeTag.style.letterSpacing = '0.5px';
+        header.appendChild(typeTag);
 
-        const type = document.createElement('div');
-        type.textContent = itemEffectData.type;
-        type.style.color = '#ffb86c';
-        type.style.fontSize = '12px';
-        type.style.fontWeight = 'bold';
-        type.style.lineHeight = '1.3';
+        tooltip.appendChild(header);
 
-        const clickHint = document.createElement('div');
-        clickHint.textContent = 'Clique para remover';
-        clickHint.style.color = '#6ec6ff';
-        clickHint.style.fontSize = '11px';
-        clickHint.style.fontStyle = 'italic';
-        clickHint.style.marginTop = '6px';
-        clickHint.style.textAlign = 'center';
+        // Descrição
+        if (effectData.descricao || effectData.description) {
+            const description = document.createElement('div');
+            description.textContent = effectData.descricao || effectData.description;
+            description.style.color = '#ecf0f1';
+            description.style.fontSize = '12px';
+            description.style.lineHeight = '1.4';
+            description.style.marginTop = '4px';
+            tooltip.appendChild(description);
+        }
 
-        tooltip.appendChild(title);
-        tooltip.appendChild(description);
-        tooltip.appendChild(type);
-        tooltip.appendChild(clickHint);
+        // Efeitos/Bônus
+        if (effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects) {
+            const effects = document.createElement('div');
+            effects.textContent = effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects;
+            effects.style.color = config.effectsColor;
+            effects.style.fontSize = '12px';
+            effects.style.fontWeight = 'bold';
+            effects.style.lineHeight = '1.3';
+            effects.style.marginTop = '4px';
+            tooltip.appendChild(effects);
+        }
+
+        // Dica de ação
+        const actionHint = document.createElement('div');
+        actionHint.textContent = config.actionHint;
+        actionHint.style.color = '#6ec6ff';
+        actionHint.style.fontSize = '11px';
+        actionHint.style.fontStyle = 'italic';
+        actionHint.style.marginTop = '8px';
+        actionHint.style.textAlign = 'center';
+        actionHint.style.borderTop = '1px solid rgba(110, 198, 255, 0.3)';
+        actionHint.style.paddingTop = '6px';
+        tooltip.appendChild(actionHint);
 
         // Posicionamento do tooltip
         const rect = element.getBoundingClientRect();
@@ -12747,7 +12642,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
 
         document.body.appendChild(tooltip);
-        currentItemEffectTooltip = tooltip;
+        currentEffectTooltip = tooltip;
 
         // Ajusta posição se sair da tela
         setTimeout(() => {
@@ -12760,95 +12655,64 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }, 10);
     }
 
-    // Função para esconder tooltip do efeito de item
-    function hideItemEffectTooltip() {
-        if (currentItemEffectTooltip) {
-            currentItemEffectTooltip.remove();
-            currentItemEffectTooltip = null;
-        }
-    }
-
-    // Tooltip global para condições
-    let currentConditionTooltip = null;
-
-    // Função para mostrar tooltip da condição
-    function showConditionTooltip(element, conditionData) {
-        // Remove tooltip existente
-        hideConditionTooltip();
-
-        const tooltip = document.createElement('div');
-        tooltip.className = 'condition-tooltip';
-        tooltip.style.position = 'fixed';
-        tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.border = '2px solid #ff6e6e';
-        tooltip.style.borderRadius = '8px';
-        tooltip.style.padding = '8px 12px';
-        tooltip.style.zIndex = '10002';
-        tooltip.style.maxWidth = '250px';
-        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
-        tooltip.style.pointerEvents = 'none';
-
-        // Conteúdo do tooltip
-        const title = document.createElement('div');
-        title.textContent = conditionData.nome;
-        title.style.color = '#ff6e6e';
-        title.style.fontSize = '14px';
-        title.style.fontWeight = 'bold';
-        title.style.marginBottom = '4px';
-
-        const description = document.createElement('div');
-        description.textContent = conditionData.descricao;
-        description.style.color = '#ecf0f1';
-        description.style.fontSize = '12px';
-        description.style.lineHeight = '1.3';
-        description.style.marginBottom = '4px';
-
-        const effects = document.createElement('div');
-        effects.textContent = conditionData.efeitos;
-        effects.style.color = '#ffa726';
-        effects.style.fontSize = '12px';
-        effects.style.fontWeight = 'bold';
-        effects.style.lineHeight = '1.3';
-
-        const clickHint = document.createElement('div');
-        clickHint.textContent = 'Clique para remover';
-        clickHint.style.color = '#6ec6ff';
-        clickHint.style.fontSize = '11px';
-        clickHint.style.fontStyle = 'italic';
-        clickHint.style.marginTop = '6px';
-        clickHint.style.textAlign = 'center';
-
-        tooltip.appendChild(title);
-        tooltip.appendChild(description);
-        tooltip.appendChild(effects);
-        tooltip.appendChild(clickHint);
-
-        // Posicionamento do tooltip
-        const rect = element.getBoundingClientRect();
-        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
-        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
-
-        document.body.appendChild(tooltip);
-        currentConditionTooltip = tooltip;
-
-        // Ajusta posição se sair da tela
-        setTimeout(() => {
-            const tooltipRect = tooltip.getBoundingClientRect();
-            if (tooltipRect.left < 10) {
-                tooltip.style.left = '10px';
-            } else if (tooltipRect.right > window.innerWidth - 10) {
-                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
+    // Função para obter configurações do tooltip baseado no tipo de efeito
+    function getEffectTooltipConfig(effectType) {
+        const configs = {
+            condition: {
+                borderColor: '#ff6e6e',
+                titleColor: '#ff6e6e',
+                effectsColor: '#ffa726',
+                tagBackground: '#ff6e6e',
+                tagColor: '#fff',
+                typeLabel: 'Condição',
+                actionHint: 'Clique para remover'
+            },
+            food: {
+                borderColor: '#ffb86c',
+                titleColor: '#ffb86c',
+                effectsColor: '#4caf50',
+                tagBackground: '#ffb86c',
+                tagColor: '#23243a',
+                typeLabel: 'Prato',
+                actionHint: 'Clique para remover'
+            },
+            drink: {
+                borderColor: '#ffb86c',
+                titleColor: '#ffb86c',
+                effectsColor: '#4caf50',
+                tagBackground: '#ffb86c',
+                tagColor: '#23243a',
+                typeLabel: 'Bebida',
+                actionHint: 'Clique para remover'
+            },
+            item: {
+                borderColor: '#9b59b6',
+                titleColor: '#9b59b6',
+                effectsColor: '#e74c3c',
+                tagBackground: '#9b59b6',
+                tagColor: '#fff',
+                typeLabel: 'Item',
+                actionHint: 'Clique para remover'
             }
-        }, 10);
+        };
+
+        return configs[effectType] || configs.condition;
     }
 
-    // Função para esconder tooltip da condição
-    function hideConditionTooltip() {
-        if (currentConditionTooltip) {
-            currentConditionTooltip.remove();
-            currentConditionTooltip = null;
+    // Tooltip global para efeitos
+    let currentEffectTooltip = null;
+
+    // Função para esconder tooltip de efeito
+    function hideEffectTooltip() {
+        if (currentEffectTooltip) {
+            currentEffectTooltip.remove();
+            currentEffectTooltip = null;
         }
     }
+
+
+
+
 
     // Função para criar o popup de condições
     function createConditionsPopup() {
