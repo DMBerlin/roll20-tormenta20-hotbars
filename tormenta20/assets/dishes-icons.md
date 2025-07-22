@@ -76,6 +76,15 @@ Abaixo está uma lista com sugestões de ícones retirados do [WoWHead](https://
 ### 🍎 **Torta de Maçã**
 **WoW Icon**: [Fresh Apple Pie](https://www.wowhead.com/item=8950)
 
+### 🌟 **Baga Celeste Cozida**
+**WoW Icon**: [Starlight Rose](https://www.wowhead.com/item=124105)
+
+### 🌶️ **Cozido de Pimenta**
+**WoW Icon**: [Spicy Stew](https://www.wowhead.com/item=122343)
+
+### 🌑 **Manjar de Sombras**
+**WoW Icon**: [Shadowberry Tart](https://www.wowhead.com/item=122343)
+
 ---
 
 Este arquivo pode ser usado para referência visual em plataformas de RPG como FoundryVTT ou Roll20.

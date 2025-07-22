@@ -36,3 +36,6 @@ Para dar mais informações para cada prato, existe uma tabela mostrando as info
 | **Sopa de cogumelos** | +2 em Misticismo                                      | T$ 6  | Cogumelo, legume, verdura                    | T$ 7                    | 15           |
 | **Sopa de peixe**     | +1 na recuperação de PM                               | T$ 3  | Verdura, peixe                               | T$ 8                    | 10           |
 | **Torta de maçã**     | Resistência a veneno +5                               | T$ 2  | Farinha, fruta                               | T$ 4                    | 15           |
+| **Baga Celeste Cozida** | Dano de queda reduzido em −1d6                      | T$ 25 | Fruta, especiaria                            | T$ 35                   | 20           |
+| **Cozido de Pimenta** | +1 em Fortitude, +1 na rolagem D20 para Fortitude     | T$ 15 | Legume, especiaria                           | T$ 12                   | 18           |
+| **Manjar de Sombras** | Ignora próximos 10 pontos de dano de trevas          | T$ 40 | Cereal, especiaria, verdura                  | T$ 28                   | 22           |

@@ -2461,6 +2461,42 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 custoIngredientes: 'T$ 4',
                 cdTeste: '15',
                 icone: '🍰'
+            },
+            {
+                nome: 'Baga Celeste Cozida',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_goldcarpconsomme.jpg', // Starlight Rose
+                raridade: 'Comum',
+                descricao: 'Encontradas originalmente nas encostas invertidas de Vectora, estas bagas se espalharam por toda Arton. Quando preparadas adequadamente, fornecem qualidades místicas de flutuação.',
+                bonus: 'Todo dano de queda que você sofre é reduzido em −1d6.',
+                preco: 'T$ 25',
+                ingredientes: 'Fruta, especiaria',
+                custoIngredientes: 'T$ 35',
+                cdTeste: '20',
+                icone: '🌟'
+            },
+            {
+                nome: 'Cozido de Pimenta',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_159_fish_82.jpg', // Spicy Stew
+                raridade: 'Comum',
+                descricao: 'Um prato forte, capaz de trazer lágrimas aos olhos do mais resistente dos comensais.',
+                bonus: '+1 em Fortitude (cumulativo com outros itens) e +1 na rolagem do D20 para testes da perícia Fortitude.',
+                preco: 'T$ 15',
+                ingredientes: 'Legume, especiaria',
+                custoIngredientes: 'T$ 12',
+                cdTeste: '18',
+                icone: '🌶️'
+            },
+            {
+                nome: 'Manjar de Sombras',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_cooking_80_ravenberrytart.jpg', // Shadowberry Tart
+                raridade: 'Comum',
+                descricao: 'A origem da receita original deste prato se perdeu, mas sua essência se manteve inalterada. Consiste de um manjar com ingredientes cultivados em terras próximas de cemitérios, que protege o corpo contra energias sombrias.',
+                bonus: 'Você ignora os próximos 10 pontos de dano de trevas que sofrer.',
+                preco: 'T$ 40',
+                ingredientes: 'Cereal, especiaria, verdura',
+                custoIngredientes: 'T$ 28',
+                cdTeste: '22',
+                icone: '🌑'
             }
         ];
     }
@@ -4186,6 +4222,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const saladaImperialActive = isEffectActive('prato_salada_imperial');
         const sopaCogumeloActive = isEffectActive('prato_sopa_de_cogumelo');
         const pizzaActive = isEffectActive('prato_pizza');
+        const cozidoDePimentaActive = isEffectActive('prato_cozido_de_pimenta');
 
         // Função para criar um bônus de comida
         function createFoodBonus(id, label, description, isActive) {
@@ -4227,61 +4264,67 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         let hasAnyBonus = false;
 
         if (batataValkarianaActive) {
-            const bonus = createFoodBonus('batata-valkariana-bonus', '🍟 Batata Valkariana (+1d6 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('batata-valkariana-bonus', 'Batata Valkariana (+1d6 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (boloCenouraActive && skillName === 'Percepção') {
-            const bonus = createFoodBonus('bolo-cenoura-bonus', '🥕 Bolo de Cenoura (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('bolo-cenoura-bonus', 'Bolo de Cenoura (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (estrogonofeActive && skillName === 'Vontade') {
-            const bonus = createFoodBonus('estrogonofe-bonus', '🍝 Estrogonofe (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('estrogonofe-bonus', 'Estrogonofe (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (futomakiActive && skillName === 'Diplomacia') {
-            const bonus = createFoodBonus('futomaki-bonus', '🍣 Futomaki (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('futomaki-bonus', 'Futomaki (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (paoQueijoActive && skillName === 'Fortitude') {
-            const bonus = createFoodBonus('pao-queijo-bonus', '🧀 Pão de Queijo (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('pao-queijo-bonus', 'Pão de Queijo (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (porcoAssadoActive && skillName === 'Luta') {
-            const bonus = createFoodBonus('porco-assado-bonus', '🐷 Porco Assado (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('porco-assado-bonus', 'Porco Assado (+1 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (saladaElficaActive && skillName === 'Pontaria') {
-            const bonus = createFoodBonus('salada-elfica-bonus', '🥗 Salada Elfica (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('salada-elfica-bonus', 'Salada Elfica (+1 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (saladaImperialActive && skillName === 'Iniciativa') {
-            const bonus = createFoodBonus('salada-imperial-bonus', '🥗 Salada Imperial (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('salada-imperial-bonus', 'Salada Imperial (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (sopaCogumeloActive && skillName === 'Misticismo') {
-            const bonus = createFoodBonus('sopa-cogumelo-bonus', '🍄 Sopa de Cogumelo (+2 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('sopa-cogumelo-bonus', 'Sopa de Cogumelo (+2 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
 
         if (pizzaActive && (skillName === 'Vontade' || skillName === 'Reflexos' || skillName === 'Fortitude')) {
-            const bonus = createFoodBonus('pizza-bonus', '🍕 Pizza (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            const bonus = createFoodBonus('pizza-bonus', 'Pizza (+1 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (cozidoDePimentaActive && skillName === 'Fortitude') {
+            const bonus = createFoodBonus('cozido-de-pimenta-bonus', 'Cozido de Pimenta (+1 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
         }
@@ -4327,6 +4370,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 document.getElementById('sopa-cogumelo-bonus').checked;
             const pizzaSelected = document.getElementById('pizza-bonus') &&
                 document.getElementById('pizza-bonus').checked;
+            const cozidoDePimentaSelected = document.getElementById('cozido-de-pimenta-bonus') &&
+                document.getElementById('cozido-de-pimenta-bonus').checked;
 
             // Encontra o comando da skill na lista de skills
             const skills = [
@@ -4418,6 +4463,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 if (pizzaSelected) {
                     numericBonus += 1;
                     bonusDescription += '%NEWLINE% *+ Pizza (+1)*';
+                }
+
+                if (cozidoDePimentaSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Cozido de Pimenta (+1)*';
                 }
 
                 // Aplica os bônus se houver algum
@@ -4526,6 +4576,14 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                         comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_pizza');
                         localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
                         showSuccessNotification('🍕 Efeito da Pizza consumido no teste!');
+                    }
+
+                    if (cozidoDePimentaSelected) {
+                        toggleEffect('prato_cozido_de_pimenta');
+                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_cozido_de_pimenta');
+                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        showSuccessNotification('🌶️ Efeito do Cozido de Pimenta consumido no teste!');
                     }
                 }, 500);
 
@@ -8660,6 +8718,40 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 value: 'pizza',
                 attackMod: 1,
                 desc: '*+ Pizza (+1 Vontade/Reflexos/Fortitude)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Baga Celeste Cozida (Efeito de Comida)
+        if (isEffectActive('prato_baga_celeste_cozida')) {
+            effects.push({
+                label: '🌟 Baga Celeste Cozida (Reduz dano de queda)',
+                value: 'baga_celeste_cozida',
+                desc: '*+ Baga Celeste Cozida (Dano de queda reduzido em −1d6)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Cozido de Pimenta (Efeito de Comida)
+        if (isEffectActive('prato_cozido_de_pimenta')) {
+            effects.push({
+                label: '🌶️ Cozido de Pimenta (+1 Fortitude)',
+                value: 'cozido_de_pimenta',
+                attackMod: 1,
+                desc: '*+ Cozido de Pimenta (+1 Fortitude)*',
+                origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Manjar de Sombras (Efeito de Comida)
+        if (isEffectActive('prato_manjar_de_sombras')) {
+            effects.push({
+                label: '🌑 Manjar de Sombras (Proteção contra trevas)',
+                value: 'manjar_de_sombras',
+                desc: '*+ Manjar de Sombras (Ignora próximos 10 pontos de dano de trevas)*',
                 origin: 'Prato Especial',
                 priority: 2
             });
