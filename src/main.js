@@ -2610,7 +2610,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_12.jpg', // Rum
                 tipo: 'Alcoólica',
                 descricao: 'Rum misturado com especiarias. Seu nome vem de sua origem — piratas do Conclave, que atuam no Mar Negro — e não da cor da bebida, que é dourada clara.',
-                efeito: 'Quando você usa **Audácia**, o bônus fornecido pelo poder aumenta em +1.',
+                efeito: 'Quando você usa Audácia, o bônus fornecido pelo poder aumenta em +1.',
                 cd: '15',
                 icone: '🏴‍☠️'
             },
@@ -2619,7 +2619,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_13.jpg', // Spiced Rum
                 tipo: 'Alcoólica',
                 descricao: 'Variação do grogue negro, com especiarias picantes que fazem a bebida adquirir uma coloração avermelhada — e quem a bebe, certa inclinação para a violência.',
-                efeito: 'Você pode usar **Audácia** para testes de ataque.',
+                efeito: 'Você pode usar Audácia para testes de ataque.',
                 cd: '20',
                 icone: '🔥'
             },
@@ -2646,7 +2646,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_16.jpg', // Cider
                 tipo: 'Alcoólica',
                 descricao: 'Esta bebida doce deixa qualquer um mais falante.',
-                efeito: '+2 em testes de perícias originalmente baseadas em **Carisma**.',
+                efeito: '+2 em testes de perícias originalmente baseadas em Carisma.',
                 cd: '15',
                 icone: '🍏'
             },
@@ -2655,7 +2655,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_17.jpg', // Wine
                 tipo: 'Alcoólica',
                 descricao: 'Batizado em homenagem ao antigo Rei-Imperador Thormy — dizem que era o favorito do monarca.',
-                efeito: 'Concede 3 pontos de **mana temporários**.',
+                efeito: 'Concede 3 pontos de mana temporários.',
                 cd: '15',
                 icone: '🍷'
             },
@@ -5004,6 +5004,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const pizzaActive = isEffectActive('prato_pizza');
         const cozidoDePimentaActive = isEffectActive('prato_cozido_de_pimenta');
 
+        // Verifica quais efeitos de bebidas estão ativos
+        const babaDeTrollActive = isEffectActive('bebida_baba_de_troll');
+        const cervejaDeheoniActive = isEffectActive('bebida_cerveja_deheoni');
+        const sidraAhlenienseActive = isEffectActive('bebida_sidra_ahleniense');
+
         // Função para criar um bônus de comida
         function createFoodBonus(id, label, description, isActive) {
             if (!isActive) return null;
@@ -5029,7 +5034,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             labelElement.style.cursor = 'pointer';
 
             const desc = document.createElement('span');
-            desc.textContent = ' - Consome o efeito após a rolagem';
+            desc.textContent = ` - ${description}`;
             desc.style.color = '#ffb86c';
             desc.style.fontSize = '12px';
             desc.style.fontStyle = 'italic';
@@ -5107,6 +5112,29 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const bonus = createFoodBonus('cozido-de-pimenta-bonus', 'Cozido de Pimenta (+1 no teste)', 'Consome o efeito após a rolagem', true);
             bonusSection.appendChild(bonus);
             hasAnyBonus = true;
+        }
+
+        // Efeitos de bebidas nos testes de perícias
+        if (babaDeTrollActive) {
+            const bonus = createFoodBonus('baba-de-troll-bonus', 'Baba de Troll (+1d4 no teste)', 'Consome o efeito após a rolagem', true);
+            bonusSection.appendChild(bonus);
+            hasAnyBonus = true;
+        }
+
+        if (cervejaDeheoniActive && (skillName === 'Fortitude' || skillName === 'Vontade' || skillName === 'Reflexos')) {
+            const bonus = createFoodBonus('cerveja-deheoni-bonus', 'Cerveja Deheoni (+1 no teste de resistência)', 'Efeito ativo por 24 horas', true);
+            if (bonus) {
+                bonusSection.appendChild(bonus);
+                hasAnyBonus = true;
+            }
+        }
+
+        if (sidraAhlenienseActive && (skillName === 'Adestramento' || skillName === 'Atuação' || skillName === 'Diplomacia' || skillName === 'Enganação' || skillName === 'Intimidação' || skillName === 'Jogatina')) {
+            const bonus = createFoodBonus('sidra-ahleniense-bonus', 'Sidra Ahleniense (+2 no teste de Carisma)', 'Efeito ativo por 24 horas', true);
+            if (bonus) {
+                bonusSection.appendChild(bonus);
+                hasAnyBonus = true;
+            }
         }
 
         if (!hasAnyBonus) {
@@ -5250,6 +5278,29 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     bonusDescription += '%NEWLINE% *+ Cozido de Pimenta (+1)*';
                 }
 
+                // Efeitos de bebidas nos testes de perícias
+                const babaDeTrollSelected = document.getElementById('baba-de-troll-bonus') &&
+                    document.getElementById('baba-de-troll-bonus').checked;
+                const cervejaDeheoniSelected = document.getElementById('cerveja-deheoni-bonus') &&
+                    document.getElementById('cerveja-deheoni-bonus').checked;
+                const sidraAhlenienseSelected = document.getElementById('sidra-ahleniense-bonus') &&
+                    document.getElementById('sidra-ahleniense-bonus').checked;
+
+                if (babaDeTrollSelected) {
+                    diceBonus += '+1d4';
+                    bonusDescription += '%NEWLINE% *+ Baba de Troll (+1d4)*';
+                }
+
+                if (cervejaDeheoniSelected) {
+                    numericBonus += 1;
+                    bonusDescription += '%NEWLINE% *+ Cerveja Deheoni (+1)*';
+                }
+
+                if (sidraAhlenienseSelected) {
+                    numericBonus += 2;
+                    bonusDescription += '%NEWLINE% *+ Sidra Ahleniense (+2)*';
+                }
+
                 // Aplica os bônus se houver algum
                 if (numericBonus !== 0 || diceBonus !== '') {
                     // Adiciona o bônus na rolagem
@@ -5325,6 +5376,27 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                     if (cozidoDePimentaSelected) {
                         showSuccessNotification('🌶️ Bônus do Cozido de Pimenta aplicado no teste!');
+                    }
+
+                    // Tratamento das bebidas após o teste
+                    if (babaDeTrollSelected) {
+                        // Remove o efeito da Baba de Troll (consumível)
+                        toggleEffect('bebida_baba_de_troll');
+
+                        // Remove também da lista de efeitos de bebida
+                        let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                        bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
+                        localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+
+                        showSuccessNotification('🧃 Efeito da Baba de Troll consumido no teste!');
+                    }
+
+                    if (cervejaDeheoniSelected) {
+                        showSuccessNotification('🍻 Bônus da Cerveja Deheoni aplicado no teste!');
+                    }
+
+                    if (sidraAhlenienseSelected) {
+                        showSuccessNotification('🍏 Bônus da Sidra Ahleniense aplicado no teste!');
                     }
                 }, 500);
 
@@ -6330,16 +6402,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const sopaCogumeloSelected = selected.includes('sopa_cogumelo');
                 const pizzaSelected = selected.includes('pizza');
 
+                // Verifica se algum efeito de bebida foi selecionado
+                const babaDeTrollSelected = selected.includes('baba_de_troll');
+                const hidromelUivanteSelected = selected.includes('hidromel_uivante');
+
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
 
-                // Se algum efeito de comida foi selecionado, executa o ataque e remove o efeito
+                // Se algum efeito de comida ou bebida foi selecionado, executa o ataque e remove o efeito
                 if (assadoCarnesSelected || batataValkarianaSelected || boloCenouraSelected ||
                     estrogonofeSelected || futomakiSelected || paoQueijoSelected ||
                     porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
-                    sopaCogumeloSelected || pizzaSelected) {
+                    sopaCogumeloSelected || pizzaSelected || babaDeTrollSelected || hidromelUivanteSelected) {
                     // Executa o ataque com os efeitos selecionados
                     const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
@@ -6435,6 +6511,23 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                         if (pizzaSelected) {
                             showSuccessNotification('🍕 Bônus da Pizza aplicado no ataque!');
+                        }
+
+                        // Tratamento das bebidas
+                        if (babaDeTrollSelected) {
+                            // Remove o efeito da Baba de Troll (consumível)
+                            toggleEffect('bebida_baba_de_troll');
+
+                            // Remove também da lista de efeitos de bebida
+                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
+                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+
+                            showSuccessNotification('🧃 Efeito da Baba de Troll consumido no ataque!');
+                        }
+
+                        if (hidromelUivanteSelected) {
+                            showSuccessNotification('🔥 Bônus do Hidromel Uivante aplicado no ataque!');
                         }
                     }, 1000); // Delay para garantir que o ataque foi processado
                 }
@@ -9402,7 +9495,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Bolo de Cenoura (Efeito de Comida)
         if (isEffectActive('prato_bolo_de_cenoura')) {
             effects.push({
-                label: '🥕 Bolo de Cenoura (+2 Percepção)',
+                label: 'Bolo de Cenoura (+2 Percepção)',
                 value: 'bolo_cenoura',
                 attackMod: 2,
                 desc: '*+ Bolo de Cenoura (+2 Percepção)*',
@@ -9414,7 +9507,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Estrogonofe (Efeito de Comida)
         if (isEffectActive('prato_estrogonofe')) {
             effects.push({
-                label: '🍝 Estrogonofe (+2 Vontade)',
+                label: 'Estrogonofe (+2 Vontade)',
                 value: 'estrogonofe',
                 attackMod: 2,
                 desc: '*+ Estrogonofe (+2 Vontade)*',
@@ -9426,7 +9519,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Futomaki (Efeito de Comida)
         if (isEffectActive('prato_futomaki')) {
             effects.push({
-                label: '🍣 Futomaki (+2 Diplomacia)',
+                label: 'Futomaki (+2 Diplomacia)',
                 value: 'futomaki',
                 attackMod: 2,
                 desc: '*+ Futomaki (+2 Diplomacia)*',
@@ -9438,7 +9531,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Pão de Queijo (Efeito de Comida)
         if (isEffectActive('prato_pao_de_queijo')) {
             effects.push({
-                label: '🧀 Pão de Queijo (+2 Fortitude)',
+                label: 'Pão de Queijo (+2 Fortitude)',
                 value: 'pao_queijo',
                 attackMod: 2,
                 desc: '*+ Pão de Queijo (+2 Fortitude)*',
@@ -9450,7 +9543,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Porco Assado (Efeito de Comida)
         if (isEffectActive('prato_porco_assado')) {
             effects.push({
-                label: '🐷 Porco Assado (+1 Luta)',
+                label: 'Porco Assado (+1 Luta)',
                 value: 'porco_assado',
                 attackMod: 1,
                 desc: '*+ Porco Assado (+1 Luta)*',
@@ -9462,7 +9555,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Salada Elfica (Efeito de Comida)
         if (isEffectActive('prato_salada_elfica')) {
             effects.push({
-                label: '🥗 Salada Elfica (+1 Pontaria)',
+                label: 'Salada Elfica (+1 Pontaria)',
                 value: 'salada_elfica',
                 attackMod: 1,
                 desc: '*+ Salada Elfica (+1 Pontaria)*',
@@ -9474,7 +9567,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Salada Imperial (Efeito de Comida)
         if (isEffectActive('prato_salada_imperial')) {
             effects.push({
-                label: '🥗 Salada Imperial (+2 Iniciativa)',
+                label: 'Salada Imperial (+2 Iniciativa)',
                 value: 'salada_imperial',
                 attackMod: 2,
                 desc: '*+ Salada Imperial (+2 Iniciativa)*',
@@ -9486,7 +9579,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Sopa de Cogumelo (Efeito de Comida)
         if (isEffectActive('prato_sopa_de_cogumelo')) {
             effects.push({
-                label: '🍄 Sopa de Cogumelo (+2 Misticismo)',
+                label: 'Sopa de Cogumelo (+2 Misticismo)',
                 value: 'sopa_cogumelo',
                 attackMod: 2,
                 desc: '*+ Sopa de Cogumelo (+2 Misticismo)*',
@@ -9498,7 +9591,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Pizza (Efeito de Comida)
         if (isEffectActive('prato_pizza')) {
             effects.push({
-                label: '🍕 Pizza (+1 Vontade/Reflexos/Fortitude)',
+                label: 'Pizza (+1 Vontade/Reflexos/Fortitude)',
                 value: 'pizza',
                 attackMod: 1,
                 desc: '*+ Pizza (+1 Vontade/Reflexos/Fortitude)*',
@@ -9510,7 +9603,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Baga Celeste Cozida (Efeito de Comida)
         if (isEffectActive('prato_baga_celeste_cozida')) {
             effects.push({
-                label: '🌟 Baga Celeste Cozida (Reduz dano de queda)',
+                label: 'Baga Celeste Cozida (Reduz dano de queda)',
                 value: 'baga_celeste_cozida',
                 desc: '*+ Baga Celeste Cozida (Dano de queda reduzido em −1d6)*',
                 origin: 'Prato Especial',
@@ -9521,7 +9614,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Cozido de Pimenta (Efeito de Comida)
         if (isEffectActive('prato_cozido_de_pimenta')) {
             effects.push({
-                label: '🌶️ Cozido de Pimenta (+1 Fortitude)',
+                label: 'Cozido de Pimenta (+1 Fortitude)',
                 value: 'cozido_de_pimenta',
                 attackMod: 1,
                 desc: '*+ Cozido de Pimenta (+1 Fortitude)*',
@@ -9533,10 +9626,35 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Manjar de Sombras (Efeito de Comida)
         if (isEffectActive('prato_manjar_de_sombras')) {
             effects.push({
-                label: '🌑 Manjar de Sombras (Proteção contra trevas)',
+                label: 'Manjar de Sombras (Proteção contra trevas)',
                 value: 'manjar_de_sombras',
                 desc: '*+ Manjar de Sombras (Ignora próximos 10 pontos de dano de trevas)*',
                 origin: 'Prato Especial',
+                priority: 2
+            });
+        }
+
+        // Efeitos de Bebidas Artonianas
+        // Baba de Troll (Efeito de Bebida) - Consumível
+        if (isEffectActive('bebida_baba_de_troll')) {
+            effects.push({
+                label: 'Baba de Troll (+1d4 acerto)',
+                value: 'baba_de_troll',
+                attackMod: '1d4',
+                desc: '*+ Baba de Troll (+1d4 acerto)*',
+                origin: 'Bebida Artoniana',
+                priority: 1 // Prioridade máxima para ficar no topo
+            });
+        }
+
+        // Hidromel Uivante (Efeito de Bebida) - Dano corpo a corpo
+        if (isEffectActive('bebida_hidromel_uivante')) {
+            effects.push({
+                label: 'Hidromel Uivante (+2 dano corpo a corpo)',
+                value: 'hidromel_uivante',
+                dice: '2',
+                desc: '*+ Hidromel Uivante (+2 dano corpo a corpo)*',
+                origin: 'Bebida Artoniana',
                 priority: 2
             });
         }
@@ -10991,130 +11109,256 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getConditionsList() {
         return [
             {
+                nome: 'Abalado',
+                descricao: 'Condição de medo que afeta a confiança do personagem.',
+                efeitos: '-2 em testes de perícia • Progressão: se aplicado novamente, torna-se apavorado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+                icone: '😰'
+            },
+            {
+                nome: 'Agarrado',
+                descricao: 'O personagem está sendo segurado ou imobilizado por uma criatura.',
+                efeitos: '-2 em testes de ataque • Só pode usar armas leves • Ataques à distância têm 50% de chance de errar o alvo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '🤝'
+            },
+            {
+                nome: 'Alquebrado',
+                descricao: 'O personagem está mentalmente esgotado, dificultando o uso de habilidades.',
+                efeitos: '+1 PM no custo de todas as habilidades',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '🧠'
+            },
+            {
+                nome: 'Apavorado',
+                descricao: 'Medo extremo que paralisa o personagem diante da fonte do terror.',
+                efeitos: '-5 em testes de perícia • Não pode se aproximar voluntariamente da fonte do medo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
+                icone: '😱'
+            },
+            {
+                nome: 'Atordoado',
+                descricao: 'O personagem está confuso e desorientado, incapaz de agir.',
+                efeitos: 'Não pode fazer ações • Fica desprevenido',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+                icone: '💫'
+            },
+            {
+                nome: 'Caído',
+                descricao: 'O personagem está no chão, em posição vulnerável.',
+                efeitos: '-5 na Defesa vs ataques corpo a corpo • +5 na Defesa vs ataques à distância • -5 em ataques corpo a corpo • Deslocamento 1,5m',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
+                icone: '🛐'
+            },
+            {
                 nome: 'Cego',
-                descricao: 'O personagem não consegue ver nada.',
-                efeitos: '-5 em testes de Percepção, -2 em ataques corpo a corpo, Imunidade a efeitos visuais',
+                descricao: 'O personagem não consegue ver, perdendo a capacidade de perceber visualmente.',
+                efeitos: '-5 em testes de Força/Destreza • Todos os alvos recebem camuflagem total • Fica desprevenido e lento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
                 icone: '👁️'
             },
             {
                 nome: 'Confuso',
                 descricao: 'O personagem age de forma aleatória e imprevisível.',
-                efeitos: 'Ações aleatórias a cada rodada, Não pode usar habilidades que exijam concentração',
+                efeitos: 'Role 1d6 no início do turno: 1) Move aleatoriamente • 2-3) Não age • 4-5) Ataca mais próximo • 6) Recupera',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
                 icone: '🤪'
             },
             {
+                nome: 'Debilitado',
+                descricao: 'Fraqueza física severa que afeta todos os atributos físicos.',
+                efeitos: '-5 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se inconsciente',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😵'
+            },
+            {
+                nome: 'Desprevenido',
+                descricao: 'O personagem não está preparado para reagir a ameaças.',
+                efeitos: '-5 na Defesa • -5 em Reflexos • Vulnerável a ataques surpresa',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '😳'
+            },
+            {
+                nome: 'Doente',
+                descricao: 'O personagem está sofrendo os efeitos de uma doença.',
+                efeitos: 'Efeitos variam conforme a doença específica',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+                icone: '🤒'
+            },
+            {
+                nome: 'Em Chamas',
+                descricao: 'O personagem está queimando e sofrendo dano contínuo.',
+                efeitos: '1d6 dano de fogo por turno • Ação padrão para apagar • Água também apaga',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_immolation.jpg',
+                icone: '🔥'
+            },
+            {
                 nome: 'Enfeitiçado',
-                descricao: 'O personagem está sob controle mágico.',
-                efeitos: 'Considera o conjurador como aliado, Não pode atacar o conjurador, Pode ser forçado a fazer ações específicas',
+                descricao: 'O personagem vê a fonte da condição de forma extremamente favorável.',
+                efeitos: 'A fonte recebe +10 em Diplomacia • Não fica sob controle direto',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_charm.jpg',
                 icone: '💫'
             },
             {
                 nome: 'Enjoado',
-                descricao: 'O personagem sente náuseas e mal-estar.',
-                efeitos: '-2 em testes de Força e Constituição, -2 em ataques corpo a corpo',
+                descricao: 'Náuseas e mal-estar que limitam as ações do personagem.',
+                efeitos: 'Apenas 1 ação por rodada (padrão OU movimento) • Investida limitada ao deslocamento normal',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
                 icone: '🤢'
             },
             {
+                nome: 'Enredado',
+                descricao: 'O personagem está preso por teias, cordas ou similar.',
+                efeitos: '-2 em testes de ataque • Fica lento e vulnerável',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '🕸️'
+            },
+            {
+                nome: 'Envenenado',
+                descricao: 'O personagem está sob efeito de um veneno.',
+                efeitos: 'Efeitos variam conforme o veneno • Dano recorrente é cumulativo',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
+                icone: '☠️'
+            },
+            {
+                nome: 'Esmorecido',
+                descricao: 'Fraqueza mental severa que afeta todos os atributos mentais.',
+                efeitos: '-5 em Inteligência, Sabedoria, Carisma e perícias mentais',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😞'
+            },
+            {
                 nome: 'Exausto',
-                descricao: 'O personagem está extremamente cansado.',
-                efeitos: '-2 em todos os testes, -2 em CA, Redução de velocidade',
+                descricao: 'Cansaço extremo que combina múltiplas condições.',
+                efeitos: 'Combina debilitado + lento + vulnerável • Progressão: se aplicado novamente, torna-se inconsciente',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😴'
             },
             {
-                nome: 'Fadigado',
-                descricao: 'O personagem está cansado.',
-                efeitos: '-1 em todos os testes, -1 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
-                icone: '😪'
-            },
-            {
                 nome: 'Fascinado',
-                descricao: 'O personagem está hipnotizado por algo.',
-                efeitos: 'Não pode fazer ações ofensivas, -2 em testes de Vontade',
+                descricao: 'O personagem está hipnotizado por algo específico.',
+                efeitos: '-5 em Percepção • Só pode observar o que o fascinou • Quebrado por ações hostis',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg',
                 icone: '😵'
             },
             {
-                nome: 'Fugindo',
-                descricao: 'O personagem está em pânico e tentando fugir.',
-                efeitos: 'Deve se mover para longe da fonte do medo, Não pode fazer ações ofensivas, -2 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
-                icone: '🏃'
+                nome: 'Fatigado',
+                descricao: 'Cansaço moderado que afeta a performance do personagem.',
+                efeitos: 'Combina fraco + vulnerável • Progressão: se aplicado novamente, torna-se exausto',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
+                icone: '😪'
+            },
+            {
+                nome: 'Fraco',
+                descricao: 'Fraqueza física leve que afeta os atributos físicos.',
+                efeitos: '-2 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se debilitado',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😣'
+            },
+            {
+                nome: 'Frustrado',
+                descricao: 'Fraqueza mental leve que afeta os atributos mentais.',
+                efeitos: '-2 em Inteligência, Sabedoria, Carisma e perícias mentais • Progressão: se aplicado novamente, torna-se esmorecido',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
+                icone: '😤'
             },
             {
                 nome: 'Imóvel',
-                descricao: 'O personagem não pode se mover.',
-                efeitos: 'Não pode se mover, -2 em CA, Pode ainda fazer ações que não envolvem movimento',
+                descricao: 'O personagem não consegue se mover de forma alguma.',
+                efeitos: 'Deslocamento reduzido a 0m • Pode ainda realizar ações que não envolvem movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '🛑'
             },
             {
                 nome: 'Inconsciente',
-                descricao: 'O personagem está desmaiado.',
-                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                descricao: 'O personagem está desmaiado e completamente indefeso.',
+                efeitos: 'Fica indefeso • Não pode fazer ações ou reações • Ainda pode fazer testes automáticos • Balançar para acordar gasta ação padrão',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
                 icone: '😵'
             },
             {
+                nome: 'Indefeso',
+                descricao: 'Vulnerabilidade extrema que deixa o personagem completamente exposto.',
+                efeitos: '-10 na Defesa • Falha automaticamente em Reflexos • Pode sofrer golpes de misericórdia',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '💀'
+            },
+            {
                 nome: 'Invisível',
-                descricao: 'O personagem não pode ser visto.',
-                efeitos: '+20 em testes de Furtividade, Imunidade a ataques que dependem de visão, Primeiro ataque tem bônus',
+                descricao: 'O personagem não pode ser visto por meios normais.',
+                efeitos: '+20 em Furtividade • Imunidade a ataques que dependem de visão • Primeiro ataque tem bônus',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_stealth.jpg',
                 icone: '👻'
             },
             {
                 nome: 'Lento',
-                descricao: 'O personagem se move mais devagar.',
-                efeitos: 'Velocidade reduzida pela metade, -1 em CA, -1 em Reflexos',
+                descricao: 'O personagem se move com dificuldade, reduzindo sua mobilidade.',
+                efeitos: 'Deslocamento reduzido à metade • Não pode correr ou fazer investidas',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_slow.jpg',
                 icone: '🐌'
             },
             {
+                nome: 'Ofuscado',
+                descricao: 'Visão prejudicada que afeta a precisão e percepção.',
+                efeitos: '-2 em testes de ataque • -2 em testes de Percepção',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
+                icone: '😵‍💫'
+            },
+            {
                 nome: 'Paralisado',
-                descricao: 'O personagem está completamente paralisado.',
-                efeitos: 'Não pode fazer nenhuma ação, CA reduzida, Vulnerável a ataques críticos',
+                descricao: 'O personagem está completamente paralisado, incapaz de se mover.',
+                efeitos: 'Fica imóvel e indefeso • Só pode realizar ações puramente mentais',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
                 icone: '🧊'
             },
             {
+                nome: 'Pasmo',
+                descricao: 'Choque ou surpresa que impede qualquer ação.',
+                efeitos: 'Não pode fazer ações • Condição temporária',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
+                icone: '😶'
+            },
+            {
                 nome: 'Petrificado',
                 descricao: 'O personagem foi transformado em pedra.',
-                efeitos: 'Não pode fazer nenhuma ação, Imunidade a dano, Não pode ser curado',
+                efeitos: 'Fica inconsciente • Recebe redução de dano 8 • Imunidade a dano',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg',
                 icone: '🗿'
             },
             {
+                nome: 'Sangrando',
+                descricao: 'O personagem está perdendo sangue continuamente.',
+                efeitos: 'Teste de Constituição (CD 15) por turno • Falha = 1d6 dano • Sucesso = remove condição',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
+                icone: '🩸'
+            },
+            {
+                nome: 'Sobrecarregado',
+                descricao: 'O personagem está carregando peso excessivo.',
+                efeitos: 'Penalidade de armadura -5 • Deslocamento reduzido em -3m',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
+                icone: '⚖️'
+            },
+            {
                 nome: 'Surdo',
-                descricao: 'O personagem não consegue ouvir.',
-                efeitos: '-5 em testes de Percepção auditiva, Imunidade a efeitos sonoros, Não pode usar magias com componente verbal',
+                descricao: 'O personagem não consegue ouvir sons.',
+                efeitos: '-5 em Iniciativa • Não pode fazer testes de Percepção auditiva • Condição ruim para magias',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech.jpg',
                 icone: '🔇'
             },
             {
-                nome: 'Tremendo',
-                descricao: 'O personagem está tremendo de medo.',
-                efeitos: '-2 em ataques, -2 em testes de perícias, Não pode usar magias',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathpact.jpg',
-                icone: '😰'
+                nome: 'Surpreendido',
+                descricao: 'O personagem foi pego desprevenido no início do combate.',
+                efeitos: 'Fica desprevenido • Não pode fazer ações • Condição do primeiro turno',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
+                icone: '😲'
             },
             {
                 nome: 'Vulnerável',
-                descricao: 'O personagem está mais suscetível a dano.',
-                efeitos: '-2 em CA, Ataques contra o personagem têm +2',
+                descricao: 'O personagem está em posição que facilita ataques inimigos.',
+                efeitos: '-2 na Defesa • Mais suscetível a ataques',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '💔'
-            },
-            {
-                nome: 'Zangado',
-                descricao: 'O personagem está em fúria.',
-                efeitos: '+2 em ataques corpo a corpo, +2 em dano corpo a corpo, -2 em CA',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unholyfrenzy.jpg',
-                icone: '😠'
             }
         ];
     }
