@@ -173,6 +173,229 @@
         return btn;
     }
 
+    // Componente reutilizável para tooltips
+    function createTooltip(config) {
+        const {
+            title,           // Título do tooltip
+            description,     // Descrição principal
+            tags = [],       // Array de tags: [{ text: 'Tag', color: '#color', bgColor: '#bgcolor' }]
+            theme = 'blue',  // Tema: 'blue', 'red', 'green', 'purple'
+            position = 'right', // Posição: 'right', 'left', 'top', 'bottom'
+            maxWidth = 320,  // Largura máxima
+            minWidth = 280   // Largura mínima
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                border: '#6ec6ff',
+                titleColor: '#6ec6ff',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            red: {
+                border: '#ff6e6e',
+                titleColor: '#ff6e6e',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            green: {
+                border: '#4caf50',
+                titleColor: '#4caf50',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            purple: {
+                border: '#9c27b0',
+                titleColor: '#9c27b0',
+                background: 'rgba(20,20,30,0.98)'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Cria o elemento tooltip
+        const tooltip = document.createElement('div');
+        tooltip.className = 'roll20-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = currentTheme.background;
+        tooltip.style.border = `2px solid ${currentTheme.border}`;
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '12px';
+        tooltip.style.minWidth = `${minWidth}px`;
+        tooltip.style.maxWidth = `${maxWidth}px`;
+        tooltip.style.zIndex = '10004';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.opacity = '0';
+        tooltip.style.transition = 'opacity 0.2s ease';
+
+        // Conteúdo do tooltip
+        const tooltipContent = document.createElement('div');
+        tooltipContent.style.display = 'flex';
+        tooltipContent.style.flexDirection = 'column';
+        tooltipContent.style.gap = '8px';
+
+        // Título
+        if (title) {
+            const tooltipTitle = document.createElement('div');
+            tooltipTitle.textContent = title;
+            tooltipTitle.style.color = currentTheme.titleColor;
+            tooltipTitle.style.fontSize = '16px';
+            tooltipTitle.style.fontWeight = 'bold';
+            tooltipTitle.style.marginBottom = '4px';
+            tooltipContent.appendChild(tooltipTitle);
+        }
+
+        // Tags
+        tags.forEach(tag => {
+            const tagElement = document.createElement('div');
+            tagElement.textContent = tag.text;
+            tagElement.style.background = tag.bgColor || currentTheme.titleColor;
+            tagElement.style.color = tag.color || '#23243a';
+            tagElement.style.fontSize = '11px';
+            tagElement.style.fontWeight = 'bold';
+            tagElement.style.borderRadius = '4px';
+            tagElement.style.padding = '2px 8px';
+            tagElement.style.display = 'inline-block';
+            tagElement.style.width = 'fit-content';
+            tagElement.style.marginTop = '2px';
+            tooltipContent.appendChild(tagElement);
+        });
+
+        // Descrição
+        if (description) {
+            const tooltipDesc = document.createElement('div');
+            tooltipDesc.textContent = description;
+            tooltipDesc.style.color = '#ecf0f1';
+            tooltipDesc.style.fontSize = '13px';
+            tooltipDesc.style.lineHeight = '1.4';
+            tooltipDesc.style.marginTop = '6px';
+            tooltipContent.appendChild(tooltipDesc);
+        }
+
+        tooltip.appendChild(tooltipContent);
+
+        // Função para posicionar o tooltip
+        function positionTooltip(element) {
+            const elementRect = element.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            let left, top;
+
+            switch (position) {
+                case 'right':
+                    left = elementRect.right + 10;
+                    top = elementRect.top;
+                    break;
+                case 'left':
+                    left = elementRect.left - tooltipRect.width - 10;
+                    top = elementRect.top;
+                    break;
+                case 'top':
+                    left = elementRect.left + (elementRect.width / 2) - (tooltipRect.width / 2);
+                    top = elementRect.top - tooltipRect.height - 10;
+                    break;
+                case 'bottom':
+                    left = elementRect.left + (elementRect.width / 2) - (tooltipRect.width / 2);
+                    top = elementRect.bottom + 10;
+                    break;
+                default:
+                    left = elementRect.right + 10;
+                    top = elementRect.top;
+            }
+
+            // Ajustar se sair da tela
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - tooltipRect.width - 10;
+            }
+            if (top < 10) {
+                top = elementRect.bottom + 10;
+            }
+            if (top + tooltipRect.height > window.innerHeight - 10) {
+                top = elementRect.top - tooltipRect.height - 10;
+            }
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        // Função para mostrar o tooltip
+        function showTooltip(element) {
+            document.body.appendChild(tooltip);
+            positionTooltip(element);
+            setTimeout(() => {
+                tooltip.style.opacity = '1';
+            }, 10);
+        }
+
+        // Função para esconder o tooltip
+        function hideTooltip() {
+            tooltip.style.opacity = '0';
+            setTimeout(() => {
+                if (tooltip.parentNode) {
+                    tooltip.parentNode.removeChild(tooltip);
+                }
+            }, 200);
+        }
+
+        return {
+            element: tooltip,
+            show: showTooltip,
+            hide: hideTooltip,
+            position: positionTooltip
+        };
+    }
+
+    // Função para adicionar tooltip a um elemento
+    // Esta função é usada para facilitar a adição de tooltips a elementos existentes
+    function addTooltipToElement(element, tooltipConfig) {
+        let tooltipInstance = null;
+        let tooltipTimeout = null;
+
+        element.addEventListener('mouseenter', () => {
+            // Criar tooltip após delay
+            tooltipTimeout = setTimeout(() => {
+                tooltipInstance = createTooltip(tooltipConfig);
+                tooltipInstance.show(element);
+            }, tooltipConfig.delay || 300);
+        });
+
+        element.addEventListener('mouseleave', () => {
+            // Limpar timeout e esconder tooltip
+            if (tooltipTimeout) {
+                clearTimeout(tooltipTimeout);
+                tooltipTimeout = null;
+            }
+            if (tooltipInstance) {
+                tooltipInstance.hide();
+                tooltipInstance = null;
+            }
+        });
+
+        element.addEventListener('click', () => {
+            // Esconder tooltip ao clicar
+            if (tooltipTimeout) {
+                clearTimeout(tooltipTimeout);
+                tooltipTimeout = null;
+            }
+            if (tooltipInstance) {
+                tooltipInstance.hide();
+                tooltipInstance = null;
+            }
+        });
+
+        return {
+            element: element,
+            tooltip: tooltipInstance,
+            show: () => tooltipInstance?.show(element),
+            hide: () => tooltipInstance?.hide()
+        };
+    }
+
+    // Exportar a função para uso global (para evitar erro de linting)
+    if (typeof window !== 'undefined') {
+        window.addTooltipToElement = addTooltipToElement;
+    }
+
     // Função de exemplo para demonstrar o uso do componente createHotbarButton
     // Esta função é usada apenas para documentação e pode ser removida se não for necessária
     function createExampleHotbarButtons() {
@@ -212,9 +435,53 @@
         };
     }
 
-    // Exportar a função para uso global (para evitar erro de linting)
+    // Função de exemplo para demonstrar o uso do componente createTooltip
+    function createExampleTooltips() {
+        // Exemplo 1: Tooltip simples
+        const simpleTooltip = createTooltip({
+            title: 'Investida',
+            description: 'Ação completa: Ataque corpo a corpo com +2 no teste de ataque, mas sofra –2 na Defesa até o próximo turno.',
+            theme: 'red',
+            tags: [
+                { text: 'Manobra de Combate', bgColor: '#ff6e6e', color: '#23243a' },
+                { text: 'Ação Completa', bgColor: '#8B4513', color: '#fff' }
+            ]
+        });
+
+        // Exemplo 2: Tooltip para magia
+        const spellTooltip = createTooltip({
+            title: 'Luz Sagrada',
+            description: 'Ação padrão: Objeto emite luz de 6m de raio. A luz não produz calor e pode ser interrompida guardando o objeto.',
+            theme: 'blue',
+            tags: [
+                { text: 'Magia Arcana', bgColor: '#6ec6ff', color: '#23243a' },
+                { text: '1º Ciclo', bgColor: '#9b59b6', color: '#fff' },
+                { text: 'Evocação', bgColor: '#e74c3c', color: '#fff' }
+            ]
+        });
+
+        // Exemplo 3: Tooltip para poder
+        const powerTooltip = createTooltip({
+            title: 'Marca da Presa',
+            description: 'Você pode gastar 1 PM para marcar um alvo como sua presa. Até o fim da cena, você recebe +2 em testes de ataque contra a presa.',
+            theme: 'green',
+            tags: [
+                { text: 'Poder de Caçador', bgColor: '#4caf50', color: '#fff' },
+                { text: '1 PM', bgColor: '#2e7d32', color: '#fff' }
+            ]
+        });
+
+        return {
+            simple: simpleTooltip,
+            spell: spellTooltip,
+            power: powerTooltip
+        };
+    }
+
+    // Exportar as funções para uso global (para evitar erro de linting)
     if (typeof window !== 'undefined') {
         window.createExampleHotbarButtons = createExampleHotbarButtons;
+        window.createExampleTooltips = createExampleTooltips;
     }
 
     // Sistema de scrollbars customizadas

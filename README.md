@@ -15,7 +15,9 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     │   ├── main.js
     │   ├── components/
     │   │   ├── HotbarButton.md
-    │   │   └── HotbarButtonExamples.js
+    │   │   ├── HotbarButtonExamples.js
+    │   │   ├── Tooltip.md
+    │   │   └── TooltipExamples.js
     │   └── assets/
     │       ├── bebidas.md
     │       ├── condicoes.md
@@ -24,7 +26,8 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     │       ├── pericias.md
     │       └── pratos-especiais.md
     └── core/
-        ├── toggle-env.js
+        ├── build/
+        │   └── build.js
         └── versioning/
             ├── update-version.js
             └── VERSIONING.md
@@ -91,6 +94,14 @@ O projeto agora inclui um sistema de componentes reutilizáveis:
   - Documentação completa em `src/components/HotbarButton.md`
   - Exemplos práticos em `src/components/HotbarButtonExamples.js`
 
+- **Tooltip**: Componente padronizado para tooltips
+  - Suporte a múltiplos temas (azul, vermelho, verde, roxo)
+  - Sistema de tags customizáveis
+  - Posicionamento inteligente (direita, esquerda, acima, abaixo)
+  - Animações suaves e responsivo
+  - Documentação completa em `src/components/Tooltip.md`
+  - Exemplos práticos em `src/components/TooltipExamples.js`
+
 ## 🛠️ Desenvolvimento
 
 ### Pré-requisitos
@@ -110,7 +121,23 @@ npm install
 ```bash
 # Executar linting e correção automática
 npm run lint
+
+# Gerar build do script
+npm run build
+
+# Atualizar versão
+npm run update-version
 ```
+
+### Sistema de Build
+
+O projeto utiliza um sistema de build baseado na branch atual:
+
+- **Branch `main`**: Build para produção
+- **Branch `development`**: Build para testes
+- **Outras branches**: Build para desenvolvimento
+
+O comando `npm run build` gera automaticamente o arquivo `dist/tormenta20hotbar.js` baseado na branch atual, eliminando a necessidade de arquivos separados para desenvolvimento e produção.
 
 ### Configuração do ESLint
 

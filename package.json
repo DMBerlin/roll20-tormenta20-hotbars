@@ -9,9 +9,7 @@
   "scripts": {
     "lint": "eslint --fix",
     "update-version": "node core/versioning/update-version.js",
-    "build": "node core/build/build.js",
-    "dev": "node core/toggle-env.js && echo 'Ambiente alterado para desenvolvimento'",
-    "prod": "node core/toggle-env.js && echo 'Ambiente alterado para produção'"
+    "build": "node core/build/build.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
