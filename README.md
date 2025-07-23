@@ -11,9 +11,23 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     ├── package.json
     ├── package-lock.json
     ├── eslint.config.mjs
-    └── tormenta20/
-        └── hotbars/
-            └── main.js
+    ├── src/
+    │   ├── main.js
+    │   ├── components/
+    │   │   ├── HotbarButton.md
+    │   │   └── HotbarButtonExamples.js
+    │   └── assets/
+    │       ├── bebidas.md
+    │       ├── condicoes.md
+    │       ├── dishes-icons.md
+    │       ├── dishes.md
+    │       ├── pericias.md
+    │       └── pratos-especiais.md
+    └── core/
+        ├── toggle-env.js
+        └── versioning/
+            ├── update-version.js
+            └── VERSIONING.md
 ```
 
 ## 🎯 Scripts Disponíveis
@@ -64,6 +78,18 @@ Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, es
 - **Responsivo**: Interface adaptável a diferentes tamanhos de tela
 - **Performance Otimizada**: Código eficiente para não impactar o desempenho do Roll20
 - **Compatibilidade**: Funciona com a versão atual do Roll20
+- **Componentes Reutilizáveis**: Sistema modular com componentes padronizados
+
+#### 🧩 Componentes
+
+O projeto agora inclui um sistema de componentes reutilizáveis:
+
+- **HotbarButton**: Componente padronizado para botões da hotbar
+  - Suporte a temas azul e vermelho
+  - Sistema de badges opcional
+  - Animações e interações consistentes
+  - Documentação completa em `src/components/HotbarButton.md`
+  - Exemplos práticos em `src/components/HotbarButtonExamples.js`
 
 ## 🛠️ Desenvolvimento
 

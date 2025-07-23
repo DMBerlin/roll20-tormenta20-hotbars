@@ -60,6 +60,163 @@
         };
     }
 
+    // Componente reutilizável para botões da hotbar
+    function createHotbarButton(config) {
+        const {
+            icon,           // Ícone do botão (emoji ou texto)
+            label,          // Nome/texto do botão
+            onClick,        // Função de callback para o clique
+            theme = 'blue', // Tema: 'blue' ou 'red'
+            badge = null,   // Badge opcional: { text: '1', color: '#4caf50' }
+            dataLabel = null // Atributo data-label opcional
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                background: 'rgba(60,80,120,0.95)',
+                border: '#6ec6ff',
+                hoverBackground: '#6ec6ff',
+                hoverColor: '#222'
+            },
+            red: {
+                background: 'rgba(120,60,60,0.95)',
+                border: '#ff6e6e',
+                hoverBackground: '#ff6e6e',
+                hoverColor: '#222'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Cria o botão principal
+        const btn = document.createElement('button');
+        btn.style.display = 'flex';
+        btn.style.flexDirection = 'column';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        btn.style.padding = '0';
+        btn.style.background = currentTheme.background;
+        btn.style.color = '#fff';
+        btn.style.border = `2px solid ${currentTheme.border}`;
+        btn.style.borderRadius = '8px';
+        btn.style.cursor = 'pointer';
+        btn.style.fontSize = '13px';
+        btn.style.fontWeight = 'bold';
+        btn.style.width = '64px';
+        btn.style.height = '64px';
+        btn.style.transition = 'all 0.2s';
+        btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+        btn.style.textAlign = 'center';
+        btn.style.lineHeight = '1.1';
+        btn.style.position = 'relative'; // Para posicionar o badge
+
+        // Efeitos hover
+        btn.onmouseover = () => {
+            btn.style.background = currentTheme.hoverBackground;
+            btn.style.color = currentTheme.hoverColor;
+            btn.style.transform = 'scale(1.08)';
+        };
+        btn.onmouseout = () => {
+            btn.style.background = currentTheme.background;
+            btn.style.color = '#fff';
+            btn.style.transform = 'scale(1)';
+        };
+
+        // Ícone
+        const iconElement = document.createElement('span');
+        iconElement.textContent = icon;
+        iconElement.style.fontSize = '26px';
+        iconElement.style.marginBottom = '2px';
+        btn.appendChild(iconElement);
+
+        // Texto
+        const labelElement = document.createElement('span');
+        labelElement.textContent = label;
+        labelElement.style.fontSize = '12px';
+        labelElement.style.marginTop = '2px';
+        btn.appendChild(labelElement);
+
+        // Evento de clique
+        if (onClick) {
+            btn.onclick = onClick;
+        }
+
+        // Adicionar atributo data-label se fornecido
+        if (dataLabel) {
+            btn.setAttribute('data-label', dataLabel);
+        }
+
+        // Adicionar badge se fornecido
+        if (badge) {
+            const badgeElement = document.createElement('div');
+            badgeElement.className = 'hotbar-button-badge';
+            badgeElement.style.position = 'absolute';
+            badgeElement.style.top = '-2px';
+            badgeElement.style.right = '-2px';
+            badgeElement.style.background = badge.color || '#4caf50';
+            badgeElement.style.color = '#fff';
+            badgeElement.style.borderRadius = '50%';
+            badgeElement.style.width = '16px';
+            badgeElement.style.height = '16px';
+            badgeElement.style.fontSize = '10px';
+            badgeElement.style.fontWeight = 'bold';
+            badgeElement.style.display = 'flex';
+            badgeElement.style.alignItems = 'center';
+            badgeElement.style.justifyContent = 'center';
+            badgeElement.style.border = '2px solid #23243a';
+            badgeElement.style.zIndex = '1000';
+            badgeElement.textContent = badge.text;
+            btn.appendChild(badgeElement);
+        }
+
+        return btn;
+    }
+
+    // Função de exemplo para demonstrar o uso do componente createHotbarButton
+    // Esta função é usada apenas para documentação e pode ser removida se não for necessária
+    function createExampleHotbarButtons() {
+        // Exemplo 1: Botão azul simples
+        const simpleButton = createHotbarButton({
+            icon: '⚔️',
+            label: 'Atacar',
+            onClick: () => console.log('Botão atacar clicado'),
+            theme: 'blue'
+        });
+
+        // Exemplo 2: Botão vermelho com badge
+        const buttonWithBadge = createHotbarButton({
+            icon: '🔥',
+            label: 'Efeitos',
+            onClick: () => console.log('Botão efeitos clicado'),
+            theme: 'red',
+            badge: {
+                text: '3',
+                color: '#ff6b6b'
+            }
+        });
+
+        // Exemplo 3: Botão azul com data-label
+        const buttonWithDataLabel = createHotbarButton({
+            icon: '🧠',
+            label: 'Perícias',
+            onClick: () => console.log('Botão perícias clicado'),
+            theme: 'blue',
+            dataLabel: 'Perícias'
+        });
+
+        return {
+            simple: simpleButton,
+            withBadge: buttonWithBadge,
+            withDataLabel: buttonWithDataLabel
+        };
+    }
+
+    // Exportar a função para uso global (para evitar erro de linting)
+    if (typeof window !== 'undefined') {
+        window.createExampleHotbarButtons = createExampleHotbarButtons;
+    }
+
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
         const style = document.createElement('style');
@@ -7071,71 +7228,32 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup },
             { label: 'Misc.', icon: '📦', onClick: createMiscPopup } // Novo botão Misc.
         ];
-        // Função para criar botão
-        function createButton(btnData, isCombatButton = false) {
-            const btn = document.createElement('button');
-            btn.style.display = 'flex';
-            btn.style.flexDirection = 'column';
-            btn.style.alignItems = 'center';
-            btn.style.justifyContent = 'center';
-            btn.style.padding = '0';
-            btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
-            btn.style.color = '#fff';
-            btn.style.border = isCombatButton ? '2px solid #ff6e6e' : '2px solid #6ec6ff';
-            btn.style.borderRadius = '8px';
-            btn.style.cursor = 'pointer';
-            btn.style.fontSize = '13px';
-            btn.style.fontWeight = 'bold';
-            btn.style.width = '64px';
-            btn.style.height = '64px';
-            btn.style.transition = 'all 0.2s';
-            btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-            btn.style.textAlign = 'center';
-            btn.style.lineHeight = '1.1';
-            btn.onmouseover = () => {
-                btn.style.background = isCombatButton ? '#ff6e6e' : '#6ec6ff';
-                btn.style.color = '#222';
-                btn.style.transform = 'scale(1.08)';
-            };
-            btn.onmouseout = () => {
-                btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
-                btn.style.color = '#fff';
-                btn.style.transform = 'scale(1)';
-            };
-            // Ícone
-            const icon = document.createElement('span');
-            icon.textContent = btnData.icon;
-            icon.style.fontSize = '26px';
-            icon.style.marginBottom = '2px';
-            btn.appendChild(icon);
-            // Texto
-            const label = document.createElement('span');
-            label.textContent = btnData.label;
-            label.style.fontSize = '12px';
-            label.style.marginTop = '2px';
-            btn.appendChild(label);
-            btn.onclick = btnData.onClick;
-
-            // Adicionar atributo data-label para identificação
-            btn.setAttribute('data-label', btnData.label);
-
-            // Adicionar indicador de efeitos ativos
-            if (btnData.label === 'Efeitos') {
-                btn.style.position = 'relative';
-            }
-
-            return btn;
-        }
 
         // Criar botões de combate para seção de combate
-        const attackBtn = createButton(attackButton, true);
-        const maneuversBtn = createButton(maneuversButton, true);
+        const attackBtn = createHotbarButton({
+            icon: attackButton.icon,
+            label: attackButton.label,
+            onClick: attackButton.onClick,
+            theme: 'red'
+        });
+        const maneuversBtn = createHotbarButton({
+            icon: maneuversButton.icon,
+            label: maneuversButton.label,
+            onClick: maneuversButton.onClick,
+            theme: 'red'
+        });
         combatSection.appendChild(attackBtn);
         combatSection.appendChild(maneuversBtn);
 
         // Criar outros botões para seção de outros
         otherButtons.forEach(btnData => {
-            const btn = createButton(btnData, false);
+            const btn = createHotbarButton({
+                icon: btnData.icon,
+                label: btnData.label,
+                onClick: btnData.onClick,
+                theme: 'blue',
+                dataLabel: btnData.label
+            });
             otherButtonsSection.appendChild(btn);
         });
 
@@ -11340,7 +11458,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
 
         // Remove badge existente se houver
-        const existingBadge = effectsButton.querySelector('.effects-badge');
+        const existingBadge = effectsButton.querySelector('.hotbar-button-badge');
         if (existingBadge) {
             existingBadge.remove();
         }
@@ -11352,7 +11470,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Cria novo badge se há efeitos ativos
         if (activeEffects.length > 0) {
             const badge = document.createElement('div');
-            badge.className = 'effects-badge';
+            badge.className = 'hotbar-button-badge';
             badge.style.position = 'absolute';
             badge.style.top = '-2px';
             badge.style.right = '-2px';
