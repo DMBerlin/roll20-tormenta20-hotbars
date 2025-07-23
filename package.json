@@ -1,20 +1,20 @@
 {
   "name": "roll20-tormenta20-hotbars",
   "version": "v0.0.2",
-  "description": "",
+  "description": "Hotbars para o Roll20 - Tormenta20",
   "license": "ISC",
   "author": "Daniel Marinho Goncalves",
   "type": "commonjs",
   "main": "./src/main.js",
   "scripts": {
     "lint": "eslint --fix",
-    "update-version": "node src/core/versioning/update-version.js",
-    "build": "node src/core/build/build.js"
+    "build": "node src/core/build/build.js",
+    "update-version": "node src/core/versioning/update-version.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
-    "eslint": "^9.30.0",
     "globals": "^16.2.0",
+    "eslint": "^9.30.0",
     "terser": "^5.28.1"
   }
 }
