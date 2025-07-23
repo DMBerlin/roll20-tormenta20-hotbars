@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Roll20 Hotbar Extra - Caçador
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.0.2
 // @description  Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20 - Especializada para Caçadores
 // @author       Você
 // @match        https://app.roll20.net/editor/*
