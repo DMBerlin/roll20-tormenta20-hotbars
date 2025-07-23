@@ -8,8 +8,8 @@
   "main": "./src/main.js",
   "scripts": {
     "lint": "eslint --fix",
-    "update-version": "node core/versioning/update-version.js",
-    "build": "node core/build/build.js"
+    "update-version": "node src/core/versioning/update-version.js",
+    "build": "node src/core/build/build.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",

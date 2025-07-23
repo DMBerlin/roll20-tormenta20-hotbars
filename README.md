@@ -18,19 +18,19 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     │   │   ├── HotbarButtonExamples.js
     │   │   ├── Tooltip.md
     │   │   └── TooltipExamples.js
-    │   └── assets/
-    │       ├── bebidas.md
-    │       ├── condicoes.md
-    │       ├── dishes-icons.md
-    │       ├── dishes.md
-    │       ├── pericias.md
-    │       └── pratos-especiais.md
-    └── core/
-        ├── build/
-        │   └── build.js
-        └── versioning/
-            ├── update-version.js
-            └── VERSIONING.md
+    │   ├── assets/
+    │   │   ├── bebidas.md
+    │   │   ├── condicoes.md
+    │   │   ├── dishes-icons.md
+    │   │   ├── dishes.md
+    │   │   ├── pericias.md
+    │   │   └── pratos-especiais.md
+    │   └── core/
+    │       ├── build/
+    │       │   └── build.js
+    │       └── versioning/
+    │           ├── update-version.js
+    │           └── VERSIONING.md
 ```
 
 ## 🎯 Scripts Disponíveis
