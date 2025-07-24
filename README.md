@@ -14,10 +14,15 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     ├── src/
     │   ├── main.js
     │   ├── components/
+    │   │   ├── README.md
     │   │   ├── HotbarButton.md
     │   │   ├── HotbarButtonExamples.js
     │   │   ├── Tooltip.md
     │   │   └── TooltipExamples.js
+    │   ├── playground/
+    │   │   ├── index.html
+    │   │   ├── README.md
+    │   │   └── search-example.html
     │   ├── assets/
     │   │   ├── bebidas.md
     │   │   ├── condicoes.md
@@ -101,6 +106,16 @@ O projeto agora inclui um sistema de componentes reutilizáveis:
   - Animações suaves e responsivo
   - Documentação completa em `src/components/Tooltip.md`
   - Exemplos práticos em `src/components/TooltipExamples.js`
+
+- **SearchInput**: Componente reutilizável para inputs de busca/filtro
+  - Suporte a múltiplos temas (azul, laranja, roxo, verde, vermelho)
+  - Botão de limpar automático
+  - Auto-focus opcional
+  - Callbacks flexíveis para input e clear
+  - API completa para manipulação programática
+  - Design responsivo e acessível
+  - Documentação completa em `src/components/README.md`
+  - Exemplo interativo em `src/playground/search-example.html`
 
 ## 🛠️ Desenvolvimento
 

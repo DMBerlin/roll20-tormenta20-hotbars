@@ -173,6 +173,184 @@
         return btn;
     }
 
+    // Componente reutilizável para inputs de search
+    function createSearchInput(config) {
+        const {
+            placeholder = 'Filtrar...',           // Placeholder do input
+            onInput = null,                       // Função de callback para o evento input
+            onClear = null,                       // Função de callback para limpar o input
+            theme = 'blue',                       // Tema: 'blue', 'orange', 'purple', 'green', 'red'
+            width = '100%',                       // Largura do container
+            marginBottom = '10px',                // Margem inferior
+            fontSize = '15px',                    // Tamanho da fonte
+            showClearButton = true,               // Se deve mostrar o botão de limpar
+            autoFocus = false                     // Se deve focar automaticamente
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                border: '#6ec6ff',
+                color: '#6ec6ff',
+                background: '#23243a'
+            },
+            orange: {
+                border: '#ffb86c',
+                color: '#ffb86c',
+                background: '#23243a'
+            },
+            purple: {
+                border: '#9c27b0',
+                color: '#9c27b0',
+                background: '#23243a'
+            },
+            green: {
+                border: '#4caf50',
+                color: '#4caf50',
+                background: '#23243a'
+            },
+            red: {
+                border: '#f44336',
+                color: '#f44336',
+                background: '#23243a'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Container principal
+        const filterContainer = document.createElement('div');
+        filterContainer.style.position = 'relative';
+        filterContainer.style.marginBottom = marginBottom;
+        filterContainer.style.width = width;
+
+        // Input principal
+        const filterInput = document.createElement('input');
+        filterInput.type = 'text';
+        filterInput.placeholder = placeholder;
+        filterInput.style.width = '100%';
+        filterInput.style.padding = '10px 28px 10px 12px';
+        filterInput.style.borderRadius = '8px';
+        filterInput.style.border = `1px solid ${currentTheme.border}`;
+        filterInput.style.background = currentTheme.background;
+        filterInput.style.color = '#fff';
+        filterInput.style.fontSize = fontSize;
+        filterInput.style.outline = 'none';
+        filterInput.style.boxSizing = 'border-box';
+        filterInput.style.transition = 'border-color 0.2s ease';
+
+        // Efeitos hover e focus
+        filterInput.onmouseover = () => {
+            filterInput.style.borderColor = currentTheme.color;
+        };
+        filterInput.onmouseout = () => {
+            if (document.activeElement !== filterInput) {
+                filterInput.style.borderColor = currentTheme.border;
+            }
+        };
+        filterInput.onfocus = () => {
+            filterInput.style.borderColor = currentTheme.color;
+            filterInput.style.boxShadow = `0 0 0 2px ${currentTheme.color}20`;
+        };
+        filterInput.onblur = () => {
+            filterInput.style.borderColor = currentTheme.border;
+            filterInput.style.boxShadow = 'none';
+        };
+
+        // Botão X para limpar (opcional)
+        let clearBtn = null;
+        if (showClearButton) {
+            clearBtn = document.createElement('span');
+            clearBtn.textContent = '×';
+            clearBtn.style.position = 'absolute';
+            clearBtn.style.right = '8px';
+            clearBtn.style.top = '50%';
+            clearBtn.style.transform = 'translateY(-50%)';
+            clearBtn.style.cursor = 'pointer';
+            clearBtn.style.color = currentTheme.color;
+            clearBtn.style.fontSize = '18px';
+            clearBtn.style.display = 'none';
+            clearBtn.style.transition = 'all 0.2s ease';
+            clearBtn.style.width = '20px';
+            clearBtn.style.height = '20px';
+            clearBtn.style.display = 'flex';
+            clearBtn.style.alignItems = 'center';
+            clearBtn.style.justifyContent = 'center';
+            clearBtn.style.borderRadius = '50%';
+
+            // Efeitos hover do botão de limpar
+            clearBtn.onmouseover = () => {
+                clearBtn.style.background = `${currentTheme.color}20`;
+                clearBtn.style.color = currentTheme.color;
+            };
+            clearBtn.onmouseout = () => {
+                clearBtn.style.background = 'transparent';
+                clearBtn.style.color = currentTheme.color;
+            };
+
+            clearBtn.onclick = () => {
+                filterInput.value = '';
+                filterInput.dispatchEvent(new Event('input'));
+                filterInput.focus();
+                if (onClear) onClear();
+            };
+        }
+
+        // Event listener para filtrar enquanto o usuário digita
+        filterInput.oninput = () => {
+            if (showClearButton && clearBtn) {
+                if (filterInput.value.length > 0) {
+                    clearBtn.style.display = 'flex';
+                } else {
+                    clearBtn.style.display = 'none';
+                }
+            }
+            if (onInput) onInput(filterInput.value);
+        };
+
+        // Adiciona elementos ao container
+        filterContainer.appendChild(filterInput);
+        if (showClearButton && clearBtn) {
+            filterContainer.appendChild(clearBtn);
+        }
+
+        // Foca automaticamente se solicitado
+        if (autoFocus) {
+            setTimeout(() => {
+                filterInput.focus();
+            }, 100);
+        }
+
+        // Retorna o objeto com elementos e métodos úteis
+        return {
+            container: filterContainer,
+            input: filterInput,
+            clearButton: clearBtn,
+            clear: () => {
+                filterInput.value = '';
+                filterInput.dispatchEvent(new Event('input'));
+                if (onClear) onClear();
+            },
+            focus: () => filterInput.focus(),
+            blur: () => filterInput.blur(),
+            getValue: () => filterInput.value,
+            setValue: (value) => {
+                filterInput.value = value;
+                filterInput.dispatchEvent(new Event('input'));
+            },
+            setPlaceholder: (newPlaceholder) => {
+                filterInput.placeholder = newPlaceholder;
+            },
+            setTheme: (newTheme) => {
+                const newThemeColors = themes[newTheme] || themes.blue;
+                filterInput.style.borderColor = newThemeColors.border;
+                if (clearBtn) {
+                    clearBtn.style.color = newThemeColors.color;
+                }
+            }
+        };
+    }
+
     // Componente reutilizável para tooltips
     function createTooltip(config) {
         const {
@@ -396,93 +574,9 @@
         window.addTooltipToElement = addTooltipToElement;
     }
 
-    // Função de exemplo para demonstrar o uso do componente createHotbarButton
-    // Esta função é usada apenas para documentação e pode ser removida se não for necessária
-    function createExampleHotbarButtons() {
-        // Exemplo 1: Botão azul simples
-        const simpleButton = createHotbarButton({
-            icon: '⚔️',
-            label: 'Atacar',
-            onClick: () => console.log('Botão atacar clicado'),
-            theme: 'blue'
-        });
 
-        // Exemplo 2: Botão vermelho com badge
-        const buttonWithBadge = createHotbarButton({
-            icon: '🔥',
-            label: 'Efeitos',
-            onClick: () => console.log('Botão efeitos clicado'),
-            theme: 'red',
-            badge: {
-                text: '3',
-                color: '#ff6b6b'
-            }
-        });
 
-        // Exemplo 3: Botão azul com data-label
-        const buttonWithDataLabel = createHotbarButton({
-            icon: '🧠',
-            label: 'Perícias',
-            onClick: () => console.log('Botão perícias clicado'),
-            theme: 'blue',
-            dataLabel: 'Perícias'
-        });
 
-        return {
-            simple: simpleButton,
-            withBadge: buttonWithBadge,
-            withDataLabel: buttonWithDataLabel
-        };
-    }
-
-    // Função de exemplo para demonstrar o uso do componente createTooltip
-    function createExampleTooltips() {
-        // Exemplo 1: Tooltip simples
-        const simpleTooltip = createTooltip({
-            title: 'Investida',
-            description: 'Ação completa: Ataque corpo a corpo com +2 no teste de ataque, mas sofra –2 na Defesa até o próximo turno.',
-            theme: 'red',
-            tags: [
-                { text: 'Manobra de Combate', bgColor: '#ff6e6e', color: '#23243a' },
-                { text: 'Ação Completa', bgColor: '#8B4513', color: '#fff' }
-            ]
-        });
-
-        // Exemplo 2: Tooltip para magia
-        const spellTooltip = createTooltip({
-            title: 'Luz Sagrada',
-            description: 'Ação padrão: Objeto emite luz de 6m de raio. A luz não produz calor e pode ser interrompida guardando o objeto.',
-            theme: 'blue',
-            tags: [
-                { text: 'Magia Arcana', bgColor: '#6ec6ff', color: '#23243a' },
-                { text: '1º Ciclo', bgColor: '#9b59b6', color: '#fff' },
-                { text: 'Evocação', bgColor: '#e74c3c', color: '#fff' }
-            ]
-        });
-
-        // Exemplo 3: Tooltip para poder
-        const powerTooltip = createTooltip({
-            title: 'Marca da Presa',
-            description: 'Você pode gastar 1 PM para marcar um alvo como sua presa. Até o fim da cena, você recebe +2 em testes de ataque contra a presa.',
-            theme: 'green',
-            tags: [
-                { text: 'Poder de Caçador', bgColor: '#4caf50', color: '#fff' },
-                { text: '1 PM', bgColor: '#2e7d32', color: '#fff' }
-            ]
-        });
-
-        return {
-            simple: simpleTooltip,
-            spell: spellTooltip,
-            power: powerTooltip
-        };
-    }
-
-    // Exportar as funções para uso global (para evitar erro de linting)
-    if (typeof window !== 'undefined') {
-        window.createExampleHotbarButtons = createExampleHotbarButtons;
-        window.createExampleTooltips = createExampleTooltips;
-    }
 
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
@@ -781,6 +875,27 @@
             }
         `;
         document.head.appendChild(style);
+    }
+
+    // Componente reutilizável para aviso de CTRL
+    function createCtrlTipMessage(type = 'item') {
+        const tipMessages = {
+            'skill': '💡 Segure CTRL + Clique para ver detalhes da perícia',
+            'spell': '💡 Segure CTRL + Clique para ver detalhes da magia',
+            'power': '💡 Segure CTRL + Clique para ver detalhes do poder',
+            'item': '💡 Segure CTRL + Clique para ver detalhes do item'
+        };
+
+        const tip = document.createElement('div');
+        tip.textContent = tipMessages[type] || tipMessages.item;
+        tip.style.fontSize = '11px';
+        tip.style.color = '#6ec6ff';
+        tip.style.marginBottom = '10px';
+        tip.style.fontStyle = 'italic';
+        tip.style.textAlign = 'center';
+        tip.style.width = '100%';
+
+        return tip;
     }
 
     // Função para aplicar scrollbars diretamente nos elementos scrolláveis
@@ -1618,6 +1733,14 @@
         overlay.style.background = 'rgba(0,0,0,0.5)';
         overlay.style.zIndex = '10000';
         overlay.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             overlay.remove();
             popup.remove();
         };
@@ -1653,25 +1776,23 @@
         header.style.width = '100%';
 
         const title = document.createElement('h3');
-        title.textContent = 'Skills';
+        title.textContent = 'Perícias';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        // Dica sobre o sistema de CTRL
-        const tip = document.createElement('div');
-        tip.textContent = '💡 Segure CTRL + Clique para ver detalhes da perícia';
-        tip.style.fontSize = '11px';
-        tip.style.color = '#6ec6ff';
-        tip.style.marginTop = '5px';
-        tip.style.fontStyle = 'italic';
-        tip.style.textAlign = 'center';
-        tip.style.width = '100%';
-
         const closeBtn = document.createElement('button');
         applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             popup.remove();
             const overlay = document.getElementById('skills-overlay');
             if (overlay) overlay.remove();
@@ -1680,63 +1801,21 @@
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Barra de filtro
-        const filterContainer = document.createElement('div');
-        filterContainer.style.position = 'relative';
-        filterContainer.style.marginBottom = '10px';
-        const filterInput = document.createElement('input');
-        filterInput.type = 'text';
-        filterInput.placeholder = 'Filter skills...';
-        filterInput.style.width = '100%';
-        filterInput.style.padding = '10px 28px 10px 12px';
-        filterInput.style.borderRadius = '8px';
-        filterInput.style.border = '1px solid #6ec6ff';
-        filterInput.style.background = '#23243a';
-        filterInput.style.color = '#fff';
-        filterInput.style.fontSize = '14px';
-        filterInput.style.outline = 'none';
-        filterInput.style.boxSizing = 'border-box';
-        filterInput.style.fontSize = '15px';
-        // Botão X para limpar
-        const clearBtn = document.createElement('span');
-        clearBtn.textContent = '×';
-        clearBtn.style.position = 'absolute';
-        clearBtn.style.right = '8px';
-        clearBtn.style.top = '50%';
-        clearBtn.style.transform = 'translateY(-50%)';
-        clearBtn.style.cursor = 'pointer';
-        clearBtn.style.color = '#6ec6ff';
-        clearBtn.style.fontSize = '18px';
-        clearBtn.style.display = 'none';
-        clearBtn.onclick = () => {
-            filterInput.value = '';
-            filterInput.dispatchEvent(new Event('input'));
-            filterInput.focus();
-        };
-
-        // Event listener para filtrar enquanto o usuário digita
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
+        // Barra de filtro usando o componente reutilizável
+        const searchComponent = createSearchInput({
+            placeholder: 'Filtrar perícias...',
+            theme: 'blue',
+            onInput: () => {
+                updateSkillList();
+            },
+            onClear: () => {
+                updateSkillList();
             }
-            updateSkillList();
-        };
-
-        filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
-        popup.appendChild(filterContainer);
+        });
+        popup.appendChild(searchComponent.container);
 
         // Dica sobre o sistema de CTRL
-        const skillTip = document.createElement('div');
-        skillTip.textContent = '💡 Segure CTRL + Clique para ver detalhes da perícia';
-        skillTip.style.fontSize = '11px';
-        skillTip.style.color = '#6ec6ff';
-        skillTip.style.marginBottom = '10px';
-        skillTip.style.fontStyle = 'italic';
-        skillTip.style.textAlign = 'center';
-        skillTip.style.width = '100%';
+        const skillTip = createCtrlTipMessage('skill');
         popup.appendChild(skillTip);
 
         // Lista de skills (nome, comando)
@@ -1781,7 +1860,15 @@
         popup.appendChild(skillList);
 
         function updateSkillList() {
-            const filter = filterInput.value.trim().toLowerCase();
+            // Remove todos os tooltips existentes antes de atualizar a lista
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
+            const filter = searchComponent.getValue().trim().toLowerCase();
             const favorites = getFavorites();
 
             // Filtra e ordena as skills
@@ -1798,17 +1885,7 @@
 
             // Verifica se não há skills encontradas durante a filtragem
             if (orderedSkills.length === 0 && filter.length > 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#999';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">🔍</div>
-                    <div>Nenhuma skill encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                `;
+                const noResultsMessage = createNoResultsMessage(filter, 'perícia', 'blue');
                 skillList.appendChild(noResultsMessage);
                 return;
             }
@@ -1826,7 +1903,24 @@
 
                 // Botão principal da skill
                 const btn = document.createElement('button');
-                btn.textContent = skill.nome;
+
+
+
+                // Cria o conteúdo do botão centralizado
+                const btnContent = document.createElement('div');
+                btnContent.style.display = 'flex';
+                btnContent.style.alignItems = 'center';
+                btnContent.style.justifyContent = 'center';
+                btnContent.style.width = '100%';
+                btnContent.style.padding = '0 8px';
+
+                const skillName = document.createElement('span');
+                skillName.textContent = skill.nome;
+                skillName.style.textAlign = 'center';
+                skillName.style.fontWeight = 'bold';
+                btnContent.appendChild(skillName);
+
+                btn.appendChild(btnContent);
                 btn.style.flex = '1';
                 btn.style.background = '#23243a';
                 btn.style.color = '#fff';
@@ -1846,8 +1940,9 @@
                     btn.style.color = '#fff';
                 };
 
-                // Adiciona hover com descrição breve da skill
-                let tooltip = null;
+                // Adiciona hover com tooltip detalhado da skill
+                let tooltipInstance = null;
+                let tooltipTimeout = null;
 
                 btn.onmouseenter = () => {
                     // Verifica se existe descrição para esta skill
@@ -1855,75 +1950,46 @@
                     if (!skillData || !skillData.descricao) return;
 
                     // Remove tooltip existente
-                    if (tooltip) {
-                        tooltip.remove();
-                        tooltip = null;
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
 
-                    // Cria tooltip personalizado
-                    tooltip = document.createElement('div');
-                    tooltip.style.position = 'fixed';
-                    tooltip.style.background = 'rgba(0, 0, 0, 0.9)';
-                    tooltip.style.color = '#ecf0f1';
-                    tooltip.style.padding = '8px 12px';
-                    tooltip.style.borderRadius = '6px';
-                    tooltip.style.fontSize = '12px';
-                    tooltip.style.lineHeight = '1.4';
-                    tooltip.style.maxWidth = '250px';
-                    tooltip.style.wordWrap = 'break-word';
-                    tooltip.style.zIndex = '10002';
-                    tooltip.style.border = '1px solid #6ec6ff';
-                    tooltip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-                    tooltip.style.pointerEvents = 'none';
-                    tooltip.style.opacity = '0';
-                    tooltip.style.transition = 'opacity 0.2s';
-
-                    tooltip.textContent = skillData.descricao;
-
-                    document.body.appendChild(tooltip);
-
-                    // Posiciona o tooltip
-                    const rect = btn.getBoundingClientRect();
-                    const tooltipRect = tooltip.getBoundingClientRect();
-
-                    let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                    let top = rect.top - tooltipRect.height - 8;
-
-                    // Ajusta se sair da tela
-                    if (left < 10) left = 10;
-                    if (left + tooltipRect.width > window.innerWidth - 10) {
-                        left = window.innerWidth - tooltipRect.width - 10;
-                    }
-                    if (top < 10) {
-                        top = rect.bottom + 8;
+                    // Limpa timeout existente
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
                     }
 
-                    tooltip.style.left = left + 'px';
-                    tooltip.style.top = top + 'px';
+                    // Prepara dados para o tooltip - apenas a descrição
+                    const description = skillData.descricao;
 
-                    // Mostra o tooltip com fade in
-                    setTimeout(() => {
-                        if (tooltip) tooltip.style.opacity = '1';
-                    }, 50);
+                    const tooltipConfig = {
+                        title: skill.nome,
+                        description: description,
+                        theme: 'blue',
+                        tags: [
+                            { text: 'Perícia', bgColor: '#6ec6ff', color: '#23243a' }
+                        ]
+                    };
+
+                    // Cria o tooltip usando o componente
+                    tooltipInstance = createTooltip(tooltipConfig);
+                    tooltipInstance.show(btn);
                 };
 
                 btn.onmouseleave = () => {
-                    if (tooltip) {
-                        tooltip.style.opacity = '0';
-                        setTimeout(() => {
-                            if (tooltip) {
-                                tooltip.remove();
-                                tooltip = null;
-                            }
-                        }, 200);
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
                 };
 
                 btn.onclick = (e) => {
                     // Remove tooltip se existir
-                    if (tooltip) {
-                        tooltip.remove();
-                        tooltip = null;
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
 
                     // Se CTRL está pressionado, abre o modal de detalhamento
@@ -2235,7 +2301,7 @@
         header.style.width = '100%';
 
         const title = document.createElement('h3');
-        title.textContent = 'Spells';
+        title.textContent = 'Magias';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
@@ -2252,50 +2318,22 @@
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Barra de filtro
-        const filterContainer = document.createElement('div');
-        filterContainer.style.position = 'relative';
-        filterContainer.style.marginBottom = '10px';
-        const filterInput = document.createElement('input');
-        filterInput.type = 'text';
-        filterInput.placeholder = 'Filter spells...';
-        filterInput.style.width = '100%';
-        filterInput.style.padding = '10px 28px 10px 12px';
-        filterInput.style.borderRadius = '8px';
-        filterInput.style.border = '1px solid #6ec6ff';
-        filterInput.style.background = '#23243a';
-        filterInput.style.color = '#fff';
-        filterInput.style.fontSize = '14px';
-        filterInput.style.outline = 'none';
-        filterInput.style.boxSizing = 'border-box';
-        filterInput.style.fontSize = '15px';
-        // Botão X para limpar
-        const clearBtn = document.createElement('span');
-        clearBtn.textContent = '×';
-        clearBtn.style.position = 'absolute';
-        clearBtn.style.right = '8px';
-        clearBtn.style.top = '50%';
-        clearBtn.style.transform = 'translateY(-50%)';
-        clearBtn.style.cursor = 'pointer';
-        clearBtn.style.color = '#6ec6ff';
-        clearBtn.style.fontSize = '18px';
-        clearBtn.style.display = 'none';
-        clearBtn.onclick = () => {
-            filterInput.value = '';
-            filterInput.dispatchEvent(new Event('input'));
-            filterInput.focus();
-        };
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
+        // Barra de filtro usando o componente reutilizável
+        const searchComponent = createSearchInput({
+            placeholder: 'Filtrar magias...',
+            theme: 'blue',
+            onInput: () => {
+                updateSpellList();
+            },
+            onClear: () => {
+                updateSpellList();
             }
-            updateSpellList();
-        };
-        filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
-        popup.appendChild(filterContainer);
+        });
+        popup.appendChild(searchComponent.container);
+
+        // Dica sobre o sistema de CTRL
+        const spellTip = createCtrlTipMessage('spell');
+        popup.appendChild(spellTip);
 
         // Lista de spells (nome, comando)
         const spells = [
@@ -2347,7 +2385,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         popup.appendChild(spellList);
 
         function updateSpellList() {
-            const filter = filterInput.value.trim().toLowerCase();
+            const filter = searchComponent.getValue().trim().toLowerCase();
             spellList.innerHTML = '';
 
             // Filtra spells baseado na raça selecionada
@@ -2377,11 +2415,9 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
                 if (filter.length > 0) {
                     // Mensagem quando há filtro mas nenhum resultado
-                    noSpellsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma magia encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filter, 'magia', 'blue');
+                    spellList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     // Mensagem quando não há magias disponíveis
                     const selectedRace = getSelectedRace();
@@ -4359,8 +4395,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return card;
     }
 
-    // Função para criar mensagem de "nenhum resultado encontrado"
-    function createNoResultsMessage(filterText, itemType) {
+    // Componente padronizado para mensagens de "nenhum resultado encontrado"
+    function createNoResultsMessage(filterText, itemName, theme = 'blue') {
+        const themes = {
+            blue: '#6ec6ff',
+            orange: '#ffb86c',
+            purple: '#9c27b0',
+            green: '#4caf50',
+            red: '#ff6b6b',
+            brown: '#8B4513'
+        };
+
+        const themeColor = themes[theme] || themes.blue;
+
         const noResultsMessage = document.createElement('div');
         noResultsMessage.style.textAlign = 'center';
         noResultsMessage.style.padding = '20px';
@@ -4369,7 +4416,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         noResultsMessage.style.fontStyle = 'italic';
         noResultsMessage.innerHTML = `
             <div style="margin-bottom: 8px;">🔍</div>
-            <div>Nenhum ${itemType === 'food' ? 'prato especial' : 'bebida artoniana'} encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+            <div>Nenhum ${itemName} encontrado para "<strong style="color: ${themeColor};">${filterText}</strong>"</div>
             <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
         `;
         return noResultsMessage;
@@ -4467,6 +4514,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             filterContainer.appendChild(filterInput);
             popup.appendChild(filterContainer);
 
+
+
             // Lista de pratos (cards)
             const pratosList = document.createElement('div');
             pratosList.style.display = 'flex';
@@ -4505,7 +4554,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 // Verifica se não há pratos encontrados durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = createNoResultsMessage(filterText, 'food');
+                    const noResultsMessage = createNoResultsMessage(filterText, 'prato especial', 'orange');
                     pratosList.appendChild(noResultsMessage);
                 }
             }
@@ -4622,6 +4671,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             filterContainer.appendChild(filterInput);
             popup.appendChild(filterContainer);
 
+
+
             // Lista de bebidas (cards)
             const bebidasList = document.createElement('div');
             bebidasList.style.display = 'flex';
@@ -4658,7 +4709,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 // Verifica se não há bebidas encontradas durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = createNoResultsMessage(filterText, 'drink');
+                    const noResultsMessage = createNoResultsMessage(filterText, 'bebida artoniana', 'orange');
                     bebidasList.appendChild(noResultsMessage);
                 }
             }
@@ -5483,6 +5534,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             ]
         }
     };
+
+
+
+
 
     // Função para fechar todos os popups de skills
     function closeAllSkillPopups() {
@@ -9490,11 +9545,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 noResultsMessage.style.marginTop = '10px';
 
                 if (currentTextFilter) {
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma habilidade encontrada para "<strong style="color: #8B4513;">${currentTextFilter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'brown');
+                    abilitiesListContainer.appendChild(noResultsMessage);
+                    return;
                 } else {
                     noResultsMessage.innerHTML = `
                         <div style="margin-bottom: 8px;">⚔️</div>
@@ -9774,17 +9827,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Verifica se não há habilidades encontradas durante a filtragem
             if (filteredAbilities.length === 0 && currentTextFilter.length > 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#999';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">🔍</div>
-                    <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${currentTextFilter}</strong>"</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                `;
+                const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'blue');
                 abilitiesListContainer.appendChild(noResultsMessage);
             }
 
@@ -10681,6 +10724,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         filterContainer.appendChild(filterInput);
         popup.appendChild(filterContainer);
 
+        // Dica sobre o sistema de CTRL
+        const abilityTip = createCtrlTipMessage('power');
+        popup.appendChild(abilityTip);
+
         // Lista visual
         const abilityList = document.createElement('div');
         abilityList.style.display = 'flex';
@@ -10723,11 +10770,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 emptyMsg.style.fontStyle = 'italic';
 
                 if (filter.length > 0) {
-                    emptyMsg.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filter, 'habilidade', 'blue');
+                    abilityList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     emptyMsg.innerHTML = `
                         <div style="margin-bottom: 8px;">✨</div>
@@ -13092,6 +13137,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         searchContainer.appendChild(searchInput);
         popup.appendChild(searchContainer);
 
+        // Dica sobre o sistema de CTRL
+        const conditionTip = createCtrlTipMessage('item');
+        popup.appendChild(conditionTip);
+
         // Lista de condições
         const conditionsList = document.createElement('div');
         conditionsList.style.display = 'flex';
@@ -13123,11 +13172,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 noResultsMessage.style.marginTop = '10px';
 
                 if (filterText) {
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma condição encontrada para "<strong style="color: #ff6b6b;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'condição', 'red');
+                    conditionsList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     noResultsMessage.innerHTML = `
                         <div style="margin-bottom: 8px;">⚠️</div>
@@ -13294,6 +13341,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         header.appendChild(title);
         header.appendChild(closeBtn);
         popup.appendChild(header);
+
+
 
         // Lista de efeitos disponíveis
         const effects = [
