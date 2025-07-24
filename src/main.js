@@ -2808,15 +2808,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('spell-cast-overlay');
@@ -3689,15 +3681,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             modal.remove();
             overlay.remove();
@@ -4030,15 +4014,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             modal.remove();
             overlay.remove();
@@ -4461,15 +4437,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('pratos-overlay');
@@ -4624,15 +4592,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('bebidas-overlay');
@@ -6789,15 +6749,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('maneuvers-overlay');
@@ -7190,15 +7142,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
@@ -9700,12 +9644,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                                 modal.appendChild(option);
                                 // Fechar
                                 const closeBtn = document.createElement('button');
-                                closeBtn.innerHTML = '×';
-                                closeBtn.style.background = 'none';
-                                closeBtn.style.border = 'none';
-                                closeBtn.style.color = '#ecf0f1';
-                                closeBtn.style.fontSize = '24px';
-                                closeBtn.style.cursor = 'pointer';
+                                applyCloseButtonStyle(closeBtn);
                                 closeBtn.style.position = 'absolute';
                                 closeBtn.style.top = '8px';
                                 closeBtn.style.right = '12px';
@@ -11024,15 +10963,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -11272,15 +11203,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -11480,15 +11403,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -11828,7 +11743,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         saveActiveConditions(activeConditions);
         updateEffectsVisualIndicators(); // Atualiza indicadores visuais unificados
         updateEffectsBadge(); // Atualiza o badge de efeitos
-        return activeConditions;
+        const activeEffects = getActiveEffects();
+        return activeEffects;
     }
 
     // Função para obter dados de uma condição
@@ -12536,8 +12452,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const effectsContainer = document.getElementById('effects-icons-container');
         if (!effectsContainer) return;
 
-
-
         // Container principal do indicador
         const indicator = document.createElement('div');
         indicator.className = 'food-indicator';
@@ -12620,8 +12534,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-
-
     // Função para remover efeito de prato
     function removeFoodEffect(effectKey) {
         // Remove do localStorage de efeitos de comida
@@ -12643,9 +12555,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
     }
-
-
-
 
     // Função para criar um ícone indicador de bebida consumida
     function createBebidaIndicatorIcon(bebidaData, effect) {
@@ -12744,8 +12653,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.appendChild(durationIndicator);
         effectsContainer.appendChild(indicator);
     }
-
-
 
     // Função para remover efeito de bebida
     function removeBebidaEffect(effectKey) {
@@ -12893,10 +12800,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         effectsContainer.appendChild(indicator);
     }
-
-
-
-
 
     // Template reutilizável para tooltips de efeitos (buff/debuff)
     function createEffectHoverTooltip(element, effectData, effectType = 'condition') {
@@ -13094,10 +12997,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             currentEffectTooltip = null;
         }
     }
-
-
-
-
 
     // Função para criar o popup de condições
     function createConditionsPopup() {
