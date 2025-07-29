@@ -617,8 +617,8 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
 
@@ -1728,17 +1728,11 @@
         // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.justifyContent = 'flex-start';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-
-        const title = document.createElement('h3');
-        title.textContent = 'Configurar Avatar';
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
+        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -1753,8 +1747,16 @@
                 if (overlay) overlay.remove();
             }
         });
-        header.appendChild(title);
+
+        const title = document.createElement('h3');
+        title.textContent = 'Configurar Avatar';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
         header.appendChild(closeBtn.render());
+        header.appendChild(title);
         popup.appendChild(header);
 
         // Preview do avatar atual
@@ -1996,10 +1998,33 @@
         // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.justifyContent = 'flex-start';
         header.style.alignItems = 'center';
         header.style.marginBottom = '10px';
         header.style.width = '100%';
+        header.style.gap = '15px';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                // Remove todos os tooltips antes de fechar
+                const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+                existingTooltips.forEach(tooltip => {
+                    if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                        tooltip.remove();
+                    }
+                });
+
+                popup.remove();
+                const overlay = document.getElementById('skills-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
 
         const title = document.createElement('h3');
         title.textContent = 'Perícias';
@@ -2008,22 +2033,7 @@
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            // Remove todos os tooltips antes de fechar
-            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
-            existingTooltips.forEach(tooltip => {
-                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
-                    tooltip.remove();
-                }
-            });
-
-            popup.remove();
-            const overlay = document.getElementById('skills-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        header.appendChild(closeBtn.render());
         header.appendChild(title);
         popup.appendChild(header);
 
@@ -2333,10 +2343,25 @@
         // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.justifyContent = 'flex-start';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
+        header.style.gap = '15px';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('misc-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
 
         const title = document.createElement('h3');
         title.textContent = 'Miscelâneos';
@@ -2345,14 +2370,7 @@
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('misc-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        header.appendChild(closeBtn.render());
         header.appendChild(title);
         popup.appendChild(header);
 
@@ -2515,15 +2533,28 @@
         popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
         popup.style.display = 'flex';
         popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
+        popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.justifyContent = 'flex-start';
         header.style.alignItems = 'center';
-        header.style.marginBottom = '10px';
+        header.style.marginBottom = '15px';
         header.style.width = '100%';
+        header.style.gap = '15px';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+            popup.remove();
+            const overlay = document.getElementById('spells-overlay');
+            if (overlay) overlay.remove();
+        }
+        });
 
         const title = document.createElement('h3');
         title.textContent = 'Magias';
@@ -2532,14 +2563,7 @@
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('spells-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        header.appendChild(closeBtn.render());
         header.appendChild(title);
         popup.appendChild(header);
 
@@ -2970,8 +2994,8 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -3818,8 +3842,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e raridade
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -4150,8 +4174,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e tipo
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -4607,8 +4631,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.marginBottom = '20px';
         header.style.paddingBottom = '15px';
@@ -4763,32 +4787,38 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
             popup.style.display = 'flex';
             popup.style.flexDirection = 'column';
-            popup.style.alignItems = 'stretch';
+            popup.style.alignItems = 'stretch';        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'flex-start';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+        header.style.gap = '15px';
 
-            // Cabeçalho
-            const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '15px';
-            header.style.width = '100%';
-
-            const title = document.createElement('h3');
-            title.textContent = 'Pratos Especiais';
-            title.style.color = '#ffb86c';
-            title.style.margin = '0';
-            title.style.fontSize = '17px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('pratos-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(closeBtn);
-            header.appendChild(title);
+            }
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = 'Pratos Especiais';
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        header.appendChild(closeBtn.render());
+        header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -4920,32 +4950,38 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
             popup.style.display = 'flex';
             popup.style.flexDirection = 'column';
-            popup.style.alignItems = 'stretch';
+            popup.style.alignItems = 'stretch';        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'flex-start';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
+        header.style.width = '100%';
+        header.style.gap = '15px';
 
-            // Cabeçalho
-            const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '15px';
-            header.style.width = '100%';
-
-            const title = document.createElement('h3');
-            title.textContent = 'Bebidas Artonianas';
-            title.style.color = '#ffb86c';
-            title.style.margin = '0';
-            title.style.fontSize = '17px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('bebidas-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(closeBtn);
-            header.appendChild(title);
+            }
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = 'Bebidas Artonianas';
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';
+
+        header.appendChild(closeBtn.render());
+        header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -5909,8 +5945,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -7133,8 +7169,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '15px';
             header.style.width = '100%';
@@ -7525,8 +7561,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -8216,8 +8252,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho fixo
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.width = '100%';
         header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -8981,8 +9017,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -9284,8 +9320,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -10968,15 +11004,28 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
         popup.style.display = 'flex';
         popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
+        popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
         header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.justifyContent = 'flex-start';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
+        header.style.gap = '15px';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+            popup.remove();
+            const overlay = document.getElementById('abilities-overlay');
+            if (overlay) overlay.remove();
+        }
+        });
 
         const title = document.createElement('h3');
         title.textContent = 'Habilidades';
@@ -10985,14 +11034,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('abilities-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        header.appendChild(closeBtn.render());
         header.appendChild(title);
         popup.appendChild(header);
 
@@ -11284,8 +11326,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11524,8 +11566,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11724,8 +11766,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
+            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -13141,8 +13183,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
+        header.style.gap = '15px';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
