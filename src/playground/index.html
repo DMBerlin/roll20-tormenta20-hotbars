@@ -221,10 +221,6 @@
     }
 
     /* Novas classes para substituir estilos inline */
-    .chat-intro {
-      color: #6ec6ff;
-      margin-bottom: 10px;
-    }
 
     .chat-message {
       margin-bottom: 8px;
@@ -232,10 +228,38 @@
       background: rgba(110, 198, 255, 0.1);
       border-radius: 3px;
       border-left: 3px solid #6ec6ff;
+      position: relative;
     }
 
     .chat-message strong {
       font-weight: bold;
+    }
+
+    .copy-button {
+      position: absolute;
+      bottom: 2px;
+      right: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 2px 6px;
+      font-size: 10px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .chat-message:hover .copy-button {
+      opacity: 1;
+    }
+
+    .copy-button:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .copy-button.copied {
+      background: #4CAF50;
     }
   </style>
 </head>
@@ -286,7 +310,13 @@
 
     <!-- Simula o chat do Roll20 -->
     <div class="roll20-chat" id="chatOutput">
-      <div class="chat-intro">💬 Chat simulado do Roll20 - comandos aparecerão aqui:</div>
+      <div class="chat-message">
+        <strong>💬 Chat simulado do Roll20 - comandos aparecerão aqui:</strong>
+        <button class="copy-button"
+          onclick="copyMessage(this, '💬 Chat simulado do Roll20 - comandos aparecerão aqui:')" title="Copiar mensagem">
+          📋
+        </button>
+      </div>
     </div>
 
     <!-- Simula o input do chat -->
@@ -331,6 +361,15 @@
       }
     }
 
+    // Função para copiar texto para a área de transferência
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(function () {
+        addLog('📋 Texto copiado para a área de transferência', 'success');
+      }).catch(function (err) {
+        addLog(`❌ Erro ao copiar: ${err}`, 'error');
+      });
+    }
+
     // Função para simular o envio de mensagem no chat
     function sendChatMessage() {
       const textarea = document.querySelector('#textchat-input textarea');
@@ -339,13 +378,32 @@
       if (textarea.value.trim()) {
         const message = document.createElement('div');
         message.className = 'chat-message';
-        message.innerHTML = `<strong>Comando:</strong> ${textarea.value}`;
+        message.innerHTML = `
+          <strong>Comando:</strong> ${textarea.value}
+          <button class="copy-button" onclick="copyMessage(this, '${textarea.value.replace(/'/g, "\\'")}')" title="Copiar mensagem">
+            📋
+          </button>
+        `;
         chatOutput.appendChild(message);
         chatOutput.scrollTop = chatOutput.scrollHeight;
 
         addLog(`💬 Comando enviado: ${textarea.value}`, 'info');
         textarea.value = '';
       }
+    }
+
+    // Função para copiar mensagem específica
+    function copyMessage(button, text) {
+      copyToClipboard(text);
+
+      // Feedback visual
+      button.textContent = '✅';
+      button.classList.add('copied');
+
+      setTimeout(() => {
+        button.textContent = '📋';
+        button.classList.remove('copied');
+      }, 2000);
     }
 
     // Função para recarregar o script
