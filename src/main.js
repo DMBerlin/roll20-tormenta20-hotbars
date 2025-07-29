@@ -350,7 +350,6 @@
             }
         };
     }
-
     // Componente reutilizável para tooltips
     function createTooltip(config) {
         const {
@@ -574,10 +573,256 @@
         window.addTooltipToElement = addTooltipToElement;
     }
 
+    // Função para criar popup de condições
+    function createConditionsPopup() {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('conditions-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('conditions-overlay');
+        if (existingOverlay) existingOverlay.remove();
 
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'conditions-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
 
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'conditions-popup';
+        popup.className = 'roll20-popup roll20-popup-orange';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #ffb86c';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '18px 20px 16px 20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '400px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
 
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '15px';
 
+        const title = document.createElement('h3');
+        title.textContent = 'Condições';
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '18px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        applyCloseButtonStyle(closeBtn);
+        closeBtn.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('conditions-overlay');
+            if (overlay) overlay.remove();
+        };
+
+        header.appendChild(closeBtn);
+        header.appendChild(title);
+        popup.appendChild(header);
+
+        // Lista de condições
+        const conditionsList = document.createElement('div');
+        conditionsList.style.display = 'flex';
+        conditionsList.style.flexDirection = 'column';
+        conditionsList.style.gap = '8px';
+
+        const conditions = getConditionsList();
+        conditions.forEach(condition => {
+            const conditionItem = document.createElement('div');
+            conditionItem.style.display = 'flex';
+            conditionItem.style.alignItems = 'center';
+            conditionItem.style.padding = '8px 12px';
+            conditionItem.style.background = 'rgba(255,184,108,0.1)';
+            conditionItem.style.borderRadius = '6px';
+            conditionItem.style.cursor = 'pointer';
+            conditionItem.style.transition = 'all 0.2s';
+            conditionItem.style.border = '1px solid rgba(255,184,108,0.3)';
+
+            conditionItem.onmouseover = () => {
+                conditionItem.style.background = 'rgba(255,184,108,0.2)';
+                conditionItem.style.borderColor = 'rgba(255,184,108,0.5)';
+            };
+
+            conditionItem.onmouseout = () => {
+                conditionItem.style.background = 'rgba(255,184,108,0.1)';
+                conditionItem.style.borderColor = 'rgba(255,184,108,0.3)';
+            };
+
+            conditionItem.onclick = () => {
+                toggleCondition(condition.nome);
+                popup.remove();
+                const overlay = document.getElementById('conditions-overlay');
+                if (overlay) overlay.remove();
+            };
+
+            const conditionIcon = document.createElement('span');
+            conditionIcon.textContent = condition.icone || '⚡';
+            conditionIcon.style.marginRight = '10px';
+            conditionIcon.style.fontSize = '16px';
+
+            const conditionText = document.createElement('div');
+            conditionText.style.display = 'flex';
+            conditionText.style.flexDirection = 'column';
+
+            const conditionName = document.createElement('div');
+            conditionName.textContent = condition.nome;
+            conditionName.style.color = '#ffb86c';
+            conditionName.style.fontWeight = 'bold';
+            conditionName.style.fontSize = '14px';
+
+            const conditionDesc = document.createElement('div');
+            conditionDesc.textContent = condition.descricao;
+            conditionDesc.style.color = '#ecf0f1';
+            conditionDesc.style.fontSize = '12px';
+            conditionDesc.style.marginTop = '2px';
+
+            conditionText.appendChild(conditionName);
+            conditionText.appendChild(conditionDesc);
+            conditionItem.appendChild(conditionIcon);
+            conditionItem.appendChild(conditionText);
+            conditionsList.appendChild(conditionItem);
+        });
+
+        popup.appendChild(conditionsList);
+        document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'orange');
+    }
+
+    // Função para criar tooltip de efeito no hover
+    function createEffectHoverTooltip(element, data, type) {
+        // Remove tooltip existente
+        hideEffectTooltip();
+
+        const tooltip = document.createElement('div');
+        tooltip.id = 'effect-hover-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = 'rgba(30,30,40,0.95)';
+        tooltip.style.border = '1px solid #6ec6ff';
+        tooltip.style.borderRadius = '6px';
+        tooltip.style.padding = '8px 12px';
+        tooltip.style.color = '#ecf0f1';
+        tooltip.style.fontSize = '12px';
+        tooltip.style.maxWidth = '250px';
+        tooltip.style.zIndex = '10004';
+        tooltip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+        tooltip.style.pointerEvents = 'none';
+
+        let title, description;
+        if (type === 'food') {
+            title = data.nome;
+            description = data.descricao || 'Efeito de comida ativo.';
+        } else if (type === 'drink') {
+            title = data.nome;
+            description = data.descricao || 'Efeito de bebida ativo.';
+        } else if (type === 'condition') {
+            title = data.nome;
+            description = data.descricao || 'Condição ativa.';
+        } else if (type === 'item') {
+            title = data.name;
+            description = data.description || 'Efeito de item ativo.';
+        }
+
+        tooltip.innerHTML = `
+            <div style="font-weight: bold; color: #6ec6ff; margin-bottom: 4px;">${title}</div>
+            <div style="color: #ecf0f1;">${description}</div>
+        `;
+
+        document.body.appendChild(tooltip);
+
+        // Posicionar tooltip
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = (rect.right + 10) + 'px';
+        tooltip.style.top = (rect.top - 5) + 'px';
+    }
+
+    // Função para esconder tooltip de efeito
+    function hideEffectTooltip() {
+        const tooltip = document.getElementById('effect-hover-tooltip');
+        if (tooltip) {
+            tooltip.remove();
+        }
+    }
+
+    // Função para criar ícone indicador de efeito de item
+    function createItemEffectIndicatorIcon(itemEffectData) {
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'item-effect-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #9c27b0'; // Borda roxa para itens
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#ba68c8'; // Roxo mais claro no hover
+            createEffectHoverTooltip(indicator, itemEffectData, 'item');
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#9c27b0'; // Volta para roxo normal
+            hideEffectTooltip();
+        };
+
+        // Click handler para remover o efeito
+        indicator.onclick = () => {
+            hideEffectTooltip();
+            toggleEffect(itemEffectData.effectKey, true); // Modo silencioso
+            removeEffectFromOrder(itemEffectData.effectKey, 'item');
+        };
+
+        // Usa o sistema de cache para carregar a imagem
+        const iconUrl = itemEffectData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg';
+
+        const cachedImageElement = createCachedImageElement(
+            iconUrl,
+            itemEffectData.name,
+            itemEffectData.icone || '⚔️',
+            {
+                width: '100%',
+                height: '100%',
+                borderRadius: '4px',
+                objectFit: 'cover',
+                showSkeleton: true
+            }
+        );
+
+        indicator.appendChild(cachedImageElement);
+        effectsContainer.appendChild(indicator);
+    }
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
         const style = document.createElement('style');
@@ -850,11 +1095,9 @@
                 width: 12px !important;
                 height: 12px !important;
             }
-
             .roll20-scrollbar-thick *::-webkit-scrollbar-thumb {
                 border-radius: 6px !important;
             }
-
             .roll20-scrollbar-thick *::-webkit-scrollbar-track {
                 border-radius: 6px !important;
                 margin: 3px !important;
@@ -1071,7 +1314,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 10000;
+            z-index: 10005;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -1342,7 +1585,6 @@
     function getAutomaticAbilities() {
         return ['Marca da Presa', 'Rastreador'];
     }
-
     // Função para obter poderes disponíveis baseado no nível
     function getAvailablePowersByLevel(level) {
         const powersByLevel = {
@@ -1380,7 +1622,6 @@
 
         return specialAbilities;
     }
-
     // Função para verificar se uma habilidade está disponível no nível atual
     function isAbilityAvailableAtLevel(abilityName, level) {
         // Habilidades automáticas sempre disponíveis
@@ -1713,7 +1954,6 @@
             sendButton.click();
         }
     }
-
     // Função para criar o popup de skills
     function createSkillsPopup() {
         // Remove popup existente se houver
@@ -1797,8 +2037,8 @@
             const overlay = document.getElementById('skills-overlay');
             if (overlay) overlay.remove();
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
+        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro usando o componente reutilizável
@@ -2059,7 +2299,6 @@
             };
         }
     };
-
     // Função para criar popup de Miscelâneos
     function createMiscPopup() {
         // Remove popup existente se houver
@@ -2127,8 +2366,8 @@
             const overlay = document.getElementById('misc-overlay');
             if (overlay) overlay.remove();
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
+        header.appendChild(title);
         popup.appendChild(header);
 
         // Lista de módulos (cards)
@@ -2314,8 +2553,8 @@
             const overlay = document.getElementById('spells-overlay');
             if (overlay) overlay.remove();
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
+        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro usando o componente reutilizável
@@ -2360,17 +2599,11 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 +1 PM: aumenta a área iluminada em +3m de raio.
 
 +2 PM: muda a duração para um dia.
-
 +2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
-
 +0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
-
-+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Você pode enviar um à frente, outra para trás, outra para cima e manter um perto de você, por exemplo. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
-
++2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 +2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
-
 +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
-
 JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             })
         ];
@@ -2704,7 +2937,6 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         return spellDatabase[spellName] || {};
     }
-
     // Função para criar popup de detalhes de spell
     function createSpellCastPopup(spellName, spellDisplayName) {
         // Remove popup existente se houver
@@ -2940,7 +3172,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
                 { label: '+2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.', cost: 2 },
                 { label: '+0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.', cost: 0 },
                 { label: '+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.', cost: 2 },
-                { label: '+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.', cost: 2 },
+                { label: '+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.', cost: 2 },
                 { label: '+5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.', cost: 5 }
             ];
         } else if (spellName === 'Sombras Profanas') {
@@ -3040,7 +3272,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
 +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostos à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
++2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
 
 +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.`;
             } else if (spellName === 'Sombras Profanas') {
@@ -3058,55 +3290,10 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             }
 
             const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellName}}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${spellDescription}
-
 JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             sendToChat(msg);
         };
         descBox.appendChild(shareBtn);
-
-        // Botão Usar
-        const useBtn = document.createElement('button');
-        useBtn.textContent = 'Usar';
-        useBtn.style.width = '100%';
-        useBtn.style.padding = '12px 0';
-        useBtn.style.background = '#6ec6ff';
-        useBtn.style.color = '#23243a';
-        useBtn.style.border = 'none';
-        useBtn.style.borderRadius = '8px';
-        useBtn.style.fontSize = '16px';
-        useBtn.style.fontWeight = 'bold';
-        useBtn.style.cursor = 'pointer';
-        useBtn.style.transition = 'all 0.2s';
-        useBtn.style.marginTop = '10px';
-        useBtn.onmouseover = () => {
-            useBtn.style.background = '#5bb8ff';
-        };
-        useBtn.onmouseout = () => {
-            useBtn.style.background = '#6ec6ff';
-        };
-        useBtn.onclick = () => {
-            // Fecha todos os popups relacionados imediatamente
-            const spellCastPopup = document.getElementById('spell-cast-popup');
-            if (spellCastPopup) spellCastPopup.remove();
-            const spellCastOverlay = document.getElementById('spell-cast-overlay');
-            if (spellCastOverlay) spellCastOverlay.remove();
-            const spellsPopup = document.getElementById('spells-popup');
-            if (spellsPopup) spellsPopup.remove();
-            const spellsOverlay = document.getElementById('spells-overlay');
-            if (spellsOverlay) spellsOverlay.remove();
-            // Monta a mensagem
-            let total = 1;
-            let upgradesDesc = [];
-            upgradeCheckboxes.forEach((cb, idx) => {
-                if (cb.checked) {
-                    total += upgrades[idx].cost;
-                    upgradesDesc.push(upgrades[idx].label);
-                }
-            });
-            const msg = `/em conjura ${spellName} (${total} PM)${upgradesDesc.length ? ': ' + upgradesDesc.join('%NEWLINE%') : ''}`;
-            sendToChat(msg);
-        };
-        descBox.appendChild(useBtn);
         popup.appendChild(descBox);
 
         document.body.appendChild(popup);
@@ -3498,7 +3685,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         ];
     }
-
     // Dados completos das bebidas baseados no arquivo MD
     function getBebidasCompletas() {
         return [
@@ -3604,7 +3790,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         ];
     }
-
     function createPratoDetailModal(prato) {
         // Remove modal existente se houver
         const existingModal = document.getElementById('prato-detail-modal');
@@ -3936,7 +4121,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         modal.appendChild(buttonsContainer);
         document.body.appendChild(modal);
     }
-
     // Função para criar modal de detalhes da bebida
     function createBebidaDetailModal(bebida) {
         // Remove modal existente se houver
@@ -4394,6 +4578,134 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         return card;
     }
+    // Função para criar modal de configurações
+    function createConfigModal() {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('config-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('config-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'config-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'config-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #ffb86c';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '500px';
+        modal.style.maxHeight = '80vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.paddingBottom = '15px';
+        header.style.borderBottom = '1px solid rgba(255,184,108,0.3)';
+
+        const title = document.createElement('h2');
+        title.textContent = '⚙️ Configurações';
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '20px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        applyCloseButtonStyle(closeBtn);
+        closeBtn.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+
+        // Conteúdo simples
+        const content = document.createElement('div');
+        content.style.color = '#ecf0f1';
+        content.innerHTML = `
+            <div style="margin-bottom: 15px;">
+                <h3 style="color: #ffb86c; margin-bottom: 10px;">Informações do Script</h3>
+                <p><strong>Versão:</strong> ${getGitVersion()}</p>
+                <p><strong>Autor:</strong> Daniel Marinho Goncalves</p>
+                <p><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <h3 style="color: #ffb86c; margin-bottom: 10px;">Ações</h3>
+                <div style="display: flex; justify-content: center;">
+                    <button id="clear-all-data-btn" style="width: 100%; padding: 12px 20px; border: 1px solid #ff6e6e; border-radius: 6px; background: transparent; color: #ff6e6e; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s ease;" title="Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página">Limpar Dados</button>
+                </div>
+            </div>
+        `;
+
+        // Evento do botão único
+        const clearButton = content.querySelector('#clear-all-data-btn');
+        
+        // Efeitos de hover
+        clearButton.onmouseover = () => {
+            clearButton.style.background = 'rgba(255, 110, 110, 0.1)';
+            clearButton.style.borderColor = '#ff8e8e';
+            clearButton.style.color = '#ff8e8e';
+            clearButton.style.transform = 'scale(1.02)';
+        };
+        
+        clearButton.onmouseout = () => {
+            clearButton.style.background = 'transparent';
+            clearButton.style.borderColor = '#ff6e6e';
+            clearButton.style.color = '#ff6e6e';
+            clearButton.style.transform = 'scale(1)';
+        };
+        
+        clearButton.onclick = () => {
+            if (confirm('Tem certeza que deseja limpar todos os dados salvos? Esta ação irá remover o cache de imagens, efeitos ativos, configurações e outros dados. Esta ação não pode ser desfeita.')) {
+                // Limpar cache de imagens
+                clearImageCache();
+                
+                // Limpar todos os dados do localStorage
+                localStorage.clear();
+                
+                // Notificação de sucesso
+                createNotification('Todos os dados foram limpos com sucesso!', 'success', 3000);
+                
+                // Recarregar a página após 1 segundo
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        };
+
+        modal.appendChild(header);
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+
+        // Aplicar scrollbars customizadas
+        applyDirectScrollbarStyles(modal, 'orange');
+    }
 
     // Componente padronizado para mensagens de "nenhum resultado encontrado"
     function createNoResultsMessage(filterText, itemName, theme = 'blue') {
@@ -4421,7 +4733,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         `;
         return noResultsMessage;
     }
-
     function createPratosEspeciaisPopup() {
         console.log('Abrindo Pratos Especiais');
         try {
@@ -4490,8 +4801,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const overlay = document.getElementById('pratos-overlay');
                 if (overlay) overlay.remove();
             };
-            header.appendChild(title);
             header.appendChild(closeBtn);
+            header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -4647,8 +4958,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const overlay = document.getElementById('bebidas-overlay');
                 if (overlay) overlay.remove();
             };
-            header.appendChild(title);
             header.appendChild(closeBtn);
+            header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -4916,7 +5227,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }, 100);
         }, 200);
     }
-
     // Função para tornar elemento arrastável
     function makeDraggable(element, handle) {
         let isDragging = false;
@@ -4964,7 +5274,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             handle.style.cursor = 'grab';
         }
     }
-
     // Dados das Perícias do Tormenta 20
     const SKILLS_DATA = {
         'Acrobacia': {
@@ -5558,7 +5867,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             skillDetailOverlay.remove();
         }
     }
-
     // Função para criar o modal de detalhamento da skill
     function createSkillDetailModal(skillName) {
         const skillData = SKILLS_DATA[skillName];
@@ -5892,7 +6200,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         bonusTitle.style.fontSize = '16px';
         bonusTitle.style.fontWeight = 'bold';
         bonusSection.appendChild(bonusTitle);
-
         // Verifica quais efeitos de comida estão ativos
         const batataValkarianaActive = isEffectActive('prato_batata_valkariana');
         const boloCenouraActive = isEffectActive('prato_bolo_de_cenoura');
@@ -5905,7 +6212,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const sopaCogumeloActive = isEffectActive('prato_sopa_de_cogumelo');
         const pizzaActive = isEffectActive('prato_pizza');
         const cozidoDePimentaActive = isEffectActive('prato_cozido_de_pimenta');
-
         // Verifica quais efeitos de bebidas estão ativos
         const babaDeTrollActive = isEffectActive('bebida_baba_de_troll');
         const cervejaDeheoniActive = isEffectActive('bebida_cerveja_deheoni');
@@ -6328,7 +6634,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             versionText.textContent = version;
         }
     }
-
     // Cria a hotbar
     function createHotbar() {
         const hotbar = document.createElement('div');
@@ -6443,7 +6748,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Indicador de versão (tag Git)
         const versionIndicator = document.createElement('div');
         versionIndicator.style.position = 'absolute';
-        versionIndicator.style.right = '24px';
+        versionIndicator.style.right = '85px'; // Posicionado à esquerda do chip de configurações
         versionIndicator.style.top = '50%';
         versionIndicator.style.transform = 'translateY(-50%)';
         versionIndicator.style.cursor = 'default';
@@ -6460,6 +6765,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         versionIndicator.style.fontWeight = 'bold';
         versionIndicator.style.transition = 'all 0.2s ease';
         versionIndicator.style.cursor = 'pointer';
+        versionIndicator.style.marginRight = '10px'; // Margin entre os botões
 
         // Efeito hover
         versionIndicator.onmouseover = () => {
@@ -6500,6 +6806,60 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             });
         };
 
+        // Chip de configurações (novo)
+        const configIndicator = document.createElement('div');
+        configIndicator.style.position = 'absolute';
+        configIndicator.style.right = '24px'; // Posicionado à direita do indicador de versão
+        configIndicator.style.top = '50%';
+        configIndicator.style.transform = 'translateY(-50%)';
+        configIndicator.style.cursor = 'pointer';
+        configIndicator.style.display = 'flex';
+        configIndicator.style.alignItems = 'center';
+        configIndicator.style.gap = '4px';
+        configIndicator.style.fontSize = '10px';
+        configIndicator.style.color = '#ffb86c';
+        configIndicator.style.userSelect = 'none';
+        configIndicator.style.background = 'rgba(255,184,108,0.1)';
+        configIndicator.style.padding = '4px 8px';
+        configIndicator.style.borderRadius = '8px';
+        configIndicator.style.border = '1px solid rgba(255,184,108,0.3)';
+        configIndicator.style.fontWeight = 'bold';
+        configIndicator.style.transition = 'all 0.2s ease';
+
+        // Efeito hover para o chip de configurações
+        configIndicator.onmouseover = () => {
+            configIndicator.style.background = 'rgba(255,184,108,0.2)';
+            configIndicator.style.borderColor = 'rgba(255,184,108,0.6)';
+            configIndicator.style.transform = 'translateY(-50%) scale(1.05)';
+        };
+
+        configIndicator.onmouseout = () => {
+            configIndicator.style.background = 'rgba(255,184,108,0.1)';
+            configIndicator.style.borderColor = 'rgba(255,184,108,0.3)';
+            configIndicator.style.transform = 'translateY(-50%) scale(1)';
+        };
+
+        const configIcon = document.createElement('span');
+        configIcon.textContent = '⚙️';
+        configIcon.style.fontSize = '10px';
+
+        const configText = document.createElement('span');
+        configText.textContent = 'Config';
+        configText.style.fontSize = '10px';
+
+        configIndicator.appendChild(configIcon);
+        configIndicator.appendChild(configText);
+
+        // Adicionar tooltip ao chip de configurações
+        configIndicator.title = 'Configurações do script\nClique para abrir as configurações';
+
+        // Adicionar funcionalidade de clique para abrir configurações
+        configIndicator.onclick = (e) => {
+            e.stopPropagation(); // Previne que o header seja arrastado
+            createConfigModal();
+        };
+
+        header.appendChild(configIndicator);
         header.appendChild(versionIndicator);
 
         hotbar.appendChild(header);
@@ -6724,14 +7084,12 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         combatSection.style.border = '1px solid rgba(255,110,110,0.3)';
         combatSection.style.minWidth = '160px';
         combatSection.style.justifyContent = 'center';
-
         // Linha separadora 2
         const separator2 = document.createElement('div');
         separator2.style.width = '1px';
         separator2.style.height = '60px';
         separator2.style.background = 'rgba(110,198,255,0.3)';
         separator2.style.margin = '0 10px';
-
         // Seção 3: Outros botões (Skills, Spells, Habilidades, Efeitos, Misc) - Agrupados
         const otherButtonsSection = document.createElement('div');
         otherButtonsSection.style.display = 'flex';
@@ -6743,7 +7101,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         otherButtonsSection.style.border = '1px solid rgba(110,198,255,0.3)';
         otherButtonsSection.style.minWidth = '340px';
         otherButtonsSection.style.justifyContent = 'center';
-
         // Função para abrir popup de manobras de combate
         function createManeuversPopup() {
             // Remove popup existente se houver
@@ -7138,7 +7495,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Aplica scrollbars customizadas
             applyDirectScrollbarStyles(popup, 'red');
         }
-
         // Função para abrir popup de efeitos extras no ataque
         function createAttackEffectsPopup() {
             // Remove popup existente se houver
@@ -7529,9 +7885,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         mainContent.appendChild(combatSection);
         mainContent.appendChild(separator2);
         mainContent.appendChild(otherButtonsSection);
-
         hotbar.appendChild(mainContent);
-
         // NOVA SEÇÃO: Indicadores Visuais Unificados (Pratos e Condições)
         const effectsIndicatorsSection = document.createElement('div');
         effectsIndicatorsSection.id = 'effects-indicators-section';
@@ -7540,7 +7894,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsIndicatorsSection.style.borderTop = '1px solid rgba(255,255,255,0.1)';
         effectsIndicatorsSection.style.width = '100%';
         effectsIndicatorsSection.style.boxSizing = 'border-box';
-
         // Container unificado para os ícones de pratos e condições
         const effectsIconsContainer = document.createElement('div');
         effectsIconsContainer.id = 'effects-icons-container';
@@ -7615,7 +7968,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             });
         }, 1000);
     });
-
     // Função para criar modal da classe Caçador
     function createHunterClassModal() {
         // Remove popup existente se houver
@@ -8102,16 +8454,13 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
             updateCombatPowerList();
         };
-
         powerTextFilterContainer.appendChild(powerTextFilterInput);
         powerTextFilterContainer.appendChild(powerClearTextBtn);
-
         // Filtros de status
         const powerStatusFiltersContainer = document.createElement('div');
         powerStatusFiltersContainer.style.display = 'flex';
         powerStatusFiltersContainer.style.gap = '10px';
         powerStatusFiltersContainer.style.flexWrap = 'wrap';
-
         const showAllPowersBtn = document.createElement('button');
         showAllPowersBtn.textContent = 'Todas';
         showAllPowersBtn.style.padding = '6px 12px';
@@ -8160,10 +8509,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const combatPowersListContainer = document.createElement('div');
         combatPowersListContainer.id = 'combat-powers-list-container';
         tab3Content.appendChild(combatPowersListContainer);
-
         // Variáveis de filtro
         let currentPowerStatusFilter = 'all'; // 'all', 'learned', 'available'
-
         // Função para atualizar a lista de poderes de combate
         function updateCombatPowerList() {
             combatPowersListContainer.innerHTML = '';
@@ -8345,7 +8692,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             statsContainer.appendChild(statsText);
             combatPowersListContainer.appendChild(statsContainer);
         }
-
         // Event listeners para os filtros
         showAllPowersBtn.onclick = () => {
             currentPowerStatusFilter = 'all';
@@ -8602,9 +8948,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             racesList.appendChild(raceContainer);
         });
-
         tab5Content.appendChild(racesList);
-
         // Função para criar modal detalhado da raça
         function createRaceDetailModal(race) {
             // Remove modal existente se houver
@@ -8908,7 +9252,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Aplica scrollbars customizadas
             applyDirectScrollbarStyles(modal, 'brown');
         }
-
         // Função para criar modal detalhado da divindade
         function createDivinityDetailModal(divinity) {
             // Remove modal existente se houver
@@ -8975,8 +9318,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 modal.remove();
                 overlay.remove();
             };
-            header.appendChild(title);
             header.appendChild(closeBtn);
+            header.appendChild(title);
             modal.appendChild(header);
 
             // Descrição
@@ -9390,7 +9733,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 level: '20º nível'
             }
         ];
-
         // Barra de filtros e controles
         const filterContainer = document.createElement('div');
         filterContainer.style.marginBottom = '15px';
@@ -9398,12 +9740,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         filterContainer.style.background = 'rgba(139, 69, 19, 0.1)';
         filterContainer.style.borderRadius = '8px';
         filterContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
         // Filtro de texto
         const textFilterContainer = document.createElement('div');
         textFilterContainer.style.position = 'relative';
         textFilterContainer.style.marginBottom = '10px';
-
         const textFilterInput = document.createElement('input');
         textFilterInput.type = 'text';
         textFilterInput.placeholder = 'Filtrar habilidades...';
@@ -9492,20 +9832,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         statusFiltersContainer.appendChild(showAllBtn);
         statusFiltersContainer.appendChild(showLearnedBtn);
         statusFiltersContainer.appendChild(showAvailableBtn);
-
         filterContainer.appendChild(textFilterContainer);
         filterContainer.appendChild(statusFiltersContainer);
         tab2Content.appendChild(filterContainer);
-
         // Container para a lista de habilidades
         const abilitiesListContainer = document.createElement('div');
         abilitiesListContainer.id = 'abilities-list-container';
         tab2Content.appendChild(abilitiesListContainer);
-
         // Variáveis de filtro
         let currentTextFilter = '';
         let currentStatusFilter = 'all'; // 'all', 'learned', 'available'
-
         // Função para atualizar a lista de habilidades
         function updateAbilityList() {
             const learnedAbilities = getLearnedAbilities();
@@ -9887,10 +10223,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             showAvailableBtn.style.color = '#fff';
             updateAbilityList();
         };
-
         // Inicializa a lista de habilidades
         updateAbilityList();
-
         // Função para alternar entre abas
         function switchTab(tabNumber) {
             // Esconde todos os conteúdos
@@ -10279,7 +10613,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
         return false;
     }
-
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
@@ -10609,7 +10942,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             };
         }
     };
-
     // Função para criar o popup de habilidades
     function createAbilitiesPopup() {
         // Remove popup existente se houver
@@ -10676,8 +11008,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const overlay = document.getElementById('abilities-overlay');
             if (overlay) overlay.remove();
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
+        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro
@@ -10922,7 +11254,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Aplica scrollbars customizadas
         applyDirectScrollbarStyles(popup, 'blue');
     }
-
     // Função para criar popup de conjuração de habilidade
     function createAbilityCastPopup(abilityName, abilityDisplayName) {
         // Modal para Bote
@@ -11720,9 +12051,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             console.log('Nenhum efeito ativo, badge não criado');
         }
     }
-
     // NOVO: Sistema de Cache de Imagens
-
     // Função para obter o cache de imagens
     function getImageCache() {
         try {
@@ -11758,11 +12087,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         localStorage.setItem('roll20-hotbar-active-conditions', JSON.stringify(conditions));
     }
 
-    // Função para verificar se uma condição está ativa
-    function isConditionActive(conditionName) {
-        const activeConditions = getActiveConditions();
-        return activeConditions.includes(conditionName);
-    }
+
 
     // Função para ativar/desativar condição
     function toggleCondition(conditionName) {
@@ -11861,7 +12186,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         saveEffectsOrder(order);
     }
-
     // Função para remover um efeito da ordem
     function removeEffectFromOrder(effectKey, effectType) {
         const order = getEffectsOrder();
@@ -12313,7 +12637,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         console.log(`Pré-carregamento concluído: ${loadedCount} novas imagens carregadas, ${cachedCount} já estavam no cache`);
     }
-
     // Função para criar elemento de imagem com cache
     function createCachedImageElement(url, alt, fallbackEmoji = '🍽️', options = {}) {
         const {
@@ -12491,7 +12814,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             }
         });
     }
-
     // Função para criar um ícone indicador de prato consumido
     function createFoodIndicatorIcon(pratoData, effect) {
         const effectsContainer = document.getElementById('effects-icons-container');
@@ -12785,484 +13107,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-    // Função para criar um ícone indicador de efeito de item
-    function createItemEffectIndicatorIcon(itemEffectData) {
-        const effectsContainer = document.getElementById('effects-icons-container');
-        if (!effectsContainer) return;
-
-        // Container principal do indicador
-        const indicator = document.createElement('div');
-        indicator.className = 'item-effect-indicator';
-        indicator.style.position = 'relative';
-        indicator.style.width = '32px';
-        indicator.style.height = '32px';
-        indicator.style.borderRadius = '6px';
-        indicator.style.border = '2px solid #ff6e6e'; // Borda vermelha (mesma cor do botão de manobras)
-        indicator.style.background = '#23243a';
-        indicator.style.cursor = 'pointer';
-        indicator.style.transition = 'all 0.2s';
-        indicator.style.overflow = 'hidden';
-
-        // Efeitos de hover
-        indicator.onmouseover = () => {
-            indicator.style.transform = 'scale(1.1)';
-            indicator.style.borderColor = '#ff8a8a'; // Vermelho mais claro no hover
-            // Mostra tooltip usando o template reutilizável
-            createEffectHoverTooltip(indicator, itemEffectData, 'item');
-        };
-
-        indicator.onmouseout = () => {
-            indicator.style.transform = 'scale(1)';
-            indicator.style.borderColor = '#ff6e6e'; // Volta para vermelho normal
-            // Esconde tooltip
-            hideEffectTooltip();
-        };
-
-        // Click handler para remover o efeito
-        indicator.onclick = () => {
-            // Esconde o tooltip antes de remover o efeito
-            hideEffectTooltip();
-            toggleEffect(itemEffectData.effectKey);
-        };
-
-        // Usa o sistema de cache para carregar a imagem
-        const iconUrl = itemEffectData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg';
-
-        const cachedImageElement = createCachedImageElement(
-            iconUrl,
-            itemEffectData.name,
-            itemEffectData.icone || '⚔️',
-            {
-                width: '100%',
-                height: '100%',
-                borderRadius: '4px',
-                objectFit: 'cover',
-                showSkeleton: true
-            }
-        );
-
-        indicator.appendChild(cachedImageElement);
-
-        effectsContainer.appendChild(indicator);
-    }
-
-    // Template reutilizável para tooltips de efeitos (buff/debuff)
-    function createEffectHoverTooltip(element, effectData, effectType = 'condition') {
-        // Remove tooltip existente
-        hideEffectTooltip();
-
-        const tooltip = document.createElement('div');
-        tooltip.className = 'effect-tooltip';
-        tooltip.style.position = 'fixed';
-        tooltip.style.background = 'rgba(20,20,30,0.98)';
-        tooltip.style.borderRadius = '8px';
-        tooltip.style.padding = '12px 16px';
-        tooltip.style.zIndex = '10002';
-        tooltip.style.maxWidth = '280px';
-        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.7)';
-        tooltip.style.pointerEvents = 'none';
-        tooltip.style.display = 'flex';
-        tooltip.style.flexDirection = 'column';
-        tooltip.style.gap = '8px';
-
-        // Configurações baseadas no tipo de efeito
-        const config = getEffectTooltipConfig(effectType);
-        tooltip.style.border = `2px solid ${config.borderColor}`;
-
-        // Cabeçalho com ícone e título
-        const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.alignItems = 'center';
-        header.style.gap = '10px';
-
-        // Ícone do efeito
-        if (effectData.iconeUrl || effectData.icone) {
-            const iconContainer = document.createElement('div');
-            iconContainer.style.width = '24px';
-            iconContainer.style.height = '24px';
-            iconContainer.style.borderRadius = '4px';
-            iconContainer.style.border = `1px solid ${config.borderColor}`;
-            iconContainer.style.display = 'flex';
-            iconContainer.style.alignItems = 'center';
-            iconContainer.style.justifyContent = 'center';
-            iconContainer.style.background = '#23243a';
-            iconContainer.style.overflow = 'hidden';
-
-            if (effectData.iconeUrl) {
-                const cachedImageElement = createCachedImageElement(
-                    effectData.iconeUrl,
-                    effectData.nome || effectData.name,
-                    effectData.icone || '⚠️',
-                    {
-                        width: '100%',
-                        height: '100%',
-                        borderRadius: '3px',
-                        objectFit: 'cover',
-                        showSkeleton: false
-                    }
-                );
-                iconContainer.appendChild(cachedImageElement);
-            } else {
-                iconContainer.textContent = effectData.icone || '⚠️';
-                iconContainer.style.fontSize = '12px';
-            }
-
-            header.appendChild(iconContainer);
-        }
-
-        // Título do efeito
-        const title = document.createElement('div');
-        title.textContent = effectData.nome || effectData.name;
-        title.style.color = config.titleColor;
-        title.style.fontSize = '15px';
-        title.style.fontWeight = 'bold';
-        title.style.flex = '1';
-        header.appendChild(title);
-
-        // Tag do tipo de efeito
-        const typeTag = document.createElement('div');
-        typeTag.textContent = config.typeLabel;
-        typeTag.style.background = config.tagBackground;
-        typeTag.style.color = config.tagColor;
-        typeTag.style.fontSize = '10px';
-        typeTag.style.fontWeight = 'bold';
-        typeTag.style.padding = '2px 6px';
-        typeTag.style.borderRadius = '4px';
-        typeTag.style.textTransform = 'uppercase';
-        typeTag.style.letterSpacing = '0.5px';
-        header.appendChild(typeTag);
-
-        tooltip.appendChild(header);
-
-        // Descrição
-        if (effectData.descricao || effectData.description) {
-            const description = document.createElement('div');
-            description.textContent = effectData.descricao || effectData.description;
-            description.style.color = '#ecf0f1';
-            description.style.fontSize = '12px';
-            description.style.lineHeight = '1.4';
-            description.style.marginTop = '4px';
-            tooltip.appendChild(description);
-        }
-
-        // Efeitos/Bônus
-        if (effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects) {
-            const effects = document.createElement('div');
-            effects.textContent = effectData.efeito || effectData.efeitos || effectData.bonus || effectData.effects;
-            effects.style.color = config.effectsColor;
-            effects.style.fontSize = '12px';
-            effects.style.fontWeight = 'bold';
-            effects.style.lineHeight = '1.3';
-            effects.style.marginTop = '4px';
-            tooltip.appendChild(effects);
-        }
-
-        // Dica de ação
-        const actionHint = document.createElement('div');
-        actionHint.textContent = config.actionHint;
-        actionHint.style.color = '#6ec6ff';
-        actionHint.style.fontSize = '11px';
-        actionHint.style.fontStyle = 'italic';
-        actionHint.style.marginTop = '8px';
-        actionHint.style.textAlign = 'center';
-        actionHint.style.borderTop = '1px solid rgba(110, 198, 255, 0.3)';
-        actionHint.style.paddingTop = '6px';
-        tooltip.appendChild(actionHint);
-
-        // Posicionamento do tooltip
-        const rect = element.getBoundingClientRect();
-        tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
-        tooltip.style.bottom = `${window.innerHeight - rect.top + 10}px`;
-
-        document.body.appendChild(tooltip);
-        currentEffectTooltip = tooltip;
-
-        // Ajusta posição se sair da tela
-        setTimeout(() => {
-            const tooltipRect = tooltip.getBoundingClientRect();
-            if (tooltipRect.left < 10) {
-                tooltip.style.left = '10px';
-            } else if (tooltipRect.right > window.innerWidth - 10) {
-                tooltip.style.left = `${window.innerWidth - tooltipRect.width - 10}px`;
-            }
-        }, 10);
-    }
-
-    // Função para obter configurações do tooltip baseado no tipo de efeito
-    function getEffectTooltipConfig(effectType) {
-        const configs = {
-            condition: {
-                borderColor: '#ff6e6e',
-                titleColor: '#ff6e6e',
-                effectsColor: '#ffa726',
-                tagBackground: '#ff6e6e',
-                tagColor: '#fff',
-                typeLabel: 'Condição',
-                actionHint: 'Clique para remover'
-            },
-            food: {
-                borderColor: '#ffb86c',
-                titleColor: '#ffb86c',
-                effectsColor: '#4caf50',
-                tagBackground: '#ffb86c',
-                tagColor: '#23243a',
-                typeLabel: 'Prato',
-                actionHint: 'Clique para remover'
-            },
-            drink: {
-                borderColor: '#ffb86c',
-                titleColor: '#ffb86c',
-                effectsColor: '#4caf50',
-                tagBackground: '#ffb86c',
-                tagColor: '#23243a',
-                typeLabel: 'Bebida',
-                actionHint: 'Clique para remover'
-            },
-            item: {
-                borderColor: '#9b59b6',
-                titleColor: '#9b59b6',
-                effectsColor: '#e74c3c',
-                tagBackground: '#9b59b6',
-                tagColor: '#fff',
-                typeLabel: 'Item',
-                actionHint: 'Clique para remover'
-            }
-        };
-
-        return configs[effectType] || configs.condition;
-    }
-
-    // Tooltip global para efeitos
-    let currentEffectTooltip = null;
-
-    // Função para esconder tooltip de efeito
-    function hideEffectTooltip() {
-        if (currentEffectTooltip) {
-            currentEffectTooltip.remove();
-            currentEffectTooltip = null;
-        }
-    }
-
-    // Função para criar o popup de condições
-    function createConditionsPopup() {
-        // Remove popup existente se houver
-        const existingPopup = document.getElementById('conditions-popup');
-        if (existingPopup) existingPopup.remove();
-        const existingOverlay = document.getElementById('conditions-overlay');
-        if (existingOverlay) existingOverlay.remove();
-
-        // Overlay para fechar ao clicar fora
-        const overlay = document.createElement('div');
-        overlay.id = 'conditions-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10000';
-        overlay.onclick = () => {
-            overlay.remove();
-            popup.remove();
-        };
-        document.body.appendChild(overlay);
-
-        // Popup principal
-        const popup = document.createElement('div');
-        popup.id = 'conditions-popup';
-        popup.className = 'roll20-popup roll20-popup-red';
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = 'rgba(30,30,40,0.98)';
-        popup.style.border = '2px solid #ff6b6b';
-        popup.style.borderRadius = '12px';
-        popup.style.padding = '18px 20px 16px 20px';
-        popup.style.zIndex = '10001';
-        popup.style.maxWidth = '500px';
-        popup.style.maxHeight = '600px';
-        popup.style.overflowY = 'auto';
-        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
-        header.style.width = '100%';
-
-        const title = document.createElement('h3');
-        title.textContent = 'Lista de Condições';
-        title.style.color = '#ff6b6b';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('conditions-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(title);
-        header.appendChild(closeBtn);
-        popup.appendChild(header);
-
-        // Campo de busca
-        const searchContainer = document.createElement('div');
-        searchContainer.style.marginBottom = '15px';
-
-        const searchInput = document.createElement('input');
-        searchInput.type = 'text';
-        searchInput.placeholder = 'Buscar condições...';
-        searchInput.style.width = '100%';
-        searchInput.style.padding = '8px 12px';
-        searchInput.style.border = '1px solid #ff6b6b';
-        searchInput.style.borderRadius = '6px';
-        searchInput.style.background = '#23243a';
-        searchInput.style.color = '#ecf0f1';
-        searchInput.style.fontSize = '14px';
-        searchInput.style.boxSizing = 'border-box';
-
-        searchInput.oninput = () => {
-            renderConditionsList(searchInput.value);
-        };
-
-        searchContainer.appendChild(searchInput);
-        popup.appendChild(searchContainer);
-
-        // Dica sobre o sistema de CTRL
-        const conditionTip = createCtrlTipMessage('item');
-        popup.appendChild(conditionTip);
-
-        // Lista de condições
-        const conditionsList = document.createElement('div');
-        conditionsList.style.display = 'flex';
-        conditionsList.style.flexDirection = 'column';
-        conditionsList.style.gap = '8px';
-        conditionsList.style.marginTop = '2px';
-        popup.appendChild(conditionsList);
-
-        function renderConditionsList(filterText = '') {
-            conditionsList.innerHTML = '';
-
-            const conditions = getConditionsList();
-            const filteredConditions = conditions.filter(condition =>
-                condition.nome.toLowerCase().includes(filterText.toLowerCase()) ||
-                condition.descricao.toLowerCase().includes(filterText.toLowerCase())
-            );
-
-            // Se não há condições filtradas, mostra mensagem
-            if (filteredConditions.length === 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#ff6b6b';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.style.background = 'rgba(255, 107, 107, 0.1)';
-                noResultsMessage.style.border = '1px solid rgba(255, 107, 107, 0.3)';
-                noResultsMessage.style.borderRadius = '8px';
-                noResultsMessage.style.marginTop = '10px';
-
-                if (filterText) {
-                    const noResultsMessage = createNoResultsMessage(filterText, 'condição', 'red');
-                    conditionsList.appendChild(noResultsMessage);
-                    return;
-                } else {
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">⚠️</div>
-                        <div>Nenhuma condição disponível</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
-                    `;
-                }
-
-                conditionsList.appendChild(noResultsMessage);
-                return;
-            }
-
-            filteredConditions.forEach(condition => {
-                const isActive = isConditionActive(condition.nome);
-
-                const conditionContainer = document.createElement('div');
-                conditionContainer.style.background = isActive ? '#3d2a2a' : '#23243a';
-                conditionContainer.style.border = `1px solid ${isActive ? '#ff6b6b' : '#4a4a5a'}`;
-                conditionContainer.style.borderRadius = '8px';
-                conditionContainer.style.padding = '12px';
-                conditionContainer.style.cursor = 'pointer';
-                conditionContainer.style.transition = 'all 0.2s';
-
-                conditionContainer.onmouseover = () => {
-                    conditionContainer.style.background = isActive ? '#4d3a3a' : '#2a2b4a';
-                };
-
-                conditionContainer.onmouseout = () => {
-                    conditionContainer.style.background = isActive ? '#3d2a2a' : '#23243a';
-                };
-
-                conditionContainer.onclick = () => {
-                    toggleCondition(condition.nome);
-                    renderConditionsList(searchInput.value);
-                };
-
-                // Cabeçalho da condição
-                const conditionHeader = document.createElement('div');
-                conditionHeader.style.display = 'flex';
-                conditionHeader.style.justifyContent = 'space-between';
-                conditionHeader.style.alignItems = 'center';
-                conditionHeader.style.marginBottom = '6px';
-
-                const conditionName = document.createElement('div');
-                conditionName.textContent = condition.nome;
-                conditionName.style.color = isActive ? '#ff6b6b' : '#ecf0f1';
-                conditionName.style.fontSize = '15px';
-                conditionName.style.fontWeight = 'bold';
-
-                const statusIndicator = document.createElement('div');
-                statusIndicator.textContent = isActive ? '●' : '○';
-                statusIndicator.style.color = isActive ? '#ff6b6b' : '#4a4a5a';
-                statusIndicator.style.fontSize = '18px';
-                statusIndicator.style.fontWeight = 'bold';
-
-                conditionHeader.appendChild(conditionName);
-                conditionHeader.appendChild(statusIndicator);
-                conditionContainer.appendChild(conditionHeader);
-
-                // Descrição da condição
-                const conditionDesc = document.createElement('div');
-                conditionDesc.textContent = condition.descricao;
-                conditionDesc.style.color = '#ecf0f1';
-                conditionDesc.style.fontSize = '13px';
-                conditionDesc.style.lineHeight = '1.4';
-                conditionDesc.style.marginBottom = '6px';
-                conditionContainer.appendChild(conditionDesc);
-
-                // Efeitos da condição
-                const conditionEffects = document.createElement('div');
-                conditionEffects.textContent = condition.efeitos;
-                conditionEffects.style.color = '#ffa726';
-                conditionEffects.style.fontSize = '12px';
-                conditionEffects.style.fontWeight = 'bold';
-                conditionEffects.style.lineHeight = '1.3';
-                conditionContainer.appendChild(conditionEffects);
-
-                conditionsList.appendChild(conditionContainer);
-            });
-        }
-
-        renderConditionsList();
-        document.body.appendChild(popup);
-
-        // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'red');
-    }
-
     // Função para criar popup de efeitos
     function createEffectsPopup() {
         // Remove popup existente se houver
@@ -13338,8 +13182,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 updateEffectsBadge();
             }, 100);
         };
-        header.appendChild(title);
         header.appendChild(closeBtn);
+        header.appendChild(title);
         popup.appendChild(header);
 
 
