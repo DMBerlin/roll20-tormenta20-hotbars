@@ -27,7 +27,7 @@ async function build() {
     // Ler o arquivo de componentes bundle
     const componentsBundlePath = path.join(__dirname, '..', '..', 'components', 'bundle.js');
     let componentsBundleContent = '';
-    
+
     if (fs.existsSync(componentsBundlePath)) {
       componentsBundleContent = fs.readFileSync(componentsBundlePath, 'utf8');
       console.log('📦 Bundle de componentes carregado');
@@ -44,9 +44,14 @@ async function build() {
     const combinedContent = componentsBundleContent + '\n\n' + mainJsContent;
     console.log('🔗 Conteúdo combinado (componentes + main.js)');
 
-    // Minificar o código
+    // Extrair metadata do Tampermonkey (se presente)
+    const metadataMatch = combinedContent.match(/\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/);
+    const metadata = metadataMatch ? metadataMatch[0] + '\n\n' : '';
+    const codeWithoutMetadata = combinedContent.replace(/\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==\s*/, '');
+
+    // Minificar o código (sem metadata)
     console.log('⚡ Minificando código...');
-    const minifiedResult = await minify(combinedContent, {
+    const minifiedResult = await minify(codeWithoutMetadata, {
       compress: {
         drop_console: false, // Manter console.log para debug
         drop_debugger: true,
@@ -66,9 +71,12 @@ async function build() {
       throw new Error(`Erro na minificação: ${minifiedResult.error}`);
     }
 
+    // Combinar metadata com código minificado
+    const finalContent = metadata + minifiedResult.code;
+
     // Salvar arquivo minificado
     const outputPath = path.join(distDir, 'tormenta20hotbar.js');
-    fs.writeFileSync(outputPath, minifiedResult.code);
+    fs.writeFileSync(outputPath, finalContent);
 
     // Calcular tamanhos
     const originalSize = Buffer.byteLength(combinedContent, 'utf8');
