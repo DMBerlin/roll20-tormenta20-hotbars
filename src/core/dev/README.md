@@ -4,7 +4,7 @@ Este script permite abrir o arquivo HTML de desenvolvimento de forma dinâmica, 
 
 ## Como funciona
 
-O script `dev-server.js`:
+O script `server.js`:
 
 1. **Detecta automaticamente** o caminho do projeto usando `path.resolve()`
 2. **Verifica se o arquivo HTML existe** antes de tentar abri-lo
@@ -39,7 +39,7 @@ pnpm dev
 src/
 ├── core/
 │   ├── dev/
-│   │   ├── dev-server.js    # Script principal
+│   │   ├── server.js    # Script principal
 │   │   └── README.md        # Esta documentação
 │   ├── build/
 │   └── versioning/
