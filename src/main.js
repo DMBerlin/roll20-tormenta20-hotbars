@@ -4640,7 +4640,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 <p><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
             </div>
             <div style="margin-bottom: 15px;">
-                <h3 style="color: #ffb86c; margin-bottom: 10px;">Ações</h3>
                 <div style="display: flex; justify-content: center;">
                     <button id="clear-all-data-btn" style="width: 100%; padding: 12px 20px; border: 1px solid #ff6e6e; border-radius: 6px; background: transparent; color: #ff6e6e; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s ease;" title="Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página">Limpar Dados</button>
                 </div>
