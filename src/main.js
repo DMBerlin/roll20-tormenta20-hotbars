@@ -33,32 +33,7 @@
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
 
-    // Função para aplicar estilo consistente aos botões de fechar
-    // Usa o sistema de componentes CloseButton
-    function applyCloseButtonStyle(closeBtn, config = {}) {
-        // Usar o componente CloseButton
-        const closeButtonComponent = window.Roll20Components.createCloseButton({
-            onClick: config.onClick || (() => {
-                // Default close behavior - find and remove the closest popup
-                const popup = closeBtn.closest('.roll20-popup, .popup, [class*="popup"], [class*="modal"]');
-                if (popup) {
-                    popup.remove();
-                } else {
-                    // Fallback: remove the button itself
-                    closeBtn.remove();
-                }
-            }),
-            ...config
-        });
 
-        // Replace the existing button with the component
-        const newCloseBtn = closeButtonComponent.render();
-        if (closeBtn.parentNode) {
-            closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
-        }
-        
-        return closeButtonComponent;
-    }
 
     // Componente reutilizável para botões da hotbar
     function createHotbarButton(config) {
@@ -617,8 +592,7 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
 
@@ -629,16 +603,20 @@
         title.style.fontSize = '18px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('conditions-overlay');
-            if (overlay) overlay.remove();
-        };
-
-        header.appendChild(closeBtn);
-        header.appendChild(title);
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('conditions-overlay');
+                if (overlay) overlay.remove();
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
         // Lista de condições
@@ -1727,12 +1705,10 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -1753,10 +1729,8 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
         popup.appendChild(header);
 
         // Preview do avatar atual
@@ -1997,12 +1971,10 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '10px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -2031,10 +2003,8 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro usando o componente reutilizável
@@ -2342,12 +2312,10 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -2368,10 +2336,8 @@
         title.style.color = '#ffb86c';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
         popup.appendChild(header);
 
         // Lista de módulos (cards)
@@ -2535,12 +2501,10 @@
         popup.style.flexDirection = 'column';
         popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -2561,10 +2525,8 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro usando o componente reutilizável
@@ -2994,8 +2956,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -3082,17 +3043,21 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         titleContainer.appendChild(chipsContainer);
 
-        header.appendChild(titleContainer);
-
-        // Botão de fechar
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
+        header.appendChild(titleContainer);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
             popup.remove();
             const overlay = document.getElementById('spell-cast-overlay');
             if (overlay) overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        }
+        });
+        header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
         // Características da spell
@@ -3842,8 +3807,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e raridade
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -3908,16 +3872,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         nomeRaridade.appendChild(raridade);
 
         pratoInfo.appendChild(nomeRaridade);
-        header.appendChild(pratoInfo);
-
-        // Botão de fechar
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
+        header.appendChild(pratoInfo);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
             modal.remove();
             overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        }
+        });
+        header.appendChild(closeBtn.render());
         modal.appendChild(header);
 
         // Descrição
@@ -4174,8 +4142,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e tipo
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -4240,16 +4207,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         nomeTipo.appendChild(tipo);
 
         bebidaInfo.appendChild(nomeTipo);
-        header.appendChild(bebidaInfo);
-
-        // Botão de fechar
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
+        header.appendChild(bebidaInfo);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
             modal.remove();
             overlay.remove();
-        };
-        header.appendChild(closeBtn);
+        }
+        });
+        header.appendChild(closeBtn.render());
         modal.appendChild(header);
 
         // Descrição
@@ -4631,8 +4602,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '20px';
         header.style.paddingBottom = '15px';
@@ -4645,15 +4615,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontSize = '20px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            overlay.remove();
-            modal.remove();
-        };
-
-        header.appendChild(title);
-        header.appendChild(closeBtn);
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
+                overlay.remove();
+                modal.remove();
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
 
         // Conteúdo simples
         const content = document.createElement('div');
@@ -4789,12 +4763,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.flexDirection = 'column';
             popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -4815,10 +4787,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#ffb86c';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -4952,12 +4922,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.flexDirection = 'column';
             popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -4978,10 +4946,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#ffb86c';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
             popup.appendChild(header);
 
             // Campo de filtro
@@ -5945,8 +5911,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -5956,17 +5921,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#6ec6ff';
         title.style.margin = '0';
         title.style.fontSize = '20px';
-        title.style.fontWeight = 'bold';
-
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
+        title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
             modal.remove();
             const overlay = document.getElementById('skill-detail-overlay');
             if (overlay) overlay.remove();
-        };
-        header.appendChild(title);
-        header.appendChild(closeBtn);
+        }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
         modal.appendChild(header);
 
         // Descrição da skill
@@ -7169,28 +7137,30 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '15px';
-            header.style.width = '100%';
-
-            const title = document.createElement('h3');
-            title.textContent = 'Manobras de Combate';
-            title.style.color = '#ecf0f1';
-            title.style.margin = '0';
-            title.style.fontSize = '18px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            header.style.width = '100%';        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('maneuvers-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(title);
-            header.appendChild(closeBtn);
+            }
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = 'Manobras de Combate';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '18px';
+        title.style.fontWeight = 'bold';        header.appendChild(title);
+        header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Campo de filtro
@@ -7561,28 +7531,30 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
-            header.style.width = '100%';
-
-            const title = document.createElement('h3');
-            title.textContent = 'Efeitos no Ataque';
-            title.style.color = '#ecf0f1';
-            title.style.margin = '0';
-            title.style.fontSize = '17px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            header.style.width = '100%';        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(title);
-            header.appendChild(closeBtn);
+            }
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = 'Efeitos no Ataque';
+        title.style.color = '#ecf0f1';
+        title.style.margin = '0';
+        title.style.fontSize = '17px';
+        title.style.fontWeight = 'bold';        header.appendChild(title);
+        header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Obter nível do personagem
@@ -8252,8 +8224,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho fixo
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.width = '100%';
         header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -8273,15 +8244,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.flex = '1'; // Ocupa o espaço disponível
         title.style.minWidth = '0'; // Permite que o texto seja cortado se necessário
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('hunter-class-overlay');
-            if (overlay) overlay.remove();
-        };
-        header.appendChild(title);
-        header.appendChild(closeBtn);
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('hunter-class-overlay');
+                if (overlay) overlay.remove();
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
         // Sistema de Abas fixo
@@ -9017,8 +8993,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -9029,16 +9004,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.color = '#8B4513';
             title.style.margin = '0';
             title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 modal.remove();
                 overlay.remove();
-            };
-            header.appendChild(title);
-            header.appendChild(closeBtn);
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
             modal.appendChild(header);
 
             // Descrição
@@ -9320,8 +9298,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -9332,16 +9309,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.color = '#8B4513';
             title.style.margin = '0';
             title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 modal.remove();
                 overlay.remove();
-            };
-            header.appendChild(closeBtn);
-            header.appendChild(title);
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
             modal.appendChild(header);
 
             // Descrição
@@ -11006,12 +10986,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         popup.style.flexDirection = 'column';
         popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';
-        header.style.justifyContent = 'flex-start';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-        header.style.gap = '15px';
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -11032,10 +11010,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';
-
+        title.style.fontWeight = 'bold';        header.appendChild(title);
         header.appendChild(closeBtn.render());
-        header.appendChild(title);
         popup.appendChild(header);
 
         // Barra de filtro
@@ -11326,8 +11302,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11361,17 +11336,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
             titleContainer.appendChild(originTag);
 
-            header.appendChild(titleContainer);
-
-            // Botão de fechar
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            header.appendChild(titleContainer);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(closeBtn);
+            }
+        });
+        header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -11566,8 +11545,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11601,17 +11579,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
             titleContainer.appendChild(originTag);
 
-            header.appendChild(titleContainer);
-
-            // Botão de fechar
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            header.appendChild(titleContainer);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(closeBtn);
+            }
+        });
+        header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -11766,8 +11748,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11801,17 +11782,21 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             originTag.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
             titleContainer.appendChild(originTag);
 
-            header.appendChild(titleContainer);
-
-            // Botão de fechar
-            const closeBtn = document.createElement('button');
-            applyCloseButtonStyle(closeBtn);
-            closeBtn.onclick = () => {
+            header.appendChild(titleContainer);        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
                 if (overlay) overlay.remove();
-            };
-            header.appendChild(closeBtn);
+            }
+        });
+        header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -13183,8 +13168,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'flex-start';
-        header.style.gap = '15px';
+        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -13196,20 +13180,25 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        applyCloseButtonStyle(closeBtn);
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('effects-overlay');
-            if (overlay) overlay.remove();
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('effects-overlay');
+                if (overlay) overlay.remove();
 
-            // Atualiza o badge após fechar o popup
-            setTimeout(() => {
-                updateEffectsBadge();
-            }, 100);
-        };
-        header.appendChild(closeBtn);
-        header.appendChild(title);
+                // Atualiza o badge após fechar o popup
+                setTimeout(() => {
+                    updateEffectsBadge();
+                }, 100);
+            }
+        });        header.appendChild(title);
+        header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
 
