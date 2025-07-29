@@ -24,14 +24,29 @@ async function build() {
       console.log('📁 Pasta dist criada');
     }
 
+    // Ler o arquivo de componentes bundle
+    const componentsBundlePath = path.join(__dirname, '..', '..', 'components', 'bundle.js');
+    let componentsBundleContent = '';
+    
+    if (fs.existsSync(componentsBundlePath)) {
+      componentsBundleContent = fs.readFileSync(componentsBundlePath, 'utf8');
+      console.log('📦 Bundle de componentes carregado');
+    } else {
+      console.log('⚠️ Bundle de componentes não encontrado, continuando sem componentes');
+    }
+
     // Ler o arquivo main.js
     const mainJsPath = path.join(__dirname, '..', '..', 'main.js');
     const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
     console.log('📖 Arquivo main.js lido');
 
+    // Combinar componentes bundle com main.js
+    const combinedContent = componentsBundleContent + '\n\n' + mainJsContent;
+    console.log('🔗 Conteúdo combinado (componentes + main.js)');
+
     // Minificar o código
     console.log('⚡ Minificando código...');
-    const minifiedResult = await minify(mainJsContent, {
+    const minifiedResult = await minify(combinedContent, {
       compress: {
         drop_console: false, // Manter console.log para debug
         drop_debugger: true,
@@ -56,7 +71,7 @@ async function build() {
     fs.writeFileSync(outputPath, minifiedResult.code);
 
     // Calcular tamanhos
-    const originalSize = Buffer.byteLength(mainJsContent, 'utf8');
+    const originalSize = Buffer.byteLength(combinedContent, 'utf8');
     const minifiedSize = Buffer.byteLength(minifiedResult.code, 'utf8');
     const compressionRatio = ((originalSize - minifiedSize) / originalSize * 100).toFixed(1);
 
