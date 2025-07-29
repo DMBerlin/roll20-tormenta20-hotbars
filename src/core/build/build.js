@@ -1,27 +1,33 @@
 const fs = require('fs');
 const path = require('path');
 const { minify } = require('terser');
+const { execSync } = require('child_process');
 
 async function build() {
   try {
     console.log('🔨 Iniciando build...');
 
+    // Detectar branch atual
+    let currentBranch = 'unknown';
+    try {
+      currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+    } catch {
+      console.log('⚠️ Não foi possível detectar a branch atual (não é um repositório git ou git não está disponível)');
+    }
+
+    console.log(`🌿 Branch atual: ${currentBranch}`);
+
     // Criar pasta dist se não existir
-    const distDir = path.join(__dirname, '..', '..', 'dist');
+    const distDir = path.join(__dirname, '..', '..', '..', 'dist');
     if (!fs.existsSync(distDir)) {
       fs.mkdirSync(distDir, { recursive: true });
       console.log('📁 Pasta dist criada');
     }
 
     // Ler o arquivo main.js
-    const mainJsPath = path.join(__dirname, '..', '..', 'src', 'main.js');
+    const mainJsPath = path.join(__dirname, '..', '..', 'main.js');
     const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
     console.log('📖 Arquivo main.js lido');
-
-    // Salvar versão de desenvolvimento (não minificada)
-    const devPath = path.join(distDir, 'tormenta20hotbar.dev.js');
-    fs.writeFileSync(devPath, mainJsContent);
-    console.log('📁 Versão de desenvolvimento salva');
 
     // Minificar o código
     console.log('⚡ Minificando código...');
@@ -58,8 +64,15 @@ async function build() {
     console.log(`📊 Tamanho original: ${(originalSize / 1024).toFixed(2)} KB`);
     console.log(`📊 Tamanho minificado: ${(minifiedSize / 1024).toFixed(2)} KB`);
     console.log(`📊 Redução: ${compressionRatio}%`);
-    console.log(`📁 Arquivo de produção: ${outputPath}`);
-    console.log(`📁 Arquivo de desenvolvimento: ${devPath}`);
+    console.log(`📁 Arquivo gerado: ${outputPath}`);
+
+    if (currentBranch === 'main') {
+      console.log('🚀 Build da branch main - pronto para produção!');
+    } else if (currentBranch === 'development') {
+      console.log('🔧 Build da branch development - para testes');
+    } else {
+      console.log(`🔧 Build da branch ${currentBranch} - para desenvolvimento`);
+    }
 
   } catch (error) {
     console.error('❌ Erro durante o build:', error.message);

@@ -27,7 +27,7 @@ A hotbar agora exibe a versão atual do script no canto superior direito da head
    
    Ou diretamente:
    ```bash
-   node update-version.js
+   node src/core/versioning/update-version.js
    ```
 
 ### Método 2: Atualização Manual
@@ -41,8 +41,8 @@ A hotbar agora exibe a versão atual do script no canto superior direito da head
 
 ## 📁 Arquivos Envolvidos
 
-- **`tormenta20/hotbars/main.js`**: Contém a constante `SCRIPT_VERSION` e o indicador visual
-- **`update-version.js`**: Script para atualização automática da versão
+- **`src/main.js`**: Contém a constante `SCRIPT_VERSION` e o indicador visual
+- **`src/core/versioning/update-version.js`**: Script para atualização automática da versão
 - **`package.json`**: Contém o script npm `update-version`
 
 ## 🎯 Fluxo de Trabalho Recomendado

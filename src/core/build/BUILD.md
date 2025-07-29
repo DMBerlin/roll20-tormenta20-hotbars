@@ -60,7 +60,10 @@ roll20/
 ├── dist/
 │   ├── tormenta20hotbar.js      # Versão minificada
 │   └── tormenta20hotbar.dev.js  # Versão desenvolvimento
-├── build.js                 # Script de build
+├── src/
+│   └── core/
+│       └── build/
+│           └── build.js    # Script de build
 ├── toggle-env.js           # Script de alternância de ambiente
 └── package.json            # Configurações e scripts
 ```

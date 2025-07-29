@@ -11,9 +11,31 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     ├── package.json
     ├── package-lock.json
     ├── eslint.config.mjs
-    └── tormenta20/
-        └── hotbars/
-            └── main.js
+    ├── src/
+    │   ├── main.js
+    │   ├── components/
+    │   │   ├── README.md
+    │   │   ├── HotbarButton.md
+    │   │   ├── HotbarButtonExamples.js
+    │   │   ├── Tooltip.md
+    │   │   └── TooltipExamples.js
+    │   ├── playground/
+    │   │   ├── index.html
+    │   │   ├── README.md
+    │   │   └── search-example.html
+    │   ├── assets/
+    │   │   ├── bebidas.md
+    │   │   ├── condicoes.md
+    │   │   ├── dishes-icons.md
+    │   │   ├── dishes.md
+    │   │   ├── pericias.md
+    │   │   └── pratos-especiais.md
+    │   └── core/
+    │       ├── build/
+    │       │   └── build.js
+    │       └── versioning/
+    │           ├── update-version.js
+    │           └── VERSIONING.md
 ```
 
 ## 🎯 Scripts Disponíveis
@@ -64,6 +86,36 @@ Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, es
 - **Responsivo**: Interface adaptável a diferentes tamanhos de tela
 - **Performance Otimizada**: Código eficiente para não impactar o desempenho do Roll20
 - **Compatibilidade**: Funciona com a versão atual do Roll20
+- **Componentes Reutilizáveis**: Sistema modular com componentes padronizados
+
+#### 🧩 Componentes
+
+O projeto agora inclui um sistema de componentes reutilizáveis:
+
+- **HotbarButton**: Componente padronizado para botões da hotbar
+  - Suporte a temas azul e vermelho
+  - Sistema de badges opcional
+  - Animações e interações consistentes
+  - Documentação completa em `src/components/HotbarButton.md`
+  - Exemplos práticos em `src/components/HotbarButtonExamples.js`
+
+- **Tooltip**: Componente padronizado para tooltips
+  - Suporte a múltiplos temas (azul, vermelho, verde, roxo)
+  - Sistema de tags customizáveis
+  - Posicionamento inteligente (direita, esquerda, acima, abaixo)
+  - Animações suaves e responsivo
+  - Documentação completa em `src/components/Tooltip.md`
+  - Exemplos práticos em `src/components/TooltipExamples.js`
+
+- **SearchInput**: Componente reutilizável para inputs de busca/filtro
+  - Suporte a múltiplos temas (azul, laranja, roxo, verde, vermelho)
+  - Botão de limpar automático
+  - Auto-focus opcional
+  - Callbacks flexíveis para input e clear
+  - API completa para manipulação programática
+  - Design responsivo e acessível
+  - Documentação completa em `src/components/README.md`
+  - Exemplo interativo em `src/playground/search-example.html`
 
 ## 🛠️ Desenvolvimento
 
@@ -84,7 +136,23 @@ npm install
 ```bash
 # Executar linting e correção automática
 npm run lint
+
+# Gerar build do script
+npm run build
+
+# Atualizar versão
+npm run update-version
 ```
+
+### Sistema de Build
+
+O projeto utiliza um sistema de build baseado na branch atual:
+
+- **Branch `main`**: Build para produção
+- **Branch `development`**: Build para testes
+- **Outras branches**: Build para desenvolvimento
+
+O comando `npm run build` gera automaticamente o arquivo `dist/tormenta20hotbar.js` baseado na branch atual, eliminando a necessidade de arquivos separados para desenvolvimento e produção.
 
 ### Configuração do ESLint
 

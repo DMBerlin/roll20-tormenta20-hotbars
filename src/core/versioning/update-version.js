@@ -15,6 +15,30 @@ function getLatestGitTag() {
   }
 }
 
+// Função para atualizar a tag @version do Tampermonkey
+function updateTampermonkeyVersion(filePath, newVersion) {
+  try {
+    let content = fs.readFileSync(filePath, 'utf8');
+
+    // Atualizar a tag @version do Tampermonkey (remover o 'v' do início se existir)
+    const versionWithoutV = newVersion.startsWith('v') ? newVersion.substring(1) : newVersion;
+    const versionRegex = /\/\/ @version\s+([^\s]+)/;
+
+    if (versionRegex.test(content)) {
+      content = content.replace(versionRegex, `// @version      ${versionWithoutV}`);
+      fs.writeFileSync(filePath, content, 'utf8');
+      console.log(`✅ Tag @version do Tampermonkey atualizada para ${versionWithoutV} em ${filePath}`);
+      return true;
+    } else {
+      console.error('❌ Não foi possível encontrar a tag @version do Tampermonkey no arquivo');
+      return false;
+    }
+  } catch (error) {
+    console.error('❌ Erro ao atualizar a tag @version do Tampermonkey:', error.message);
+    return false;
+  }
+}
+
 // Função para atualizar a versão no arquivo main.js
 function updateVersionInFile(filePath, newVersion) {
   try {
@@ -40,7 +64,7 @@ function updateVersionInFile(filePath, newVersion) {
 // Função para atualizar a versão no package.json
 function updatePackageJsonVersion(newVersion) {
   try {
-    const packageJsonPath = path.join(__dirname, '..', '..', 'package.json');
+    const packageJsonPath = path.join(__dirname, '..', '..', '..', 'package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
     packageJson.version = newVersion;
@@ -56,7 +80,7 @@ function updatePackageJsonVersion(newVersion) {
 
 // Função principal
 function main() {
-  const scriptPath = path.join(__dirname, '..', '..', 'src', 'main.js');
+  const scriptPath = path.join(__dirname, '..', '..', 'main.js');
 
   // Verificar se o arquivo existe
   if (!fs.existsSync(scriptPath)) {
@@ -73,13 +97,16 @@ function main() {
 
   console.log(`🏷️  Última tag Git encontrada: ${latestTag}`);
 
-  // Atualizar o arquivo main.js
+  // Atualizar a tag @version do Tampermonkey
+  const tampermonkeySuccess = updateTampermonkeyVersion(scriptPath, latestTag);
+
+  // Atualizar o arquivo main.js (constante SCRIPT_VERSION)
   const mainJsSuccess = updateVersionInFile(scriptPath, latestTag);
 
   // Atualizar o package.json
   const packageJsonSuccess = updatePackageJsonVersion(latestTag);
 
-  if (mainJsSuccess && packageJsonSuccess) {
+  if (tampermonkeySuccess && mainJsSuccess && packageJsonSuccess) {
     console.log('🎉 Atualização de versão concluída com sucesso!');
   } else {
     console.error('❌ Falha na atualização de versão');
@@ -92,4 +119,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { getLatestGitTag, updateVersionInFile, updatePackageJsonVersion }; 
+module.exports = { getLatestGitTag, updateVersionInFile, updatePackageJsonVersion, updateTampermonkeyVersion }; 

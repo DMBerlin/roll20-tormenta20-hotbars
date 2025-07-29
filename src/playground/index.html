@@ -167,6 +167,12 @@
       color: #4CAF50;
     }
 
+    .script-file {
+      cursor: help;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
     .status-error {
       color: #f44336;
     }
@@ -239,6 +245,7 @@
     <h1>🏹 Teste Hotbar - Hot Reload</h1>
     <div class="controls">
       <button class="reload-btn" onclick="reloadScript()">🔄 Recarregar Script</button>
+
       <div class="auto-reload-toggle">
         <label>Auto-reload:</label>
         <label class="toggle">
@@ -252,6 +259,10 @@
   </div>
 
   <div class="status">
+    <div class="status-item">
+      <span class="status-label">Arquivo carregado:</span>
+      <span id="scriptFile" class="status-ok script-file">tormenta20hotbar.js</span>
+    </div>
     <div class="status-item">
       <span class="status-label">Script Status:</span>
       <span id="scriptStatus" class="status-ok">Carregado</span>
@@ -288,12 +299,12 @@
   <div class="logs">
     <div id="logContainer">
       <div class="log-entry log-info">🚀 Sistema de teste iniciado</div>
-      <div class="log-entry log-info">📁 Aguardando carregamento do script main.js</div>
+      <div class="log-entry log-info">📁 Aguardando carregamento do script tormenta20hotbar.js</div>
     </div>
   </div>
 
   <div class="footer">
-    <p>Simulador para desenvolvimento do script main.js</p>
+    <p>Simulador para desenvolvimento do script tormenta20hotbar.js</p>
     <p>Pressione <kbd>Ctrl + '</kbd> para mostrar/ocultar a hotbar (quando carregada)</p>
   </div>
 
@@ -302,6 +313,7 @@
     let scriptElement = null;
     let loadAttempts = 0;
     const maxLoadAttempts = 3;
+    const currentScriptFile = 'tormenta20hotbar.js'; // Sempre usa o arquivo principal
 
     // Função para adicionar logs
     function addLog(message, type = 'info') {
@@ -366,12 +378,19 @@
       loadScript();
     }
 
+
+
     // Função para carregar o script
     function loadScript() {
       const timestamp = new Date().getTime();
+      const scriptPath = `../../dist/${currentScriptFile}?t=${timestamp}`;
       scriptElement = document.createElement('script');
-      scriptElement.src = `../../dist/tormenta20hotbar.dev.js?t=${timestamp}`;
+      scriptElement.src = scriptPath;
       scriptElement.type = 'text/javascript';
+
+      // Atualiza o status do arquivo sendo carregado
+      document.getElementById('scriptFile').textContent = currentScriptFile;
+      document.getElementById('scriptFile').title = scriptPath;
 
       scriptElement.onload = function () {
         document.getElementById('scriptStatus').textContent = 'Carregado';
@@ -394,12 +413,12 @@
           addLog(`🔄 Tentando novamente em 2 segundos...`, 'warning');
           setTimeout(loadScript, 2000);
         } else {
-          addLog(`❌ Máximo de tentativas atingido. Verifique se o arquivo tormenta20/hotbars/cacador.js existe.`, 'error');
+          addLog(`❌ Máximo de tentativas atingido. Verifique se o arquivo dist/${currentScriptFile} existe.`, 'error');
         }
       };
 
       document.head.appendChild(scriptElement);
-      addLog(`📥 Carregando script... (tentativa ${loadAttempts + 1}/${maxLoadAttempts})`, 'info');
+      addLog(`📥 Carregando script: ${currentScriptFile} (tentativa ${loadAttempts + 1}/${maxLoadAttempts})`, 'info');
     }
 
     // Função para verificar se a hotbar foi criada

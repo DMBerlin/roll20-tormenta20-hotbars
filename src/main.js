@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Roll20 Hotbar Extra - Caçador
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.0.2
 // @description  Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20 - Especializada para Caçadores
 // @author       Você
 // @match        https://app.roll20.net/editor/*
@@ -59,6 +59,524 @@
             closeBtn.style.backgroundColor = 'transparent';
         };
     }
+
+    // Componente reutilizável para botões da hotbar
+    function createHotbarButton(config) {
+        const {
+            icon,           // Ícone do botão (emoji ou texto)
+            label,          // Nome/texto do botão
+            onClick,        // Função de callback para o clique
+            theme = 'blue', // Tema: 'blue' ou 'red'
+            badge = null,   // Badge opcional: { text: '1', color: '#4caf50' }
+            dataLabel = null // Atributo data-label opcional
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                background: 'rgba(60,80,120,0.95)',
+                border: '#6ec6ff',
+                hoverBackground: '#6ec6ff',
+                hoverColor: '#222'
+            },
+            red: {
+                background: 'rgba(120,60,60,0.95)',
+                border: '#ff6e6e',
+                hoverBackground: '#ff6e6e',
+                hoverColor: '#222'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Cria o botão principal
+        const btn = document.createElement('button');
+        btn.style.display = 'flex';
+        btn.style.flexDirection = 'column';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        btn.style.padding = '0';
+        btn.style.background = currentTheme.background;
+        btn.style.color = '#fff';
+        btn.style.border = `2px solid ${currentTheme.border}`;
+        btn.style.borderRadius = '8px';
+        btn.style.cursor = 'pointer';
+        btn.style.fontSize = '13px';
+        btn.style.fontWeight = 'bold';
+        btn.style.width = '64px';
+        btn.style.height = '64px';
+        btn.style.transition = 'all 0.2s';
+        btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+        btn.style.textAlign = 'center';
+        btn.style.lineHeight = '1.1';
+        btn.style.position = 'relative'; // Para posicionar o badge
+
+        // Efeitos hover
+        btn.onmouseover = () => {
+            btn.style.background = currentTheme.hoverBackground;
+            btn.style.color = currentTheme.hoverColor;
+            btn.style.transform = 'scale(1.08)';
+        };
+        btn.onmouseout = () => {
+            btn.style.background = currentTheme.background;
+            btn.style.color = '#fff';
+            btn.style.transform = 'scale(1)';
+        };
+
+        // Ícone
+        const iconElement = document.createElement('span');
+        iconElement.textContent = icon;
+        iconElement.style.fontSize = '26px';
+        iconElement.style.marginBottom = '2px';
+        btn.appendChild(iconElement);
+
+        // Texto
+        const labelElement = document.createElement('span');
+        labelElement.textContent = label;
+        labelElement.style.fontSize = '12px';
+        labelElement.style.marginTop = '2px';
+        btn.appendChild(labelElement);
+
+        // Evento de clique
+        if (onClick) {
+            btn.onclick = onClick;
+        }
+
+        // Adicionar atributo data-label se fornecido
+        if (dataLabel) {
+            btn.setAttribute('data-label', dataLabel);
+        }
+
+        // Adicionar badge se fornecido
+        if (badge) {
+            const badgeElement = document.createElement('div');
+            badgeElement.className = 'hotbar-button-badge';
+            badgeElement.style.position = 'absolute';
+            badgeElement.style.top = '-2px';
+            badgeElement.style.right = '-2px';
+            badgeElement.style.background = badge.color || '#4caf50';
+            badgeElement.style.color = '#fff';
+            badgeElement.style.borderRadius = '50%';
+            badgeElement.style.width = '16px';
+            badgeElement.style.height = '16px';
+            badgeElement.style.fontSize = '10px';
+            badgeElement.style.fontWeight = 'bold';
+            badgeElement.style.display = 'flex';
+            badgeElement.style.alignItems = 'center';
+            badgeElement.style.justifyContent = 'center';
+            badgeElement.style.border = '2px solid #23243a';
+            badgeElement.style.zIndex = '1000';
+            badgeElement.textContent = badge.text;
+            btn.appendChild(badgeElement);
+        }
+
+        return btn;
+    }
+
+    // Componente reutilizável para inputs de search
+    function createSearchInput(config) {
+        const {
+            placeholder = 'Filtrar...',           // Placeholder do input
+            onInput = null,                       // Função de callback para o evento input
+            onClear = null,                       // Função de callback para limpar o input
+            theme = 'blue',                       // Tema: 'blue', 'orange', 'purple', 'green', 'red'
+            width = '100%',                       // Largura do container
+            marginBottom = '10px',                // Margem inferior
+            fontSize = '15px',                    // Tamanho da fonte
+            showClearButton = true,               // Se deve mostrar o botão de limpar
+            autoFocus = false                     // Se deve focar automaticamente
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                border: '#6ec6ff',
+                color: '#6ec6ff',
+                background: '#23243a'
+            },
+            orange: {
+                border: '#ffb86c',
+                color: '#ffb86c',
+                background: '#23243a'
+            },
+            purple: {
+                border: '#9c27b0',
+                color: '#9c27b0',
+                background: '#23243a'
+            },
+            green: {
+                border: '#4caf50',
+                color: '#4caf50',
+                background: '#23243a'
+            },
+            red: {
+                border: '#f44336',
+                color: '#f44336',
+                background: '#23243a'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Container principal
+        const filterContainer = document.createElement('div');
+        filterContainer.style.position = 'relative';
+        filterContainer.style.marginBottom = marginBottom;
+        filterContainer.style.width = width;
+
+        // Input principal
+        const filterInput = document.createElement('input');
+        filterInput.type = 'text';
+        filterInput.placeholder = placeholder;
+        filterInput.style.width = '100%';
+        filterInput.style.padding = '10px 28px 10px 12px';
+        filterInput.style.borderRadius = '8px';
+        filterInput.style.border = `1px solid ${currentTheme.border}`;
+        filterInput.style.background = currentTheme.background;
+        filterInput.style.color = '#fff';
+        filterInput.style.fontSize = fontSize;
+        filterInput.style.outline = 'none';
+        filterInput.style.boxSizing = 'border-box';
+        filterInput.style.transition = 'border-color 0.2s ease';
+
+        // Efeitos hover e focus
+        filterInput.onmouseover = () => {
+            filterInput.style.borderColor = currentTheme.color;
+        };
+        filterInput.onmouseout = () => {
+            if (document.activeElement !== filterInput) {
+                filterInput.style.borderColor = currentTheme.border;
+            }
+        };
+        filterInput.onfocus = () => {
+            filterInput.style.borderColor = currentTheme.color;
+            filterInput.style.boxShadow = `0 0 0 2px ${currentTheme.color}20`;
+        };
+        filterInput.onblur = () => {
+            filterInput.style.borderColor = currentTheme.border;
+            filterInput.style.boxShadow = 'none';
+        };
+
+        // Botão X para limpar (opcional)
+        let clearBtn = null;
+        if (showClearButton) {
+            clearBtn = document.createElement('span');
+            clearBtn.textContent = '×';
+            clearBtn.style.position = 'absolute';
+            clearBtn.style.right = '8px';
+            clearBtn.style.top = '50%';
+            clearBtn.style.transform = 'translateY(-50%)';
+            clearBtn.style.cursor = 'pointer';
+            clearBtn.style.color = currentTheme.color;
+            clearBtn.style.fontSize = '18px';
+            clearBtn.style.display = 'none';
+            clearBtn.style.transition = 'all 0.2s ease';
+            clearBtn.style.width = '20px';
+            clearBtn.style.height = '20px';
+            clearBtn.style.display = 'flex';
+            clearBtn.style.alignItems = 'center';
+            clearBtn.style.justifyContent = 'center';
+            clearBtn.style.borderRadius = '50%';
+
+            // Efeitos hover do botão de limpar
+            clearBtn.onmouseover = () => {
+                clearBtn.style.background = `${currentTheme.color}20`;
+                clearBtn.style.color = currentTheme.color;
+            };
+            clearBtn.onmouseout = () => {
+                clearBtn.style.background = 'transparent';
+                clearBtn.style.color = currentTheme.color;
+            };
+
+            clearBtn.onclick = () => {
+                filterInput.value = '';
+                filterInput.dispatchEvent(new Event('input'));
+                filterInput.focus();
+                if (onClear) onClear();
+            };
+        }
+
+        // Event listener para filtrar enquanto o usuário digita
+        filterInput.oninput = () => {
+            if (showClearButton && clearBtn) {
+                if (filterInput.value.length > 0) {
+                    clearBtn.style.display = 'flex';
+                } else {
+                    clearBtn.style.display = 'none';
+                }
+            }
+            if (onInput) onInput(filterInput.value);
+        };
+
+        // Adiciona elementos ao container
+        filterContainer.appendChild(filterInput);
+        if (showClearButton && clearBtn) {
+            filterContainer.appendChild(clearBtn);
+        }
+
+        // Foca automaticamente se solicitado
+        if (autoFocus) {
+            setTimeout(() => {
+                filterInput.focus();
+            }, 100);
+        }
+
+        // Retorna o objeto com elementos e métodos úteis
+        return {
+            container: filterContainer,
+            input: filterInput,
+            clearButton: clearBtn,
+            clear: () => {
+                filterInput.value = '';
+                filterInput.dispatchEvent(new Event('input'));
+                if (onClear) onClear();
+            },
+            focus: () => filterInput.focus(),
+            blur: () => filterInput.blur(),
+            getValue: () => filterInput.value,
+            setValue: (value) => {
+                filterInput.value = value;
+                filterInput.dispatchEvent(new Event('input'));
+            },
+            setPlaceholder: (newPlaceholder) => {
+                filterInput.placeholder = newPlaceholder;
+            },
+            setTheme: (newTheme) => {
+                const newThemeColors = themes[newTheme] || themes.blue;
+                filterInput.style.borderColor = newThemeColors.border;
+                if (clearBtn) {
+                    clearBtn.style.color = newThemeColors.color;
+                }
+            }
+        };
+    }
+
+    // Componente reutilizável para tooltips
+    function createTooltip(config) {
+        const {
+            title,           // Título do tooltip
+            description,     // Descrição principal
+            tags = [],       // Array de tags: [{ text: 'Tag', color: '#color', bgColor: '#bgcolor' }]
+            theme = 'blue',  // Tema: 'blue', 'red', 'green', 'purple'
+            position = 'right', // Posição: 'right', 'left', 'top', 'bottom'
+            maxWidth = 320,  // Largura máxima
+            minWidth = 280   // Largura mínima
+        } = config;
+
+        // Configurações de tema
+        const themes = {
+            blue: {
+                border: '#6ec6ff',
+                titleColor: '#6ec6ff',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            red: {
+                border: '#ff6e6e',
+                titleColor: '#ff6e6e',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            green: {
+                border: '#4caf50',
+                titleColor: '#4caf50',
+                background: 'rgba(20,20,30,0.98)'
+            },
+            purple: {
+                border: '#9c27b0',
+                titleColor: '#9c27b0',
+                background: 'rgba(20,20,30,0.98)'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.blue;
+
+        // Cria o elemento tooltip
+        const tooltip = document.createElement('div');
+        tooltip.className = 'roll20-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.background = currentTheme.background;
+        tooltip.style.border = `2px solid ${currentTheme.border}`;
+        tooltip.style.borderRadius = '8px';
+        tooltip.style.padding = '12px';
+        tooltip.style.minWidth = `${minWidth}px`;
+        tooltip.style.maxWidth = `${maxWidth}px`;
+        tooltip.style.zIndex = '10004';
+        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.opacity = '0';
+        tooltip.style.transition = 'opacity 0.2s ease';
+
+        // Conteúdo do tooltip
+        const tooltipContent = document.createElement('div');
+        tooltipContent.style.display = 'flex';
+        tooltipContent.style.flexDirection = 'column';
+        tooltipContent.style.gap = '8px';
+
+        // Título
+        if (title) {
+            const tooltipTitle = document.createElement('div');
+            tooltipTitle.textContent = title;
+            tooltipTitle.style.color = currentTheme.titleColor;
+            tooltipTitle.style.fontSize = '16px';
+            tooltipTitle.style.fontWeight = 'bold';
+            tooltipTitle.style.marginBottom = '4px';
+            tooltipContent.appendChild(tooltipTitle);
+        }
+
+        // Tags
+        tags.forEach(tag => {
+            const tagElement = document.createElement('div');
+            tagElement.textContent = tag.text;
+            tagElement.style.background = tag.bgColor || currentTheme.titleColor;
+            tagElement.style.color = tag.color || '#23243a';
+            tagElement.style.fontSize = '11px';
+            tagElement.style.fontWeight = 'bold';
+            tagElement.style.borderRadius = '4px';
+            tagElement.style.padding = '2px 8px';
+            tagElement.style.display = 'inline-block';
+            tagElement.style.width = 'fit-content';
+            tagElement.style.marginTop = '2px';
+            tooltipContent.appendChild(tagElement);
+        });
+
+        // Descrição
+        if (description) {
+            const tooltipDesc = document.createElement('div');
+            tooltipDesc.textContent = description;
+            tooltipDesc.style.color = '#ecf0f1';
+            tooltipDesc.style.fontSize = '13px';
+            tooltipDesc.style.lineHeight = '1.4';
+            tooltipDesc.style.marginTop = '6px';
+            tooltipContent.appendChild(tooltipDesc);
+        }
+
+        tooltip.appendChild(tooltipContent);
+
+        // Função para posicionar o tooltip
+        function positionTooltip(element) {
+            const elementRect = element.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            let left, top;
+
+            switch (position) {
+                case 'right':
+                    left = elementRect.right + 10;
+                    top = elementRect.top;
+                    break;
+                case 'left':
+                    left = elementRect.left - tooltipRect.width - 10;
+                    top = elementRect.top;
+                    break;
+                case 'top':
+                    left = elementRect.left + (elementRect.width / 2) - (tooltipRect.width / 2);
+                    top = elementRect.top - tooltipRect.height - 10;
+                    break;
+                case 'bottom':
+                    left = elementRect.left + (elementRect.width / 2) - (tooltipRect.width / 2);
+                    top = elementRect.bottom + 10;
+                    break;
+                default:
+                    left = elementRect.right + 10;
+                    top = elementRect.top;
+            }
+
+            // Ajustar se sair da tela
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - tooltipRect.width - 10;
+            }
+            if (top < 10) {
+                top = elementRect.bottom + 10;
+            }
+            if (top + tooltipRect.height > window.innerHeight - 10) {
+                top = elementRect.top - tooltipRect.height - 10;
+            }
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        // Função para mostrar o tooltip
+        function showTooltip(element) {
+            document.body.appendChild(tooltip);
+            positionTooltip(element);
+            setTimeout(() => {
+                tooltip.style.opacity = '1';
+            }, 10);
+        }
+
+        // Função para esconder o tooltip
+        function hideTooltip() {
+            tooltip.style.opacity = '0';
+            setTimeout(() => {
+                if (tooltip.parentNode) {
+                    tooltip.parentNode.removeChild(tooltip);
+                }
+            }, 200);
+        }
+
+        return {
+            element: tooltip,
+            show: showTooltip,
+            hide: hideTooltip,
+            position: positionTooltip
+        };
+    }
+
+    // Função para adicionar tooltip a um elemento
+    // Esta função é usada para facilitar a adição de tooltips a elementos existentes
+    function addTooltipToElement(element, tooltipConfig) {
+        let tooltipInstance = null;
+        let tooltipTimeout = null;
+
+        element.addEventListener('mouseenter', () => {
+            // Criar tooltip após delay
+            tooltipTimeout = setTimeout(() => {
+                tooltipInstance = createTooltip(tooltipConfig);
+                tooltipInstance.show(element);
+            }, tooltipConfig.delay || 300);
+        });
+
+        element.addEventListener('mouseleave', () => {
+            // Limpar timeout e esconder tooltip
+            if (tooltipTimeout) {
+                clearTimeout(tooltipTimeout);
+                tooltipTimeout = null;
+            }
+            if (tooltipInstance) {
+                tooltipInstance.hide();
+                tooltipInstance = null;
+            }
+        });
+
+        element.addEventListener('click', () => {
+            // Esconder tooltip ao clicar
+            if (tooltipTimeout) {
+                clearTimeout(tooltipTimeout);
+                tooltipTimeout = null;
+            }
+            if (tooltipInstance) {
+                tooltipInstance.hide();
+                tooltipInstance = null;
+            }
+        });
+
+        return {
+            element: element,
+            tooltip: tooltipInstance,
+            show: () => tooltipInstance?.show(element),
+            hide: () => tooltipInstance?.hide()
+        };
+    }
+
+    // Exportar a função para uso global (para evitar erro de linting)
+    if (typeof window !== 'undefined') {
+        window.addTooltipToElement = addTooltipToElement;
+    }
+
+
+
+
 
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
@@ -357,6 +875,27 @@
             }
         `;
         document.head.appendChild(style);
+    }
+
+    // Componente reutilizável para aviso de CTRL
+    function createCtrlTipMessage(type = 'item') {
+        const tipMessages = {
+            'skill': '💡 Segure CTRL + Clique para ver detalhes da perícia',
+            'spell': '💡 Segure CTRL + Clique para ver detalhes da magia',
+            'power': '💡 Segure CTRL + Clique para ver detalhes do poder',
+            'item': '💡 Segure CTRL + Clique para ver detalhes do item'
+        };
+
+        const tip = document.createElement('div');
+        tip.textContent = tipMessages[type] || tipMessages.item;
+        tip.style.fontSize = '11px';
+        tip.style.color = '#6ec6ff';
+        tip.style.marginBottom = '10px';
+        tip.style.fontStyle = 'italic';
+        tip.style.textAlign = 'center';
+        tip.style.width = '100%';
+
+        return tip;
     }
 
     // Função para aplicar scrollbars diretamente nos elementos scrolláveis
@@ -1194,6 +1733,14 @@
         overlay.style.background = 'rgba(0,0,0,0.5)';
         overlay.style.zIndex = '10000';
         overlay.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             overlay.remove();
             popup.remove();
         };
@@ -1229,25 +1776,23 @@
         header.style.width = '100%';
 
         const title = document.createElement('h3');
-        title.textContent = 'Skills';
+        title.textContent = 'Perícias';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        // Dica sobre o sistema de CTRL
-        const tip = document.createElement('div');
-        tip.textContent = '💡 Segure CTRL + Clique para ver detalhes da perícia';
-        tip.style.fontSize = '11px';
-        tip.style.color = '#6ec6ff';
-        tip.style.marginTop = '5px';
-        tip.style.fontStyle = 'italic';
-        tip.style.textAlign = 'center';
-        tip.style.width = '100%';
-
         const closeBtn = document.createElement('button');
         applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             popup.remove();
             const overlay = document.getElementById('skills-overlay');
             if (overlay) overlay.remove();
@@ -1256,63 +1801,21 @@
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Barra de filtro
-        const filterContainer = document.createElement('div');
-        filterContainer.style.position = 'relative';
-        filterContainer.style.marginBottom = '10px';
-        const filterInput = document.createElement('input');
-        filterInput.type = 'text';
-        filterInput.placeholder = 'Filter skills...';
-        filterInput.style.width = '100%';
-        filterInput.style.padding = '10px 28px 10px 12px';
-        filterInput.style.borderRadius = '8px';
-        filterInput.style.border = '1px solid #6ec6ff';
-        filterInput.style.background = '#23243a';
-        filterInput.style.color = '#fff';
-        filterInput.style.fontSize = '14px';
-        filterInput.style.outline = 'none';
-        filterInput.style.boxSizing = 'border-box';
-        filterInput.style.fontSize = '15px';
-        // Botão X para limpar
-        const clearBtn = document.createElement('span');
-        clearBtn.textContent = '×';
-        clearBtn.style.position = 'absolute';
-        clearBtn.style.right = '8px';
-        clearBtn.style.top = '50%';
-        clearBtn.style.transform = 'translateY(-50%)';
-        clearBtn.style.cursor = 'pointer';
-        clearBtn.style.color = '#6ec6ff';
-        clearBtn.style.fontSize = '18px';
-        clearBtn.style.display = 'none';
-        clearBtn.onclick = () => {
-            filterInput.value = '';
-            filterInput.dispatchEvent(new Event('input'));
-            filterInput.focus();
-        };
-
-        // Event listener para filtrar enquanto o usuário digita
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
+        // Barra de filtro usando o componente reutilizável
+        const searchComponent = createSearchInput({
+            placeholder: 'Filtrar perícias...',
+            theme: 'blue',
+            onInput: () => {
+                updateSkillList();
+            },
+            onClear: () => {
+                updateSkillList();
             }
-            updateSkillList();
-        };
-
-        filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
-        popup.appendChild(filterContainer);
+        });
+        popup.appendChild(searchComponent.container);
 
         // Dica sobre o sistema de CTRL
-        const skillTip = document.createElement('div');
-        skillTip.textContent = '💡 Segure CTRL + Clique para ver detalhes da perícia';
-        skillTip.style.fontSize = '11px';
-        skillTip.style.color = '#6ec6ff';
-        skillTip.style.marginBottom = '10px';
-        skillTip.style.fontStyle = 'italic';
-        skillTip.style.textAlign = 'center';
-        skillTip.style.width = '100%';
+        const skillTip = createCtrlTipMessage('skill');
         popup.appendChild(skillTip);
 
         // Lista de skills (nome, comando)
@@ -1357,7 +1860,15 @@
         popup.appendChild(skillList);
 
         function updateSkillList() {
-            const filter = filterInput.value.trim().toLowerCase();
+            // Remove todos os tooltips existentes antes de atualizar a lista
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
+            const filter = searchComponent.getValue().trim().toLowerCase();
             const favorites = getFavorites();
 
             // Filtra e ordena as skills
@@ -1374,17 +1885,7 @@
 
             // Verifica se não há skills encontradas durante a filtragem
             if (orderedSkills.length === 0 && filter.length > 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#999';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">🔍</div>
-                    <div>Nenhuma skill encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                `;
+                const noResultsMessage = createNoResultsMessage(filter, 'perícia', 'blue');
                 skillList.appendChild(noResultsMessage);
                 return;
             }
@@ -1402,7 +1903,24 @@
 
                 // Botão principal da skill
                 const btn = document.createElement('button');
-                btn.textContent = skill.nome;
+
+
+
+                // Cria o conteúdo do botão centralizado
+                const btnContent = document.createElement('div');
+                btnContent.style.display = 'flex';
+                btnContent.style.alignItems = 'center';
+                btnContent.style.justifyContent = 'center';
+                btnContent.style.width = '100%';
+                btnContent.style.padding = '0 8px';
+
+                const skillName = document.createElement('span');
+                skillName.textContent = skill.nome;
+                skillName.style.textAlign = 'center';
+                skillName.style.fontWeight = 'bold';
+                btnContent.appendChild(skillName);
+
+                btn.appendChild(btnContent);
                 btn.style.flex = '1';
                 btn.style.background = '#23243a';
                 btn.style.color = '#fff';
@@ -1422,8 +1940,9 @@
                     btn.style.color = '#fff';
                 };
 
-                // Adiciona hover com descrição breve da skill
-                let tooltip = null;
+                // Adiciona hover com tooltip detalhado da skill
+                let tooltipInstance = null;
+                let tooltipTimeout = null;
 
                 btn.onmouseenter = () => {
                     // Verifica se existe descrição para esta skill
@@ -1431,75 +1950,46 @@
                     if (!skillData || !skillData.descricao) return;
 
                     // Remove tooltip existente
-                    if (tooltip) {
-                        tooltip.remove();
-                        tooltip = null;
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
 
-                    // Cria tooltip personalizado
-                    tooltip = document.createElement('div');
-                    tooltip.style.position = 'fixed';
-                    tooltip.style.background = 'rgba(0, 0, 0, 0.9)';
-                    tooltip.style.color = '#ecf0f1';
-                    tooltip.style.padding = '8px 12px';
-                    tooltip.style.borderRadius = '6px';
-                    tooltip.style.fontSize = '12px';
-                    tooltip.style.lineHeight = '1.4';
-                    tooltip.style.maxWidth = '250px';
-                    tooltip.style.wordWrap = 'break-word';
-                    tooltip.style.zIndex = '10002';
-                    tooltip.style.border = '1px solid #6ec6ff';
-                    tooltip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-                    tooltip.style.pointerEvents = 'none';
-                    tooltip.style.opacity = '0';
-                    tooltip.style.transition = 'opacity 0.2s';
-
-                    tooltip.textContent = skillData.descricao;
-
-                    document.body.appendChild(tooltip);
-
-                    // Posiciona o tooltip
-                    const rect = btn.getBoundingClientRect();
-                    const tooltipRect = tooltip.getBoundingClientRect();
-
-                    let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                    let top = rect.top - tooltipRect.height - 8;
-
-                    // Ajusta se sair da tela
-                    if (left < 10) left = 10;
-                    if (left + tooltipRect.width > window.innerWidth - 10) {
-                        left = window.innerWidth - tooltipRect.width - 10;
-                    }
-                    if (top < 10) {
-                        top = rect.bottom + 8;
+                    // Limpa timeout existente
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
                     }
 
-                    tooltip.style.left = left + 'px';
-                    tooltip.style.top = top + 'px';
+                    // Prepara dados para o tooltip - apenas a descrição
+                    const description = skillData.descricao;
 
-                    // Mostra o tooltip com fade in
-                    setTimeout(() => {
-                        if (tooltip) tooltip.style.opacity = '1';
-                    }, 50);
+                    const tooltipConfig = {
+                        title: skill.nome,
+                        description: description,
+                        theme: 'blue',
+                        tags: [
+                            { text: 'Perícia', bgColor: '#6ec6ff', color: '#23243a' }
+                        ]
+                    };
+
+                    // Cria o tooltip usando o componente
+                    tooltipInstance = createTooltip(tooltipConfig);
+                    tooltipInstance.show(btn);
                 };
 
                 btn.onmouseleave = () => {
-                    if (tooltip) {
-                        tooltip.style.opacity = '0';
-                        setTimeout(() => {
-                            if (tooltip) {
-                                tooltip.remove();
-                                tooltip = null;
-                            }
-                        }, 200);
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
                 };
 
                 btn.onclick = (e) => {
                     // Remove tooltip se existir
-                    if (tooltip) {
-                        tooltip.remove();
-                        tooltip = null;
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
                     }
 
                     // Se CTRL está pressionado, abre o modal de detalhamento
@@ -1811,7 +2301,7 @@
         header.style.width = '100%';
 
         const title = document.createElement('h3');
-        title.textContent = 'Spells';
+        title.textContent = 'Magias';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
@@ -1828,50 +2318,22 @@
         header.appendChild(closeBtn);
         popup.appendChild(header);
 
-        // Barra de filtro
-        const filterContainer = document.createElement('div');
-        filterContainer.style.position = 'relative';
-        filterContainer.style.marginBottom = '10px';
-        const filterInput = document.createElement('input');
-        filterInput.type = 'text';
-        filterInput.placeholder = 'Filter spells...';
-        filterInput.style.width = '100%';
-        filterInput.style.padding = '10px 28px 10px 12px';
-        filterInput.style.borderRadius = '8px';
-        filterInput.style.border = '1px solid #6ec6ff';
-        filterInput.style.background = '#23243a';
-        filterInput.style.color = '#fff';
-        filterInput.style.fontSize = '14px';
-        filterInput.style.outline = 'none';
-        filterInput.style.boxSizing = 'border-box';
-        filterInput.style.fontSize = '15px';
-        // Botão X para limpar
-        const clearBtn = document.createElement('span');
-        clearBtn.textContent = '×';
-        clearBtn.style.position = 'absolute';
-        clearBtn.style.right = '8px';
-        clearBtn.style.top = '50%';
-        clearBtn.style.transform = 'translateY(-50%)';
-        clearBtn.style.cursor = 'pointer';
-        clearBtn.style.color = '#6ec6ff';
-        clearBtn.style.fontSize = '18px';
-        clearBtn.style.display = 'none';
-        clearBtn.onclick = () => {
-            filterInput.value = '';
-            filterInput.dispatchEvent(new Event('input'));
-            filterInput.focus();
-        };
-        filterInput.oninput = () => {
-            if (filterInput.value.length > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
+        // Barra de filtro usando o componente reutilizável
+        const searchComponent = createSearchInput({
+            placeholder: 'Filtrar magias...',
+            theme: 'blue',
+            onInput: () => {
+                updateSpellList();
+            },
+            onClear: () => {
+                updateSpellList();
             }
-            updateSpellList();
-        };
-        filterContainer.appendChild(filterInput);
-        filterContainer.appendChild(clearBtn);
-        popup.appendChild(filterContainer);
+        });
+        popup.appendChild(searchComponent.container);
+
+        // Dica sobre o sistema de CTRL
+        const spellTip = createCtrlTipMessage('spell');
+        popup.appendChild(spellTip);
 
         // Lista de spells (nome, comando)
         const spells = [
@@ -1923,7 +2385,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
         popup.appendChild(spellList);
 
         function updateSpellList() {
-            const filter = filterInput.value.trim().toLowerCase();
+            const filter = searchComponent.getValue().trim().toLowerCase();
             spellList.innerHTML = '';
 
             // Filtra spells baseado na raça selecionada
@@ -1953,11 +2415,9 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
                 if (filter.length > 0) {
                     // Mensagem quando há filtro mas nenhum resultado
-                    noSpellsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma magia encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filter, 'magia', 'blue');
+                    spellList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     // Mensagem quando não há magias disponíveis
                     const selectedRace = getSelectedRace();
@@ -2384,15 +2844,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             popup.remove();
             const overlay = document.getElementById('spell-cast-overlay');
@@ -3265,15 +3717,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             modal.remove();
             overlay.remove();
@@ -3606,15 +4050,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Botão de fechar
         const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
+        applyCloseButtonStyle(closeBtn);
         closeBtn.onclick = () => {
             modal.remove();
             overlay.remove();
@@ -3959,8 +4395,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         return card;
     }
 
-    // Função para criar mensagem de "nenhum resultado encontrado"
-    function createNoResultsMessage(filterText, itemType) {
+    // Componente padronizado para mensagens de "nenhum resultado encontrado"
+    function createNoResultsMessage(filterText, itemName, theme = 'blue') {
+        const themes = {
+            blue: '#6ec6ff',
+            orange: '#ffb86c',
+            purple: '#9c27b0',
+            green: '#4caf50',
+            red: '#ff6b6b',
+            brown: '#8B4513'
+        };
+
+        const themeColor = themes[theme] || themes.blue;
+
         const noResultsMessage = document.createElement('div');
         noResultsMessage.style.textAlign = 'center';
         noResultsMessage.style.padding = '20px';
@@ -3969,7 +4416,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         noResultsMessage.style.fontStyle = 'italic';
         noResultsMessage.innerHTML = `
             <div style="margin-bottom: 8px;">🔍</div>
-            <div>Nenhum ${itemType === 'food' ? 'prato especial' : 'bebida artoniana'} encontrado para "<strong style="color: #ffb86c;">${filterText}</strong>"</div>
+            <div>Nenhum ${itemName} encontrado para "<strong style="color: ${themeColor};">${filterText}</strong>"</div>
             <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
         `;
         return noResultsMessage;
@@ -4037,15 +4484,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('pratos-overlay');
@@ -4074,6 +4513,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             filterInput.style.fontSize = '15px';
             filterContainer.appendChild(filterInput);
             popup.appendChild(filterContainer);
+
+
 
             // Lista de pratos (cards)
             const pratosList = document.createElement('div');
@@ -4113,7 +4554,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 // Verifica se não há pratos encontrados durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = createNoResultsMessage(filterText, 'food');
+                    const noResultsMessage = createNoResultsMessage(filterText, 'prato especial', 'orange');
                     pratosList.appendChild(noResultsMessage);
                 }
             }
@@ -4200,15 +4641,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('bebidas-overlay');
@@ -4237,6 +4670,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             filterInput.style.fontSize = '15px';
             filterContainer.appendChild(filterInput);
             popup.appendChild(filterContainer);
+
+
 
             // Lista de bebidas (cards)
             const bebidasList = document.createElement('div');
@@ -4274,7 +4709,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
                 // Verifica se não há bebidas encontradas durante a filtragem
                 if (filtered.length === 0 && filterText.length > 0) {
-                    const noResultsMessage = createNoResultsMessage(filterText, 'drink');
+                    const noResultsMessage = createNoResultsMessage(filterText, 'bebida artoniana', 'orange');
                     bebidasList.appendChild(noResultsMessage);
                 }
             }
@@ -5099,6 +5534,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             ]
         }
     };
+
+
+
+
 
     // Função para fechar todos os popups de skills
     function closeAllSkillPopups() {
@@ -6365,15 +6804,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('maneuvers-overlay');
@@ -6766,15 +7197,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.fontWeight = 'bold';
 
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
@@ -7071,71 +7494,32 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             { label: 'Efeitos', icon: '🌀', onClick: createEffectsPopup },
             { label: 'Misc.', icon: '📦', onClick: createMiscPopup } // Novo botão Misc.
         ];
-        // Função para criar botão
-        function createButton(btnData, isCombatButton = false) {
-            const btn = document.createElement('button');
-            btn.style.display = 'flex';
-            btn.style.flexDirection = 'column';
-            btn.style.alignItems = 'center';
-            btn.style.justifyContent = 'center';
-            btn.style.padding = '0';
-            btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
-            btn.style.color = '#fff';
-            btn.style.border = isCombatButton ? '2px solid #ff6e6e' : '2px solid #6ec6ff';
-            btn.style.borderRadius = '8px';
-            btn.style.cursor = 'pointer';
-            btn.style.fontSize = '13px';
-            btn.style.fontWeight = 'bold';
-            btn.style.width = '64px';
-            btn.style.height = '64px';
-            btn.style.transition = 'all 0.2s';
-            btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-            btn.style.textAlign = 'center';
-            btn.style.lineHeight = '1.1';
-            btn.onmouseover = () => {
-                btn.style.background = isCombatButton ? '#ff6e6e' : '#6ec6ff';
-                btn.style.color = '#222';
-                btn.style.transform = 'scale(1.08)';
-            };
-            btn.onmouseout = () => {
-                btn.style.background = isCombatButton ? 'rgba(120,60,60,0.95)' : 'rgba(60,80,120,0.95)';
-                btn.style.color = '#fff';
-                btn.style.transform = 'scale(1)';
-            };
-            // Ícone
-            const icon = document.createElement('span');
-            icon.textContent = btnData.icon;
-            icon.style.fontSize = '26px';
-            icon.style.marginBottom = '2px';
-            btn.appendChild(icon);
-            // Texto
-            const label = document.createElement('span');
-            label.textContent = btnData.label;
-            label.style.fontSize = '12px';
-            label.style.marginTop = '2px';
-            btn.appendChild(label);
-            btn.onclick = btnData.onClick;
-
-            // Adicionar atributo data-label para identificação
-            btn.setAttribute('data-label', btnData.label);
-
-            // Adicionar indicador de efeitos ativos
-            if (btnData.label === 'Efeitos') {
-                btn.style.position = 'relative';
-            }
-
-            return btn;
-        }
 
         // Criar botões de combate para seção de combate
-        const attackBtn = createButton(attackButton, true);
-        const maneuversBtn = createButton(maneuversButton, true);
+        const attackBtn = createHotbarButton({
+            icon: attackButton.icon,
+            label: attackButton.label,
+            onClick: attackButton.onClick,
+            theme: 'red'
+        });
+        const maneuversBtn = createHotbarButton({
+            icon: maneuversButton.icon,
+            label: maneuversButton.label,
+            onClick: maneuversButton.onClick,
+            theme: 'red'
+        });
         combatSection.appendChild(attackBtn);
         combatSection.appendChild(maneuversBtn);
 
         // Criar outros botões para seção de outros
         otherButtons.forEach(btnData => {
-            const btn = createButton(btnData, false);
+            const btn = createHotbarButton({
+                icon: btnData.icon,
+                label: btnData.label,
+                onClick: btnData.onClick,
+                theme: 'blue',
+                dataLabel: btnData.label
+            });
             otherButtonsSection.appendChild(btn);
         });
 
@@ -9161,11 +9545,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 noResultsMessage.style.marginTop = '10px';
 
                 if (currentTextFilter) {
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma habilidade encontrada para "<strong style="color: #8B4513;">${currentTextFilter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'brown');
+                    abilitiesListContainer.appendChild(noResultsMessage);
+                    return;
                 } else {
                     noResultsMessage.innerHTML = `
                         <div style="margin-bottom: 8px;">⚔️</div>
@@ -9315,12 +9697,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                                 modal.appendChild(option);
                                 // Fechar
                                 const closeBtn = document.createElement('button');
-                                closeBtn.innerHTML = '×';
-                                closeBtn.style.background = 'none';
-                                closeBtn.style.border = 'none';
-                                closeBtn.style.color = '#ecf0f1';
-                                closeBtn.style.fontSize = '24px';
-                                closeBtn.style.cursor = 'pointer';
+                                applyCloseButtonStyle(closeBtn);
                                 closeBtn.style.position = 'absolute';
                                 closeBtn.style.top = '8px';
                                 closeBtn.style.right = '12px';
@@ -9450,17 +9827,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Verifica se não há habilidades encontradas durante a filtragem
             if (filteredAbilities.length === 0 && currentTextFilter.length > 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#999';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">🔍</div>
-                    <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${currentTextFilter}</strong>"</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                `;
+                const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'blue');
                 abilitiesListContainer.appendChild(noResultsMessage);
             }
 
@@ -10357,6 +10724,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         filterContainer.appendChild(filterInput);
         popup.appendChild(filterContainer);
 
+        // Dica sobre o sistema de CTRL
+        const abilityTip = createCtrlTipMessage('power');
+        popup.appendChild(abilityTip);
+
         // Lista visual
         const abilityList = document.createElement('div');
         abilityList.style.display = 'flex';
@@ -10399,11 +10770,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 emptyMsg.style.fontStyle = 'italic';
 
                 if (filter.length > 0) {
-                    emptyMsg.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma habilidade encontrada para "<strong style="color: #6ec6ff;">${filter}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filter, 'habilidade', 'blue');
+                    abilityList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     emptyMsg.innerHTML = `
                         <div style="margin-bottom: 8px;">✨</div>
@@ -10639,15 +11008,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -10887,15 +11248,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -11095,15 +11448,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Botão de fechar
             const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#ecf0f1';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
+            applyCloseButtonStyle(closeBtn);
             closeBtn.onclick = () => {
                 popup.remove();
                 const overlay = document.getElementById('power-cast-overlay');
@@ -11340,7 +11685,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
 
         // Remove badge existente se houver
-        const existingBadge = effectsButton.querySelector('.effects-badge');
+        const existingBadge = effectsButton.querySelector('.hotbar-button-badge');
         if (existingBadge) {
             existingBadge.remove();
         }
@@ -11352,7 +11697,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Cria novo badge se há efeitos ativos
         if (activeEffects.length > 0) {
             const badge = document.createElement('div');
-            badge.className = 'effects-badge';
+            badge.className = 'hotbar-button-badge';
             badge.style.position = 'absolute';
             badge.style.top = '-2px';
             badge.style.right = '-2px';
@@ -11443,7 +11788,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         saveActiveConditions(activeConditions);
         updateEffectsVisualIndicators(); // Atualiza indicadores visuais unificados
         updateEffectsBadge(); // Atualiza o badge de efeitos
-        return activeConditions;
+        const activeEffects = getActiveEffects();
+        return activeEffects;
     }
 
     // Função para obter dados de uma condição
@@ -12151,8 +12497,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         const effectsContainer = document.getElementById('effects-icons-container');
         if (!effectsContainer) return;
 
-
-
         // Container principal do indicador
         const indicator = document.createElement('div');
         indicator.className = 'food-indicator';
@@ -12235,8 +12579,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         effectsContainer.appendChild(indicator);
     }
 
-
-
     // Função para remover efeito de prato
     function removeFoodEffect(effectKey) {
         // Remove do localStorage de efeitos de comida
@@ -12258,9 +12600,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
     }
-
-
-
 
     // Função para criar um ícone indicador de bebida consumida
     function createBebidaIndicatorIcon(bebidaData, effect) {
@@ -12359,8 +12698,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         indicator.appendChild(durationIndicator);
         effectsContainer.appendChild(indicator);
     }
-
-
 
     // Função para remover efeito de bebida
     function removeBebidaEffect(effectKey) {
@@ -12508,10 +12845,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         effectsContainer.appendChild(indicator);
     }
-
-
-
-
 
     // Template reutilizável para tooltips de efeitos (buff/debuff)
     function createEffectHoverTooltip(element, effectData, effectType = 'condition') {
@@ -12710,10 +13043,6 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         }
     }
 
-
-
-
-
     // Função para criar o popup de condições
     function createConditionsPopup() {
         // Remove popup existente se houver
@@ -12808,6 +13137,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         searchContainer.appendChild(searchInput);
         popup.appendChild(searchContainer);
 
+        // Dica sobre o sistema de CTRL
+        const conditionTip = createCtrlTipMessage('item');
+        popup.appendChild(conditionTip);
+
         // Lista de condições
         const conditionsList = document.createElement('div');
         conditionsList.style.display = 'flex';
@@ -12839,11 +13172,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 noResultsMessage.style.marginTop = '10px';
 
                 if (filterText) {
-                    noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhuma condição encontrada para "<strong style="color: #ff6b6b;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                    const noResultsMessage = createNoResultsMessage(filterText, 'condição', 'red');
+                    conditionsList.appendChild(noResultsMessage);
+                    return;
                 } else {
                     noResultsMessage.innerHTML = `
                         <div style="margin-bottom: 8px;">⚠️</div>
@@ -13010,6 +13341,8 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         header.appendChild(title);
         header.appendChild(closeBtn);
         popup.appendChild(header);
+
+
 
         // Lista de efeitos disponíveis
         const effects = [
