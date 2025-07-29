@@ -12,11 +12,19 @@ export default defineConfig([
   },
   {
     files: ["**/*.js"],
-    ignores: ["dist/**/*", "node_modules/**/*"],
+    ignores: ["dist/**/*", "node_modules/**/*", "src/components/**/*.js"],
     languageOptions: { sourceType: "commonjs" }
   },
   {
+    files: ["src/components/**/*.js"],
+    languageOptions: { 
+      sourceType: "module",
+      globals: globals.browser 
+    }
+  },
+  {
     files: ["src/**/*.{js,mjs,cjs}"],
+    ignores: ["src/components/**/*.js"],
     languageOptions: { globals: globals.browser }
   },
   {

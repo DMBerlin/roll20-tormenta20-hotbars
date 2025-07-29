@@ -34,30 +34,30 @@
     const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
 
     // Função para aplicar estilo consistente aos botões de fechar
-    function applyCloseButtonStyle(closeBtn) {
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '8px';
-        closeBtn.style.width = '40px';
-        closeBtn.style.height = '40px';
-        closeBtn.style.display = 'flex';
-        closeBtn.style.alignItems = 'center';
-        closeBtn.style.justifyContent = 'center';
-        closeBtn.style.borderRadius = '4px';
-        closeBtn.style.transition = 'background-color 0.2s';
-        closeBtn.style.flexShrink = '0';
+    // Usa o sistema de componentes CloseButton
+    function applyCloseButtonStyle(closeBtn, config = {}) {
+        // Usar o componente CloseButton
+        const closeButtonComponent = window.Roll20Components.createCloseButton({
+            onClick: config.onClick || (() => {
+                // Default close behavior - find and remove the closest popup
+                const popup = closeBtn.closest('.roll20-popup, .popup, [class*="popup"], [class*="modal"]');
+                if (popup) {
+                    popup.remove();
+                } else {
+                    // Fallback: remove the button itself
+                    closeBtn.remove();
+                }
+            }),
+            ...config
+        });
 
-        // Efeitos hover
-        closeBtn.onmouseover = () => {
-            closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-        };
-        closeBtn.onmouseout = () => {
-            closeBtn.style.backgroundColor = 'transparent';
-        };
+        // Replace the existing button with the component
+        const newCloseBtn = closeButtonComponent.render();
+        if (closeBtn.parentNode) {
+            closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+        }
+        
+        return closeButtonComponent;
     }
 
     // Componente reutilizável para botões da hotbar
@@ -1375,29 +1375,17 @@
         `;
         notification.appendChild(messageDiv);
 
-        // Botão de fechar
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.cssText = `
-            background: none;
-            border: none;
-            color: inherit;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.7;
-            transition: opacity 0.2s ease;
-            flex-shrink: 0;
-        `;
-        closeBtn.onmouseenter = () => closeBtn.style.opacity = '1';
-        closeBtn.onmouseleave = () => closeBtn.style.opacity = '0.7';
-        closeBtn.onclick = () => removeNotification(notification);
-        notification.appendChild(closeBtn);
+        // Botão de fechar usando componente
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '20px',
+            width: '24px',
+            height: '24px',
+            padding: '0',
+            customStyles: 'opacity: 0.7; transition: opacity 0.2s ease;',
+            onClick: () => removeNotification(notification)
+        });
+        notification.appendChild(closeBtn.render());
 
         container.appendChild(notification);
 
@@ -1752,23 +1740,21 @@
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
 
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.background = 'none';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#ecf0f1';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '0';
-        closeBtn.style.width = '32px';
-        closeBtn.style.height = '32px';
-        closeBtn.onclick = () => {
-            popup.remove();
-            const overlay = document.getElementById('avatar-overlay');
-            if (overlay) overlay.remove();
-        };
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('avatar-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
         header.appendChild(title);
-        header.appendChild(closeBtn);
+        header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
         // Preview do avatar atual
@@ -10031,17 +10017,15 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                                     updateAbilityList();
                                 };
                                 modal.appendChild(option);
-                                // Fechar
-                                const closeBtn = document.createElement('button');
-                                applyCloseButtonStyle(closeBtn);
-                                closeBtn.style.position = 'absolute';
-                                closeBtn.style.top = '8px';
-                                closeBtn.style.right = '12px';
-                                closeBtn.onclick = () => {
-                                    overlay.remove();
-                                    modal.remove();
-                                };
-                                modal.appendChild(closeBtn);
+                                // Fechar usando componente
+                                const closeBtn = window.Roll20Components.createCloseButton({
+                                    customStyles: 'position: absolute; top: 8px; right: 12px;',
+                                    onClick: () => {
+                                        overlay.remove();
+                                        modal.remove();
+                                    }
+                                });
+                                modal.appendChild(closeBtn.render());
                                 document.body.appendChild(modal);
                             } else {
                                 setAnimalCompanionType('');
