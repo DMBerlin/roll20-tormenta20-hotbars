@@ -45,7 +45,7 @@ function openDevServer() {
 
     console.log(`💻 Comando: ${command}`);
 
-    exec(command, (error, stdout, stderr) => {
+    exec(command, (error) => {
       if (error) {
         console.error('❌ Erro ao abrir o navegador:', error.message);
         
