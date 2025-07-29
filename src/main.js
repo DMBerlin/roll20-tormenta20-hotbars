@@ -592,7 +592,7 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
 
@@ -615,7 +615,7 @@
                 const overlay = document.getElementById('conditions-overlay');
                 if (overlay) overlay.remove();
             }
-        });        header.appendChild(title);
+        }); header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -724,9 +724,9 @@
         }
 
         tooltip.innerHTML = `
-            <div style="font-weight: bold; color: #6ec6ff; margin-bottom: 4px;">${title}</div>
-            <div style="color: #ecf0f1;">${description}</div>
-        `;
+                <div style="font-weight: bold; color: #6ec6ff; margin-bottom: 4px;">${title}</div>
+                <div style="color: #ecf0f1;">${description}</div>
+            `;
 
         document.body.appendChild(tooltip);
 
@@ -806,295 +806,295 @@
         const style = document.createElement('style');
         style.id = 'roll20-custom-scrollbar-styles';
         style.textContent = `
-            /* Scrollbars customizadas para todos os elementos do script */
-            #roll20-hotbar *::-webkit-scrollbar,
-            .roll20-popup *::-webkit-scrollbar,
-            .roll20-modal *::-webkit-scrollbar,
-            #roll20-notification-container *::-webkit-scrollbar,
-            #skills-popup *::-webkit-scrollbar,
-            #spells-popup *::-webkit-scrollbar,
-            #misc-popup *::-webkit-scrollbar,
-            #avatar-popup *::-webkit-scrollbar,
-            #spell-cast-popup *::-webkit-scrollbar,
-            #pratos-popup *::-webkit-scrollbar,
-            #bebidas-popup *::-webkit-scrollbar,
-            #conditions-popup *::-webkit-scrollbar,
-            #hunter-class-modal *::-webkit-scrollbar,
-            #skill-detail-modal *::-webkit-scrollbar {
-                width: 8px !important;
-                height: 8px !important;
-            }
+                /* Scrollbars customizadas para todos os elementos do script */
+                #roll20-hotbar *::-webkit-scrollbar,
+                .roll20-popup *::-webkit-scrollbar,
+                .roll20-modal *::-webkit-scrollbar,
+                #roll20-notification-container *::-webkit-scrollbar,
+                #skills-popup *::-webkit-scrollbar,
+                #spells-popup *::-webkit-scrollbar,
+                #misc-popup *::-webkit-scrollbar,
+                #avatar-popup *::-webkit-scrollbar,
+                #spell-cast-popup *::-webkit-scrollbar,
+                #pratos-popup *::-webkit-scrollbar,
+                #bebidas-popup *::-webkit-scrollbar,
+                #conditions-popup *::-webkit-scrollbar,
+                #hunter-class-modal *::-webkit-scrollbar,
+                #skill-detail-modal *::-webkit-scrollbar {
+                    width: 8px !important;
+                    height: 8px !important;
+                }
 
-            #roll20-hotbar *::-webkit-scrollbar-track,
-            .roll20-popup *::-webkit-scrollbar-track,
-            .roll20-modal *::-webkit-scrollbar-track,
-            #roll20-notification-container *::-webkit-scrollbar-track,
-            #skills-popup *::-webkit-scrollbar-track,
-            #spells-popup *::-webkit-scrollbar-track,
-            #misc-popup *::-webkit-scrollbar-track,
-            #avatar-popup *::-webkit-scrollbar-track,
-            #spell-cast-popup *::-webkit-scrollbar-track,
-            #pratos-popup *::-webkit-scrollbar-track,
-            #bebidas-popup *::-webkit-scrollbar-track,
-            #conditions-popup *::-webkit-scrollbar-track,
-            #hunter-class-modal *::-webkit-scrollbar-track,
-            #skill-detail-modal *::-webkit-scrollbar-track {
-                background: rgba(35, 36, 58, 0.3) !important;
-                border-radius: 4px !important;
-                margin: 2px !important;
-            }
+                #roll20-hotbar *::-webkit-scrollbar-track,
+                .roll20-popup *::-webkit-scrollbar-track,
+                .roll20-modal *::-webkit-scrollbar-track,
+                #roll20-notification-container *::-webkit-scrollbar-track,
+                #skills-popup *::-webkit-scrollbar-track,
+                #spells-popup *::-webkit-scrollbar-track,
+                #misc-popup *::-webkit-scrollbar-track,
+                #avatar-popup *::-webkit-scrollbar-track,
+                #spell-cast-popup *::-webkit-scrollbar-track,
+                #pratos-popup *::-webkit-scrollbar-track,
+                #bebidas-popup *::-webkit-scrollbar-track,
+                #conditions-popup *::-webkit-scrollbar-track,
+                #hunter-class-modal *::-webkit-scrollbar-track,
+                #skill-detail-modal *::-webkit-scrollbar-track {
+                    background: rgba(35, 36, 58, 0.3) !important;
+                    border-radius: 4px !important;
+                    margin: 2px !important;
+                }
 
-            #roll20-hotbar *::-webkit-scrollbar-thumb,
-            .roll20-popup *::-webkit-scrollbar-thumb,
-            .roll20-modal *::-webkit-scrollbar-thumb,
-            #roll20-notification-container *::-webkit-scrollbar-thumb,
-            #skills-popup *::-webkit-scrollbar-thumb,
-            #spells-popup *::-webkit-scrollbar-thumb,
-            #misc-popup *::-webkit-scrollbar-thumb,
-            #avatar-popup *::-webkit-scrollbar-thumb,
-            #spell-cast-popup *::-webkit-scrollbar-thumb,
-            #pratos-popup *::-webkit-scrollbar-thumb,
-            #bebidas-popup *::-webkit-scrollbar-thumb,
-            #conditions-popup *::-webkit-scrollbar-thumb,
-            #hunter-class-modal *::-webkit-scrollbar-thumb,
-            #skill-detail-modal *::-webkit-scrollbar-thumb {
-                background: rgba(110, 198, 255, 0.6) !important;
-                border-radius: 4px !important;
-                border: 1px solid rgba(110, 198, 255, 0.2) !important;
-                transition: all 0.2s ease !important;
-            }
+                #roll20-hotbar *::-webkit-scrollbar-thumb,
+                .roll20-popup *::-webkit-scrollbar-thumb,
+                .roll20-modal *::-webkit-scrollbar-thumb,
+                #roll20-notification-container *::-webkit-scrollbar-thumb,
+                #skills-popup *::-webkit-scrollbar-thumb,
+                #spells-popup *::-webkit-scrollbar-thumb,
+                #misc-popup *::-webkit-scrollbar-thumb,
+                #avatar-popup *::-webkit-scrollbar-thumb,
+                #spell-cast-popup *::-webkit-scrollbar-thumb,
+                #pratos-popup *::-webkit-scrollbar-thumb,
+                #bebidas-popup *::-webkit-scrollbar-thumb,
+                #conditions-popup *::-webkit-scrollbar-thumb,
+                #hunter-class-modal *::-webkit-scrollbar-thumb,
+                #skill-detail-modal *::-webkit-scrollbar-thumb {
+                    background: rgba(110, 198, 255, 0.6) !important;
+                    border-radius: 4px !important;
+                    border: 1px solid rgba(110, 198, 255, 0.2) !important;
+                    transition: all 0.2s ease !important;
+                }
 
-            #roll20-hotbar *::-webkit-scrollbar-thumb:hover,
-            .roll20-popup *::-webkit-scrollbar-thumb:hover,
-            .roll20-modal *::-webkit-scrollbar-thumb:hover,
-            #roll20-notification-container *::-webkit-scrollbar-thumb:hover,
-            #skills-popup *::-webkit-scrollbar-thumb:hover,
-            #spells-popup *::-webkit-scrollbar-thumb:hover,
-            #misc-popup *::-webkit-scrollbar-thumb:hover,
-            #avatar-popup *::-webkit-scrollbar-thumb:hover,
-            #spell-cast-popup *::-webkit-scrollbar-thumb:hover,
-            #pratos-popup *::-webkit-scrollbar-thumb:hover,
-            #bebidas-popup *::-webkit-scrollbar-thumb:hover,
-            #conditions-popup *::-webkit-scrollbar-thumb:hover,
-            #hunter-class-modal *::-webkit-scrollbar-thumb:hover,
-            #skill-detail-modal *::-webkit-scrollbar-thumb:hover {
-                background: rgba(110, 198, 255, 0.8) !important;
-                border-color: rgba(110, 198, 255, 0.4) !important;
-            }
+                #roll20-hotbar *::-webkit-scrollbar-thumb:hover,
+                .roll20-popup *::-webkit-scrollbar-thumb:hover,
+                .roll20-modal *::-webkit-scrollbar-thumb:hover,
+                #roll20-notification-container *::-webkit-scrollbar-thumb:hover,
+                #skills-popup *::-webkit-scrollbar-thumb:hover,
+                #spells-popup *::-webkit-scrollbar-thumb:hover,
+                #misc-popup *::-webkit-scrollbar-thumb:hover,
+                #avatar-popup *::-webkit-scrollbar-thumb:hover,
+                #spell-cast-popup *::-webkit-scrollbar-thumb:hover,
+                #pratos-popup *::-webkit-scrollbar-thumb:hover,
+                #bebidas-popup *::-webkit-scrollbar-thumb:hover,
+                #conditions-popup *::-webkit-scrollbar-thumb:hover,
+                #hunter-class-modal *::-webkit-scrollbar-thumb:hover,
+                #skill-detail-modal *::-webkit-scrollbar-thumb:hover {
+                    background: rgba(110, 198, 255, 0.8) !important;
+                    border-color: rgba(110, 198, 255, 0.4) !important;
+                }
 
-            #roll20-hotbar *::-webkit-scrollbar-thumb:active,
-            .roll20-popup *::-webkit-scrollbar-thumb:active,
-            .roll20-modal *::-webkit-scrollbar-thumb:active,
-            #roll20-notification-container *::-webkit-scrollbar-thumb:active,
-            #skills-popup *::-webkit-scrollbar-thumb:active,
-            #spells-popup *::-webkit-scrollbar-thumb:active,
-            #misc-popup *::-webkit-scrollbar-thumb:active,
-            #avatar-popup *::-webkit-scrollbar-thumb:active,
-            #spell-cast-popup *::-webkit-scrollbar-thumb:active,
-            #pratos-popup *::-webkit-scrollbar-thumb:active,
-            #bebidas-popup *::-webkit-scrollbar-thumb:active,
-            #conditions-popup *::-webkit-scrollbar-thumb:active,
-            #hunter-class-modal *::-webkit-scrollbar-thumb:active,
-            #skill-detail-modal *::-webkit-scrollbar-thumb:active {
-                background: rgba(110, 198, 255, 1) !important;
-                border-color: rgba(110, 198, 255, 0.6) !important;
-            }
+                #roll20-hotbar *::-webkit-scrollbar-thumb:active,
+                .roll20-popup *::-webkit-scrollbar-thumb:active,
+                .roll20-modal *::-webkit-scrollbar-thumb:active,
+                #roll20-notification-container *::-webkit-scrollbar-thumb:active,
+                #skills-popup *::-webkit-scrollbar-thumb:active,
+                #spells-popup *::-webkit-scrollbar-thumb:active,
+                #misc-popup *::-webkit-scrollbar-thumb:active,
+                #avatar-popup *::-webkit-scrollbar-thumb:active,
+                #spell-cast-popup *::-webkit-scrollbar-thumb:active,
+                #pratos-popup *::-webkit-scrollbar-thumb:active,
+                #bebidas-popup *::-webkit-scrollbar-thumb:active,
+                #conditions-popup *::-webkit-scrollbar-thumb:active,
+                #hunter-class-modal *::-webkit-scrollbar-thumb:active,
+                #skill-detail-modal *::-webkit-scrollbar-thumb:active {
+                    background: rgba(110, 198, 255, 1) !important;
+                    border-color: rgba(110, 198, 255, 0.6) !important;
+                }
 
-            #roll20-hotbar *::-webkit-scrollbar-corner,
-            .roll20-popup *::-webkit-scrollbar-corner,
-            .roll20-modal *::-webkit-scrollbar-corner,
-            #roll20-notification-container *::-webkit-scrollbar-corner,
-            #skills-popup *::-webkit-scrollbar-corner,
-            #spells-popup *::-webkit-scrollbar-corner,
-            #misc-popup *::-webkit-scrollbar-corner,
-            #avatar-popup *::-webkit-scrollbar-corner,
-            #spell-cast-popup *::-webkit-scrollbar-corner,
-            #pratos-popup *::-webkit-scrollbar-corner,
-            #bebidas-popup *::-webkit-scrollbar-corner,
-            #conditions-popup *::-webkit-scrollbar-corner,
-            #hunter-class-modal *::-webkit-scrollbar-corner,
-            #skill-detail-modal *::-webkit-scrollbar-corner {
-                background: rgba(35, 36, 58, 0.3) !important;
-                border-radius: 4px !important;
-            }
+                #roll20-hotbar *::-webkit-scrollbar-corner,
+                .roll20-popup *::-webkit-scrollbar-corner,
+                .roll20-modal *::-webkit-scrollbar-corner,
+                #roll20-notification-container *::-webkit-scrollbar-corner,
+                #skills-popup *::-webkit-scrollbar-corner,
+                #spells-popup *::-webkit-scrollbar-corner,
+                #misc-popup *::-webkit-scrollbar-corner,
+                #avatar-popup *::-webkit-scrollbar-corner,
+                #spell-cast-popup *::-webkit-scrollbar-corner,
+                #pratos-popup *::-webkit-scrollbar-corner,
+                #bebidas-popup *::-webkit-scrollbar-corner,
+                #conditions-popup *::-webkit-scrollbar-corner,
+                #hunter-class-modal *::-webkit-scrollbar-corner,
+                #skill-detail-modal *::-webkit-scrollbar-corner {
+                    background: rgba(35, 36, 58, 0.3) !important;
+                    border-radius: 4px !important;
+                }
 
-            /* Scrollbars para Firefox */
-            #roll20-hotbar *,
-            .roll20-popup *,
-            .roll20-modal *,
-            #roll20-notification-container *,
-            #skills-popup *,
-            #spells-popup *,
-            #misc-popup *,
-            #avatar-popup *,
-            #spell-cast-popup *,
-            #pratos-popup *,
-            #bebidas-popup *,
-            #conditions-popup *,
-            #hunter-class-modal *,
-            #skill-detail-modal * {
-                scrollbar-width: thin !important;
-                scrollbar-color: rgba(110, 198, 255, 0.6) rgba(35, 36, 58, 0.3) !important;
-            }
+                /* Scrollbars para Firefox */
+                #roll20-hotbar *,
+                .roll20-popup *,
+                .roll20-modal *,
+                #roll20-notification-container *,
+                #skills-popup *,
+                #spells-popup *,
+                #misc-popup *,
+                #avatar-popup *,
+                #spell-cast-popup *,
+                #pratos-popup *,
+                #bebidas-popup *,
+                #conditions-popup *,
+                #hunter-class-modal *,
+                #skill-detail-modal * {
+                    scrollbar-width: thin !important;
+                    scrollbar-color: rgba(110, 198, 255, 0.6) rgba(35, 36, 58, 0.3) !important;
+                }
 
-            /* Scrollbars para elementos específicos com cores diferentes */
-            .roll20-popup-orange *::-webkit-scrollbar-thumb,
-            #misc-popup *::-webkit-scrollbar-thumb,
-            #pratos-popup *::-webkit-scrollbar-thumb,
-            #bebidas-popup *::-webkit-scrollbar-thumb {
-                background: rgba(255, 184, 108, 0.6) !important;
-                border-color: rgba(255, 184, 108, 0.2) !important;
-            }
+                /* Scrollbars para elementos específicos com cores diferentes */
+                .roll20-popup-orange *::-webkit-scrollbar-thumb,
+                #misc-popup *::-webkit-scrollbar-thumb,
+                #pratos-popup *::-webkit-scrollbar-thumb,
+                #bebidas-popup *::-webkit-scrollbar-thumb {
+                    background: rgba(255, 184, 108, 0.6) !important;
+                    border-color: rgba(255, 184, 108, 0.2) !important;
+                }
 
-            .roll20-popup-orange *::-webkit-scrollbar-thumb:hover,
-            #misc-popup *::-webkit-scrollbar-thumb:hover,
-            #pratos-popup *::-webkit-scrollbar-thumb:hover,
-            #bebidas-popup *::-webkit-scrollbar-thumb:hover {
-                background: rgba(255, 184, 108, 0.8) !important;
-                border-color: rgba(255, 184, 108, 0.4) !important;
-            }
+                .roll20-popup-orange *::-webkit-scrollbar-thumb:hover,
+                #misc-popup *::-webkit-scrollbar-thumb:hover,
+                #pratos-popup *::-webkit-scrollbar-thumb:hover,
+                #bebidas-popup *::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 184, 108, 0.8) !important;
+                    border-color: rgba(255, 184, 108, 0.4) !important;
+                }
 
-            .roll20-popup-orange *::-webkit-scrollbar-thumb:active,
-            #misc-popup *::-webkit-scrollbar-thumb:active,
-            #pratos-popup *::-webkit-scrollbar-thumb:active,
-            #bebidas-popup *::-webkit-scrollbar-thumb:active {
-                background: rgba(255, 184, 108, 1) !important;
-                border-color: rgba(255, 184, 108, 0.6) !important;
-            }
+                .roll20-popup-orange *::-webkit-scrollbar-thumb:active,
+                #misc-popup *::-webkit-scrollbar-thumb:active,
+                #pratos-popup *::-webkit-scrollbar-thumb:active,
+                #bebidas-popup *::-webkit-scrollbar-thumb:active {
+                    background: rgba(255, 184, 108, 1) !important;
+                    border-color: rgba(255, 184, 108, 0.6) !important;
+                }
 
-            .roll20-popup-orange *,
-            #misc-popup *,
-            #pratos-popup *,
-            #bebidas-popup * {
-                scrollbar-color: rgba(255, 184, 108, 0.6) rgba(35, 36, 58, 0.3) !important;
-            }
+                .roll20-popup-orange *,
+                #misc-popup *,
+                #pratos-popup *,
+                #bebidas-popup * {
+                    scrollbar-color: rgba(255, 184, 108, 0.6) rgba(35, 36, 58, 0.3) !important;
+                }
 
-            /* Scrollbars para elementos com tema verde */
-            .roll20-popup-green *::-webkit-scrollbar-thumb,
-            #hunter-class-modal *::-webkit-scrollbar-thumb {
-                background: rgba(76, 175, 80, 0.6) !important;
-                border-color: rgba(76, 175, 80, 0.2) !important;
-            }
+                /* Scrollbars para elementos com tema verde */
+                .roll20-popup-green *::-webkit-scrollbar-thumb,
+                #hunter-class-modal *::-webkit-scrollbar-thumb {
+                    background: rgba(76, 175, 80, 0.6) !important;
+                    border-color: rgba(76, 175, 80, 0.2) !important;
+                }
 
-            .roll20-popup-green *::-webkit-scrollbar-thumb:hover,
-            #hunter-class-modal *::-webkit-scrollbar-thumb:hover {
-                background: rgba(76, 175, 80, 0.8) !important;
-                border-color: rgba(76, 175, 80, 0.4) !important;
-            }
+                .roll20-popup-green *::-webkit-scrollbar-thumb:hover,
+                #hunter-class-modal *::-webkit-scrollbar-thumb:hover {
+                    background: rgba(76, 175, 80, 0.8) !important;
+                    border-color: rgba(76, 175, 80, 0.4) !important;
+                }
 
-            .roll20-popup-green *::-webkit-scrollbar-thumb:active,
-            #hunter-class-modal *::-webkit-scrollbar-thumb:active {
-                background: rgba(76, 175, 80, 1) !important;
-                border-color: rgba(76, 175, 80, 0.6) !important;
-            }
+                .roll20-popup-green *::-webkit-scrollbar-thumb:active,
+                #hunter-class-modal *::-webkit-scrollbar-thumb:active {
+                    background: rgba(76, 175, 80, 1) !important;
+                    border-color: rgba(76, 175, 80, 0.6) !important;
+                }
 
-            .roll20-popup-green *,
-            #hunter-class-modal * {
-                scrollbar-color: rgba(76, 175, 80, 0.6) rgba(35, 36, 58, 0.3) !important;
-            }
+                .roll20-popup-green *,
+                #hunter-class-modal * {
+                    scrollbar-color: rgba(76, 175, 80, 0.6) rgba(35, 36, 58, 0.3) !important;
+                }
 
-            /* Scrollbars para elementos com tema roxo */
-            .roll20-popup-purple *::-webkit-scrollbar-thumb,
-            #spells-popup *::-webkit-scrollbar-thumb,
-            #spell-cast-popup *::-webkit-scrollbar-thumb {
-                background: rgba(156, 39, 176, 0.6) !important;
-                border-color: rgba(156, 39, 176, 0.2) !important;
-            }
+                /* Scrollbars para elementos com tema roxo */
+                .roll20-popup-purple *::-webkit-scrollbar-thumb,
+                #spells-popup *::-webkit-scrollbar-thumb,
+                #spell-cast-popup *::-webkit-scrollbar-thumb {
+                    background: rgba(156, 39, 176, 0.6) !important;
+                    border-color: rgba(156, 39, 176, 0.2) !important;
+                }
 
-            .roll20-popup-purple *::-webkit-scrollbar-thumb:hover,
-            #spells-popup *::-webkit-scrollbar-thumb:hover,
-            #spell-cast-popup *::-webkit-scrollbar-thumb:hover {
-                background: rgba(156, 39, 176, 0.8) !important;
-                border-color: rgba(156, 39, 176, 0.4) !important;
-            }
+                .roll20-popup-purple *::-webkit-scrollbar-thumb:hover,
+                #spells-popup *::-webkit-scrollbar-thumb:hover,
+                #spell-cast-popup *::-webkit-scrollbar-thumb:hover {
+                    background: rgba(156, 39, 176, 0.8) !important;
+                    border-color: rgba(156, 39, 176, 0.4) !important;
+                }
 
-            .roll20-popup-purple *::-webkit-scrollbar-thumb:active,
-            #spells-popup *::-webkit-scrollbar-thumb:active,
-            #spell-cast-popup *::-webkit-scrollbar-thumb:active {
-                background: rgba(156, 39, 176, 1) !important;
-                border-color: rgba(156, 39, 176, 0.6) !important;
-            }
+                .roll20-popup-purple *::-webkit-scrollbar-thumb:active,
+                #spells-popup *::-webkit-scrollbar-thumb:active,
+                #spell-cast-popup *::-webkit-scrollbar-thumb:active {
+                    background: rgba(156, 39, 176, 1) !important;
+                    border-color: rgba(156, 39, 176, 0.6) !important;
+                }
 
-            .roll20-popup-purple *,
-            #spells-popup *,
-            #spell-cast-popup * {
-                scrollbar-color: rgba(156, 39, 176, 0.6) rgba(35, 36, 58, 0.3) !important;
-            }
+                .roll20-popup-purple *,
+                #spells-popup *,
+                #spell-cast-popup * {
+                    scrollbar-color: rgba(156, 39, 176, 0.6) rgba(35, 36, 58, 0.3) !important;
+                }
 
-            /* Scrollbars para elementos com tema vermelho */
-            .roll20-popup-red *::-webkit-scrollbar-thumb,
-            #conditions-popup *::-webkit-scrollbar-thumb {
-                background: rgba(244, 67, 54, 0.6) !important;
-                border-color: rgba(244, 67, 54, 0.2) !important;
-            }
+                /* Scrollbars para elementos com tema vermelho */
+                .roll20-popup-red *::-webkit-scrollbar-thumb,
+                #conditions-popup *::-webkit-scrollbar-thumb {
+                    background: rgba(244, 67, 54, 0.6) !important;
+                    border-color: rgba(244, 67, 54, 0.2) !important;
+                }
 
-            .roll20-popup-red *::-webkit-scrollbar-thumb:hover,
-            #conditions-popup *::-webkit-scrollbar-thumb:hover {
-                background: rgba(244, 67, 54, 0.8) !important;
-                border-color: rgba(244, 67, 54, 0.4) !important;
-            }
+                .roll20-popup-red *::-webkit-scrollbar-thumb:hover,
+                #conditions-popup *::-webkit-scrollbar-thumb:hover {
+                    background: rgba(244, 67, 54, 0.8) !important;
+                    border-color: rgba(244, 67, 54, 0.4) !important;
+                }
 
-            .roll20-popup-red *::-webkit-scrollbar-thumb:active,
-            #conditions-popup *::-webkit-scrollbar-thumb:active {
-                background: rgba(244, 67, 54, 1) !important;
-                border-color: rgba(244, 67, 54, 0.6) !important;
-            }
+                .roll20-popup-red *::-webkit-scrollbar-thumb:active,
+                #conditions-popup *::-webkit-scrollbar-thumb:active {
+                    background: rgba(244, 67, 54, 1) !important;
+                    border-color: rgba(244, 67, 54, 0.6) !important;
+                }
 
-            .roll20-popup-red *,
-            #conditions-popup * {
-                scrollbar-color: rgba(244, 67, 54, 0.6) rgba(35, 36, 58, 0.3) !important;
-            }
+                .roll20-popup-red *,
+                #conditions-popup * {
+                    scrollbar-color: rgba(244, 67, 54, 0.6) rgba(35, 36, 58, 0.3) !important;
+                }
 
-            /* Animações suaves para scrollbars */
-            #roll20-hotbar *::-webkit-scrollbar-thumb,
-            .roll20-popup *::-webkit-scrollbar-thumb,
-            .roll20-modal *::-webkit-scrollbar-thumb,
-            #roll20-notification-container *::-webkit-scrollbar-thumb {
-                transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease !important;
-            }
+                /* Animações suaves para scrollbars */
+                #roll20-hotbar *::-webkit-scrollbar-thumb,
+                .roll20-popup *::-webkit-scrollbar-thumb,
+                .roll20-modal *::-webkit-scrollbar-thumb,
+                #roll20-notification-container *::-webkit-scrollbar-thumb {
+                    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease !important;
+                }
 
-            /* Scrollbars mais finas para elementos pequenos */
-            .roll20-scrollbar-thin *::-webkit-scrollbar {
-                width: 6px !important;
-                height: 6px !important;
-            }
+                /* Scrollbars mais finas para elementos pequenos */
+                .roll20-scrollbar-thin *::-webkit-scrollbar {
+                    width: 6px !important;
+                    height: 6px !important;
+                }
 
-            .roll20-scrollbar-thin *::-webkit-scrollbar-thumb {
-                border-radius: 3px !important;
-            }
+                .roll20-scrollbar-thin *::-webkit-scrollbar-thumb {
+                    border-radius: 3px !important;
+                }
 
-            .roll20-scrollbar-thin *::-webkit-scrollbar-track {
-                border-radius: 3px !important;
-                margin: 1px !important;
-            }
+                .roll20-scrollbar-thin *::-webkit-scrollbar-track {
+                    border-radius: 3px !important;
+                    margin: 1px !important;
+                }
 
-            /* Scrollbars mais grossas para elementos grandes */
-            .roll20-scrollbar-thick *::-webkit-scrollbar {
-                width: 12px !important;
-                height: 12px !important;
-            }
-            .roll20-scrollbar-thick *::-webkit-scrollbar-thumb {
-                border-radius: 6px !important;
-            }
-            .roll20-scrollbar-thick *::-webkit-scrollbar-track {
-                border-radius: 6px !important;
-                margin: 3px !important;
-            }
+                /* Scrollbars mais grossas para elementos grandes */
+                .roll20-scrollbar-thick *::-webkit-scrollbar {
+                    width: 12px !important;
+                    height: 12px !important;
+                }
+                .roll20-scrollbar-thick *::-webkit-scrollbar-thumb {
+                    border-radius: 6px !important;
+                }
+                .roll20-scrollbar-thick *::-webkit-scrollbar-track {
+                    border-radius: 6px !important;
+                    margin: 3px !important;
+                }
 
-            /* Esconder scrollbars quando não necessário */
-            .roll20-scrollbar-auto *::-webkit-scrollbar {
-                width: 8px !important;
-                height: 8px !important;
-            }
+                /* Esconder scrollbars quando não necessário */
+                .roll20-scrollbar-auto *::-webkit-scrollbar {
+                    width: 8px !important;
+                    height: 8px !important;
+                }
 
-            .roll20-scrollbar-auto *::-webkit-scrollbar-thumb {
-                background: rgba(110, 198, 255, 0.3) !important;
-            }
+                .roll20-scrollbar-auto *::-webkit-scrollbar-thumb {
+                    background: rgba(110, 198, 255, 0.3) !important;
+                }
 
-            .roll20-scrollbar-auto *:hover::-webkit-scrollbar-thumb {
-                background: rgba(110, 198, 255, 0.6) !important;
-            }
-        `;
+                .roll20-scrollbar-auto *:hover::-webkit-scrollbar-thumb {
+                    background: rgba(110, 198, 255, 0.6) !important;
+                }
+            `;
         document.head.appendChild(style);
     }
 
@@ -1204,34 +1204,34 @@
 
                 const scrollbarStyle = document.createElement('style');
                 scrollbarStyle.textContent = `
-                    #${elementId}::-webkit-scrollbar {
-                        width: 8px !important;
-                        height: 8px !important;
-                    }
-                    #${elementId}::-webkit-scrollbar-track {
-                        background: ${colors.track} !important;
-                        border-radius: 4px !important;
-                        margin: 2px !important;
-                    }
-                    #${elementId}::-webkit-scrollbar-thumb {
-                        background: ${colors.thumb} !important;
-                        border-radius: 4px !important;
-                        border: 1px solid ${colors.border} !important;
-                        transition: all 0.2s ease !important;
-                    }
-                    #${elementId}::-webkit-scrollbar-thumb:hover {
-                        background: ${colors.thumbHover} !important;
-                        border-color: ${colors.borderHover} !important;
-                    }
-                    #${elementId}::-webkit-scrollbar-thumb:active {
-                        background: ${colors.thumbActive} !important;
-                        border-color: ${colors.borderActive} !important;
-                    }
-                    #${elementId}::-webkit-scrollbar-corner {
-                        background: ${colors.track} !important;
-                        border-radius: 4px !important;
-                    }
-                `;
+                        #${elementId}::-webkit-scrollbar {
+                            width: 8px !important;
+                            height: 8px !important;
+                        }
+                        #${elementId}::-webkit-scrollbar-track {
+                            background: ${colors.track} !important;
+                            border-radius: 4px !important;
+                            margin: 2px !important;
+                        }
+                        #${elementId}::-webkit-scrollbar-thumb {
+                            background: ${colors.thumb} !important;
+                            border-radius: 4px !important;
+                            border: 1px solid ${colors.border} !important;
+                            transition: all 0.2s ease !important;
+                        }
+                        #${elementId}::-webkit-scrollbar-thumb:hover {
+                            background: ${colors.thumbHover} !important;
+                            border-color: ${colors.borderHover} !important;
+                        }
+                        #${elementId}::-webkit-scrollbar-thumb:active {
+                            background: ${colors.thumbActive} !important;
+                            border-color: ${colors.borderActive} !important;
+                        }
+                        #${elementId}::-webkit-scrollbar-corner {
+                            background: ${colors.track} !important;
+                            border-radius: 4px !important;
+                        }
+                    `;
                 document.head.appendChild(scrollbarStyle);
             }
         });
@@ -1246,34 +1246,34 @@
 
             const popupScrollbarStyle = document.createElement('style');
             popupScrollbarStyle.textContent = `
-                #${popup.id}::-webkit-scrollbar {
-                    width: 8px !important;
-                    height: 8px !important;
-                }
-                #${popup.id}::-webkit-scrollbar-track {
-                    background: ${colors.track} !important;
-                    border-radius: 4px !important;
-                    margin: 2px !important;
-                }
-                #${popup.id}::-webkit-scrollbar-thumb {
-                    background: ${colors.thumb} !important;
-                    border-radius: 4px !important;
-                    border: 1px solid ${colors.border} !important;
-                    transition: all 0.2s ease !important;
-                }
-                #${popup.id}::-webkit-scrollbar-thumb:hover {
-                    background: ${colors.thumbHover} !important;
-                    border-color: ${colors.borderHover} !important;
-                }
-                #${popup.id}::-webkit-scrollbar-thumb:active {
-                    background: ${colors.thumbActive} !important;
-                    border-color: ${colors.borderActive} !important;
-                }
-                #${popup.id}::-webkit-scrollbar-corner {
-                    background: ${colors.track} !important;
-                    border-radius: 4px !important;
-                }
-            `;
+                    #${popup.id}::-webkit-scrollbar {
+                        width: 8px !important;
+                        height: 8px !important;
+                    }
+                    #${popup.id}::-webkit-scrollbar-track {
+                        background: ${colors.track} !important;
+                        border-radius: 4px !important;
+                        margin: 2px !important;
+                    }
+                    #${popup.id}::-webkit-scrollbar-thumb {
+                        background: ${colors.thumb} !important;
+                        border-radius: 4px !important;
+                        border: 1px solid ${colors.border} !important;
+                        transition: all 0.2s ease !important;
+                    }
+                    #${popup.id}::-webkit-scrollbar-thumb:hover {
+                        background: ${colors.thumbHover} !important;
+                        border-color: ${colors.borderHover} !important;
+                    }
+                    #${popup.id}::-webkit-scrollbar-thumb:active {
+                        background: ${colors.thumbActive} !important;
+                        border-color: ${colors.borderActive} !important;
+                    }
+                    #${popup.id}::-webkit-scrollbar-corner {
+                        background: ${colors.track} !important;
+                        border-radius: 4px !important;
+                    }
+                `;
             document.head.appendChild(popupScrollbarStyle);
         }
     }
@@ -1289,15 +1289,15 @@
         notificationContainer.id = 'roll20-notification-container';
         notificationContainer.className = 'roll20-scrollbar-thin';
         notificationContainer.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10005;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        `;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 10005;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                pointer-events: none;
+            `;
 
         document.body.appendChild(notificationContainer);
         return notificationContainer;
@@ -1310,47 +1310,47 @@
         const notification = document.createElement('div');
         notification.className = `roll20-notification roll20-notification-${type}`;
         notification.style.cssText = `
-            background: ${getNotificationBackground(type)};
-            border: 1px solid ${getNotificationBorder(type)};
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 300px;
-            max-width: 400px;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-            pointer-events: auto;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-            color: ${getNotificationTextColor(type)};
-        `;
+                background: ${getNotificationBackground(type)};
+                border: 1px solid ${getNotificationBorder(type)};
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin-bottom: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-width: 300px;
+                max-width: 400px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                pointer-events: auto;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                color: ${getNotificationTextColor(type)};
+            `;
 
         // Ícone
         const icon = document.createElement('div');
         icon.innerHTML = getNotificationIcon(type);
         icon.style.cssText = `
-            font-size: 18px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-        `;
+                font-size: 18px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+            `;
         notification.appendChild(icon);
 
         // Mensagem
         const messageDiv = document.createElement('div');
         messageDiv.textContent = message;
         messageDiv.style.cssText = `
-            flex: 1;
-            line-height: 1.4;
-        `;
+                flex: 1;
+                line-height: 1.4;
+            `;
         notification.appendChild(messageDiv);
 
         // Botão de fechar usando componente
@@ -1705,7 +1705,7 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -1729,7 +1729,7 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
+        title.style.fontWeight = 'bold'; header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -1971,7 +1971,7 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '10px';
         header.style.width = '100%';
@@ -2003,7 +2003,7 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
+        title.style.fontWeight = 'bold'; header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -2312,7 +2312,7 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -2336,7 +2336,7 @@
         title.style.color = '#ffb86c';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
+        title.style.fontWeight = 'bold'; header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -2501,7 +2501,7 @@
         popup.style.flexDirection = 'column';
         popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -2514,10 +2514,10 @@
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            popup.remove();
-            const overlay = document.getElementById('spells-overlay');
-            if (overlay) overlay.remove();
-        }
+                popup.remove();
+                const overlay = document.getElementById('spells-overlay');
+                if (overlay) overlay.remove();
+            }
         });
 
         const title = document.createElement('h3');
@@ -2525,7 +2525,7 @@
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
+        title.style.fontWeight = 'bold'; header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -2552,31 +2552,31 @@
                 nome: 'Sombras Profanas',
                 comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
 
-+1 PM: aumenta a área da escuridão em +1,5m de raio.
+    +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
-+2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
+    +2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
 
-+2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
+    +2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
 
-+3 PM: muda a duração para um dia.
+    +3 PM: muda a duração para um dia.
 
-+5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
+    +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
 
-JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
+    JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             }),
             spellTemplates.createSpell({
                 nome: 'Luz Sagrada',
                 comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Luz Sagrada}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.
 
-+1 PM: aumenta a área iluminada em +3m de raio.
+    +1 PM: aumenta a área iluminada em +3m de raio.
 
-+2 PM: muda a duração para um dia.
-+2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
-+0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
-+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
-+5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
-JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
+    +2 PM: muda a duração para um dia.
+    +2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
+    +0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
+    +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
+    +2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
+    +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
+    JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             })
         ];
 
@@ -2956,7 +2956,7 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -3052,10 +3052,10 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            popup.remove();
-            const overlay = document.getElementById('spell-cast-overlay');
-            if (overlay) overlay.remove();
-        }
+                popup.remove();
+                const overlay = document.getElementById('spell-cast-overlay');
+                if (overlay) overlay.remove();
+            }
         });
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
@@ -3237,35 +3237,35 @@ JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
             if (spellName === 'Luz Sagrada') {
                 spellDescription = `${description.textContent}
 
-+1 PM: aumenta a área iluminada em +3m de raio.
+    +1 PM: aumenta a área iluminada em +3m de raio.
 
-+2 PM: muda a duração para um dia.
+    +2 PM: muda a duração para um dia.
 
-+2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
+    +2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
 
-+0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
+    +0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
 
-+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
+    +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
 
-+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
+    +2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
 
-+5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.`;
+    +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.`;
             } else if (spellName === 'Sombras Profanas') {
                 spellDescription = `${description.textContent}
 
-+1 PM: aumenta a área da escuridão em +1,5m de raio.
+    +1 PM: aumenta a área da escuridão em +1,5m de raio.
 
-+2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
+    +2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
 
-+2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
+    +2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
 
-+3 PM: muda a duração para um dia.
+    +3 PM: muda a duração para um dia.
 
-+5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.`;
+    +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.`;
             }
 
             const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellName}}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${spellDescription}
-JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
+    JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             sendToChat(msg);
         };
         descBox.appendChild(shareBtn);
@@ -3807,7 +3807,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e raridade
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -3881,9 +3881,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            modal.remove();
-            overlay.remove();
-        }
+                modal.remove();
+                overlay.remove();
+            }
         });
         header.appendChild(closeBtn.render());
         modal.appendChild(header);
@@ -4142,7 +4142,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho com ícone, nome e tipo
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'flex-start';
         header.style.marginBottom = '15px';
 
@@ -4216,9 +4216,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            modal.remove();
-            overlay.remove();
-        }
+                modal.remove();
+                overlay.remove();
+            }
         });
         header.appendChild(closeBtn.render());
         modal.appendChild(header);
@@ -4602,7 +4602,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '20px';
         header.style.paddingBottom = '15px';
@@ -4626,29 +4626,29 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 overlay.remove();
                 modal.remove();
             }
-        });        header.appendChild(title);
+        }); header.appendChild(title);
         header.appendChild(closeBtn.render());
 
         // Conteúdo simples
         const content = document.createElement('div');
         content.style.color = '#ecf0f1';
         content.innerHTML = `
-            <div style="margin-bottom: 15px;">
-                <h3 style="color: #ffb86c; margin-bottom: 10px;">Informações do Script</h3>
-                <p><strong>Versão:</strong> ${getGitVersion()}</p>
-                <p><strong>Autor:</strong> Daniel Marinho Goncalves</p>
-                <p><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: center;">
-                    <button id="clear-all-data-btn" style="width: 100%; padding: 12px 20px; border: 1px solid #ff6e6e; border-radius: 6px; background: transparent; color: #ff6e6e; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s ease;" title="Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página">Limpar Dados</button>
+                <div style="margin-bottom: 15px;">
+                    <h3 style="color: #ffb86c; margin-bottom: 10px;">Informações do Script</h3>
+                    <p><strong>Versão:</strong> ${getGitVersion()}</p>
+                    <p><strong>Autor:</strong> Daniel Marinho Goncalves</p>
+                    <p><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
                 </div>
-            </div>
-        `;
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: center;">
+                        <button id="clear-all-data-btn" style="width: 100%; padding: 12px 20px; border: 1px solid #ff6e6e; border-radius: 6px; background: transparent; color: #ff6e6e; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s ease;" title="Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página">Limpar Dados</button>
+                    </div>
+                </div>
+            `;
 
         // Evento do botão único
         const clearButton = content.querySelector('#clear-all-data-btn');
-        
+
         // Efeitos de hover
         clearButton.onmouseover = () => {
             clearButton.style.background = 'rgba(255, 110, 110, 0.1)';
@@ -4656,25 +4656,25 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             clearButton.style.color = '#ff8e8e';
             clearButton.style.transform = 'scale(1.02)';
         };
-        
+
         clearButton.onmouseout = () => {
             clearButton.style.background = 'transparent';
             clearButton.style.borderColor = '#ff6e6e';
             clearButton.style.color = '#ff6e6e';
             clearButton.style.transform = 'scale(1)';
         };
-        
+
         clearButton.onclick = () => {
             if (confirm('Tem certeza que deseja limpar todos os dados salvos? Esta ação irá remover o cache de imagens, efeitos ativos, configurações e outros dados. Esta ação não pode ser desfeita.')) {
                 // Limpar cache de imagens
                 clearImageCache();
-                
+
                 // Limpar todos os dados do localStorage
                 localStorage.clear();
-                
+
                 // Notificação de sucesso
                 createNotification('Todos os dados foram limpos com sucesso!', 'success', 3000);
-                
+
                 // Recarregar a página após 1 segundo
                 setTimeout(() => {
                     location.reload();
@@ -4710,10 +4710,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         noResultsMessage.style.fontSize = '14px';
         noResultsMessage.style.fontStyle = 'italic';
         noResultsMessage.innerHTML = `
-            <div style="margin-bottom: 8px;">🔍</div>
-            <div>Nenhum ${itemName} encontrado para "<strong style="color: ${themeColor};">${filterText}</strong>"</div>
-            <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-        `;
+                <div style="margin-bottom: 8px;">🔍</div>
+                <div>Nenhum ${itemName} encontrado para "<strong style="color: ${themeColor};">${filterText}</strong>"</div>
+                <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+            `;
         return noResultsMessage;
     }
     function createPratosEspeciaisPopup() {
@@ -4761,33 +4761,33 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.display = 'flex';
             popup.style.flexDirection = 'column';
             popup.style.alignItems = 'stretch';        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
-        header.style.width = '100%';
+            const header = document.createElement('div');
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
 
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ffb86c',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('pratos-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ffb86c',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('pratos-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
 
-        const title = document.createElement('h3');
-        title.textContent = 'Pratos Especiais';
-        title.style.color = '#ffb86c';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            const title = document.createElement('h3');
+            title.textContent = 'Pratos Especiais';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold'; header.appendChild(title);
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Campo de filtro
@@ -4920,33 +4920,33 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             popup.style.display = 'flex';
             popup.style.flexDirection = 'column';
             popup.style.alignItems = 'stretch';        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
-        header.style.width = '100%';
+            const header = document.createElement('div');
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
 
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ffb86c',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('bebidas-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ffb86c',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('bebidas-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
 
-        const title = document.createElement('h3');
-        title.textContent = 'Bebidas Artonianas';
-        title.style.color = '#ffb86c';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            const title = document.createElement('h3');
+            title.textContent = 'Bebidas Artonianas';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold'; header.appendChild(title);
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Campo de filtro
@@ -5077,32 +5077,32 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             const style = document.createElement('style');
             style.id = 'healing-effect-styles';
             style.textContent = `
-                @keyframes leafFloat {
-                    0% {
-                        transform: translateX(-50px) translateY(0px) rotate(45deg);
-                        opacity: 0;
+                    @keyframes leafFloat {
+                        0% {
+                            transform: translateX(-50px) translateY(0px) rotate(45deg);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 0.8;
+                        }
+                        20% {
+                            transform: translateX(20vw) translateY(calc(var(--leaf-amplitude) * -1)) rotate(45deg);
+                        }
+                        40% {
+                            transform: translateX(40vw) translateY(calc(var(--leaf-amplitude) * 1)) rotate(45deg);
+                        }
+                        60% {
+                            transform: translateX(60vw) translateY(calc(var(--leaf-amplitude) * -1)) rotate(45deg);
+                        }
+                        80% {
+                            transform: translateX(80vw) translateY(calc(var(--leaf-amplitude) * 1)) rotate(45deg);
+                        }
+                        100% {
+                            transform: translateX(calc(100vw + 50px)) translateY(0px) rotate(45deg);
+                            opacity: 0;
+                        }
                     }
-                    10% {
-                        opacity: 0.8;
-                    }
-                    20% {
-                        transform: translateX(20vw) translateY(calc(var(--leaf-amplitude) * -1)) rotate(45deg);
-                    }
-                    40% {
-                        transform: translateX(40vw) translateY(calc(var(--leaf-amplitude) * 1)) rotate(45deg);
-                    }
-                    60% {
-                        transform: translateX(60vw) translateY(calc(var(--leaf-amplitude) * -1)) rotate(45deg);
-                    }
-                    80% {
-                        transform: translateX(80vw) translateY(calc(var(--leaf-amplitude) * 1)) rotate(45deg);
-                    }
-                    100% {
-                        transform: translateX(calc(100vw + 50px)) translateY(0px) rotate(45deg);
-                        opacity: 0;
-                    }
-                }
-            `;
+                `;
             document.head.appendChild(style);
         }
 
@@ -5910,7 +5910,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -5920,7 +5920,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#6ec6ff';
         title.style.margin = '0';
         title.style.fontSize = '20px';
-        title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
+        title.style.fontWeight = 'bold'; const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
             fontSize: '24px',
             width: '32px',
@@ -5928,11 +5928,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            modal.remove();
-            const overlay = document.getElementById('skill-detail-overlay');
-            if (overlay) overlay.remove();
-        }
-        });        header.appendChild(title);
+                modal.remove();
+                const overlay = document.getElementById('skill-detail-overlay');
+                if (overlay) overlay.remove();
+            }
+        }); header.appendChild(title);
         header.appendChild(closeBtn.render());
         modal.appendChild(header);
 
@@ -7136,30 +7136,30 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '15px';
-            header.style.width = '100%';        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('maneuvers-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
+            header.style.width = '100%'; const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('maneuvers-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
 
-        const title = document.createElement('h3');
-        title.textContent = 'Manobras de Combate';
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '18px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            const title = document.createElement('h3');
+            title.textContent = 'Manobras de Combate';
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = 'bold'; header.appendChild(title);
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Campo de filtro
@@ -7530,30 +7530,30 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
-            header.style.width = '100%';        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('attack-effects-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
+            header.style.width = '100%'; const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('attack-effects-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
 
-        const title = document.createElement('h3');
-        title.textContent = 'Efeitos no Ataque';
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            const title = document.createElement('h3');
+            title.textContent = 'Efeitos no Ataque';
+            title.style.color = '#ecf0f1';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold'; header.appendChild(title);
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Obter nível do personagem
@@ -7933,11 +7933,11 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const style = document.createElement('style');
                 style.id = 'skeleton-loader-style';
                 style.textContent = `
-                        @keyframes skeleton-loading { 
-                            0% { background-position: -200px 0; } 
-                            100% { background-position: calc(200px + 100%) 0; } 
-                        }
-                    `;
+                            @keyframes skeleton-loading { 
+                                0% { background-position: -200px 0; } 
+                                100% { background-position: calc(200px + 100%) 0; } 
+                            }
+                        `;
                 document.head.appendChild(style);
             }
 
@@ -8223,7 +8223,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho fixo
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.width = '100%';
         header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -8255,7 +8255,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const overlay = document.getElementById('hunter-class-overlay');
                 if (overlay) overlay.remove();
             }
-        });        header.appendChild(title);
+        }); header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -8541,16 +8541,16 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 const filterText = powerTextFilterInput.value.trim();
                 if (filterText) {
                     noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">🔍</div>
-                        <div>Nenhum poder encontrado para "<strong style="color: #8B4513;">${filterText}</strong>"</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                    `;
+                            <div style="margin-bottom: 8px;">🔍</div>
+                            <div>Nenhum poder encontrado para "<strong style="color: #8B4513;">${filterText}</strong>"</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
+                        `;
                 } else {
                     noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">⚔️</div>
-                        <div>Nenhum poder disponível</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
-                    `;
+                            <div style="margin-bottom: 8px;">⚔️</div>
+                            <div>Nenhum poder disponível</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                        `;
                 }
 
                 combatPowersListContainer.appendChild(noResultsMessage);
@@ -8992,7 +8992,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -9003,19 +9003,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.color = '#8B4513';
             title.style.margin = '0';
             title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                modal.remove();
-                overlay.remove();
-            }
-        });        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            title.style.fontWeight = 'bold'; const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    modal.remove();
+                    overlay.remove();
+                }
+            }); header.appendChild(title);
+            header.appendChild(closeBtn.render());
             modal.appendChild(header);
 
             // Descrição
@@ -9297,7 +9297,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '20px';
             header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
@@ -9308,19 +9308,19 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             title.style.color = '#8B4513';
             title.style.margin = '0';
             title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold';        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                modal.remove();
-                overlay.remove();
-            }
-        });        header.appendChild(title);
-        header.appendChild(closeBtn.render());
+            title.style.fontWeight = 'bold'; const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    modal.remove();
+                    overlay.remove();
+                }
+            }); header.appendChild(title);
+            header.appendChild(closeBtn.render());
             modal.appendChild(header);
 
             // Descrição
@@ -9887,10 +9887,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     return;
                 } else {
                     noResultsMessage.innerHTML = `
-                        <div style="margin-bottom: 8px;">⚔️</div>
-                        <div>Nenhuma habilidade disponível</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
-                    `;
+                            <div style="margin-bottom: 8px;">⚔️</div>
+                            <div>Nenhuma habilidade disponível</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                        `;
                 }
 
                 abilitiesListContainer.appendChild(noResultsMessage);
@@ -10985,7 +10985,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         popup.style.flexDirection = 'column';
         popup.style.alignItems = 'stretch';        // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -10998,10 +10998,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
-            popup.remove();
-            const overlay = document.getElementById('abilities-overlay');
-            if (overlay) overlay.remove();
-        }
+                popup.remove();
+                const overlay = document.getElementById('abilities-overlay');
+                if (overlay) overlay.remove();
+            }
         });
 
         const title = document.createElement('h3');
@@ -11009,7 +11009,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold';        header.appendChild(title);
+        title.style.fontWeight = 'bold'; header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -11108,10 +11108,10 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     return;
                 } else {
                     emptyMsg.innerHTML = `
-                        <div style="margin-bottom: 8px;">✨</div>
-                        <div>Nenhuma habilidade disponível</div>
-                        <div style="margin-top: 8px; font-size: 12px;">Aprenda habilidades no modal da classe para vê-las aqui</div>
-                    `;
+                            <div style="margin-bottom: 8px;">✨</div>
+                            <div>Nenhuma habilidade disponível</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Aprenda habilidades no modal da classe para vê-las aqui</div>
+                        `;
                 }
 
                 abilityList.appendChild(emptyMsg);
@@ -11301,7 +11301,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11336,20 +11336,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             titleContainer.appendChild(originTag);
 
             header.appendChild(titleContainer);        // Botão de fechar
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('power-cast-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
-        header.appendChild(closeBtn.render());
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('power-cast-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -11544,7 +11544,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11579,20 +11579,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             titleContainer.appendChild(originTag);
 
             header.appendChild(titleContainer);        // Botão de fechar
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('power-cast-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
-        header.appendChild(closeBtn.render());
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('power-cast-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -11747,7 +11747,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
             // Cabeçalho
             const header = document.createElement('div');
-            header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
             header.style.alignItems = 'center';
             header.style.marginBottom = '10px';
             header.style.width = '100%';
@@ -11782,20 +11782,20 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             titleContainer.appendChild(originTag);
 
             header.appendChild(titleContainer);        // Botão de fechar
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('power-cast-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
-        header.appendChild(closeBtn.render());
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('power-cast-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+            header.appendChild(closeBtn.render());
             popup.appendChild(header);
 
             // Descrição em uma box
@@ -12118,6 +12118,9 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
             // Adiciona à ordem
             addEffectToOrder(conditionName, 'condition');
             showSuccessNotification(`Condição "${conditionName}" aplicada!`);
+
+            // Envia roll template para o chat
+            sendConditionToChat(conditionName);
         }
 
         saveActiveConditions(activeConditions);
@@ -12131,6 +12134,18 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
     function getConditionData(conditionName) {
         const conditions = getConditionsList();
         return conditions.find(condition => condition.nome === conditionName);
+    }
+
+    // Função para enviar condição para o chat com roll template
+    function sendConditionToChat(conditionName) {
+        const conditionData = getConditionData(conditionName);
+        if (!conditionData) return;
+
+        // Cria o roll template usando t20-info padrão
+        const template = `&{template:t20-info}{{infoname=${conditionName} ${conditionData.icone || '⚡'}}}{{description=Categoria: ${conditionData.categoria || 'Status'}
+${conditionData.efeitos || conditionData.descricao}}}`;
+
+        sendToChat(template);
     }
 
     // Função para obter dados de um efeito de item
@@ -12236,6 +12251,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Abalado',
                 descricao: 'Condição de medo que afeta a confiança do personagem.',
                 efeitos: '-2 em testes de perícia • Progressão: se aplicado novamente, torna-se apavorado',
+                categoria: 'Medo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
                 icone: '😰'
             },
@@ -12243,6 +12259,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Agarrado',
                 descricao: 'O personagem está sendo segurado ou imobilizado por uma criatura.',
                 efeitos: '-2 em testes de ataque • Só pode usar armas leves • Ataques à distância têm 50% de chance de errar o alvo',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '🤝'
             },
@@ -12250,6 +12267,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Alquebrado',
                 descricao: 'O personagem está mentalmente esgotado, dificultando o uso de habilidades.',
                 efeitos: '+1 PM no custo de todas as habilidades',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '🧠'
             },
@@ -12257,6 +12275,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Apavorado',
                 descricao: 'Medo extremo que paralisa o personagem diante da fonte do terror.',
                 efeitos: '-5 em testes de perícia • Não pode se aproximar voluntariamente da fonte do medo',
+                categoria: 'Medo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
                 icone: '😱'
             },
@@ -12264,6 +12283,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Atordoado',
                 descricao: 'O personagem está confuso e desorientado, incapaz de agir.',
                 efeitos: 'Não pode fazer ações • Fica desprevenido',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
                 icone: '💫'
             },
@@ -12271,6 +12291,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Caído',
                 descricao: 'O personagem está no chão, em posição vulnerável.',
                 efeitos: '-5 na Defesa vs ataques corpo a corpo • +5 na Defesa vs ataques à distância • -5 em ataques corpo a corpo • Deslocamento 1,5m',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
                 icone: '🛐'
             },
@@ -12278,6 +12299,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Cego',
                 descricao: 'O personagem não consegue ver, perdendo a capacidade de perceber visualmente.',
                 efeitos: '-5 em testes de Força/Destreza • Todos os alvos recebem camuflagem total • Fica desprevenido e lento',
+                categoria: 'Sentidos',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
                 icone: '👁️'
             },
@@ -12285,6 +12307,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Confuso',
                 descricao: 'O personagem age de forma aleatória e imprevisível.',
                 efeitos: 'Role 1d6 no início do turno: 1) Move aleatoriamente • 2-3) Não age • 4-5) Ataca mais próximo • 6) Recupera',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
                 icone: '🤪'
             },
@@ -12292,6 +12315,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Debilitado',
                 descricao: 'Fraqueza física severa que afeta todos os atributos físicos.',
                 efeitos: '-5 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se inconsciente',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😵'
             },
@@ -12299,6 +12323,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Desprevenido',
                 descricao: 'O personagem não está preparado para reagir a ameaças.',
                 efeitos: '-5 na Defesa • -5 em Reflexos • Vulnerável a ataques surpresa',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '😳'
             },
@@ -12306,6 +12331,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Doente',
                 descricao: 'O personagem está sofrendo os efeitos de uma doença.',
                 efeitos: 'Efeitos variam conforme a doença específica',
+                categoria: 'Metabolismo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
                 icone: '🤒'
             },
@@ -12313,6 +12339,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Em Chamas',
                 descricao: 'O personagem está queimando e sofrendo dano contínuo.',
                 efeitos: '1d6 dano de fogo por turno • Ação padrão para apagar • Água também apaga',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_immolation.jpg',
                 icone: '🔥'
             },
@@ -12320,6 +12347,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Enfeitiçado',
                 descricao: 'O personagem vê a fonte da condição de forma extremamente favorável.',
                 efeitos: 'A fonte recebe +10 em Diplomacia • Não fica sob controle direto',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_charm.jpg',
                 icone: '💫'
             },
@@ -12327,6 +12355,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Enjoado',
                 descricao: 'Náuseas e mal-estar que limitam as ações do personagem.',
                 efeitos: 'Apenas 1 ação por rodada (padrão OU movimento) • Investida limitada ao deslocamento normal',
+                categoria: 'Metabolismo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
                 icone: '🤢'
             },
@@ -12334,6 +12363,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Enredado',
                 descricao: 'O personagem está preso por teias, cordas ou similar.',
                 efeitos: '-2 em testes de ataque • Fica lento e vulnerável',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '🕸️'
             },
@@ -12341,6 +12371,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Envenenado',
                 descricao: 'O personagem está sob efeito de um veneno.',
                 efeitos: 'Efeitos variam conforme o veneno • Dano recorrente é cumulativo',
+                categoria: 'Veneno',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
                 icone: '☠️'
             },
@@ -12348,6 +12379,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Esmorecido',
                 descricao: 'Fraqueza mental severa que afeta todos os atributos mentais.',
                 efeitos: '-5 em Inteligência, Sabedoria, Carisma e perícias mentais',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😞'
             },
@@ -12355,6 +12387,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Exausto',
                 descricao: 'Cansaço extremo que combina múltiplas condições.',
                 efeitos: 'Combina debilitado + lento + vulnerável • Progressão: se aplicado novamente, torna-se inconsciente',
+                categoria: 'Cansaço',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😴'
             },
@@ -12362,6 +12395,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Fascinado',
                 descricao: 'O personagem está hipnotizado por algo específico.',
                 efeitos: '-5 em Percepção • Só pode observar o que o fascinou • Quebrado por ações hostis',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg',
                 icone: '😵'
             },
@@ -12369,6 +12403,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Fatigado',
                 descricao: 'Cansaço moderado que afeta a performance do personagem.',
                 efeitos: 'Combina fraco + vulnerável • Progressão: se aplicado novamente, torna-se exausto',
+                categoria: 'Cansaço',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg',
                 icone: '😪'
             },
@@ -12376,6 +12411,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Fraco',
                 descricao: 'Fraqueza física leve que afeta os atributos físicos.',
                 efeitos: '-2 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se debilitado',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😣'
             },
@@ -12383,6 +12419,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Frustrado',
                 descricao: 'Fraqueza mental leve que afeta os atributos mentais.',
                 efeitos: '-2 em Inteligência, Sabedoria, Carisma e perícias mentais • Progressão: se aplicado novamente, torna-se esmorecido',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
                 icone: '😤'
             },
@@ -12390,6 +12427,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Imóvel',
                 descricao: 'O personagem não consegue se mover de forma alguma.',
                 efeitos: 'Deslocamento reduzido a 0m • Pode ainda realizar ações que não envolvem movimento',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '🛑'
             },
@@ -12397,6 +12435,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Inconsciente',
                 descricao: 'O personagem está desmaiado e completamente indefeso.',
                 efeitos: 'Fica indefeso • Não pode fazer ações ou reações • Ainda pode fazer testes automáticos • Balançar para acordar gasta ação padrão',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
                 icone: '😵'
             },
@@ -12404,6 +12443,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Indefeso',
                 descricao: 'Vulnerabilidade extrema que deixa o personagem completamente exposto.',
                 efeitos: '-10 na Defesa • Falha automaticamente em Reflexos • Pode sofrer golpes de misericórdia',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '💀'
             },
@@ -12411,6 +12451,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Invisível',
                 descricao: 'O personagem não pode ser visto por meios normais.',
                 efeitos: '+20 em Furtividade • Imunidade a ataques que dependem de visão • Primeiro ataque tem bônus',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_stealth.jpg',
                 icone: '👻'
             },
@@ -12418,6 +12459,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Lento',
                 descricao: 'O personagem se move com dificuldade, reduzindo sua mobilidade.',
                 efeitos: 'Deslocamento reduzido à metade • Não pode correr ou fazer investidas',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_slow.jpg',
                 icone: '🐌'
             },
@@ -12425,6 +12467,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Ofuscado',
                 descricao: 'Visão prejudicada que afeta a precisão e percepção.',
                 efeitos: '-2 em testes de ataque • -2 em testes de Percepção',
+                categoria: 'Sentidos',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
                 icone: '😵‍💫'
             },
@@ -12432,6 +12475,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Paralisado',
                 descricao: 'O personagem está completamente paralisado, incapaz de se mover.',
                 efeitos: 'Fica imóvel e indefeso • Só pode realizar ações puramente mentais',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
                 icone: '🧊'
             },
@@ -12439,6 +12483,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Pasmo',
                 descricao: 'Choque ou surpresa que impede qualquer ação.',
                 efeitos: 'Não pode fazer ações • Condição temporária',
+                categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
                 icone: '😶'
             },
@@ -12446,6 +12491,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Petrificado',
                 descricao: 'O personagem foi transformado em pedra.',
                 efeitos: 'Fica inconsciente • Recebe redução de dano 8 • Imunidade a dano',
+                categoria: 'Metamorfose',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg',
                 icone: '🗿'
             },
@@ -12453,6 +12499,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Sangrando',
                 descricao: 'O personagem está perdendo sangue continuamente.',
                 efeitos: 'Teste de Constituição (CD 15) por turno • Falha = 1d6 dano • Sucesso = remove condição',
+                categoria: 'Metabolismo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_blackplague.jpg',
                 icone: '🩸'
             },
@@ -12460,6 +12507,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Sobrecarregado',
                 descricao: 'O personagem está carregando peso excessivo.',
                 efeitos: 'Penalidade de armadura -5 • Deslocamento reduzido em -3m',
+                categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
                 icone: '⚖️'
             },
@@ -12467,6 +12515,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Surdo',
                 descricao: 'O personagem não consegue ouvir sons.',
                 efeitos: '-5 em Iniciativa • Não pode fazer testes de Percepção auditiva • Condição ruim para magias',
+                categoria: 'Sentidos',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech.jpg',
                 icone: '🔇'
             },
@@ -12474,6 +12523,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Surpreendido',
                 descricao: 'O personagem foi pego desprevenido no início do combate.',
                 efeitos: 'Fica desprevenido • Não pode fazer ações • Condição do primeiro turno',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '😲'
             },
@@ -12481,6 +12531,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                 nome: 'Vulnerável',
                 descricao: 'O personagem está em posição que facilita ataques inimigos.',
                 efeitos: '-2 na Defesa • Mais suscetível a ataques',
+                categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
                 icone: '💔'
             }
@@ -13167,7 +13218,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex';        header.style.justifyContent = 'space-between';
+        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
@@ -13196,7 +13247,7 @@ JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
                     updateEffectsBadge();
                 }, 100);
             }
-        });        header.appendChild(title);
+        }); header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
