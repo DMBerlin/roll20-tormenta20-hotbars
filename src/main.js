@@ -647,7 +647,16 @@
                 conditionItem.style.borderColor = 'rgba(255,184,108,0.3)';
             };
 
-            conditionItem.onclick = () => {
+            conditionItem.onclick = (event) => {
+                // Se CTRL está pressionado, mostra popup detalhado
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    showConditionDetailsPopup(condition);
+                    return;
+                }
+
+                // Clique normal - aplica/remove condição
                 toggleCondition(condition.nome);
                 popup.remove();
                 const overlay = document.getElementById('conditions-overlay');
@@ -670,7 +679,7 @@
             conditionName.style.fontSize = '14px';
 
             const conditionDesc = document.createElement('div');
-            conditionDesc.textContent = condition.descricao;
+            conditionDesc.innerHTML = `${condition.descricao} <span style="color: #ffb86c; font-size: 10px; opacity: 0.8;">(CTRL+Click para detalhes)</span>`;
             conditionDesc.style.color = '#ecf0f1';
             conditionDesc.style.fontSize = '12px';
             conditionDesc.style.marginTop = '2px';
@@ -683,6 +692,208 @@
         });
 
         popup.appendChild(conditionsList);
+        document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'orange');
+    }
+
+    // Função para mostrar popup detalhado de uma condição específica
+    function showConditionDetailsPopup(conditionData) {
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('condition-details-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('condition-details-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'condition-details-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'condition-details-popup';
+        popup.className = 'roll20-popup roll20-popup-orange';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #ffb86c';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '500px';
+        popup.style.maxHeight = '600px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.alignItems = 'center';
+        titleContainer.style.gap = '12px';
+
+        const conditionIcon = document.createElement('span');
+        conditionIcon.textContent = conditionData.icone || '⚡';
+        conditionIcon.style.fontSize = '24px';
+
+        const title = document.createElement('h3');
+        title.textContent = conditionData.nome;
+        title.style.color = '#ffb86c';
+        title.style.margin = '0';
+        title.style.fontSize = '20px';
+        title.style.fontWeight = 'bold';
+
+        titleContainer.appendChild(conditionIcon);
+        titleContainer.appendChild(title);
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ffb86c',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('condition-details-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
+
+        header.appendChild(titleContainer);
+        header.appendChild(closeBtn.render());
+        popup.appendChild(header);
+
+        // Conteúdo
+        const content = document.createElement('div');
+        content.style.display = 'flex';
+        content.style.flexDirection = 'column';
+        content.style.gap = '16px';
+
+        // Categoria
+        if (conditionData.categoria) {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.style.display = 'flex';
+            categoryDiv.style.alignItems = 'center';
+            categoryDiv.style.gap = '8px';
+
+            const categoryLabel = document.createElement('span');
+            categoryLabel.textContent = 'Categoria:';
+            categoryLabel.style.color = '#ffb86c';
+            categoryLabel.style.fontWeight = 'bold';
+            categoryLabel.style.fontSize = '14px';
+
+            const categoryValue = document.createElement('span');
+            categoryValue.textContent = conditionData.categoria;
+            categoryValue.style.color = '#ecf0f1';
+            categoryValue.style.fontSize = '14px';
+
+            categoryDiv.appendChild(categoryLabel);
+            categoryDiv.appendChild(categoryValue);
+            content.appendChild(categoryDiv);
+        }
+
+        // Descrição completa
+        if (conditionData.descricaoCompleta) {
+            const descriptionDiv = document.createElement('div');
+
+            const descriptionLabel = document.createElement('div');
+            descriptionLabel.textContent = 'Descrição Completa:';
+            descriptionLabel.style.color = '#ffb86c';
+            descriptionLabel.style.fontWeight = 'bold';
+            descriptionLabel.style.fontSize = '14px';
+            descriptionLabel.style.marginBottom = '8px';
+
+            const descriptionText = document.createElement('div');
+            descriptionText.innerHTML = conditionData.descricaoCompleta.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            descriptionText.style.color = '#ecf0f1';
+            descriptionText.style.fontSize = '14px';
+            descriptionText.style.lineHeight = '1.5';
+            descriptionText.style.padding = '12px';
+            descriptionText.style.background = 'rgba(255,184,108,0.1)';
+            descriptionText.style.borderRadius = '6px';
+            descriptionText.style.border = '1px solid rgba(255,184,108,0.3)';
+
+            descriptionDiv.appendChild(descriptionLabel);
+            descriptionDiv.appendChild(descriptionText);
+            content.appendChild(descriptionDiv);
+        }
+
+        // Efeitos
+        if (conditionData.efeitos) {
+            const effectsDiv = document.createElement('div');
+
+            const effectsLabel = document.createElement('div');
+            effectsLabel.textContent = 'Efeitos:';
+            effectsLabel.style.color = '#ffb86c';
+            effectsLabel.style.fontWeight = 'bold';
+            effectsLabel.style.fontSize = '14px';
+            effectsLabel.style.marginBottom = '8px';
+
+            const effectsText = document.createElement('div');
+            effectsText.textContent = conditionData.efeitos;
+            effectsText.style.color = '#ecf0f1';
+            effectsText.style.fontSize = '13px';
+            effectsText.style.lineHeight = '1.4';
+
+            effectsDiv.appendChild(effectsLabel);
+            effectsDiv.appendChild(effectsText);
+            content.appendChild(effectsDiv);
+        }
+
+        // Regras gerais
+        const rulesDiv = document.createElement('div');
+        rulesDiv.style.marginTop = '16px';
+        rulesDiv.style.padding = '12px';
+        rulesDiv.style.background = 'rgba(255,184,108,0.05)';
+        rulesDiv.style.borderRadius = '6px';
+        rulesDiv.style.border = '1px solid rgba(255,184,108,0.2)';
+
+        const rulesTitle = document.createElement('div');
+        rulesTitle.textContent = 'Regras Gerais das Condições:';
+        rulesTitle.style.color = '#ffb86c';
+        rulesTitle.style.fontWeight = 'bold';
+        rulesTitle.style.fontSize = '13px';
+        rulesTitle.style.marginBottom = '8px';
+
+        const rulesText = document.createElement('div');
+        rulesText.innerHTML = `
+            <div style="color: #ecf0f1; font-size: 12px; line-height: 1.4; margin-bottom: 6px;">
+                • <strong>Condições com os mesmos efeitos não se acumulam;</strong> aplique apenas os mais severos.
+            </div>
+            <div style="color: #ecf0f1; font-size: 12px; line-height: 1.4; margin-bottom: 6px;">
+                • <strong>A menos que especificado o contrário, condições terminam no fim da cena.</strong>
+            </div>
+            <div style="color: #ecf0f1; font-size: 12px; line-height: 1.4;">
+                • Algumas condições possuem um tipo de efeito (em <em>itálico</em>).
+            </div>
+        `;
+
+        rulesDiv.appendChild(rulesTitle);
+        rulesDiv.appendChild(rulesText);
+        content.appendChild(rulesDiv);
+
+        popup.appendChild(content);
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
@@ -12250,6 +12461,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Abalado',
                 descricao: 'Condição de medo que afeta a confiança do personagem.',
+                descricaoCompleta: 'O personagem sofre –2 em testes de perícia. Se ficar abalado novamente, em vez disso fica apavorado. *Medo.*',
                 efeitos: '-2 em testes de perícia • Progressão: se aplicado novamente, torna-se apavorado',
                 categoria: 'Medo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
@@ -12258,6 +12470,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Agarrado',
                 descricao: 'O personagem está sendo segurado ou imobilizado por uma criatura.',
+                descricaoCompleta: 'O personagem fica desprevenido e imóvel, sofre –2 em testes de ataque e só pode atacar com armas leves. Ataques à distância contra um alvo envolvido em uma manobra agarrar têm 50% de chance de acertar o alvo errado. *Movimento.*',
                 efeitos: '-2 em testes de ataque • Só pode usar armas leves • Ataques à distância têm 50% de chance de errar o alvo',
                 categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg',
@@ -12266,6 +12479,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Alquebrado',
                 descricao: 'O personagem está mentalmente esgotado, dificultando o uso de habilidades.',
+                descricaoCompleta: 'O custo em pontos de mana das habilidades do personagem aumenta em +1. *Mental.*',
                 efeitos: '+1 PM no custo de todas as habilidades',
                 categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
@@ -12274,6 +12488,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Apavorado',
                 descricao: 'Medo extremo que paralisa o personagem diante da fonte do terror.',
+                descricaoCompleta: 'O personagem sofre –5 em testes de perícia e não pode se aproximar voluntariamente da fonte do medo. *Medo.*',
                 efeitos: '-5 em testes de perícia • Não pode se aproximar voluntariamente da fonte do medo',
                 categoria: 'Medo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg',
@@ -12282,6 +12497,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Atordoado',
                 descricao: 'O personagem está confuso e desorientado, incapaz de agir.',
+                descricaoCompleta: 'O personagem fica desprevenido e não pode fazer ações. *Mental.*',
                 efeitos: 'Não pode fazer ações • Fica desprevenido',
                 categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
@@ -12290,6 +12506,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Caído',
                 descricao: 'O personagem está no chão, em posição vulnerável.',
+                descricaoCompleta: 'O personagem sofre –5 na Defesa contra ataques corpo a corpo e recebe +5 na Defesa contra ataques à distância (cumulativos com outras condições). Além disso, sofre –5 em ataques corpo a corpo e seu deslocamento é reduzido a 1,5m.',
                 efeitos: '-5 na Defesa vs ataques corpo a corpo • +5 na Defesa vs ataques à distância • -5 em ataques corpo a corpo • Deslocamento 1,5m',
                 categoria: 'Movimento',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
@@ -12298,6 +12515,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Cego',
                 descricao: 'O personagem não consegue ver, perdendo a capacidade de perceber visualmente.',
+                descricaoCompleta: 'O personagem fica desprevenido e lento, não pode fazer testes de Percepção para observar e sofre –5 em testes de perícias baseadas em Força ou Destreza. Todos os alvos de seus ataques recebem camuflagem total. Você é considerado cego enquanto estiver em uma área de escuridão total, a menos que algo lhe permita perceber no escuro. *Sentidos.*',
                 efeitos: '-5 em testes de Força/Destreza • Todos os alvos recebem camuflagem total • Fica desprevenido e lento',
                 categoria: 'Sentidos',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg',
@@ -12306,6 +12524,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Confuso',
                 descricao: 'O personagem age de forma aleatória e imprevisível.',
+                descricaoCompleta: 'O personagem comporta-se de modo aleatório. Role 1d6 no início de seus turnos: 1) Movimenta-se em uma direção escolhida por uma rolagem de 1d8; 2-3) Não pode fazer ações, e fica balbuciando incoerentemente; 4-5) Usa a arma que estiver empunhando para atacar a criatura mais próxima, ou a si mesmo se estiver sozinho (nesse caso, apenas role o dano); 6) A condição termina e pode agir normalmente. *Mental.*',
                 efeitos: 'Role 1d6 no início do turno: 1) Move aleatoriamente • 2-3) Não age • 4-5) Ataca mais próximo • 6) Recupera',
                 categoria: 'Mental',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_mindsteal.jpg',
@@ -12314,6 +12533,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Debilitado',
                 descricao: 'Fraqueza física severa que afeta todos os atributos físicos.',
+                descricaoCompleta: 'O personagem sofre –5 em testes de Força, Destreza e Constituição e de perícias baseadas nesses atributos. Se o personagem ficar debilitado novamente, em vez disso fica inconsciente.',
                 efeitos: '-5 em Força, Destreza, Constituição e perícias físicas • Progressão: se aplicado novamente, torna-se inconsciente',
                 categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg',
@@ -12322,6 +12542,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Desprevenido',
                 descricao: 'O personagem não está preparado para reagir a ameaças.',
+                descricaoCompleta: 'O personagem sofre –5 na Defesa e em Reflexos. Você fica desprevenido contra inimigos que não possa perceber.',
                 efeitos: '-5 na Defesa • -5 em Reflexos • Vulnerável a ataques surpresa',
                 categoria: 'Status',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg',
@@ -12330,6 +12551,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             {
                 nome: 'Doente',
                 descricao: 'O personagem está sofrendo os efeitos de uma doença.',
+                descricaoCompleta: 'Sob efeito de uma doença. *Metabolismo.*',
                 efeitos: 'Efeitos variam conforme a doença específica',
                 categoria: 'Metabolismo',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_poisoncleansingtotem.jpg',
