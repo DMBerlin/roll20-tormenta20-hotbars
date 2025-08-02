@@ -585,14 +585,15 @@
         popup.style.borderRadius = '12px';
         popup.style.padding = '18px 20px 16px 20px';
         popup.style.zIndex = '10001';
-        popup.style.maxWidth = '400px';
+        popup.style.maxWidth = '450px';
         popup.style.maxHeight = '600px';
         popup.style.overflowY = 'auto';
         popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
 
@@ -615,81 +616,166 @@
                 const overlay = document.getElementById('conditions-overlay');
                 if (overlay) overlay.remove();
             }
-        }); header.appendChild(title);
+        });
+        header.appendChild(title);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
+        // Campo de busca
+        const searchInput = createSearchInput({
+            placeholder: 'Buscar condições...',
+            theme: 'orange',
+            marginBottom: '12px',
+            onInput: (value) => {
+                filterConditions(value, selectedCategory);
+            }
+        });
+        popup.appendChild(searchInput.container);
+
+        // Filtros por categoria
+        const filterContainer = document.createElement('div');
+        filterContainer.style.marginBottom = '12px';
+        filterContainer.style.display = 'flex';
+        filterContainer.style.flexWrap = 'wrap';
+        filterContainer.style.gap = '6px';
+
+        const categories = ['Todas', 'Medo', 'Movimento', 'Mental', 'Metabolismo', 'Sentidos', 'Cansaço', 'Veneno', 'Metamorfose', 'Status'];
+        let selectedCategory = 'Todas';
+
+        categories.forEach(category => {
+            const filterBtn = document.createElement('button');
+            filterBtn.textContent = category;
+            filterBtn.style.padding = '6px 12px';
+            filterBtn.style.border = '1px solid #ffb86c';
+            filterBtn.style.borderRadius = '6px';
+            filterBtn.style.background = category === 'Todas' ? '#ffb86c' : 'transparent';
+            filterBtn.style.color = category === 'Todas' ? '#23243a' : '#ffb86c';
+            filterBtn.style.cursor = 'pointer';
+            filterBtn.style.fontSize = '12px';
+            filterBtn.style.fontWeight = 'bold';
+            filterBtn.style.transition = 'all 0.2s';
+
+            filterBtn.onclick = () => {
+                // Atualiza visual dos botões
+                filterContainer.querySelectorAll('button').forEach(btn => {
+                    btn.style.background = 'transparent';
+                    btn.style.color = '#ffb86c';
+                });
+                filterBtn.style.background = '#ffb86c';
+                filterBtn.style.color = '#23243a';
+
+                selectedCategory = category;
+                filterConditions(searchInput.getValue(), category);
+            };
+
+            filterContainer.appendChild(filterBtn);
+        });
+        popup.appendChild(filterContainer);
+
+        // Label sobre CTRL
+        const ctrlLabel = document.createElement('div');
+        ctrlLabel.innerHTML = '<span style="color: #ffb86c; font-size: 11px; opacity: 0.8;">💡 Pressione CTRL + clique para ver detalhes completos da condição</span>';
+        ctrlLabel.style.marginBottom = '12px';
+        ctrlLabel.style.textAlign = 'center';
+        ctrlLabel.style.padding = '8px';
+        ctrlLabel.style.background = 'rgba(255,184,108,0.1)';
+        ctrlLabel.style.borderRadius = '6px';
+        ctrlLabel.style.border = '1px solid rgba(255,184,108,0.3)';
+        popup.appendChild(ctrlLabel);
+
         // Lista de condições
         const conditionsList = document.createElement('div');
+        conditionsList.id = 'conditions-list';
         conditionsList.style.display = 'flex';
         conditionsList.style.flexDirection = 'column';
         conditionsList.style.gap = '8px';
 
-        const conditions = getConditionsList();
-        conditions.forEach(condition => {
-            const conditionItem = document.createElement('div');
-            conditionItem.style.display = 'flex';
-            conditionItem.style.alignItems = 'center';
-            conditionItem.style.padding = '8px 12px';
-            conditionItem.style.background = 'rgba(255,184,108,0.1)';
-            conditionItem.style.borderRadius = '6px';
-            conditionItem.style.cursor = 'pointer';
-            conditionItem.style.transition = 'all 0.2s';
-            conditionItem.style.border = '1px solid rgba(255,184,108,0.3)';
+        // Função para filtrar condições
+        function filterConditions(searchTerm, category) {
+            const conditions = getConditionsList();
+            const filteredConditions = conditions.filter(condition => {
+                const matchesSearch = !searchTerm ||
+                    condition.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    condition.descricao.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    condition.efeitos.toLowerCase().includes(searchTerm.toLowerCase());
 
-            conditionItem.onmouseover = () => {
-                conditionItem.style.background = 'rgba(255,184,108,0.2)';
-                conditionItem.style.borderColor = 'rgba(255,184,108,0.5)';
-            };
+                const matchesCategory = category === 'Todas' || condition.categoria === category;
 
-            conditionItem.onmouseout = () => {
+                return matchesSearch && matchesCategory;
+            });
+
+            // Limpa a lista atual
+            conditionsList.innerHTML = '';
+
+            // Adiciona as condições filtradas
+            filteredConditions.forEach(condition => {
+                const conditionItem = document.createElement('div');
+                conditionItem.style.display = 'flex';
+                conditionItem.style.alignItems = 'center';
+                conditionItem.style.padding = '8px 12px';
                 conditionItem.style.background = 'rgba(255,184,108,0.1)';
-                conditionItem.style.borderColor = 'rgba(255,184,108,0.3)';
-            };
+                conditionItem.style.borderRadius = '6px';
+                conditionItem.style.cursor = 'pointer';
+                conditionItem.style.transition = 'all 0.2s';
+                conditionItem.style.border = '1px solid rgba(255,184,108,0.3)';
 
-            conditionItem.onclick = (event) => {
-                // Se CTRL está pressionado, mostra popup detalhado
-                if (event.ctrlKey) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    showConditionDetailsPopup(condition);
-                    return;
-                }
+                conditionItem.onmouseover = () => {
+                    conditionItem.style.background = 'rgba(255,184,108,0.2)';
+                    conditionItem.style.borderColor = 'rgba(255,184,108,0.5)';
+                };
 
-                // Clique normal - aplica/remove condição
-                toggleCondition(condition.nome);
-                popup.remove();
-                const overlay = document.getElementById('conditions-overlay');
-                if (overlay) overlay.remove();
-            };
+                conditionItem.onmouseout = () => {
+                    conditionItem.style.background = 'rgba(255,184,108,0.1)';
+                    conditionItem.style.borderColor = 'rgba(255,184,108,0.3)';
+                };
 
-            const conditionIcon = document.createElement('span');
-            conditionIcon.textContent = condition.icone || '⚡';
-            conditionIcon.style.marginRight = '10px';
-            conditionIcon.style.fontSize = '16px';
+                conditionItem.onclick = (event) => {
+                    // Se CTRL está pressionado, mostra popup detalhado
+                    if (event.ctrlKey) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        showConditionDetailsPopup(condition);
+                        return;
+                    }
 
-            const conditionText = document.createElement('div');
-            conditionText.style.display = 'flex';
-            conditionText.style.flexDirection = 'column';
+                    // Clique normal - aplica/remove condição
+                    toggleCondition(condition.nome);
+                    popup.remove();
+                    const overlay = document.getElementById('conditions-overlay');
+                    if (overlay) overlay.remove();
+                };
 
-            const conditionName = document.createElement('div');
-            conditionName.textContent = condition.nome;
-            conditionName.style.color = '#ffb86c';
-            conditionName.style.fontWeight = 'bold';
-            conditionName.style.fontSize = '14px';
+                const conditionIcon = document.createElement('span');
+                conditionIcon.textContent = condition.icone || '⚡';
+                conditionIcon.style.marginRight = '10px';
+                conditionIcon.style.fontSize = '16px';
 
-            const conditionDesc = document.createElement('div');
-            conditionDesc.innerHTML = `${condition.descricao} <span style="color: #ffb86c; font-size: 10px; opacity: 0.8;">(CTRL+Click para detalhes)</span>`;
-            conditionDesc.style.color = '#ecf0f1';
-            conditionDesc.style.fontSize = '12px';
-            conditionDesc.style.marginTop = '2px';
+                const conditionText = document.createElement('div');
+                conditionText.style.display = 'flex';
+                conditionText.style.flexDirection = 'column';
 
-            conditionText.appendChild(conditionName);
-            conditionText.appendChild(conditionDesc);
-            conditionItem.appendChild(conditionIcon);
-            conditionItem.appendChild(conditionText);
-            conditionsList.appendChild(conditionItem);
-        });
+                const conditionName = document.createElement('div');
+                conditionName.textContent = condition.nome;
+                conditionName.style.color = '#ffb86c';
+                conditionName.style.fontWeight = 'bold';
+                conditionName.style.fontSize = '14px';
+
+                const conditionDesc = document.createElement('div');
+                conditionDesc.textContent = condition.descricao;
+                conditionDesc.style.color = '#ecf0f1';
+                conditionDesc.style.fontSize = '12px';
+                conditionDesc.style.marginTop = '2px';
+
+                conditionText.appendChild(conditionName);
+                conditionText.appendChild(conditionDesc);
+                conditionItem.appendChild(conditionIcon);
+                conditionItem.appendChild(conditionText);
+                conditionsList.appendChild(conditionItem);
+            });
+        }
+
+        // Inicializa com todas as condições
+        filterConditions('', 'Todas');
 
         popup.appendChild(conditionsList);
         document.body.appendChild(popup);
