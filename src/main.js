@@ -627,61 +627,10 @@
             theme: 'orange',
             marginBottom: '12px',
             onInput: (value) => {
-                filterConditions(value, selectedCategory);
+                filterConditions(value);
             }
         });
         popup.appendChild(searchInput.container);
-
-        // Filtros por categoria
-        const filterContainer = document.createElement('div');
-        filterContainer.style.marginBottom = '12px';
-        filterContainer.style.display = 'flex';
-        filterContainer.style.flexWrap = 'wrap';
-        filterContainer.style.gap = '6px';
-
-        const categories = ['Todas', 'Medo', 'Movimento', 'Mental', 'Metabolismo', 'Sentidos', 'Cansaço', 'Veneno', 'Metamorfose', 'Status'];
-        let selectedCategory = 'Todas';
-
-        categories.forEach(category => {
-            const filterBtn = document.createElement('button');
-            filterBtn.textContent = category;
-            filterBtn.style.padding = '6px 12px';
-            filterBtn.style.border = '1px solid #ffb86c';
-            filterBtn.style.borderRadius = '6px';
-            filterBtn.style.background = category === 'Todas' ? '#ffb86c' : 'transparent';
-            filterBtn.style.color = category === 'Todas' ? '#23243a' : '#ffb86c';
-            filterBtn.style.cursor = 'pointer';
-            filterBtn.style.fontSize = '12px';
-            filterBtn.style.fontWeight = 'bold';
-            filterBtn.style.transition = 'all 0.2s';
-
-            filterBtn.onclick = () => {
-                // Atualiza visual dos botões
-                filterContainer.querySelectorAll('button').forEach(btn => {
-                    btn.style.background = 'transparent';
-                    btn.style.color = '#ffb86c';
-                });
-                filterBtn.style.background = '#ffb86c';
-                filterBtn.style.color = '#23243a';
-
-                selectedCategory = category;
-                filterConditions(searchInput.getValue(), category);
-            };
-
-            filterContainer.appendChild(filterBtn);
-        });
-        popup.appendChild(filterContainer);
-
-        // Label sobre CTRL
-        const ctrlLabel = document.createElement('div');
-        ctrlLabel.innerHTML = '<span style="color: #ffb86c; font-size: 11px; opacity: 0.8;">💡 Pressione CTRL + clique para ver detalhes completos da condição</span>';
-        ctrlLabel.style.marginBottom = '12px';
-        ctrlLabel.style.textAlign = 'center';
-        ctrlLabel.style.padding = '8px';
-        ctrlLabel.style.background = 'rgba(255,184,108,0.1)';
-        ctrlLabel.style.borderRadius = '6px';
-        ctrlLabel.style.border = '1px solid rgba(255,184,108,0.3)';
-        popup.appendChild(ctrlLabel);
 
         // Lista de condições
         const conditionsList = document.createElement('div');
@@ -691,7 +640,7 @@
         conditionsList.style.gap = '8px';
 
         // Função para filtrar condições
-        function filterConditions(searchTerm, category) {
+        function filterConditions(searchTerm) {
             const conditions = getConditionsList();
             const filteredConditions = conditions.filter(condition => {
                 const matchesSearch = !searchTerm ||
@@ -699,9 +648,7 @@
                     condition.descricao.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     condition.efeitos.toLowerCase().includes(searchTerm.toLowerCase());
 
-                const matchesCategory = category === 'Todas' || condition.categoria === category;
-
-                return matchesSearch && matchesCategory;
+                return matchesSearch;
             });
 
             // Limpa a lista atual
@@ -710,72 +657,73 @@
             // Adiciona as condições filtradas
             filteredConditions.forEach(condition => {
                 const conditionItem = document.createElement('div');
+                conditionItem.style.background = '#23243a';
+                conditionItem.style.border = '1px solid #ffb86c';
+                conditionItem.style.borderRadius = '8px';
+                conditionItem.style.padding = '12px 14px';
                 conditionItem.style.display = 'flex';
+                conditionItem.style.justifyContent = 'space-between';
                 conditionItem.style.alignItems = 'center';
-                conditionItem.style.padding = '8px 12px';
-                conditionItem.style.background = 'rgba(255,184,108,0.1)';
-                conditionItem.style.borderRadius = '6px';
+                conditionItem.style.gap = '10px';
                 conditionItem.style.cursor = 'pointer';
                 conditionItem.style.transition = 'all 0.2s';
-                conditionItem.style.border = '1px solid rgba(255,184,108,0.3)';
 
+                // Efeitos de hover
                 conditionItem.onmouseover = () => {
-                    conditionItem.style.background = 'rgba(255,184,108,0.2)';
-                    conditionItem.style.borderColor = 'rgba(255,184,108,0.5)';
+                    conditionItem.style.background = '#2d2e4a';
+                    conditionItem.style.borderColor = '#ffc97a';
                 };
 
                 conditionItem.onmouseout = () => {
-                    conditionItem.style.background = 'rgba(255,184,108,0.1)';
-                    conditionItem.style.borderColor = 'rgba(255,184,108,0.3)';
+                    conditionItem.style.background = '#23243a';
+                    conditionItem.style.borderColor = '#ffb86c';
                 };
 
-                conditionItem.onclick = (event) => {
-                    // Se CTRL está pressionado, mostra popup detalhado
-                    if (event.ctrlKey) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        showConditionDetailsPopup(condition);
-                        return;
-                    }
-
-                    // Clique normal - aplica/remove condição
-                    toggleCondition(condition.nome);
-                    popup.remove();
-                    const overlay = document.getElementById('conditions-overlay');
-                    if (overlay) overlay.remove();
+                conditionItem.onclick = () => {
+                    // Clique normal - mostra popup detalhado
+                    showConditionDetailsPopup(condition);
                 };
 
-                const conditionIcon = document.createElement('span');
-                conditionIcon.textContent = condition.icone || '⚡';
-                conditionIcon.style.marginRight = '10px';
-                conditionIcon.style.fontSize = '16px';
-
-                const conditionText = document.createElement('div');
-                conditionText.style.display = 'flex';
-                conditionText.style.flexDirection = 'column';
+                // Informações da condição
+                const conditionInfo = document.createElement('div');
+                conditionInfo.style.flex = '1';
+                conditionInfo.style.display = 'flex';
+                conditionInfo.style.flexDirection = 'column';
+                conditionInfo.style.gap = '4px';
 
                 const conditionName = document.createElement('div');
                 conditionName.textContent = condition.nome;
                 conditionName.style.color = '#ffb86c';
                 conditionName.style.fontWeight = 'bold';
-                conditionName.style.fontSize = '14px';
+                conditionName.style.fontSize = '15px';
+                conditionInfo.appendChild(conditionName);
 
-                const conditionDesc = document.createElement('div');
-                conditionDesc.textContent = condition.descricao;
-                conditionDesc.style.color = '#ecf0f1';
-                conditionDesc.style.fontSize = '12px';
-                conditionDesc.style.marginTop = '2px';
+                // Resumo da descrição
+                const resumo = document.createElement('div');
+                const palavras = condition.descricao.split(/\s+/);
+                let resumoTexto = palavras.slice(0, 10).join(' ');
+                if (palavras.length > 10) resumoTexto += '...';
+                resumo.textContent = resumoTexto;
+                resumo.style.color = '#bdbdbd';
+                resumo.style.fontSize = '12px';
+                resumo.style.fontStyle = 'italic';
+                conditionInfo.appendChild(resumo);
 
-                conditionText.appendChild(conditionName);
-                conditionText.appendChild(conditionDesc);
-                conditionItem.appendChild(conditionIcon);
-                conditionItem.appendChild(conditionText);
+                // Efeitos da condição
+                const conditionEffects = document.createElement('div');
+                conditionEffects.textContent = condition.efeitos;
+                conditionEffects.style.color = '#6ec6ff';
+                conditionEffects.style.fontSize = '13px';
+                conditionEffects.style.fontWeight = 'bold';
+                conditionInfo.appendChild(conditionEffects);
+
+                conditionItem.appendChild(conditionInfo);
                 conditionsList.appendChild(conditionItem);
             });
         }
 
         // Inicializa com todas as condições
-        filterConditions('', 'Todas');
+        filterConditions('');
 
         popup.appendChild(conditionsList);
         document.body.appendChild(popup);
@@ -838,9 +786,32 @@
         titleContainer.style.alignItems = 'center';
         titleContainer.style.gap = '12px';
 
-        const conditionIcon = document.createElement('span');
-        conditionIcon.textContent = conditionData.icone || '⚡';
-        conditionIcon.style.fontSize = '24px';
+        const conditionIcon = document.createElement('div');
+        conditionIcon.style.width = '32px';
+        conditionIcon.style.height = '32px';
+        conditionIcon.style.borderRadius = '6px';
+        conditionIcon.style.border = '2px solid #ff6e6e';
+        conditionIcon.style.background = '#23243a';
+        conditionIcon.style.overflow = 'hidden';
+        conditionIcon.style.flexShrink = '0';
+
+        // Usa o sistema de cache para carregar a imagem
+        const iconUrl = conditionData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseoftounges.jpg';
+
+        const cachedImageElement = createCachedImageElement(
+            iconUrl,
+            conditionData.nome,
+            conditionData.icone || '⚠️',
+            {
+                width: '100%',
+                height: '100%',
+                borderRadius: '4px',
+                objectFit: 'cover',
+                showSkeleton: true
+            }
+        );
+
+        conditionIcon.appendChild(cachedImageElement);
 
         const title = document.createElement('h3');
         title.textContent = conditionData.nome;
@@ -978,6 +949,53 @@
         rulesDiv.appendChild(rulesTitle);
         rulesDiv.appendChild(rulesText);
         content.appendChild(rulesDiv);
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.display = 'flex';
+        buttonsContainer.style.gap = '10px';
+        buttonsContainer.style.marginTop = '20px';
+
+        // Botão Compartilhar
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.style.flex = '1';
+        shareBtn.style.padding = '10px 15px';
+        shareBtn.style.background = '#2c3e50';
+        shareBtn.style.border = '1px solid #34495e';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.color = '#ecf0f1';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.onclick = () => {
+            // Envia condição para o chat
+            sendConditionToChat(conditionData.nome);
+            showSuccessNotification(`Condição "${conditionData.nome}" compartilhada no chat!`);
+        };
+        buttonsContainer.appendChild(shareBtn);
+
+        // Botão Aplicar
+        const applyBtn = document.createElement('button');
+        applyBtn.textContent = 'Aplicar Condição';
+        applyBtn.style.flex = '1';
+        applyBtn.style.padding = '10px 15px';
+        applyBtn.style.background = '#27ae60';
+        applyBtn.style.border = '1px solid #2ecc71';
+        applyBtn.style.borderRadius = '6px';
+        applyBtn.style.color = '#ecf0f1';
+        applyBtn.style.cursor = 'pointer';
+        applyBtn.style.fontSize = '14px';
+        applyBtn.onclick = () => {
+            // Aplica a condição
+            toggleCondition(conditionData.nome);
+            // Fecha o popup
+            popup.remove();
+            const overlay = document.getElementById('condition-details-overlay');
+            if (overlay) overlay.remove();
+        };
+        buttonsContainer.appendChild(applyBtn);
+
+        content.appendChild(buttonsContainer);
 
         popup.appendChild(content);
         document.body.appendChild(popup);
