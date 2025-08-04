@@ -201,12 +201,284 @@
         return new CloseButton({ ...presetConfig, ...config });
     }
 
+    // FavoritableCard Component
+    function FavoritableCard(config = {}) {
+        this.config = {
+            // Default values
+            id: config.id || `favoritable-card-${Date.now()}`,
+            title: config.title || '',
+            summary: config.summary || '',
+            effectText: config.effectText || '',
+            showFavoriteButton: config.showFavoriteButton !== false, // Default true
+            isFavorite: config.isFavorite || false,
+            theme: config.theme || 'orange', // 'orange', 'blue', 'red'
+            customStyles: config.customStyles || '',
+            onClick: config.onClick || null,
+            onFavoriteToggle: config.onFavoriteToggle || null,
+            ...config
+        };
+        
+        this.element = null;
+        this._setupTheme();
+    }
+
+    FavoritableCard.prototype._setupTheme = function() {
+        const themes = {
+            orange: {
+                borderColor: '#ffb86c',
+                titleColor: '#ffb86c',
+                hoverBorderColor: '#ffc97a',
+                hoverBackground: '#2d2e4a'
+            },
+            blue: {
+                borderColor: '#6ec6ff',
+                titleColor: '#6ec6ff',
+                hoverBorderColor: '#7dd3ff',
+                hoverBackground: '#2d2e4a'
+            },
+            red: {
+                borderColor: '#ff6e6e',
+                titleColor: '#ff6e6e',
+                hoverBorderColor: '#ff7a7a',
+                hoverBackground: '#2d2e4a'
+            }
+        };
+
+        const currentTheme = themes[this.config.theme] || themes.orange;
+        this.config.borderColor = currentTheme.borderColor;
+        this.config.titleColor = currentTheme.titleColor;
+        this.config.hoverBorderColor = currentTheme.hoverBorderColor;
+        this.config.hoverBackground = currentTheme.hoverBackground;
+    };
+
+    FavoritableCard.prototype.updateFavoriteStatus = function(isFavorite) {
+        this.config.isFavorite = isFavorite;
+        this.config.favoriteIcon = isFavorite ? '★' : '☆';
+        this.config.favoriteIconColor = isFavorite ? this.config.titleColor : '#666';
+        
+        if (this.element) {
+            const favoriteBtn = this.element.querySelector('.favorite-btn');
+            if (favoriteBtn) {
+                favoriteBtn.innerHTML = this.config.favoriteIcon;
+                favoriteBtn.style.color = this.config.favoriteIconColor;
+            }
+        }
+    };
+
+    FavoritableCard.prototype.render = function() {
+        // Set favorite icon based on current status
+        this.config.favoriteIcon = this.config.isFavorite ? '★' : '☆';
+        this.config.favoriteIconColor = this.config.isFavorite ? this.config.titleColor : '#666';
+        
+        // Create the card element
+        const card = document.createElement('div');
+        card.className = 'favoritable-card';
+        card.style.background = '#23243a';
+        card.style.border = `1px solid ${this.config.borderColor}`;
+        card.style.borderRadius = '8px';
+        card.style.padding = '12px 14px';
+        card.style.display = 'flex';
+        card.style.justifyContent = 'space-between';
+        card.style.alignItems = 'center';
+        card.style.gap = '10px';
+        card.style.cursor = 'pointer';
+        card.style.transition = 'all 0.2s';
+        card.style.cssText += this.config.customStyles;
+
+        // Card info container
+        const itemInfo = document.createElement('div');
+        itemInfo.className = 'card-info';
+        itemInfo.style.flex = '1';
+        itemInfo.style.display = 'flex';
+        itemInfo.style.flexDirection = 'column';
+        itemInfo.style.gap = '4px';
+
+        // Title
+        const nome = document.createElement('div');
+        nome.className = 'card-title';
+        nome.textContent = this.config.title;
+        nome.style.color = this.config.titleColor;
+        nome.style.fontWeight = 'bold';
+        nome.style.fontSize = '15px';
+        itemInfo.appendChild(nome);
+
+        // Summary (if provided)
+        if (this.config.summary) {
+            const resumo = document.createElement('div');
+            resumo.className = 'card-summary';
+            const palavras = this.config.summary.split(/\s+/);
+            let resumoTexto = palavras.slice(0, 10).join(' ');
+            if (palavras.length > 10) resumoTexto += '...';
+            resumo.textContent = resumoTexto;
+            resumo.style.color = '#bdbdbd';
+            resumo.style.fontSize = '12px';
+            resumo.style.fontStyle = 'italic';
+            itemInfo.appendChild(resumo);
+        }
+
+        // Effect text (if provided)
+        if (this.config.effectText) {
+            const effectField = document.createElement('div');
+            effectField.className = 'card-effect';
+            effectField.textContent = this.config.effectText;
+            effectField.style.color = '#6ec6ff';
+            effectField.style.fontSize = '13px';
+            effectField.style.fontWeight = 'bold';
+            itemInfo.appendChild(effectField);
+        }
+
+        card.appendChild(itemInfo);
+
+        // Favorite button (if enabled)
+        if (this.config.showFavoriteButton) {
+            const favoriteBtn = document.createElement('button');
+            favoriteBtn.className = 'favorite-btn';
+            favoriteBtn.innerHTML = this.config.favoriteIcon;
+            favoriteBtn.style.background = 'none';
+            favoriteBtn.style.border = 'none';
+            favoriteBtn.style.color = this.config.favoriteIconColor;
+            favoriteBtn.style.fontSize = '18px';
+            favoriteBtn.style.cursor = 'pointer';
+            favoriteBtn.style.padding = '5px';
+            favoriteBtn.style.minWidth = '30px';
+            favoriteBtn.style.transition = 'all 0.2s';
+
+            card.appendChild(favoriteBtn);
+        }
+
+        this.element = card;
+        this._addEventListeners();
+        
+        return this.element;
+    };
+
+    FavoritableCard.prototype._addEventListeners = function() {
+        if (!this.element) return;
+
+        // Hover effects for the card
+        this.element.addEventListener('mouseover', () => {
+            this.element.style.background = this.config.hoverBackground;
+            this.element.style.borderColor = this.config.hoverBorderColor;
+        });
+
+        this.element.addEventListener('mouseout', () => {
+            this.element.style.background = '#23243a';
+            this.element.style.borderColor = this.config.borderColor;
+        });
+
+        // Click handler for the card
+        if (this.config.onClick) {
+            this.element.addEventListener('click', (e) => {
+                // Don't trigger if clicking on favorite button
+                if (e.target.classList.contains('favorite-btn')) {
+                    return;
+                }
+                this.config.onClick(e, this);
+            });
+        }
+
+        // Favorite button click handler
+        if (this.config.showFavoriteButton) {
+            const favoriteBtn = this.element.querySelector('.favorite-btn');
+            if (favoriteBtn) {
+                favoriteBtn.addEventListener('mouseover', () => {
+                    favoriteBtn.style.background = `rgba(255, 184, 108, 0.2)`;
+                    favoriteBtn.style.color = this.config.titleColor;
+                });
+
+                favoriteBtn.addEventListener('mouseout', () => {
+                    favoriteBtn.style.background = 'none';
+                    favoriteBtn.style.color = this.config.favoriteIconColor;
+                });
+
+                favoriteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const newFavoriteStatus = !this.config.isFavorite;
+                    this.updateFavoriteStatus(newFavoriteStatus);
+                    
+                    if (this.config.onFavoriteToggle) {
+                        this.config.onFavoriteToggle(newFavoriteStatus, this);
+                    }
+                });
+            }
+        }
+    };
+
+    FavoritableCard.prototype.update = function(newConfig) {
+        this.config = { ...this.config, ...newConfig };
+        this._setupTheme();
+        
+        if (this.element && this.element.parentNode) {
+            const newElement = this.render();
+            this.element.parentNode.replaceChild(newElement, this.element);
+            this.element = newElement;
+        }
+    };
+
+    FavoritableCard.prototype.show = function() {
+        if (this.element) {
+            this.element.style.display = 'flex';
+        }
+    };
+
+    FavoritableCard.prototype.hide = function() {
+        if (this.element) {
+            this.element.style.display = 'none';
+        }
+    };
+
+    FavoritableCard.prototype.destroy = function() {
+        if (this.element && this.element.parentNode) {
+            this.element.parentNode.removeChild(this.element);
+        }
+        this.element = null;
+    };
+
+    function createFavoritableCard(config = {}) {
+        return new FavoritableCard(config);
+    }
+
+    function createFavoritableCardWithPreset(preset = 'default', additionalConfig = {}) {
+        const presets = {
+            food: {
+                theme: 'orange',
+                showFavoriteButton: true,
+                effectText: additionalConfig.bonus || ''
+            },
+            drink: {
+                theme: 'orange',
+                showFavoriteButton: true,
+                effectText: additionalConfig.efeito || ''
+            },
+            condition: {
+                theme: 'orange',
+                showFavoriteButton: false,
+                effectText: additionalConfig.efeitos || ''
+            }
+        };
+
+        const presetConfig = presets[preset] || presets.food;
+        const finalConfig = { ...presetConfig, ...additionalConfig };
+
+        return new FavoritableCard(finalConfig);
+    }
+
+    const FavoritableCardPresets = {
+        FOOD: 'food',
+        DRINK: 'drink',
+        CONDITION: 'condition'
+    };
+
     // Make components available globally
     window.Roll20Components = {
         CloseButton: CloseButton,
         createCloseButton: createCloseButton,
         createCloseButtonWithPreset: createCloseButtonWithPreset,
-        CloseButtonPresets: CloseButtonPresets
+        CloseButtonPresets: CloseButtonPresets,
+        FavoritableCard: FavoritableCard,
+        createFavoritableCard: createFavoritableCard,
+        createFavoritableCardWithPreset: createFavoritableCardWithPreset,
+        FavoritableCardPresets: FavoritableCardPresets
     };
 
 })(); 

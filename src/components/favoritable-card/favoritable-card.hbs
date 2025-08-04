@@ -1,0 +1,55 @@
+<div class="favoritable-card" style="
+    background: #23243a;
+    border: 1px solid {{borderColor}};
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    {{customStyles}}
+">
+    <div class="card-info" style="
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    ">
+        <div class="card-title" style="
+            color: {{titleColor}};
+            font-weight: bold;
+            font-size: 15px;
+        ">{{title}}</div>
+        
+        {{#if summary}}
+        <div class="card-summary" style="
+            color: #bdbdbd;
+            font-size: 12px;
+            font-style: italic;
+        ">{{summary}}</div>
+        {{/if}}
+        
+        {{#if effectText}}
+        <div class="card-effect" style="
+            color: #6ec6ff;
+            font-size: 13px;
+            font-weight: bold;
+        ">{{effectText}}</div>
+        {{/if}}
+    </div>
+    
+    {{#if showFavoriteButton}}
+    <button class="favorite-btn" style="
+        background: none;
+        border: none;
+        color: {{favoriteIconColor}};
+        font-size: 18px;
+        cursor: pointer;
+        padding: 5px;
+        min-width: 30px;
+        transition: all 0.2s;
+    ">{{favoriteIcon}}</button>
+    {{/if}}
+</div> 

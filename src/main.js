@@ -654,71 +654,18 @@
             // Limpa a lista atual
             conditionsList.innerHTML = '';
 
-            // Adiciona as condições filtradas
+            // Adiciona as condições filtradas usando o componente FavoritableCard
             filteredConditions.forEach(condition => {
-                const conditionItem = document.createElement('div');
-                conditionItem.style.background = '#23243a';
-                conditionItem.style.border = '1px solid #ffb86c';
-                conditionItem.style.borderRadius = '8px';
-                conditionItem.style.padding = '12px 14px';
-                conditionItem.style.display = 'flex';
-                conditionItem.style.justifyContent = 'space-between';
-                conditionItem.style.alignItems = 'center';
-                conditionItem.style.gap = '10px';
-                conditionItem.style.cursor = 'pointer';
-                conditionItem.style.transition = 'all 0.2s';
-
-                // Efeitos de hover
-                conditionItem.onmouseover = () => {
-                    conditionItem.style.background = '#2d2e4a';
-                    conditionItem.style.borderColor = '#ffc97a';
-                };
-
-                conditionItem.onmouseout = () => {
-                    conditionItem.style.background = '#23243a';
-                    conditionItem.style.borderColor = '#ffb86c';
-                };
-
-                conditionItem.onclick = () => {
-                    // Clique normal - mostra popup detalhado
-                    showConditionDetailsPopup(condition);
-                };
-
-                // Informações da condição
-                const conditionInfo = document.createElement('div');
-                conditionInfo.style.flex = '1';
-                conditionInfo.style.display = 'flex';
-                conditionInfo.style.flexDirection = 'column';
-                conditionInfo.style.gap = '4px';
-
-                const conditionName = document.createElement('div');
-                conditionName.textContent = condition.nome;
-                conditionName.style.color = '#ffb86c';
-                conditionName.style.fontWeight = 'bold';
-                conditionName.style.fontSize = '15px';
-                conditionInfo.appendChild(conditionName);
-
-                // Resumo da descrição
-                const resumo = document.createElement('div');
-                const palavras = condition.descricao.split(/\s+/);
-                let resumoTexto = palavras.slice(0, 10).join(' ');
-                if (palavras.length > 10) resumoTexto += '...';
-                resumo.textContent = resumoTexto;
-                resumo.style.color = '#bdbdbd';
-                resumo.style.fontSize = '12px';
-                resumo.style.fontStyle = 'italic';
-                conditionInfo.appendChild(resumo);
-
-                // Efeitos da condição
-                const conditionEffects = document.createElement('div');
-                conditionEffects.textContent = condition.efeitos;
-                conditionEffects.style.color = '#6ec6ff';
-                conditionEffects.style.fontSize = '13px';
-                conditionEffects.style.fontWeight = 'bold';
-                conditionInfo.appendChild(conditionEffects);
-
-                conditionItem.appendChild(conditionInfo);
-                conditionsList.appendChild(conditionItem);
+                const conditionCard = window.Roll20Components.createFavoritableCardWithPreset('condition', {
+                    title: condition.nome,
+                    summary: condition.descricao,
+                    efeitos: condition.efeitos,
+                    onClick: () => {
+                        showConditionDetailsPopup(condition);
+                    }
+                });
+                
+                conditionsList.appendChild(conditionCard.render());
             });
         }
 
@@ -4757,122 +4704,34 @@
         document.body.appendChild(modal);
     }
 
-    // Template reutilizável para itens de lista (pratos e bebidas)
+    // Template reutilizável para itens de lista usando o componente FavoritableCard
     function createListItemCard(item, itemType, onFavoriteToggle) {
-        const card = document.createElement('div');
-        card.style.background = '#23243a';
-        card.style.border = '1px solid #ffb86c';
-        card.style.borderRadius = '8px';
-        card.style.padding = '12px 14px';
-        card.style.display = 'flex';
-        card.style.justifyContent = 'space-between';
-        card.style.alignItems = 'center';
-        card.style.gap = '10px';
-        card.style.cursor = 'pointer';
-        card.style.transition = 'all 0.2s';
-
-        // Efeitos de hover
-        card.onmouseover = () => {
-            card.style.background = '#2d2e4a';
-            card.style.borderColor = '#ffc97a';
-        };
-        card.onmouseout = () => {
-            card.style.background = '#23243a';
-            card.style.borderColor = '#ffb86c';
-        };
-
-        // Informações do item
-        const itemInfo = document.createElement('div');
-        itemInfo.style.flex = '1';
-        itemInfo.style.display = 'flex';
-        itemInfo.style.flexDirection = 'column';
-        itemInfo.style.gap = '4px';
-
-        const nome = document.createElement('div');
-        nome.textContent = item.nome;
-        nome.style.color = '#ffb86c';
-        nome.style.fontWeight = 'bold';
-        nome.style.fontSize = '15px';
-        itemInfo.appendChild(nome);
-
-        // Resumo da descrição
-        const resumo = document.createElement('div');
-        const palavras = item.descricao.split(/\s+/);
-        let resumoTexto = palavras.slice(0, 10).join(' ');
-        if (palavras.length > 10) resumoTexto += '...';
-        resumo.textContent = resumoTexto;
-        resumo.style.color = '#bdbdbd';
-        resumo.style.fontSize = '12px';
-        resumo.style.fontStyle = 'italic';
-        itemInfo.appendChild(resumo);
-
-        // Campo específico baseado no tipo (bonus para pratos, efeito para bebidas)
-        const effectField = document.createElement('div');
-        if (itemType === 'food') {
-            effectField.textContent = item.bonus;
-        } else if (itemType === 'drink') {
-            effectField.textContent = item.efeito;
-        }
-        effectField.style.color = '#6ec6ff';
-        effectField.style.fontSize = '13px';
-        effectField.style.fontWeight = 'bold';
-        itemInfo.appendChild(effectField);
-
-        // Botão de favorito
-        const favoriteBtn = document.createElement('button');
-        const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
-        favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
-        favoriteBtn.style.background = 'none';
-        favoriteBtn.style.border = 'none';
-        favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
-        favoriteBtn.style.fontSize = '18px';
-        favoriteBtn.style.cursor = 'pointer';
-        favoriteBtn.style.padding = '5px';
-        favoriteBtn.style.minWidth = '30px';
-        favoriteBtn.style.transition = 'all 0.2s';
-
-        // Efeitos de hover no botão
-        favoriteBtn.onmouseover = () => {
-            favoriteBtn.style.background = 'rgba(255, 184, 108, 0.2)';
-            favoriteBtn.style.color = '#ffb86c';
-        };
-        favoriteBtn.onmouseout = () => {
-            favoriteBtn.style.background = 'none';
-            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
-        };
-
-        favoriteBtn.onclick = (e) => {
-            e.stopPropagation();
-            if (itemType === 'food') {
-                togglePratoFavorito(item.nome);
-            } else if (itemType === 'drink') {
-                toggleBebidaFavorita(item.nome);
+        const preset = itemType === 'food' ? 'food' : 
+                       itemType === 'drink' ? 'drink' : 'condition';
+        
+        const card = window.Roll20Components.createFavoritableCardWithPreset(preset, {
+            title: item.nome,
+            summary: item.descricao,
+            isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) : 
+                       itemType === 'drink' ? isBebidaFavorita(item.nome) : false,
+            onClick: () => {
+                if (itemType === 'food') {
+                    createPratoDetailModal(item);
+                } else if (itemType === 'drink') {
+                    createBebidaDetailModal(item);
+                }
+            },
+            onFavoriteToggle: () => {
+                if (itemType === 'food') {
+                    togglePratoFavorito(item.nome);
+                } else if (itemType === 'drink') {
+                    toggleBebidaFavorita(item.nome);
+                }
+                if (onFavoriteToggle) onFavoriteToggle();
             }
-
-            // Atualiza o botão imediatamente
-            const isFavorite = itemType === 'food' ? isPratoFavorito(item.nome) : isBebidaFavorita(item.nome);
-            favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
-            favoriteBtn.style.color = isFavorite ? '#ffb86c' : '#666';
-
-            // Chama o callback para re-renderizar a lista
-            if (onFavoriteToggle) {
-                onFavoriteToggle();
-            }
-        };
-
-        card.appendChild(itemInfo);
-        card.appendChild(favoriteBtn);
-
-        // Evento de clique para abrir modal de detalhes
-        card.onclick = () => {
-            if (itemType === 'food') {
-                createPratoDetailModal(item);
-            } else if (itemType === 'drink') {
-                createBebidaDetailModal(item);
-            }
-        };
-
-        return card;
+        });
+        
+        return card.render();
     }
     // Função para criar modal de configurações
     function createConfigModal() {
