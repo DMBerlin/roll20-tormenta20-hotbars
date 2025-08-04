@@ -4712,6 +4712,10 @@
         const card = window.Roll20Components.createFavoritableCardWithPreset(preset, {
             title: item.nome,
             summary: item.descricao,
+            // Adiciona os efeitos específicos para cada tipo de item
+            bonus: itemType === 'food' ? item.bonus : undefined,
+            efeito: itemType === 'drink' ? item.efeito : undefined,
+            efeitos: itemType === 'condition' ? item.efeitos : undefined,
             isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) : 
                        itemType === 'drink' ? isBebidaFavorita(item.nome) : false,
             onClick: () => {
