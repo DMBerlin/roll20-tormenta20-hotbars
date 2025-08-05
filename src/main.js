@@ -664,7 +664,7 @@
                         showConditionDetailsPopup(condition);
                     }
                 });
-                
+
                 conditionsList.appendChild(conditionCard.render());
             });
         }
@@ -935,7 +935,14 @@
         applyBtn.onclick = () => {
             // Aplica a condição
             toggleCondition(conditionData.nome);
-            // Fecha o popup
+
+            // Fecha todos os popups relacionados às condições para limpar a cena
+            const conditionsPopup = document.getElementById('conditions-popup');
+            if (conditionsPopup) conditionsPopup.remove();
+            const conditionsOverlay = document.getElementById('conditions-overlay');
+            if (conditionsOverlay) conditionsOverlay.remove();
+
+            // Fecha o popup de detalhes
             popup.remove();
             const overlay = document.getElementById('condition-details-overlay');
             if (overlay) overlay.remove();
@@ -3612,7 +3619,7 @@
                 nome: 'Balinhas',
                 iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/achievement_halloween_candy_01.jpg', // Candy
                 raridade: 'Comum',
-                descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias. Claro… Apesar do ceticismo dos outros, você recebe +2 em rolagens de dano de magias.',
+                descricao: 'Balas coloridas e doces. Arcanistas gostam — dizem que o açúcar feérico usado nas balinhas potencializa suas magias.',
                 bonus: '+2 em rolagens de dano de magias.',
                 preco: 'T$ 30',
                 ingredientes: 'Açúcar das fadas, fruta',
@@ -4706,9 +4713,9 @@
 
     // Template reutilizável para itens de lista usando o componente FavoritableCard
     function createListItemCard(item, itemType, onFavoriteToggle) {
-        const preset = itemType === 'food' ? 'food' : 
-                       itemType === 'drink' ? 'drink' : 'condition';
-        
+        const preset = itemType === 'food' ? 'food' :
+            itemType === 'drink' ? 'drink' : 'condition';
+
         const card = window.Roll20Components.createFavoritableCardWithPreset(preset, {
             title: item.nome,
             summary: item.descricao,
@@ -4716,8 +4723,8 @@
             bonus: itemType === 'food' ? item.bonus : undefined,
             efeito: itemType === 'drink' ? item.efeito : undefined,
             efeitos: itemType === 'condition' ? item.efeitos : undefined,
-            isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) : 
-                       itemType === 'drink' ? isBebidaFavorita(item.nome) : false,
+            isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) :
+                itemType === 'drink' ? isBebidaFavorita(item.nome) : false,
             onClick: () => {
                 if (itemType === 'food') {
                     createPratoDetailModal(item);
@@ -4734,7 +4741,7 @@
                 if (onFavoriteToggle) onFavoriteToggle();
             }
         });
-        
+
         return card.render();
     }
     // Função para criar modal de configurações
@@ -12149,7 +12156,8 @@
     // Função para verificar se um efeito está ativo
     function isEffectActive(effectName) {
         const activeEffects = getActiveEffects();
-        return activeEffects.includes(effectName);
+        const activeSelectableCards = getActiveSelectableCards();
+        return activeEffects.includes(effectName) || activeSelectableCards.includes(effectName);
     }
 
     // Função para ativar/desativar efeito
@@ -12211,10 +12219,13 @@
 
         // Verifica efeitos ativos
         const activeEffects = getActiveEffects();
+        const activeSelectableCards = getActiveSelectableCards();
+        const totalActiveEffects = activeEffects.length + activeSelectableCards.length;
         console.log('Efeitos ativos:', activeEffects);
+        console.log('Selectable cards ativos:', activeSelectableCards);
 
         // Cria novo badge se há efeitos ativos
-        if (activeEffects.length > 0) {
+        if (totalActiveEffects > 0) {
             const badge = document.createElement('div');
             badge.className = 'hotbar-button-badge';
             badge.style.position = 'absolute';
@@ -12232,9 +12243,9 @@
             badge.style.justifyContent = 'center';
             badge.style.border = '2px solid #23243a';
             badge.style.zIndex = '1000';
-            badge.textContent = activeEffects.length;
+            badge.textContent = totalActiveEffects;
             effectsButton.appendChild(badge);
-            console.log('Badge criado com valor:', activeEffects.length);
+            console.log('Badge criado com valor:', totalActiveEffects);
         } else {
             console.log('Nenhum efeito ativo, badge não criado');
         }
@@ -13357,6 +13368,48 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         effectsContainer.appendChild(indicator);
     }
 
+    // Sistema de selectable-cards
+    const SELECTABLE_CARDS_KEY = 'roll20-hotbar-selectable-cards';
+
+    // Função para obter selectable-cards ativos
+    function getActiveSelectableCards() {
+        try {
+            return JSON.parse(localStorage.getItem(SELECTABLE_CARDS_KEY) || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar selectable-cards:', e);
+            return [];
+        }
+    }
+
+    // Função para salvar selectable-cards ativos
+    function saveActiveSelectableCards(cards) {
+        try {
+            localStorage.setItem(SELECTABLE_CARDS_KEY, JSON.stringify(cards));
+        } catch (e) {
+            console.error('Erro ao salvar selectable-cards:', e);
+        }
+    }
+
+
+
+    // Função para ativar/desativar selectable-card
+    function toggleSelectableCard(effectKey) {
+        const activeCards = getActiveSelectableCards();
+        const index = activeCards.indexOf(effectKey);
+
+        if (index > -1) {
+            activeCards.splice(index, 1);
+            showWarningNotification(`Efeito removido.`);
+        } else {
+            activeCards.push(effectKey);
+            showSuccessNotification(`Efeito ativado!`);
+        }
+
+        saveActiveSelectableCards(activeCards);
+        updateEffectsBadge();
+        updateEffectsVisualIndicators();
+    }
+
     // Função para criar popup de efeitos
     function createEffectsPopup() {
         // Remove popup existente se houver
@@ -13442,17 +13495,21 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
 
 
-        // Lista de efeitos disponíveis
+        // Lista de efeitos disponíveis (convertidos para selectable-cards)
         const effects = [
             {
-                name: 'Cachecol Sombrio',
+                title: 'Cachecol Sombrio',
                 description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
+                chips: ['+1d6', 'Furtivo', 'Melee'],
                 type: 'Item',
                 effectKey: 'cachecol_sombrio'
             }
         ];
 
-        // Efeitos de comida
+        // Lista de selectable-cards vazia (removidos os itens estáticos)
+        const selectableCards = [];
+
+        // Efeitos de comida (convertidos para selectable-cards)
         let comidaEffects = [];
         try {
             comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
@@ -13462,9 +13519,49 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         }
         // Só mostra efeitos de comida que estão ativos
         const activeEffects = getActiveEffects();
-        const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey));
+        const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            // Extrai bônus da descrição para criar chips
+            let bonus = '';
+            let desc = effect.description;
 
-        // Efeitos de bebida
+            // Procura por padrões de bônus na descrição
+            const bonusPatterns = [
+                /\+[^.]*$/i,  // +algo no final
+                /\+[^,]*$/i,  // +algo no final (antes de vírgula)
+                /\+[^!]*$/i   // +algo no final (antes de exclamação)
+            ];
+
+            for (const pattern of bonusPatterns) {
+                const match = desc.match(pattern);
+                if (match) {
+                    bonus = match[0].trim();
+                    desc = desc.substring(0, desc.lastIndexOf(match[0])).trim();
+                    break;
+                }
+            }
+
+            // Se não encontrou padrão, tenta extrair após último ponto
+            if (!bonus) {
+                const ponto = desc.lastIndexOf('.');
+                if (ponto !== -1 && ponto < desc.length - 1) {
+                    const afterPonto = desc.substring(ponto + 1).trim();
+                    if (afterPonto && afterPonto.length > 0) {
+                        bonus = afterPonto;
+                        desc = desc.substring(0, ponto + 1).trim();
+                    }
+                }
+            }
+
+            return {
+                title: effect.name,
+                description: desc,
+                chips: bonus ? [bonus, 'Comida', '24h'] : ['Comida', '24h'],
+                type: 'Comida',
+                effectKey: effect.effectKey
+            };
+        });
+
+        // Efeitos de bebida (convertidos para selectable-cards)
         let bebidaEffects = [];
         try {
             bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
@@ -13473,22 +13570,31 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             bebidaEffects = [];
         }
         // Só mostra efeitos de bebida que estão ativos
-        const activeBebidaEffects = bebidaEffects.filter(e => activeEffects.includes(e.effectKey));
+        const activeBebidaEffects = bebidaEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            return {
+                title: effect.name,
+                description: effect.description,
+                chips: ['Bebida', '24h'],
+                type: 'Bebida',
+                effectKey: effect.effectKey
+            };
+        });
 
-        // Efeitos de condições
+        // Efeitos de condições (convertidos para selectable-cards)
         const activeConditions = getActiveConditions();
         const conditionsEffects = activeConditions.map(conditionName => {
             const conditionData = getConditionData(conditionName);
             return {
-                name: conditionData ? conditionData.nome : conditionName,
+                title: conditionData ? conditionData.nome : conditionName,
                 description: conditionData ? conditionData.descricao : '',
+                chips: conditionData && conditionData.efeitos ? [conditionData.efeitos.split('•')[0].trim(), 'Condição'] : ['Condição'],
                 type: 'Condição',
                 effectKey: conditionName
             };
         });
 
-        // Junta efeitos normais, de comida, bebida e condições
-        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...conditionsEffects];
+        // Junta efeitos normais, de comida, bebida, condições e selectable-cards
+        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...conditionsEffects, ...selectableCards];
 
         // Lista visual
         const effectsList = document.createElement('div');
@@ -13521,9 +13627,75 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 };
 
                 effectContainer.onclick = () => {
-                    // Se for uma condição, também remove do sistema de condições
+                    // Todos os efeitos agora são tratados como selectable-cards
                     if (effect.type === 'Condição') {
                         toggleCondition(effect.effectKey);
+
+                        // Fechar todos os popups relacionados às condições para limpar a cena
+                        const conditionsPopup = document.getElementById('conditions-popup');
+                        if (conditionsPopup) conditionsPopup.remove();
+                        const conditionsOverlay = document.getElementById('conditions-overlay');
+                        if (conditionsOverlay) conditionsOverlay.remove();
+                        const conditionDetailsPopup = document.getElementById('condition-details-popup');
+                        if (conditionDetailsPopup) conditionDetailsPopup.remove();
+                        const conditionDetailsOverlay = document.getElementById('condition-details-overlay');
+                        if (conditionDetailsOverlay) conditionDetailsOverlay.remove();
+                        const effectsPopup = document.getElementById('effects-popup');
+                        if (effectsPopup) effectsPopup.remove();
+                        const effectsOverlay = document.getElementById('effects-overlay');
+                        if (effectsOverlay) effectsOverlay.remove();
+                    } else if (effect.type === 'Selectable') {
+                        toggleSelectableCard(effect.effectKey);
+                    } else if (effect.type === 'Comida') {
+                        // Remove do sistema de comida e adiciona/remove do selectable
+                        const activeEffects = getActiveEffects();
+                        const index = activeEffects.indexOf(effect.effectKey);
+                        if (index > -1) {
+                            activeEffects.splice(index, 1);
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            saveActiveEffects(activeEffects);
+                            showWarningNotification(`Efeito "${effect.title}" removido.`);
+                        } else {
+                            activeEffects.push(effect.effectKey);
+                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                            comidaEffects.push({
+                                name: effect.title,
+                                description: effect.description,
+                                type: 'Comida',
+                                effectKey: effect.effectKey
+                            });
+                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            saveActiveEffects(activeEffects);
+                            showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                        }
+                    } else if (effect.type === 'Bebida') {
+                        // Remove do sistema de bebida e adiciona/remove do selectable
+                        const activeEffects = getActiveEffects();
+                        const index = activeEffects.indexOf(effect.effectKey);
+                        if (index > -1) {
+                            activeEffects.splice(index, 1);
+                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            saveActiveEffects(activeEffects);
+                            showWarningNotification(`Efeito "${effect.title}" removido.`);
+                        } else {
+                            activeEffects.push(effect.effectKey);
+                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                            bebidaEffects.push({
+                                name: effect.title,
+                                description: effect.description,
+                                type: 'Bebida',
+                                effectKey: effect.effectKey
+                            });
+                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            saveActiveEffects(activeEffects);
+                            showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                        }
                     } else {
                         toggleEffect(effect.effectKey);
                     }
@@ -13540,7 +13712,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 effectHeader.style.marginBottom = '6px';
 
                 const effectName = document.createElement('div');
-                effectName.textContent = effect.name;
+                effectName.textContent = effect.title || effect.name;
                 effectName.style.color = isActive ? '#4caf50' : '#6ec6ff';
                 effectName.style.fontSize = '15px';
                 effectName.style.fontWeight = 'bold';
@@ -13577,36 +13749,32 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 effectDesc.style.lineHeight = '1.4';
                 effectContainer.appendChild(effectDesc);
 
-                // Se for efeito de comida, destaque o bônus
-                if (effect.type === 'Comida') {
-                    // Tenta extrair o bônus do final da descrição
-                    let bonus = '';
-                    let desc = effect.description;
-                    // Procura o último ponto final e separa
-                    const ponto = desc.lastIndexOf('.');
-                    if (ponto !== -1 && ponto < desc.length - 1) {
-                        bonus = desc.substring(ponto + 1).trim();
-                        desc = desc.substring(0, ponto + 1).trim();
-                    } else {
-                        // Se não encontrar ponto, tenta achar o último '+'
-                        const plus = desc.lastIndexOf('+');
-                        if (plus !== -1) {
-                            bonus = desc.substring(plus).trim();
-                            desc = desc.substring(0, plus).trim();
-                        }
-                    }
-                    // Atualiza a descrição
-                    effectDesc.textContent = desc;
-                    if (bonus) {
-                        const bonusDiv = document.createElement('div');
-                        bonusDiv.textContent = bonus;
-                        bonusDiv.style.color = '#ffb86c';
-                        bonusDiv.style.fontWeight = 'bold';
-                        bonusDiv.style.fontSize = '14px';
-                        bonusDiv.style.marginTop = '2px';
-                        effectContainer.appendChild(bonusDiv);
-                    }
+                // Chips para todos os tipos de efeitos
+                if (effect.chips && effect.chips.length > 0) {
+                    const chipsContainer = document.createElement('div');
+                    chipsContainer.style.display = 'flex';
+                    chipsContainer.style.flexWrap = 'wrap';
+                    chipsContainer.style.gap = '4px';
+                    chipsContainer.style.marginTop = '8px';
+
+                    effect.chips.forEach(chip => {
+                        const chipElement = document.createElement('div');
+                        chipElement.textContent = chip;
+                        chipElement.style.background = '#ffb86c';
+                        chipElement.style.color = '#23243a';
+                        chipElement.style.fontSize = '10px';
+                        chipElement.style.fontWeight = 'bold';
+                        chipElement.style.padding = '2px 6px';
+                        chipElement.style.borderRadius = '10px';
+                        chipElement.style.border = '1px solid #ffc97a';
+                        chipElement.style.display = 'inline-block';
+                        chipsContainer.appendChild(chipElement);
+                    });
+
+                    effectContainer.appendChild(chipsContainer);
                 }
+
+
 
                 effectsList.appendChild(effectContainer);
             });
