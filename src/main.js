@@ -9059,6 +9059,13 @@
                     e.preventDefault();
                     e.stopPropagation();
                 }
+
+                // NOVO: Ctrl + Space para quick search
+                if (e.ctrlKey && e.code === 'Space') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    createQuickSearchModal();
+                }
             });
         }, 1000);
     });
@@ -14927,4 +14934,508 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Aplica scrollbars customizadas
         applyDirectScrollbarStyles(popup, 'blue');
     }
+
+    // NOVO: Sistema de Quick Search
+    function createQuickSearchModal() {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('quick-search-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('quick-search-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Cria o overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'quick-search-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10000';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'flex-start';
+        overlay.style.paddingTop = '10vh';
+
+        // Cria o modal
+        const modal = document.createElement('div');
+        modal.id = 'quick-search-modal';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #6ec6ff';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.width = '600px';
+        modal.style.maxWidth = '90vw';
+        modal.style.maxHeight = '70vh';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        modal.style.display = 'flex';
+        modal.style.flexDirection = 'column';
+        modal.style.gap = '15px';
+
+        // Título
+        const title = document.createElement('h2');
+        title.textContent = '🔍 Busca Rápida';
+        title.style.color = '#6ec6ff';
+        title.style.margin = '0';
+        title.style.textAlign = 'center';
+        title.style.fontSize = '18px';
+
+        // Campo de busca
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Digite para buscar... (dishes, drinks, potions, conditions, skills, spells, powers, divinity)';
+        searchInput.style.padding = '12px 16px';
+        searchInput.style.border = '2px solid #6ec6ff';
+        searchInput.style.borderRadius = '8px';
+        searchInput.style.background = 'rgba(20,20,30,0.9)';
+        searchInput.style.color = '#ecf0f1';
+        searchInput.style.fontSize = '14px';
+        searchInput.style.width = '100%';
+        searchInput.style.boxSizing = 'border-box';
+
+        // Container de resultados
+        const resultsContainer = document.createElement('div');
+        resultsContainer.style.flex = '1';
+        resultsContainer.style.overflowY = 'auto';
+        resultsContainer.style.maxHeight = '400px';
+        resultsContainer.style.border = '1px solid rgba(110,198,255,0.3)';
+        resultsContainer.style.borderRadius = '8px';
+        resultsContainer.style.padding = '10px';
+        resultsContainer.style.background = 'rgba(20,20,30,0.5)';
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(resultsContainer, 'blue');
+
+        // Adiciona elementos ao modal
+        modal.appendChild(title);
+        modal.appendChild(searchInput);
+        modal.appendChild(resultsContainer);
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        // Foca no campo de busca
+        searchInput.focus();
+
+        // Função para buscar e filtrar resultados
+        function performSearch(query) {
+            const searchIndex = createSearchIndex();
+            const results = searchIndex.filter(item => {
+                const searchText = `${item.name} ${item.category} ${item.description || ''} ${item.effects || ''}`.toLowerCase();
+                return searchText.includes(query.toLowerCase());
+            });
+
+            // Limpa resultados anteriores
+            resultsContainer.innerHTML = '';
+
+            if (results.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.textContent = 'Nenhum resultado encontrado.';
+                noResults.style.color = '#888';
+                noResults.style.textAlign = 'center';
+                noResults.style.padding = '20px';
+                resultsContainer.appendChild(noResults);
+                return;
+            }
+
+            // Limita a 50 resultados para performance
+            const limitedResults = results.slice(0, 50);
+
+            limitedResults.forEach((item, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.style.display = 'flex';
+                resultItem.style.alignItems = 'center';
+                resultItem.style.padding = '10px';
+                // Only add border-bottom if it's not the last item and there are multiple items
+                if (index < limitedResults.length - 1) {
+                    resultItem.style.borderBottom = '1px solid rgba(110,198,255,0.2)';
+                }
+                resultItem.style.cursor = 'pointer';
+                resultItem.style.transition = 'background 0.2s';
+
+                // Container do ícone
+                const iconContainer = document.createElement('div');
+                iconContainer.style.width = '32px';
+                iconContainer.style.height = '32px';
+                iconContainer.style.marginRight = '10px';
+                iconContainer.style.flexShrink = '0';
+                iconContainer.style.borderRadius = '6px';
+                iconContainer.style.border = '2px solid rgba(110,198,255,0.3)';
+                iconContainer.style.background = '#23243a';
+                iconContainer.style.overflow = 'hidden';
+                iconContainer.style.display = 'flex';
+                iconContainer.style.alignItems = 'center';
+                iconContainer.style.justifyContent = 'center';
+
+                // Tenta carregar imagem, usa emoji como fallback
+                if (item.data && item.data.iconeUrl) {
+                    // Usa o sistema de cache para carregar a imagem
+                    const cachedImageElement = createCachedImageElement(
+                        item.data.iconeUrl,
+                        item.name,
+                        item.icon || '📄',
+                        {
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '4px',
+                            objectFit: 'cover',
+                            showSkeleton: true
+                        }
+                    );
+                    iconContainer.appendChild(cachedImageElement);
+                } else {
+                    // Fallback para emoji
+                    const emojiElement = document.createElement('div');
+                    emojiElement.textContent = item.icon || '📄';
+                    emojiElement.style.fontSize = '16px';
+                    emojiElement.style.display = 'flex';
+                    emojiElement.style.alignItems = 'center';
+                    emojiElement.style.justifyContent = 'center';
+                    emojiElement.style.width = '100%';
+                    emojiElement.style.height = '100%';
+                    iconContainer.appendChild(emojiElement);
+                }
+
+                // Conteúdo
+                const content = document.createElement('div');
+                content.style.flex = '1';
+
+                const name = document.createElement('div');
+                name.textContent = item.name;
+                name.style.color = '#6ec6ff';
+                name.style.fontWeight = 'bold';
+                name.style.fontSize = '14px';
+
+                const category = document.createElement('div');
+                category.textContent = item.category;
+                category.style.color = '#888';
+                category.style.fontSize = '12px';
+                category.style.marginTop = '2px';
+
+                const description = document.createElement('div');
+                description.textContent = item.description || item.effects || '';
+                description.style.color = '#ecf0f1';
+                description.style.fontSize = '12px';
+                description.style.marginTop = '4px';
+                description.style.lineHeight = '1.3';
+
+                content.appendChild(name);
+                content.appendChild(category);
+                content.appendChild(description);
+
+                resultItem.appendChild(iconContainer);
+                resultItem.appendChild(content);
+
+                // Efeitos hover
+                resultItem.onmouseover = () => {
+                    resultItem.style.background = 'rgba(110,198,255,0.1)';
+                };
+                resultItem.onmouseout = () => {
+                    resultItem.style.background = 'transparent';
+                };
+
+                // Clique no item
+                resultItem.onclick = () => {
+                    handleSearchItemClick(item);
+                };
+
+                resultsContainer.appendChild(resultItem);
+            });
+        }
+
+        // Listener para input
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if (query.length >= 1) {
+                performSearch(query);
+            } else {
+                resultsContainer.innerHTML = '';
+                const placeholder = document.createElement('div');
+                placeholder.textContent = 'Digite para começar a buscar...';
+                placeholder.style.color = '#888';
+                placeholder.style.textAlign = 'center';
+                placeholder.style.padding = '20px';
+                resultsContainer.appendChild(placeholder);
+            }
+        });
+
+        // Listener para teclas especiais
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                overlay.remove();
+            }
+        });
+
+        // Fecha ao clicar no overlay
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+
+        // Mostra placeholder inicial
+        const placeholder = document.createElement('div');
+        placeholder.textContent = 'Digite para começar a buscar...';
+        placeholder.style.color = '#888';
+        placeholder.style.textAlign = 'center';
+        placeholder.style.padding = '20px';
+        resultsContainer.appendChild(placeholder);
+    }
+
+    // Função para criar índice de busca
+    function createSearchIndex() {
+        const searchIndex = [];
+
+        // Adiciona pratos
+        const pratos = getPratosCompletos();
+        pratos.forEach(prato => {
+            searchIndex.push({
+                name: prato.nome,
+                category: 'Prato',
+                description: prato.descricao,
+                effects: prato.bonus,
+                icon: prato.icone || '🍽️',
+                type: 'prato',
+                data: prato
+            });
+        });
+
+        // Adiciona bebidas
+        const bebidas = getBebidasCompletas();
+        bebidas.forEach(bebida => {
+            searchIndex.push({
+                name: bebida.nome,
+                category: 'Bebida',
+                description: bebida.descricao,
+                effects: bebida.efeito,
+                icon: bebida.icone || '🥤',
+                type: 'bebida',
+                data: bebida
+            });
+        });
+
+        // Adiciona poções
+        const pocoes = getPocoesCompletas();
+        pocoes.forEach(pocao => {
+            searchIndex.push({
+                name: pocao.nome,
+                category: 'Poção',
+                description: pocao.descricao,
+                effects: pocao.efeito,
+                icon: pocao.icone || '🧪',
+                type: 'pocao',
+                data: pocao
+            });
+        });
+
+        // Adiciona condições
+        const conditions = getConditionsList();
+        conditions.forEach(condition => {
+            searchIndex.push({
+                name: condition.nome,
+                category: 'Condição',
+                description: condition.descricao,
+                effects: condition.efeitos,
+                icon: condition.icone || '⚡',
+                type: 'condition',
+                data: condition
+            });
+        });
+
+        // Adiciona skills
+        const skills = Object.keys(SKILLS_DATA);
+        skills.forEach(skill => {
+            const skillData = SKILLS_DATA[skill];
+            searchIndex.push({
+                name: skill,
+                category: 'Perícia',
+                description: skillData.descricao,
+                effects: skillData.usos ? skillData.usos.map(u => u.titulo).join(', ') : '',
+                icon: '🎯',
+                type: 'skill',
+                data: skillData
+            });
+        });
+
+        // Adiciona magias
+        const spellDatabase = {
+            'Luz Sagrada': { tipo: 'Divina', ciclo: 1, escola: 'Evocação' },
+            'Sombras Profanas': { tipo: 'Universal', ciclo: 1, escola: 'Necromancia' },
+            'Cura Ferimentos Leves': { tipo: 'Divina', ciclo: 1, escola: 'Cura' },
+            'Proteção Divina': { tipo: 'Divina', ciclo: 1, escola: 'Abjuração' },
+            'Bênção': { tipo: 'Divina', ciclo: 1, escola: 'Encantamento' },
+            'Raio de Energia': { tipo: 'Arcana', ciclo: 1, escola: 'Evocação' },
+            'Escudo Mágico': { tipo: 'Arcana', ciclo: 1, escola: 'Abjuração' },
+            'Disfarce Ilusório': { tipo: 'Arcana', ciclo: 1, escola: 'Ilusão' },
+            'Detectar Magia': { tipo: 'Universal', ciclo: 1, escola: 'Adivinhação' },
+            'Compreender Idiomas': { tipo: 'Universal', ciclo: 1, escola: 'Adivinhação' },
+            'Cura Ferimentos Moderados': { tipo: 'Divina', ciclo: 2, escola: 'Cura' },
+            'Silêncio': { tipo: 'Divina', ciclo: 2, escola: 'Ilusão' },
+            'Bola de Fogo': { tipo: 'Arcana', ciclo: 3, escola: 'Evocação' },
+            'Relâmpago': { tipo: 'Arcana', ciclo: 3, escola: 'Evocação' },
+            'Invisibilidade': { tipo: 'Arcana', ciclo: 2, escola: 'Ilusão' },
+            'Sugestão': { tipo: 'Arcana', ciclo: 2, escola: 'Encantamento' },
+            'Dissipar Magia': { tipo: 'Universal', ciclo: 3, escola: 'Abjuração' },
+            'Voo': { tipo: 'Arcana', ciclo: 3, escola: 'Transmutação' },
+            'Teleporte': { tipo: 'Arcana', ciclo: 4, escola: 'Conjuração' },
+            'Ressurreição': { tipo: 'Divina', ciclo: 5, escola: 'Cura' },
+            'Meteoro': { tipo: 'Arcana', ciclo: 6, escola: 'Evocação' }
+        };
+
+        Object.keys(spellDatabase).forEach(spellName => {
+            const spellData = spellDatabase[spellName];
+            searchIndex.push({
+                name: spellName,
+                category: 'Magia',
+                description: `${spellData.tipo} - Ciclo ${spellData.ciclo} - ${spellData.escola}`,
+                effects: '',
+                icon: '✨',
+                type: 'spell',
+                data: spellData
+            });
+        });
+
+        // Adiciona poderes de combate
+        const combatPowers = [
+            { name: 'Acuidade com Arma', description: 'Quando usa uma arma corpo a corpo leve ou uma arma de arremesso, você pode usar sua Destreza em vez de Força nos testes de ataque e rolagens de dano.' },
+            { name: 'Arma Secundária Grande', description: 'Você pode empunhar duas armas de uma mão com o poder Estilo de Duas Armas.' },
+            { name: 'Arremesso Potente', description: 'Quando usa uma arma de arremesso, você pode usar sua Força em vez de Destreza nos testes de ataque.' },
+            { name: 'Ataque Poderoso', description: 'Sempre que faz um ataque corpo a corpo, você pode sofrer –2 no teste de ataque para receber +5 na rolagem de dano.' },
+            { name: 'Bloqueio com Escudo', description: 'Quando sofre dano, você pode gastar 1 PM para receber redução de dano igual ao bônus na Defesa que seu escudo fornece contra este dano.' }
+        ];
+
+        combatPowers.forEach(power => {
+            searchIndex.push({
+                name: power.name,
+                category: 'Poder de Combate',
+                description: power.description,
+                effects: '',
+                icon: '⚔️',
+                type: 'combat_power',
+                data: power
+            });
+        });
+
+        // Adiciona divindades
+        const divinities = [
+            { name: 'Azgher', title: 'Deus-Sol', description: 'Deus da luz e do calor, venerado por viajantes e combatentes das trevas.' },
+            { name: 'Kallyadranoch', title: 'Deus-Dragão', description: 'Deus da sabedoria e conhecimento, venerado por magos e sábios.' },
+            { name: 'Megalokk', title: 'Deus da Guerra', description: 'Deus da guerra e da força, venerado por guerreiros e bárbaros.' }
+        ];
+
+        divinities.forEach(divinity => {
+            searchIndex.push({
+                name: `${divinity.name} - ${divinity.title}`,
+                category: 'Divindade',
+                description: divinity.description,
+                effects: '',
+                icon: '🙏',
+                type: 'divinity',
+                data: divinity
+            });
+        });
+
+        return searchIndex;
+    }
+
+    // Função para lidar com clique em item da busca
+    function handleSearchItemClick(item) {
+        // Remove o modal de busca
+        const modal = document.getElementById('quick-search-modal');
+        const overlay = document.getElementById('quick-search-overlay');
+        if (modal) modal.remove();
+        if (overlay) overlay.remove();
+
+        // Executa ação baseada no tipo do item
+        switch (item.type) {
+            case 'prato': {
+                // Abre o modal de detalhes do prato
+                createPratoDetailModal(item.data);
+                break;
+            }
+            case 'bebida': {
+                // Abre o modal de detalhes da bebida
+                createBebidaDetailModal(item.data);
+                break;
+            }
+            case 'pocao': {
+                // Abre o modal de detalhes da poção
+                createPocaoDetailModal(item.data);
+                break;
+            }
+            case 'condition': {
+                // Abre o modal de detalhes da condição
+                showConditionDetailsPopup(item.data);
+                break;
+            }
+            case 'skill': {
+                // Executa o teste da perícia
+                const skillName = item.name;
+                const skills = [
+                    { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Acrobacia}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}` },
+                    { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Adestramento}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|adestramentototal}]]]]}}` },
+                    { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atletismo}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}` },
+                    { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atuação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atuacaototal}]]]]}}` },
+                    { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cavalgar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|cavalgartotal}]]]]}}` },
+                    { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Conhecimento}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|conhecimentototal}]]]]}}` },
+                    { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cura}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|curatotal}]]]]}}` },
+                    { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Diplomacia}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|diplomaciatotal}]]]]}}` },
+                    { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Enganação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|enganacaototal}]]]]}}` },
+                    { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|fortitudetotal}]]]]}}` },
+                    { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Furtividade}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|furtividadetotal}]]]]}}` },
+                    { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Guerra}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|guerratotal}]]]]}}` },
+                    { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|iniciativatotal}]] &{tracker}]]}}` },
+                    { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intimidação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intimidacaototal}]]]]}}` },
+                    { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intuição}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intuicaototal}]]]]}}` },
+                    { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Investigação}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|investigacaototal}]]]]}}` },
+                    { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Jogatina}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|jogatinatotal}]]]]}}` },
+                    { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ladinagem}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|ladinagemtotal}]]]]}}` },
+                    { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Misticismo}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
+                    { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Nobreza}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
+                    { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
+                    { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Percepção}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
+                    { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pilotagem}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
+                    { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pontaria}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
+                    { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|reflexostotal}]]]]}}` },
+                    { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Religião}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|religiaototal}]]]]}}` },
+                    { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Sobrevivência}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|sobrevivenciatotal}]]]]}}` },
+                    { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|vontadetotal}]]]]}}` }
+                ];
+
+                const skill = skills.find(s => s.nome === skillName);
+                if (skill) {
+                    sendToChat(skill.comando);
+                    showSuccessNotification(`Teste de ${skillName} executado!`);
+                } else {
+                    // Se não encontrar a skill, abre o modal de detalhes
+                    createSkillDetailModal(skillName);
+                }
+                break;
+            }
+            case 'spell': {
+                // Abre o popup de conjuração da magia
+                createSpellCastPopup(item.name, item.name);
+                break;
+            }
+            case 'combat_power': {
+                // Mostra detalhes do poder no chat
+                const template = `&{template:t20-info}{{infoname=${item.data.name || 'Poder de Combate'}}}{{description=${item.data.description || ''}}}`;
+                sendToChat(template);
+                showSuccessNotification(`Poder "${item.name}" compartilhado no chat!`);
+                break;
+            }
+            case 'divinity': {
+                // Mostra detalhes da divindade no chat
+                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
+                sendToChat(template);
+                showSuccessNotification(`Divindade "${item.name}" compartilhada no chat!`);
+                break;
+            }
+            default:
+                // Envia para o chat
+                sendToChat(`&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || item.effects || ''}}}`);
+                break;
+        }
+    }
+
 })();
