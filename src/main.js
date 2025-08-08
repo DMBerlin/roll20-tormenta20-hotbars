@@ -990,6 +990,9 @@
         } else if (type === 'item') {
             title = data.name;
             description = data.description || 'Efeito de item ativo.';
+        } else if (type === 'potion') {
+            title = data.nome;
+            description = data.descricao || 'Efeito de poção ativo.';
         }
 
         tooltip.innerHTML = `
@@ -1087,6 +1090,7 @@
                 #spell-cast-popup *::-webkit-scrollbar,
                 #pratos-popup *::-webkit-scrollbar,
                 #bebidas-popup *::-webkit-scrollbar,
+                #pocoes-popup *::-webkit-scrollbar,
                 #conditions-popup *::-webkit-scrollbar,
                 #hunter-class-modal *::-webkit-scrollbar,
                 #skill-detail-modal *::-webkit-scrollbar {
@@ -1105,6 +1109,7 @@
                 #spell-cast-popup *::-webkit-scrollbar-track,
                 #pratos-popup *::-webkit-scrollbar-track,
                 #bebidas-popup *::-webkit-scrollbar-track,
+                #pocoes-popup *::-webkit-scrollbar-track,
                 #conditions-popup *::-webkit-scrollbar-track,
                 #hunter-class-modal *::-webkit-scrollbar-track,
                 #skill-detail-modal *::-webkit-scrollbar-track {
@@ -1124,6 +1129,7 @@
                 #spell-cast-popup *::-webkit-scrollbar-thumb,
                 #pratos-popup *::-webkit-scrollbar-thumb,
                 #bebidas-popup *::-webkit-scrollbar-thumb,
+                #pocoes-popup *::-webkit-scrollbar-thumb,
                 #conditions-popup *::-webkit-scrollbar-thumb,
                 #hunter-class-modal *::-webkit-scrollbar-thumb,
                 #skill-detail-modal *::-webkit-scrollbar-thumb {
@@ -1144,6 +1150,7 @@
                 #spell-cast-popup *::-webkit-scrollbar-thumb:hover,
                 #pratos-popup *::-webkit-scrollbar-thumb:hover,
                 #bebidas-popup *::-webkit-scrollbar-thumb:hover,
+                #pocoes-popup *::-webkit-scrollbar-thumb:hover,
                 #conditions-popup *::-webkit-scrollbar-thumb:hover,
                 #hunter-class-modal *::-webkit-scrollbar-thumb:hover,
                 #skill-detail-modal *::-webkit-scrollbar-thumb:hover {
@@ -1162,6 +1169,7 @@
                 #spell-cast-popup *::-webkit-scrollbar-thumb:active,
                 #pratos-popup *::-webkit-scrollbar-thumb:active,
                 #bebidas-popup *::-webkit-scrollbar-thumb:active,
+                #pocoes-popup *::-webkit-scrollbar-thumb:active,
                 #conditions-popup *::-webkit-scrollbar-thumb:active,
                 #hunter-class-modal *::-webkit-scrollbar-thumb:active,
                 #skill-detail-modal *::-webkit-scrollbar-thumb:active {
@@ -1180,6 +1188,7 @@
                 #spell-cast-popup *::-webkit-scrollbar-corner,
                 #pratos-popup *::-webkit-scrollbar-corner,
                 #bebidas-popup *::-webkit-scrollbar-corner,
+                #pocoes-popup *::-webkit-scrollbar-corner,
                 #conditions-popup *::-webkit-scrollbar-corner,
                 #hunter-class-modal *::-webkit-scrollbar-corner,
                 #skill-detail-modal *::-webkit-scrollbar-corner {
@@ -2719,6 +2728,40 @@
         conditionsCard.appendChild(conditionsDesc);
         modulesList.appendChild(conditionsCard);
 
+        // Card: Poções
+        const potionsCard = document.createElement('div');
+        potionsCard.style.background = '#23243a';
+        potionsCard.style.border = '1.5px solid #ffb86c';
+        potionsCard.style.borderRadius = '8px';
+        potionsCard.style.padding = '16px';
+        potionsCard.style.cursor = 'pointer';
+        potionsCard.style.transition = 'all 0.2s';
+        potionsCard.onmouseover = () => {
+            potionsCard.style.background = '#2d2e4a';
+        };
+        potionsCard.onmouseout = () => {
+            potionsCard.style.background = '#23243a';
+        };
+        potionsCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createPocoesPopup();
+        };
+        const potionsTitle = document.createElement('div');
+        potionsTitle.textContent = 'Poções';
+        potionsTitle.style.color = '#ffb86c';
+        potionsTitle.style.fontSize = '16px';
+        potionsTitle.style.fontWeight = 'bold';
+        potionsTitle.style.marginBottom = '6px';
+        potionsCard.appendChild(potionsTitle);
+        const potionsDesc = document.createElement('div');
+        potionsDesc.textContent = 'Poções mágicas que concedem efeitos temporários. Efeitos duram por cena.';
+        potionsDesc.style.color = '#ecf0f1';
+        potionsDesc.style.fontSize = '13px';
+        potionsCard.appendChild(potionsDesc);
+        modulesList.appendChild(potionsCard);
+
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
@@ -3600,6 +3643,33 @@
         return favoritas.includes(nomeBebida);
     }
 
+    // Funções auxiliares para poções
+    function getPocoesFavoritas() {
+        return JSON.parse(localStorage.getItem('roll20-hotbar-pocoes-favoritas') || '[]');
+    }
+
+    function savePocoesFavoritas(favoritas) {
+        localStorage.setItem('roll20-hotbar-pocoes-favoritas', JSON.stringify(favoritas));
+    }
+
+    function togglePocaoFavorita(nomePocao) {
+        let favoritas = getPocoesFavoritas();
+        const index = favoritas.indexOf(nomePocao);
+        if (index > -1) {
+            favoritas.splice(index, 1);
+            showWarningNotification(`Poção "${nomePocao}" removida dos favoritos.`);
+        } else {
+            favoritas.push(nomePocao);
+            showSuccessNotification(`Poção "${nomePocao}" adicionada aos favoritos!`);
+        }
+        savePocoesFavoritas(favoritas);
+    }
+
+    function isPocaoFavorita(nomePocao) {
+        const favoritas = getPocoesFavoritas();
+        return favoritas.includes(nomePocao);
+    }
+
     // Dados completos dos pratos baseados no arquivo MD
     function getPratosCompletos() {
         return [
@@ -4034,6 +4104,355 @@
             }
         ];
     }
+
+    // Dados completos das poções baseados no arquivo MD
+    function getPocoesCompletas() {
+        return [
+            {
+                nome: 'Abençoar Alimentos (óleo)',
+                preco: 'T$ 30',
+                efeito: 'Bênção sobre alimentos e bebidas, purificando-os e conferindo pequenos benefícios a quem os consome (benefício varia conforme a quantidade ingerida).',
+                descricao: 'Óleo sagrado que purifica e abençoa alimentos.',
+                tipo: 'Óleo',
+                icone: '🛢️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofstrength.jpg'
+            },
+            {
+                nome: 'Área Escorregadia (granada)',
+                preco: 'T$ 30',
+                efeito: 'Cria uma superfície escorregadia em área escolhida; criaturas devem passar em Reflexos ou cair.',
+                descricao: 'Granada que cria uma superfície escorregadia.',
+                tipo: 'Granada',
+                icone: '💣',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg'
+            },
+            {
+                nome: 'Arma Mágica (óleo)',
+                preco: 'T$ 30',
+                efeito: 'Concede bônus mágico (+1) a uma arma tocada, tornando-a mágica por cena.',
+                descricao: 'Óleo que torna uma arma mágica temporariamente.',
+                tipo: 'Óleo',
+                icone: '⚔️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_sword_30.jpg'
+            },
+            {
+                nome: 'Compreensão',
+                preco: 'T$ 30',
+                efeito: 'Permite entender qualquer língua falada ou escrita e ouvir pensamentos.',
+                descricao: 'Poção que concede compreensão universal.',
+                tipo: 'Poção',
+                icone: '🧠',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_invisibilitytotem.jpg'
+            },
+            {
+                nome: 'Curar Ferimentos',
+                preco: 'T$ 30',
+                efeito: 'Recupera 2d8+2 pontos de vida ao ser consumida.',
+                descricao: 'Poção de cura básica.',
+                tipo: 'Poção',
+                icone: '❤️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_54.jpg'
+            },
+            {
+                nome: 'Disfarce Ilusório',
+                preco: 'T$ 30',
+                efeito: 'Muda sua aparência (roupas, cor de pele, estatura) por cena; +10 em Enganação.',
+                descricao: 'Poção que altera a aparência do usuário.',
+                tipo: 'Poção',
+                icone: '🎭',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_polymorph.jpg'
+            },
+            {
+                nome: 'Escuridão (óleo)',
+                preco: 'T$ 30',
+                efeito: 'Objeto emana esfera de escuridão; só luz mágica de nível ≥3 contraria.',
+                descricao: 'Óleo que cria escuridão mágica.',
+                tipo: 'Óleo',
+                icone: '🌑',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowbolt.jpg'
+            },
+            {
+                nome: 'Luz (óleo)',
+                preco: 'T$ 30',
+                efeito: 'Objeto ilumina como tocha (6 m de raio).',
+                descricao: 'Óleo que ilumina objetos.',
+                tipo: 'Óleo',
+                icone: '💡',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_flashheal.jpg'
+            },
+            {
+                nome: 'Névoa (granada)',
+                preco: 'T$ 30',
+                efeito: 'Cria névoa que concede cobertura leve (–2 na Mira) a criaturas na área.',
+                descricao: 'Granada que cria névoa protetora.',
+                tipo: 'Granada',
+                icone: '🌫️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_fogwalking.jpg'
+            },
+            {
+                nome: 'Primor Atlético',
+                preco: 'T$ 30',
+                efeito: '+4 em Deslocamento e Atletismo por cena.',
+                descricao: 'Poção que melhora habilidades atléticas.',
+                tipo: 'Poção',
+                icone: '🏃',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_swiftness.jpg'
+            },
+            {
+                nome: 'Proteção Divina',
+                preco: 'T$ 30',
+                efeito: '+4 em Defesa e Resistência contra ataques físicos por cena.',
+                descricao: 'Poção que concede proteção divina.',
+                tipo: 'Poção',
+                icone: '🛡️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_barrier.jpg'
+            },
+            {
+                nome: 'Resistência a Energia',
+                preco: 'T$ 30',
+                efeito: 'Concede resistência 10 a um tipo de dano (fogo, frio, eletricidade etc.) por cena.',
+                descricao: 'Poção que concede resistência a danos elementais.',
+                tipo: 'Poção',
+                icone: '🔥',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_frost_frostresistancetotem_01.jpg'
+            },
+            {
+                nome: 'Sono',
+                preco: 'T$ 30',
+                efeito: 'Alvo cai em sono profundo (CD de Vontade reduz à exaustão).',
+                descricao: 'Poção que induz sono.',
+                tipo: 'Poção',
+                icone: '😴',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg'
+            },
+            {
+                nome: 'Suporte Ambiental',
+                preco: 'T$ 30',
+                efeito: 'Permite respirar debaixo d\'água, em vácuo ou locais tóxicos por cena.',
+                descricao: 'Poção que permite respirar em ambientes hostis.',
+                tipo: 'Poção',
+                icone: '🌊',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_ancestralguardian.jpg'
+            },
+            {
+                nome: 'Tranca Arcana (óleo)',
+                preco: 'T$ 30',
+                efeito: 'Tranca porta, baú ou objeto como se tivesse sido fechado por chave mágica.',
+                descricao: 'Óleo que tranca objetos magicamente.',
+                tipo: 'Óleo',
+                icone: '🔒',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_rogue_sprint.jpg'
+            },
+            {
+                nome: 'Visão Mística',
+                preco: 'T$ 30',
+                efeito: 'Permite ver auras mágicas e criaturas invisíveis por cena.',
+                descricao: 'Poção que concede visão mística.',
+                tipo: 'Poção',
+                icone: '👁️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_searinglightpriest.jpg'
+            },
+            {
+                nome: 'Vitalidade Fantasma',
+                preco: 'T$ 30',
+                efeito: 'Concede pontos de vida temporários iguais a 1d8+ mod. por cena.',
+                descricao: 'Poção que concede vida temporária.',
+                tipo: 'Poção',
+                icone: '👻',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_deathknight_ghoulfrenzy.jpg'
+            },
+            {
+                nome: 'Escudo da Fé',
+                preco: 'T$ 120',
+                efeito: 'Concede bônus de +2 em Defesa para você e aliado por cena.',
+                descricao: 'Poção que concede proteção divina a aliados.',
+                tipo: 'Poção',
+                icone: '✝️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_powerwordshield.jpg'
+            },
+            {
+                nome: 'Alterar Tamanho',
+                preco: 'T$ 270',
+                efeito: 'Aumenta ou diminui seu porte em uma categoria por cena (modificadores em For, Con, Des).',
+                descricao: 'Poção que altera o tamanho do usuário.',
+                tipo: 'Poção',
+                icone: '📏',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg'
+            },
+            {
+                nome: 'Aparência Perfeita',
+                preco: 'T$ 270',
+                efeito: 'Remove imperfeições físicas; concede +10 em Enganação e Carisma por cena.',
+                descricao: 'Poção que melhora a aparência do usuário.',
+                tipo: 'Poção',
+                icone: '✨',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterclaw_02.jpg'
+            },
+            {
+                nome: 'Armamento da Natureza (óleo)',
+                preco: 'T$ 270',
+                efeito: 'Sua arma causa +1d6 de dano de veneno ou ácido por cena.',
+                descricao: 'Óleo que envenena armas.',
+                tipo: 'Óleo',
+                icone: '🌿',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_corrosiveskin.jpg'
+            },
+            {
+                nome: 'Bola de Fogo (granada)',
+                preco: 'T$ 270',
+                efeito: 'Explode em esfera de 9 m causando 6d6 de fogo; Reflexos reduz metade.',
+                descricao: 'Granada que explode em bola de fogo.',
+                tipo: 'Granada',
+                icone: '🔥',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg'
+            },
+            {
+                nome: 'Camuflagem Ilusória',
+                preco: 'T$ 270',
+                efeito: 'Você e até +2 aliados (com +PM) ganham camuflagem por cena (–5 em Percepção).',
+                descricao: 'Poção que concede camuflagem.',
+                tipo: 'Poção',
+                icone: '🥷',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_invisibility.jpg'
+            },
+            {
+                nome: 'Concentração de Combate',
+                preco: 'T$ 270',
+                efeito: 'Ao atacar, role 2d20 e escolha o maior; dura cena.',
+                descricao: 'Poção que melhora a concentração em combate.',
+                tipo: 'Poção',
+                icone: '🎯',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessedrecovery.jpg'
+            },
+            {
+                nome: 'Curar Ferimentos (4d8+4 PV)',
+                preco: 'T$ 270',
+                efeito: 'Recupera 4d8+4 pontos de vida.',
+                descricao: 'Poção de cura avançada.',
+                tipo: 'Poção',
+                icone: '❤️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
+            },
+            {
+                nome: 'Físico Divino',
+                preco: 'T$ 270',
+                efeito: '+2 em Força, Con ou Des por cena.',
+                descricao: 'Poção que melhora atributos físicos.',
+                tipo: 'Poção',
+                icone: '💪',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_fistofjustice.jpg'
+            },
+            {
+                nome: 'Mente Divina',
+                preco: 'T$ 270',
+                efeito: '+2 em Int, Sab ou Car por cena.',
+                descricao: 'Poção que melhora atributos mentais.',
+                tipo: 'Poção',
+                icone: '🧠',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane01.jpg'
+            },
+            {
+                nome: 'Metamorfose',
+                preco: 'T$ 270',
+                efeito: 'Você se transforma em outra forma (item e equipamentos também mudam) por cena.',
+                descricao: 'Poção que permite transformação.',
+                tipo: 'Poção',
+                icone: '🦋',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_polymorph.jpg'
+            },
+            {
+                nome: 'Purificação',
+                preco: 'T$ 270',
+                efeito: 'Dissipa efeitos negativos (venenos, doenças, paralisia) de você ou alvo por cena.',
+                descricao: 'Poção que remove efeitos negativos.',
+                tipo: 'Poção',
+                icone: '🧹',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_purify.jpg'
+            },
+            {
+                nome: 'Velocidade',
+                preco: 'T$ 270',
+                efeito: 'Dobra seu número de ações (ação extra) por cena.',
+                descricao: 'Poção que aumenta a velocidade de ação.',
+                tipo: 'Poção',
+                icone: '⚡',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_swiftness.jpg'
+            },
+            {
+                nome: 'Vestimenta da Fé (óleo)',
+                preco: 'T$ 270',
+                efeito: 'Sua armadura ganha bônus +1 em Defesa e resistência a magia por cena.',
+                descricao: 'Óleo que fortalece armaduras.',
+                tipo: 'Óleo',
+                icone: '🛡️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_sealofprotection.jpg'
+            },
+            {
+                nome: 'Voz Divina',
+                preco: 'T$ 270',
+                efeito: 'Sua voz ressoa com poder divino; +4 em Tests Sociais e auras podem ser ouvidas a até 30 m.',
+                descricao: 'Poção que melhora a voz do usuário.',
+                tipo: 'Poção',
+                icone: '🗣️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_divinespirit.jpg'
+            },
+            {
+                nome: 'Arma Mágica (++): óleo',
+                preco: 'T$ 750',
+                efeito: 'Como Arma Mágica, mas bônus +3 em vez de +1.',
+                descricao: 'Óleo que torna uma arma muito mágica.',
+                tipo: 'Óleo',
+                icone: '⚔️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_sword_07.jpg'
+            },
+            {
+                nome: 'Curar Ferimentos (7d8+7 PV)',
+                preco: 'T$ 1 080',
+                efeito: 'Recupera 7d8+7 PV.',
+                descricao: 'Poção de cura superior.',
+                tipo: 'Poção',
+                icone: '❤️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
+            },
+            {
+                nome: 'Físico Divino (++): aprimoramento',
+                preco: 'T$ 1 080',
+                efeito: 'Concede +2 em três atributos físicos (For, Con, Des) por cena.',
+                descricao: 'Poção que melhora todos os atributos físicos.',
+                tipo: 'Poção',
+                icone: '💪',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_greaterblessingofkings.jpg'
+            },
+            {
+                nome: 'Invisibilidade (aprimoramento)',
+                preco: 'T$ 1 080',
+                efeito: 'Você fica invisível por cena; ação de ataque ou conjurar quebra o efeito.',
+                descricao: 'Poção que concede invisibilidade.',
+                tipo: 'Poção',
+                icone: '👻',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_lesserinvisibilty.jpg'
+            },
+            {
+                nome: 'Bola de Fogo (granada ++): aprimoramento',
+                preco: 'T$ 1 470',
+                efeito: 'Como Bola de Fogo, mas causa 10d6 de fogo.',
+                descricao: 'Granada de bola de fogo aprimorada.',
+                tipo: 'Granada',
+                icone: '🔥',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg'
+            },
+            {
+                nome: 'Curar Ferimentos (11d8+11 PV)',
+                preco: 'T$ 3 000',
+                efeito: 'Recupera 11d8+11 PV.',
+                descricao: 'Poção de cura suprema.',
+                tipo: 'Poção',
+                icone: '❤️',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
+            }
+        ];
+    }
+
     function createPratoDetailModal(prato) {
         // Remove modal existente se houver
         const existingModal = document.getElementById('prato-detail-modal');
@@ -4711,25 +5130,360 @@
         document.body.appendChild(modal);
     }
 
+    // Função para criar modal de detalhes da poção
+    function createPocaoDetailModal(pocao) {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('pocao-detail-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('pocao-detail-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'pocao-detail-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'pocao-detail-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #ffb86c';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '500px';
+        modal.style.maxHeight = '80vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho com ícone, nome e tipo
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'flex-start';
+        header.style.marginBottom = '15px';
+
+        // Container do ícone e informações da poção
+        const pocaoInfo = document.createElement('div');
+        pocaoInfo.style.display = 'flex';
+        pocaoInfo.style.alignItems = 'center';
+        pocaoInfo.style.gap = '12px';
+        pocaoInfo.style.flex = '1';
+
+        // Ícone da poção com borda (usando cache)
+        if (pocao.iconeUrl) {
+            const iconeContainer = document.createElement('div');
+            iconeContainer.style.position = 'relative';
+            iconeContainer.style.width = '3rem';
+            iconeContainer.style.height = '3rem';
+            iconeContainer.style.display = 'flex';
+            iconeContainer.style.alignItems = 'center';
+            iconeContainer.style.justifyContent = 'center';
+            iconeContainer.style.border = '2px solid #ffb86c';
+            iconeContainer.style.borderRadius = '8px';
+            iconeContainer.style.padding = '2px';
+            iconeContainer.style.backgroundColor = '#23243a';
+
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                pocao.iconeUrl,
+                pocao.nome,
+                pocao.icone || '🧪',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '6px',
+                    objectFit: 'cover',
+                    showSkeleton: true
+                }
+            );
+
+            iconeContainer.appendChild(cachedImageElement);
+            pocaoInfo.appendChild(iconeContainer);
+        }
+
+        // Container do nome e tipo
+        const nomeTipo = document.createElement('div');
+        nomeTipo.style.display = 'flex';
+        nomeTipo.style.flexDirection = 'column';
+        nomeTipo.style.gap = '4px';
+
+        // Nome da poção
+        const pocaoTitle = document.createElement('div');
+        pocaoTitle.textContent = pocao.nome;
+        pocaoTitle.style.color = '#ffb86c';
+        pocaoTitle.style.fontSize = '18px';
+        pocaoTitle.style.fontWeight = 'bold';
+        nomeTipo.appendChild(pocaoTitle);
+
+        // Tipo
+        const tipo = document.createElement('div');
+        tipo.textContent = `Tipo: ${pocao.tipo}`;
+        tipo.style.color = '#6ec6ff';
+        tipo.style.fontSize = '14px';
+        nomeTipo.appendChild(tipo);
+
+        pocaoInfo.appendChild(nomeTipo);
+        header.appendChild(pocaoInfo);
+
+        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                modal.remove();
+                overlay.remove();
+            }
+        });
+        header.appendChild(closeBtn.render());
+        modal.appendChild(header);
+
+        // Descrição
+        const descSection = document.createElement('div');
+        descSection.style.marginBottom = '15px';
+        const descTitle = document.createElement('h3');
+        descTitle.textContent = 'Descrição';
+        descTitle.style.color = '#6ec6ff';
+        descTitle.style.fontSize = '16px';
+        descTitle.style.margin = '0 0 8px 0';
+        descSection.appendChild(descTitle);
+        const descText = document.createElement('p');
+        descText.textContent = pocao.descricao;
+        descText.style.color = '#ecf0f1';
+        descText.style.fontSize = '14px';
+        descText.style.margin = '0';
+        descText.style.lineHeight = '1.4';
+        descSection.appendChild(descText);
+        modal.appendChild(descSection);
+
+        // Efeito
+        const efeitoSection = document.createElement('div');
+        efeitoSection.style.marginBottom = '15px';
+        const efeitoTitle = document.createElement('h3');
+        efeitoTitle.textContent = 'Efeito';
+        efeitoTitle.style.color = '#6ec6ff';
+        efeitoTitle.style.fontSize = '16px';
+        efeitoTitle.style.margin = '0 0 8px 0';
+        efeitoSection.appendChild(efeitoTitle);
+        const efeitoText = document.createElement('p');
+        efeitoText.textContent = pocao.efeito;
+        efeitoText.style.color = '#ffb86c';
+        efeitoText.style.fontSize = '14px';
+        efeitoText.style.fontWeight = 'bold';
+        efeitoText.style.margin = '0';
+        efeitoSection.appendChild(efeitoText);
+        modal.appendChild(efeitoSection);
+
+        // Duração do Efeito
+        const duracaoSection = document.createElement('div');
+        duracaoSection.style.marginBottom = '15px';
+        const duracaoTitle = document.createElement('h3');
+        duracaoTitle.textContent = 'Duração do Efeito';
+        duracaoTitle.style.color = '#6ec6ff';
+        duracaoTitle.style.fontSize = '16px';
+        duracaoTitle.style.margin = '0 0 8px 0';
+        duracaoSection.appendChild(duracaoTitle);
+
+        const duracaoText = document.createElement('p');
+        duracaoText.textContent = 'Por cena';
+        duracaoText.style.color = '#27ae60';
+        duracaoText.style.fontSize = '14px';
+        duracaoText.style.fontWeight = 'bold';
+        duracaoText.style.margin = '0';
+        duracaoText.style.padding = '8px 12px';
+        duracaoText.style.background = '#1a1a2e';
+        duracaoText.style.border = '1px solid #27ae60';
+        duracaoText.style.borderRadius = '6px';
+        duracaoSection.appendChild(duracaoText);
+        modal.appendChild(duracaoSection);
+
+        // Informações da Poção
+        const pocaoInfoSection = document.createElement('div');
+        pocaoInfoSection.style.marginBottom = '20px';
+        const pocaoInfoTitle = document.createElement('h3');
+        pocaoInfoTitle.textContent = 'Informações da Poção';
+        pocaoInfoTitle.style.color = '#6ec6ff';
+        pocaoInfoTitle.style.fontSize = '16px';
+        pocaoInfoTitle.style.margin = '0 0 8px 0';
+        pocaoInfoSection.appendChild(pocaoInfoTitle);
+
+        const pocaoInfoGrid = document.createElement('div');
+        pocaoInfoGrid.style.display = 'grid';
+        pocaoInfoGrid.style.gridTemplateColumns = '1fr 1fr';
+        pocaoInfoGrid.style.gap = '10px';
+
+        const infoItems = [
+            { label: 'Preço', value: pocao.preco, color: '#ffb86c' }
+        ];
+
+        infoItems.forEach(item => {
+            const infoItem = document.createElement('div');
+            infoItem.style.background = '#23243a';
+            infoItem.style.padding = '8px 10px';
+            infoItem.style.borderRadius = '6px';
+            infoItem.style.border = '1px solid #444';
+
+            const label = document.createElement('div');
+            label.textContent = item.label;
+            label.style.color = '#888';
+            label.style.fontSize = '12px';
+            label.style.marginBottom = '2px';
+            infoItem.appendChild(label);
+
+            const value = document.createElement('div');
+            value.textContent = item.value;
+            value.style.color = item.color;
+            value.style.fontSize = '13px';
+            value.style.fontWeight = 'bold';
+            infoItem.appendChild(value);
+
+            pocaoInfoGrid.appendChild(infoItem);
+        });
+
+        pocaoInfoSection.appendChild(pocaoInfoGrid);
+        modal.appendChild(pocaoInfoSection);
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.display = 'flex';
+        buttonsContainer.style.gap = '10px';
+        buttonsContainer.style.marginTop = '20px';
+
+        // Botão Compartilhar
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.style.flex = '1';
+        shareBtn.style.padding = '10px 15px';
+        shareBtn.style.background = '#2c3e50';
+        shareBtn.style.border = '1px solid #34495e';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.color = '#ecf0f1';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.onclick = () => {
+            const template = `&{template:t20-info}{{infoname=${pocao.nome}}}{{description=${pocao.descricao} ${pocao.efeito}}}`;
+            sendToChat(template);
+            showSuccessNotification(`Poção "${pocao.nome}" compartilhada no chat!`);
+
+            // Fechar todos os popups relacionados às poções para limpar a cena
+            const pocoesPopup = document.getElementById('pocoes-popup');
+            if (pocoesPopup) pocoesPopup.remove();
+            const pocoesOverlay = document.getElementById('pocoes-overlay');
+            if (pocoesOverlay) pocoesOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(shareBtn);
+
+        // Botão Usar
+        const useBtn = document.createElement('button');
+        useBtn.textContent = 'Usar Poção';
+        useBtn.style.flex = '1';
+        useBtn.style.padding = '10px 15px';
+        useBtn.style.background = '#27ae60';
+        useBtn.style.border = '1px solid #2ecc71';
+        useBtn.style.borderRadius = '6px';
+        useBtn.style.color = '#ecf0f1';
+        useBtn.style.cursor = 'pointer';
+        useBtn.style.fontSize = '14px';
+        useBtn.onclick = () => {
+            const effectKey = 'pocao_' + pocao.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+            const effect = {
+                name: pocao.nome,
+                description: pocao.descricao + ' ' + pocao.efeito,
+                type: 'Poção',
+                effectKey: effectKey
+            };
+
+            let activeEffects = getActiveEffects();
+            if (!activeEffects.includes(effectKey)) {
+                let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effectKey);
+                pocaoEffects.push(effect);
+                localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+                activeEffects.push(effectKey);
+
+                // Adiciona à ordem dos efeitos
+                addEffectToOrder(effectKey, 'potion');
+
+                showSuccessNotification(`Poção "${pocao.nome}" usada! Efeito ativo por cena.`);
+                saveActiveEffects(activeEffects);
+                updateEffectsBadge();
+                updateEffectsVisualIndicators();
+
+                // Enviar mensagem no chat informando que o personagem usou a poção
+                const emoteMessage = `/em ${getCharacterName()} usou **${pocao.nome}** ${pocao.icone || '🧪'}`;
+                sendToChat(emoteMessage);
+            } else {
+                showWarningNotification(`Poção "${pocao.nome}" já está ativa nos efeitos!`);
+            }
+
+            // Fechar todos os popups relacionados às poções para limpar a cena
+            const pocoesPopup = document.getElementById('pocoes-popup');
+            if (pocoesPopup) pocoesPopup.remove();
+            const pocoesOverlay = document.getElementById('pocoes-overlay');
+            if (pocoesOverlay) pocoesOverlay.remove();
+            const miscPopup = document.getElementById('misc-popup');
+            if (miscPopup) miscPopup.remove();
+            const miscOverlay = document.getElementById('misc-overlay');
+            if (miscOverlay) miscOverlay.remove();
+
+            modal.remove();
+            overlay.remove();
+        };
+        buttonsContainer.appendChild(useBtn);
+
+        modal.appendChild(buttonsContainer);
+        document.body.appendChild(modal);
+    }
+
     // Template reutilizável para itens de lista usando o componente FavoritableCard
     function createListItemCard(item, itemType, onFavoriteToggle) {
         const preset = itemType === 'food' ? 'food' :
-            itemType === 'drink' ? 'drink' : 'condition';
+            itemType === 'drink' ? 'drink' :
+                itemType === 'potion' ? 'potion' : 'condition';
 
         const card = window.Roll20Components.createFavoritableCardWithPreset(preset, {
             title: item.nome,
             summary: item.descricao,
             // Adiciona os efeitos específicos para cada tipo de item
             bonus: itemType === 'food' ? item.bonus : undefined,
-            efeito: itemType === 'drink' ? item.efeito : undefined,
+            efeito: (itemType === 'drink' || itemType === 'potion') ? item.efeito : undefined,
             efeitos: itemType === 'condition' ? item.efeitos : undefined,
             isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) :
-                itemType === 'drink' ? isBebidaFavorita(item.nome) : false,
+                itemType === 'drink' ? isBebidaFavorita(item.nome) :
+                    itemType === 'potion' ? isPocaoFavorita(item.nome) : false,
             onClick: () => {
                 if (itemType === 'food') {
                     createPratoDetailModal(item);
                 } else if (itemType === 'drink') {
                     createBebidaDetailModal(item);
+                } else if (itemType === 'potion') {
+                    createPocaoDetailModal(item);
                 }
             },
             onFavoriteToggle: () => {
@@ -4737,6 +5491,8 @@
                     togglePratoFavorito(item.nome);
                 } else if (itemType === 'drink') {
                     toggleBebidaFavorita(item.nome);
+                } else if (itemType === 'potion') {
+                    togglePocaoFavorita(item.nome);
                 }
                 if (onFavoriteToggle) onFavoriteToggle();
             }
@@ -5213,6 +5969,166 @@
         } catch (e) {
             console.error('Erro ao abrir Bebidas Artonianas:', e);
             alert('Erro ao abrir Bebidas Artonianas. Veja o console para detalhes.');
+        }
+    }
+
+    // Função para criar popup de Poções
+    function createPocoesPopup() {
+        console.log('Abrindo Poções');
+        try {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('pocoes-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('pocoes-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'pocoes-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10000';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'pocoes-popup';
+            popup.className = 'roll20-popup roll20-popup-orange';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ffb86c';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '18px 20px 16px 20px';
+            popup.style.zIndex = '10001';
+            popup.style.maxWidth = '480px';
+            popup.style.maxHeight = '600px';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
+
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ffb86c',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('pocoes-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+
+            const title = document.createElement('h3');
+            title.textContent = 'Poções';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold';
+            header.appendChild(title);
+            header.appendChild(closeBtn.render());
+            popup.appendChild(header);
+
+            // Campo de filtro
+            const filterContainer = document.createElement('div');
+            filterContainer.style.position = 'relative';
+            filterContainer.style.marginBottom = '10px';
+            const filterInput = document.createElement('input');
+            filterInput.type = 'text';
+            filterInput.placeholder = 'Filtrar poções...';
+            filterInput.style.width = '100%';
+            filterInput.style.padding = '10px 12px';
+            filterInput.style.borderRadius = '8px';
+            filterInput.style.border = '1px solid #ffb86c';
+            filterInput.style.background = '#23243a';
+            filterInput.style.color = '#fff';
+            filterInput.style.fontSize = '14px';
+            filterInput.style.outline = 'none';
+            filterInput.style.boxSizing = 'border-box';
+            filterInput.style.fontSize = '15px';
+            filterContainer.appendChild(filterInput);
+            popup.appendChild(filterContainer);
+
+            // Lista de poções (cards)
+            const pocoesList = document.createElement('div');
+            pocoesList.style.display = 'flex';
+            pocoesList.style.flexDirection = 'column';
+            pocoesList.style.gap = '14px';
+            pocoesList.style.marginTop = '10px';
+            popup.appendChild(pocoesList);
+
+            // Dados das poções
+            const pocoes = getPocoesCompletas();
+
+            function renderPocoesList(filterText = '') {
+                pocoesList.innerHTML = '';
+                const filtered = pocoes.filter(pocao =>
+                    pocao.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+                    pocao.descricao.toLowerCase().includes(filterText.toLowerCase()) ||
+                    pocao.efeito.toLowerCase().includes(filterText.toLowerCase()) ||
+                    pocao.tipo.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                // Ordena favoritos primeiro
+                const favoritas = getPocoesFavoritas();
+                filtered.sort((a, b) => {
+                    const aFavorita = favoritas.includes(a.nome);
+                    const bFavorita = favoritas.includes(b.nome);
+                    if (aFavorita && !bFavorita) return -1;
+                    if (!aFavorita && bFavorita) return 1;
+                    return a.nome.localeCompare(b.nome);
+                });
+
+                filtered.forEach(pocao => {
+                    const card = createListItemCard(pocao, 'potion', () => renderPocoesList(filterInput.value));
+                    pocoesList.appendChild(card);
+                });
+
+                // Verifica se não há poções encontradas durante a filtragem
+                if (filtered.length === 0 && filterText.length > 0) {
+                    const noResultsMessage = createNoResultsMessage(filterText, 'poção', 'orange');
+                    pocoesList.appendChild(noResultsMessage);
+                }
+            }
+
+            // Atualiza a lista ao digitar
+            filterInput.addEventListener('input', () => {
+                renderPocoesList(filterInput.value);
+            });
+
+            // Render inicial
+            renderPocoesList();
+
+            // Adiciona o popup ao body
+            document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'orange');
+        } catch (e) {
+            console.error('Erro ao abrir Poções:', e);
+            alert('Erro ao abrir Poções. Veja o console para detalhes.');
         }
     }
 
@@ -8734,7 +9650,7 @@
                     noResultsMessage.innerHTML = `
                             <div style="margin-bottom: 8px;">⚔️</div>
                             <div>Nenhum poder disponível</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Selecione uma classe para obter poderes de combate</div>
                         `;
                 }
 
@@ -9299,81 +10215,101 @@
             typesContainer.style.flexDirection = 'column';
             typesContainer.style.gap = '15px';
 
-            race.types.forEach(type => {
-                const isSelected = getSelectedRace() === race.name && getSelectedRaceType() === type.name;
+            // Se não há tipos de raça, mostra mensagem
+            if (!race.types || race.types.length === 0) {
+                const noTypesMessage = document.createElement('div');
+                noTypesMessage.style.textAlign = 'center';
+                noTypesMessage.style.padding = '20px';
+                noTypesMessage.style.color = '#8B4513';
+                noTypesMessage.style.fontSize = '14px';
+                noTypesMessage.style.fontStyle = 'italic';
+                noTypesMessage.style.background = 'rgba(139, 69, 19, 0.1)';
+                noTypesMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                noTypesMessage.style.borderRadius = '8px';
+                noTypesMessage.style.marginTop = '10px';
+                noTypesMessage.innerHTML = `
+                    <div style="margin-bottom: 8px;">👥</div>
+                    <div>Nenhum tipo de raça disponível</div>
+                    <div style="margin-top: 8px; font-size: 12px;">Esta raça não possui subtipos especiais</div>
+                `;
+                typesContainer.appendChild(noTypesMessage);
+            } else {
+                race.types.forEach(type => {
+                    const isSelected = getSelectedRace() === race.name && getSelectedRaceType() === type.name;
 
-                const typeContainer = document.createElement('div');
-                typeContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
-                typeContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
-                typeContainer.style.borderRadius = '10px';
-                typeContainer.style.padding = '15px';
-                typeContainer.style.cursor = 'pointer';
-                typeContainer.style.transition = 'all 0.2s';
+                    const typeContainer = document.createElement('div');
+                    typeContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
+                    typeContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
+                    typeContainer.style.borderRadius = '10px';
+                    typeContainer.style.padding = '15px';
+                    typeContainer.style.cursor = 'pointer';
+                    typeContainer.style.transition = 'all 0.2s';
 
-                typeContainer.onclick = () => {
-                    saveSelectedRace(race.name);
-                    saveSelectedRaceType(type.name);
+                    typeContainer.onclick = () => {
+                        saveSelectedRace(race.name);
+                        saveSelectedRaceType(type.name);
 
-                    // Atualiza a interface
-                    modal.remove();
-                    overlay.remove();
+                        // Atualiza a interface
+                        modal.remove();
+                        overlay.remove();
 
-                    // Recria o modal para mostrar a seleção
-                    setTimeout(() => {
-                        createRaceDetailModal(race);
-                    }, 100);
-                };
+                        // Recria o modal para mostrar a seleção
+                        setTimeout(() => {
+                            createRaceDetailModal(race);
+                        }, 100);
+                    };
 
-                typeContainer.onmouseover = () => {
-                    if (!isSelected) {
-                        typeContainer.style.background = 'rgba(139, 69, 19, 0.2)';
-                        typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
+                    typeContainer.onmouseover = () => {
+                        if (!isSelected) {
+                            typeContainer.style.background = 'rgba(139, 69, 19, 0.2)';
+                            typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
+                        }
+                    };
+
+                    typeContainer.onmouseout = () => {
+                        if (!isSelected) {
+                            typeContainer.style.background = 'rgba(139, 69, 19, 0.1)';
+                            typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                        }
+                    };
+
+                    // Cabeçalho do tipo
+                    const typeHeader = document.createElement('div');
+                    typeHeader.style.display = 'flex';
+                    typeHeader.style.justifyContent = 'space-between';
+                    typeHeader.style.alignItems = 'center';
+                    typeHeader.style.marginBottom = '10px';
+
+                    const typeTitle = document.createElement('div');
+                    typeTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${type.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${type.title}</em>`;
+
+                    const typeStatus = document.createElement('div');
+                    if (isSelected) {
+                        typeStatus.innerHTML = '✓ Selecionado';
+                        typeStatus.style.color = '#4caf50';
+                    } else {
+                        typeStatus.innerHTML = 'Clique para selecionar';
+                        typeStatus.style.color = '#6ec6ff';
                     }
-                };
+                    typeStatus.style.fontSize = '12px';
+                    typeStatus.style.fontWeight = 'bold';
+                    typeStatus.style.fontStyle = 'italic';
 
-                typeContainer.onmouseout = () => {
-                    if (!isSelected) {
-                        typeContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-                        typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                    }
-                };
+                    typeHeader.appendChild(typeTitle);
+                    typeHeader.appendChild(typeStatus);
+                    typeContainer.appendChild(typeHeader);
 
-                // Cabeçalho do tipo
-                const typeHeader = document.createElement('div');
-                typeHeader.style.display = 'flex';
-                typeHeader.style.justifyContent = 'space-between';
-                typeHeader.style.alignItems = 'center';
-                typeHeader.style.marginBottom = '10px';
+                    // Descrição do tipo
+                    const typeDescription = document.createElement('div');
+                    typeDescription.textContent = type.description;
+                    typeDescription.style.color = '#ecf0f1';
+                    typeDescription.style.fontSize = '13px';
+                    typeDescription.style.lineHeight = '1.4';
+                    typeContainer.appendChild(typeDescription);
 
-                const typeTitle = document.createElement('div');
-                typeTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${type.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${type.title}</em>`;
-
-                const typeStatus = document.createElement('div');
-                if (isSelected) {
-                    typeStatus.innerHTML = '✓ Selecionado';
-                    typeStatus.style.color = '#4caf50';
-                } else {
-                    typeStatus.innerHTML = 'Clique para selecionar';
-                    typeStatus.style.color = '#6ec6ff';
-                }
-                typeStatus.style.fontSize = '12px';
-                typeStatus.style.fontWeight = 'bold';
-                typeStatus.style.fontStyle = 'italic';
-
-                typeHeader.appendChild(typeTitle);
-                typeHeader.appendChild(typeStatus);
-                typeContainer.appendChild(typeHeader);
-
-                // Descrição do tipo
-                const typeDescription = document.createElement('div');
-                typeDescription.textContent = type.description;
-                typeDescription.style.color = '#ecf0f1';
-                typeDescription.style.fontSize = '13px';
-                typeDescription.style.lineHeight = '1.4';
-                typeContainer.appendChild(typeDescription);
-
-                typesContainer.appendChild(typeContainer);
-            });
+                    typesContainer.appendChild(typeContainer);
+                });
+            }
 
             typesSection.appendChild(typesContainer);
             modal.appendChild(typesSection);
@@ -9634,72 +10570,92 @@
 
             let selectedPower = getSelectedDivinityPower();
 
-            divinity.powers.forEach(power => {
-                const isSelected = selectedPower === power.name;
+            // Se não há poderes concedidos, mostra mensagem
+            if (!divinity.powers || divinity.powers.length === 0) {
+                const noPowersMessage = document.createElement('div');
+                noPowersMessage.style.textAlign = 'center';
+                noPowersMessage.style.padding = '20px';
+                noPowersMessage.style.color = '#8B4513';
+                noPowersMessage.style.fontSize = '14px';
+                noPowersMessage.style.fontStyle = 'italic';
+                noPowersMessage.style.background = 'rgba(139, 69, 19, 0.1)';
+                noPowersMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
+                noPowersMessage.style.borderRadius = '8px';
+                noPowersMessage.style.marginTop = '10px';
+                noPowersMessage.innerHTML = `
+                    <div style="margin-bottom: 8px;">🙏</div>
+                    <div>Nenhum poder concedido disponível</div>
+                    <div style="margin-top: 8px; font-size: 12px;">Esta divindade não possui poderes especiais</div>
+                `;
+                powersList.appendChild(noPowersMessage);
+            } else {
+                divinity.powers.forEach(power => {
+                    const isSelected = selectedPower === power.name;
 
-                const powerContainer = document.createElement('div');
-                powerContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
-                powerContainer.style.border = `1px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
-                powerContainer.style.borderRadius = '8px';
-                powerContainer.style.padding = '12px';
-                powerContainer.style.cursor = 'pointer';
-                powerContainer.style.transition = 'all 0.2s';
+                    const powerContainer = document.createElement('div');
+                    powerContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
+                    powerContainer.style.border = `1px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
+                    powerContainer.style.borderRadius = '8px';
+                    powerContainer.style.padding = '12px';
+                    powerContainer.style.cursor = 'pointer';
+                    powerContainer.style.transition = 'all 0.2s';
 
-                powerContainer.onmouseover = () => {
-                    if (!isSelected) {
-                        powerContainer.style.background = '#2a2b4a';
-                    }
-                };
+                    powerContainer.onmouseover = () => {
+                        if (!isSelected) {
+                            powerContainer.style.background = '#2a2b4a';
+                        }
+                    };
 
-                powerContainer.onmouseout = () => {
-                    if (!isSelected) {
-                        powerContainer.style.background = '#23243a';
-                    }
-                };
+                    powerContainer.onmouseout = () => {
+                        if (!isSelected) {
+                            powerContainer.style.background = '#23243a';
+                        }
+                    };
 
-                powerContainer.onclick = () => {
-                    // Remove seleção anterior
-                    const previousSelected = powersList.querySelector('.selected-power');
-                    if (previousSelected) {
-                        previousSelected.classList.remove('selected-power');
-                        previousSelected.style.background = '#23243a';
-                        previousSelected.style.border = '1px solid #6ec6ff';
-                    }
+                    powerContainer.onclick = () => {
+                        // Remove seleção anterior
+                        const previousSelected = powersList.querySelector('.selected-power');
+                        if (previousSelected) {
+                            previousSelected.classList.remove('selected-power');
+                            previousSelected.style.background = '#23243a';
+                            previousSelected.style.border = '1px solid #6ec6ff';
+                        }
 
-                    // Seleciona novo poder
-                    powerContainer.classList.add('selected-power');
-                    powerContainer.style.background = '#2d4a3e';
-                    powerContainer.style.border = '1px solid #4caf50';
+                        // Seleciona novo poder
+                        powerContainer.classList.add('selected-power');
+                        powerContainer.style.background = '#2d4a3e';
+                        powerContainer.style.border = '1px solid #4caf50';
 
-                    selectedPower = power.name;
-                };
+                        selectedPower = power.name;
+                    };
 
-                // Cabeçalho do poder
-                const powerHeader = document.createElement('div');
-                powerHeader.style.display = 'flex';
-                powerHeader.style.justifyContent = 'flex-start';
-                powerHeader.style.alignItems = 'center';
-                powerHeader.style.marginBottom = '6px';
+                    // Cabeçalho do poder
+                    const powerHeader = document.createElement('div');
+                    powerHeader.style.display = 'flex';
+                    powerHeader.style.justifyContent = 'flex-start';
+                    powerHeader.style.alignItems = 'center';
+                    powerHeader.style.marginBottom = '6px';
 
-                const powerName = document.createElement('div');
-                powerName.textContent = power.name;
-                powerName.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-                powerName.style.fontSize = '14px';
-                powerName.style.fontWeight = 'bold';
+                    const powerName = document.createElement('div');
+                    powerName.textContent = power.name;
+                    powerName.style.color = isSelected ? '#4caf50' : '#6ec6ff';
+                    powerName.style.fontSize = '14px';
+                    powerName.style.fontWeight = 'bold';
 
-                powerHeader.appendChild(powerName);
-                powerContainer.appendChild(powerHeader);
+                    powerHeader.appendChild(powerName);
+                    powerContainer.appendChild(powerHeader);
 
-                // Descrição do poder
-                const powerDesc = document.createElement('div');
-                powerDesc.textContent = power.description;
-                powerDesc.style.color = '#ecf0f1';
-                powerDesc.style.fontSize = '12px';
-                powerDesc.style.lineHeight = '1.4';
-                powerContainer.appendChild(powerDesc);
+                    // Descrição do poder
+                    const powerDesc = document.createElement('div');
+                    powerDesc.textContent = power.description;
+                    powerDesc.style.color = '#ecf0f1';
+                    powerDesc.style.fontSize = '12px';
+                    powerDesc.style.lineHeight = '1.4';
+                    powerContainer.appendChild(powerDesc);
 
-                powersList.appendChild(powerContainer);
-            });
+                    powersList.appendChild(powerContainer);
+                });
+            }
 
             powersSection.appendChild(powersList);
             modal.appendChild(powersSection);
@@ -10072,9 +11028,9 @@
                     return;
                 } else {
                     noResultsMessage.innerHTML = `
-                            <div style="margin-bottom: 8px;">⚔️</div>
+                            <div style="margin-bottom: 8px;">🏹</div>
                             <div>Nenhuma habilidade disponível</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Verifique os filtros aplicados</div>
+                            <div style="margin-top: 8px; font-size: 12px;">Selecione uma classe para obter habilidades especiais</div>
                         `;
                 }
 
@@ -12426,6 +13382,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 return activeEffects.includes(item.effectKey);
             } else if (item.effectType === 'drink') {
                 return activeEffects.includes(item.effectKey);
+            } else if (item.effectType === 'potion') {
+                return activeEffects.includes(item.effectKey);
             } else if (item.effectType === 'item') {
                 return activeEffects.includes(item.effectKey);
             }
@@ -13072,6 +14030,23 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                         createBebidaIndicatorIcon(bebidaData, bebidaEffect);
                     }
                 }
+            } else if (orderedEffect.effectType === 'potion') {
+                // Busca os dados do efeito de poção
+                let pocaoEffects = [];
+                try {
+                    pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                } catch (e) {
+                    console.error('Erro ao carregar efeitos de poção:', e);
+                    pocaoEffects = [];
+                }
+
+                const pocaoEffect = pocaoEffects.find(effect => effect.effectKey === orderedEffect.effectKey);
+                if (pocaoEffect) {
+                    const pocaoData = getPocaoDataByName(pocaoEffect.name);
+                    if (pocaoData) {
+                        createPocaoIndicatorIcon(pocaoData, pocaoEffect);
+                    }
+                }
             }
         });
     }
@@ -13299,6 +14274,128 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Remove da ordem
         removeEffectFromOrder(effectKey, 'drink');
+
+        // Atualiza indicadores visuais unificados
+        updateEffectsVisualIndicators();
+    }
+
+    // Função para obter dados de uma poção pelo nome
+    function getPocaoDataByName(nome) {
+        const pocoes = getPocoesCompletas();
+        return pocoes.find(pocao => pocao.nome === nome);
+    }
+
+    // Função para criar um ícone indicador de poção usada
+    function createPocaoIndicatorIcon(pocaoData, effect) {
+        const effectsContainer = document.getElementById('effects-icons-container');
+        if (!effectsContainer) return;
+
+        // Container principal do indicador
+        const indicator = document.createElement('div');
+        indicator.className = 'pocao-indicator';
+        indicator.style.position = 'relative';
+        indicator.style.width = '32px';
+        indicator.style.height = '32px';
+        indicator.style.borderRadius = '6px';
+        indicator.style.border = '2px solid #9c27b0'; // Borda roxa para poções
+        indicator.style.background = '#23243a';
+        indicator.style.cursor = 'pointer';
+        indicator.style.transition = 'all 0.2s';
+        indicator.style.overflow = 'hidden';
+
+        // Efeitos de hover
+        indicator.onmouseover = () => {
+            indicator.style.transform = 'scale(1.1)';
+            indicator.style.borderColor = '#ba68c8'; // Roxo mais claro no hover
+            // Mostra tooltip usando o template reutilizável
+            createEffectHoverTooltip(indicator, pocaoData, 'potion');
+        };
+
+        indicator.onmouseout = () => {
+            indicator.style.transform = 'scale(1)';
+            indicator.style.borderColor = '#9c27b0'; // Volta para roxo normal
+            // Esconde tooltip
+            hideEffectTooltip();
+        };
+
+        // Click handler para remover o efeito
+        indicator.onclick = () => {
+            // Esconde o tooltip antes de remover o efeito
+            hideEffectTooltip();
+            removePocaoEffect(effect.effectKey);
+        };
+
+        // Ícone da poção
+        if (pocaoData.iconeUrl) {
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                pocaoData.iconeUrl,
+                pocaoData.nome,
+                pocaoData.icone || '🧪',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '4px',
+                    objectFit: 'cover',
+                    showSkeleton: false
+                }
+            );
+            indicator.appendChild(cachedImageElement);
+        } else {
+            // Fallback para emoji
+            const emojiElement = document.createElement('div');
+            emojiElement.textContent = pocaoData.icone || '🧪';
+            emojiElement.style.width = '100%';
+            emojiElement.style.height = '100%';
+            emojiElement.style.display = 'flex';
+            emojiElement.style.alignItems = 'center';
+            emojiElement.style.justifyContent = 'center';
+            emojiElement.style.fontSize = '16px';
+            indicator.appendChild(emojiElement);
+        }
+
+        // Adiciona indicador de duração no canto inferior direito
+        const durationIndicator = document.createElement('div');
+        durationIndicator.style.position = 'absolute';
+        durationIndicator.style.bottom = '0';
+        durationIndicator.style.right = '0';
+        durationIndicator.style.background = 'rgba(0, 0, 0, 0.7)';
+        durationIndicator.style.color = '#ffffff';
+        durationIndicator.style.fontSize = '8px';
+        durationIndicator.style.fontWeight = 'bold';
+        durationIndicator.style.padding = '1px 3px';
+        durationIndicator.style.borderRadius = '3px 0 4px 0';
+        durationIndicator.style.lineHeight = '1';
+        durationIndicator.style.minWidth = '12px';
+        durationIndicator.style.textAlign = 'center';
+        durationIndicator.style.border = '1px solid #000000';
+        durationIndicator.style.zIndex = '10';
+        durationIndicator.style.pointerEvents = 'none';
+
+        // Duração das poções é sempre por cena
+        durationIndicator.textContent = 'Cena';
+
+        indicator.appendChild(durationIndicator);
+        effectsContainer.appendChild(indicator);
+    }
+
+    // Função para remover efeito de poção
+    function removePocaoEffect(effectKey) {
+        // Remove do localStorage de efeitos de poção
+        let pocaoEffects = [];
+        try {
+            pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+            pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effectKey);
+            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+        } catch (e) {
+            console.error('Erro ao remover efeito de poção:', e);
+        }
+
+        // Remove do sistema de efeitos ativos
+        toggleEffect(effectKey);
+
+        // Remove da ordem
+        removeEffectFromOrder(effectKey, 'potion');
 
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
@@ -13580,6 +14677,25 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             };
         });
 
+        // Carrega efeitos de poção
+        let pocaoEffects = [];
+        try {
+            pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de poção:', e);
+            pocaoEffects = [];
+        }
+        // Só mostra efeitos de poção que estão ativos
+        const activePocaoEffects = pocaoEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            return {
+                title: effect.name,
+                description: effect.description,
+                chips: ['Poção', 'Cena'],
+                type: 'Poção',
+                effectKey: effect.effectKey
+            };
+        });
+
         // Efeitos de condições (convertidos para selectable-cards)
         const activeConditions = getActiveConditions();
         const conditionsEffects = activeConditions.map(conditionName => {
@@ -13593,8 +14709,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             };
         });
 
-        // Junta efeitos normais, de comida, bebida, condições e selectable-cards
-        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...conditionsEffects, ...selectableCards];
+        // Junta efeitos normais, de comida, bebida, poção, condições e selectable-cards
+        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...selectableCards];
 
         // Lista visual
         const effectsList = document.createElement('div');
@@ -13693,6 +14809,31 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                                 effectKey: effect.effectKey
                             });
                             localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            saveActiveEffects(activeEffects);
+                            showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                        }
+                    } else if (effect.type === 'Poção') {
+                        // Remove do sistema de poção e adiciona/remove do selectable
+                        const activeEffects = getActiveEffects();
+                        const index = activeEffects.indexOf(effect.effectKey);
+                        if (index > -1) {
+                            activeEffects.splice(index, 1);
+                            let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                            pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
+                            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+                            saveActiveEffects(activeEffects);
+                            showWarningNotification(`Efeito "${effect.title}" removido.`);
+                        } else {
+                            activeEffects.push(effect.effectKey);
+                            let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                            pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
+                            pocaoEffects.push({
+                                name: effect.title,
+                                description: effect.description,
+                                type: 'Poção',
+                                effectKey: effect.effectKey
+                            });
+                            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
                             saveActiveEffects(activeEffects);
                             showSuccessNotification(`Efeito "${effect.title}" ativado!`);
                         }
