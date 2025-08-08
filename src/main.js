@@ -10895,7 +10895,7 @@
         textFilterContainer.style.marginBottom = '10px';
         const textFilterInput = document.createElement('input');
         textFilterInput.type = 'text';
-        textFilterInput.placeholder = 'Filtrar habilidades...';
+        textFilterInput.placeholder = 'Filtrar poderes...';
         textFilterInput.style.width = '100%';
         textFilterInput.style.padding = '10px 28px 10px 12px';
         textFilterInput.style.borderRadius = '8px';
@@ -12153,7 +12153,7 @@
         });
 
         const title = document.createElement('h3');
-        title.textContent = 'Habilidades';
+        title.textContent = 'Poderes';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
@@ -12167,7 +12167,7 @@
         filterContainer.style.marginBottom = '10px';
         const filterInput = document.createElement('input');
         filterInput.type = 'text';
-        filterInput.placeholder = 'Filtrar habilidades...';
+        filterInput.placeholder = 'Filtrar poderes...';
         filterInput.style.width = '100%';
         filterInput.style.padding = '10px 28px 10px 12px';
         filterInput.style.borderRadius = '8px';
@@ -15335,6 +15335,67 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             });
         });
 
+        // Adiciona habilidades dinâmicas (aprendidas e automáticas)
+        const learnedAbilities = getLearnedAbilities();
+        const automaticAbilities = getAutomaticAbilities();
+        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+        const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
+
+        // Adiciona habilidades automáticas
+        automaticAbilities.forEach(abilityName => {
+            searchIndex.push({
+                name: abilityName,
+                category: 'Habilidade',
+                description: 'Habilidade automática do Caçador',
+                effects: 'Sempre disponível',
+                icon: '🎯',
+                type: 'ability',
+                data: { nome: abilityName, tipo: 'automática' }
+            });
+        });
+
+        // Adiciona habilidades especiais por nível
+        specialAbilities.forEach(abilityName => {
+            searchIndex.push({
+                name: abilityName,
+                category: 'Habilidade',
+                description: `Habilidade especial disponível no nível ${charLevel}`,
+                effects: 'Habilidade de classe',
+                icon: '🌟',
+                type: 'ability',
+                data: { nome: abilityName, tipo: 'especial' }
+            });
+        });
+
+        // Adiciona habilidades aprendidas
+        learnedAbilities.forEach(abilityName => {
+            if (!automaticAbilities.includes(abilityName) && !specialAbilities.includes(abilityName)) {
+                searchIndex.push({
+                    name: abilityName,
+                    category: 'Habilidade',
+                    description: 'Habilidade aprendida pelo Caçador',
+                    effects: 'Habilidade escolhida',
+                    icon: '🎯',
+                    type: 'ability',
+                    data: { nome: abilityName, tipo: 'aprendida' }
+                });
+            }
+        });
+
+        // Adiciona poderes de destino aprendidos
+        const learnedDestinyPowers = getLearnedDestinyPowers();
+        learnedDestinyPowers.forEach(powerName => {
+            searchIndex.push({
+                name: powerName,
+                category: 'Poder de Destino',
+                description: 'Poder de destino aprendido pelo personagem',
+                effects: 'Poder de destino',
+                icon: '⭐',
+                type: 'destiny_power',
+                data: { nome: powerName, tipo: 'destino' }
+            });
+        });
+
         return searchIndex;
     }
 
@@ -15429,6 +15490,18 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
                 sendToChat(template);
                 showSuccessNotification(`Divindade "${item.name}" compartilhada no chat!`);
+                break;
+            }
+            case 'ability': {
+                // Abre o popup de detalhes da habilidade
+                createAbilityCastPopup(item.data.nome, item.data.nome);
+                break;
+            }
+            case 'destiny_power': {
+                // Mostra detalhes do poder de destino no chat
+                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
+                sendToChat(template);
+                showSuccessNotification(`Poder de Destino "${item.name}" compartilhado no chat!`);
                 break;
             }
             default:
