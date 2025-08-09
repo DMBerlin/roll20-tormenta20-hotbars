@@ -52,11 +52,9 @@ execucao:
   duracao: "instantânea"
   resistencia: "—"
 mecanica:
-  descricao_resumida: "Sua mente visualiza todas as possibilidades de um evento, permitindo  a você escolher o melhor curso de  ação."
+  descricao_resumida: "Sua mente visualiza todas as possibilidades de um evento, permitindo a você escolher o melhor curso de ação."
   efeito_detalhado: |
-    Sua mente visualiza todas as possibilidades de um evento, permitindo  a você escolher o melhor curso
-    de  ação. Você pode rolar novamente um  teste de resistência com um bônus  de +10 ou um inimigo deve
-    rolar no vamente um ataque contra você com  uma penalidade de –10.
+    Sua mente visualiza todas as possibilidades de um evento, permitindo a você escolher o melhor curso de ação. Você pode rolar novamente um teste de resistência com um bônus de +10 ou um inimigo deve rolar no vamente um ataque contra você com uma penalidade de –10.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -103,32 +101,9 @@ execucao:
   duracao: "permanente"
   resistencia: "Vontade anula"
 mecanica:
-  descricao_resumida: "Você cria uma prisão mágica para aprisionar uma criatura."
+  descricao_resumida: "Resistência: Vontade anula."
   efeito_detalhado: |
-    Você cria uma prisão mágica para aprisionar uma criatura. Se falhar no teste  de resistência, o alvo
-    sofre o efeito da  magia; se passar, fica imune a esta magia por uma semana. Enquanto estiver
-    aprisionada, a criatura não precisa respirar e alimentar-se, e não envelhece.  Magias de adivinhação
-    não conseguem  localizar ou perceber o alvo. Ao lançar a  magia, você escolhe uma das seguintes
-    formas de prisão. O componente material varia, mas todos custam T$ 1.000. Acorrentamento:  o alvo é
-    preso por cor rentes firmemente enraizadas no chão,  que o mantém no lugar. O alvo fica paralisado e
-    não pode se mover ou ser  movido por qualquer meio. Componente  Material: uma fina corrente de
-    mitral. Contenção Mínima:  o alvo diminui para  2 cm de altura e é preso dentro de uma  pedra
-    preciosa ou objeto semelhante.  Luz passa através da pedra, permitin do que o alvo veja o lado de
-    fora e seja  visto, mas nada mais pode passar, nem  por meio de teletransporte ou viagem  planar. A
-    pedra não pode ser quebrada  enquanto o alvo estiver dentro. Componente Material: uma pedra
-    preciosa,  como um diamante ou rubi. Prisão Dimensional: o alvo é transportado para um semiplano
-    protegido contra  teletransporte e viagens planares. Pode  ser um labirinto, uma gaiola, uma torre
-    ou qualquer estrutura ou área confinada e pequena a sua escolha. Componente  Material: uma
-    representação em miniatura da prisão, feita de jade. Sepultamento: o alvo é sepultado nas
-    profundezas da terra, em uma esfera  mágica. Nada pode destruir ou atravessar a esfera, nem mesmo
-    teletranspor -te ou viagens planares. Componente Material: um pequeno orbe de adamante. Sono Eterno:
-    o alvo adormece e não pode  ser acordado. Componente Material: fruta  preparada com ervas soníferas
-    raras. Quando a magia é lançada, você deve  especificar uma condição que fará com  que ela termine e
-    solte o alvo. A condição pode ser tão específica ou elaborada quanto você quiser, mas deve  ser
-    possível de acontecer. As condições  podem se basear no nome, identidade  ou divindade padroeira de
-    uma criatu ra, ou em ações ou qualidades observáveis, mas nunca em estatísticas intangíveis, como
-    nível, classe ou pontos de  vida. O mestre tem a palavra final so bre se uma condição é válida ou
-    não.
+    Resistência: Vontade anula. Você cria uma prisão mágica para aprisionar uma criatura. Se falhar no teste de resistência, o alvo sofre o efeito da magia; se passar, fica imune a esta magia por uma semana. Enquanto estiver aprisionada, a criatura não precisa respirar e alimentar-se, e não envelhece. Magias de adivinhação não conseguem localizar ou perceber o alvo. Ao lançar a magia, você escolhe uma das seguintes formas de prisão. O componente material varia, mas todos custam T$ 1.000. Acorrentamento: o alvo é preso por cor rentes firmemente enraizadas no chão, que o mantém no lugar. O alvo fica paralisado e não pode se mover ou ser movido por qualquer meio. Componente Material: uma fina corrente de mitral. Contenção Mínima: o alvo diminui para 2 cm de altura e é preso dentro de uma pedra preciosa ou objeto semelhante. Luz passa através da pedra, permitin do que o alvo veja o lado de fora e seja visto, mas nada mais pode passar, nem por meio de teletransporte ou viagem planar. A pedra não pode ser quebrada enquanto o alvo estiver dentro. Componente Material: uma pedra preciosa, como um diamante ou rubi. Prisão Dimensional: o alvo é transportado para um semiplano protegido contra teletransporte e viagens planares. Pode ser um labirinto, uma gaiola, uma torre ou qualquer estrutura ou área confinada e pequena a sua escolha. Componente Material: uma representação em miniatura da prisão, feita de jade. Sepultamento: o alvo é sepultado nas profundezas da terra, em uma esfera mágica. Nada pode destruir ou atravessar a esfera, nem mesmo teletranspor -te ou viagens planares. Componente Material: um pequeno orbe de adamante. Sono Eterno: o alvo adormece e não pode ser acordado. Componente Material: fruta preparada com ervas soníferas raras. Quando a magia é lançada, você deve especificar uma condição que fará com que ela termine e solte o alvo. A condição pode ser tão específica ou elaborada quanto você quiser, mas deve ser possível de acontecer. As condições podem se basear no nome, identidade ou divindade padroeira de uma criatu ra, ou em ações ou qualidades observáveis, mas nunca em estatísticas intangíveis, como nível, classe ou pontos de vida. O mestre tem a palavra final so bre se uma condição é válida ou não.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -176,13 +151,9 @@ execucao:
   duracao: "cena"
   resistencia: "Vontade parcial"
 mecanica:
-  descricao_resumida: "Envia um aviso telepático para uma  criatura, mesmo que não possa vê-la  nem tenha linha de efeito."
+  descricao_resumida: "cena; Resistência: Vontade parcial."
   efeito_detalhado: |
-    Envia um aviso telepático para uma  criatura, mesmo que não possa vê-la  nem tenha linha de efeito.
-    Escolha um: Alerta: o alvo recebe +5 em seu próximo teste de Iniciativa e de Percepção   até o fim
-    da próxima cena. Mensagem:  o alvo recebe uma mensa gem sua de até 25 palavras. Vocês devem ter um
-    idioma em comum para o  alvo poder entendê-lo. Localização: o alvo sabe onde você está  naquele
-    momento. Se você mudar de  posição, ele não saberá. +3 PM: aumenta o número de alvos  em +1.
+    cena; Resistência: Vontade parcial. Você se torna um conduíte da energia de sua divindade, emanando uma aura brilhante. Você e aliados devotos da mesma divindade ficam imunes a encantamento e recebem +10 na Defesa e em testes de resistência. Aliados não devotos da mesma divindade recebem +5 na Defesa e em testes de resistência. Além disso, inimigos que entrem na área devem fazer um teste de Vontade; em caso de falha, recebem uma condição a sua escolha entre esmorecido, debilitado ou lento até o fim da cena. O teste deve ser refeito cada vez que a criatura entrar novamente na área. +2 PM: aumenta os bônus na Defesa e em testes de resistência em +1.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 1
@@ -235,17 +206,9 @@ execucao:
   duracao: "instantânea"
   resistencia: "Reflexos parcial"
 mecanica:
-  descricao_resumida: "Criada pelo arquimago Vectorius, esta  magia produz quatro esferas, de ácido, eletricidade, fogo e frio, que voam  até um ponto a sua escolha."
+  descricao_resumida: "xos parcial."
   efeito_detalhado: |
-    Criada pelo arquimago Vectorius, esta  magia produz quatro esferas, de ácido, eletricidade, fogo e
-    frio, que voam  até um ponto a sua escolha. Quando  atingem o ponto escolhido, explodem  causando
-    6d6 pontos de dano de seu  respectivo tipo numa área com 12m  de raio. Um teste de Reflexos reduz o
-    dano à metade. Você pode mirar cada  esfera em uma criatura ou ponto dife rente. Uma criatura ao
-    alcance da explosão de mais de uma esfera deve fazer um teste de resistência para cada  uma. Além
-    disso, as esferas causam os  seguintes efeitos em criaturas que falharem em seus testes de
-    resistência: • Ácido:  vulnerável até o fim da cena. • Elétrica: atordoado por 1 rodada  (apenas uma
-    vez por cena). • Fogo: em chamas. • Frio: lento até o fim da cena. +5 PM: aumenta o dano de cada
-    esfe ra em +2d6.
+    xos parcial. Criada pelo arquimago Vectorius, esta magia produz quatro esferas, de ácido, eletricidade, fogo e frio, que voam até um ponto a sua escolha. Quando atingem o ponto escolhido, explodem causando 6d6 pontos de dano de seu respectivo tipo numa área com 12m de raio. Um teste de Reflexos reduz o dano à metade. Você pode mirar cada esfera em uma criatura ou ponto dife rente. Uma criatura ao alcance da explosão de mais de uma esfera deve fazer um teste de resistência para cada uma. Além disso, as esferas causam os seguintes efeitos em criaturas que falharem em seus testes de resistência: • Ácido: vulnerável até o fim da cena. • Elétrica: atordoado por 1 rodada (apenas uma vez por cena). • Fogo: em chamas. • Frio: lento até o fim da cena. +5 PM: aumenta o dano de cada esfe ra em +2d6. +5 PM: muda o tipo de dano de todas as esferas para essência (mas elas ainda causam os outros efeitos como se
   dano_ou_cura:
     formulas: ["2d6", "6d6"]
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
@@ -355,23 +318,9 @@ execucao:
 mecanica:
   descricao_resumida: "Escolha um dos efeitos a seguir."
   efeito_detalhado: |
-    Escolha um dos efeitos a seguir. Congelar o tempo: você gera uma bolha  do seu tamanho na qual o
-    tempo passa  mais lentamente. Para outras criaturas,  a bolha surge e desaparece instantaneamente,
-    mas, para você, ela dura 3 rodadas (o que fornece 2 turnos extras após  o atual), durante as quais
-    você pode  agir e não é afetado por efeitos contínuos (como chamas). Porém, durante  essas 3
-    rodadas, você e quaisquer efeitos que você gerar não podem sair da  área que você ocupava quando
-    lançou  esta magia. Efeitos de área com duração maior que a da bolha voltam a agir  normalmente
-    quando ela termina.  Você  não pode congelar o tempo nem preparar  ações enquanto está sob esse
-    efeito. Saltar no tempo: você e até 5 criaturas  voluntárias são transportadas de 1 a  24 horas para
-    o futuro, desaparecendo com um brilho. Vocês ressurgem  no mesmo lugar, com a mesma velo cidade e
-    orientação; do seu ponto de  187  Kellyanne Pontes kelly.ayame@gmail.com  Capítulo Quatro vista,
-    nenhum tempo se passou. Se  um objeto sólido agora ocupa o espaço de uma criatura, ela ressurge na
-    área vazia mais próxima. Voltar no tempo: você revive os últimos segundos. Todas as ações da ro dada
-    anterior são desfeitas (incluindo  perda de PV e PM — exceto os gastos  nesta magia). Tudo retorna à
-    posição  em que estava no início do seu turno  na última rodada e você é o único que  sabe o que
-    acontecerá. Outros per sonagens devem repetir as mesmas  ações — exceto se você fizer algo a
-    respeito (como avisar seus aliados so bre o que vai acontecer). Você só pode  reviver uma mesma
-    rodada uma vez.
+    Escolha um dos efeitos a seguir. Congelar o tempo: você gera uma bolha do seu tamanho na qual o tempo passa mais lentamente. Para outras criaturas, a bolha surge e desaparece instantaneamente, mas, para você, ela dura 3 rodadas (o que fornece 2 turnos extras após o atual), durante as quais você pode agir e não é afetado por efeitos contínuos (como chamas). Porém, durante essas 3 rodadas, você e quaisquer efeitos que você gerar não podem sair da área que você ocupava quando lançou esta magia. Efeitos de área com duração maior que a da bolha voltam a agir normalmente quando ela termina. Você não pode congelar o tempo nem preparar ações enquanto está sob esse efeito. Saltar no tempo: você e até 5 criaturas voluntárias são transportadas de 1 a 24 horas para o futuro, desaparecendo com um brilho. Vocês ressurgem no mesmo lugar, com a mesma velo cidade e orientação; do seu ponto de 187 Kellyanne Pontes kelly.ayame@gmail.com
+    
+    Capítulo Quatro vista, nenhum tempo se passou. Se um objeto sólido agora ocupa o espaço de uma criatura, ela ressurge na área vazia mais próxima. Voltar no tempo: você revive os últimos segundos. Todas as ações da ro dada anterior são desfeitas (incluindo perda de PV e PM — exceto os gastos nesta magia). Tudo retorna à posição em que estava no início do seu turno na última rodada e você é o único que sabe o que acontecerá. Outros per sonagens devem repetir as mesmas ações — exceto se você fizer algo a respeito (como avisar seus aliados so bre o que vai acontecer). Você só pode reviver uma mesma rodada uma vez.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -418,13 +367,11 @@ execucao:
   duracao: "instantânea"
   resistencia: "Fortitude parcial"
 mecanica:
-  descricao_resumida: "Após concentrar seu mana, você emana energia, como uma estrela em plena terra."
+  descricao_resumida: "Fortitude parcial."
   efeito_detalhado: |
-    Após concentrar seu mana, você emana energia, como uma estrela em plena terra. Todas as criaturas na
-    área so frem 150 pontos de dano de essência e  todos os itens mágicos (exceto artefa tos) tornam-se
-    mundanos. Você não é  afetado pela magia. Alvos que passem  no teste de Fortitude sofrem metade  do
-    dano e seus itens mágicos voltam a  funcionar após um dia. 189  Kellyanne Pontes
-    kelly.ayame@gmail.com  Capítulo Quatro +1 PM: aumenta o dano em +10.
+    Fortitude parcial. Após concentrar seu mana, você emana energia, como uma estrela em plena terra. Todas as criaturas na área so frem 150 pontos de dano de essência e todos os itens mágicos (exceto artefa tos) tornam-se mundanos. Você não é afetado pela magia. Alvos que passem no teste de Fortitude sofrem metade do dano e seus itens mágicos voltam a funcionar após um dia. 189 Kellyanne Pontes kelly.ayame@gmail.com
+    
+    Capítulo Quatro +1 PM: aumenta o dano em +10. +5 PM: afeta apenas criaturas a sua escolha.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 5
@@ -473,22 +420,9 @@ execucao:
   duracao: "veja  texto"
   resistencia: "veja texto"
 mecanica:
-  descricao_resumida: "Esta é a mais poderosa das magias ar canas, permitindo alterar a realidade a  seu bel-prazer."
+  descricao_resumida: "texto; Resistência: veja texto."
   efeito_detalhado: |
-    Esta é a mais poderosa das magias ar canas, permitindo alterar a realidade a  seu bel-prazer. Você
-    pode: • Dissipar os efeitos de qualquer magia de 4º círculo ou menor. • Transportar até 10 criaturas
-    voluntárias em alcance longo para qualquer  outro local, em qualquer plano. • Desfazer um
-    acontecimento recente. A magia permite que um teste realizado por uma criatura em alcance  longo na
-    última rodada seja realizado  novamente. Por exemplo, se um aliado morreu na última rodada devido ao
-    ataque de um inimigo, você pode obrigar o inimigo a refazer esse ataque. Você pode desejar por algo
-    ainda mais  poderoso. Nesse caso, a magia requer  o sacrifício de 2 PM e pode fazer coi sas como: •
-    Criar um item mundano de até T$  30.000. • Duplicar os efeitos de qualquer magia de até 4º círculo.
-    Caso a magia precise de um componente material para  ser lançada, ainda é necessário providenciar o
-    componente. • Aumentar um atributo de uma criatura em +1. Cada atributo só pode ser  aumentado uma
-    vez com Desejo. Desejo pode gerar efeitos ainda mais  poderosos, mas cuidado! Desejar a for tuna de
-    um rei pode transportá-lo para  a sala de tesouro real, onde você po derá ser preso ou morto;
-    desejar ser  imortal pode transformá-lo em mor to-vivo, e assim por diante. Qualquer  efeito que não
-    se encaixe na lista acima  deve ser decidido pelo mestre.
+    texto; Resistência: veja texto. Esta é a mais poderosa das magias ar canas, permitindo alterar a realidade a seu bel-prazer. Você pode: • Dissipar os efeitos de qualquer magia de 4º círculo ou menor. • Transportar até 10 criaturas voluntárias em alcance longo para qualquer outro local, em qualquer plano. • Desfazer um acontecimento recente. A magia permite que um teste realizado por uma criatura em alcance longo na última rodada seja realizado novamente. Por exemplo, se um aliado morreu na última rodada devido ao ataque de um inimigo, você pode obrigar o inimigo a refazer esse ataque. Você pode desejar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrifício de 2 PM e pode fazer coi sas como: • Criar um item mundano de até T$ 30.000. • Duplicar os efeitos de qualquer magia de até 4º círculo. Caso a magia precise de um componente material para ser lançada, ainda é necessário providenciar o componente. • Aumentar um atributo de uma criatura em +1. Cada atributo só pode ser aumentado uma vez com Desejo. Desejo pode gerar efeitos ainda mais poderosos, mas cuidado! Desejar a for tuna de um rei pode transportá-lo para a sala de tesouro real, onde você po derá ser preso ou morto; desejar ser imortal pode transformá-lo em mor to-vivo, e assim por diante. Qualquer efeito que não se encaixe na lista acima deve ser decidido pelo mestre.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -535,14 +469,9 @@ execucao:
   duracao: "sustentada"
   resistencia: "—"
 mecanica:
-  descricao_resumida: "Você cria um disco de energia que lembra uma roda de engenho e flutua no  ponto em que foi conjurado."
+  descricao_resumida: "Você cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado."
   efeito_detalhado: |
-    Você cria um disco de energia que lembra uma roda de engenho e flutua no  ponto em que foi
-    conjurado. O disco é  imune a dano, não pode ser movido e  faz uma contramágica automática con tra
-    qualquer magia lançada em alcance médio dele (exceto as suas), usando seu teste de Misticismo. Caso
-    vença  o teste, o engenho não só anula a magia como absorve os PM usados para  lançá-la, acumulando
-    PM temporários.  No seu turno, se estiver ao alcance do  disco, você pode gastar PM nele para
-    lançar magias.
+    Você cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado. O disco é imune a dano, não pode ser movido e faz uma contramágica automática con tra qualquer magia lançada em alcance médio dele (exceto as suas), usando seu teste de Misticismo. Caso vença o teste, o engenho não só anula a magia como absorve os PM usados para lançá-la, acumulando PM temporários. No seu turno, se estiver ao alcance do disco, você pode gastar PM nele para lançar magias. +1 PM: em vez de flutuar no ponto em que foi conjurado, o disco flutua atrás de você, mantendo-se sempre adjacente. +4 PM: muda a duração para um dia.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 1
@@ -594,12 +523,9 @@ execucao:
   duracao: "sustentada"
   resistencia: "veja texto"
 mecanica:
-  descricao_resumida: "Cria um globo flutuante e intangível,  com 50cm de diâmetro."
+  descricao_resumida: "tada; Resistência: veja texto."
   efeito_detalhado: |
-    Cria um globo flutuante e intangível,  com 50cm de diâmetro. O globo mostra  uma cena vista até uma
-    semana atrás  por você ou por uma criatura que você  toque ao lançar a magia (mediante uma
-    pergunta; a criatura pode fazer um teste  de Vontade para anular o efeito), permitindo que outras
-    pessoas a vejam.
+    tada; Resistência: veja texto. Você cria uma nuvem de tempesta de violenta. Os ventos tornam ataques à distância impossíveis e fazem a área contar como condição terrível para lançar magia. Além disso, inimi gos na área têm a visibilidade reduzida (como a magia Névoa). Uma vez por turno, você pode gastar uma ação de movimento para gerar um dos efeitos a seguir. Nevasca. Inimigos na área sofrem 10d6 pontos de dano de frio (Fortitude reduz à metade). A área fica coberta de neve, virando terreno difícil até o fim da cena ou até você usar siroco. Raios. Até 6 inimigos a sua escolha na área sofrem 10d8 pontos de dano de eletricidade (Reflexos reduz à metade). Siroco. Transforma a chuva em uma tempestade de areia escaldante. Inimigos na área sofrem 10d6 pontos de dano (metade corte, metade fogo) e ficam sangrando (Fortitude reduz o dano à metade e evita a condição). Trovões. Inimigos sofrem 10d6 pontos de dano de impacto e ficam desprevenidos por uma rodada (Fortitude reduz o dano à metade e evita a condição).Globo da verdade de gwen divina 2 (adivinhação) Execução: padrão; Alcance: curto; Efeito: 1 globo; Duração: cena. Cria um globo flutuante e intangível, com 50cm de diâmetro. O globo mostra uma cena vista até uma semana atrás por você ou por uma criatura que você toque ao lançar a magia (mediante uma pergunta; a criatura pode fazer um teste de Vontade para anular o efeito), permitindo que outras pessoas a vejam. +1 PM: o globo mostra uma cena vista até um mês atrás. +2 PM: como acima, até um ano atrás. +2 PM: ao lançar a magia, você pode tocar um cadáver. O globo mostra a última cena vista por essa criatura. +4 PM: muda o alcance para longo e o efeito para 10 globos. Todos mostram a mesma cena.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 1
@@ -654,18 +580,9 @@ execucao:
   duracao: "veja  texto"
   resistencia: "veja texto"
 mecanica:
-  descricao_resumida: "Você pede a sua divindade para inter ceder diretamente."
+  descricao_resumida: "texto; Resistência: veja texto."
   efeito_detalhado: |
-    Você pede a sua divindade para inter ceder diretamente. Você pode: • Curar todos os PV e condições
-    de  até 10 criaturas em alcance longo (este  efeito cura mortos-vivos, em vez de  causar dano). •
-    Dissipar os efeitos de qualquer magia de 4º círculo ou menor. Você pode implorar por algo ainda
-    mais poderoso. Nesse caso, a magia requer o sacrifício de 2 PM e pode fazer  coisas como: • Criar um
-    item mundano de até T$  30.000. • Duplicar os efeitos de qualquer magia de até 4º círculo. Caso a
-    magia precise de um componente material para  ser lançada, ainda é necessário providenciar o
-    componente. • Proteger uma cidade de um desastre, como uma erupção vulcânica, enchente ou terremoto.
-    • Ressuscitar uma criatura em alcance  longo que tenha morrido há até uma  rodada. A criatura acorda
-    com 1 PV . • Qualquer outra coisa que o mestre  autorize, conforme os desejos e objeti vos da
-    divindade do conjurador.
+    texto; Resistência: veja texto. Você pede a sua divindade para inter ceder diretamente. Você pode: • Curar todos os PV e condições de até 10 criaturas em alcance longo (este efeito cura mortos-vivos, em vez de causar dano). • Dissipar os efeitos de qualquer magia de 4º círculo ou menor. Você pode implorar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrifício de 2 PM e pode fazer coisas como: • Criar um item mundano de até T$ 30.000. • Duplicar os efeitos de qualquer magia de até 4º círculo. Caso a magia precise de um componente material para ser lançada, ainda é necessário providenciar o componente. • Proteger uma cidade de um desastre, como uma erupção vulcânica, enchente ou terremoto. • Ressuscitar uma criatura em alcance longo que tenha morrido há até uma rodada. A criatura acorda com 1 PV . • Qualquer outra coisa que o mestre autorize, conforme os desejos e objeti
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -712,10 +629,9 @@ execucao:
   duracao: "instantânea"
   resistencia: "Vontade parcial"
 mecanica:
-  descricao_resumida: "Se falhar no teste de resistência, o alvo  perde a habilidade de lançar magias ar canas até o fim da cena."
+  descricao_resumida: "Resistência: Vontade parcial."
   efeito_detalhado: |
-    Se falhar no teste de resistência, o alvo  perde a habilidade de lançar magias ar canas até o fim da
-    cena. Se passar, per de a habilidade por uma rodada.
+    Resistência: Vontade parcial. Se falhar no teste de resistência, o alvo perde a habilidade de lançar magias ar canas até o fim da cena. Se passar, per de a habilidade por uma rodada. +2 PM: muda a área para esfera com 6m de raio e o alvo para criaturas escolhidas. +5 PM: muda a execução para um dia e adiciona custo adicional (sacrifício de 1 PM). O alvo da magia precisa ser mantido em alcance curto do conjurador durante toda a execução. Ao término, faz um teste de Vontade. Se falhar, perde a habilidade de lançar magias arcanas permanentemente. Se passar, resiste, mas ainda pode ser alvo da magia no dia seguinte. Nenhum poder mortal é capaz de rever ter essa perda. Os clérigos de Wynna dizem que a deusa chora cada vez que este ritual é realizado.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 2
@@ -766,21 +682,9 @@ execucao:
   duracao: "sustentada"
   resistencia: "Vontade parcial"
 mecanica:
-  descricao_resumida: "Você domina a mente dos alvos."
+  descricao_resumida: "de parcial."
   efeito_detalhado: |
-    Você domina a mente dos alvos. Os alvos obedecem cegamente a seus co mandos, exceto ordens
-    claramente suicidas. Um alvo tem direito a um teste  no final de cada um de seus turnos para  se
-    livrar do efeito. Alvos que passarem  no teste ficam abalados por 1 rodada  enquanto recuperam a
-    consciência. +1 PM: aumenta o número de alvos  em +1. Lendas e Histórias Universal 3 (Adivinhação)
-    Execução: padrão; Alcance: toque;  Alvo: 1 criatura, objeto ou local; Duração: sustentada.  Você
-    descobre informações sobre uma  criatura, objeto ou local que esteja to cando. O que exatamente você
-    desco bre depende do mestre: talvez você não  descubra tudo que há para saber, mas  ganhe pistas
-    para continuar a investi gação. A cada rodada que mantiver a  magia, você descobre: • Todas as
-    informações sobre o alvo,  como se tivesse passado em todos os  testes de Conhecimento para tal. •
-    Todas as habilidades do alvo. Se for  uma criatura, você sabe suas estatís ticas de jogo como raça,
-    classe, nível,  atributos, magias, resistências e fraquezas. Se for um item mágico, aprende seu
-    efeito e funcionamento. • Se o alvo está sob influência de alguma magia e todas as informações sobre
-    as magias ativas, se houver alguma.
+    de parcial. Você domina a mente dos alvos. Os alvos obedecem cegamente a seus co mandos, exceto ordens claramente suicidas. Um alvo tem direito a um teste no final de cada um de seus turnos para se livrar do efeito. Alvos que passarem no teste ficam abalados por 1 rodada enquanto recuperam a consciência. +1 PM: aumenta o número de alvos em +1.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 4
@@ -829,14 +733,9 @@ execucao:
   duracao: "instantânea"
   resistencia: "Reflexos reduz à metade"
 mecanica:
-  descricao_resumida: "Esta é uma das mais poderosas magias de destruição existentes."
+  descricao_resumida: "instantânea; Resistência: Reflexos reduz à metade."
   efeito_detalhado: |
-    Esta é uma das mais poderosas magias de destruição existentes. Após  entoar longos cânticos, o
-    conjurador  dispara uma carga de energia que var re uma enorme área à sua frente, causando 20d12
-    pontos de dano de essên -cia em todas as criaturas, construções  e objetos livres atingidos. Sempre
-    que  rola um resultado 12 em um dado de  dano, a magia causa +1d12 pontos de  dano. Apesar de seu
-    poder destrutivo,  esta magia é lenta, tornando seu uso  difícil em combate. +1 PM: aumenta o dano
-    em +1d12.
+    instantânea; Resistência: Reflexos reduz à metade. Esta é uma das mais poderosas magias de destruição existentes. Após entoar longos cânticos, o conjurador dispara uma carga de energia que var re uma enorme área à sua frente, causando 20d12 pontos de dano de essên -cia em todas as criaturas, construções e objetos livres atingidos. Sempre que rola um resultado 12 em um dado de dano, a magia causa +1d12 pontos de dano. Apesar de seu poder destrutivo, esta magia é lenta, tornando seu uso difícil em combate. +1 PM: aumenta o dano em +1d12.
   dano_ou_cura:
     formulas: ["1d12", "20d12"]
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
@@ -947,15 +846,9 @@ execucao:
   duracao: "cena"
   resistencia: "—"
 mecanica:
-  descricao_resumida: "Você reanima uma criatura morta recentemente (dentro da mesma cena),  trazendo sua alma de volta ao cor po de forma forçada."
+  descricao_resumida: "centemente (dentro da mesma cena), trazendo sua alma de volta ao cor po de forma forçada."
   efeito_detalhado: |
-    Você reanima uma criatura morta recentemente (dentro da mesma cena),  trazendo sua alma de volta ao
-    cor po de forma forçada. O tipo da criatu ra muda para morto-vivo, mas ela retém suas memórias e
-    habilidades de  quando estava viva, podendo inclusi ve lançar magias. A criatura pode pensar e falar
-    livremente, mas obedece cegamente a seus comandos. Quando a  cena termina, a criatura volta a ficar
-    morta, mas muitos clérigos malignos  usam meios para guardar e preservar  o corpo de criaturas
-    poderosas para serem reanimadas dessa forma quando  necessário. Se for destruída, a criatu ra não
-    pode ser reanimada novamente  com esta magia.
+    centemente (dentro da mesma cena), trazendo sua alma de volta ao cor po de forma forçada. O tipo da criatu ra muda para morto-vivo, mas ela retém suas memórias e habilidades de quando estava viva, podendo inclusi ve lançar magias. A criatura pode pensar e falar livremente, mas obedece cegamente a seus comandos. Quando a cena termina, a criatura volta a ficar morta, mas muitos clérigos malignos usam meios para guardar e preservar o corpo de criaturas poderosas para serem reanimadas dessa forma quando necessário. Se for destruída, a criatu ra não pode ser reanimada novamente com esta magia.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -1002,20 +895,9 @@ execucao:
   duracao: "sustentada"
   resistencia: "Vontade anula"
 mecanica:
-  descricao_resumida: "Esta magia cria uma ilusão particular  para cada uma das criaturas que atingir."
+  descricao_resumida: "sustentada; Resistência: Vontade anula."
   efeito_detalhado: |
-    Esta magia cria uma ilusão particular  para cada uma das criaturas que atingir. Enquanto a magia
-    durar, no início  de cada um de seus turnos, cada criatu ra afetada deve fazer um teste de Vontade;
-    se falhar, acha que não tomou as  ações que realmente fez no turno anterior e é obrigada a repetir
-    as mesmas  ações neste turno, com uma penalidade cumulativa de –5 em todos os testes  para cada vez
-    que se repetir (a penalidade não se aplica ao teste de Vontade contra esta magia). Por exemplo,  se
-    a criatura se aproximou de um alvo  e o atacou, precisa se aproximar desse mesmo alvo e atacar
-    novamente. A  ação repetida consome PM e recursos  normalmente e, caso exija um teste de
-    resistência, qualquer alvo faz esse tes te com um bônus igual ao da penalidade desta magia.
-    Resistência  a Energia Universal 1 (Abjuração) Execução: padrão; Alcance: toque;  Alvo: 1 criatura;
-    Duração: cena.  Ao lançar esta magia, escolha entre  ácido, eletricidade, fogo, frio, luz ou
-    trevas. O alvo recebe redução de dano  10 contra o tipo de dano escolhido. +2 PM: aumenta a redução
-    de dano  em +5.
+    sustentada; Resistência: Vontade anula. Esta magia cria uma ilusão particular para cada uma das criaturas que atingir. Enquanto a magia durar, no início de cada um de seus turnos, cada criatu ra afetada deve fazer um teste de Vontade; se falhar, acha que não tomou as ações que realmente fez no turno anterior e é obrigada a repetir as mesmas ações neste turno, com uma penalidade cumulativa de –5 em todos os testes para cada vez que se repetir (a penalidade não se aplica ao teste de Vontade contra esta magia). Por exemplo, se a criatura se aproximou de um alvo e o atacou, precisa se aproximar desse mesmo alvo e atacar novamente. A ação repetida consome PM e recursos normalmente e, caso exija um teste de resistência, qualquer alvo faz esse tes te com um bônus igual ao da penalidade desta magia.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 2
@@ -1070,12 +952,9 @@ execucao:
   duracao: "instantânea"
   resistencia: "—"
 mecanica:
-  descricao_resumida: "Um brilho de luz, na forma de asas de  fênix, emana do alvo."
+  descricao_resumida: "Um brilho de luz, na forma de asas de fênix, emana do alvo."
   efeito_detalhado: |
-    Um brilho de luz, na forma de asas de  fênix, emana do alvo. Ele recupera 200  pontos de vida e se
-    cura de qualquer  das seguintes condições: abalado, apavorado, alquebrado, atordoado, cego,
-    confuso, debilitado, enjoado, envene nado, esmorecido, exausto, fascinado,  fatigado, fraco,
-    frustrado, lento, ofus cado, paralisado, pasmo ou surdo. +1 PM: aumenta a cura em +20 PV .
+    Um brilho de luz, na forma de asas de fênix, emana do alvo. Ele recupera 200 pontos de vida e se cura de qualquer das seguintes condições: abalado, apavorado, alquebrado, atordoado, cego, confuso, debilitado, enjoado, envene nado, esmorecido, exausto, fascinado, fatigado, fraco, frustrado, lento, ofus cado, paralisado, pasmo ou surdo. +1 PM: aumenta a cura em +20 PV . +2 PM: muda o alcance para curto e o alvo para até 5 criaturas. +5 PM: muda o alvo para uma criatura que tenha morrido há até uma rodada. Esta magia pode curá-la.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 2
@@ -1130,23 +1009,7 @@ execucao:
 mecanica:
   descricao_resumida: "Você cria uma dimensão particular."
   efeito_detalhado: |
-    Você cria uma dimensão particular.  Você pode entrar no semiplano gastando uma ação padrão e 10 PM,
-    desaparecendo do plano material como se tivesse se teletransportado. Você pode  levar criaturas
-    voluntárias que esteja  tocando, ao custo de 1 PM por criatura extra. Você também pode levar objetos
-    que esteja tocando, ao custo de 1  PM por objeto Médio ou menor, 2 PM  por objeto Grande, 5 PM por
-    Enorme e  10 PM por Colossal. Uma vez no semiplano, pode gastar uma ação completa  para voltar ao
-    plano material, no mesmo local onde estava. Caso conheça a  magia Viagem Planar, pode lançá-la para
-    voltar ao plano material em outro local. Você escolhe a forma e a aparência do  semiplano — uma
-    caverna, um aste roide que singra o éter, um palacete  de cristal etc. Ele contém ar, luz e calor,
-    mas além disso é vazio. Entretan to, você pode levar itens (mobília, fer ramentas etc.) a cada
-    viagem. +2 PM: adiciona alvo (1 criatura). Você  cria uma semiplano labiríntico e expulsa  o alvo
-    para ele. A cada rodada, a vítima  tem direito a um teste de Investigação  ou Sobrevivência, com
-    bônus cumulativo de +1 para cada teste já realizado,  para escapar do labirinto. Quando o alvo
-    escapa, a magia termina e o alvo reaparece no plano material no mesmo local  onde estava quando a
-    magia foi lançada. Magias como Salto Dimensional e Teletrans porte não ajudam a escapar do
-    labirinto, mas Viagem Planar, sim. +5 PM: muda a duração para permanente e adiciona componente
-    material  (maquete do semiplano feita de mate riais preciosos no valor de T$ 5.000).  Você pode
-    lançar a magia diversas vezes para aumentar as dimensões do semiplano em +30m de lado a cada vez.
+    Você cria uma dimensão particular. Você pode entrar no semiplano gastando uma ação padrão e 10 PM, desaparecendo do plano material como se tivesse se teletransportado. Você pode levar criaturas voluntárias que esteja tocando, ao custo de 1 PM por criatura extra. Você também pode levar objetos que esteja tocando, ao custo de 1 PM por objeto Médio ou menor, 2 PM por objeto Grande, 5 PM por Enorme e 10 PM por Colossal. Uma vez no semiplano, pode gastar uma ação completa para voltar ao plano material, no mesmo local onde estava. Caso conheça a magia Viagem Planar, pode lançá-la para voltar ao plano material em outro local. Você escolhe a forma e a aparência do semiplano — uma caverna, um aste roide que singra o éter, um palacete de cristal etc. Ele contém ar, luz e calor, mas além disso é vazio. Entretan to, você pode levar itens (mobília, fer ramentas etc.) a cada viagem. +2 PM: adiciona alvo (1 criatura). Você cria uma semiplano labiríntico e expulsa o alvo para ele. A cada rodada, a vítima tem direito a um teste de Investigação ou Sobrevivência, com bônus cumulativo de +1 para cada teste já realizado, para escapar do labirinto. Quando o alvo escapa, a magia termina e o alvo reaparece no plano material no mesmo local onde estava quando a magia foi lançada. Magias como Salto Dimensional e Teletrans porte não ajudam a escapar do labirinto, mas Viagem Planar, sim. +5 PM: muda a duração para permanente e adiciona componente material (maquete do semiplano feita de mate riais preciosos no valor de T$ 5.000). Você pode lançar a magia diversas vezes para aumentar as dimensões do semiplano em +30m de lado a cada vez.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm: []
 componentes_materiais:
@@ -1193,15 +1056,9 @@ execucao:
   duracao: "cena"
   resistencia: "Vontade parcial"
 mecanica:
-  descricao_resumida: "Esta magia cria uma duplicata ilusória  do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifes tação sólida de sua própria sombra."
+  descricao_resumida: "sistência: Vontade parcial."
   efeito_detalhado: |
-    Esta magia cria uma duplicata ilusória  do alvo na forma de uma silhueta, ligada a ele como se fosse
-    uma manifes tação sólida de sua própria sombra. A  duplicata de sombras segue automati camente o
-    alvo. Sempre que o alvo faz  uma ação hostil — fazer um ataque,  usar uma habilidade, lançar uma
-    magia — a sombra imediatamente realiza  a mesma ação contra o alvo, usando as  mesmas estatísticas e
-    rolagens. A sombra pode ser atacada, tem as mesmas  estatísticas do alvo e é destruída quando chega
-    a 0 PV . Se o alvo passar no  teste de resistência, a sombra desaparece no final do turno do alvo,
-    depois  de copiar sua ação dessa rodada.
+    sistência: Vontade parcial. Esta magia cria uma duplicata ilusória do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifes tação sólida de sua própria sombra. A duplicata de sombras segue automati camente o alvo. Sempre que o alvo faz uma ação hostil — fazer um ataque, usar uma habilidade, lançar uma magia — a sombra imediatamente realiza a mesma ação contra o alvo, usando as mesmas estatísticas e rolagens. A sombra pode ser atacada, tem as mesmas estatísticas do alvo e é destruída quando chega a 0 PV . Se o alvo passar no teste de resistência, a sombra desaparece no final do turno do alvo, depois de copiar sua ação dessa rodada. +10 PM: muda o alvo para criaturas escolhidas na área.
   cd: "ver regras gerais (CD = 10 + círculo + modificadores)"
 aprimoramentos_pm:
   - custo: 10
