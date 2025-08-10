@@ -1,0 +1,455 @@
+_id: N1xVfw9A8TiYeLae
+name: Hipnotismo
+type: magia
+img: https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soothingkiss.jpg
+effects:
+  - _id: 0qnDVKlJ4Y6vIqzN
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: ''
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+        equipment: false
+    changes:
+      - key: alvo
+        mode: 5
+        value: 1 criatura
+        priority: 0
+      - key: duracao
+        mode: 5
+        value: 1 rodada
+        priority: 0
+      - key: condicao
+        mode: 0
+        value: fascinado
+        priority: 0
+      - key: condicao
+        mode: 0
+        value: pasmo
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.N1xVfw9A8TiYeLae
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda a duração para 1 rodada. Em vez de fascinado, o alvo fica pasmo.
+      (apenas uma vez por cena)
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.0qnDVKlJ4Y6vIqzN'
+  - _id: jN9vw5EXuCc5hmMq
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '1'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.N1xVfw9A8TiYeLae
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      como o normal, mas alvos que passarem na resistência não sabem que foram
+      vítimas de uma magia.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.jN9vw5EXuCc5hmMq'
+  - _id: n2XIwlHRUXWsyWoe
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes:
+      - key: duracao
+        mode: 5
+        value: Cena
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.N1xVfw9A8TiYeLae
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: muda o alvo para animais ou humanoides escolhidos.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.n2XIwlHRUXWsyWoe'
+  - _id: yU9cKxRGtCBztsFj
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes:
+      - key: alcance
+        mode: 5
+        value: médio
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.N1xVfw9A8TiYeLae
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: muda a duração para sustentada.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.yU9cKxRGtCBztsFj'
+  - _id: 9h8Bd2cCqHTlY8pk
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.N1xVfw9A8TiYeLae
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: também afeta espíritos e monstros na área. Requer 2º círculo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.9h8Bd2cCqHTlY8pk'
+  - _id: SeBpexrQ8zNDV7tm
+    changes:
+      - key: system.pericias.vont.bonus
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.7QpJwWrO3AakONv7
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Alvo Hostil
+    img: systems/tormenta20/icons/magias/hipnotismo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.SeBpexrQ8zNDV7tm'
+  - origin: Item.N1xVfw9A8TiYeLae
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 9mAowMAjosn37SjU
+    changes: []
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Alvo (s) Hipnotizado(s)
+    img: systems/tormenta20/icons/magias/hipnotismo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.9mAowMAjosn37SjU'
+  - origin: Item.N1xVfw9A8TiYeLae
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '5'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: vH6NxRKODI5fhBH7
+    changes: []
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      também afeta construtos, espíritos, monstros e mortos-vivos na área.
+      Requer 3º círculo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!N1xVfw9A8TiYeLae.vH6NxRKODI5fhBH7'
+folder: wqRfH0bDNPgI8ZTq
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Suas palavras e movimentos ritmados deixam o alvo fascinado. Esta magia
+      s&oacute; afeta criaturas que possam perceber voc&ecirc;. Se usar esta
+      magia em combate, o alvo recebe +5 em seu teste de resist&ecirc;ncia. Se a
+      criatura passar, fica imune a este efeito por um dia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 194
+  ativacao:
+    execucao: action
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: special
+    special: 1d4 Rodadas
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: short
+  alvo: 1 animal ou humanoide
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: int
+    bonus: 0
+    txt: Vontade anula
+  rolls: []
+  tipo: arc
+  circulo: '1'
+  preparada: false
+  escola: enc
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310461905
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!N1xVfw9A8TiYeLae'
+

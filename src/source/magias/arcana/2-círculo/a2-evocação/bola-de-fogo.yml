@@ -1,0 +1,240 @@
+_id: gcjCsjzpk2OtClSt
+name: Bola de Fogo
+type: magia
+img: systems/tormenta20/icons/magias/bola-de-fogo.webp
+effects:
+  - _id: UWydlNbe3IFFWSmJ
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: true
+    changes:
+      - key: dano
+        value: 2d6
+        mode: 0
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.gcjCsjzpk2OtClSt
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: aumenta o dano em +2d6.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!gcjCsjzpk2OtClSt.UWydlNbe3IFFWSmJ'
+  - _id: 54Cbq85qzDbWg4SB
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes:
+      - key: area
+        mode: 5
+        value: efeito de esfera flamejante com tamanho 1,5m
+        priority: 0
+      - key: duracao
+        mode: 5
+        value: Cena
+        priority: 0
+      - key: dano
+        mode: 5
+        value: 3d6
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.gcjCsjzpk2OtClSt
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda a área para efeito de esfera flamejante com tamanho Médio e a duração
+      para cena. Em vez do normal, cria uma esfera flamejante com 1,5m de
+      diâmetro que causa 3d6 pontos de dano a qualquer criatura no mesmo espaço.
+      Você pode gastar uma ação de movimento para fazer a esfera voar 9m em
+      qualquer direção. Ela é imune a dano, mas pode ser apagada com água. Uma
+      criatura só pode sofrer dano da esfera uma vez por rodada.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!gcjCsjzpk2OtClSt.54Cbq85qzDbWg4SB'
+  - _id: EOLJ5ChVkU6V1DAg
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '3'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        durationScene: false
+        items: ''
+    changes:
+      - key: duracao
+        mode: 5
+        value: 1 dia ou até ser descarregada
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.gcjCsjzpk2OtClSt
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda a duração para 1 dia ou até ser descarregada. Em vez do normal, você
+      cria uma pequena pedra flamejante, que pode detonar como uma reação,
+      descarregando a magia. A pedra pode ser usada como uma arma de arremesso
+      com alcance curto. Uma vez detonada, causa o dano da magia numa área de
+      esfera de 6m com raio.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!gcjCsjzpk2OtClSt.EOLJ5ChVkU6V1DAg'
+folder: C4AaVHB8ALOWtksj
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Esta famosa magia de ataque cria uma poderosa explosão, causando 6d6
+      pontos de dano de fogo em todas as criaturas e objetos livres na área.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 182
+  ativacao:
+    execucao: action
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: inst
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: medium
+  alvo: ''
+  area: esfera com 6m de raio
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: null
+    txt: Reflexos reduz à metade
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 6d6
+          - fogo
+          - ''
+      versatil: ''
+  tipo: arc
+  circulo: '2'
+  preparada: false
+  escola: evo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310462779
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!gcjCsjzpk2OtClSt'
+

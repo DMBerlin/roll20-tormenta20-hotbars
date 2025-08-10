@@ -1,0 +1,281 @@
+_id: W3wssZ36rMtbMPaA
+name: Seta Infalível
+type: magia
+img: https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane02.jpg
+effects:
+  - _id: LsqObMrldBr1Fcuf
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        durationScene: false
+    changes:
+      - key: dano
+        mode: 0
+        value: d8
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.W3wssZ36rMtbMPaA
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda as setas para lanças de energia que surgem e caem do céu. Cada lança
+      causa 1d8+1 pontos de dano de essência. Requer 2º círculo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!W3wssZ36rMtbMPaA.LsqObMrldBr1Fcuf'
+  - _id: FNDcKMDqbeI2fS1z
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        durationScene: false
+    changes:
+      - key: dano
+        mode: 5
+        value: 3d4+3
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.W3wssZ36rMtbMPaA
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: muda o número de setas/lanças para três.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!W3wssZ36rMtbMPaA.FNDcKMDqbeI2fS1z'
+  - _id: ueestmdj5uAD6cQe
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '4'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        durationScene: false
+    changes:
+      - key: dano
+        mode: 5
+        value: 5d4+5
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.W3wssZ36rMtbMPaA
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: muda o número de setas/lanças para cinco. Requer 2º círculo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!W3wssZ36rMtbMPaA.ueestmdj5uAD6cQe'
+  - _id: 4yIBeldeGDY1thXx
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '9'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        durationScene: false
+    changes:
+      - key: dano
+        mode: 5
+        value: 10d4+10
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.W3wssZ36rMtbMPaA
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: muda o número de setas/lanças para dez. Requer 4º círculo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!W3wssZ36rMtbMPaA.4yIBeldeGDY1thXx'
+folder: KOlUvn9hRr5MhzaH
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Favorita entre arcanistas iniciantes, esta magia lan&ccedil;a duas
+      setas de energia que causam 1d4+1 pontos de dano de ess&ecirc;ncia cada.
+      Voc&ecirc; pode lan&ccedil;ar as setas em alvos diferentes ou
+      concentr&aacute;-las num mesmo alvo. Caso voc&ecirc; possua um b&ocirc;nus
+      no dano de magias, como pelo poder Arcano de Batalha, ele &eacute;
+      aplicado em apenas uma seta (o b&ocirc;nus vale para a magia, n&atilde;o
+      cada alvo).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 206
+  ativacao:
+    execucao: action
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: inst
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: medium
+  alvo: até 2 criaturas
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: int
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: dano
+      key: dano0
+      type: dano
+      parts:
+        - - 2d4+2
+          - essencia
+          - ''
+      versatil: ''
+  tipo: arc
+  circulo: '1'
+  preparada: false
+  escola: evo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310461917
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!W3wssZ36rMtbMPaA'
+

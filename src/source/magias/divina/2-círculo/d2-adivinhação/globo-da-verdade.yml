@@ -1,0 +1,251 @@
+_id: LbRCMfcaEQr6BAyN
+name: Globo da Verdade
+type: magia
+img: systems/tormenta20/icons/magias/globo-da-verdade.webp
+effects:
+  - _id: fKXok5ihS171EoRv
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '1'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.LbRCMfcaEQr6BAyN
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: o globo mostra uma cena vista até um mês atrás.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LbRCMfcaEQr6BAyN.fKXok5ihS171EoRv'
+  - _id: wxmmZDSDMRKQyZkh
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.LbRCMfcaEQr6BAyN
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: o globo mostra uma cena vista até um ano atrás.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LbRCMfcaEQr6BAyN.wxmmZDSDMRKQyZkh'
+  - _id: hUoz62gaoy91MJ1S
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        aumenta: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.LbRCMfcaEQr6BAyN
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      ao lançar a magia, você pode tocar um cadáver. O globo mostra a última
+      cena vista por essa criatura.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LbRCMfcaEQr6BAyN.hUoz62gaoy91MJ1S'
+  - _id: pDh5JjQwXjrhE1FI
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '4'
+        aumenta: false
+    changes:
+      - key: alcance
+        value: longo
+        mode: 5
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.magias.LbRCMfcaEQr6BAyN
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o alcance para longo e o efeito para 10 globos. Todos mostram a mesma
+      cena.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LbRCMfcaEQr6BAyN.pDh5JjQwXjrhE1FI'
+folder: 7qHtGvSoffZXEVGU
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Cria um globo flutuante e intangível, com 50cm de diâmetro. O globo
+      mostra uma cena vista até uma semana atrás por você ou por uma criatura
+      que você toque ao lançar a magia (mediante uma pergunta; a criatura pode
+      fazer um teste de Vontade para anular o efeito), permitindo que outras
+      pessoas a vejam.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 194
+  ativacao:
+    execucao: action
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: 1 globo
+  alcance: short
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: div
+  circulo: '2'
+  preparada: false
+  escola: adv
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310461897
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!LbRCMfcaEQr6BAyN'
+

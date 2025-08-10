@@ -1,0 +1,263 @@
+_id: Cs46oTuzFnIuqFN3
+name: Amarras Etéreas
+type: magia
+img: systems/tormenta20/icons/magias/amarras-etereas.webp
+effects:
+  - _id: Of4OHjVeJJYFGMVR
+    flags:
+      tormenta20:
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '2'
+        durationScene: false
+        onuse: true
+    changes:
+      - key: alvo
+        value: '1'
+        mode: 2
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.9H5WUoQd6wIrSKDQ
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: aumenta o número de alvos em +1.
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Cs46oTuzFnIuqFN3.Of4OHjVeJJYFGMVR'
+  - _id: nh1Tjykbn8LIPdO3
+    flags:
+      tormenta20:
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '2'
+        durationScene: false
+        onuse: true
+        equipment: false
+        items: ''
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.9H5WUoQd6wIrSKDQ
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      aumenta o número de laços em um alvo a sua escolha em +1. (bônus máximo
+      limitado pelo círculo máximo de magia que você pode lançar)
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Cs46oTuzFnIuqFN3.nh1Tjykbn8LIPdO3'
+  - _id: 7jKy7zfPfM0bHxB9
+    flags:
+      tormenta20:
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '3'
+        durationScene: false
+        onuse: true
+        items: ''
+        equipment: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.9H5WUoQd6wIrSKDQ
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      em vez do normal, cada laço é destruído automaticamente com um único
+      ataque bem-sucedido; porém, cada laço destruído libera um choque de
+      energia que causa 1d8+1 pontos de dano de essência na criatura amarrada.
+      Requer 3º círculo.
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Cs46oTuzFnIuqFN3.7jKy7zfPfM0bHxB9'
+  - _id: cWFLapgWypf0TiZM
+    changes: []
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.Ene0TK73dvXiF3tl
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Amarras Etéreas
+    img: systems/tormenta20/icons/magias/amarras-etereas.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Cs46oTuzFnIuqFN3.cWFLapgWypf0TiZM'
+folder: zq0Qy1eE5QlMSaax
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Tr&ecirc;s la&ccedil;os de energia surgem e se enroscam no alvo,
+      deixando-o agarrado. A v&iacute;tima pode tentar se livrar, gastando uma
+      a&ccedil;&atilde;o padr&atilde;o para fazer um teste de Atletismo (CD
+      igual &agrave; da magia). Se passar, destr&oacute;i um la&ccedil;o, mais
+      um la&ccedil;o adicional para cada 5 pontos pelos quais superou a CD. Os
+      la&ccedil;os tamb&eacute;m podem ser atacados e destru&iacute;dos: cada um
+      tem Defesa 10, 10 PV, RD 5 e imunidade a dano m&aacute;gico. Se todos os
+      la&ccedil;os forem destru&iacute;dos, a magia &eacute; dissipada. Por
+      serem feitos de energia, os la&ccedil;os afetam criaturas
+      incorp&oacute;reas.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 197
+  ativacao:
+    execucao: action
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: medium
+  alvo: 1 criatura
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: int
+    bonus: 0
+    txt: Reflexos anula
+  rolls: []
+  tipo: arc
+  circulo: '2'
+  preparada: false
+  escola: con
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310461801
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Cs46oTuzFnIuqFN3'
+

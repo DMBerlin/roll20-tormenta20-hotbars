@@ -1,0 +1,384 @@
+_id: 6KC8s8eUUKYCremp
+name: Âncora Dimensional
+type: magia
+img: systems/tormenta20/icons/magias/ancora-dimensional.webp
+effects:
+  - _id: ERjKGgKCirntEjat
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        durationScene: false
+        items: ''
+        equipment: false
+    changes:
+      - key: alcance
+        mode: 5
+        value: médio
+        priority: 0
+      - key: area
+        mode: 5
+        value: círculo 3m de raio
+        priority: 0
+      - key: alvo
+        mode: 5
+        value: criaturas escolhidas
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UddlrhMxhZgAQpNg
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o alcance para médio, a área para esfera com 3m de raio e o alvo para
+      criaturas escolhidas.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.ERjKGgKCirntEjat'
+  - _id: 6z5H2TeCMMkrCv5I
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '2'
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UddlrhMxhZgAQpNg
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o efeito para criar um fio de energia cor de esmeralda que prende o
+      alvo a um ponto no espaço dentro do alcance. O ponto precisa ser fixo, mas
+      não precisa de nenhum apoio ou superfície (pode simplesmente flutuar no
+      ar). O alvo não pode se afastar mais de 3m do ponto, nem fisicamente, nem
+      com movimento planar. O fio possui 20 PV e resistência a dano 20 (mas pode
+      ser dissipado por efeitos que libertam criaturas, como o Julgamento
+      Divino: Libertação do paladino).
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.6z5H2TeCMMkrCv5I'
+  - _id: bLE60ZwKrjQ5twTt
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '4'
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UddlrhMxhZgAQpNg
+    transfer: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o efeito para criar um fio de energia cor de esmeralda que prende o
+      alvo a um ponto no espaço dentro do alcance. O ponto precisa ser fixo, mas
+      não precisa de nenhum apoio ou superfície (pode simplesmente flutuar no
+      ar). O alvo não pode se afastar mais de 3m do ponto, nem fisicamente, nem
+      com movimento planar. O fio possui 20 PV e redução de dano 40 (mas pode
+      ser dissipado por efeitos que libertam criaturas, como o Julgamento
+      Divino: Libertação do paladino).
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.bLE60ZwKrjQ5twTt'
+  - _id: 6FkFv2SbHkysYY5F
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '4'
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        durationScene: false
+    changes:
+      - key: duracao
+        value: permanente
+        mode: 5
+        priority: null
+      - key: area
+        value: cubo de 9m;
+        mode: 5
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UddlrhMxhZgAQpNg
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o alvo para área de cubo de 9m, a duração para permanente e adiciona
+      componente material (chave de esmeralda no valor de T$ 2.000). Em vez do
+      normal, nenhum tipo de movimento planar pode ser feito para entrar ou sair
+      da área.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.6FkFv2SbHkysYY5F'
+  - _id: IIW5Xg3KHd2tAwSB
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        custo: '9'
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        durationScene: false
+    changes:
+      - key: alcance
+        mode: 5
+        value: médio
+        priority: null
+      - key: area
+        mode: 5
+        value: círculo de 3m de raio
+        priority: null
+      - key: alvo
+        mode: 5
+        value: criaturas escolhidas
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UddlrhMxhZgAQpNg
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      muda o alcance para médio, a área para esfera de 3m de raio e o alvo para
+      criaturas escolhidas. Cria um fio de energia (veja acima) que prende todos
+      os alvos ao centro da área.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.IIW5Xg3KHd2tAwSB'
+  - _id: 9so5kjaDrhlh2nf8
+    changes: []
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.aQa0kHggazyxoIxZ
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Âncora Dimensional
+    img: systems/tormenta20/icons/magias/ancora-dimensional.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KC8s8eUUKYCremp.9so5kjaDrhlh2nf8'
+folder: uwdflCMp3DmBY55C
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>O alvo &eacute; envolvido por um campo de for&ccedil;a cor de esmeralda
+      que impede qualquer movimento planar. Isso inclui magias de
+      convoca&ccedil;&atilde;o (como Salto Dimensional e Teletransporte),
+      viagens astrais e a habilidade incorp&oacute;reo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 179
+  ativacao:
+    execucao: action
+    custo: 6
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: short
+  alvo: 1 criatura ou objeto
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: int
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: arc
+  circulo: '3'
+  preparada: false
+  escola: abj
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664310461762
+  modifiedTime: 1684622830660
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!6KC8s8eUUKYCremp'
+

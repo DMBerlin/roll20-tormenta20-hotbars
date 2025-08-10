@@ -1,0 +1,132 @@
+<div class="spell-list-item" style="
+    background: #23243a;
+    border: 1px solid {{borderColor}};
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    {{customStyles}}
+">
+  <!-- Ícone da magia -->
+  <div class="spell-icon" style="
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: #1a1b2e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid {{borderColor}};
+    ">
+    {{#if img}}
+    <img src="{{img}}" alt="{{title}}" style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        ">
+    {{else}}
+    <div style="
+            color: {{titleColor}};
+            font-size: 18px;
+            font-weight: bold;
+        ">✨</div>
+    {{/if}}
+  </div>
+
+  <!-- Informações da magia -->
+  <div class="spell-info" style="
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    ">
+    <div class="spell-title" style="
+            color: {{titleColor}};
+            font-weight: bold;
+            font-size: 15px;
+        ">{{title}}</div>
+
+    {{#if description}}
+    <div class="spell-description" style="
+            color: #bdbdbd;
+            font-size: 12px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        ">{{description}}</div>
+    {{/if}}
+
+    <!-- Chips informativos -->
+    <div class="spell-chips" style="
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        ">
+      {{#if escola}}
+      <span class="chip escola-chip" style="
+                background: {{escolaColor}};
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+            ">{{escola}}</span>
+      {{/if}}
+
+      {{#if execucao}}
+      <span class="chip execucao-chip" style="
+                background: {{execucaoColor}};
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+            ">{{execucao}}</span>
+      {{/if}}
+
+      {{#if circulo}}
+      <span class="chip circulo-chip" style="
+                background: {{circuloColor}};
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                font-weight: bold;
+            ">{{circulo}}º círculo</span>
+      {{/if}}
+    </div>
+  </div>
+
+  <!-- Checkbox para seleção -->
+  <div class="spell-checkbox" style="
+        width: 20px;
+        height: 20px;
+        border: 2px solid {{borderColor}};
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: {{isSelected ? '#2d2e4a' : 'transparent'}};
+        transition: all 0.2s;
+        flex-shrink: 0;
+    ">
+    {{#if isSelected}}
+    <div style="
+            width: 12px;
+            height: 12px;
+            background: {{titleColor}};
+            border-radius: 2px;
+        "></div>
+    {{/if}}
+  </div>
+</div>
