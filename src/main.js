@@ -2837,7 +2837,7 @@
         };
 
         // Dados de magias gerados dinamicamente durante o build
-        const spellsData = require('./generated-spells-data.js');
+        const spellsData = require('./modules/grimorio/generated-spells-data.js');
 
         // Processar dados embutidos
         for (const tradition in spellsData) {
