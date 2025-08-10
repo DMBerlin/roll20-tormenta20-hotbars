@@ -1,0 +1,429 @@
+module.exports = {
+  "_id": "19donXyns0pliwj9",
+  "name": "Disfarce Ilusório",
+  "type": "magia",
+  "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_disguise.jpg",
+  "effects": [
+    {
+      "_id": "Wfb0kEsFKtQGSRn9",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "",
+          "aumenta": false,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "items": "",
+          "durationScene": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "mode": 5,
+          "value": "Toque",
+          "priority": 0
+        },
+        {
+          "key": "alvo",
+          "mode": 5,
+          "value": "1 criatura",
+          "priority": 0
+        },
+        {
+          "key": "duracao",
+          "mode": 5,
+          "value": "1 semana",
+          "priority": 0
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.19donXyns0pliwj9",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para toque, o alvo para 1 criatura e a duração para 1 semana. Em vez do normal, você faz uma pequena alteração na aparência do alvo, como deixar o nariz vermelho ou fazer brotar um gerânio no alto da cabeça. A mudança é inofensiva, mas persistente — se a flor for arrancada, por exemplo, outra nascerá no local.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.Wfb0kEsFKtQGSRn9"
+    },
+    {
+      "_id": "ncM64y8pN8zIGVFw",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "1",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "curto",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "alvo",
+          "value": "1 objeto",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.19donXyns0pliwj9",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para curto e o alvo para 1 objeto. Você pode, por exemplo, transformar pedaços de ferro em moedas de ouro. Você recebe +10 em testes de Enganação para falsificação.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.ncM64y8pN8zIGVFw"
+    },
+    {
+      "_id": "2RixCPmjBkcyPz8C",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "2",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "curto",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "alvo",
+          "value": "1 criatura",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.19donXyns0pliwj9",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para curto e o alvo para 1 criatura. Uma criatura involuntária pode anular o efeito com um teste de Vontade.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.2RixCPmjBkcyPz8C"
+    },
+    {
+      "_id": "vEvafj1SkYCuj2Cy",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "2",
+          "aumenta": false,
+          "skill": false,
+          "attack": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false
+        }
+      },
+      "changes": [
+        {
+          "key": "system.pericias.enga.bonus",
+          "mode": 2,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.19donXyns0pliwj9",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "a ilusão inclui odores e sensações. Isso muda o bônus em testes de Enganação para disfarce para +20.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.vEvafj1SkYCuj2Cy"
+    },
+    {
+      "_id": "v710K9wBEMWMpbxg",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "3",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "curto",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "alvo",
+          "value": "criaturas escolhidas",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.19donXyns0pliwj9",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para curto e o alvo para criaturas escolhidas. Cada criatura pode ter uma aparência diferente. Criaturas involuntárias podem anular o efeito com um teste de Vontade. Requer 2º círculo.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.v710K9wBEMWMpbxg"
+    },
+    {
+      "_id": "iW2FP0uzo7tRJft9",
+      "changes": [
+        {
+          "key": "system.pericias.enga.bonus",
+          "mode": 2,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.ImzpDE9niUkXOWPk",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": true
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Disfarce Ilusório",
+      "img": "systems/tormenta20/icons/magias/disfarce-ilusorio.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!19donXyns0pliwj9.iW2FP0uzo7tRJft9"
+    }
+  ],
+  "folder": "eOR9yLzI2EByQRJv",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Você muda a aparência do alvo, incluindo seu equipamento. Isso inclui altura, peso, tom de pele, cor de cabelo, timbre de voz etc. O alvo recebe +10 em testes de Enganação para disfarce. O alvo não recebe novas habilidades (você pode ficar parecido com outra raça, mas não ganhará as habilidades dela), nem modifica o equipamento (uma espada longa disfarçada de bordão continua funcionando e causando dano como uma espada).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 191",
+    "ativacao": {
+      "execucao": "action",
+      "custo": 1,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 0,
+      "units": "scene",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "self",
+    "alvo": "Você",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": "Vontade desacredita"
+    },
+    "rolls": [],
+    "tipo": "arc",
+    "circulo": "1",
+    "preparada": false,
+    "escola": "ilu",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310461753,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!19donXyns0pliwj9"
+};

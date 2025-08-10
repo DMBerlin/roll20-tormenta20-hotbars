@@ -1,0 +1,175 @@
+module.exports = {
+  "_id": "1SjsOe7nMbo8LfOk",
+  "name": "Miragem",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/miragem.webp",
+  "effects": [
+    {
+      "_id": "WyoikU3cch24hj68",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "4",
+          "aumenta": false
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.1SjsOe7nMbo8LfOk",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "além do normal, pode alterar a aparência de criaturas escolhidas na área, como se usando Disfarce Ilusório.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!1SjsOe7nMbo8LfOk.WyoikU3cch24hj68"
+    },
+    {
+      "_id": "3Sb8et9hsoNxcZHZ",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "9",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "duracao",
+          "value": "permanente",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.1SjsOe7nMbo8LfOk",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda a duração para permanente e adiciona componente material (pó de diamante no valor de T$ 1.000). Requer 5º círculo.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!1SjsOe7nMbo8LfOk.3Sb8et9hsoNxcZHZ"
+    }
+  ],
+  "folder": "KG0i7Ko46Nmq1cyT",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Voc&ecirc; faz um terreno parecer outro, incluindo sons e cheiros. Uma plan&iacute;cie pode parecer um p&acirc;ntano, uma floresta pode parecer uma montanha etc. Esta magia pode ser usada para criar armadilhas: areia movedi&ccedil;a pode parecer terra firme ou um precip&iacute;cio pode parecer um lago. Voc&ecirc; pode alterar, incluir e esconder estruturas dentro da &aacute;rea, mas n&atilde;o criaturas (embora elas possam se esconder nas estruturas ilus&oacute;rias).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 199",
+    "ativacao": {
+      "execucao": "action",
+      "custo": 6,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 1,
+      "units": "day",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "long",
+    "alvo": "",
+    "area": "cubo de até 90m de lado",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": "Vontade desacredita"
+    },
+    "rolls": [],
+    "tipo": "arc",
+    "circulo": "3",
+    "preparada": false,
+    "escola": "ilu",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310461754,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!1SjsOe7nMbo8LfOk"
+};

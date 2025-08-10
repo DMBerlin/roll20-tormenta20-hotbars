@@ -1,0 +1,346 @@
+module.exports = {
+  "_id": "C2TqT4GXlsNiJPxb",
+  "name": "Flecha Ácida",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/flecha-acida.webp",
+  "effects": [
+    {
+      "_id": "d7IDFbjShdJHo90C",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "1",
+          "aumenta": false,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false,
+          "items": ""
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.C2TqT4GXlsNiJPxb",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "além do normal, se o alvo coberto pelo muco ácido estiver usando armadura ou escudo, o item é corroído. Isso reduz o bônus na Defesa do item em 1 ponto permanentemente. O item pode ser consertado, restaurando seu bônus (veja Ofício, na página 121).",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2TqT4GXlsNiJPxb.d7IDFbjShdJHo90C"
+    },
+    {
+      "_id": "o83N6WPQ3oDMLduk",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "2",
+          "aumenta": true,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false
+        }
+      },
+      "changes": [
+        {
+          "key": "system.attributes.defesa.bonus",
+          "mode": 2,
+          "value": "-1",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.C2TqT4GXlsNiJPxb",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "aumenta a redução na Defesa em +1.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2TqT4GXlsNiJPxb.o83N6WPQ3oDMLduk"
+    },
+    {
+      "_id": "fzlrQ06DWbl87Kff",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "2",
+          "aumenta": true
+        }
+      },
+      "changes": [
+        {
+          "key": "dano",
+          "value": "1d6",
+          "mode": 0,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.C2TqT4GXlsNiJPxb",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "aumenta o dano inicial e o dano por rodada em +1d6.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2TqT4GXlsNiJPxb.fzlrQ06DWbl87Kff"
+    },
+    {
+      "_id": "vqa8aByQVq4iTE3W",
+      "changes": [
+        {
+          "key": "system.attributes.defesa.bonus",
+          "mode": 2,
+          "value": "-1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.FCo6WybUsBxKIDF4",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": true
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Redução na Defesa",
+      "img": "systems/tormenta20/icons/magias/flecha-acida.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2TqT4GXlsNiJPxb.vqa8aByQVq4iTE3W"
+    },
+    {
+      "_id": "IOpuJUda7G0inDRZ",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "rounds": 2,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.FCo6WybUsBxKIDF4",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": false
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Flecha Ácida",
+      "img": "systems/tormenta20/icons/magias/flecha-acida.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2TqT4GXlsNiJPxb.IOpuJUda7G0inDRZ"
+    }
+  ],
+  "folder": "C4AaVHB8ALOWtksj",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Voc&ecirc; dispara um proj&eacute;til que causa 4d6 pontos de dano de &aacute;cido. Se falhar no teste de resist&ecirc;ncia, o alvo tamb&eacute;m fica coberto por um muco corrosivo, sofrendo mais 2d6 de dano de &aacute;cido no in&iacute;cio de seus dois pr&oacute;ximos turnos. Se lan&ccedil;ada contra um objeto que n&atilde;o esteja em posse de uma criatura a magia causa dano dobrado e ignora a RD do objeto.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 193",
+    "ativacao": {
+      "execucao": "action",
+      "custo": 3,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 0,
+      "units": "inst",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "medium",
+    "alvo": "1 criatura ou objeto",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": "Reflexos parcial"
+    },
+    "rolls": [
+      {
+        "name": "Dano",
+        "key": "dano0",
+        "type": "dano",
+        "parts": [
+          [
+            "4d6",
+            "acido",
+            ""
+          ]
+        ],
+        "versatil": ""
+      }
+    ],
+    "tipo": "arc",
+    "circulo": "2",
+    "preparada": false,
+    "escola": "evo",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310461796,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!C2TqT4GXlsNiJPxb"
+};

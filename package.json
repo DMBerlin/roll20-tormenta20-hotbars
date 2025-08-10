@@ -10,7 +10,8 @@
     "lint": "eslint --fix",
     "build": "node src/core/build/build.js",
     "update-version": "node src/core/versioning/update-version.js",
-    "dev": "node src/core/dev/server.js"
+    "dev": "node src/core/dev/server.js",
+    "test-spells": "node src/core/build/test-spells-generation.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
@@ -19,7 +20,6 @@
     "terser": "^5.28.1"
   },
   "dependencies": {
-    "handlebars": "^4.7.8",
-    "js-yaml": "^4.1.0"
+    "handlebars": "^4.7.8"
   }
 }

@@ -1,0 +1,122 @@
+module.exports = {
+  "_id": "9rWi1y1QSjogLEyj",
+  "name": "Marionete",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/marionete.webp",
+  "effects": [
+    {
+      "_id": "Ni0IcK0hEiL0QY5L",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.vmIv1Z3wgMPbHvJ6",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": true
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Marionete",
+      "img": "systems/tormenta20/icons/magias/marionete.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!9rWi1y1QSjogLEyj.Ni0IcK0hEiL0QY5L"
+    }
+  ],
+  "folder": "PABI38J6SHGUIktW",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Esta magia manipula o sistema nervoso do alvo. Ao sofrer a magia, e no in&iacute;cio de cada um de seus turnos, a v&iacute;tima faz um teste de Fortitude. Se passar, a magia &eacute; anulada. Se falhar, todas as suas a&ccedil;&otilde;es f&iacute;sicas naquele turno estar&atilde;o sob controle do conjurador. A v&iacute;tima ainda tem consci&ecirc;ncia de tudo que acontece &agrave; sua volta, podendo ver, ouvir e at&eacute; falar com certo esfor&ccedil;o (mas n&atilde;o para lan&ccedil;ar magias). Contudo, seu corpo realiza apenas os movimentos que o conjurador deseja. A v&iacute;tima pode ser manipulada para se movimentar, lutar, usar habilidades de combate... Enfim, qualquer coisa de que seja fisicamente capaz.</p>\n<p>Voc&ecirc; precisa de linha de efeito para controlar a v&iacute;tima. Se perder o contato, n&atilde;o poder&aacute; control&aacute;-la &mdash; mas ela estar&aacute; paralisada at&eacute; que o conjurador recupere o controle ou a magia termine.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 198",
+    "ativacao": {
+      "execucao": "action",
+      "custo": 10,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 0,
+      "units": "sust",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "medium",
+    "alvo": "1 criatura",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": "Fortitude anula"
+    },
+    "rolls": [],
+    "tipo": "arc",
+    "circulo": "4",
+    "preparada": false,
+    "escola": "enc",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310461773,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!9rWi1y1QSjogLEyj"
+};

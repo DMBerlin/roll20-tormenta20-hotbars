@@ -1,0 +1,210 @@
+module.exports = {
+  "_id": "p6sWgQAgMD5Kp6EF",
+  "name": "Contato Extraplanar",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/contato-extraplanar.webp",
+  "effects": [
+    {
+      "_id": "RDj6YcZ4urDG8acJ",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "2",
+          "aumenta": true
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.p6sWgQAgMD5Kp6EF",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "aumenta o número de dados de auxílio em +1.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!p6sWgQAgMD5Kp6EF.RDj6YcZ4urDG8acJ"
+    },
+    {
+      "_id": "44JzTDSZZyNuJDQH",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "8",
+          "aumenta": false
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.p6sWgQAgMD5Kp6EF",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Muda os dados de auxílio para d12. Sempre que rolar um resultado 12 num desses d12, a entidade \"suga\" 2 PM de você. Requer 4º círculo.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!p6sWgQAgMD5Kp6EF.44JzTDSZZyNuJDQH"
+    },
+    {
+      "_id": "vQ3KCTv7rnUwKOtV",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.XD2xtNzDW8c7QK5n",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": true
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Contato Extraplanar",
+      "img": "systems/tormenta20/icons/magias/contato-extraplanar.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!p6sWgQAgMD5Kp6EF.vQ3KCTv7rnUwKOtV"
+    }
+  ],
+  "folder": "bWjis0eO9VwrSHOj",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Sua mente viaja at&eacute; outro plano de exist&ecirc;ncia, onde entra em contato com seres extraplanares como g&ecirc;nios e dem&ocirc;nios. Voc&ecirc; firma um contrato com uma dessas entidades para que o auxilie durante o dia, em troca de se alimentar de seu mana. Quando a magia &eacute; lan&ccedil;ada, voc&ecirc; recebe 6d6 dados de aux&iacute;lio. Enquanto a magia durar, sempre que for realizar um teste de per&iacute;cia, voc&ecirc; pode gastar 1d6 (mais 1d6 para cada c&iacute;rculo de magias acima do 3&ordm; que puder lan&ccedil;ar) e adicionar o resultado como b&ocirc;nus no teste. No entanto, sempre que rolar um &ldquo;6&rdquo; num desses dados, a entidade &ldquo;suga&rdquo; 1 PM de voc&ecirc;. A magia termina se voc&ecirc; gastar todos os dados, ficar sem PM ou no fim do dia (o que acontecer primeiro).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 186",
+    "ativacao": {
+      "execucao": "full",
+      "custo": 6,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 1,
+      "units": "day",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "self",
+    "alvo": "Você",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": ""
+    },
+    "rolls": [],
+    "tipo": "arc",
+    "circulo": "3",
+    "preparada": false,
+    "escola": "adv",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310462813,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!p6sWgQAgMD5Kp6EF"
+};

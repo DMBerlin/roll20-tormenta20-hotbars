@@ -38,6 +38,40 @@ Este repositório contém scripts personalizados para melhorar a experiência de
     │           └── VERSIONING.md
 ```
 
+## 🔨 Build System
+
+### Geração Dinâmica de Dados de Magias
+
+O projeto agora inclui um sistema de build que gera dinamicamente os dados de magias durante o processo de build. Isso oferece várias vantagens:
+
+#### ✨ Benefícios
+
+- **Manutenibilidade**: Os dados de magias são gerados automaticamente a partir dos arquivos individuais
+- **Consistência**: Garante que todos os dados estejam sempre atualizados
+- **Performance**: Elimina a necessidade de carregar dados hardcoded no runtime
+- **Escalabilidade**: Fácil adição de novas magias sem modificar o código principal
+
+#### 🔧 Como Funciona
+
+1. **Estrutura de Arquivos**: As magias são organizadas em arquivos individuais em `src/source/magias/`
+2. **Geração**: Durante o build, o script `generate-spells-data.js` lê todos os arquivos de magias
+3. **Transformação**: Converte os dados para o formato esperado pelo `main.js`
+4. **Integração**: O build process inlines os dados gerados no arquivo final
+
+#### 📋 Scripts Disponíveis
+
+- `pnpm build`: Executa o build completo incluindo geração de dados de magias
+- `pnpm test-spells`: Testa apenas a geração de dados de magias
+- `pnpm dev`: Inicia o servidor de desenvolvimento
+
+#### 📊 Estatísticas
+
+O sistema processa automaticamente:
+- **200+ magias** organizadas por tradição, círculo e escola
+- **3 tradições**: Arcana, Divina, Universal
+- **5 círculos**: 1º ao 5º círculo
+- **8 escolas**: Abjuração, Adivinhação, Convocação, Encantamento, Evocação, Ilusão, Necromancia, Transmutação
+
 ## 🎯 Scripts Disponíveis
 
 ### Hotbar Extra - Caçador (`main.js`)

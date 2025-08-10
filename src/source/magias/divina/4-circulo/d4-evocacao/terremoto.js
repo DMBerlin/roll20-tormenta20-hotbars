@@ -1,0 +1,79 @@
+module.exports = {
+  "_id": "bTYmLsNGfcg4pFzu",
+  "name": "Terremoto",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/terremoto.webp",
+  "effects": [],
+  "folder": "fjzcx2rvOZ83jHv7",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Esta magia cria um tremor de terra que rasga o solo. O terremoto dura uma rodada, durante a qual criaturas sobre o solo ficam atordoadas. Barreiras f&iacute;sicas n&atilde;ointerrompem a &aacute;rea de<em> Terremoto</em>.</p>\n<p>O efeito exato depende do terreno.</p>\n<p><em>Caverna ou subterr&acirc;neo:</em> a magia derruba o teto, causando 12d6 pontos de dano de impacto e agarrando (@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}) todas as criaturas na &aacute;rea. Um teste de Reflexos reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o.</p>\n<p><em>Constru&ccedil;&atilde;o:</em> todas as estruturas na &aacute;rea sofrem 200 pontos de dano de impacto, o suficiente para derrubar constru&ccedil;&otilde;es de madeira ou alvenaria simples, mas n&atilde;o de alvenaria refor&ccedil;ada. Criaturas em uma constru&ccedil;&atilde;o que desmorone sofrem o mesmo efeito de criaturas em uma caverna (veja acima).</p>\n<p><em>Espa&ccedil;o aberto:</em> fendas se abrem no ch&atilde;o. Cada criatura na &aacute;rea precisa rolar um dado; em um resultado &iacute;mpar, uma fenda se abre sob ela e ela precisa fazer um teste de Reflexos; se falhar, cai na fenda. A criatura pode escapar gastando uma a&ccedil;&atilde;o completa e passando em um teste de Atletismo (CD igual &agrave; da magia). No in&iacute;cio do seu pr&oacute;ximo turno as fendas se fecham, matando todos que estejam dentro delas.</p>\n<p><em>Penhascos:</em> o penhasco racha, criando um desmoronamento que percorre uma dist&acirc;ncia horizontal igual &agrave; dist&acirc;ncia da queda. Por exemplo, um penhasco com 30m de altura desmorona em uma &aacute;rea de 30m de comprimento al&eacute;m da base. Qualquer criatura no caminho sofre 12d6 pontos de dano de impacto e fica agarrada. Um teste de Reflexos reduz o dano &agrave; metade e evita ficar agarrado.</p>\n<p><em>Rio, lago ou p&acirc;ntano:</em> fissuras se abrem sob a &aacute;gua, drenando-a e formando um lama&ccedil;al. Criaturas na &aacute;rea precisam fazer um teste de Reflexos para n&atilde;o afundarem na lama e ficarem agarradas. No in&iacute;cio do seu pr&oacute;ximo turno as fissuras se fecham, possivelmente afogando as criaturas que ficaram agarradas.</p>\n<p>Criaturas agarradas (efeito poss&iacute;vel decaverna, constru&ccedil;&atilde;o, penhasco e rio, lago ou p&acirc;ntano) sofrem 1d6 pontos de dano por rodada at&eacute; serem libertadas, o que exige uma a&ccedil;&atilde;o completa e um teste de Atletismo (por parte da pr&oacute;pria criatura ou de um aliado adjacente).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 209",
+    "ativacao": {
+      "execucao": "action",
+      "custo": 10,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 1,
+      "units": "round",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "long",
+    "alvo": "",
+    "area": "esfera com 30m de raio",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "sab",
+      "bonus": 0,
+      "txt": "veja texto"
+    },
+    "rolls": [],
+    "tipo": "div",
+    "circulo": "4",
+    "preparada": false,
+    "escola": "evo",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310462766,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bTYmLsNGfcg4pFzu"
+};

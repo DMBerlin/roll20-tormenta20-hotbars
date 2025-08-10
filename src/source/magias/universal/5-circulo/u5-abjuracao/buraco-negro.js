@@ -1,0 +1,132 @@
+module.exports = {
+  "_id": "WrXV3FSwTkh5Hgtc",
+  "name": "Buraco Negro",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/buraco-negro.webp",
+  "effects": [
+    {
+      "_id": "IZkYfoMdeEGdbnWl",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "self": true,
+          "custo": "5",
+          "aumenta": false,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false,
+          "items": ""
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.WrXV3FSwTkh5Hgtc",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o efeito para que você não seja afetado.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!WrXV3FSwTkh5Hgtc.IZkYfoMdeEGdbnWl"
+    }
+  ],
+  "folder": "seRZE2QmkdqIYGlT",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Esta magia cria um v&aacute;cuo capaz de sugar tudo nas proximidades. Escolha um espa&ccedil;o desocupado para o buraco negro. No in&iacute;cio de cada um de seus tr&ecirc;s turnos seguintes, todas as criaturas a at&eacute; alcance longo do buraco negro, incluindo voc&ecirc;, devem fazer um teste de Fortitude. Em caso de falha, ficam ca&iacute;das e s&atilde;o puxadas 30m na dire&ccedil;&atilde;o do buraco. Objetos soltos tamb&eacute;m s&atilde;o puxados. Criaturas podem gastar uma a&ccedil;&atilde;o de movimento para se segurar em algum objeto fixo, recebendo +2 em seus testes de resist&ecirc;ncia.</p>\n<p>Criaturas e objetos que toquem o buraco negro s&atilde;o sugadas, desaparecendo para sempre.Criaturas e objetos que iniciem seu turno no espa&ccedil;o do buraco negro devem gastar uma a&ccedil;&atilde;o de movimento e fazer um teste de Fortitude. Se passarem, podem escapar se arrastando (metade de seu deslocamento) para longe dele. Se falharem, perdem a a&ccedil;&atilde;o (mas podem gastar outra para tentar novamente). Se terminarem seu turno no espa&ccedil;o do buraco negro, s&atilde;o sugadas, desaparecendo para sempre.</p>\n<p>N&atilde;o se conhece o destino das coisas sugadas pelo buraco negro, uma vez que jamais retornam. Alguns estudiosos sugerem que podem ser enviadas para outros mundos. Muitos cl&eacute;rigos da Noite acreditam que esta magia abre um portal para Sombria, o lar de sua deusa, e sonham um dia poder realizar essa jornada.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 182",
+    "ativacao": {
+      "execucao": "full",
+      "custo": 15,
+      "qtd": "",
+      "condicao": "",
+      "special": ""
+    },
+    "duracao": {
+      "value": 3,
+      "units": "round",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "Buraco Negro",
+    "alcance": "long",
+    "alvo": "",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "sab",
+      "bonus": 0,
+      "txt": "Fortitude parcial"
+    },
+    "rolls": [],
+    "tipo": "uni",
+    "circulo": "5",
+    "preparada": false,
+    "escola": "abj",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310461917,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!WrXV3FSwTkh5Hgtc"
+};
