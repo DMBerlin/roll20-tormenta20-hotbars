@@ -50,7 +50,7 @@ async function build() {
 
     // Inline the generated spells data into the main.js content
     let finalCombinedContent = combinedContent;
-    const generatedSpellsDataPath = path.join(__dirname, '..', '..', 'generated-spells-data.js');
+    const generatedSpellsDataPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'generated-spells-data.js');
     if (fs.existsSync(generatedSpellsDataPath)) {
       const spellsDataContent = fs.readFileSync(generatedSpellsDataPath, 'utf8');
       // Replace the require statement with the actual spells data

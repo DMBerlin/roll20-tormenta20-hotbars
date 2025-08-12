@@ -15,7 +15,7 @@ function generateSpellsData() {
     universal: {}
   };
 
-  const magiasPath = path.join(__dirname, '..', '..', 'source', 'magias');
+  const magiasPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'magias');
 
   // Process each tradition (arcana, divina, universal)
   const traditions = ['arcana', 'divina', 'universal'];
@@ -116,7 +116,7 @@ module.exports = spellsData;
 `;
 
   // Write the generated file
-  const outputPath = path.join(__dirname, '..', '..', 'generated-spells-data.js');
+  const outputPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'generated-spells-data.js');
   fs.writeFileSync(outputPath, spellsDataCode);
 
   console.log(`✅ Dados de magias gerados: ${outputPath}`);

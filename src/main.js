@@ -11,6 +11,8 @@
 (function () {
     'use strict';
 
+    /* global GM_setValue, GM_getValue */
+
     // Sistema de favoritos para skills
     const FAVORITES_KEY = 'roll20-hotbar-favorites';
     // Sistema de avatar do personagem
@@ -905,7 +907,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -918,6 +920,8 @@
             // Envia condição para o chat
             sendConditionToChat(conditionData.nome);
             showSuccessNotification(`Condição "${conditionData.nome}" compartilhada no chat!`);
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -2837,7 +2841,7 @@
         };
 
         // Dados de magias gerados dinamicamente durante o build
-        const spellsData = require('./modules/grimorio/generated-spells-data.js');
+        const spellsData = require('./generated-spells-data.js');
 
         // Processar dados embutidos
         for (const tradition in spellsData) {
@@ -2868,6 +2872,10 @@
 
     // Função para criar popup do Grimório de Magias
     async function createGrimorioPopup() {
+        // Variáveis para filtros selecionados
+        let selectedCircles = new Set();
+        let selectedSchools = new Set();
+
         // Remove popup existente se houver
         const existingPopup = document.getElementById('grimorio-popup');
         if (existingPopup) existingPopup.remove();
@@ -2986,73 +2994,7 @@
         title.style.fontWeight = 'bold';
         title.title = 'Atalho: Ctrl + G';
 
-        // Botão de atualizar
-        const refreshBtn = document.createElement('button');
-        refreshBtn.innerHTML = '🔄';
-        refreshBtn.style.background = 'none';
-        refreshBtn.style.border = '1px solid #9c27b0';
-        refreshBtn.style.borderRadius = '6px';
-        refreshBtn.style.color = '#9c27b0';
-        refreshBtn.style.fontSize = '16px';
-        refreshBtn.style.cursor = 'pointer';
-        refreshBtn.style.padding = '8px';
-        refreshBtn.style.marginRight = '10px';
-        refreshBtn.style.transition = 'all 0.2s';
-        refreshBtn.title = 'Recarregar magias';
 
-        refreshBtn.onmouseover = () => {
-            refreshBtn.style.background = '#9c27b0';
-            refreshBtn.style.color = '#fff';
-        };
-
-        refreshBtn.onmouseout = () => {
-            refreshBtn.style.background = 'none';
-            refreshBtn.style.color = '#9c27b0';
-        };
-
-        refreshBtn.onclick = async () => {
-            refreshBtn.style.transform = 'rotate(360deg)';
-            refreshBtn.style.transition = 'transform 0.5s';
-
-            // Limpar cache e recarregar
-            window.grimorioSpellsCache = null;
-            window.grimorioSpellsCache = await loadSpellsDirectly();
-
-            // Atualizar conteúdo
-            updateTabContent(activeTab);
-
-            setTimeout(() => {
-                refreshBtn.style.transform = 'rotate(0deg)';
-            }, 500);
-        };
-
-        // Botão de estatísticas
-        const statsBtn = document.createElement('button');
-        statsBtn.innerHTML = '📊';
-        statsBtn.style.background = 'none';
-        statsBtn.style.border = '1px solid #9c27b0';
-        statsBtn.style.borderRadius = '6px';
-        statsBtn.style.color = '#9c27b0';
-        statsBtn.style.fontSize = '16px';
-        statsBtn.style.cursor = 'pointer';
-        statsBtn.style.padding = '8px';
-        statsBtn.style.marginRight = '10px';
-        statsBtn.style.transition = 'all 0.2s';
-        statsBtn.title = 'Ver estatísticas';
-
-        statsBtn.onmouseover = () => {
-            statsBtn.style.background = '#9c27b0';
-            statsBtn.style.color = '#fff';
-        };
-
-        statsBtn.onmouseout = () => {
-            statsBtn.style.background = 'none';
-            statsBtn.style.color = '#9c27b0';
-        };
-
-        statsBtn.onclick = () => {
-            showSpellStatistics();
-        };
 
         // Container para título e atalho
         const titleContainer = document.createElement('div');
@@ -3070,8 +3012,6 @@
         titleContainer.appendChild(shortcutText);
 
         header.appendChild(titleContainer);
-        header.appendChild(statsBtn);
-        header.appendChild(refreshBtn);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -3086,133 +3026,285 @@
         });
         popup.appendChild(searchInput.container);
 
-        // Filtros adicionais
+        // Filtros por chips selecionáveis
         const filtersContainer = document.createElement('div');
         filtersContainer.style.display = 'flex';
-        filtersContainer.style.gap = '10px';
+        filtersContainer.style.flexDirection = 'column';
+        filtersContainer.style.gap = '15px';
         filtersContainer.style.marginBottom = '20px';
-        filtersContainer.style.flexWrap = 'wrap';
+
+        // Funções para persistir filtros
+        function saveFilters() {
+            try {
+                const filters = {
+                    circles: Array.from(selectedCircles),
+                    schools: Array.from(selectedSchools)
+                };
+
+                // Verificar se GM_setValue está disponível (Tampermonkey)
+                if (typeof GM_setValue !== 'undefined') {
+                    GM_setValue('grimorio_filters', JSON.stringify(filters));
+                } else {
+                    // Fallback para localStorage se GM_setValue não estiver disponível
+                    localStorage.setItem('grimorio_filters', JSON.stringify(filters));
+                }
+            } catch (error) {
+                console.warn('Erro ao salvar filtros:', error);
+            }
+        }
+
+        function loadFilters() {
+            try {
+                let savedFilters = '{}';
+
+                // Verificar se GM_getValue está disponível (Tampermonkey)
+                if (typeof GM_getValue !== 'undefined') {
+                    savedFilters = GM_getValue('grimorio_filters', '{}');
+                } else {
+                    // Fallback para localStorage se GM_getValue não estiver disponível
+                    savedFilters = localStorage.getItem('grimorio_filters') || '{}';
+                }
+
+                const filters = JSON.parse(savedFilters);
+
+                if (filters.circles) {
+                    selectedCircles.clear();
+                    filters.circles.forEach(circle => selectedCircles.add(circle));
+                }
+                if (filters.schools) {
+                    selectedSchools.clear();
+                    filters.schools.forEach(school => selectedSchools.add(school));
+                }
+            } catch (error) {
+                console.warn('Erro ao carregar filtros:', error);
+                selectedCircles.clear();
+                selectedSchools.clear();
+            }
+        }
+
+        // Carregar filtros salvos
+        loadFilters();
+
+        // Função para criar chips
+        function createChip(text, isSelected, onClick) {
+            const chip = document.createElement('div');
+            chip.textContent = text;
+            chip.style.display = 'inline-block';
+            chip.style.padding = '6px 12px';
+            chip.style.margin = '2px';
+            chip.style.borderRadius = '16px';
+            chip.style.fontSize = '12px';
+            chip.style.fontWeight = '500';
+            chip.style.cursor = 'pointer';
+            chip.style.transition = 'all 0.2s ease';
+            chip.style.userSelect = 'none';
+            chip.style.border = '1px solid #9c27b0';
+            chip.style.boxShadow = isSelected ? '0 2px 8px rgba(156, 39, 176, 0.3)' : 'none';
+
+            if (isSelected) {
+                chip.style.background = '#9c27b0';
+                chip.style.color = '#fff';
+                chip.style.transform = 'scale(1.05)';
+            } else {
+                chip.style.background = 'transparent';
+                chip.style.color = '#9c27b0';
+                chip.style.transform = 'scale(1)';
+            }
+
+            chip.onclick = onClick;
+
+            chip.onmouseover = () => {
+                if (!isSelected) {
+                    chip.style.background = '#9c27b0';
+                    chip.style.color = '#fff';
+                    chip.style.transform = 'scale(1.02)';
+                    chip.style.boxShadow = '0 2px 8px rgba(156, 39, 176, 0.2)';
+                }
+            };
+
+            chip.onmouseout = () => {
+                if (!isSelected) {
+                    chip.style.background = 'transparent';
+                    chip.style.color = '#9c27b0';
+                    chip.style.transform = 'scale(1)';
+                    chip.style.boxShadow = 'none';
+                }
+            };
+
+            return chip;
+        }
 
         // Filtro por círculo
-        const circleFilter = document.createElement('select');
-        circleFilter.style.padding = '8px 12px';
-        circleFilter.style.borderRadius = '6px';
-        circleFilter.style.border = '1px solid #9c27b0';
-        circleFilter.style.background = '#23243a';
-        circleFilter.style.color = '#fff';
-        circleFilter.style.fontSize = '14px';
-        circleFilter.style.outline = 'none';
-        circleFilter.style.cursor = 'pointer';
+        const circleFilterContainer = document.createElement('div');
+        circleFilterContainer.style.display = 'flex';
+        circleFilterContainer.style.flexDirection = 'column';
+        circleFilterContainer.style.gap = '8px';
 
-        const circleOptions = ['Todos os Círculos', '1º Círculo', '2º Círculo', '3º Círculo', '4º Círculo', '5º Círculo'];
-        circleOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            optionElement.textContent = option;
-            circleFilter.appendChild(optionElement);
-        });
-
-        circleFilter.onchange = () => {
-            filterSpells(searchInput.getValue());
-        };
-
-        // Filtro por escola
-        const schoolFilter = document.createElement('select');
-        schoolFilter.style.padding = '8px 12px';
-        schoolFilter.style.borderRadius = '6px';
-        schoolFilter.style.border = '1px solid #9c27b0';
-        schoolFilter.style.background = '#23243a';
-        schoolFilter.style.color = '#fff';
-        schoolFilter.style.fontSize = '14px';
-        schoolFilter.style.outline = 'none';
-        schoolFilter.style.cursor = 'pointer';
-
-        const schoolOptions = ['Todas as Escolas', 'Abjuração', 'Adivinhação', 'Conjuração', 'Encantamento', 'Evocação', 'Ilusão', 'Necromancia', 'Transmutação'];
-        schoolOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            optionElement.textContent = option;
-            schoolFilter.appendChild(optionElement);
-        });
-
-        schoolFilter.onchange = () => {
-            filterSpells(searchInput.getValue());
-        };
-
-        // Labels para os filtros
         const circleLabel = document.createElement('label');
-        circleLabel.textContent = 'Círculo:';
+        circleLabel.textContent = 'Círculos:';
         circleLabel.style.color = '#9c27b0';
         circleLabel.style.fontSize = '14px';
         circleLabel.style.fontWeight = 'bold';
-        circleLabel.style.marginRight = '5px';
+
+        const circleChipsContainer = document.createElement('div');
+        circleChipsContainer.style.display = 'flex';
+        circleChipsContainer.style.flexWrap = 'wrap';
+        circleChipsContainer.style.gap = '4px';
+
+        const circleOptions = ['1º Círculo', '2º Círculo', '3º Círculo', '4º Círculo', '5º Círculo'];
+        const circleChips = {};
+
+        circleOptions.forEach(option => {
+            const isSelected = selectedCircles.has(option);
+            const chip = createChip(option, isSelected, () => {
+                const isCurrentlySelected = selectedCircles.has(option);
+                if (isCurrentlySelected) {
+                    selectedCircles.delete(option);
+                    chip.style.background = 'transparent';
+                    chip.style.color = '#9c27b0';
+                    chip.style.transform = 'scale(1)';
+                    chip.style.boxShadow = 'none';
+                } else {
+                    selectedCircles.add(option);
+                    chip.style.background = '#9c27b0';
+                    chip.style.color = '#fff';
+                    chip.style.transform = 'scale(1.05)';
+                    chip.style.boxShadow = '0 2px 8px rgba(156, 39, 176, 0.3)';
+                }
+                saveFilters();
+                updateClearButtonText();
+                filterSpells(searchInput.getValue());
+            });
+            circleChips[option] = chip;
+            circleChipsContainer.appendChild(chip);
+        });
+
+        circleFilterContainer.appendChild(circleLabel);
+        circleFilterContainer.appendChild(circleChipsContainer);
+
+        // Filtro por escola
+        const schoolFilterContainer = document.createElement('div');
+        schoolFilterContainer.style.display = 'flex';
+        schoolFilterContainer.style.flexDirection = 'column';
+        schoolFilterContainer.style.gap = '8px';
 
         const schoolLabel = document.createElement('label');
-        schoolLabel.textContent = 'Escola:';
+        schoolLabel.textContent = 'Escolas:';
         schoolLabel.style.color = '#9c27b0';
         schoolLabel.style.fontSize = '14px';
         schoolLabel.style.fontWeight = 'bold';
-        schoolLabel.style.marginRight = '5px';
 
-        // Container para cada filtro com label
-        const circleContainer = document.createElement('div');
-        circleContainer.style.display = 'flex';
-        circleContainer.style.alignItems = 'center';
-        circleContainer.appendChild(circleLabel);
-        circleContainer.appendChild(circleFilter);
+        const schoolChipsContainer = document.createElement('div');
+        schoolChipsContainer.style.display = 'flex';
+        schoolChipsContainer.style.flexWrap = 'wrap';
+        schoolChipsContainer.style.gap = '4px';
 
-        const schoolContainer = document.createElement('div');
-        schoolContainer.style.display = 'flex';
-        schoolContainer.style.alignItems = 'center';
-        schoolContainer.appendChild(schoolLabel);
-        schoolContainer.appendChild(schoolFilter);
+        const schoolOptions = ['Abjuração', 'Adivinhação', 'Conjuração', 'Encantamento', 'Evocação', 'Ilusão', 'Necromancia', 'Transmutação'];
+        const schoolChips = {};
 
-        // Filtro por ordenação
-        const sortFilter = document.createElement('select');
-        sortFilter.style.padding = '8px 12px';
-        sortFilter.style.borderRadius = '6px';
-        sortFilter.style.border = '1px solid #9c27b0';
-        sortFilter.style.background = '#23243a';
-        sortFilter.style.color = '#fff';
-        sortFilter.style.fontSize = '14px';
-        sortFilter.style.outline = 'none';
-        sortFilter.style.cursor = 'pointer';
-
-        const sortOptions = [
-            'Nome A-Z',
-            'Nome Z-A',
-            'Círculo Crescente',
-            'Círculo Decrescente',
-            'Escola A-Z',
-            'Escola Z-A'
-        ];
-        sortOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            optionElement.textContent = option;
-            sortFilter.appendChild(optionElement);
+        schoolOptions.forEach(option => {
+            const isSelected = selectedSchools.has(option);
+            const chip = createChip(option, isSelected, () => {
+                const isCurrentlySelected = selectedSchools.has(option);
+                if (isCurrentlySelected) {
+                    selectedSchools.delete(option);
+                    chip.style.background = 'transparent';
+                    chip.style.color = '#9c27b0';
+                    chip.style.transform = 'scale(1)';
+                    chip.style.boxShadow = 'none';
+                } else {
+                    selectedSchools.add(option);
+                    chip.style.background = '#9c27b0';
+                    chip.style.color = '#fff';
+                    chip.style.transform = 'scale(1.05)';
+                    chip.style.boxShadow = '0 2px 8px rgba(156, 39, 176, 0.3)';
+                }
+                saveFilters();
+                updateClearButtonText();
+                filterSpells(searchInput.getValue());
+            });
+            schoolChips[option] = chip;
+            schoolChipsContainer.appendChild(chip);
         });
 
-        sortFilter.onchange = () => {
+        schoolFilterContainer.appendChild(schoolLabel);
+        schoolFilterContainer.appendChild(schoolChipsContainer);
+
+        // Botão para limpar todos os filtros
+        const clearFiltersContainer = document.createElement('div');
+        clearFiltersContainer.style.display = 'flex';
+        clearFiltersContainer.style.justifyContent = 'flex-end';
+        clearFiltersContainer.style.marginTop = '10px';
+
+        const clearFiltersBtn = document.createElement('button');
+        clearFiltersBtn.textContent = 'Limpar Filtros';
+        clearFiltersBtn.style.padding = '6px 12px';
+        clearFiltersBtn.style.borderRadius = '6px';
+        clearFiltersBtn.style.border = '1px solid #666';
+        clearFiltersBtn.style.background = 'transparent';
+        clearFiltersBtn.style.color = '#666';
+        clearFiltersBtn.style.fontSize = '12px';
+        clearFiltersBtn.style.cursor = 'pointer';
+        clearFiltersBtn.style.transition = 'all 0.2s ease';
+
+        clearFiltersBtn.onmouseover = () => {
+            clearFiltersBtn.style.background = '#666';
+            clearFiltersBtn.style.color = '#fff';
+        };
+
+        clearFiltersBtn.onmouseout = () => {
+            clearFiltersBtn.style.background = 'transparent';
+            clearFiltersBtn.style.color = '#666';
+        };
+
+        // Função para atualizar o texto do botão de limpar
+        function updateClearButtonText() {
+            const totalSelected = selectedCircles.size + selectedSchools.size;
+            if (totalSelected > 0) {
+                clearFiltersBtn.textContent = `Limpar Filtros (${totalSelected})`;
+                clearFiltersBtn.style.border = '1px solid #9c27b0';
+                clearFiltersBtn.style.color = '#9c27b0';
+            } else {
+                clearFiltersBtn.textContent = 'Limpar Filtros';
+                clearFiltersBtn.style.border = '1px solid #666';
+                clearFiltersBtn.style.color = '#666';
+            }
+        }
+
+        // Atualizar texto inicial
+        updateClearButtonText();
+
+        clearFiltersBtn.onclick = () => {
+            // Limpar seleções
+            selectedCircles.clear();
+            selectedSchools.clear();
+
+            // Atualizar visual dos chips
+            Object.values(circleChips).forEach(chip => {
+                chip.style.background = 'transparent';
+                chip.style.color = '#9c27b0';
+                chip.style.transform = 'scale(1)';
+                chip.style.boxShadow = 'none';
+            });
+
+            Object.values(schoolChips).forEach(chip => {
+                chip.style.background = 'transparent';
+                chip.style.color = '#9c27b0';
+                chip.style.transform = 'scale(1)';
+                chip.style.boxShadow = 'none';
+            });
+
+            // Salvar e filtrar
+            saveFilters();
+            updateClearButtonText();
             filterSpells(searchInput.getValue());
         };
 
-        const sortLabel = document.createElement('label');
-        sortLabel.textContent = 'Ordenar:';
-        sortLabel.style.color = '#9c27b0';
-        sortLabel.style.fontSize = '14px';
-        sortLabel.style.fontWeight = 'bold';
-        sortLabel.style.marginRight = '5px';
+        clearFiltersContainer.appendChild(clearFiltersBtn);
 
-        const sortContainer = document.createElement('div');
-        sortContainer.style.display = 'flex';
-        sortContainer.style.alignItems = 'center';
-        sortContainer.appendChild(sortLabel);
-        sortContainer.appendChild(sortFilter);
-
-        filtersContainer.appendChild(circleContainer);
-        filtersContainer.appendChild(schoolContainer);
-        filtersContainer.appendChild(sortContainer);
+        filtersContainer.appendChild(circleFilterContainer);
+        filtersContainer.appendChild(schoolFilterContainer);
+        filtersContainer.appendChild(clearFiltersContainer);
         popup.appendChild(filtersContainer);
 
         // Abas para tradições
@@ -3391,6 +3483,16 @@
 
         // Função para mostrar detalhes da magia
         function showSpellDetails(spell) {
+            // Overlay para fechar
+            const spellDetailsOverlay = document.createElement('div');
+            spellDetailsOverlay.style.position = 'fixed';
+            spellDetailsOverlay.style.top = '0';
+            spellDetailsOverlay.style.left = '0';
+            spellDetailsOverlay.style.width = '100%';
+            spellDetailsOverlay.style.height = '100%';
+            spellDetailsOverlay.style.background = 'rgba(0,0,0,0.5)';
+            spellDetailsOverlay.style.zIndex = '10001';
+
             // Criar popup de detalhes da magia
             const detailsPopup = document.createElement('div');
             detailsPopup.style.position = 'fixed';
@@ -3407,6 +3509,12 @@
             detailsPopup.style.overflowY = 'auto';
             detailsPopup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
 
+            // Função para fechar o popup
+            function closePopup() {
+                spellDetailsOverlay.remove();
+                detailsPopup.remove();
+            }
+
             // Cabeçalho
             const header = document.createElement('div');
             header.style.display = 'flex';
@@ -3421,20 +3529,19 @@
             title.style.fontSize = '24px';
             title.style.fontWeight = 'bold';
 
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#9c27b0';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
-            closeBtn.onclick = () => detailsPopup.remove();
+            // Usar o componente de close button
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#9c27b0',
+                onClick: closePopup
+            });
 
             header.appendChild(title);
-            header.appendChild(closeBtn);
+            header.appendChild(closeBtn.render());
 
             // Informações da magia
             const info = document.createElement('div');
@@ -3559,22 +3666,85 @@
             detailsPopup.appendChild(detailsContainer);
             detailsPopup.appendChild(description);
 
-            // Overlay para fechar
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'rgba(0,0,0,0.5)';
-            overlay.style.zIndex = '10001';
-            overlay.onclick = () => {
-                overlay.remove();
-                detailsPopup.remove();
+            // Adicionar botão de compartilhar
+            const shareButton = document.createElement('button');
+            shareButton.textContent = 'Compartilhar';
+            shareButton.style.background = '#4caf50';
+            shareButton.style.color = '#fff';
+            shareButton.style.border = 'none';
+            shareButton.style.borderRadius = '8px';
+            shareButton.style.padding = '12px 20px';
+            shareButton.style.fontSize = '14px';
+            shareButton.style.fontWeight = 'bold';
+            shareButton.style.cursor = 'pointer';
+            shareButton.style.marginTop = '20px';
+            shareButton.style.width = '100%';
+            shareButton.style.transition = 'all 0.2s ease';
+
+            shareButton.onmouseover = () => {
+                shareButton.style.background = '#45a049';
+                shareButton.style.transform = 'translateY(-1px)';
             };
 
-            document.body.appendChild(overlay);
+            shareButton.onmouseout = () => {
+                shareButton.style.background = '#4caf50';
+                shareButton.style.transform = 'translateY(0)';
+            };
+
+            shareButton.onclick = () => {
+                shareSpellToChat(spell);
+                // Fechar todos os popups abertos
+                closeAllPopups();
+            };
+
+            detailsPopup.appendChild(shareButton);
+
+            // Configurar overlay para fechar ao clicar
+            spellDetailsOverlay.onclick = closePopup;
+
+            document.body.appendChild(spellDetailsOverlay);
             document.body.appendChild(detailsPopup);
+        }
+
+        // Função para compartilhar magia no chat usando template T20
+        function shareSpellToChat(spell) {
+            try {
+                // Obter nome do personagem usando a mesma função do sistema existente
+                const charName = getCharacterName();
+
+                // Preparar dados da magia
+                const spellData = {
+                    name: spell.name,
+                    type: spell.tradition.charAt(0).toUpperCase() + spell.tradition.slice(1),
+                    execution: spell.system?.ativacao?.type || 'Padrão',
+                    duration: spell.system?.duracao || 'Cena',
+                    range: spell.system?.alcance || 'Curto',
+                    target: spell.system?.alvo || '1 Alvo',
+                    resistance: spell.system?.resistencia || 'Nenhuma',
+                    description: spell.system?.description?.value || 'Descrição não disponível'
+                };
+
+                // Criar template T20 usando o mesmo formato do sistema existente
+                const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellData.name}}}{{type=${spellData.type}}}{{execution=${spellData.execution}}}{{duration=${spellData.duration}}}{{range=${spellData.range}}}{{targetarea=${spellData.target}}}{{resistance=${spellData.resistance}}}{{description=${spellData.description}}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
+
+                // Enviar para o chat usando a mesma função do sistema existente
+                sendToChat(msg);
+
+                // Feedback visual
+                const shareButton = document.querySelector('button[onclick*="shareSpellToChat"]');
+                if (shareButton) {
+                    const originalText = shareButton.textContent;
+                    shareButton.textContent = '✅ Enviado!';
+                    shareButton.style.background = '#4caf50';
+                    setTimeout(() => {
+                        shareButton.textContent = originalText;
+                    }, 2000);
+                }
+
+            } catch (error) {
+                console.error('Erro ao compartilhar magia:', error);
+                alert('Erro ao compartilhar magia no chat. Verifique o console para mais detalhes.');
+            }
         }
 
         // Função para atualizar o conteúdo da aba
@@ -3694,11 +3864,6 @@
         function filterSpells(searchTerm) {
             console.log(`Filtrando magias por: ${searchTerm}`);
 
-            // Obter valores dos filtros
-            const selectedCircle = circleFilter.value;
-            const selectedSchool = schoolFilter.value;
-            const selectedSort = sortFilter.value;
-
             // Filtrar magias localmente
             const spellsCache = window.grimorioSpellsCache || [];
             if (spellsCache && spellsCache.length > 0) {
@@ -3709,17 +3874,19 @@
                     filteredSpells = filteredSpells.filter(spell => spell.tradition === activeTab);
                 }
 
-                // Filtrar por escola
-                if (selectedSchool && selectedSchool !== 'Todas as Escolas') {
-                    filteredSpells = filteredSpells.filter(spell => spell.escola === selectedSchool);
+                // Filtrar por escolas selecionadas
+                if (selectedSchools.size > 0) {
+                    filteredSpells = filteredSpells.filter(spell =>
+                        selectedSchools.has(spell.escola)
+                    );
                 }
 
-                // Filtrar por círculo
-                if (selectedCircle && selectedCircle !== 'Todos os Círculos') {
-                    const circleNumber = selectedCircle.match(/\d+/)?.[0];
-                    if (circleNumber) {
-                        filteredSpells = filteredSpells.filter(spell => spell.circulo === circleNumber);
-                    }
+                // Filtrar por círculos selecionados
+                if (selectedCircles.size > 0) {
+                    filteredSpells = filteredSpells.filter(spell => {
+                        const circleNumber = spell.circulo;
+                        return selectedCircles.has(`${circleNumber}º Círculo`);
+                    });
                 }
 
                 // Filtrar por termo de busca
@@ -3733,27 +3900,8 @@
                     );
                 }
 
-                // Ordenar magias
-                if (selectedSort) {
-                    filteredSpells.sort((a, b) => {
-                        switch (selectedSort) {
-                            case 'Nome A-Z':
-                                return a.name.localeCompare(b.name);
-                            case 'Nome Z-A':
-                                return b.name.localeCompare(a.name);
-                            case 'Círculo Crescente':
-                                return parseInt(a.circulo) - parseInt(b.circulo);
-                            case 'Círculo Decrescente':
-                                return parseInt(b.circulo) - parseInt(a.circulo);
-                            case 'Escola A-Z':
-                                return a.escola.localeCompare(b.escola);
-                            case 'Escola Z-A':
-                                return b.escola.localeCompare(a.escola);
-                            default:
-                                return 0;
-                        }
-                    });
-                }
+                // Ordenar magias por nome (padrão)
+                filteredSpells.sort((a, b) => a.name.localeCompare(b.name));
 
                 // Atualizar o cache temporariamente com as magias filtradas
                 const originalCache = window.grimorioSpellsCache;
@@ -3771,145 +3919,7 @@
         // Aplica scrollbars customizadas
         applyDirectScrollbarStyles(popup, 'purple');
 
-        // Função para mostrar estatísticas das magias
-        function showSpellStatistics() {
-            const spellsCache = window.grimorioSpellsCache || [];
-            if (spellsCache.length === 0) {
-                alert('Nenhuma magia carregada para gerar estatísticas.');
-                return;
-            }
 
-            // Calcular estatísticas
-            const stats = {
-                total: spellsCache.length,
-                byTradition: {},
-                byCircle: {},
-                bySchool: {}
-            };
-
-            spellsCache.forEach(spell => {
-                // Por tradição
-                stats.byTradition[spell.tradition] = (stats.byTradition[spell.tradition] || 0) + 1;
-
-                // Por círculo
-                stats.byCircle[spell.circulo] = (stats.byCircle[spell.circulo] || 0) + 1;
-
-                // Por escola
-                stats.bySchool[spell.escola] = (stats.bySchool[spell.escola] || 0) + 1;
-            });
-
-            // Criar popup de estatísticas
-            const statsPopup = document.createElement('div');
-            statsPopup.style.position = 'fixed';
-            statsPopup.style.top = '50%';
-            statsPopup.style.left = '50%';
-            statsPopup.style.transform = 'translate(-50%, -50%)';
-            statsPopup.style.background = 'rgba(30, 30, 40, 0.98)';
-            statsPopup.style.border = '2px solid #9c27b0';
-            statsPopup.style.borderRadius = '12px';
-            statsPopup.style.padding = '24px';
-            statsPopup.style.zIndex = '10004';
-            statsPopup.style.maxWidth = '500px';
-            statsPopup.style.maxHeight = '80vh';
-            statsPopup.style.overflowY = 'auto';
-            statsPopup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-
-            // Cabeçalho
-            const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.justifyContent = 'space-between';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '20px';
-
-            const title = document.createElement('h3');
-            title.textContent = 'Estatísticas do Grimório';
-            title.style.color = '#9c27b0';
-            title.style.margin = '0';
-            title.style.fontSize = '20px';
-            title.style.fontWeight = 'bold';
-
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = '×';
-            closeBtn.style.background = 'none';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = '#9c27b0';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.padding = '0';
-            closeBtn.style.width = '32px';
-            closeBtn.style.height = '32px';
-            closeBtn.onclick = () => statsPopup.remove();
-
-            header.appendChild(title);
-            header.appendChild(closeBtn);
-
-            // Conteúdo das estatísticas
-            const content = document.createElement('div');
-
-            // Total
-            const totalSection = createStatsSection('Total de Magias', stats.total.toString());
-            content.appendChild(totalSection);
-
-            // Por tradição
-            const traditionSection = createStatsSection('Por Tradição', formatStatsObject(stats.byTradition));
-            content.appendChild(traditionSection);
-
-            // Por círculo
-            const circleSection = createStatsSection('Por Círculo', formatStatsObject(stats.byCircle));
-            content.appendChild(circleSection);
-
-            // Por escola
-            const schoolSection = createStatsSection('Por Escola', formatStatsObject(stats.bySchool));
-            content.appendChild(schoolSection);
-
-            statsPopup.appendChild(header);
-            statsPopup.appendChild(content);
-
-            // Overlay
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'rgba(0,0,0,0.5)';
-            overlay.style.zIndex = '10003';
-            overlay.onclick = () => {
-                overlay.remove();
-                statsPopup.remove();
-            };
-
-            document.body.appendChild(overlay);
-            document.body.appendChild(statsPopup);
-
-            function createStatsSection(title, content) {
-                const section = document.createElement('div');
-                section.style.marginBottom = '20px';
-
-                const sectionTitle = document.createElement('h4');
-                sectionTitle.textContent = title;
-                sectionTitle.style.color = '#9c27b0';
-                sectionTitle.style.margin = '0 0 10px 0';
-                sectionTitle.style.fontSize = '16px';
-                sectionTitle.style.fontWeight = 'bold';
-
-                const sectionContent = document.createElement('div');
-                sectionContent.innerHTML = content;
-                sectionContent.style.color = '#fff';
-                sectionContent.style.fontSize = '14px';
-                sectionContent.style.lineHeight = '1.4';
-
-                section.appendChild(sectionTitle);
-                section.appendChild(sectionContent);
-                return section;
-            }
-
-            function formatStatsObject(obj) {
-                return Object.entries(obj)
-                    .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
-                    .join('<br>');
-            }
-        }
     }
 
     // Função para criar o popup de spells
@@ -5841,7 +5851,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -5854,19 +5864,8 @@
             const template = `&{template:t20-info}{{infoname=${prato.nome}}}{{description=${prato.descricao} ${prato.bonus}}}`;
             sendToChat(template);
             showSuccessNotification(`Prato "${prato.nome}" compartilhado no chat!`);
-
-            // Fechar todos os popups relacionados aos pratos especiais para limpar a cena
-            const pratosPopup = document.getElementById('pratos-popup');
-            if (pratosPopup) pratosPopup.remove();
-            const pratosOverlay = document.getElementById('pratos-overlay');
-            if (pratosOverlay) pratosOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -6178,7 +6177,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -6191,19 +6190,8 @@
             const template = `&{template:t20-info}{{infoname=${bebida.nome}}}{{description=${bebida.descricao} ${bebida.efeito}}}`;
             sendToChat(template);
             showSuccessNotification(`Bebida "${bebida.nome}" compartilhada no chat!`);
-
-            // Fechar todos os popups relacionados às bebidas para limpar a cena
-            const bebidasPopup = document.getElementById('bebidas-popup');
-            if (bebidasPopup) bebidasPopup.remove();
-            const bebidasOverlay = document.getElementById('bebidas-overlay');
-            if (bebidasOverlay) bebidasOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -6514,7 +6502,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -6527,19 +6515,8 @@
             const template = `&{template:t20-info}{{infoname=${pocao.nome}}}{{description=${pocao.descricao} ${pocao.efeito}}}`;
             sendToChat(template);
             showSuccessNotification(`Poção "${pocao.nome}" compartilhada no chat!`);
-
-            // Fechar todos os popups relacionados às poções para limpar a cena
-            const pocoesPopup = document.getElementById('pocoes-popup');
-            if (pocoesPopup) pocoesPopup.remove();
-            const pocoesOverlay = document.getElementById('pocoes-overlay');
-            if (pocoesOverlay) pocoesOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -8098,6 +8075,57 @@
         if (skillDetailOverlay) {
             skillDetailOverlay.remove();
         }
+    }
+
+    // Função para fechar todos os popups abertos
+    function closeAllPopups() {
+        // Lista de todos os popups e overlays conhecidos
+        const popupIds = [
+            // Popups principais
+            'conditions-popup', 'conditions-overlay',
+            'condition-details-popup', 'condition-details-overlay',
+            'avatar-popup', 'avatar-overlay',
+            'skills-popup', 'skills-overlay',
+            'skill-detail-modal', 'skill-detail-overlay',
+            'misc-popup', 'misc-overlay',
+            'grimorio-popup', 'grimorio-overlay',
+            'spells-popup', 'spells-overlay',
+            'spell-cast-popup', 'spell-cast-overlay',
+            'pratos-popup', 'pratos-overlay',
+            'prato-detail-modal', 'prato-detail-overlay',
+            'bebidas-popup', 'bebidas-overlay',
+            'bebida-detail-modal', 'bebida-detail-overlay',
+            'pocoes-popup', 'pocoes-overlay',
+            'pocao-detail-modal', 'pocao-detail-overlay',
+            'config-modal', 'config-overlay',
+            'maneuvers-popup', 'maneuvers-overlay',
+            'attack-effects-popup', 'attack-effects-overlay',
+            'hunter-class-overlay',
+            'race-detail-overlay',
+            'divinity-detail-overlay',
+            'animal-companion-overlay',
+            'abilities-popup', 'abilities-overlay',
+            'power-cast-popup', 'power-cast-overlay'
+        ];
+
+        // Remove todos os popups e overlays
+        popupIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.remove();
+            }
+        });
+
+        // Também remove qualquer elemento com z-index alto que possa ser um popup
+        const highZIndexElements = document.querySelectorAll('[style*="z-index: 1000"], [style*="z-index: 10000"], [style*="z-index: 10001"], [style*="z-index: 10002"], [style*="z-index: 10003"]');
+        highZIndexElements.forEach(element => {
+            if (element.style.position === 'fixed' &&
+                (element.style.background === 'rgba(0,0,0,0.5)' ||
+                    element.style.background === 'rgba(0,0,0,0.7)' ||
+                    element.style.background.includes('rgba(30,30,40'))) {
+                element.remove();
+            }
+        });
     }
     // Função para criar o modal de detalhamento da skill
     function createSkillDetailModal(skillName) {
@@ -16714,11 +16742,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         createFavoritableCardWithPreset: function (preset, config) {
             const {
                 title,
+                summary,
                 description,
                 chips = [],
                 onFavorite = null,
                 onUnfavorite = null,
-                isFavorited = false
+                onFavoriteToggle = null,
+                onClick = null,
+                isFavorite = false
             } = config;
 
             const card = document.createElement('div');
@@ -16741,6 +16772,17 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 card.style.borderColor = '#6ec6ff';
             };
 
+            // Add click handler for the card
+            if (onClick) {
+                card.onclick = (e) => {
+                    // Don't trigger if clicking on favorite button
+                    if (e.target === favoriteBtn) {
+                        return;
+                    }
+                    onClick(e);
+                };
+            }
+
             // Título
             const titleElement = document.createElement('div');
             titleElement.textContent = title;
@@ -16751,7 +16793,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
             // Descrição
             const descElement = document.createElement('div');
-            descElement.textContent = description;
+            descElement.textContent = summary || description || '';
             descElement.style.color = '#ecf0f1';
             descElement.style.fontSize = '12px';
             descElement.style.lineHeight = '1.3';
@@ -16777,13 +16819,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
             // Botão de favorito
             const favoriteBtn = document.createElement('button');
-            favoriteBtn.innerHTML = isFavorited ? '★' : '☆';
+            favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
             favoriteBtn.style.position = 'absolute';
             favoriteBtn.style.top = '8px';
             favoriteBtn.style.right = '8px';
             favoriteBtn.style.background = 'none';
             favoriteBtn.style.border = 'none';
-            favoriteBtn.style.color = isFavorited ? '#ffd700' : '#666';
+            favoriteBtn.style.color = isFavorite ? '#ffd700' : '#666';
             favoriteBtn.style.fontSize = '16px';
             favoriteBtn.style.cursor = 'pointer';
             favoriteBtn.style.padding = '0';
@@ -16795,7 +16837,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
             favoriteBtn.onclick = (e) => {
                 e.stopPropagation();
-                if (isFavorited) {
+                if (onFavoriteToggle) {
+                    onFavoriteToggle();
+                } else if (isFavorite) {
                     if (onUnfavorite) onUnfavorite();
                 } else {
                     if (onFavorite) onFavorite();
