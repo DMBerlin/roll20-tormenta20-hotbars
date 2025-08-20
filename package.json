@@ -10,7 +10,9 @@
     "lint": "eslint --fix",
     "build": "node src/core/build/build.js",
     "update-version": "node src/core/versioning/update-version.js",
-    "dev": "node src/core/dev/server.js"
+    "dev": "node src/core/dev/server.js",
+    "test-spells": "node src/core/build/test-spells-generation.js",
+    "generate-spells-data": "node src/core/build/generate-spells-data.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",

@@ -1,0 +1,352 @@
+module.exports = {
+  "_id": "h98JyQAldmgexmzR",
+  "name": "Visão da Verdade",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/visao-da-verdade.webp",
+  "effects": [
+    {
+      "_id": "BWFXuE9D8h1DWj67",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "1",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "Toque",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "alvo",
+          "value": "1 criatura",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.h98JyQAldmgexmzR",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para toque e o alvo para 1 criatura.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!h98JyQAldmgexmzR.BWFXuE9D8h1DWj67"
+    },
+    {
+      "_id": "l3aogOkppbIgUFgD",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "1",
+          "aumenta": false,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false
+        }
+      },
+      "changes": [
+        {
+          "key": "system.pericias.perc.bonus",
+          "mode": 2,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.h98JyQAldmgexmzR",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "além do normal, o alvo fica com sentidos apurados; ele recebe +10 em todos os testes de Percepção.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!h98JyQAldmgexmzR.l3aogOkppbIgUFgD"
+    },
+    {
+      "_id": "W0nnBmflVSGSVySF",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "2",
+          "aumenta": false,
+          "attack": false,
+          "skill": false,
+          "ability": false,
+          "power": false,
+          "spell": false,
+          "consumable": false,
+          "durationScene": false
+        }
+      },
+      "changes": [
+        {
+          "key": "system.pericias.intu.bonus",
+          "mode": 2,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.h98JyQAldmgexmzR",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "além do normal, o alvo escuta falsidades; ele recebe +10 em todos os testes de Intuição.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!h98JyQAldmgexmzR.W0nnBmflVSGSVySF"
+    },
+    {
+      "_id": "FQkmvLSsOHYIA1Lu",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "4",
+          "aumenta": false
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.h98JyQAldmgexmzR",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "além do normal, o alvo enxerga através de paredes e barreiras com 30cm de espessura ou menos (as paredes e barreiras parecem translúcidas).",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!h98JyQAldmgexmzR.FQkmvLSsOHYIA1Lu"
+    },
+    {
+      "_id": "kcliNEvn1MIfvLBt",
+      "changes": [
+        {
+          "key": "system.pericias.perc.bonus",
+          "mode": 2,
+          "value": "0",
+          "priority": null
+        },
+        {
+          "key": "system.pericias.intu.bonus",
+          "mode": 2,
+          "value": "0",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Item.5GWVq233XBgX05To",
+      "transfer": false,
+      "flags": {
+        "tormenta20": {
+          "onuse": false,
+          "durationScene": true
+        }
+      },
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Visão da Verdade",
+      "img": "systems/tormenta20/icons/magias/visao-da-verdade.webp",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!h98JyQAldmgexmzR.kcliNEvn1MIfvLBt"
+    }
+  ],
+  "folder": "hwpmUl6kXgb0bOXp",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Voc&ecirc; enxerga a forma real das coisas. Voc&ecirc; pode ver atrav&eacute;s de camuflagem e escurid&atilde;o (normais e m&aacute;gicas), assim como efeitos de ilus&atilde;o e transmuta&ccedil;&atilde;o (enxergando a verdade como formas transl&uacute;cidas ou sobrepostas).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 211",
+    "ativacao": {
+      "execução": "move",
+      "custo": 10,
+      "qtd": "",
+      "condição": "",
+      "special": ""
+    },
+    "duração": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "pessoal",
+    "alvo": "você",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "sab",
+      "bonus": 0,
+      "txt": ""
+    },
+    "rolls": [],
+    "tipo": "uni",
+    "circulo": "4",
+    "preparada": false,
+    "escola": "adv",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310462780,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!h98JyQAldmgexmzR"
+};

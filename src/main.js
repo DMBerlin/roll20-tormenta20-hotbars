@@ -11,6 +11,8 @@
 (function () {
     'use strict';
 
+
+
     // Sistema de favoritos para skills
     const FAVORITES_KEY = 'roll20-hotbar-favorites';
     // Sistema de avatar do personagem
@@ -25,14 +27,142 @@
     const SELECTED_RACE_KEY = 'roll20-hotbar-selected-race';
     // Sistema de tipo de raça selecionado (para raças com subtipos)
     const SELECTED_RACE_TYPE_KEY = 'roll20-hotbar-selected-race-type';
+    // Sistema de magias aprendidas
+    const LEARNED_SPELLS_KEY = 'roll20-hotbar-learned-spells';
 
     // NOVO: Sistema de cache de imagens
     const IMAGE_CACHE_KEY = 'roll20-hotbar-image-cache';
     const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
 
+    // Sistema de fallback para ícones de magias
+    const TORMENTA20_ICONS_BASE_URL = 'https://gitlab.com/vizael/Tormenta20/-/raw/master/icons/magias/';
+    const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
+
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
 
+
+    // Funções para gerenciamento de ícones com fallback
+    function getSpellIconCache() {
+        try {
+            const cached = localStorage.getItem(IMAGE_CACHE_KEY);
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                if (parsed.version === IMAGE_CACHE_VERSION) {
+                    return parsed.data || {};
+                }
+            }
+        } catch (error) {
+            console.warn('Erro ao carregar cache de ícones de magias:', error);
+        }
+        return {};
+    }
+
+    function saveSpellIconCache(cache) {
+        try {
+            localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify({
+                version: IMAGE_CACHE_VERSION,
+                data: cache,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.warn('Erro ao salvar cache de ícones de magias:', error);
+        }
+    }
+
+    function normalizeSpellName(spellName) {
+        // Normaliza o nome da magia para corresponder ao nome do arquivo no GitLab
+        return spellName
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+            .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais
+            .replace(/\s+/g, '-') // Substitui espaços por hífens
+            .replace(/-+/g, '-') // Remove hífens duplicados
+            .replace(/^-|-$/g, ''); // Remove hífens no início e fim
+    }
+
+    function getTormenta20IconUrl(spellName) {
+        const normalizedName = normalizeSpellName(spellName);
+        return `${TORMENTA20_ICONS_BASE_URL}${normalizedName}.webp`;
+    }
+
+    function testImageUrl(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+            // Timeout de 5 segundos
+            setTimeout(() => resolve(false), 5000);
+        });
+    }
+
+    async function loadSpellIcon(spellName, originalIconUrl) {
+        const cache = getSpellIconCache();
+        const cacheKey = `spell_${spellName}`;
+
+        // Verificar se já temos o ícone em cache
+        if (cache[cacheKey]) {
+            return cache[cacheKey];
+        }
+
+        let finalIconUrl = DEFAULT_ICON;
+
+        try {
+            // Verificar se o ícone original é um caminho relativo do Tormenta20
+            const isTormenta20RelativePath = originalIconUrl &&
+                originalIconUrl.startsWith('systems/tormenta20/icons/magias/') &&
+                originalIconUrl.endsWith('.webp');
+
+            if (isTormenta20RelativePath) {
+                // Se é um caminho relativo do Tormenta20, converter para URL completa
+                const iconName = originalIconUrl.replace('systems/tormenta20/icons/magias/', '').replace('.webp', '');
+                const tormenta20Url = `${TORMENTA20_ICONS_BASE_URL}${iconName}.webp`;
+
+                const tormenta20Works = await testImageUrl(tormenta20Url);
+                if (tormenta20Works) {
+                    finalIconUrl = tormenta20Url;
+                } else {
+                    // Se falhar, tentar com o nome normalizado da magia
+                    const normalizedUrl = getTormenta20IconUrl(spellName);
+                    const normalizedWorks = await testImageUrl(normalizedUrl);
+                    if (normalizedWorks) {
+                        finalIconUrl = normalizedUrl;
+                    }
+                }
+            } else if (originalIconUrl && originalIconUrl !== DEFAULT_ICON) {
+                // Se é uma URL do Wowhead ou outra fonte
+                const originalWorks = await testImageUrl(originalIconUrl);
+                if (originalWorks) {
+                    finalIconUrl = originalIconUrl;
+                } else {
+                    // Se falhar, tentar o ícone do Tormenta20
+                    const tormenta20Url = getTormenta20IconUrl(spellName);
+                    const tormenta20Works = await testImageUrl(tormenta20Url);
+                    if (tormenta20Works) {
+                        finalIconUrl = tormenta20Url;
+                    }
+                }
+            } else {
+                // Se não há ícone original, tentar diretamente o Tormenta20
+                const tormenta20Url = getTormenta20IconUrl(spellName);
+                const tormenta20Works = await testImageUrl(tormenta20Url);
+                if (tormenta20Works) {
+                    finalIconUrl = tormenta20Url;
+                }
+            }
+
+            // Salvar no cache
+            cache[cacheKey] = finalIconUrl;
+            saveSpellIconCache(cache);
+
+        } catch (error) {
+            console.warn(`Erro ao carregar ícone para magia "${spellName}":`, error);
+        }
+
+        return finalIconUrl;
+    }
 
 
     // Componente reutilizável para botões da hotbar
@@ -905,7 +1035,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -918,6 +1048,8 @@
             // Envia condição para o chat
             sendConditionToChat(conditionData.nome);
             showSuccessNotification(`Condição "${conditionData.nome}" compartilhada no chat!`);
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -1890,6 +2022,46 @@
         return learnedPowers < availablePowers;
     }
 
+    // Funções para gerenciar magias aprendidas
+    function getLearnedSpells() {
+        try {
+            const spells = localStorage.getItem(LEARNED_SPELLS_KEY);
+            return spells ? JSON.parse(spells) : [];
+        } catch (error) {
+            console.log('Erro ao carregar magias aprendidas:', error);
+            return [];
+        }
+    }
+
+    function saveLearnedSpells(spells) {
+        try {
+            localStorage.setItem(LEARNED_SPELLS_KEY, JSON.stringify(spells));
+        } catch (error) {
+            console.log('Erro ao salvar magias aprendidas:', error);
+        }
+    }
+
+    function toggleLearnedSpell(spellName) {
+        const learnedSpells = getLearnedSpells();
+        const index = learnedSpells.indexOf(spellName);
+
+        if (index > -1) {
+            learnedSpells.splice(index, 1);
+            showWarningNotification(`Magia "${spellName}" removida da lista de aprendidas.`);
+        } else {
+            learnedSpells.push(spellName);
+            showSuccessNotification(`Magia "${spellName}" adicionada à lista de aprendidas!`);
+        }
+
+        saveLearnedSpells(learnedSpells);
+        return learnedSpells;
+    }
+
+    function isSpellLearned(spellName) {
+        const learnedSpells = getLearnedSpells();
+        return learnedSpells.includes(spellName);
+    }
+
     // Função utilitária para verificar se o personagem possui uma habilidade
     function hasAbility(abilityName) {
         const learnedAbilities = getLearnedAbilities();
@@ -2762,10 +2934,934 @@
         potionsCard.appendChild(potionsDesc);
         modulesList.appendChild(potionsCard);
 
+        // Card: Grimório de Magias
+        const grimorioCard = document.createElement('div');
+        grimorioCard.style.background = '#23243a';
+        grimorioCard.style.border = '1.5px solid #ffb86c';
+        grimorioCard.style.borderRadius = '8px';
+        grimorioCard.style.padding = '16px';
+        grimorioCard.style.cursor = 'pointer';
+        grimorioCard.style.transition = 'all 0.2s';
+        grimorioCard.onmouseover = () => {
+            grimorioCard.style.background = '#2d2e4a';
+        };
+        grimorioCard.onmouseout = () => {
+            grimorioCard.style.background = '#23243a';
+        };
+        grimorioCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createGrimorioPopup();
+        };
+        const grimorioTitle = document.createElement('div');
+        grimorioTitle.textContent = 'Grimório de Magias';
+        grimorioTitle.style.color = '#ffb86c';
+        grimorioTitle.style.fontSize = '16px';
+        grimorioTitle.style.fontWeight = 'bold';
+        grimorioTitle.style.marginBottom = '6px';
+        grimorioCard.appendChild(grimorioTitle);
+        const grimorioDesc = document.createElement('div');
+        grimorioDesc.textContent = 'Catálogo completo de magias organizadas por tradições e círculos.';
+        grimorioDesc.style.color = '#ecf0f1';
+        grimorioDesc.style.fontSize = '13px';
+        grimorioCard.appendChild(grimorioDesc);
+        modulesList.appendChild(grimorioCard);
+
         document.body.appendChild(popup);
 
         // Aplica scrollbars customizadas
         applyDirectScrollbarStyles(popup, 'orange');
+    }
+
+    // Função para carregar magias diretamente
+    async function loadSpellsDirectly() {
+        const spells = [];
+
+        // Mapeamento de escolas
+        const escolaMap = {
+            'abj': 'Abjuração',
+            'adv': 'Adivinhação',
+            'con': 'Conjuração',
+            'enc': 'Encantamento',
+            'evo': 'Evocação',
+            'ilu': 'Ilusão',
+            'nec': 'Necromancia',
+            'tra': 'Transmutação'
+        };
+
+        // Mapeamento de execução
+        const execucaoMap = {
+            'ação': 'Ação',
+            'action': 'Ação',
+            'bonus': 'Ação Bônus',
+            'reacao': 'Reação',
+            'reaction': 'Reação',
+            'free': 'Livre',
+            'full': 'Ação Completa',
+            'minute': '1 Minuto',
+            'hour': '1 Hora',
+            'move': 'Movimento',
+            'special': 'Especial',
+            'ritual': 'Ritual'
+        };
+
+        // Mapeamento de círculos
+        const circuloMap = {
+            '1': '1º Círculo',
+            '2': '2º Círculo',
+            '3': '3º Círculo',
+            '4': '4º Círculo',
+            '5': '5º Círculo'
+        };
+
+        // Dados de magias gerados dinamicamente durante o build
+        const spellsData = require('./generated-spells-data.js');
+
+        // Processar dados embutidos
+        for (const tradition in spellsData) {
+            for (const circle in spellsData[tradition]) {
+                for (const school in spellsData[tradition][circle]) {
+                    for (const spellKey in spellsData[tradition][circle][school]) {
+                        const spell = spellsData[tradition][circle][school][spellKey];
+                        if (spell.system && spell.system.circulo) {
+                            spells.push({
+                                ...spell,
+                                tradition: tradition,
+                                escola: escolaMap[spell.system.escola] || spell.system.escola,
+                                execucao: execucaoMap[spell.system.ativacao?.execução] || spell.system.ativacao?.execução || '',
+                                circulo: spell.system.circulo,
+                                circuloDisplay: circuloMap[spell.system.circulo] || `${spell.system.circulo}º Círculo`
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        console.log(`Carregadas ${spells.length} magias do arquivo JSON`);
+        return spells;
+    }
+
+
+
+    // Função para mostrar detalhes da magia (global)
+    function showSpellDetails(spell) {
+        // Overlay para fechar
+        const spellDetailsOverlay = document.createElement('div');
+        spellDetailsOverlay.style.position = 'fixed';
+        spellDetailsOverlay.style.top = '0';
+        spellDetailsOverlay.style.left = '0';
+        spellDetailsOverlay.style.width = '100%';
+        spellDetailsOverlay.style.height = '100%';
+        spellDetailsOverlay.style.background = 'rgba(0,0,0,0.5)';
+        spellDetailsOverlay.style.zIndex = '10001';
+
+        // Criar popup de detalhes da magia
+        const detailsPopup = document.createElement('div');
+        detailsPopup.style.position = 'fixed';
+        detailsPopup.style.top = '50%';
+        detailsPopup.style.left = '50%';
+        detailsPopup.style.transform = 'translate(-50%, -50%)';
+        detailsPopup.style.background = 'rgba(30, 30, 40, 0.98)';
+        detailsPopup.style.border = '2px solid #9c27b0';
+        detailsPopup.style.borderRadius = '12px';
+        detailsPopup.style.padding = '24px';
+        detailsPopup.style.zIndex = '10002';
+        detailsPopup.style.maxWidth = '600px';
+        detailsPopup.style.maxHeight = '80vh';
+        detailsPopup.style.overflowY = 'auto';
+        detailsPopup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+
+        // Função para fechar o popup
+        function closePopup() {
+            spellDetailsOverlay.remove();
+            detailsPopup.remove();
+        }
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+
+        // Container para título e ícone
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.alignItems = 'center';
+        titleContainer.style.flex = '1';
+
+        // Ícone da magia com fallback
+        const icon = document.createElement('img');
+        icon.style.width = '48px';
+        icon.style.height = '48px';
+        icon.style.borderRadius = '6px';
+        icon.style.marginRight = '16px';
+        icon.style.border = '2px solid #9c27b0';
+
+        // Carregar ícone com fallback
+        loadSpellIcon(spell.name, spell.img).then(iconUrl => {
+            icon.src = iconUrl;
+        }).catch(error => {
+            console.warn(`Erro ao carregar ícone para "${spell.name}":`, error);
+            icon.src = DEFAULT_ICON;
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = spell.name;
+        title.style.color = '#9c27b0';
+        title.style.margin = '0';
+        title.style.fontSize = '24px';
+        title.style.fontWeight = 'bold';
+
+        titleContainer.appendChild(icon);
+        titleContainer.appendChild(title);
+
+        // Usar o componente de close button
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#9c27b0',
+            onClick: closePopup
+        });
+
+        header.appendChild(titleContainer);
+        header.appendChild(closeBtn.render());
+
+        // Informações da magia
+        const info = document.createElement('div');
+        info.style.display = 'flex';
+        info.style.gap = '8px';
+        info.style.marginBottom = '16px';
+        info.style.flexWrap = 'wrap';
+
+        const circleChip = document.createElement('span');
+        circleChip.textContent = spell.circuloDisplay || `${spell.circulo}º Círculo`;
+        circleChip.style.background = '#9c27b0';
+        circleChip.style.color = '#fff';
+        circleChip.style.padding = '6px 12px';
+        circleChip.style.borderRadius = '16px';
+        circleChip.style.fontSize = '14px';
+        circleChip.style.fontWeight = 'bold';
+
+        const schoolChip = document.createElement('span');
+        schoolChip.textContent = spell.escola;
+        schoolChip.style.background = '#4caf50';
+        schoolChip.style.color = '#fff';
+        schoolChip.style.padding = '6px 12px';
+        schoolChip.style.borderRadius = '16px';
+        schoolChip.style.fontSize = '14px';
+        schoolChip.style.fontWeight = 'bold';
+
+        const executionChip = document.createElement('span');
+        executionChip.textContent = spell.execucao;
+        executionChip.style.background = '#ff9800';
+        executionChip.style.color = '#fff';
+        executionChip.style.padding = '6px 12px';
+        executionChip.style.borderRadius = '16px';
+        executionChip.style.fontSize = '14px';
+        executionChip.style.fontWeight = 'bold';
+
+        info.appendChild(circleChip);
+        info.appendChild(schoolChip);
+        info.appendChild(executionChip);
+
+        // Informações detalhadas da magia
+        const detailsContainer = document.createElement('div');
+        detailsContainer.style.marginBottom = '20px';
+
+        const detailsGrid = document.createElement('div');
+        detailsGrid.style.display = 'grid';
+        detailsGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+        detailsGrid.style.gap = '12px';
+        detailsGrid.style.marginBottom = '16px';
+
+        // Alcance
+        if (spell.system?.alcance) {
+            const rangeItem = createDetailItem('Alcance', spell.system.alcance);
+            detailsGrid.appendChild(rangeItem);
+        }
+
+        // Duração
+        if (spell.system?.duracao) {
+            const durationItem = createDetailItem('Duração', spell.system.duracao);
+            detailsGrid.appendChild(durationItem);
+        }
+
+        // Alvo/Área
+        if (spell.system?.alvo) {
+            const targetItem = createDetailItem('Alvo/Área', spell.system.alvo);
+            detailsGrid.appendChild(targetItem);
+        }
+
+        // Resistência
+        if (spell.system?.resistencia) {
+            const resistanceItem = createDetailItem('Resistência', spell.system.resistencia);
+            detailsGrid.appendChild(resistanceItem);
+        }
+
+        // Custo de PM
+        if (spell.system?.custo) {
+            const costItem = createDetailItem('Custo PM', spell.system.custo);
+            detailsGrid.appendChild(costItem);
+        }
+
+        // Tradição
+        const traditionItem = createDetailItem('Tradição', spell.tradition.charAt(0).toUpperCase() + spell.tradition.slice(1));
+        detailsGrid.appendChild(traditionItem);
+
+        detailsContainer.appendChild(detailsGrid);
+
+        // Descrição completa
+        const description = document.createElement('div');
+        description.innerHTML = spell.system?.description?.value || 'Descrição não disponível';
+        description.style.color = '#fff';
+        description.style.fontSize = '16px';
+        description.style.lineHeight = '1.6';
+        description.style.marginBottom = '16px';
+
+        // Função auxiliar para criar itens de detalhes
+        function createDetailItem(label, value) {
+            const item = document.createElement('div');
+            item.style.background = 'rgba(35, 36, 58, 0.8)';
+            item.style.border = '1px solid #9c27b0';
+            item.style.borderRadius = '8px';
+            item.style.padding = '12px';
+
+            const labelElement = document.createElement('div');
+            labelElement.textContent = label;
+            labelElement.style.color = '#9c27b0';
+            labelElement.style.fontSize = '12px';
+            labelElement.style.fontWeight = 'bold';
+            labelElement.style.marginBottom = '4px';
+            labelElement.style.textTransform = 'uppercase';
+
+            const valueElement = document.createElement('div');
+            valueElement.textContent = value;
+            valueElement.style.color = '#fff';
+            valueElement.style.fontSize = '14px';
+
+            item.appendChild(labelElement);
+            item.appendChild(valueElement);
+            return item;
+        }
+
+        detailsPopup.appendChild(header);
+        detailsPopup.appendChild(info);
+        detailsPopup.appendChild(detailsContainer);
+        detailsPopup.appendChild(description);
+
+        // Container para botões
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.gap = '10px';
+        buttonContainer.style.marginTop = '20px';
+
+        // Verificar se a magia já foi aprendida
+        const isLearned = isSpellLearned(spell.name);
+
+        // Botão Aprender/Esquecer
+        const learnButton = document.createElement('button');
+        learnButton.textContent = isLearned ? 'Esquecer' : 'Aprender';
+        learnButton.style.background = isLearned ? '#f44336' : '#2196f3';
+        learnButton.style.color = '#fff';
+        learnButton.style.border = 'none';
+        learnButton.style.borderRadius = '8px';
+        learnButton.style.padding = '12px 20px';
+        learnButton.style.fontSize = '14px';
+        learnButton.style.fontWeight = 'bold';
+        learnButton.style.cursor = 'pointer';
+        learnButton.style.flex = '1';
+        learnButton.style.transition = 'all 0.2s ease';
+
+        learnButton.onmouseover = () => {
+            learnButton.style.background = isLearned ? '#d32f2f' : '#1976d2';
+            learnButton.style.transform = 'translateY(-1px)';
+        };
+
+        learnButton.onmouseout = () => {
+            learnButton.style.background = isLearned ? '#f44336' : '#2196f3';
+            learnButton.style.transform = 'translateY(0)';
+        };
+
+        learnButton.onclick = () => {
+            toggleLearnedSpell(spell.name);
+            closePopup(); // Fechar o popup de detalhes
+        };
+
+        // Botão de compartilhar
+        const shareButton = document.createElement('button');
+        shareButton.textContent = 'Compartilhar';
+        shareButton.style.background = '#4caf50';
+        shareButton.style.color = '#fff';
+        shareButton.style.border = 'none';
+        shareButton.style.borderRadius = '8px';
+        shareButton.style.padding = '12px 20px';
+        shareButton.style.fontSize = '14px';
+        shareButton.style.fontWeight = 'bold';
+        shareButton.style.cursor = 'pointer';
+        shareButton.style.flex = '1';
+        shareButton.style.transition = 'all 0.2s ease';
+
+        shareButton.onmouseover = () => {
+            shareButton.style.background = '#45a049';
+            shareButton.style.transform = 'translateY(-1px)';
+        };
+
+        shareButton.onmouseout = () => {
+            shareButton.style.background = '#4caf50';
+            shareButton.style.transform = 'translateY(0)';
+        };
+
+        shareButton.onclick = () => {
+            shareSpellToChat(spell);
+            // Fechar todos os popups abertos
+            closeAllPopups();
+        };
+
+        buttonContainer.appendChild(learnButton);
+        buttonContainer.appendChild(shareButton);
+        detailsPopup.appendChild(buttonContainer);
+
+        // Configurar overlay para fechar ao clicar
+        spellDetailsOverlay.onclick = closePopup;
+
+        document.body.appendChild(spellDetailsOverlay);
+        document.body.appendChild(detailsPopup);
+    }
+
+    // Função para compartilhar magia no chat usando template T20 (global)
+    function shareSpellToChat(spell) {
+        try {
+            // Obter nome do personagem usando a mesma função do sistema existente
+            const charName = getCharacterName();
+
+            // Preparar dados da magia
+            const spellData = {
+                name: spell.name,
+                type: spell.tradition.charAt(0).toUpperCase() + spell.tradition.slice(1),
+                execution: spell.system?.ativacao?.type || 'Padrão',
+                duration: spell.system?.duracao || 'Cena',
+                range: spell.system?.alcance || 'Curto',
+                target: spell.system?.alvo || '1 Alvo',
+                resistance: spell.system?.resistencia || 'Nenhuma',
+                description: spell.system?.description?.value || 'Descrição não disponível'
+            };
+
+            // Criar template T20 usando o mesmo formato do sistema existente
+            const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellData.name}}}{{type=${spellData.type}}}{{execution=${spellData.execution}}}{{duration=${spellData.duration}}}{{range=${spellData.range}}}{{targetarea=${spellData.target}}}{{resistance=${spellData.resistance}}}{{description=${spellData.description}}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
+
+            // Enviar para o chat usando a mesma função do sistema existente
+            sendToChat(msg);
+
+            // Feedback visual
+            const shareButton = document.querySelector('button[onclick*="shareSpellToChat"]');
+            if (shareButton) {
+                const originalText = shareButton.textContent;
+                shareButton.textContent = '✅ Enviado!';
+                shareButton.style.background = '#4caf50';
+                setTimeout(() => {
+                    shareButton.textContent = originalText;
+                }, 2000);
+            }
+
+        } catch (error) {
+            console.error('Erro ao compartilhar magia:', error);
+            alert('Erro ao compartilhar magia no chat. Verifique o console para mais detalhes.');
+        }
+    }
+
+    // Função para criar popup do Grimório de Magias
+    async function createGrimorioPopup() {
+
+
+        // Remove popup existente se houver
+        const existingPopup = document.getElementById('grimorio-popup');
+        if (existingPopup) existingPopup.remove();
+        const existingOverlay = document.getElementById('grimorio-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // CARREGA AS MAGIAS AQUI - ADICIONAR ESTE BLOCO
+        if (!window.grimorioSpellsCache) {
+            console.log('Carregando todas as magias...');
+
+            // Mostrar indicador de carregamento
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.id = 'grimorio-loading';
+            loadingIndicator.style.position = 'fixed';
+            loadingIndicator.style.top = '50%';
+            loadingIndicator.style.left = '50%';
+            loadingIndicator.style.transform = 'translate(-50%, -50%)';
+            loadingIndicator.style.background = 'rgba(30, 30, 40, 0.98)';
+            loadingIndicator.style.border = '2px solid #9c27b0';
+            loadingIndicator.style.borderRadius = '12px';
+            loadingIndicator.style.padding = '40px';
+            loadingIndicator.style.zIndex = '10003';
+            loadingIndicator.style.textAlign = 'center';
+            loadingIndicator.style.color = '#9c27b0';
+            loadingIndicator.style.fontSize = '18px';
+            loadingIndicator.style.fontWeight = 'bold';
+
+            loadingIndicator.innerHTML = `
+                <div style="margin-bottom: 20px;">🔄</div>
+                <div>Carregando Grimório de Magias...</div>
+                <div style="font-size: 14px; margin-top: 10px; color: #ccc;">Isso pode levar alguns segundos</div>
+            `;
+
+            document.body.appendChild(loadingIndicator);
+
+            try {
+                // Carregar magias diretamente usando fetch
+                window.grimorioSpellsCache = await loadSpellsDirectly();
+                console.log(`Carregadas ${window.grimorioSpellsCache.length} magias no total`);
+            } catch (error) {
+                console.error('Erro ao carregar magias:', error);
+                window.grimorioSpellsCache = [];
+            } finally {
+                // Remover indicador de carregamento
+                const loadingElement = document.getElementById('grimorio-loading');
+                if (loadingElement) {
+                    loadingElement.remove();
+                }
+            }
+        }
+
+        // Overlay para fechar ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.id = 'grimorio-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.zIndex = '10000';
+        overlay.onclick = () => {
+            overlay.remove();
+            popup.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Popup principal
+        const popup = document.createElement('div');
+        popup.id = 'grimorio-popup';
+        popup.className = 'roll20-popup roll20-popup-purple';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.background = 'rgba(30,30,40,0.98)';
+        popup.style.border = '2px solid #9c27b0';
+        popup.style.borderRadius = '12px';
+        popup.style.padding = '20px';
+        popup.style.zIndex = '10001';
+        popup.style.maxWidth = '800px';
+        popup.style.maxHeight = '700px';
+        popup.style.overflowY = 'auto';
+        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+        popup.style.display = 'flex';
+        popup.style.flexDirection = 'column';
+        popup.style.alignItems = 'stretch';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.width = '100%';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#9c27b0',
+            onClick: () => {
+                popup.remove();
+                const overlay = document.getElementById('grimorio-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
+
+        const title = document.createElement('h3');
+        title.textContent = 'Grimório de Magias';
+        title.style.color = '#9c27b0';
+        title.style.margin = '0';
+        title.style.fontSize = '20px';
+        title.style.fontWeight = 'bold';
+        title.title = 'Atalho: Ctrl + G';
+
+
+
+        // Container para título e atalho
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.flexDirection = 'column';
+        titleContainer.style.alignItems = 'flex-start';
+
+        const shortcutText = document.createElement('div');
+        shortcutText.textContent = 'Atalho: Ctrl + G';
+        shortcutText.style.color = '#666';
+        shortcutText.style.fontSize = '12px';
+        shortcutText.style.marginTop = '2px';
+
+        titleContainer.appendChild(title);
+        titleContainer.appendChild(shortcutText);
+
+        header.appendChild(titleContainer);
+        header.appendChild(closeBtn.render());
+        popup.appendChild(header);
+
+        // Campo de busca principal
+        const searchInput = createSearchInput({
+            placeholder: 'Filtrar magias por nome...',
+            theme: 'purple',
+            marginBottom: '15px',
+            onInput: (value) => {
+                filterSpells(value);
+            }
+        });
+        popup.appendChild(searchInput.container);
+
+        // Filtros por chips selecionáveis
+
+
+        // Abas para tradições
+        const tabsContainer = document.createElement('div');
+        tabsContainer.style.display = 'flex';
+        tabsContainer.style.marginBottom = '20px';
+        tabsContainer.style.borderBottom = '2px solid #9c27b0';
+
+        const traditions = [
+            { id: 'todas', name: 'Todas', color: '#ffffff' },
+            { id: 'arcana', name: 'Arcana', color: '#9c27b0' },
+            { id: 'divina', name: 'Divina', color: '#4caf50' },
+            { id: 'universal', name: 'Universal', color: '#ff9800' }
+        ];
+
+        let activeTab = 'todas';
+
+        traditions.forEach(tradition => {
+            const tab = document.createElement('div');
+            tab.id = `tab-${tradition.id}`;
+            tab.textContent = tradition.name;
+            tab.style.padding = '12px 20px';
+            tab.style.cursor = 'pointer';
+            tab.style.borderBottom = `3px solid transparent`;
+            tab.style.color = tradition.id === activeTab ? tradition.color : '#666';
+            tab.style.fontWeight = tradition.id === activeTab ? tradition.color : 'normal';
+            tab.style.transition = 'all 0.2s';
+            tab.style.borderRadius = '6px 6px 0 0';
+
+            tab.onclick = () => {
+                // Remove active de todas as abas
+                traditions.forEach(t => {
+                    const tabElement = document.getElementById(`tab-${t.id}`);
+                    if (tabElement) {
+                        tabElement.style.color = '#666';
+                        tabElement.style.fontWeight = 'normal';
+                        tabElement.style.borderBottom = '3px solid transparent';
+                    }
+                });
+
+                // Ativa a aba clicada
+                tab.style.color = tradition.color;
+                tab.style.fontWeight = 'bold';
+                tab.style.borderBottom = `3px solid ${tradition.color}`;
+                activeTab = tradition.id;
+
+                // Atualiza o conteúdo da aba
+                updateTabContent(tradition.id);
+            };
+
+            if (tradition.id === activeTab) {
+                tab.style.color = tradition.color;
+                tab.style.fontWeight = 'bold';
+                tab.style.borderBottom = `3px solid ${tradition.color}`;
+            }
+
+            tabsContainer.appendChild(tab);
+        });
+
+        popup.appendChild(tabsContainer);
+
+        // Conteúdo das abas
+        const tabContent = document.createElement('div');
+        tabContent.id = 'grimorio-tab-content';
+        tabContent.style.flex = '1';
+        tabContent.style.overflowY = 'auto';
+
+        // Função para criar card de magia
+        function createSpellCard(spell) {
+            const card = document.createElement('div');
+            card.style.background = 'rgba(35, 36, 58, 0.8)';
+            card.style.border = '1px solid #9c27b0';
+            card.style.borderRadius = '8px';
+            card.style.padding = '16px';
+            card.style.cursor = 'pointer';
+            card.style.transition = 'all 0.2s';
+            card.style.marginBottom = '8px';
+
+            card.onmouseover = () => {
+                card.style.background = 'rgba(45, 46, 74, 0.9)';
+                card.style.borderColor = '#ba68c8';
+                card.style.transform = 'translateY(-2px)';
+            };
+
+            card.onmouseout = () => {
+                card.style.background = 'rgba(35, 36, 58, 0.8)';
+                card.style.borderColor = '#9c27b0';
+                card.style.transform = 'translateY(0)';
+            };
+
+            card.onclick = () => {
+                showSpellDetails(spell);
+            };
+
+            // Cabeçalho da magia
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '12px';
+
+            // Nome da magia
+            const name = document.createElement('div');
+            name.textContent = spell.name;
+            name.style.color = '#fff';
+            name.style.fontSize = '16px';
+            name.style.fontWeight = 'bold';
+            name.style.flex = '1';
+
+            header.appendChild(name);
+
+            // Informações da magia
+            const info = document.createElement('div');
+            info.style.display = 'flex';
+            info.style.gap = '8px';
+            info.style.marginBottom = '8px';
+            info.style.flexWrap = 'wrap';
+
+            // Círculo
+            const circleChip = document.createElement('span');
+            circleChip.textContent = spell.circuloDisplay || `${spell.circulo}º Círculo`;
+            circleChip.style.background = '#9c27b0';
+            circleChip.style.color = '#fff';
+            circleChip.style.padding = '4px 8px';
+            circleChip.style.borderRadius = '12px';
+            circleChip.style.fontSize = '12px';
+            circleChip.style.fontWeight = 'bold';
+
+            // Escola
+            const schoolChip = document.createElement('span');
+            schoolChip.textContent = spell.escola;
+            schoolChip.style.background = '#4caf50';
+            schoolChip.style.color = '#fff';
+            schoolChip.style.padding = '4px 8px';
+            schoolChip.style.borderRadius = '12px';
+            schoolChip.style.fontSize = '12px';
+            schoolChip.style.fontWeight = 'bold';
+
+            // Execução
+            const executionChip = document.createElement('span');
+            executionChip.textContent = spell.execucao;
+            executionChip.style.background = '#ff9800';
+            executionChip.style.color = '#fff';
+            executionChip.style.padding = '4px 8px';
+            executionChip.style.borderRadius = '12px';
+            executionChip.style.fontSize = '12px';
+            executionChip.style.fontWeight = 'bold';
+
+            info.appendChild(circleChip);
+            info.appendChild(schoolChip);
+            info.appendChild(executionChip);
+
+            // Descrição resumida
+            const description = document.createElement('div');
+            const descText = spell.system?.description?.value || 'Descrição não disponível';
+            description.textContent = descText.length > 150 ? descText.substring(0, 150) + '...' : descText;
+            description.style.color = '#ccc';
+            description.style.fontSize = '14px';
+            description.style.lineHeight = '1.4';
+
+            card.appendChild(header);
+            card.appendChild(info);
+            card.appendChild(description);
+
+            return card;
+        }
+
+
+
+        // Função para atualizar o conteúdo da aba
+        function updateTabContent(traditionId) {
+            console.log(`Atualizando conteúdo da aba: ${traditionId}`);
+            const content = tabContent;
+            content.innerHTML = '';
+
+            // Verificar se temos magias carregadas
+            const spellsCache = window.grimorioSpellsCache || [];
+            if (!spellsCache || spellsCache.length === 0) {
+                // Placeholder para quando não há magias
+                const placeholder = document.createElement('div');
+                placeholder.style.display = 'flex';
+                placeholder.style.flexDirection = 'column';
+                placeholder.style.alignItems = 'center';
+                placeholder.style.justifyContent = 'center';
+                placeholder.style.padding = '40px 20px';
+                placeholder.style.color = '#666';
+                placeholder.style.textAlign = 'center';
+
+                const placeholderIcon = document.createElement('div');
+                placeholderIcon.textContent = '📚';
+                placeholderIcon.style.fontSize = '48px';
+                placeholderIcon.style.marginBottom = '15px';
+
+                const placeholderTitle = document.createElement('div');
+                placeholderTitle.textContent = 'Nenhuma magia registrada ainda';
+                placeholderTitle.style.fontSize = '18px';
+                placeholderTitle.style.fontWeight = 'bold';
+                placeholderTitle.style.marginBottom = '8px';
+
+                const placeholderDesc = document.createElement('div');
+                placeholderDesc.textContent = 'As magias desta tradição serão exibidas aqui quando forem adicionadas ao sistema.';
+                placeholderDesc.style.fontSize = '14px';
+                placeholderDesc.style.lineHeight = '1.4';
+
+                placeholder.appendChild(placeholderIcon);
+                placeholder.appendChild(placeholderTitle);
+                placeholder.appendChild(placeholderDesc);
+                content.appendChild(placeholder);
+                return;
+            }
+
+            // Filtrar magias por tradição
+            let traditionSpells;
+            if (traditionId === 'todas') {
+                traditionSpells = spellsCache;
+                console.log(`Encontradas ${traditionSpells.length} magias no total`);
+            } else {
+                traditionSpells = spellsCache.filter(spell => spell.tradition === traditionId);
+                console.log(`Encontradas ${traditionSpells.length} magias para tradição ${traditionId}`);
+            }
+
+            if (traditionSpells.length === 0) {
+                // Placeholder para tradição sem magias
+                const placeholder = document.createElement('div');
+                placeholder.style.display = 'flex';
+                placeholder.style.flexDirection = 'column';
+                placeholder.style.alignItems = 'center';
+                placeholder.style.justifyContent = 'center';
+                placeholder.style.padding = '40px 20px';
+                placeholder.style.color = '#666';
+                placeholder.style.textAlign = 'center';
+
+                const placeholderIcon = document.createElement('div');
+                placeholderIcon.textContent = '🔮';
+                placeholderIcon.style.fontSize = '48px';
+                placeholderIcon.style.marginBottom = '15px';
+
+                const placeholderTitle = document.createElement('div');
+                placeholderTitle.textContent = 'Nenhuma magia nesta tradição';
+                placeholderTitle.style.fontSize = '18px';
+                placeholderTitle.style.fontWeight = 'bold';
+                placeholderTitle.style.marginBottom = '8px';
+
+                const placeholderDesc = document.createElement('div');
+                placeholderDesc.textContent = `Não há magias registradas para a tradição ${traditionId}.`;
+                placeholderDesc.style.fontSize = '14px';
+                placeholderDesc.style.lineHeight = '1.4';
+
+                placeholder.appendChild(placeholderIcon);
+                placeholder.appendChild(placeholderTitle);
+                placeholder.appendChild(placeholderDesc);
+                content.appendChild(placeholder);
+                return;
+            }
+
+            // Contador de magias
+            const spellCounter = document.createElement('div');
+            spellCounter.style.color = '#9c27b0';
+            spellCounter.style.fontSize = '14px';
+            spellCounter.style.fontWeight = 'bold';
+            spellCounter.style.marginBottom = '15px';
+            spellCounter.style.textAlign = 'center';
+            spellCounter.textContent = `${traditionSpells.length} magia${traditionSpells.length !== 1 ? 's' : ''} encontrada${traditionSpells.length !== 1 ? 's' : ''}`;
+            content.appendChild(spellCounter);
+
+            // Criar lista de magias
+            const spellsList = document.createElement('div');
+            spellsList.style.display = 'flex';
+            spellsList.style.flexDirection = 'column';
+            spellsList.style.gap = '10px';
+
+            traditionSpells.forEach(spell => {
+                const spellCard = createSpellCard(spell);
+                spellsList.appendChild(spellCard);
+            });
+
+            content.appendChild(spellsList);
+        }
+
+        // Inicializa com a primeira aba
+        updateTabContent(activeTab);
+
+        // Função para recarregar o conteúdo do grimório
+        function reloadGrimorioContent() {
+            console.log('🔄 Recarregando conteúdo do grimório...');
+            updateTabContent(activeTab);
+        }
+
+        // Função para filtrar magias
+        function filterSpells(searchTerm) {
+            console.log(`Filtrando magias por: ${searchTerm}`);
+
+            // Filtrar magias localmente
+            const spellsCache = window.grimorioSpellsCache || [];
+            if (spellsCache && spellsCache.length > 0) {
+                let filteredSpells = [...spellsCache];
+
+                // Filtrar por tradição
+                if (activeTab && activeTab !== 'todas') {
+                    filteredSpells = filteredSpells.filter(spell => spell.tradition === activeTab);
+                }
+
+                // Filtrar por termo de busca
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    filteredSpells = filteredSpells.filter(spell =>
+                        spell.name.toLowerCase().includes(term) ||
+                        spell.escola.toLowerCase().includes(term) ||
+                        (spell.system?.description?.value &&
+                            spell.system.description.value.toLowerCase().includes(term))
+                    );
+                }
+
+                // Ordenar magias por nome (padrão)
+                filteredSpells.sort((a, b) => a.name.localeCompare(b.name));
+
+                // Atualizar o cache temporariamente com as magias filtradas
+                const originalCache = window.grimorioSpellsCache;
+                window.grimorioSpellsCache = filteredSpells;
+                reloadGrimorioContent();
+                window.grimorioSpellsCache = originalCache;
+            } else {
+                reloadGrimorioContent();
+            }
+        }
+
+        popup.appendChild(tabContent);
+        document.body.appendChild(popup);
+
+        // Aplica scrollbars customizadas
+        applyDirectScrollbarStyles(popup, 'purple');
+
+
     }
 
     // Função para criar o popup de spells
@@ -2905,8 +4001,25 @@
             const filter = searchComponent.getValue().trim().toLowerCase();
             spellList.innerHTML = '';
 
+            // Obter magias aprendidas do grimório
+            const learnedSpells = getLearnedSpells();
+            const spellsCache = window.grimorioSpellsCache || [];
+
+            // Criar lista de magias aprendidas do grimório
+            const learnedSpellItems = learnedSpells.map(spellName => {
+                const fullSpell = spellsCache.find(spell => spell.name === spellName);
+                if (fullSpell) {
+                    return {
+                        nome: fullSpell.name,
+                        comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=${fullSpell.name}}}{{type=${fullSpell.tradition.charAt(0).toUpperCase() + fullSpell.tradition.slice(1)}}}{{execution=${fullSpell.execucao || 'Padrão'}}}{{duration=${fullSpell.system?.duracao || 'Cena'}}}{{range=${fullSpell.system?.alcance || 'Curto'}}}{{targetarea=${fullSpell.system?.alvo || '1 Alvo'}}}{{resistance=${fullSpell.system?.resistencia || 'Nenhuma'}}}{{description=${fullSpell.system?.description?.value || 'Descrição não disponível'}}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`,
+                        onClick: () => showSpellDetails(fullSpell)
+                    };
+                }
+                return null;
+            }).filter(item => item !== null);
+
             // Filtra spells baseado na raça selecionada
-            const availableSpells = spells.filter(spell => {
+            const raceSpells = spells.filter(spell => {
                 // Mostra Sombras Profanas apenas se for Suraggel Sulfure
                 if (spell.nome === 'Sombras Profanas') {
                     return hasRacePower('Sombras Profanas');
@@ -2920,7 +4033,9 @@
                 return false;
             });
 
-            const filteredSpells = availableSpells.filter(s => s.nome.toLowerCase().includes(filter));
+            // Combinar magias de raça e magias aprendidas
+            const allSpells = [...raceSpells, ...learnedSpellItems];
+            const filteredSpells = allSpells.filter(s => s.nome.toLowerCase().includes(filter));
 
             if (filteredSpells.length === 0) {
                 const noSpellsMessage = document.createElement('div');
@@ -2946,10 +4061,12 @@
                     noSpellsMessage.style.marginTop = '10px';
                     noSpellsMessage.style.color = '#6ec6ff';
 
-                    if (!selectedRace) {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais</small>';
-                    } else if (!selectedRaceType) {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais</small>';
+                    if (!selectedRace && learnedSpells.length === 0) {
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais ou aprenda magias no grimório</small>';
+                    } else if (!selectedRaceType && learnedSpells.length === 0) {
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais ou aprenda magias no grimório</small>';
+                    } else if (learnedSpells.length === 0) {
+                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Use o grimório para aprender magias</small>';
                     } else {
                         noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Esta raça não possui magias especiais</small>';
                     }
@@ -4697,7 +5814,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -4710,19 +5827,8 @@
             const template = `&{template:t20-info}{{infoname=${prato.nome}}}{{description=${prato.descricao} ${prato.bonus}}}`;
             sendToChat(template);
             showSuccessNotification(`Prato "${prato.nome}" compartilhado no chat!`);
-
-            // Fechar todos os popups relacionados aos pratos especiais para limpar a cena
-            const pratosPopup = document.getElementById('pratos-popup');
-            if (pratosPopup) pratosPopup.remove();
-            const pratosOverlay = document.getElementById('pratos-overlay');
-            if (pratosOverlay) pratosOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -5034,7 +6140,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -5047,19 +6153,8 @@
             const template = `&{template:t20-info}{{infoname=${bebida.nome}}}{{description=${bebida.descricao} ${bebida.efeito}}}`;
             sendToChat(template);
             showSuccessNotification(`Bebida "${bebida.nome}" compartilhada no chat!`);
-
-            // Fechar todos os popups relacionados às bebidas para limpar a cena
-            const bebidasPopup = document.getElementById('bebidas-popup');
-            if (bebidasPopup) bebidasPopup.remove();
-            const bebidasOverlay = document.getElementById('bebidas-overlay');
-            if (bebidasOverlay) bebidasOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -5370,7 +6465,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar no Chat';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '10px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -5383,19 +6478,8 @@
             const template = `&{template:t20-info}{{infoname=${pocao.nome}}}{{description=${pocao.descricao} ${pocao.efeito}}}`;
             sendToChat(template);
             showSuccessNotification(`Poção "${pocao.nome}" compartilhada no chat!`);
-
-            // Fechar todos os popups relacionados às poções para limpar a cena
-            const pocoesPopup = document.getElementById('pocoes-popup');
-            if (pocoesPopup) pocoesPopup.remove();
-            const pocoesOverlay = document.getElementById('pocoes-overlay');
-            if (pocoesOverlay) pocoesOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -6954,6 +8038,57 @@
         if (skillDetailOverlay) {
             skillDetailOverlay.remove();
         }
+    }
+
+    // Função para fechar todos os popups abertos
+    function closeAllPopups() {
+        // Lista de todos os popups e overlays conhecidos
+        const popupIds = [
+            // Popups principais
+            'conditions-popup', 'conditions-overlay',
+            'condition-details-popup', 'condition-details-overlay',
+            'avatar-popup', 'avatar-overlay',
+            'skills-popup', 'skills-overlay',
+            'skill-detail-modal', 'skill-detail-overlay',
+            'misc-popup', 'misc-overlay',
+            'grimorio-popup', 'grimorio-overlay',
+            'spells-popup', 'spells-overlay',
+            'spell-cast-popup', 'spell-cast-overlay',
+            'pratos-popup', 'pratos-overlay',
+            'prato-detail-modal', 'prato-detail-overlay',
+            'bebidas-popup', 'bebidas-overlay',
+            'bebida-detail-modal', 'bebida-detail-overlay',
+            'pocoes-popup', 'pocoes-overlay',
+            'pocao-detail-modal', 'pocao-detail-overlay',
+            'config-modal', 'config-overlay',
+            'maneuvers-popup', 'maneuvers-overlay',
+            'attack-effects-popup', 'attack-effects-overlay',
+            'hunter-class-overlay',
+            'race-detail-overlay',
+            'divinity-detail-overlay',
+            'animal-companion-overlay',
+            'abilities-popup', 'abilities-overlay',
+            'power-cast-popup', 'power-cast-overlay'
+        ];
+
+        // Remove todos os popups e overlays
+        popupIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.remove();
+            }
+        });
+
+        // Também remove qualquer elemento com z-index alto que possa ser um popup
+        const highZIndexElements = document.querySelectorAll('[style*="z-index: 1000"], [style*="z-index: 10000"], [style*="z-index: 10001"], [style*="z-index: 10002"], [style*="z-index: 10003"]');
+        highZIndexElements.forEach(element => {
+            if (element.style.position === 'fixed' &&
+                (element.style.background === 'rgba(0,0,0,0.5)' ||
+                    element.style.background === 'rgba(0,0,0,0.7)' ||
+                    element.style.background.includes('rgba(30,30,40'))) {
+                element.remove();
+            }
+        });
     }
     // Função para criar o modal de detalhamento da skill
     function createSkillDetailModal(skillName) {
@@ -9065,6 +10200,13 @@
                     e.preventDefault();
                     e.stopPropagation();
                     createQuickSearchModal();
+                }
+
+                // NOVO: Ctrl + G para abrir grimório
+                if (e.ctrlKey && e.key === 'g') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    createGrimorioPopup();
                 }
             });
         }, 1000);
@@ -15018,7 +16160,17 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         searchInput.focus();
 
         // Função para buscar e filtrar resultados
-        function performSearch(query) {
+        async function performSearch(query) {
+            // Garante que o grimório está carregado antes de criar o índice
+            if (!window.grimorioSpellsCache) {
+                try {
+                    window.grimorioSpellsCache = await loadSpellsDirectly();
+                } catch (error) {
+                    console.warn('Erro ao carregar magias para busca:', error);
+                    window.grimorioSpellsCache = [];
+                }
+            }
+
             const searchIndex = createSearchIndex();
             const results = searchIndex.filter(item => {
                 const searchText = `${item.name} ${item.category} ${item.description || ''} ${item.effects || ''}`.toLowerCase();
@@ -15144,10 +16296,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         }
 
         // Listener para input
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', async (e) => {
             const query = e.target.value.trim();
             if (query.length >= 1) {
-                performSearch(query);
+                await performSearch(query);
             } else {
                 resultsContainer.innerHTML = '';
                 const placeholder = document.createElement('div');
@@ -15257,43 +16409,52 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             });
         });
 
-        // Adiciona magias
-        const spellDatabase = {
-            'Luz Sagrada': { tipo: 'Divina', ciclo: 1, escola: 'Evocação' },
-            'Sombras Profanas': { tipo: 'Universal', ciclo: 1, escola: 'Necromancia' },
-            'Cura Ferimentos Leves': { tipo: 'Divina', ciclo: 1, escola: 'Cura' },
-            'Proteção Divina': { tipo: 'Divina', ciclo: 1, escola: 'Abjuração' },
-            'Bênção': { tipo: 'Divina', ciclo: 1, escola: 'Encantamento' },
-            'Raio de Energia': { tipo: 'Arcana', ciclo: 1, escola: 'Evocação' },
-            'Escudo Mágico': { tipo: 'Arcana', ciclo: 1, escola: 'Abjuração' },
-            'Disfarce Ilusório': { tipo: 'Arcana', ciclo: 1, escola: 'Ilusão' },
-            'Detectar Magia': { tipo: 'Universal', ciclo: 1, escola: 'Adivinhação' },
-            'Compreender Idiomas': { tipo: 'Universal', ciclo: 1, escola: 'Adivinhação' },
-            'Cura Ferimentos Moderados': { tipo: 'Divina', ciclo: 2, escola: 'Cura' },
-            'Silêncio': { tipo: 'Divina', ciclo: 2, escola: 'Ilusão' },
-            'Bola de Fogo': { tipo: 'Arcana', ciclo: 3, escola: 'Evocação' },
-            'Relâmpago': { tipo: 'Arcana', ciclo: 3, escola: 'Evocação' },
-            'Invisibilidade': { tipo: 'Arcana', ciclo: 2, escola: 'Ilusão' },
-            'Sugestão': { tipo: 'Arcana', ciclo: 2, escola: 'Encantamento' },
-            'Dissipar Magia': { tipo: 'Universal', ciclo: 3, escola: 'Abjuração' },
-            'Voo': { tipo: 'Arcana', ciclo: 3, escola: 'Transmutação' },
-            'Teleporte': { tipo: 'Arcana', ciclo: 4, escola: 'Conjuração' },
-            'Ressurreição': { tipo: 'Divina', ciclo: 5, escola: 'Cura' },
-            'Meteoro': { tipo: 'Arcana', ciclo: 6, escola: 'Evocação' }
-        };
+        // Adiciona magias do grimório
+        const spellsCache = window.grimorioSpellsCache || [];
+        if (spellsCache && spellsCache.length > 0) {
+            spellsCache.forEach(spell => {
+                const traditionName = spell.tradition === 'arcana' ? 'Arcana' :
+                    spell.tradition === 'divina' ? 'Divina' :
+                        spell.tradition === 'universal' ? 'Universal' : spell.tradition;
 
-        Object.keys(spellDatabase).forEach(spellName => {
-            const spellData = spellDatabase[spellName];
-            searchIndex.push({
-                name: spellName,
-                category: 'Magia',
-                description: `${spellData.tipo} - Ciclo ${spellData.ciclo} - ${spellData.escola}`,
-                effects: '',
-                icon: '✨',
-                type: 'spell',
-                data: spellData
+                const description = spell.system?.description?.value || '';
+
+                searchIndex.push({
+                    name: spell.name,
+                    category: 'Magia',
+                    description: `${traditionName} - ${spell.circuloDisplay} - ${spell.escola}`,
+                    effects: description,
+                    icon: '✨',
+                    type: 'spell',
+                    data: {
+                        ...spell,
+                        tradition: traditionName,
+                        circle: spell.circulo,
+                        school: spell.escola
+                    }
+                });
             });
-        });
+        } else {
+            // Fallback para magias básicas se o cache não estiver disponível
+            const basicSpells = [
+                { name: 'Luz Sagrada', tradition: 'Divina', circle: 1, school: 'Evocação' },
+                { name: 'Bola de Fogo', tradition: 'Arcana', circle: 3, school: 'Evocação' },
+                { name: 'Cura Ferimentos Leves', tradition: 'Divina', circle: 1, school: 'Necromancia' },
+                { name: 'Detectar Magia', tradition: 'Universal', circle: 1, school: 'Adivinhação' }
+            ];
+
+            basicSpells.forEach(spell => {
+                searchIndex.push({
+                    name: spell.name,
+                    category: 'Magia',
+                    description: `${spell.tradition} - ${spell.circle}º Círculo - ${spell.school}`,
+                    effects: '',
+                    icon: '✨',
+                    type: 'spell',
+                    data: spell
+                });
+            });
+        }
 
         // Adiciona poderes de combate
         const combatPowers = [
@@ -15474,8 +16635,35 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 break;
             }
             case 'spell': {
-                // Abre o popup de conjuração da magia
-                createSpellCastPopup(item.name, item.name);
+                // Abre o modal de detalhes da magia
+                if (item.data && item.data.name) {
+                    // Buscar a magia completa no cache do grimório
+                    const spellsCache = window.grimorioSpellsCache || [];
+                    const fullSpell = spellsCache.find(spell => spell.name === item.data.name);
+
+                    if (fullSpell) {
+                        showSpellDetails(fullSpell);
+                    } else {
+                        // Fallback: mostrar informações básicas da magia
+                        const basicSpell = {
+                            name: item.data.name,
+                            tradition: item.data.tradition?.toLowerCase() || 'universal',
+                            circulo: item.data.circle || 1,
+                            circuloDisplay: `${item.data.circle || 1}º Círculo`,
+                            escola: item.data.school || 'Universal',
+                            execucao: 'Ação Padrão',
+                            system: {
+                                description: { value: item.effects || 'Descrição não disponível' },
+                                alcance: 'Curto',
+                                duracao: 'Cena',
+                                alvo: '1 Alvo',
+                                resistencia: 'Nenhuma',
+                                custo: '1 PM'
+                            }
+                        };
+                        showSpellDetails(basicSpell);
+                    }
+                }
                 break;
             }
             case 'combat_power': {
@@ -15511,4 +16699,173 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         }
     }
 
+    // Definição dos Roll20Components para uso global
+    window.Roll20Components = {
+        createCloseButton: function (config) {
+            const {
+                text = '×',
+                fontSize = '18px',
+                width = '32px',
+                height = '32px',
+                padding = '4px',
+                color = '#ecf0f1',
+                onClick = null
+            } = config;
+
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.style.background = 'none';
+            button.style.border = 'none';
+            button.style.color = color;
+            button.style.fontSize = fontSize;
+            button.style.width = width;
+            button.style.height = height;
+            button.style.padding = padding;
+            button.style.cursor = 'pointer';
+            button.style.borderRadius = '4px';
+            button.style.transition = 'all 0.2s';
+            button.style.display = 'flex';
+            button.style.alignItems = 'center';
+            button.style.justifyContent = 'center';
+
+            button.onmouseover = () => {
+                button.style.background = 'rgba(255,255,255,0.1)';
+            };
+
+            button.onmouseout = () => {
+                button.style.background = 'none';
+            };
+
+            if (onClick) {
+                button.onclick = onClick;
+            }
+
+            return {
+                element: button,
+                render: function () {
+                    return button;
+                }
+            };
+        },
+
+        createFavoritableCardWithPreset: function (preset, config) {
+            const {
+                title,
+                summary,
+                description,
+                chips = [],
+                onFavorite = null,
+                onUnfavorite = null,
+                onFavoriteToggle = null,
+                onClick = null,
+                isFavorite = false
+            } = config;
+
+            const card = document.createElement('div');
+            card.style.background = '#23243a';
+            card.style.border = '1px solid #6ec6ff';
+            card.style.borderRadius = '8px';
+            card.style.padding = '12px';
+            card.style.cursor = 'pointer';
+            card.style.transition = 'all 0.2s';
+            card.style.marginBottom = '8px';
+            card.style.position = 'relative';
+
+            card.onmouseover = () => {
+                card.style.background = '#2a2b4a';
+                card.style.borderColor = '#8ed8ff';
+            };
+
+            card.onmouseout = () => {
+                card.style.background = '#23243a';
+                card.style.borderColor = '#6ec6ff';
+            };
+
+            // Add click handler for the card
+            if (onClick) {
+                card.onclick = (e) => {
+                    // Don't trigger if clicking on favorite button
+                    if (e.target === favoriteBtn) {
+                        return;
+                    }
+                    onClick(e);
+                };
+            }
+
+            // Título
+            const titleElement = document.createElement('div');
+            titleElement.textContent = title;
+            titleElement.style.color = '#6ec6ff';
+            titleElement.style.fontSize = '14px';
+            titleElement.style.fontWeight = 'bold';
+            titleElement.style.marginBottom = '4px';
+
+            // Descrição
+            const descElement = document.createElement('div');
+            descElement.textContent = summary || description || '';
+            descElement.style.color = '#ecf0f1';
+            descElement.style.fontSize = '12px';
+            descElement.style.lineHeight = '1.3';
+            descElement.style.marginBottom = '8px';
+
+            // Chips
+            const chipsContainer = document.createElement('div');
+            chipsContainer.style.display = 'flex';
+            chipsContainer.style.gap = '4px';
+            chipsContainer.style.flexWrap = 'wrap';
+
+            chips.forEach(chip => {
+                const chipElement = document.createElement('span');
+                chipElement.textContent = chip;
+                chipElement.style.background = '#6ec6ff';
+                chipElement.style.color = '#23243a';
+                chipElement.style.fontSize = '10px';
+                chipElement.style.padding = '2px 6px';
+                chipElement.style.borderRadius = '10px';
+                chipElement.style.fontWeight = 'bold';
+                chipsContainer.appendChild(chipElement);
+            });
+
+            // Botão de favorito
+            const favoriteBtn = document.createElement('button');
+            favoriteBtn.innerHTML = isFavorite ? '★' : '☆';
+            favoriteBtn.style.position = 'absolute';
+            favoriteBtn.style.top = '8px';
+            favoriteBtn.style.right = '8px';
+            favoriteBtn.style.background = 'none';
+            favoriteBtn.style.border = 'none';
+            favoriteBtn.style.color = isFavorite ? '#ffd700' : '#666';
+            favoriteBtn.style.fontSize = '16px';
+            favoriteBtn.style.cursor = 'pointer';
+            favoriteBtn.style.padding = '0';
+            favoriteBtn.style.width = '20px';
+            favoriteBtn.style.height = '20px';
+            favoriteBtn.style.display = 'flex';
+            favoriteBtn.style.alignItems = 'center';
+            favoriteBtn.style.justifyContent = 'center';
+
+            favoriteBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (onFavoriteToggle) {
+                    onFavoriteToggle();
+                } else if (isFavorite) {
+                    if (onUnfavorite) onUnfavorite();
+                } else {
+                    if (onFavorite) onFavorite();
+                }
+            };
+
+            card.appendChild(titleElement);
+            card.appendChild(descElement);
+            card.appendChild(chipsContainer);
+            card.appendChild(favoriteBtn);
+
+            return {
+                element: card,
+                render: function () {
+                    return card;
+                }
+            };
+        }
+    };
 })();

@@ -1,0 +1,202 @@
+module.exports = {
+  "_id": "rQ44Cz2gJdt86jFL",
+  "name": "Toque da Morte",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/toque-da-morte.webp",
+  "effects": [
+    {
+      "_id": "3Ivodo4341tW7cj8",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "2",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "curto",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.rQ44Cz2gJdt86jFL",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para curto. Em vez de tocar no alvo, você dispara um raio púrpura da ponta de seu dedo indicador.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!rQ44Cz2gJdt86jFL.3Ivodo4341tW7cj8"
+    },
+    {
+      "_id": "IDwvmjisl8U6TBXN",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "10",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alcance",
+          "value": "curto",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "alvo",
+          "value": "inimigos no alcance",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.rQ44Cz2gJdt86jFL",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alcance para curto e o alvo para inimigos no alcance. Em vez de tocar no alvo, você dispara raios púrpuras da ponta de seus dedos.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!rQ44Cz2gJdt86jFL.IDwvmjisl8U6TBXN"
+    }
+  ],
+  "folder": "P0UceOxL7WH3yyPb",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Sua m&atilde;o exala energias letais. A criatura sofre 10d8+10 pontos de dano de trevas. Se estiver com menos da metade de seus PV, em vez disso deve fazer um teste de Fortitude. Se passar, sofre o dano normal. Se falhar, seus PV s&atilde;o reduzidos a &ndash;10.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 209",
+    "ativacao": {
+      "execução": "ação",
+      "custo": 15,
+      "qtd": "",
+      "condição": "",
+      "special": ""
+    },
+    "duração": {
+      "value": 0,
+      "units": "inst",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "toque",
+    "alvo": "1 criatura",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "sab",
+      "bonus": 0,
+      "txt": "Veja texto"
+    },
+    "rolls": [
+      {
+        "name": "Dano",
+        "key": "dano0",
+        "type": "dano",
+        "parts": [
+          [
+            "10d8",
+            "trevas",
+            ""
+          ]
+        ],
+        "versatil": ""
+      }
+    ],
+    "tipo": "uni",
+    "circulo": "5",
+    "preparada": false,
+    "escola": "nec",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310462815,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!rQ44Cz2gJdt86jFL"
+};

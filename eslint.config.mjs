@@ -12,14 +12,14 @@ export default defineConfig([
   },
   {
     files: ["**/*.js"],
-    ignores: ["dist/**/*", "node_modules/**/*", "src/components/**/*.js"],
+    ignores: ["dist/**/*", "node_modules/**/*", "src/components/**/*.js", "src/core/**/*.js"],
     languageOptions: { sourceType: "commonjs" }
   },
   {
     files: ["src/components/**/*.js"],
-    languageOptions: { 
+    languageOptions: {
       sourceType: "module",
-      globals: globals.browser 
+      globals: globals.browser
     }
   },
   {
@@ -29,7 +29,17 @@ export default defineConfig([
   },
   {
     files: ["src/core/**/*.js"],
-    languageOptions: { globals: globals.node }
+    languageOptions: {
+      sourceType: "module",
+      globals: globals.node
+    }
+  },
+  {
+    files: ["scripts/**/*.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: globals.node
+    }
   },
   {
     files: ["update-version.js"],

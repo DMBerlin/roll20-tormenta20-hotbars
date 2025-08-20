@@ -1,0 +1,272 @@
+module.exports = {
+  "_id": "s9z7z8KtujpICCZw",
+  "name": "Sussurros Insanos",
+  "type": "magia",
+  "img": "systems/tormenta20/icons/magias/sussurros-insanos.webp",
+  "effects": [
+    {
+      "_id": "a91Qq4uJWCt9BaHJ",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "2",
+          "aumenta": true
+        }
+      },
+      "changes": [],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.s9z7z8KtujpICCZw",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "aumenta o número de alvos em +1.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!s9z7z8KtujpICCZw.a91Qq4uJWCt9BaHJ"
+    },
+    {
+      "_id": "n4P4UlD5bQRhtzIh",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "3",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alvo",
+          "value": "1 criatura",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.s9z7z8KtujpICCZw",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alvo para 1 criatura.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!s9z7z8KtujpICCZw.n4P4UlD5bQRhtzIh"
+    },
+    {
+      "_id": "Yiwe30aN5lDHb5mk",
+      "flags": {
+        "tormenta20": {
+          "onuse": true,
+          "pessoal": true,
+          "custo": "12",
+          "aumenta": false
+        }
+      },
+      "changes": [
+        {
+          "key": "alvo",
+          "value": "criaturas escolhidas",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "origin": "Compendium.tormenta20.magias.s9z7z8KtujpICCZw",
+      "transfer": false,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "muda o alvo para criaturas escolhidas. Requer 5º círculo.",
+      "img": "icons/svg/upgrade.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!s9z7z8KtujpICCZw.Yiwe30aN5lDHb5mk"
+    },
+    {
+      "duration": {
+        "rounds": 999,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "core": {
+          "statusId": "confuso"
+        },
+        "tormenta20": {
+          "condition": true,
+          "durationScene": true,
+          "category": "mental"
+        }
+      },
+      "_id": "jux9RnXL3OYir0N4",
+      "changes": [],
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "_stats": {
+        "coreVersion": "13.342",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "name": "Confuso",
+      "img": "systems/tormenta20/icons/conditions/confuso.svg",
+      "type": "base",
+      "system": {},
+      "description": "",
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!s9z7z8KtujpICCZw.jux9RnXL3OYir0N4"
+    }
+  ],
+  "folder": "OhcRkxh8f9gK9sZ7",
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": {
+      "value": "<p>Voc&ecirc; murmura palavras desconexas que afetam a mente do alvo. O alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Tormenta20 — Edição Jogo do Ano, p. 207",
+    "ativacao": {
+      "execução": "ação",
+      "custo": 3,
+      "qtd": "",
+      "condição": "",
+      "special": ""
+    },
+    "duração": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "units": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null,
+      "mpMultiplier": false
+    },
+    "efeito": "",
+    "alcance": "short",
+    "alvo": "1 humanoide",
+    "area": "",
+    "resistencia": {
+      "pericia": "",
+      "atributo": "int",
+      "bonus": 0,
+      "txt": "Vontade anula"
+    },
+    "rolls": [],
+    "tipo": "arcana",
+    "circulo": "2",
+    "preparada": false,
+    "escola": "enc",
+    "chatFlavor": "",
+    "origin": "",
+    "tags": [],
+    "chatGif": ""
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "tormenta20",
+    "systemVersion": "1.4.116",
+    "coreVersion": "13.342",
+    "createdTime": 1664310462817,
+    "modifiedTime": 1684622830660,
+    "lastModifiedBy": "t20builder000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!s9z7z8KtujpICCZw"
+};
