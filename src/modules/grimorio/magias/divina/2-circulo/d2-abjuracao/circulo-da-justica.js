@@ -9,14 +9,14 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "Padrão",
           "mode": 5,
           "priority": null
@@ -34,8 +34,8 @@ module.exports = {
           "priority": null
         },
         {
-          "key": "duracao",
-          "value": "Cena",
+          "key": "duração",
+          "value": "cena",
           "mode": 5,
           "priority": null
         },
@@ -298,7 +298,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -349,7 +349,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -461,13 +461,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 183",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "day",
       "special": ""
@@ -502,7 +502,7 @@ module.exports = {
     "tipo": "div",
     "circulo": "2",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

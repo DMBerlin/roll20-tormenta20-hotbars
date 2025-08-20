@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": false,
+          "pessoal": false,
           "custo": "1",
           "aumenta": false,
           "skill": true,
@@ -67,14 +67,14 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "desprevenido",
           "mode": 0,
           "priority": null
@@ -118,7 +118,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false,
           "attack": false,
@@ -133,7 +133,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "mode": 5,
           "value": "Movimento",
           "priority": 0
@@ -151,7 +151,7 @@ module.exports = {
           "priority": 0
         },
         {
-          "key": "duracao",
+          "key": "duração",
           "mode": 5,
           "value": "instantânea",
           "priority": 0
@@ -195,7 +195,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false
         }
@@ -301,15 +301,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 201",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -329,7 +329,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "1 criatura",
     "area": "",
     "resistencia": {
@@ -339,7 +339,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
     "escola": "tra",

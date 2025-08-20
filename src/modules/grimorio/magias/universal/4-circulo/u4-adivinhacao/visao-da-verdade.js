@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false
         }
@@ -66,7 +66,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false,
           "attack": false,
@@ -124,7 +124,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false,
           "attack": false,
@@ -182,7 +182,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "4",
           "aumenta": false
         }
@@ -288,15 +288,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 211",
     "ativacao": {
-      "execucao": "move",
+      "execução": "move",
       "custo": 10,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -316,7 +316,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "self",
+    "alcance": "pessoal",
     "alvo": "você",
     "area": "",
     "resistencia": {

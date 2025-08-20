@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false
         }
@@ -53,7 +53,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false
         }
@@ -97,7 +97,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "7",
           "aumenta": false
         }
@@ -148,13 +148,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 206",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 6,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "inst",
       "special": ""
@@ -176,7 +176,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "1 cadáver",
     "area": "",
     "resistencia": {

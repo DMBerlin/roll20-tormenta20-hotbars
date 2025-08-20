@@ -58,13 +58,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 187",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 15,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "veja texto"
@@ -96,7 +96,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "5",
     "preparada": false,
     "escola": "tra",

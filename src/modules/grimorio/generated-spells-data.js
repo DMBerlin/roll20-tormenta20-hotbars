@@ -7,25 +7,24 @@ const spellsData = {
       "abjuracao": {
         "alarme": {
           "name": "Alarme",
-          "type": "magia",
+          "type": "Magia",
           "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_orb_01.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "alvo": "Esfera de 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma barreira protetora invis&iacute;vel que detecta qualquer criatura que tocar ou entrar na &aacute;rea protegida. Ao lan&ccedil;ar a magia, voc&ecirc; pode escolher quais criaturas podem entrar na &aacute;rea sem ativar seus efeitos. <em>Alarme</em> pode emitir um aviso telep&aacute;tico ou sonoro, decidido quando a magia &eacute; lan&ccedil;ada. Um aviso telep&aacute;tico alerta apenas voc&ecirc;, inclusive acordando-o se estiver dormindo, mas apenas se estiver a at&eacute; 1km da &aacute;rea protegida. Um aviso sonoro alerta todas as criaturas em alcance longo.</p>"
+              "value": "<p>Você cria uma barreira protetora invisível que detecta qualquer criatura que tocar ou entrar na área protegida. Ao lançar a magia, você pode escolher quais criaturas podem entrar na área sem ativar seus efeitos. <em>Alarme</em> pode emitir um aviso telepático ou sonoro, decidido quando a magia é lançada. Um aviso telepático alerta apenas você, inclusive acordando-o se estiver dormindo, mas apenas se estiver a até 1km da área protegida. Um aviso sonoro alerta todas as criaturas em alcance longo.</p>"
             }
           }
         },
@@ -35,15 +34,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -58,15 +57,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane01.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 objeto Grande ou menor",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -85,19 +84,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "free",
+              "execução": "free",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "1 round",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; amplia sua percep&ccedil;&atilde;o, antecipando movimentos dos inimigos e achando brechas em sua defesa. Quando fazum teste de ataque, voc&ecirc; rola dois dados e usa o melhor resultado</p>"
+              "value": "<p>Você amplia sua percepção, antecipando movimentos dos inimigos e achando brechas em sua defesa. Quando fazum teste de ataque, você rola dois dados e usa o melhor resultado</p>"
             }
           }
         }
@@ -111,10 +109,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -122,7 +120,7 @@ const spellsData = {
             "resistencia": "Reflexos (veja texto)",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Esta magia recobre uma superf&iacute;cie com uma subst&acirc;ncia gordurosa e escorregadia. Criaturas na &aacute;rea devem passar na resist&ecirc;ncia para n&atilde;o cair. Nas rodadas seguintes, criaturas que tentem movimentar-se pela &aacute;rea devem fazer testes de Acrobacia para equil&iacute;brio (CD 10).</p>\n<p><em>&Aacute;rea Escorregadia</em> pode tornar um item escorregadio. Uma criatura segurando um objeto afetado deve passar na resist&ecirc;ncia para n&atilde;o deixar o item cair cada vez que us&aacute;-lo.</p>"
+              "value": "<p>Esta magia recobre uma superfície com uma substância gordurosa e escorregadia. Criaturas na área devem passar na resistência para não cair. Nas rodadas seguintes, criaturas que tentem movimentar-se pela área devem fazer testes de Acrobacia para equilíbrio (CD 10).</p>\n<p><em>Área Escorregadia</em> pode tornar um item escorregadio. Uma criatura segurando um objeto afetado deve passar na resistência para não deixar o item cair cada vez que usá-lo.</p>"
             }
           }
         },
@@ -134,17 +132,17 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<div>\n<div>Voc&ecirc; conjura um monstro Pequeno que ataca seus inimigos. Voc&ecirc; escolhe a apar&ecirc;ncia do monstro e o tipo de dano que ele pode causar, entre corte, impacto e perfura&ccedil;&atilde;o. No entanto, ele n&atilde;o &eacute; uma criatura real, e sim um construto feito de energia. Se for destru&iacute;do, ou quando a magia acaba, desaparece com um brilho, sem deixar nada para tr&aacute;s. Voc&ecirc; s&oacute; pode ter um monstro conjurado por esta magia por vez.</div>\n<br>\n<div>O monstro surge em um espa&ccedil;o desocupado a sua escolha dentro do alcance e age no in&iacute;cio de cada um de seus turnos, a partir da pr&oacute;xima rodada. O monstro tem deslocamento 9m e pode fazer uma a&ccedil;&atilde;o de movimento por rodada. Voc&ecirc; pode gastar uma a&ccedil;&atilde;o padr&atilde;o para dar uma das seguintes ordens a ele.</div>\n<br>\n<div>Mover: o monstro se movimenta o dobro do deslocamento nessa rodada.</div>\n<br>\n<div>Atacar: o monstro causa 2d4+2 pontos de dano a uma criatura adjacente.</div>\n<br>\n<div>Lan&ccedil;ar Magia: o monstro pode servir como ponto de origem para uma magia lan&ccedil;ada por voc&ecirc; com execu&ccedil;&atilde;o de uma a&ccedil;&atilde;o padr&atilde;o ou menor. Ele pode descarregar um Toque Chocante em um inimigo distante, ou mesmo &ldquo;cuspir&rdquo; uma Bola de Fogo! Voc&ecirc; gasta PM normalmente para lan&ccedil;ar a magia.</div>\n<br>\n<div>Outros usos criativos para monstros conjurados ficam a crit&eacute;rio do mestre. O monstro n&atilde;o age sem receber uma ordem.</div>\n<br>\n<div>Para efeitos de jogo, o monstro conjurado tem For 2, Des 3 e todos os outros atributos nulos. Ele tem Defesa igual a sua, 20 pontos de vid e usa o seu b&ocirc;nus para teste de Reflexos. Ele &eacute; imune a efeitos que pedem um teste de Fortitude ou Vontade.</div>\n</div>"
+              "value": "<div>\n<div>Você conjura um monstro Pequeno que ataca seus inimigos. Você escolhe a aparência do monstro e o tipo de dano que ele pode causar, entre corte, impacto e perfuração. No entanto, ele não é uma criatura real, e sim um construto feito de energia. Se for destruído, ou quando a magia acaba, desaparece com um brilho, sem deixar nada para trás. Você só pode ter um monstro conjurado por esta magia por vez.</div>\n<br>\n<div>O monstro surge em um espaço desocupado a sua escolha dentro do alcance e age no início de cada um de seus turnos, a partir da próxima rodada. O monstro tem deslocamento 9m e pode fazer uma ação de movimento por rodada. Você pode gastar uma ação padrão para dar uma das seguintes ordens a ele.</div>\n<br>\n<div>Mover: o monstro se movimenta o dobro do deslocamento nessa rodada.</div>\n<br>\n<div>Atacar: o monstro causa 2d4+2 pontos de dano a uma criatura adjacente.</div>\n<br>\n<div>Lançar Magia: o monstro pode servir como ponto de origem para uma magia lançada por você com execução de uma ação padrão ou menor. Ele pode descarregar um Toque Chocante em um inimigo distante, ou mesmo &ldquo;cuspir&rdquo; uma Bola de Fogo! Você gasta PM normalmente para lançar a magia.</div>\n<br>\n<div>Outros usos criativos para monstros conjurados ficam a critério do mestre. O monstro não age sem receber uma ordem.</div>\n<br>\n<div>Para efeitos de jogo, o monstro conjurado tem For 2, Des 3 e todos os outros atributos nulos. Ele tem Defesa igual a sua, 20 pontos de vid e usa o seu bônus para teste de Reflexos. Ele é imune a efeitos que pedem um teste de Fortitude ou Vontade.</div>\n</div>"
             }
           }
         },
@@ -156,10 +154,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -167,7 +165,7 @@ const spellsData = {
             "resistencia": "Reflexos anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Teia cria v&aacute;rias camadas de fibras entrela&ccedil;adas e pegajosas na &aacute;rea. Qualquer criatura na &aacute;rea que falhar na resist&ecirc;ncia fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw\" data-id=\"GwCDzhOvdqD8zEaw\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enredado</a>. Uma v&iacute;tima pode se libertar com uma a&ccedil;&atilde;o padr&atilde;o e um teste de Acrobacia ou Atletismo. A &aacute;rea ocupada por Teia &eacute; terreno dif&iacute;cil.</p>\n<p>A Teia &eacute; inflam&aacute;vel. Qualquer ataque que cause dano de fogo destr&oacute;i as teias por onde passar, libertando as criaturas enredadas mas deixando-as em chamas.</p>"
+              "value": "<p>Teia cria várias camadas de fibras entrelaçadas e pegajosas na área. Qualquer criatura na área que falhar na resistência fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw\" data-id=\"GwCDzhOvdqD8zEaw\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enredado</a>. Uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo. A área ocupada por Teia é terreno difícil.</p>\n<p>A Teia é inflamável. Qualquer ataque que cause dano de fogo destrói as teias por onde passar, libertando as criaturas enredadas mas deixando-as em chamas.</p>"
             }
           }
         }
@@ -181,10 +179,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -192,7 +190,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; manifesta e dispara uma adaga imaterial contra a mente do alvo, que sofre 2d6 pontos de dano ps&iacute;quico e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado} por uma rodada. Se passar no teste de resist&ecirc;ncia, sofre apenas metade do dano e evita a condi&ccedil;&atilde;o. Uma criatura s&oacute; pode ficar atordoada por esta magia uma vez por cena.</p>"
+              "value": "<p>Você manifesta e dispara uma adaga imaterial contra a mente do alvo, que sofre 2d6 pontos de dano psíquico e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado} por uma rodada. Se passar no teste de resistência, sofre apenas metade do dano e evita a condição. Uma criatura só pode ficar atordoada por esta magia uma vez por cena.</p>"
             }
           }
         },
@@ -204,10 +202,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -215,7 +213,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O alvo fica enfeiti&ccedil;ado (veja a p&aacute;gina 394). Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resist&ecirc;ncia. Se voc&ecirc; ou seus aliados tomarem qualquer a&ccedil;&atilde;o hostil contra o alvo, a magia &eacute; dissipada e o alvo retorna &agrave; atitude que tinha antes (ou piorada, de acordo com o mestre).</p>"
+              "value": "<p>O alvo fica enfeitiçado (veja a página 394). Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resistência. Se você ou seus aliados tomarem qualquer ação hostil contra o alvo, a magia é dissipada e o alvo retorna à atitude que tinha antes (ou piorada, de acordo com o mestre).</p>"
             }
           }
         },
@@ -227,19 +225,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1d4 Rodadas",
             "alvo": "1 animal ou humanoide",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Suas palavras e movimentos ritmados deixam o alvo fascinado. Esta magia s&oacute; afeta criaturas que possam perceber voc&ecirc;. Se usar esta magia em combate, o alvo recebe +5 em seu teste de resist&ecirc;ncia. Se a criatura passar, fica imune a este efeito por um dia.</p>"
+              "value": "<p>Suas palavras e movimentos ritmados deixam o alvo fascinado. Esta magia só afeta criaturas que possam perceber você. Se usar esta magia em combate, o alvo recebe +5 em seu teste de resistência. Se a criatura passar, fica imune a este efeito por um dia.</p>"
             }
           }
         },
@@ -251,10 +248,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -262,7 +259,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Um cansa&ccedil;o m&iacute;stico recai sobre o alvo. Se falhar na resist&ecirc;ncia, ele fica inconsciente e ca&iacute;do ou, se estiver envolvido em combate ou outra situa&ccedil;&atilde;o perigosa, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto} por 1 rodada, depois fatigado. Em ambos os casos, se passar, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado} por 1d4 rodadas.</p>"
+              "value": "<p>Um cansaço místico recai sobre o alvo. Se falhar na resistência, ele fica inconsciente e caído ou, se estiver envolvido em combate ou outra situação perigosa, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto} por 1 rodada, depois fatigado. Em ambos os casos, se passar, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado} por 1d4 rodadas.</p>"
             }
           }
         }
@@ -276,13 +273,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Cone de 6m",
             "resistencia": "Reflexos reduz à metade",
             "custo": "1 PM",
@@ -299,10 +296,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -310,7 +307,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Favorita entre arcanistas iniciantes, esta magia lan&ccedil;a duas setas de energia que causam 1d4+1 pontos de dano de ess&ecirc;ncia cada. Voc&ecirc; pode lan&ccedil;ar as setas em alvos diferentes ou concentr&aacute;-las num mesmo alvo. Caso voc&ecirc; possua um b&ocirc;nus no dano de magias, como pelo poder Arcano de Batalha, ele &eacute; aplicado em apenas uma seta (o b&ocirc;nus vale para a magia, n&atilde;o cada alvo).</p>"
+              "value": "<p>Favorita entre arcanistas iniciantes, esta magia lança duas setas de energia que causam 1d4+1 pontos de dano de essência cada. Você pode lançar as setas em alvos diferentes ou concentrá-las num mesmo alvo. Caso você possua um bônus no dano de magias, como pelo poder Arcano de Batalha, ele é aplicado em apenas uma seta (o bônus vale para a magia, não cada alvo).</p>"
             }
           }
         },
@@ -322,13 +319,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Fortitude reduz à metade",
             "custo": "1 PM",
@@ -347,17 +344,17 @@ const spellsData = {
             "circulo": "1",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Vontade desacredita",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Esta magia cria uma ilus&atilde;o visual (uma criatura, uma parede...) ou sonora (um grito de socorro, um uivo assustador...). A magia cria apenas imagens ou sons simples, com volume equivalente ao tom de voz normal para cada cubo de 1,5m no efeito. N&atilde;o &eacute; poss&iacute;vel criar cheiros, texturas ou temperaturas, nem sons complexos, como uma m&uacute;sica ou di&aacute;logo. Criaturas e objetos atravessam uma ilus&atilde;o sem sofrer dano, mas a magia pode, por exemplo, esconder uma armadilha ou inimigo. A magia &eacute; dissipada se voc&ecirc; sair do alcance.</p>"
+              "value": "<p>Esta magia cria uma ilusão visual (uma criatura, uma parede...) ou sonora (um grito de socorro, um uivo assustador...). A magia cria apenas imagens ou sons simples, com volume equivalente ao tom de voz normal para cada cubo de 1,5m no efeito. Não é possível criar cheiros, texturas ou temperaturas, nem sons complexos, como uma música ou diálogo. Criaturas e objetos atravessam uma ilusão sem sofrer dano, mas a magia pode, por exemplo, esconder uma armadilha ou inimigo. A magia é dissipada se você sair do alcance.</p>"
             }
           }
         },
@@ -369,13 +366,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Vontade desacredita",
             "custo": "1 PM",
@@ -392,13 +389,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -415,18 +412,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "cone de 4,5m",
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Um cone de luzes brilhantes surge das suas m&atilde;os, deixando os animais e humanoides na &aacute;rea atordoados por 1 rodada (apenas uma vez por cena, Vontade anula) e ofuscados pela cena.</p>"
+              "value": "<p>Um cone de luzes brilhantes surge das suas mãos, deixando os animais e humanoides na área atordoados por 1 rodada (apenas uma vez por cena, Vontade anula) e ofuscados pela cena.</p>"
             }
           }
         }
@@ -440,10 +437,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -451,7 +448,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O alvo &eacute; envolvido por energias sombrias e assustadoras. Se falhar na resist&ecirc;ncia, fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a> por 1 rodada, depois @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado}. Se passar, fica abalado por 1d4 rodadas.</p>"
+              "value": "<p>O alvo é envolvido por energias sombrias e assustadoras. Se falhar na resistência, fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a> por 1 rodada, depois @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado}. Se passar, fica abalado por 1d4 rodadas.</p>"
             }
           }
         },
@@ -463,10 +460,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -474,7 +471,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; dispara um raio p&uacute;rpura que drena as for&ccedil;as do alvo. Se falhar na resist&ecirc;ncia, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado}. Se passar, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulner&aacute;vel}.</p>\n<p>Note que, como efeitos de magia n&atilde;o acumulam, lan&ccedil;ar esta magia duas vezes contra o mesmo alvo n&atilde;o ir&aacute; deix&aacute;-lo exausto.</p>"
+              "value": "<p>Você dispara um raio púrpura que drena as forças do alvo. Se falhar na resistência, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado}. Se passar, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulnerável}.</p>\n<p>Note que, como efeitos de magia não acumulam, lançar esta magia duas vezes contra o mesmo alvo não irá deixá-lo exausto.</p>"
             }
           }
         },
@@ -486,18 +483,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; suga energia vital da terra, recebendo 2d10 pontos de vida tempor&aacute;rios. Os PV tempor&aacute;rios desaparecem ao final da cena.</p>"
+              "value": "<p>Você suga energia vital da terra, recebendo 2d10 pontos de vida temporários. Os PV temporários desaparecem ao final da cena.</p>"
             }
           }
         }
@@ -511,13 +508,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -534,19 +531,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "reaction",
+              "execução": "reaction",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "até chegar ao solo ou cena, o que vier primeiro",
             "alvo": "1 criatura ou objeto com até 200kg",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O alvo cai lentamente. A velocidade da queda &eacute; reduzida para 18m por rodada &mdash; o suficiente para n&atilde;o causar dano.</p>\n<p>Como lan&ccedil;ar esta magia &eacute; uma rea&ccedil;&atilde;o, voc&ecirc; pode lan&ccedil;&aacute;-la r&aacute;pido o bastante para salvar a si ou um aliado de quedas inesperadas.</p>\n<p>Lan&ccedil;ada sobre um proj&eacute;til &mdash; como uma flecha ou uma rocha largada do alto de um penhasco &mdash;, a magia faz com que ele cause metade do dano normal, devido &agrave; lentid&atilde;o.</p>\n<p><em>Queda Suave</em> s&oacute; funciona em criaturas e objetos em queda livre ou similar; a magia n&atilde;o vai frear um golpe de espada ou o mergulho rasante de um atacante voador.</p>"
+              "value": "<p>O alvo cai lentamente. A velocidade da queda é reduzida para 18m por rodada — o suficiente para não causar dano.</p>\n<p>Como lançar esta magia é uma reação, você pode lançá-la rápido o bastante para salvar a si ou um aliado de quedas inesperadas.</p>\n<p>Lançada sobre um projétil — como uma flecha ou uma rocha largada do alto de um penhasco —, a magia faz com que ele cause metade do dano normal, devido à lentidão.</p>\n<p><em>Queda Suave</em> só funciona em criaturas e objetos em queda livre ou similar; a magia não vai frear um golpe de espada ou o mergulho rasante de um atacante voador.</p>"
             }
           }
         },
@@ -558,18 +554,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "matéria-prima, como madeira, rochas, ossos",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>A magia transforma mat&eacute;ria bruta para moldar um novo objeto. Voc&ecirc; pode usar mat&eacute;ria-prima mundana para criar um objeto de tamanho Pequeno ou menor e pre&ccedil;o m&aacute;ximo de T$ 25, como um balde ou uma espada. O objeto reverte &agrave; mat&eacute;ria-prima no final da cena, ou se for tocado por um objeto feito de chumbo. Esta magia n&atilde;o pode ser usada para criar objetos consum&iacute;veis, como alimentos ou itens alqu&iacute;micos, nem objetos com mecanismos complexos, como bestas ou armas de fogo.</p>\n<p><em>Transmutar Objetos </em>anula <em>Despeda&ccedil;ar</em>.</p>"
+              "value": "<p>A magia transforma matéria bruta para moldar um novo objeto. Você pode usar matéria-prima mundana para criar um objeto de tamanho Pequeno ou menor e preço máximo de T$ 25, como um balde ou uma espada. O objeto reverte à matéria-prima no final da cena, ou se for tocado por um objeto feito de chumbo. Esta magia não pode ser usada para criar objetos consumíveis, como alimentos ou itens alquímicos, nem objetos com mecanismos complexos, como bestas ou armas de fogo.</p>\n<p><em>Transmutar Objetos </em>anula <em>Despedaçar</em>.</p>"
             }
           }
         }
@@ -583,20 +579,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/campo-de-forca.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia cria uma pel&iacute;cula protetora sobre voc&ecirc;. Voc&ecirc; recebe 30 pontos de vida tempor&aacute;rios.</p>"
+              "value": "<p>Esta magia cria uma película protetora sobre você. Você recebe 30 pontos de vida temporários.</p>"
             }
           }
         },
@@ -606,20 +602,19 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/refugio.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia cria um domo im&oacute;vel e quase opaco por fora, mas transparente pelo lado de dentro. Ele protege contra calor, frio e for&ccedil;as pequenas, mas n&atilde;o contra qualquer coisa capaz de causar dano. Assim, o domo protege contra neve e vento comuns, mas n&atilde;o contra uma flecha ou Bola de Fogo. Por&eacute;m, como o domo &eacute; quase opaco, qualquer criatura dentro dele tem camuflagem total contra ataques vindos de fora. Criaturas podem entrar e sair do domo livremente. Descansar dentro do Ref&uacute;gio concede recupera&ccedil;&atilde;o normal de PV e PM.</p>"
+              "value": "<p>Esta magia cria um domo imóvel e quase opaco por fora, mas transparente pelo lado de dentro. Ele protege contra calor, frio e forças pequenas, mas não contra qualquer coisa capaz de causar dano. Assim, o domo protege contra neve e vento comuns, mas não contra uma flecha ou Bola de Fogo. Porém, como o domo é quase opaco, qualquer criatura dentro dele tem camuflagem total contra ataques vindos de fora. Criaturas podem entrar e sair do domo livremente. Descansar dentro do Refúgio concede recuperação normal de PV e PM.</p>"
             }
           }
         }
@@ -633,19 +628,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "1 day",
+            "alcance": "toque",
             "alvo": "2 criaturas voluntárias",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria um elo mental entre duas criaturas com Intelig&ecirc;ncia -3 ou maior (voc&ecirc; pode ser uma delas). As criaturas podem se comunicar independente de idioma ou dist&acirc;ncia, mas n&atilde;o em mundos diferentes.</p>"
+              "value": "<p>Você cria um elo mental entre duas criaturas com Inteligência -3 ou maior (você pode ser uma delas). As criaturas podem se comunicar independente de idioma ou distância, mas não em mundos diferentes.</p>"
             }
           }
         },
@@ -657,18 +651,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "esfera com 90m de raio",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia pode encontrar uma criatura ou objeto a sua escolha. Voc&ecirc; pode pensar em termos gerais (&ldquo;um elfo&rdquo;, &ldquo;algo de metal&rdquo;) ou espec&iacute;ficos (&ldquo;Gwen, a elfa&rdquo;, &ldquo;uma espada longa&rdquo;). A magia indica a dire&ccedil;&atilde;o e dist&acirc;ncia da criatura ou objeto mais pr&oacute;ximo desse tipo, caso esteja ao alcance. Voc&ecirc; pode movimentar-se para continuar procurando. Procurar algo muito espec&iacute;fico (&ldquo;a espada longa encantada do Bar&atilde;o Rulyn&rdquo;) exige que voc&ecirc; tenha em mente uma imagem precisa do objeto; caso a imagem n&atilde;o seja muito pr&oacute;xima da verdade, a magia falha, mas voc&ecirc; gasta os PM mesmo assim. Esta magia pode ser bloqueada por uma fina camada de chumbo.</p>"
+              "value": "<p>Esta magia pode encontrar uma criatura ou objeto a sua escolha. Você pode pensar em termos gerais (&ldquo;um elfo&rdquo;, &ldquo;algo de metal&rdquo;) ou específicos (&ldquo;Gwen, a elfa&rdquo;, &ldquo;uma espada longa&rdquo;). A magia indica a direção e distância da criatura ou objeto mais próximo desse tipo, caso esteja ao alcance. Você pode movimentar-se para continuar procurando. Procurar algo muito específico (&ldquo;a espada longa encantada do Barão Rulyn&rdquo;) exige que você tenha em mente uma imagem precisa do objeto; caso a imagem não seja muito próxima da verdade, a magia falha, mas você gasta os PM mesmo assim. Esta magia pode ser bloqueada por uma fina camada de chumbo.</p>"
             }
           }
         },
@@ -680,13 +674,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "superfície ou objeto plano, como uma mesa ou pergaminho",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -705,10 +699,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -716,7 +710,7 @@ const spellsData = {
             "resistencia": "Reflexos anula",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Tr&ecirc;s la&ccedil;os de energia surgem e se enroscam no alvo, deixando-o agarrado. A v&iacute;tima pode tentar se livrar, gastando uma a&ccedil;&atilde;o padr&atilde;o para fazer um teste de Atletismo (CD igual &agrave; da magia). Se passar, destr&oacute;i um la&ccedil;o, mais um la&ccedil;o adicional para cada 5 pontos pelos quais superou a CD. Os la&ccedil;os tamb&eacute;m podem ser atacados e destru&iacute;dos: cada um tem Defesa 10, 10 PV, RD 5 e imunidade a dano m&aacute;gico. Se todos os la&ccedil;os forem destru&iacute;dos, a magia &eacute; dissipada. Por serem feitos de energia, os la&ccedil;os afetam criaturas incorp&oacute;reas.</p>"
+              "value": "<p>Três laços de energia surgem e se enroscam no alvo, deixando-o agarrado. A vítima pode tentar se livrar, gastando uma ação padrão para fazer um teste de Atletismo (CD igual à da magia). Se passar, destrói um laço, mais um laço adicional para cada 5 pontos pelos quais superou a CD. Os laços também podem ser atacados e destruídos: cada um tem Defesa 10, 10 PV, RD 5 e imunidade a dano mágico. Se todos os laços forem destruídos, a magia é dissipada. Por serem feitos de energia, os laços afetam criaturas incorpóreas.</p>"
             }
           }
         },
@@ -728,18 +722,17 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia convoca um parceiro cavalo (ou p&ocirc;nei) de guerra veterano. Sua apar&ecirc;ncia &eacute; de um animal negro com crina e cauda cinzentas e cascos feitos de fuma&ccedil;a, mas voc&ecirc; pode mud&aacute;-la se quiser. Al&eacute;m dos benef&iacute;cios normais, a <em>Montaria Arcana</em> pode atravessar terreno dif&iacute;cil sem redu&ccedil;&atilde;o em seu deslocamento.Voc&ecirc; pode usar Misticismo no lugar de Cavalgar para efeitos desta montaria (incluindo ser considerado treinado).</p>"
+              "value": "<p>Esta magia convoca um parceiro cavalo (ou pônei) de guerra veterano. Sua aparência é de um animal negro com crina e cauda cinzentas e cascos feitos de fumaça, mas você pode mudá-la se quiser. Além dos benefícios normais, a <em>Montaria Arcana</em> pode atravessar terreno difícil sem redução em seu deslocamento.Você pode usar Misticismo no lugar de Cavalgar para efeitos desta montaria (incluindo ser considerado treinado).</p>"
             }
           }
         },
@@ -751,10 +744,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -774,17 +767,17 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria at&eacute; tr&ecirc;s servos invis&iacute;veis e silenciosos, capazes de realizar tarefas simples como apanhar lenha, colher frutos, varrer o ch&atilde;o ou alimentar um cavalo. Os servos podem ser usados para manter arrumada e organizada uma mans&atilde;o ou pequena torre ou para preparar um acampamento nos ermos para voc&ecirc; e seus aliados (veja a per&iacute;cia Sobreviv&ecirc;ncia, na p&aacute;gina 123).</p>\n<p>Eles tamb&eacute;m podem ajud&aacute;-lo em tarefas mais complexas, como fazer uma pesquisa ou preparar uma po&ccedil;&atilde;o, mas isso consome sua energia m&aacute;gica. Voc&ecirc; pode &ldquo;gastar&rdquo; um servo para receber um b&ocirc;nus n&atilde;o cumulativo de +2 em um teste de per&iacute;cia (exceto testes de ataque e resist&ecirc;ncia). Os servos n&atilde;o s&atilde;o criaturas reais; n&atilde;o podem lutar, nem resistir a qualquer dano ou efeito que exija um teste de resist&ecirc;ncia ou teste oposto &mdash; falhar&atilde;o automaticamente no teste e ser&atilde;o destru&iacute;dos.</p>"
+              "value": "<p>Você cria até três servos invisíveis e silenciosos, capazes de realizar tarefas simples como apanhar lenha, colher frutos, varrer o chão ou alimentar um cavalo. Os servos podem ser usados para manter arrumada e organizada uma mansão ou pequena torre ou para preparar um acampamento nos ermos para você e seus aliados (veja a perícia Sobrevivência, na página 123).</p>\n<p>Eles também podem ajudá-lo em tarefas mais complexas, como fazer uma pesquisa ou preparar uma poção, mas isso consome sua energia mágica. Você pode &ldquo;gastar&rdquo; um servo para receber um bônus não cumulativo de +2 em um teste de perícia (exceto testes de ataque e resistência). Os servos não são criaturas reais; não podem lutar, nem resistir a qualquer dano ou efeito que exija um teste de resistência ou teste oposto — falharão automaticamente no teste e serão destruídos.</p>"
             }
           }
         }
@@ -798,18 +791,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Cone de 6m",
             "resistencia": "Vontade parcial",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Humanoides na &aacute;rea s&atilde;o acometidos de grande tristeza, adquirindo as condi&ccedil;&otilde;es @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco} e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}. Se passarem na resist&ecirc;ncia, adquirem essas condi&ccedil;&otilde;es por uma rodada.</p>"
+              "value": "<p>Humanoides na área são acometidos de grande tristeza, adquirindo as condições @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco} e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}. Se passarem na resistência, adquirem essas condições por uma rodada.</p>"
             }
           }
         },
@@ -821,10 +814,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -832,7 +825,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; murmura palavras desconexas que afetam a mente do alvo. O alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}.</p>"
+              "value": "<p>Você murmura palavras desconexas que afetam a mente do alvo. O alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}.</p>"
             }
           }
         }
@@ -846,10 +839,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -869,10 +862,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -880,7 +873,7 @@ const spellsData = {
             "resistencia": "Reflexos parcial",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; dispara um proj&eacute;til que causa 4d6 pontos de dano de &aacute;cido. Se falhar no teste de resist&ecirc;ncia, o alvo tamb&eacute;m fica coberto por um muco corrosivo, sofrendo mais 2d6 de dano de &aacute;cido no in&iacute;cio de seus dois pr&oacute;ximos turnos. Se lan&ccedil;ada contra um objeto que n&atilde;o esteja em posse de uma criatura a magia causa dano dobrado e ignora a RD do objeto.</p>"
+              "value": "<p>Você dispara um projétil que causa 4d6 pontos de dano de ácido. Se falhar no teste de resistência, o alvo também fica coberto por um muco corrosivo, sofrendo mais 2d6 de dano de ácido no início de seus dois próximos turnos. Se lançada contra um objeto que não esteja em posse de uma criatura a magia causa dano dobrado e ignora a RD do objeto.</p>"
             }
           }
         },
@@ -892,10 +885,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -915,10 +908,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -926,7 +919,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; sopra ar g&eacute;lido que causa 4d6 pontos de dano de frio (Fortitude reduz &agrave; metade). Criaturas de tamanho M&eacute;dio ou menor que falhem na resist&ecirc;ncia ficam ca&iacute;das e s&atilde;o empurradas 6m na dire&ccedil;&atilde;o oposta. Se houver uma parede ou outro objeto s&oacute;lido (mas n&atilde;o uma criatura) no caminho, a criatura para de se mover, mas sofre +2d6 pontos de dano de impacto.</p>"
+              "value": "<p>Você sopra ar gélido que causa 4d6 pontos de dano de frio (Fortitude reduz à metade). Criaturas de tamanho Médio ou menor que falhem na resistência ficam caídas e são empurradas 6m na direção oposta. Se houver uma parede ou outro objeto sólido (mas não uma criatura) no caminho, a criatura para de se mover, mas sofre +2d6 pontos de dano de impacto.</p>"
             }
           }
         }
@@ -940,18 +933,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia lhe concede um rosto idealizado, porte f&iacute;sico garboso, voz melodiosa e olhar sedutor. Enquanto a magia estiver ativa, seu Carisma torna-se 5 (ou recebe um b&ocirc;nus de +2, caso seja 5 ou maior) e voc&ecirc; recebe +5 nos testes de Diplomacia e Engana&ccedil;&atilde;o. Quando a magia acaba, quaisquer observadores percebem a mudan&ccedil;a e tendem a suspeitar de voc&ecirc;. Da mesma maneira, pessoas que o viram sob o efeito da magia sentir&atilde;o que &ldquo;algo est&aacute; errado&rdquo; ao v&ecirc;-lo em condi&ccedil;&otilde;es normais. Quando a cena acabar, voc&ecirc; pode gastar os PM da magia novamente como uma a&ccedil;&atilde;o livre para mant&ecirc;-la ativa. Este efeito n&atilde;o fornece PV ou PM adicionais.</p>"
+              "value": "<p>Esta magia lhe concede um rosto idealizado, porte físico garboso, voz melodiosa e olhar sedutor. Enquanto a magia estiver ativa, seu Carisma torna-se 5 (ou recebe um bônus de +2, caso seja 5 ou maior) e você recebe +5 nos testes de Diplomacia e Enganação. Quando a magia acaba, quaisquer observadores percebem a mudança e tendem a suspeitar de você. Da mesma maneira, pessoas que o viram sob o efeito da magia sentirão que &ldquo;algo está errado&rdquo; ao vê-lo em condições normais. Quando a cena acabar, você pode gastar os PM da magia novamente como uma ação livre para mantê-la ativa. Este efeito não fornece PV ou PM adicionais.</p>"
             }
           }
         },
@@ -963,18 +956,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>O alvo fica com sua imagem nublada, como se vista atrav&eacute;s de um l&iacute;quido, recebendo os efeitos de camuflagem leve.</p>"
+              "value": "<p>O alvo fica com sua imagem nublada, como se vista através de um líquido, recebendo os efeitos de camuflagem leve.</p>"
             }
           }
         },
@@ -986,10 +979,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1009,19 +1002,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "free",
+              "execução": "free",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "1 round",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>O alvo fica invis&iacute;vel (incluindo seu equipamento). Um personagem invis&iacute;vel recebe camuflagem total, +10 em testes de Furtividade contra ouvir e criaturas que n&atilde;o possam v&ecirc;-lo ficam desprevenidas contra seus ataques.</p>\n<p>A magia termina se o alvo faz uma a&ccedil;&atilde;o hostil contra uma criatura. A&ccedil;&otilde;es contra objetos livres n&atilde;o dissipam a Invisibilidade (voc&ecirc; pode tocar ou apanhar objetos que n&atilde;o estejam sendo segurados por outras criaturas). Causar dano indiretamente &mdash; por exemplo, acendendo o pavio de um barril de p&oacute;lvora que vai detonar mais tarde &mdash; n&atilde;o &eacute; considerado um ataque.</p>\n<p>Objetos soltos pelo alvo voltam a ser vis&iacute;veis e objetos apanhados por ele ficam invis&iacute;veis. Qualquer parte de um item carregado que se estenda al&eacute;m de seu alcance corpo a corpo natural se torna vis&iacute;vel. Uma luz nunca fica invis&iacute;vel (mesmo que sua fonte seja).</p>"
+              "value": "<p>O alvo fica invisível (incluindo seu equipamento). Um personagem invisível recebe camuflagem total, +10 em testes de Furtividade contra ouvir e criaturas que não possam vê-lo ficam desprevenidas contra seus ataques.</p>\n<p>A magia termina se o alvo faz uma ação hostil contra uma criatura. Ações contra objetos livres não dissipam a Invisibilidade (você pode tocar ou apanhar objetos que não estejam sendo segurados por outras criaturas). Causar dano indiretamente — por exemplo, acendendo o pavio de um barril de pólvora que vai detonar mais tarde — não é considerado um ataque.</p>\n<p>Objetos soltos pelo alvo voltam a ser visíveis e objetos apanhados por ele ficam invisíveis. Qualquer parte de um item carregado que se estenda além de seu alcance corpo a corpo natural se torna visível. Uma luz nunca fica invisível (mesmo que sua fonte seja).</p>"
             }
           }
         }
@@ -1035,10 +1027,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1046,7 +1038,7 @@ const spellsData = {
             "resistencia": "Fortitude reduz à metade",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia cria um cr&acirc;nio envolto em energia negativa. Quando atinge o alvo, causa 4d8+4 pontos de dano de trevas e se desfaz emitindo um som horrendo, deixando abalado o alvo e todos os inimigos num raio de 3m dele (criaturas j&aacute; abaladas ficam apavoradas por 1d4 rodadas). Passar no teste de resist&ecirc;ncia diminui o dano &agrave; metade e evita a condi&ccedil;&atilde;o (as demais criaturas na &aacute;rea tamb&eacute;m tem direito ao teste de resist&ecirc;ncia, para evitar a condi&ccedil;&atilde;o).</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo\" data-id=\"ccqJXj25EVIzUhzo\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Abalado</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a></p>"
+              "value": "<p>Esta magia cria um crânio envolto em energia negativa. Quando atinge o alvo, causa 4d8+4 pontos de dano de trevas e se desfaz emitindo um som horrendo, deixando abalado o alvo e todos os inimigos num raio de 3m dele (criaturas já abaladas ficam apavoradas por 1d4 rodadas). Passar no teste de resistência diminui o dano à metade e evita a condição (as demais criaturas na área também tem direito ao teste de resistência, para evitar a condição).</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo\" data-id=\"ccqJXj25EVIzUhzo\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Abalado</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a></p>"
             }
           }
         },
@@ -1058,13 +1050,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Fortitude reduz à metade",
             "custo": "3 PM",
@@ -1083,19 +1075,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "alvo": "1 objeto",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia aumenta ou diminui o tamanho de um item mundano em at&eacute; tr&ecirc;s categorias (um objeto Enorme vira Pequeno, por exemplo). Voc&ecirc; tamb&eacute;m pode mudar a consist&ecirc;ncia do item, deixando-o r&iacute;gido como pedra ou flex&iacute;vel como seda (isso n&atilde;o altera sua RD ou PV, apenas suas propriedades f&iacute;sicas). Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela pode fazer um teste de Vontade para anul&aacute;-la.</p>"
+              "value": "<p>Esta magia aumenta ou diminui o tamanho de um item mundano em até três categorias (um objeto Enorme vira Pequeno, por exemplo). Você também pode mudar a consistência do item, deixando-o rígido como pedra ou flexível como seda (isso não altera sua RD ou PV, apenas suas propriedades físicas). Se lançar a magia num objeto de uma criatura involuntária, ela pode fazer um teste de Vontade para anulá-la.</p>"
             }
           }
         },
@@ -1107,18 +1098,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; muda sua apar&ecirc;ncia e forma &mdash; incluindo seu equipamento &mdash; para qualquer outra criatura, existente ou imaginada. Independentemente da forma escolhida, voc&ecirc; recebe +20 em testes de Engana&ccedil;&atilde;o para disfarce. Caracter&iacute;sticas n&atilde;o mencionadas n&atilde;o mudam.</p>\n<p>Se mudar para uma forma humanoide, pode mudar o tipo de dano (entre corte, impacto e perfura&ccedil;&atilde;o) de suas armas (se usa uma ma&ccedil;a e transform&aacute;- la em espada longa, ela pode causar dano de corte, por exemplo). Se quiser, pode assumir uma forma humanoide com uma categoria de tamanho acima ou abaixo da sua; nesse caso aplique os modificadores em Furtividade e testes de manobra.</p>\n<p>Se mudar para outras formas, voc&ecirc; pode escolher uma @UUID[Item.vfR7gweTOfgnna8G]{Forma Selvagem} do druida (veja no Cap&iacute;tulo 1). Nesse caso voc&ecirc; n&atilde;o pode atacar com suas armas, falar ou lan&ccedil;ar magias at&eacute; voltar ao normal, mas recebe uma ou mais armas naturais e os b&ocirc;nus da forma selvagem escolhida.</p>"
+              "value": "<p>Você muda sua aparência e forma — incluindo seu equipamento — para qualquer outra criatura, existente ou imaginada. Independentemente da forma escolhida, você recebe +20 em testes de Enganação para disfarce. Características não mencionadas não mudam.</p>\n<p>Se mudar para uma forma humanoide, pode mudar o tipo de dano (entre corte, impacto e perfuração) de suas armas (se usa uma maça e transformá- la em espada longa, ela pode causar dano de corte, por exemplo). Se quiser, pode assumir uma forma humanoide com uma categoria de tamanho acima ou abaixo da sua; nesse caso aplique os modificadores em Furtividade e testes de manobra.</p>\n<p>Se mudar para outras formas, você pode escolher uma @UUID[Item.vfR7gweTOfgnna8G]{Forma Selvagem} do druida (veja no Capítulo 1). Nesse caso você não pode atacar com suas armas, falar ou lançar magias até voltar ao normal, mas recebe uma ou mais armas naturais e os bônus da forma selvagem escolhida.</p>"
             }
           }
         },
@@ -1130,10 +1121,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -1141,7 +1132,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>O alvo pode realizar uma a&ccedil;&atilde;o padr&atilde;o ou de movimento adicional por turno. Esta a&ccedil;&atilde;o n&atilde;o pode ser usada para lan&ccedil;ar magias e ativar engenhocas.</p>"
+              "value": "<p>O alvo pode realizar uma ação padrão ou de movimento adicional por turno. Esta ação não pode ser usada para lançar magias e ativar engenhocas.</p>"
             }
           }
         }
@@ -1155,12 +1146,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/ancora-dimensional.webp",
           "system": {
             "circulo": "3",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -1168,7 +1159,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>O alvo &eacute; envolvido por um campo de for&ccedil;a cor de esmeralda que impede qualquer movimento planar. Isso inclui magias de convoca&ccedil;&atilde;o (como Salto Dimensional e Teletransporte), viagens astrais e a habilidade incorp&oacute;reo.</p>"
+              "value": "<p>O alvo é envolvido por um campo de força cor de esmeralda que impede qualquer movimento planar. Isso inclui magias de convocação (como Salto Dimensional e Teletransporte), viagens astrais e a habilidade incorpóreo.</p>"
             }
           }
         },
@@ -1178,21 +1169,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/dificultar-deteccao.webp",
           "system": {
             "circulo": "3",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "1 day",
+            "alcance": "toque",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia oculta a presen&ccedil;a do alvo contra qualquer meio m&aacute;gico de detec&ccedil;&atilde;o, inclusive detectar magia. Um conjurador que lance uma magia de adivinha&ccedil;&atilde;o para detectar a presen&ccedil;a ou localiza&ccedil;&atilde;o do alvo deve fazer um teste de Vontade. Se falhar, a magia n&atilde;o funciona, mas os PM s&atilde;o gastos mesmo assim. Se for lan&ccedil;ada sobre uma criatura, <em>Dificultar Detec&ccedil;&atilde;o</em> protege tanto a criatura quanto seu equipamento.</p>"
+              "value": "<p>Esta magia oculta a presença do alvo contra qualquer meio mágico de detecção, inclusive detectar magia. Um conjurador que lance uma magia de adivinhação para detectar a presença ou localização do alvo deve fazer um teste de Vontade. Se falhar, a magia não funciona, mas os PM são gastos mesmo assim. Se for lançada sobre uma criatura, <em>Dificultar Detecção</em> protege tanto a criatura quanto seu equipamento.</p>"
             }
           }
         },
@@ -1202,20 +1192,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/globo-de-invulnerabilidade.webp",
           "system": {
             "circulo": "3",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; &eacute; envolto por uma esfera m&aacute;gica brilhante com 3m de raio, que det&eacute;m qualquer magia de 2&ordm; c&iacute;rculo ou menor. Nenhuma magia pode ser lan&ccedil;ada contra um alvo dentro do globo e magias de &aacute;rea n&atilde;o o penetram. No entanto, magias ainda podem ser lan&ccedil;adas de dentro para fora.</p>\n<p>Uma magia que dissipa outras magias s&oacute; dissipa o globo se for usada diretamente sobre voc&ecirc;, n&atilde;o o afetando se usada em &aacute;rea. Efeitos m&aacute;gicos n&atilde;o s&atilde;o dissipados quando entram na esfera, apenas suprimidos (voltam a funcionar fora do globo, caso sua dura&ccedil;&atilde;o n&atilde;o tenha acabado). O globo &eacute; im&oacute;vel e n&atilde;o tem efeito sobre criaturas ou objetos. Ap&oacute;s lan&ccedil;&aacute;-lo, voc&ecirc; pode entrar ou sair livremente.</p>"
+              "value": "<p>Você é envolto por uma esfera mágica brilhante com 3m de raio, que detém qualquer magia de 2&ordm; círculo ou menor. Nenhuma magia pode ser lançada contra um alvo dentro do globo e magias de área não o penetram. No entanto, magias ainda podem ser lançadas de dentro para fora.</p>\n<p>Uma magia que dissipa outras magias só dissipa o globo se for usada diretamente sobre você, não o afetando se usada em área. Efeitos mágicos não são dissipados quando entram na esfera, apenas suprimidos (voltam a funcionar fora do globo, caso sua duração não tenha acabado). O globo é imóvel e não tem efeito sobre criaturas ou objetos. Após lançá-lo, você pode entrar ou sair livremente.</p>"
             }
           }
         }
@@ -1229,19 +1219,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "1 day",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Sua mente viaja at&eacute; outro plano de exist&ecirc;ncia, onde entra em contato com seres extraplanares como g&ecirc;nios e dem&ocirc;nios. Voc&ecirc; firma um contrato com uma dessas entidades para que o auxilie durante o dia, em troca de se alimentar de seu mana. Quando a magia &eacute; lan&ccedil;ada, voc&ecirc; recebe 6d6 dados de aux&iacute;lio. Enquanto a magia durar, sempre que for realizar um teste de per&iacute;cia, voc&ecirc; pode gastar 1d6 (mais 1d6 para cada c&iacute;rculo de magias acima do 3&ordm; que puder lan&ccedil;ar) e adicionar o resultado como b&ocirc;nus no teste. No entanto, sempre que rolar um &ldquo;6&rdquo; num desses dados, a entidade &ldquo;suga&rdquo; 1 PM de voc&ecirc;. A magia termina se voc&ecirc; gastar todos os dados, ficar sem PM ou no fim do dia (o que acontecer primeiro).</p>"
+              "value": "<p>Sua mente viaja até outro plano de existência, onde entra em contato com seres extraplanares como gênios e demônios. Você firma um contrato com uma dessas entidades para que o auxilie durante o dia, em troca de se alimentar de seu mana. Quando a magia é lançada, você recebe 6d6 dados de auxílio. Enquanto a magia durar, sempre que for realizar um teste de perícia, você pode gastar 1d6 (mais 1d6 para cada círculo de magias acima do 3&ordm; que puder lançar) e adicionar o resultado como bônus no teste. No entanto, sempre que rolar um &ldquo;6&rdquo; num desses dados, a entidade &ldquo;suga&rdquo; 1 PM de você. A magia termina se você gastar todos os dados, ficar sem PM ou no fim do dia (o que acontecer primeiro).</p>"
             }
           }
         }
@@ -1255,10 +1244,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "any",
@@ -1278,17 +1267,17 @@ const spellsData = {
             "circulo": "3",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Reflexos reduz à metade",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; conjura um enxame de pequenas criaturas da Tormenta. O enxame pode passar pelo espa&ccedil;o de outras criaturas e n&atilde;o impede que outras criaturas entrem no espa&ccedil;o dele. No final de cada um de seus turnos, o enxame causa 4d12 pontos de dano de &aacute;cido a qualquer criatura em seu espa&ccedil;o (Reflexos reduz &agrave; metade). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para mover o enxame com deslocamento de 12m.</p>"
+              "value": "<p>Você conjura um enxame de pequenas criaturas da Tormenta. O enxame pode passar pelo espaço de outras criaturas e não impede que outras criaturas entrem no espaço dele. No final de cada um de seus turnos, o enxame causa 4d12 pontos de dano de ácido a qualquer criatura em seu espaço (Reflexos reduz à metade). Você pode gastar uma ação de movimento para mover o enxame com deslocamento de 12m.</p>"
             }
           }
         },
@@ -1300,18 +1289,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "até 5 criaturas voluntárias",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia transporta os alvos para um lugar a sua escolha a at&eacute; 1.000km. Voc&ecirc; precisa fazer um teste de Misticismo, com dificuldade que depende de seu conhecimento sobre o local de destino.</p>\n<p><em>CD 20.</em> Um lugar familiar, que voc&ecirc; visita com frequ&ecirc;ncia.</p>\n<p><em>CD 30.</em> Um lugar conhecido, que voc&ecirc; j&aacute; visitou pelo menos uma vez.</p>\n<p><em>CD 40.</em> Um que voc&ecirc; nunca visitou e s&oacute; conhece a partir da descri&ccedil;&atilde;o de outra pessoa que esteve l&aacute;.</p>\n<p>Voc&ecirc; n&atilde;o pode se teletransportar para um lugar que nunca visitou sem a descri&ccedil;&atilde;o de algu&eacute;m. Ou seja, n&atilde;o pode se transportar para a &ldquo;sala de tesouro do rei&rdquo; se nunca esteve nela nem falou com algu&eacute;m que esteve.</p>\n<p>Se passar no teste, os alvos chegam ao lugar desejado. Se falhar, os alvos surgem 1d10 x 10km afastados em qualquer dire&ccedil;&atilde;o (se o destino &eacute; uma cidade costeira, voc&ecirc; pode surgir em alto-mar). Se falhar por 5 ou mais, voc&ecirc; chega em um lugar parecido, mas errado. E se voc&ecirc; rolar 1 natural no teste a magia falha (mas voc&ecirc; gasta os PM) e fica atordoado por 1d4 rodadas.</p>"
+              "value": "<p>Esta magia transporta os alvos para um lugar a sua escolha a até 1.000km. Você precisa fazer um teste de Misticismo, com dificuldade que depende de seu conhecimento sobre o local de destino.</p>\n<p><em>CD 20.</em> Um lugar familiar, que você visita com frequência.</p>\n<p><em>CD 30.</em> Um lugar conhecido, que você já visitou pelo menos uma vez.</p>\n<p><em>CD 40.</em> Um que você nunca visitou e só conhece a partir da descrição de outra pessoa que esteve lá.</p>\n<p>Você não pode se teletransportar para um lugar que nunca visitou sem a descrição de alguém. Ou seja, não pode se transportar para a &ldquo;sala de tesouro do rei&rdquo; se nunca esteve nela nem falou com alguém que esteve.</p>\n<p>Se passar no teste, os alvos chegam ao lugar desejado. Se falhar, os alvos surgem 1d10 x 10km afastados em qualquer direção (se o destino é uma cidade costeira, você pode surgir em alto-mar). Se falhar por 5 ou mais, você chega em um lugar parecido, mas errado. E se você rolar 1 natural no teste a magia falha (mas você gasta os PM) e fica atordoado por 1d4 rodadas.</p>"
             }
           }
         }
@@ -1325,10 +1314,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1336,7 +1325,7 @@ const spellsData = {
             "resistencia": "Relfexos parcial",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Estacas de gelo irrompem do ch&atilde;o. Criaturas na &aacute;rea sofrem 4d6 de dano de corte, 4d6 de dano de frio e ficam ca&iacute;das. Passar no teste de Reflexos evita o dano de corte e a queda. As estacas duram pela cena, o que torna a &aacute;rea afetada terreno dif&iacute;cil, e concedem cobertura leve para criaturas dentro da &aacute;rea ou atr&aacute;s dela. As estacas s&atilde;o destru&iacute;das caso sofram qualquer quantidade de dano por fogo m&aacute;gico.</p>"
+              "value": "<p>Estacas de gelo irrompem do chão. Criaturas na área sofrem 4d6 de dano de corte, 4d6 de dano de frio e ficam caídas. Passar no teste de Reflexos evita o dano de corte e a queda. As estacas duram pela cena, o que torna a área afetada terreno difícil, e concedem cobertura leve para criaturas dentro da área ou atrás dela. As estacas são destruídas caso sofram qualquer quantidade de dano por fogo mágico.</p>"
             }
           }
         },
@@ -1348,10 +1337,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1359,7 +1348,7 @@ const spellsData = {
             "resistencia": "Reflexos parcial",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia foi desenvolvida por um mago imortal, um entusiasta dos estudos vulc&acirc;nicos. Ela dispara um proj&eacute;til de magma contra o alvo, que sofre 4d6 pontos de dano de fogo e 4d6 pontos de dano de perfura&ccedil;&atilde;o e fica em chamas. As chamas causam 2d6 pontos de dano por rodada, em vez do dano normal. Se passar no teste de resist&ecirc;ncia, o alvo sofre metade do dano e n&atilde;o fica em chamas.</p>\n<p>Respingos de rocha incandescente se espalham com a explos&atilde;o, atingindo todas as criaturas adjacentes ao alvo, que devem fazer um teste de Reflexos. Se falharem, ficam em chamas, como descrito acima.</p>"
+              "value": "<p>Esta magia foi desenvolvida por um mago imortal, um entusiasta dos estudos vulcânicos. Ela dispara um projétil de magma contra o alvo, que sofre 4d6 pontos de dano de fogo e 4d6 pontos de dano de perfuração e fica em chamas. As chamas causam 2d6 pontos de dano por rodada, em vez do dano normal. Se passar no teste de resistência, o alvo sofre metade do dano e não fica em chamas.</p>\n<p>Respingos de rocha incandescente se espalham com a explosão, atingindo todas as criaturas adjacentes ao alvo, que devem fazer um teste de Reflexos. Se falharem, ficam em chamas, como descrito acima.</p>"
             }
           }
         },
@@ -1371,17 +1360,17 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "veja texto",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Cria uma muralha de um elemento a sua escolha. A muralha pode ser um muro de at&eacute; 30m de comprimento e 3m de altura (ou o contr&aacute;rio) ou uma c&uacute;pula de 3m de raio. Os efeitos variam conforme o elemento escolhido.</p>\n<p><em>Fogo.</em> Faz surgir uma violenta cortina de chamas. Um lado da muralha (a sua escolha) emite ondas de calor, que causam 2d6 pontos de dano de fogo em criaturas a at&eacute; 6m quando voc&ecirc; lan&ccedil;a a magia e no in&iacute;cio de seus turnos. Atravessar a muralha causa 8d6 pontos de dano de fogo. Caso seja criada em uma &aacute;rea onde existem criaturas, elas sofrem dano como se estivessem atravessando a muralha, mas podem fazer um teste de Reflexos para reduzir o dano &agrave; metade (a criatura escolhe para qual lado quer escapar, mas se escapar para o lado quente sofrer&aacute; mais 2d6 pontos de dano).</p>\n<p><em>Gelo.</em> Evoca uma parede grossa de gelo denso com 15cm de espessura. Na forma de c&uacute;pula, pode prender uma ou mais criaturas, mas elas t&ecirc;m direito a um teste de Reflexos para escapar antes que a c&uacute;pula se forme. Cada trecho de 3m da muralha tem Defesa 8, 40 PV e RD 5. Um trecho da muralha que atinja 0 PV ser&aacute; rompido. Qualquer efeito de fogo causa dano dobrado &agrave; muralha. Uma criatura que atravesse um trecho rompido da muralha sofre 4d6 pontos de dano de frio.</p>"
+              "value": "<p>Cria uma muralha de um elemento a sua escolha. A muralha pode ser um muro de até 30m de comprimento e 3m de altura (ou o contrário) ou uma cúpula de 3m de raio. Os efeitos variam conforme o elemento escolhido.</p>\n<p><em>Fogo.</em> Faz surgir uma violenta cortina de chamas. Um lado da muralha (a sua escolha) emite ondas de calor, que causam 2d6 pontos de dano de fogo em criaturas a até 6m quando você lança a magia e no início de seus turnos. Atravessar a muralha causa 8d6 pontos de dano de fogo. Caso seja criada em uma área onde existem criaturas, elas sofrem dano como se estivessem atravessando a muralha, mas podem fazer um teste de Reflexos para reduzir o dano à metade (a criatura escolhe para qual lado quer escapar, mas se escapar para o lado quente sofrerá mais 2d6 pontos de dano).</p>\n<p><em>Gelo.</em> Evoca uma parede grossa de gelo denso com 15cm de espessura. Na forma de cúpula, pode prender uma ou mais criaturas, mas elas têm direito a um teste de Reflexos para escapar antes que a cúpula se forme. Cada trecho de 3m da muralha tem Defesa 8, 40 PV e RD 5. Um trecho da muralha que atinja 0 PV será rompido. Qualquer efeito de fogo causa dano dobrado à muralha. Uma criatura que atravesse um trecho rompido da muralha sofre 4d6 pontos de dano de frio.</p>"
             }
           }
         }
@@ -1395,10 +1384,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1406,7 +1395,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma ilus&atilde;o de algum perigo mortal. Quando a magia &eacute; lan&ccedil;ada, criaturas na &aacute;rea devem fazer um teste de Vontade; uma falha significa que a criatura acredita que a ilus&atilde;o &eacute; real e sofre 3d6 pontos de dano ps&iacute;quico n&atilde;o letal. Sempre que uma criatura iniciar seu turno dentro da &aacute;rea, deve repetir o teste de Vontade. Se falhar, sofre o dano novamente. Somente criaturas que falham veem a ilus&atilde;o, e racionalizam o efeito sempre que falham no teste (por exemplo, acredita que o mesmo teto pode cair sobre ela v&aacute;rias vezes).</p>"
+              "value": "<p>Você cria uma ilusão de algum perigo mortal. Quando a magia é lançada, criaturas na área devem fazer um teste de Vontade; uma falha significa que a criatura acredita que a ilusão é real e sofre 3d6 pontos de dano psíquico não letal. Sempre que uma criatura iniciar seu turno dentro da área, deve repetir o teste de Vontade. Se falhar, sofre o dano novamente. Somente criaturas que falham veem a ilusão, e racionalizam o efeito sempre que falham no teste (por exemplo, acredita que o mesmo teto pode cair sobre ela várias vezes).</p>"
             }
           }
         },
@@ -1418,19 +1407,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 day",
             "alvo": "cubo de até 90m de lado",
             "resistencia": "Vontade desacredita",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; faz um terreno parecer outro, incluindo sons e cheiros. Uma plan&iacute;cie pode parecer um p&acirc;ntano, uma floresta pode parecer uma montanha etc. Esta magia pode ser usada para criar armadilhas: areia movedi&ccedil;a pode parecer terra firme ou um precip&iacute;cio pode parecer um lago. Voc&ecirc; pode alterar, incluir e esconder estruturas dentro da &aacute;rea, mas n&atilde;o criaturas (embora elas possam se esconder nas estruturas ilus&oacute;rias).</p>"
+              "value": "<p>Você faz um terreno parecer outro, incluindo sons e cheiros. Uma planície pode parecer um pântano, uma floresta pode parecer uma montanha etc. Esta magia pode ser usada para criar armadilhas: areia movediça pode parecer terra firme ou um precipício pode parecer um lago. Você pode alterar, incluir e esconder estruturas dentro da área, mas não criaturas (embora elas possam se esconder nas estruturas ilusórias).</p>"
             }
           }
         }
@@ -1444,10 +1432,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -1455,7 +1443,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "6 PM",
             "description": {
-              "value": "<p>O sangue do alvo aquece rapidamente at&eacute; entrar em ebuli&ccedil;&atilde;o. Quando a magia &eacute; lan&ccedil;ada, e no in&iacute;cio de cada um de seus turnos, o alvo sofre 4d8 pontos de dano de fogo e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por uma rodada (Fortitude reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o). Se o alvo passar em dois testes de Fortitude seguidos, dissipa a magia. Se o alvo for reduzido a 0 PV pelo dano desta magia, seu corpo explode, matando-o e causando 6d6 pontos de dano de fogo em todas as criaturas a at&eacute; 3m (Reflexos reduz &agrave; metade). Essa magia n&atilde;o afeta criaturas sem sangue, como construtos ou mortos-vivos.</p>"
+              "value": "<p>O sangue do alvo aquece rapidamente até entrar em ebulição. Quando a magia é lançada, e no início de cada um de seus turnos, o alvo sofre 4d8 pontos de dano de fogo e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por uma rodada (Fortitude reduz o dano à metade e evita a condição). Se o alvo passar em dois testes de Fortitude seguidos, dissipa a magia. Se o alvo for reduzido a 0 PV pelo dano desta magia, seu corpo explode, matando-o e causando 6d6 pontos de dano de fogo em todas as criaturas a até 3m (Reflexos reduz à metade). Essa magia não afeta criaturas sem sangue, como construtos ou mortos-vivos.</p>"
             }
           }
         },
@@ -1467,10 +1455,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1478,7 +1466,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Um c&iacute;rculo de energias sombrias se abre no ch&atilde;o, de onde surgem tent&aacute;culos feitos de treva viscosa. Ao lan&ccedil;ar a magia e no in&iacute;cio de cada um de seus turnos, voc&ecirc; faz um teste da manobra agarrar (usando seu b&ocirc;nus de Misticismo) contra cada criatura na &aacute;rea. Se voc&ecirc; passar, a criatura &eacute; agarrada; se a v&iacute;tima j&aacute; est&aacute; agarrada, &eacute; esmagada, sofrendo 4d6 pontos de dano de trevas. A &aacute;rea conta como terreno dif&iacute;cil. Os tent&aacute;culos s&atilde;o imunes a dano.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}</p>"
+              "value": "<p>Um círculo de energias sombrias se abre no chão, de onde surgem tentáculos feitos de treva viscosa. Ao lançar a magia e no início de cada um de seus turnos, você faz um teste da manobra agarrar (usando seu bônus de Misticismo) contra cada criatura na área. Se você passar, a criatura é agarrada; se a vítima já está agarrada, é esmagada, sofrendo 4d6 pontos de dano de trevas. A área conta como terreno difícil. Os tentáculos são imunes a dano.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}</p>"
             }
           }
         }
@@ -1492,19 +1480,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
-            "duracao": "sustentada ou instantânea (veja texto)",
             "alvo": "veja texto;",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; move objetos ou criaturas se concentrando. Ao lan&ccedil;ar a magia, escolha uma das op&ccedil;&otilde;es a seguir.</p>\n<p><em>For&ccedil;a Cont&iacute;nua:</em> voc&ecirc; move uma criatura ou objeto de at&eacute; 10 espa&ccedil;os, a at&eacute; 6m por rodada. Uma criatura pode anular o efeito sobre ela, ou sobre um objeto que possua, passando num teste de Vontade. O alvo pode ser movido em qualquer dire&ccedil;&atilde;o dentro do alcance. Ele cai no ch&atilde;o se sair do alcance ou a magia terminar. <strong>Dura&ccedil;&atilde;o:</strong> sustentada.</p>\n<p><em>Empurr&atilde;o Violento:</em> nesta vers&atilde;o a energia m&aacute;gica &eacute; expelida de uma &uacute;nica vez e arremessa at&eacute; 10 objetos (no m&aacute;ximo 10 espa&ccedil;os). Os objetos devem estar a at&eacute; 3m uns dos outros e podem ser arremessados at&eacute; o alcance da magia.</p>\n<p>Objetos arremessados podem atingir criaturas em seu caminho, causando de 1 ponto de dano de impacto por espa&ccedil;o (objetos macios, sem pontas ou sem fio) at&eacute; 1d6 pontos de dano por espa&ccedil;o (objetos duros, pontudos ou afiados). Criaturas atingidas t&ecirc;m direito a um teste de Reflexos para reduzir o dano &agrave; metade.</p>\n<p>Criaturas m&eacute;dias ou menores podem ser arremessadas, mas t&ecirc;m direito a um teste de Vontade para evitar o efeito (em si mesmas ou em objetos que estejam segurando). Uma criatura arremessada contra uma superf&iacute;cie s&oacute;lida sofre 1d6 pontos de dano de impacto para cada 3m que &ldquo;voou&rdquo; no deslocamento (incluindo outras criaturas; nesse caso, ambas sofrem o dano). Dura&ccedil;&atilde;o: instant&acirc;nea.</p>"
+              "value": "<p>Você move objetos ou criaturas se concentrando. Ao lançar a magia, escolha uma das opções a seguir.</p>\n<p><em>Força Contínua:</em> você move uma criatura ou objeto de até 10 espaços, a até 6m por rodada. Uma criatura pode anular o efeito sobre ela, ou sobre um objeto que possua, passando num teste de Vontade. O alvo pode ser movido em qualquer direção dentro do alcance. Ele cai no chão se sair do alcance ou a magia terminar. <strong>Duração:</strong> sustentada.</p>\n<p><em>Empurrão Violento:</em> nesta versão a energia mágica é expelida de uma única vez e arremessa até 10 objetos (no máximo 10 espaços). Os objetos devem estar a até 3m uns dos outros e podem ser arremessados até o alcance da magia.</p>\n<p>Objetos arremessados podem atingir criaturas em seu caminho, causando de 1 ponto de dano de impacto por espaço (objetos macios, sem pontas ou sem fio) até 1d6 pontos de dano por espaço (objetos duros, pontudos ou afiados). Criaturas atingidas têm direito a um teste de Reflexos para reduzir o dano à metade.</p>\n<p>Criaturas médias ou menores podem ser arremessadas, mas têm direito a um teste de Vontade para evitar o efeito (em si mesmas ou em objetos que estejam segurando). Uma criatura arremessada contra uma superfície sólida sofre 1d6 pontos de dano de impacto para cada 3m que &ldquo;voou&rdquo; no deslocamento (incluindo outras criaturas; nesse caso, ambas sofrem o dano). Duração: instantânea.</p>"
             }
           }
         },
@@ -1516,18 +1503,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; se torna uma m&aacute;quina de combate, ficando mais forte, r&aacute;pido e resistente. Voc&ecirc; recebe +6 na Defesa, testes de ataque e rolagens de dano corpo a corpo, e 30 PV tempor&aacute;rios. Durante a <em>Transforma&ccedil;&atilde;o de Guerra</em> voc&ecirc; n&atilde;o pode lan&ccedil;ar magias, mas se torna proficiente em todas as armas.</p>"
+              "value": "<p>Você se torna uma máquina de combate, ficando mais forte, rápido e resistente. Você recebe +6 na Defesa, testes de ataque e rolagens de dano corpo a corpo, e 30 PV temporários. Durante a <em>Transformação de Guerra</em> você não pode lançar magias, mas se torna proficiente em todas as armas.</p>"
             }
           }
         },
@@ -1539,18 +1526,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; recebe deslocamento de voo 12m. Voar por meio desta magia &eacute; simples como andar &mdash; voc&ecirc; pode atacar e lan&ccedil;ar magias normalmente enquanto voa. Quando a magia termina, voc&ecirc; desce lentamente at&eacute; o ch&atilde;o, como se estivesse sob efeito de <em>Queda Suave</em>.</p>"
+              "value": "<p>Você recebe deslocamento de voo 12m. Voar por meio desta magia é simples como andar — você pode atacar e lançar magias normalmente enquanto voa. Quando a magia termina, você desce lentamente até o chão, como se estivesse sob efeito de <em>Queda Suave</em>.</p>"
             }
           }
         }
@@ -1564,20 +1551,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/campo-antimagia.webp",
           "system": {
             "circulo": "4",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; &eacute; cercado por uma barreira invis&iacute;vel com 3m de raio que acompanha seus movimentos. Qualquer magia ou habilidade m&aacute;gica que entre na &aacute;rea da barreira &eacute; suprimida enquanto estiver l&aacute;.</p>\n<p>Criaturas convocadas que entrem em um Campo Antimagia desaparecem. Elas reaparecem na mesma posi&ccedil;&atilde;o quando a dura&ccedil;&atilde;o do Campo termina &mdash; supondo que a dura&ccedil;&atilde;o da magia que as convocou ainda n&atilde;o tenha terminado.</p>\n<p>Criaturas m&aacute;gicas, como elementais, ou construtos imbu&iacute;dos com magia durante sua cria&ccedil;&atilde;o, como golens, n&atilde;o s&atilde;o diretamente afetados pelo Campo Antimagia. Entretanto, como qualquer criatura, n&atilde;o poder&atilde;o usar magias ou habilidades m&aacute;gicas dentro dele.</p>\n<p>Magias que dissipam outras magias, como Dissipar Magia, n&atilde;odissipam um Campo Antimagia, e dois Campos na mesma &aacute;rea n&atilde;o se neutralizam. Artefatos e deuses maiores n&atilde;o s&atilde;o afetados por um Campo Antimagia</p>"
+              "value": "<p>Você é cercado por uma barreira invisível com 3m de raio que acompanha seus movimentos. Qualquer magia ou habilidade mágica que entre na área da barreira é suprimida enquanto estiver lá.</p>\n<p>Criaturas convocadas que entrem em um Campo Antimagia desaparecem. Elas reaparecem na mesma posição quando a duração do Campo termina — supondo que a duração da magia que as convocou ainda não tenha terminado.</p>\n<p>Criaturas mágicas, como elementais, ou construtos imbuídos com magia durante sua criação, como golens, não são diretamente afetados pelo Campo Antimagia. Entretanto, como qualquer criatura, não poderão usar magias ou habilidades mágicas dentro dele.</p>\n<p>Magias que dissipam outras magias, como Dissipar Magia, nãodissipam um Campo Antimagia, e dois Campos na mesma área não se neutralizam. Artefatos e deuses maiores não são afetados por um Campo Antimagia</p>"
             }
           }
         }
@@ -1591,19 +1578,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execucao": "minute",
+              "execução": "minute",
               "custo": 10,
               "qtd": "10",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "any",
-            "duracao": "Veja Texto",
             "alvo": "1 criatura viva",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; entra nos sonhos de uma criatura. Uma vez l&aacute;, pode conversar com ela at&eacute; que ela acorde. Se o alvo n&atilde;o estiver dormindo quando voc&ecirc; lan&ccedil;ar a magia, voc&ecirc; pode permanecer em transe at&eacute; que ele adorme&ccedil;a. Durante o transe, voc&ecirc; fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e sem consci&ecirc;ncia dos arredores. Voc&ecirc; pode sair do transe quando quiser, mas a magia termina.</p>"
+              "value": "<p>Você entra nos sonhos de uma criatura. Uma vez lá, pode conversar com ela até que ela acorde. Se o alvo não estiver dormindo quando você lançar a magia, você pode permanecer em transe até que ele adormeça. Durante o transe, você fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e sem consciência dos arredores. Você pode sair do transe quando quiser, mas a magia termina.</p>"
             }
           }
         }
@@ -1617,17 +1603,17 @@ const spellsData = {
             "circulo": "4",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia transforma uma por&ccedil;&atilde;o de um elemento inerte em uma criatura elemental Grande do tipo do elemento alvo. Por exemplo, lan&ccedil;ar esta magia numa fogueira ou tocha cria um elemental do fogo. Voc&ecirc; pode criar elementais do ar, &aacute;gua, fogo e terra com essa magia. O elemental obedece a todos os seus comandos e pode funcionar como um parceiro mestre do tipo destruidor (cuja habilidade custa apenas 2 PM para ser usada) e mais um tipo entre os indicados na lista abaixo. O elemental auxilia apenas voc&ecirc; e n&atilde;o conta em seu limite de parceiros.</p>\n<p><em>Ar:</em> assassino, perseguidor ou vigilante. Dano de eletricidade.</p>\n<p><em>&Aacute;gua:</em> ajudante, guardi&atilde;o ou m&eacute;dico. Dano de frio.</p>\n<p><em>Fogo:</em> atirador, combatente ou fort&atilde;o. Dano de fogo.</p>\n<p><em>Terra:</em> combatente, guardi&atilde;o ou montaria. Dano de impacto.</p>"
+              "value": "<p>Esta magia transforma uma porção de um elemento inerte em uma criatura elemental Grande do tipo do elemento alvo. Por exemplo, lançar esta magia numa fogueira ou tocha cria um elemental do fogo. Você pode criar elementais do ar, água, fogo e terra com essa magia. O elemental obedece a todos os seus comandos e pode funcionar como um parceiro mestre do tipo destruidor (cuja habilidade custa apenas 2 PM para ser usada) e mais um tipo entre os indicados na lista abaixo. O elemental auxilia apenas você e não conta em seu limite de parceiros.</p>\n<p><em>Ar:</em> assassino, perseguidor ou vigilante. Dano de eletricidade.</p>\n<p><em>Água:</em> ajudante, guardião ou médico. Dano de frio.</p>\n<p><em>Fogo:</em> atirador, combatente ou fortão. Dano de fogo.</p>\n<p><em>Terra:</em> combatente, guardião ou montaria. Dano de impacto.</p>"
             }
           }
         },
@@ -1639,17 +1625,17 @@ const spellsData = {
             "circulo": "4",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia cria uma m&atilde;o flutuante de tamanho Grande que sempre se posiciona entre voc&ecirc; e um oponente a sua escolha. A m&atilde;o fornece cobertura leve (+5 na Defesa) contra esse oponente. Nada &eacute; capaz de enganar a m&atilde;o &mdash; coisas como escurid&atilde;o, invisibilidade, metamorfose e disfarces mundanos n&atilde;o a impedem de proteg&ecirc;-lo. A m&atilde;o tem Defesa 20 e PV e resist&ecirc;ncias iguais aos seus. Com uma a&ccedil;&atilde;o de movimento, voc&ecirc; pode comandar a m&atilde;o para que o proteja de outro oponente ou para que realize uma das a&ccedil;&otilde;es a seguir.</p>\n<p><em>Agarrar:</em> a m&atilde;o usa uma manobra agarrar contra o oponente, usando o seu Misticismo com um b&ocirc;nus adicional de +10. A m&atilde;o mant&eacute;m o oponente agarrado, mas n&atilde;o causa dano.</p>\n<p><em>Esmagar:</em> a m&atilde;o esmaga um oponente agarrado, causando 2d6+10 pontos de dano de impacto.</p>\n<p><em>Empurrar:</em> a m&atilde;o afasta o oponente (manobra empurrar usando o seu Misticismo com um b&ocirc;nus adicional de +10). A m&atilde;o acompanha o oponente para empurr&aacute;-lo o m&aacute;ximo que conseguir, dentro do alcance da magia.</p>"
+              "value": "<p>Esta magia cria uma mão flutuante de tamanho Grande que sempre se posiciona entre você e um oponente a sua escolha. A mão fornece cobertura leve (+5 na Defesa) contra esse oponente. Nada é capaz de enganar a mão — coisas como escuridão, invisibilidade, metamorfose e disfarces mundanos não a impedem de protegê-lo. A mão tem Defesa 20 e PV e resistências iguais aos seus. Com uma ação de movimento, você pode comandar a mão para que o proteja de outro oponente ou para que realize uma das ações a seguir.</p>\n<p><em>Agarrar:</em> a mão usa uma manobra agarrar contra o oponente, usando o seu Misticismo com um bônus adicional de +10. A mão mantém o oponente agarrado, mas não causa dano.</p>\n<p><em>Esmagar:</em> a mão esmaga um oponente agarrado, causando 2d6+10 pontos de dano de impacto.</p>\n<p><em>Empurrar:</em> a mão afasta o oponente (manobra empurrar usando o seu Misticismo com um bônus adicional de +10). A mão acompanha o oponente para empurrá-lo o máximo que conseguir, dentro do alcance da magia.</p>"
             }
           }
         }
@@ -1663,18 +1649,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; invade a mente do alvo e altera ou apaga suas mem&oacute;rias da &uacute;ltima hora.</p>"
+              "value": "<p>Você invade a mente do alvo e altera ou apaga suas memórias da última hora.</p>"
             }
           }
         },
@@ -1686,10 +1672,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1697,7 +1683,7 @@ const spellsData = {
             "resistencia": "Fortitude anula",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia manipula o sistema nervoso do alvo. Ao sofrer a magia, e no in&iacute;cio de cada um de seus turnos, a v&iacute;tima faz um teste de Fortitude. Se passar, a magia &eacute; anulada. Se falhar, todas as suas a&ccedil;&otilde;es f&iacute;sicas naquele turno estar&atilde;o sob controle do conjurador. A v&iacute;tima ainda tem consci&ecirc;ncia de tudo que acontece &agrave; sua volta, podendo ver, ouvir e at&eacute; falar com certo esfor&ccedil;o (mas n&atilde;o para lan&ccedil;ar magias). Contudo, seu corpo realiza apenas os movimentos que o conjurador deseja. A v&iacute;tima pode ser manipulada para se movimentar, lutar, usar habilidades de combate... Enfim, qualquer coisa de que seja fisicamente capaz.</p>\n<p>Voc&ecirc; precisa de linha de efeito para controlar a v&iacute;tima. Se perder o contato, n&atilde;o poder&aacute; control&aacute;-la &mdash; mas ela estar&aacute; paralisada at&eacute; que o conjurador recupere o controle ou a magia termine.</p>"
+              "value": "<p>Esta magia manipula o sistema nervoso do alvo. Ao sofrer a magia, e no início de cada um de seus turnos, a vítima faz um teste de Fortitude. Se passar, a magia é anulada. Se falhar, todas as suas ações físicas naquele turno estarão sob controle do conjurador. A vítima ainda tem consciência de tudo que acontece à sua volta, podendo ver, ouvir e até falar com certo esforço (mas não para lançar magias). Contudo, seu corpo realiza apenas os movimentos que o conjurador deseja. A vítima pode ser manipulada para se movimentar, lutar, usar habilidades de combate... Enfim, qualquer coisa de que seja fisicamente capaz.</p>\n<p>Você precisa de linha de efeito para controlar a vítima. Se perder o contato, não poderá controlá-la — mas ela estará paralisada até que o conjurador recupere o controle ou a magia termine.</p>"
             }
           }
         }
@@ -1711,10 +1697,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1722,7 +1708,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; dispara um raio azul esbranqui&ccedil;ado de gelo e ar congelante. O alvo sofre 10d8 pontos de dano de frio e fica preso em um bloco de gelo (<a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU\" data-id=\"3dcJKe2SGu8mnafU\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Paralisado</a>). Se passar no teste de resist&ecirc;ncia, sofre metade do dano e, em vez de paralisado, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento} por uma rodada.</p>\n<p>&Eacute; poss&iacute;vel quebrar o gelo para libertar uma criatura presa: o bloco tem 20 PV, resist&ecirc;ncia a dano 10 e &eacute; vulner&aacute;vel a fogo. Uma criatura presa pode usar uma a&ccedil;&atilde;o completa para fazer um teste de Atletismo (com a mesma CD para resistir &agrave; magia) e tentar se libertar do gelo; cada vez que passar no teste causa 10 pontos de dano ao bloco, ignorando a RD.</p>"
+              "value": "<p>Você dispara um raio azul esbranquiçado de gelo e ar congelante. O alvo sofre 10d8 pontos de dano de frio e fica preso em um bloco de gelo (<a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU\" data-id=\"3dcJKe2SGu8mnafU\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Paralisado</a>). Se passar no teste de resistência, sofre metade do dano e, em vez de paralisado, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento} por uma rodada.</p>\n<p>É possível quebrar o gelo para libertar uma criatura presa: o bloco tem 20 PV, resistência a dano 10 e é vulnerável a fogo. Uma criatura presa pode usar uma ação completa para fazer um teste de Atletismo (com a mesma CD para resistir à magia) e tentar se libertar do gelo; cada vez que passar no teste causa 10 pontos de dano ao bloco, ignorando a RD.</p>"
             }
           }
         },
@@ -1734,10 +1720,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "special",
+              "execução": "special",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": "Duas Rodadas"
             },
             "alcance": "medium",
@@ -1756,18 +1742,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "cone de 9m",
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia cruel foi desenvolvida por um mago de combate, quando ainda era um b&iacute;pede. Voc&ecirc; faz um gesto r&aacute;pido e dispara uma l&acirc;mina de ar em alta velocidade. Criaturas na &aacute;rea sofrem 10d8 pontos de dano de corte e ficam sangrando. Alvos que passem no teste de resist&ecirc;ncia sofrem metade do dano e n&atilde;o ficam sangrando.</p>"
+              "value": "<p>Esta magia cruel foi desenvolvida por um mago de combate, quando ainda era um bípede. Você faz um gesto rápido e dispara uma lâmina de ar em alta velocidade. Criaturas na área sofrem 10d8 pontos de dano de corte e ficam sangrando. Alvos que passem no teste de resistência sofrem metade do dano e não ficam sangrando.</p>"
             }
           }
         }
@@ -1781,17 +1767,17 @@ const spellsData = {
             "circulo": "4",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma c&oacute;pia ilus&oacute;ria semirreal de... voc&ecirc; mesmo! Ela &eacute; id&ecirc;ntica em apar&ecirc;ncia, som e cheiro, mas &eacute; intang&iacute;vel. A cada turno, voc&ecirc; escolhe se ver&aacute; e ouvir&aacute; atrav&eacute;s da duplicata ou de seu corpo original. A c&oacute;pia reproduz todas as suas a&ccedil;&otilde;es, incluindo fala. Qualquer magia com alcance de toque ou maior que voc&ecirc; lan&ccedil;ar pode se originar da duplicata, em vez do seu corpo original. As magias afetam outros alvos normalmente, com a &uacute;nica diferen&ccedil;a de se originarem da c&oacute;pia, em vez de voc&ecirc;. Se quiser que a duplicata fa&ccedil;a algo diferente de voc&ecirc;, voc&ecirc; deve gastar uma a&ccedil;&atilde;o de movimento. Qualquer criatura que interagir com a c&oacute;pia tem direito a um teste de Vontade para perceber que &eacute; uma ilus&atilde;o. As magias que se originam dela, no entanto, s&atilde;o reais. A c&oacute;pia desaparece se sair do alcance.</p>"
+              "value": "<p>Você cria uma cópia ilusória semirreal de... você mesmo! Ela é idêntica em aparência, som e cheiro, mas é intangível. A cada turno, você escolhe se verá e ouvirá através da duplicata ou de seu corpo original. A cópia reproduz todas as suas ações, incluindo fala. Qualquer magia com alcance de toque ou maior que você lançar pode se originar da duplicata, em vez do seu corpo original. As magias afetam outros alvos normalmente, com a única diferença de se originarem da cópia, em vez de você. Se quiser que a duplicata faça algo diferente de você, você deve gastar uma ação de movimento. Qualquer criatura que interagir com a cópia tem direito a um teste de Vontade para perceber que é uma ilusão. As magias que se originam dela, no entanto, são reais. A cópia desaparece se sair do alcance.</p>"
             }
           }
         },
@@ -1803,10 +1789,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -1814,7 +1800,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia cria uma forte explos&atilde;o de luzes estrobosc&oacute;picas e sons cacof&ocirc;nicos que desorientam as criaturas atingidas. O efeito que cada criatura sofre depende do ND dela.</p>\n<p><em>ND 4 ou menor:</em> se falhar no teste de resist&ecirc;ncia, fica inconsciente. Se passar, fica atordoada por 1d4 rodadas e enjoada pelo resto da cena.</p>\n<p><em>ND entre 5 e 9:</em> se falhar no teste de resist&ecirc;ncia, fica atordoada por 1d4 rodadas e enjoada pelo resto da cena. Se passar, fica atordoada por 1 rodada e enjoada por 1d4 rodadas.</p>\n<p><em>ND 10 ou maior:</em> se falhar no teste de resist&ecirc;ncia, fica atordoada por 1 rodada e enjoada por 1d4 rodadas. Se passar, fica desprevenida e enjoada por 1 rodada.</p>\n<p>Uma criatura s&oacute; pode ser atordoada por esta magia uma vez por cena.</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv\" data-id=\"2jgO4I5cMaSKa9fv\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Inconsciente</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a></p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}</p>"
+              "value": "<p>Esta magia cria uma forte explosão de luzes estroboscópicas e sons cacofônicos que desorientam as criaturas atingidas. O efeito que cada criatura sofre depende do ND dela.</p>\n<p><em>ND 4 ou menor:</em> se falhar no teste de resistência, fica inconsciente. Se passar, fica atordoada por 1d4 rodadas e enjoada pelo resto da cena.</p>\n<p><em>ND entre 5 e 9:</em> se falhar no teste de resistência, fica atordoada por 1d4 rodadas e enjoada pelo resto da cena. Se passar, fica atordoada por 1 rodada e enjoada por 1d4 rodadas.</p>\n<p><em>ND 10 ou maior:</em> se falhar no teste de resistência, fica atordoada por 1 rodada e enjoada por 1d4 rodadas. Se passar, fica desprevenida e enjoada por 1 rodada.</p>\n<p>Uma criatura só pode ser atordoada por esta magia uma vez por cena.</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv\" data-id=\"2jgO4I5cMaSKa9fv\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Inconsciente</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a></p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}</p>"
             }
           }
         }
@@ -1828,19 +1814,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "cena, até ser descarregada",
             "alvo": "1 criatura",
             "resistencia": "Vontade Anula, Fortitude Parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Usando os medos subconscientes do alvo, voc&ecirc; cria uma imagem daquilo que ele mais teme. Apenas a pr&oacute;pria v&iacute;tima pode ver o Assassino Fantasmag&oacute;rico com nitidez; outras criaturas presentes (incluindo o conjurador) enxergam apenas um espectro sombrio.</p>\n<p>Quando voc&ecirc; lan&ccedil;a a magia, o espectro surge adjacente a voc&ecirc; e a v&iacute;tima faz um teste de Vontade. Se ela passar, percebe que o espectro &eacute; uma ilus&atilde;o e a magia &eacute; dissipada. Se falhar, acredita na exist&ecirc;ncia do espectro, que ent&atilde;o flutua 18m por rodada em dire&ccedil;&atilde;o &agrave; v&iacute;tima, sempre no fim do seu turno. Ele &eacute; incorp&oacute;reo e imune a magias (exceto magias que dissipam outras).</p>\n<p>Se o espectro terminar seu turno adjacente &agrave; v&iacute;tima, ela deve fazer um teste de Fortitude. Se passar, sofre 6d6 pontos de dano de trevas (este dano n&atilde;o pode reduzir o alvo a menos de 0 PV e n&atilde;o o deixa sangrando). Se falhar, sofre um colapso, ficando imediatamente com &ndash;1 PV e sangrando.</p>\n<p>O espectro persegue o alvo implacavelmente. Ele desaparece se o alvo ficar inconsciente ou se afastar al&eacute;m de alcance longo dele, ou se for dissipado.</p>"
+              "value": "<p>Usando os medos subconscientes do alvo, você cria uma imagem daquilo que ele mais teme. Apenas a própria vítima pode ver o Assassino Fantasmagórico com nitidez; outras criaturas presentes (incluindo o conjurador) enxergam apenas um espectro sombrio.</p>\n<p>Quando você lança a magia, o espectro surge adjacente a você e a vítima faz um teste de Vontade. Se ela passar, percebe que o espectro é uma ilusão e a magia é dissipada. Se falhar, acredita na existência do espectro, que então flutua 18m por rodada em direção à vítima, sempre no fim do seu turno. Ele é incorpóreo e imune a magias (exceto magias que dissipam outras).</p>\n<p>Se o espectro terminar seu turno adjacente à vítima, ela deve fazer um teste de Fortitude. Se passar, sofre 6d6 pontos de dano de trevas (este dano não pode reduzir o alvo a menos de 0 PV e não o deixa sangrando). Se falhar, sofre um colapso, ficando imediatamente com –1 PV e sangrando.</p>\n<p>O espectro persegue o alvo implacavelmente. Ele desaparece se o alvo ficar inconsciente ou se afastar além de alcance longo dele, ou se for dissipado.</p>"
             }
           }
         }
@@ -1854,10 +1839,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1865,7 +1850,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; concede vida a objetos inanimados. Cada objeto se torna um parceiro sob seu controle. O tipo dele &eacute; escolhido da lista de tamanho e ele n&atilde;o conta em seu limite de parceiros. Com uma a&ccedil;&atilde;o de movimento, voc&ecirc; pode comandar mentalmente qualquer objeto animado dentro do alcance para que auxilie voc&ecirc; ou outra criatura. Outros usos criativos para os objetos ficam a cargo do mestre. Objetos animados s&atilde;o construtos com valores de For&ccedil;a, Destreza e PV de acordo com seu tamanho. Todos os outros atributos nulos, eles n&atilde;o t&ecirc;m valor de Defesa ou testes de resist&ecirc;ncia e falham automaticamente em qualquer teste oposto. Diferente de parceiros comuns, um objeto pode ser alvo de um ataque direto. Esta magia n&atilde;o afeta itens m&aacute;gicos, nem objetos que estejam sendo carregados por outra criatura.</p>\n<p>Esta magia n&atilde;o afeta itens m&aacute;gicos, nem objetos que estejam sendo carregados por outra criatura.</p>\n\n\n<p>Estat&iacute;sticas de objetos animados</p>\n<p>Min&uacute;sculo: For -3, Des 4, 5 PV; Assassino ou Combatente Iniciante.</p>\n<p>Pequeno: For -2, Des 2, 10 PV; Combatente ou Guardi&atilde;o Iniciante.</p>\n<p>M&eacute;dio: For 0, Des 1, 20 PV; Combatente ou Guardi&atilde;o Veterano.</p>\n<p>Grande: For 2, Des 0, 40 PV; Fort&atilde;o, Guardi&atilde;o ou Montaria (cavalo) Veterano.</p>\n<p>Enorme: For 4, Des -2, 60 PV; Fort&atilde;o, Guardi&atilde;o ou Montaria (cavalo) Mestre.</p>"
+              "value": "<p>Você concede vida a objetos inanimados. Cada objeto se torna um parceiro sob seu controle. O tipo dele é escolhido da lista de tamanho e ele não conta em seu limite de parceiros. Com uma ação de movimento, você pode comandar mentalmente qualquer objeto animado dentro do alcance para que auxilie você ou outra criatura. Outros usos criativos para os objetos ficam a cargo do mestre. Objetos animados são construtos com valores de Força, Destreza e PV de acordo com seu tamanho. Todos os outros atributos nulos, eles não têm valor de Defesa ou testes de resistência e falham automaticamente em qualquer teste oposto. Diferente de parceiros comuns, um objeto pode ser alvo de um ataque direto. Esta magia não afeta itens mágicos, nem objetos que estejam sendo carregados por outra criatura.</p>\n<p>Esta magia não afeta itens mágicos, nem objetos que estejam sendo carregados por outra criatura.</p>\n\n\n<p>Estatísticas de objetos animados</p>\n<p>Minúsculo: For -3, Des 4, 5 PV; Assassino ou Combatente Iniciante.</p>\n<p>Pequeno: For -2, Des 2, 10 PV; Combatente ou Guardião Iniciante.</p>\n<p>Médio: For 0, Des 1, 20 PV; Combatente ou Guardião Veterano.</p>\n<p>Grande: For 2, Des 0, 40 PV; Fortão, Guardião ou Montaria (cavalo) Veterano.</p>\n<p>Enorme: For 4, Des -2, 60 PV; Fortão, Guardião ou Montaria (cavalo) Mestre.</p>"
             }
           }
         },
@@ -1877,10 +1862,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1888,7 +1873,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; controla os efeitos da gravidade dentro da &aacute;rea. Ao lan&ccedil;ar a magia, escolha um dos efeitos abaixo. Enquanto a magia durar, voc&ecirc; pode usar uma a&ccedil;&atilde;o padr&atilde;o para mudar o efeito.</p>\n<p><em>Aumentar:</em> a gravidade fica mais forte. No in&iacute;cio de seus turnos, cada criatura na &aacute;rea deve fazer um teste de Atletismo. Se passar, fica fatigada. Se falhar, fica fatigada e ca&iacute;da.</p>\n<p><em>Inverter:</em> inverte a gravidade da &aacute;rea, fazendo com que criaturas e objetos &ldquo;caiam&rdquo; para cima, atingindo o topo (12m) em uma rodada. Se um obst&aacute;culo (como um teto) impedir o movimento das criaturas, elas sofrem 1d6 pontos de dano de impacto para cada 1,5m de &ldquo;queda&rdquo;. Elas podem ent&atilde;o se levantar e caminhar no obst&aacute;culo, de cabe&ccedil;a para baixo. Se n&atilde;o houver obst&aacute;culo, as criaturas e objetos ficam flutuando no topo da &aacute;rea afetada, sem poder sair do lugar. Criaturas voadoras podem se movimentar normalmente. Algu&eacute;m adjacente a algo que possa agarrar tem direito a um teste de Reflexos para evitar a &ldquo;queda&rdquo;. A criatura deve permanecer presa pela dura&ccedil;&atilde;o da magia; caso contr&aacute;rio &ldquo;cair&aacute;&rdquo;.</p>\n<p><em>Reduzir:</em> a gravidade fica mais leve. Criaturas ou objetos livres com at&eacute; 100kg flutuam para cima e para baixo conforme sua vontade, com deslocamento de voo 6m. Criaturas na &aacute;rea recebem +20 de b&ocirc;nus em testes de Atletismo para escalar e saltar. Uma criatura levitando fica inst&aacute;vel, sofrendo &ndash;2 de penalidade em testes de ataque.</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf\" data-id=\"MCED18aEe4UFeEVf\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Fatigado</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz\" data-id=\"fJFNeZeKmfHMpblz\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Ca&iacute;do</a></p>"
+              "value": "<p>Você controla os efeitos da gravidade dentro da área. Ao lançar a magia, escolha um dos efeitos abaixo. Enquanto a magia durar, você pode usar uma ação padrão para mudar o efeito.</p>\n<p><em>Aumentar:</em> a gravidade fica mais forte. No início de seus turnos, cada criatura na área deve fazer um teste de Atletismo. Se passar, fica fatigada. Se falhar, fica fatigada e caída.</p>\n<p><em>Inverter:</em> inverte a gravidade da área, fazendo com que criaturas e objetos &ldquo;caiam&rdquo; para cima, atingindo o topo (12m) em uma rodada. Se um obstáculo (como um teto) impedir o movimento das criaturas, elas sofrem 1d6 pontos de dano de impacto para cada 1,5m de &ldquo;queda&rdquo;. Elas podem então se levantar e caminhar no obstáculo, de cabeça para baixo. Se não houver obstáculo, as criaturas e objetos ficam flutuando no topo da área afetada, sem poder sair do lugar. Criaturas voadoras podem se movimentar normalmente. Alguém adjacente a algo que possa agarrar tem direito a um teste de Reflexos para evitar a &ldquo;queda&rdquo;. A criatura deve permanecer presa pela duração da magia; caso contrário &ldquo;cairá&rdquo;.</p>\n<p><em>Reduzir:</em> a gravidade fica mais leve. Criaturas ou objetos livres com até 100kg flutuam para cima e para baixo conforme sua vontade, com deslocamento de voo 6m. Criaturas na área recebem +20 de bônus em testes de Atletismo para escalar e saltar. Uma criatura levitando fica instável, sofrendo –2 de penalidade em testes de ataque.</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf\" data-id=\"MCED18aEe4UFeEVf\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Fatigado</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz\" data-id=\"fJFNeZeKmfHMpblz\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Caído</a></p>"
             }
           }
         },
@@ -1900,10 +1885,10 @@ const spellsData = {
             "circulo": "4",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -1911,7 +1896,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; dispara um raio fino e esverdeado que causa 10d12 pontos de dano de ess&ecirc;ncia. Se o alvo passar no teste de resist&ecirc;ncia, em vez disso sofre 2d12 pontos de dano.</p>\n<p>Independentemente do resultado do teste de Fortitude, se os PV do alvo forem reduzidos a 0 ou menos, ele ser&aacute; completamente desintegrado, restando apenas p&oacute;.</p>"
+              "value": "<p>Você dispara um raio fino e esverdeado que causa 10d12 pontos de dano de essência. Se o alvo passar no teste de resistência, em vez disso sofre 2d12 pontos de dano.</p>\n<p>Independentemente do resultado do teste de Fortitude, se os PV do alvo forem reduzidos a 0 ou menos, ele será completamente desintegrado, restando apenas pó.</p>"
             }
           }
         },
@@ -1923,18 +1908,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "tra",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; e todo o equipamento que est&aacute; com voc&ecirc; s&atilde;o transportados para o plano et&eacute;reo, que existe paralelamente ao plano material (o mundo f&iacute;sico). Na pr&aacute;tica, &eacute; como ser transformado em um fantasma (mas voc&ecirc; ainda &eacute; considerado uma criatura viva). Uma criatura et&eacute;rea &eacute; invis&iacute;vel (pode alterar entre vis&iacute;vel e invis&iacute;vel como a&ccedil;&atilde;o livre), incorp&oacute;rea e capaz de se mover em qualquer dire&ccedil;&atilde;o, inclusive para cima e para baixo. Ela enxerga o plano material, mas tudo parece cinza e insubstancial, reduzindo o alcance da vis&atilde;o e audi&ccedil;&atilde;o para 18m. Magias de abjura&ccedil;&atilde;o e ess&ecirc;ncia afetam criaturas et&eacute;reas, mas outras magias, n&atilde;o. Da mesma forma, uma criatura et&eacute;rea n&atilde;o pode atacar nem lan&ccedil;ar magias contra criaturas no plano material. Duas criaturas et&eacute;reas podem se afetar normalmente. Uma criatura afetada pode se materializar como uma a&ccedil;&atilde;o de movimento, encerrando a magia. Uma criatura et&eacute;rea que se materialize em um espa&ccedil;o ocupado &eacute; jogada para o espa&ccedil;o n&atilde;o ocupado mais pr&oacute;ximo e sofre 1d6 pontos de dano de impacto para cada 1,5m de deslocamento.</p>"
+              "value": "<p>Você e todo o equipamento que está com você são transportados para o plano etéreo, que existe paralelamente ao plano material (o mundo físico). Na prática, é como ser transformado em um fantasma (mas você ainda é considerado uma criatura viva). Uma criatura etérea é invisível (pode alterar entre visível e invisível como ação livre), incorpórea e capaz de se mover em qualquer direção, inclusive para cima e para baixo. Ela enxerga o plano material, mas tudo parece cinza e insubstancial, reduzindo o alcance da visão e audição para 18m. Magias de abjuração e essência afetam criaturas etéreas, mas outras magias, não. Da mesma forma, uma criatura etérea não pode atacar nem lançar magias contra criaturas no plano material. Duas criaturas etéreas podem se afetar normalmente. Uma criatura afetada pode se materializar como uma ação de movimento, encerrando a magia. Uma criatura etérea que se materialize em um espaço ocupado é jogada para o espaço não ocupado mais próximo e sofre 1d6 pontos de dano de impacto para cada 1,5m de deslocamento.</p>"
             }
           }
         }
@@ -1948,20 +1933,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/alterar-destino.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "reaction",
+              "execução": "reaction",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Sua mente visualiza todas as possibilidades de um evento, permitindo a voc&ecirc; escolher o melhor curso de a&ccedil;&atilde;o. Voc&ecirc; pode rolar novamente um teste de resist&ecirc;ncia com um b&ocirc;nus de +10 ou um inimigo deve rolar novamente um ataque contra voc&ecirc; com uma penalidade de &ndash;10</p>"
+              "value": "<p>Sua mente visualiza todas as possibilidades de um evento, permitindo a você escolher o melhor curso de ação. Você pode rolar novamente um teste de resistência com um bônus de +10 ou um inimigo deve rolar novamente um ataque contra você com uma penalidade de –10</p>"
             }
           }
         },
@@ -1971,12 +1956,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aprisionamento.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -1984,7 +1969,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma pris&atilde;o m&aacute;gica para aprisionar uma criatura. Se falhar no teste<br>de resist&ecirc;ncia, o alvo sofre o efeito da magia; se passar, fica imune a esta magia por uma semana. Enquanto estiver aprisionada, a criatura n&atilde;o precisa respirar e alimentar-se, e n&atilde;o envelhece. Magias de adivinha&ccedil;&atilde;o n&atilde;o conseguem localizar ou perceber o alvo. Ao lan&ccedil;ar a magia, voc&ecirc; escolhe uma das seguintes formas de pris&atilde;o. O componente material varia, mas todos custam T$ 1.000.</p>\n<p><em>Acorrentamento:</em> o alvo &eacute; preso por correntes firmemente enraizadas no ch&atilde;o, que o mant&eacute;m no lugar. O alvo fica paralisado e n&atilde;o pode se mover ou ser movido por qualquer meio.</p>\n<p><em>Componente Material:</em> uma fina corrente de mitral.</p>\n<p><em>Conten&ccedil;&atilde;o M&iacute;nima: </em>o alvo diminui para 2 cm de altura e &eacute; preso dentro de uma pedra preciosa ou objeto semelhante. Luz passa atrav&eacute;s da pedra, permitindo que o alvo veja o lado de fora e seja visto, mas nada mais pode passar, nem por meio de teletransporte ou viagem planar. A pedra n&atilde;o pode ser quebrada enquanto o alvo estiver dentro.</p>\n<p><em>Componente Material:</em> uma pedra preciosa, como um diamante ou rubi.</p>\n<p><em>Pris&atilde;o Dimensional:</em> o alvo &eacute; transportado para um semiplano protegido contra teletransporte e viagens planares. Pode ser um labirinto, uma gaiola, uma torre ou qualquer estrutura ou &aacute;rea confinada e pequena a sua escolha.</p>\n<p><em>Componente Material:</em> uma representa&ccedil;&atilde;o em miniatura da pris&atilde;o, feita de jade.</p>\n<p><em>Sepultamento: </em>o alvo &eacute; sepultado nas profundezas da terra, em uma esfera m&aacute;gica. Nada pode destruir ou atravessar a esfera, nem mesmo teletransporte ou viagens planares.</p>\n<p><em>Componente Material: </em>um pequeno orbe de adamante.</p>\n<p><em>Sono Eterno:</em> o alvo adormece e n&atilde;o pode ser acordado.</p>\n<p><em>Componente Material:</em> fruta preparada com ervas son&iacute;feras raras.</p>\n<p>Quando a magia &eacute; lan&ccedil;ada, voc&ecirc; deve especificar uma condi&ccedil;&atilde;o que far&aacute; com que ela termine e solte o alvo. A condi&ccedil;&atilde;o pode ser t&atilde;o espec&iacute;fica ou elaborada quanto voc&ecirc; quiser, mas deve ser poss&iacute;vel de acontecer. As condi&ccedil;&otilde;es podem se basear no nome, identidade ou divindade padroeira de uma criatura, ou em a&ccedil;&otilde;es ou qualidades observ&aacute;veis, mas nunca em estat&iacute;sticas intang&iacute;veis, como n&iacute;vel, classe ou pontos de vida. O mestre tem a palavra final sobre se uma condi&ccedil;&atilde;o &eacute; v&aacute;lida ou n&atilde;o.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}</p>"
+              "value": "<p>Você cria uma prisão mágica para aprisionar uma criatura. Se falhar no teste<br>de resistência, o alvo sofre o efeito da magia; se passar, fica imune a esta magia por uma semana. Enquanto estiver aprisionada, a criatura não precisa respirar e alimentar-se, e não envelhece. Magias de adivinhação não conseguem localizar ou perceber o alvo. Ao lançar a magia, você escolhe uma das seguintes formas de prisão. O componente material varia, mas todos custam T$ 1.000.</p>\n<p><em>Acorrentamento:</em> o alvo é preso por correntes firmemente enraizadas no chão, que o mantém no lugar. O alvo fica paralisado e não pode se mover ou ser movido por qualquer meio.</p>\n<p><em>Componente Material:</em> uma fina corrente de mitral.</p>\n<p><em>Contenção Mínima: </em>o alvo diminui para 2 cm de altura e é preso dentro de uma pedra preciosa ou objeto semelhante. Luz passa através da pedra, permitindo que o alvo veja o lado de fora e seja visto, mas nada mais pode passar, nem por meio de teletransporte ou viagem planar. A pedra não pode ser quebrada enquanto o alvo estiver dentro.</p>\n<p><em>Componente Material:</em> uma pedra preciosa, como um diamante ou rubi.</p>\n<p><em>Prisão Dimensional:</em> o alvo é transportado para um semiplano protegido contra teletransporte e viagens planares. Pode ser um labirinto, uma gaiola, uma torre ou qualquer estrutura ou área confinada e pequena a sua escolha.</p>\n<p><em>Componente Material:</em> uma representação em miniatura da prisão, feita de jade.</p>\n<p><em>Sepultamento: </em>o alvo é sepultado nas profundezas da terra, em uma esfera mágica. Nada pode destruir ou atravessar a esfera, nem mesmo teletransporte ou viagens planares.</p>\n<p><em>Componente Material: </em>um pequeno orbe de adamante.</p>\n<p><em>Sono Eterno:</em> o alvo adormece e não pode ser acordado.</p>\n<p><em>Componente Material:</em> fruta preparada com ervas soníferas raras.</p>\n<p>Quando a magia é lançada, você deve especificar uma condição que fará com que ela termine e solte o alvo. A condição pode ser tão específica ou elaborada quanto você quiser, mas deve ser possível de acontecer. As condições podem se basear no nome, identidade ou divindade padroeira de uma criatura, ou em ações ou qualidades observáveis, mas nunca em estatísticas intangíveis, como nível, classe ou pontos de vida. O mestre tem a palavra final sobre se uma condição é válida ou não.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}</p>"
             }
           }
         }
@@ -1998,10 +1983,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -2009,7 +1994,7 @@ const spellsData = {
             "resistencia": "Reflexos parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Meteoros caem dos c&eacute;us, devastando a &aacute;rea afetada. Criaturas na &aacute;rea sofrem 15d6 pontos de dano de impacto, 15d6 pontos de dano de fogo e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz]{Ca&iacute;do} e presas sob os escombros (<a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK\" data-id=\"TSRZ1cAIIIpsvOfK\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Agarrado</a>).</p>\n<p>Uma criatura que passe no teste de resist&ecirc;ncia sofre metade do dano total e n&atilde;o fica ca&iacute;da e agarrada. Uma criatura agarrada pode escapar gastando uma a&ccedil;&atilde;o padr&atilde;o e passando em um teste de Atletismo (CD da magia). Toda a &aacute;rea afetada fica coberta de escombros, sendo considerada terreno dif&iacute;cil, e imersa numa nuvem de poeira (camuflagem leve). Esta magia s&oacute; pode ser utilizada a c&eacute;u aberto.</p>"
+              "value": "<p>Meteoros caem dos céus, devastando a área afetada. Criaturas na área sofrem 15d6 pontos de dano de impacto, 15d6 pontos de dano de fogo e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz]{Caído} e presas sob os escombros (<a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK\" data-id=\"TSRZ1cAIIIpsvOfK\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Agarrado</a>).</p>\n<p>Uma criatura que passe no teste de resistência sofre metade do dano total e não fica caída e agarrada. Uma criatura agarrada pode escapar gastando uma ação padrão e passando em um teste de Atletismo (CD da magia). Toda a área afetada fica coberta de escombros, sendo considerada terreno difícil, e imersa numa nuvem de poeira (camuflagem leve). Esta magia só pode ser utilizada a céu aberto.</p>"
             }
           }
         },
@@ -2021,18 +2006,17 @@ const spellsData = {
             "circulo": "5",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma dimens&atilde;o particular. Voc&ecirc; pode entrar no semiplano gastando uma a&ccedil;&atilde;o padr&atilde;o e 10 PM, desaparecendo do plano material como se tivesse se teletransportado. Voc&ecirc; pode levar criaturas volunt&aacute;rias que esteja tocando, ao custo de 1 PM por criatura extra. Voc&ecirc; tamb&eacute;m pode levar objetos que esteja tocando, ao custo de 1 PM por objeto M&eacute;dio ou menor, 2 PM por objeto Grande, 5 PM por Enorme e 10 PM por Colossal. Uma vez no semiplano, pode gastar uma a&ccedil;&atilde;o completa para voltar ao plano material, no mesmo local onde estava. Caso conhe&ccedil;a a magia @UUID[Item.3rR4d2fWU6uIqVNv]{Viagem Planar}, pode lan&ccedil;&aacute;-la para voltar ao plano material em outro local.</p>\n<p>Voc&ecirc; escolhe a forma e a apar&ecirc;ncia do semiplano &mdash; uma caverna, um asteroide que singra o &eacute;ter, um palacete de cristal etc. Ele cont&eacute;m ar, luz e calor, mas al&eacute;m disso &eacute; vazio. Entretanto, voc&ecirc; pode levar itens (mob&iacute;lia, ferramentas etc.) a cada viagem.</p>"
+              "value": "<p>Você cria uma dimensão particular. Você pode entrar no semiplano gastando uma ação padrão e 10 PM, desaparecendo do plano material como se tivesse se teletransportado. Você pode levar criaturas voluntárias que esteja tocando, ao custo de 1 PM por criatura extra. Você também pode levar objetos que esteja tocando, ao custo de 1 PM por objeto Médio ou menor, 2 PM por objeto Grande, 5 PM por Enorme e 10 PM por Colossal. Uma vez no semiplano, pode gastar uma ação completa para voltar ao plano material, no mesmo local onde estava. Caso conheça a magia @UUID[Item.3rR4d2fWU6uIqVNv]{Viagem Planar}, pode lançá-la para voltar ao plano material em outro local.</p>\n<p>Você escolhe a forma e a aparência do semiplano — uma caverna, um asteroide que singra o éter, um palacete de cristal etc. Ele contém ar, luz e calor, mas além disso é vazio. Entretanto, você pode levar itens (mobília, ferramentas etc.) a cada viagem.</p>"
             }
           }
         }
@@ -2046,10 +2030,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -2057,7 +2041,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; domina a mente dos alvos. Os alvos obedecem cegamente a seus comandos, exceto ordens claramente suicidas. Um alvo tem direito a um teste no final de cada um de seus turnos para se livrar do efeito. Alvos que passarem no teste ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado} por 1 rodada enquanto recuperam a consci&ecirc;ncia.</p>"
+              "value": "<p>Você domina a mente dos alvos. Os alvos obedecem cegamente a seus comandos, exceto ordens claramente suicidas. Um alvo tem direito a um teste no final de cada um de seus turnos para se livrar do efeito. Alvos que passarem no teste ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado} por 1 rodada enquanto recuperam a consciência.</p>"
             }
           }
         },
@@ -2069,19 +2053,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 day",
             "alvo": "1 criatura",
             "resistencia": "Vontade anual",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; projeta sua consci&ecirc;ncia no corpo do alvo. Enquanto possuir uma criatura, voc&ecirc; assume o controle total do corpo dela. O seu pr&oacute;prio corpo fica inconsciente e a consci&ecirc;ncia do alvo fica inerte. Em termos de jogo, voc&ecirc; continua usando a sua ficha, mas com os atributos f&iacute;sicos e deslocamento da criatura. Se o alvo passar no teste de resist&ecirc;ncia, sabe que voc&ecirc; tentou possu&iacute;-lo e fica imune a esta magia por um dia. Caso o corpo da criatura morra enquanto voc&ecirc; a possui, a criatura morre e voc&ecirc; deve fazer um teste de Vontade contra a CD da sua pr&oacute;pria magia. Se passar, sua consci&ecirc;ncia retorna para o seu corpo (contanto que esteja dentro do alcance). Do contr&aacute;rio, voc&ecirc; tamb&eacute;m morre. Retornar para o seu corpo voluntariamente &eacute; uma a&ccedil;&atilde;o livre.</p>"
+              "value": "<p>Você projeta sua consciência no corpo do alvo. Enquanto possuir uma criatura, você assume o controle total do corpo dela. O seu próprio corpo fica inconsciente e a consciência do alvo fica inerte. Em termos de jogo, você continua usando a sua ficha, mas com os atributos físicos e deslocamento da criatura. Se o alvo passar no teste de resistência, sabe que você tentou possuí-lo e fica imune a esta magia por um dia. Caso o corpo da criatura morra enquanto você a possui, a criatura morre e você deve fazer um teste de Vontade contra a CD da sua própria magia. Se passar, sua consciência retorna para o seu corpo (contanto que esteja dentro do alcance). Do contrário, você também morre. Retornar para o seu corpo voluntariamente é uma ação livre.</p>"
             }
           }
         }
@@ -2095,17 +2078,17 @@ const spellsData = {
             "circulo": "5",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
             "resistencia": "Reflexos parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Criada por um arquimago, esta magia produz quatro esferas elementais (&aacute;cido, eletricidade, fogo e frio) que voam at&eacute; um ponto a sua escolha. Quando atingem o ponto escolhido, explodem causando 6d6 pontos de dano do seu respectivo tipo numa &aacute;rea com 12m de raio. Um teste de Reflexos reduz o dano &agrave; metade. Voc&ecirc; pode mirar cada esfera em uma criatura ou ponto diferente. Uma criatura ao alcance da explos&atilde;o de mais de uma esfera deve fazer um teste de resist&ecirc;ncia para cada uma. Al&eacute;m disso, as esferas causam os seguintes efeitos em criaturas que falharem em seus respectivos testes de resist&ecirc;ncia:</p>\n<p>&bull; <em>&Aacute;cido:</em> <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am\" data-id=\"iGWU5WVm57STW7am\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Vulner&aacute;vel</a> at&eacute; o fim da cena.</p>\n<p>&bull; <em>El&eacute;trica:</em> <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a> por uma rodada. (apenas uma vez por cena).</p>\n<p>&bull; <em>Fogo: <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2M8CXrGavdU6g1ZI\" data-id=\"2M8CXrGavdU6g1ZI\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Em Chamas</a></em>.</p>\n<p>&bull; <em>Frio: @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}</em>at&eacute; o fim da cena.</p>"
+              "value": "<p>Criada por um arquimago, esta magia produz quatro esferas elementais (ácido, eletricidade, fogo e frio) que voam até um ponto a sua escolha. Quando atingem o ponto escolhido, explodem causando 6d6 pontos de dano do seu respectivo tipo numa área com 12m de raio. Um teste de Reflexos reduz o dano à metade. Você pode mirar cada esfera em uma criatura ou ponto diferente. Uma criatura ao alcance da explosão de mais de uma esfera deve fazer um teste de resistência para cada uma. Além disso, as esferas causam os seguintes efeitos em criaturas que falharem em seus respectivos testes de resistência:</p>\n<p>&bull; <em>Ácido:</em> <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am\" data-id=\"iGWU5WVm57STW7am\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Vulnerável</a> até o fim da cena.</p>\n<p>&bull; <em>Elétrica:</em> <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a> por uma rodada. (apenas uma vez por cena).</p>\n<p>&bull; <em>Fogo: <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2M8CXrGavdU6g1ZI\" data-id=\"2M8CXrGavdU6g1ZI\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Em Chamas</a></em>.</p>\n<p>&bull; <em>Frio: @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}</em>até o fim da cena.</p>"
             }
           }
         },
@@ -2117,13 +2100,13 @@ const spellsData = {
             "circulo": "5",
             "escola": "evo",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "esfera de 15m de raio",
             "resistencia": "Fortitude parcial",
             "custo": "15 PM",
@@ -2140,18 +2123,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "evo",
             "ativacao": {
-              "execucao": "special",
+              "execução": "special",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": "2 Rodadas"
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "cone de 30m",
             "resistencia": "Reflexos reduz à metade",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta &eacute; uma das mais poderosas magias de destrui&ccedil;&atilde;o existentes. Ap&oacute;s entoar longos c&acirc;nticos, o conjurador dispara uma carga de energia que varre uma enorme &aacute;rea &agrave; sua frente, causando 20d12 pontos de dano de ess&ecirc;ncia em todas as criaturas, constru&ccedil;&otilde;es e objetos livres atingidos. Sempre que rola um resultado 12 em um dado de dano, a magia causa +1d12 pontos de dano. Apesar de seu poder destrutivo, esta magia &eacute; lenta, tornando seu uso dif&iacute;cil em combate.</p>"
+              "value": "<p>Esta é uma das mais poderosas magias de destruição existentes. Após entoar longos cânticos, o conjurador dispara uma carga de energia que varre uma enorme área à sua frente, causando 20d12 pontos de dano de essência em todas as criaturas, construções e objetos livres atingidos. Sempre que rola um resultado 12 em um dado de dano, a magia causa +1d12 pontos de dano. Apesar de seu poder destrutivo, esta magia é lenta, tornando seu uso difícil em combate.</p>"
             }
           }
         }
@@ -2165,10 +2148,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2176,7 +2159,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta magia cria uma ilus&atilde;o particular para cada uma das criaturas que atingir. Enquanto a magia durar, no in&iacute;cio de cada um de seus turnos, cada criatura afetada deve fazer um teste de Vontade; se falhar, acha que n&atilde;o tomou as a&ccedil;&otilde;es que realmente fez no turno anterior e &eacute; obrigada a repetir as mesmas a&ccedil;&otilde;es neste turno, com uma penalidade cumulativa de &ndash;5 em todos os testes para cada vez que se repetir (a penalidade n&atilde;o se aplica ao teste de Vontade contra esta magia). Por exemplo, se a criatura se aproximou de um alvo e o atacou, precisa se aproximar desse mesmo alvo e atacar novamente. A a&ccedil;&atilde;o repetida consome PM e recursos normalmente e, caso exija um teste de resist&ecirc;ncia, qualquer alvo faz esse teste com um b&ocirc;nus igual ao da penalidade desta magia.</p>"
+              "value": "<p>Esta magia cria uma ilusão particular para cada uma das criaturas que atingir. Enquanto a magia durar, no início de cada um de seus turnos, cada criatura afetada deve fazer um teste de Vontade; se falhar, acha que não tomou as ações que realmente fez no turno anterior e é obrigada a repetir as mesmas ações neste turno, com uma penalidade cumulativa de –5 em todos os testes para cada vez que se repetir (a penalidade não se aplica ao teste de Vontade contra esta magia). Por exemplo, se a criatura se aproximou de um alvo e o atacou, precisa se aproximar desse mesmo alvo e atacar novamente. A ação repetida consome PM e recursos normalmente e, caso exija um teste de resistência, qualquer alvo faz esse teste com um bônus igual ao da penalidade desta magia.</p>"
             }
           }
         },
@@ -2188,10 +2171,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2199,7 +2182,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta magia cria uma duplicata ilus&oacute;ria do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifesta&ccedil;&atilde;o s&oacute;lida de sua pr&oacute;pria sombra. A duplicata de sombras segue automaticamente o alvo. Sempre que o alvo faz uma a&ccedil;&atilde;o hostil &mdash; fazer um ataque, usar uma habilidade, lan&ccedil;ar uma magia &mdash; a sombra imediatamente realiza a mesma a&ccedil;&atilde;o contra o alvo, usando as mesmas estat&iacute;sticas e rolagens. A sombra pode ser atacada, tem as mesmas estat&iacute;sticas do alvo e &eacute; destru&iacute;da quando chega a 0 PV. Se o alvo passar no teste de resist&ecirc;ncia, a sombra desaparece no final do turno do alvo, depois de copiar sua a&ccedil;&atilde;o dessa rodada.</p>"
+              "value": "<p>Esta magia cria uma duplicata ilusória do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifestação sólida de sua própria sombra. A duplicata de sombras segue automaticamente o alvo. Sempre que o alvo faz uma ação hostil — fazer um ataque, usar uma habilidade, lançar uma magia — a sombra imediatamente realiza a mesma ação contra o alvo, usando as mesmas estatísticas e rolagens. A sombra pode ser atacada, tem as mesmas estatísticas do alvo e é destruída quando chega a 0 PV. Se o alvo passar no teste de resistência, a sombra desaparece no final do turno do alvo, depois de copiar sua ação dessa rodada.</p>"
             }
           }
         }
@@ -2213,19 +2196,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "veja texto",
             "alvo": "veja texto",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Aquele que controla o tempo controla o mundo. Escolha um dos efeitos a seguir.</p>\n<p><em>Congelar o tempo:</em> voc&ecirc; gera uma bolha na qual o tempo passa mais lentamente. Para outras criaturas, a bolha surge e desaparece instantaneamente, mas, para voc&ecirc;, ela dura 3 rodadas, durante as quais voc&ecirc; pode agir e n&atilde;o &eacute; afetado por efeitos cont&iacute;nuos (como chamas). Por&eacute;m, durante essas 3 rodadas, voc&ecirc; e quaisquer efeitos que voc&ecirc; gerar n&atilde;o podem sair da &aacute;rea que voc&ecirc; ocupava quando lan&ccedil;ou esta magia. Efeitos de &aacute;rea com dura&ccedil;&atilde;o maior que a da bolha voltam a agir normalmente quando ela termina.</p>\n<p><em>Saltar no tempo:</em> voc&ecirc; e at&eacute; 5 criaturas volunt&aacute;rias s&atilde;o transportadas de 1 a 24 horas para o futuro, desaparecendo com um brilho. Voc&ecirc;s ressurgem no mesmo lugar, com a mesma velocidade e orienta&ccedil;&atilde;o; do seu ponto de vista, nenhum tempo se passou. Se um objeto s&oacute;lido agora ocupa o espa&ccedil;o de uma criatura, ela ressurge na &aacute;rea vazia mais pr&oacute;xima.</p>\n<p><em>Voltar no tempo: </em>voc&ecirc; revive os &uacute;ltimos segundos. Todas as a&ccedil;&otilde;es da rodada anterior s&atilde;o desfeitas (incluindo perda de PV e PM). Tudo retorna &agrave; posi&ccedil;&atilde;o em que estava no in&iacute;cio do seu turno na &uacute;ltima rodada e voc&ecirc; &eacute; o &uacute;nico que sabe o que acontecer&aacute;. Todos os outros personagens envolvidos na cena devem repetir as mesmas a&ccedil;&otilde;es &mdash; exceto se voc&ecirc; fizer algo a respeito (como avisar seus aliados sobre o que vai acontecer).</p>"
+              "value": "<p>Aquele que controla o tempo controla o mundo. Escolha um dos efeitos a seguir.</p>\n<p><em>Congelar o tempo:</em> você gera uma bolha na qual o tempo passa mais lentamente. Para outras criaturas, a bolha surge e desaparece instantaneamente, mas, para você, ela dura 3 rodadas, durante as quais você pode agir e não é afetado por efeitos contínuos (como chamas). Porém, durante essas 3 rodadas, você e quaisquer efeitos que você gerar não podem sair da área que você ocupava quando lançou esta magia. Efeitos de área com duração maior que a da bolha voltam a agir normalmente quando ela termina.</p>\n<p><em>Saltar no tempo:</em> você e até 5 criaturas voluntárias são transportadas de 1 a 24 horas para o futuro, desaparecendo com um brilho. Vocês ressurgem no mesmo lugar, com a mesma velocidade e orientação; do seu ponto de vista, nenhum tempo se passou. Se um objeto sólido agora ocupa o espaço de uma criatura, ela ressurge na área vazia mais próxima.</p>\n<p><em>Voltar no tempo: </em>você revive os últimos segundos. Todas as ações da rodada anterior são desfeitas (incluindo perda de PV e PM). Tudo retorna à posição em que estava no início do seu turno na última rodada e você é o único que sabe o que acontecerá. Todos os outros personagens envolvidos na cena devem repetir as mesmas ações — exceto se você fizer algo a respeito (como avisar seus aliados sobre o que vai acontecer).</p>"
             }
           }
         },
@@ -2237,19 +2219,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "tra",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "spec",
-            "duracao": "veja texto",
             "alvo": "veja texto",
             "resistencia": "veja texto",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta &eacute; a mais poderosa das magias arcanas, permitindo alterar a realidade a seu bel-prazer. Voc&ecirc; pode:</p>\n<p>&bull; Dissipar os efeitos de qualquer magia de 4&ordm; c&iacute;rculo ou menor.</p>\n<p>&bull; Transportar at&eacute; 10 criaturas volunt&aacute;rias em alcance longo para qualquer outro local, em qualquer plano.</p>\n<p>&bull; Desfazer um acontecimento recente. A magia permite que um teste realizado por uma criatura em alcance longo na &uacute;ltima rodada seja realizado novamente. Por exemplo, se um aliado morreu na &uacute;ltima rodada devido ao ataque de um inimigo, voc&ecirc; pode obrigar o inimigo a refazer esse ataque.</p>\n<p>Voc&ecirc; pode desejar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrif&iacute;cio de 2 PM e pode fazer coisas como:</p>\n<p>&bull; Criar um item mundano de at&eacute; T$ 30.000.</p>\n<p>&bull; Duplicar os efeitos de qualquer magia de at&eacute; 4&ordm; c&iacute;rculo. Caso a magia precise de um componente material para ser lan&ccedil;ada, ainda &eacute; necess&aacute;rio providenciar o componente.</p>\n<p>&bull; Aumentar um atributo de uma criatura em +1. Cada atributo s&oacute; pode ser aumentado uma vez com Desejo.</p>\n<p>Desejo pode gerar efeitos ainda mais poderosos, mas cuidado! Desejar a fortuna de um rei pode transport&aacute;-lo para a sala de tesouro real, onde voc&ecirc; poder&aacute; ser preso ou morto; desejar ser imortal pode transform&aacute;-lo em morto-vivo, e assim por diante. Qualquer efeito que n&atilde;o se encaixe na lista acima deve ser decidido pelo mestre.</p>"
+              "value": "<p>Esta é a mais poderosa das magias arcanas, permitindo alterar a realidade a seu bel-prazer. Você pode:</p>\n<p>&bull; Dissipar os efeitos de qualquer magia de 4&ordm; círculo ou menor.</p>\n<p>&bull; Transportar até 10 criaturas voluntárias em alcance longo para qualquer outro local, em qualquer plano.</p>\n<p>&bull; Desfazer um acontecimento recente. A magia permite que um teste realizado por uma criatura em alcance longo na última rodada seja realizado novamente. Por exemplo, se um aliado morreu na última rodada devido ao ataque de um inimigo, você pode obrigar o inimigo a refazer esse ataque.</p>\n<p>Você pode desejar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrifício de 2 PM e pode fazer coisas como:</p>\n<p>&bull; Criar um item mundano de até T$ 30.000.</p>\n<p>&bull; Duplicar os efeitos de qualquer magia de até 4&ordm; círculo. Caso a magia precise de um componente material para ser lançada, ainda é necessário providenciar o componente.</p>\n<p>&bull; Aumentar um atributo de uma criatura em +1. Cada atributo só pode ser aumentado uma vez com Desejo.</p>\n<p>Desejo pode gerar efeitos ainda mais poderosos, mas cuidado! Desejar a fortuna de um rei pode transportá-lo para a sala de tesouro real, onde você poderá ser preso ou morto; desejar ser imortal pode transformá-lo em morto-vivo, e assim por diante. Qualquer efeito que não se encaixe na lista acima deve ser decidido pelo mestre.</p>"
             }
           }
         }
@@ -2265,16 +2246,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_powerwordshield.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "reaction",
+              "execução": "reaction",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 turn",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2289,15 +2269,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_divineprotection.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2312,20 +2292,20 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_sanctuary.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Qualquer criatura que tente fazer uma a&ccedil;&atilde;o hostil contra o alvo deve fazer um teste de Vontade. Se falhar, n&atilde;o consegue, perde a a&ccedil;&atilde;o e n&atilde;o pode tentar novamente at&eacute; o fim da cena. <em>Santu&aacute;rio</em> n&atilde;o protege o alvo de efeitos de &aacute;rea. Al&eacute;m disso, o pr&oacute;prio alvo tamb&eacute;m n&atilde;o pode fazer a&ccedil;&otilde;es hostis (incluindo for&ccedil;ar outras criaturas a atac&aacute;-lo), ou a magia &eacute; dissipada &mdash; mas pode usar habilidades e magias de cura e suporte como @UUID[Item.soVAGPRWQmKxOrPm]{Curar Ferimentos} e @UUID[Item.OTsBw84Ci2IKPStn]{B&ecirc;n&ccedil;&atilde;o}.</p>"
+              "value": "<p>Qualquer criatura que tente fazer uma ação hostil contra o alvo deve fazer um teste de Vontade. Se falhar, não consegue, perde a ação e não pode tentar novamente até o fim da cena. <em>Santuário</em> não protege o alvo de efeitos de área. Além disso, o próprio alvo também não pode fazer ações hostis (incluindo forçar outras criaturas a atacá-lo), ou a magia é dissipada — mas pode usar habilidades e magias de cura e suporte como @UUID[Item.soVAGPRWQmKxOrPm]{Curar Ferimentos} e @UUID[Item.OTsBw84Ci2IKPStn]{Bênção}.</p>"
             }
           }
         },
@@ -2335,16 +2315,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_protectionformnature.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "1 day",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2363,19 +2342,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "Cena, até ser descarregada",
+            "alcance": "pessoal",
             "alvo": "Esfera de 18m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; recebe uma intui&ccedil;&atilde;o agu&ccedil;ada sobre perigos ao seu redor. Quando uma criatura hostil ou armadilha entra na &aacute;rea do efeito, voc&ecirc; faz um teste de Percep&ccedil;&atilde;o (CD determinada pelo mestre de acordo com a situa&ccedil;&atilde;o). Se passar, sabe a origem (criatura ou armadilha), dire&ccedil;&atilde;o e dist&acirc;ncia do perigo. Se falhar, sabe apenas que o perigo existe.</p>"
+              "value": "<p>Você recebe uma intuição aguçada sobre perigos ao seu redor. Quando uma criatura hostil ou armadilha entra na área do efeito, você faz um teste de Percepção (CD determinada pelo mestre de acordo com a situação). Se passar, sabe a origem (criatura ou armadilha), direção e distância do perigo. Se falhar, sabe apenas que o perigo existe.</p>"
             }
           }
         },
@@ -2387,19 +2365,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 round",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Em seu pr&oacute;ximo teste de per&iacute;cia, o alvo pode rolar dois dados e ficar com o melhor resultado</p>"
+              "value": "<p>Em seu próximo teste de perícia, o alvo pode rolar dois dados e ficar com o melhor resultado</p>"
             }
           }
         }
@@ -2413,18 +2390,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; invoca a arma preferida de sua divindade (se tiver uma), que surge flutuando a seu lado. Uma vez por rodada, quando voc&ecirc; sofre um ataque corpo a corpo, pode usar uma rea&ccedil;&atilde;o para que a arma cause automaticamente 2d6pontos de dano do tipo da arma &mdash; por exemplo, uma espada longa causa dano de corte &mdash; no oponente que fez o ataque. Esta magia se dissipa se voc&ecirc; morrer.</p>"
+              "value": "<p>Você invoca a arma preferida de sua divindade (se tiver uma), que surge flutuando a seu lado. Uma vez por rodada, quando você sofre um ataque corpo a corpo, pode usar uma reação para que a arma cause automaticamente 2d6pontos de dano do tipo da arma — por exemplo, uma espada longa causa dano de corte — no oponente que fez o ataque. Esta magia se dissipa se você morrer.</p>"
             }
           }
         },
@@ -2436,14 +2413,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "alvo": "criaturas escolhidas",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2460,10 +2436,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2484,10 +2460,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2495,7 +2471,7 @@ const spellsData = {
             "resistencia": "Vontade anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O animal fica prestativo em rela&ccedil;&atilde;o a voc&ecirc;. Ele n&atilde;o fica sob seu controle, mas percebe suas palavras e a&ccedil;&otilde;es da maneira mais favor&aacute;vel poss&iacute;vel. Voc&ecirc; recebe +10 nos testes de Adestramento e Diplomacia que fizer contra o animal.</p>\n<p>Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resist&ecirc;ncia. Se voc&ecirc; ou seus aliados tomarem qualquer a&ccedil;&atilde;o hostil contra o alvo, a magia &eacute; dissipada e ele retorna &agrave; atitude que tinha antes (ou piorada, de acordo com o mestre). Se tratar bem o alvo, a atitude pode permanecer mesmo ap&oacute;s o t&eacute;rmino da magia.</p>"
+              "value": "<p>O animal fica prestativo em relação a você. Ele não fica sob seu controle, mas percebe suas palavras e ações da maneira mais favorável possível. Você recebe +10 nos testes de Adestramento e Diplomacia que fizer contra o animal.</p>\n<p>Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resistência. Se você ou seus aliados tomarem qualquer ação hostil contra o alvo, a magia é dissipada e ele retorna à atitude que tinha antes (ou piorada, de acordo com o mestre). Se tratar bem o alvo, a atitude pode permanecer mesmo após o término da magia.</p>"
             }
           }
         },
@@ -2507,10 +2483,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2518,7 +2494,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Aben&ccedil;oa os alvos, que recebem +1 em testes de ataque e rolagens de dano. <em>B&ecirc;n&ccedil;&atilde;o</em> anula <em>Perdi&ccedil;&atilde;o</em>.</p>"
+              "value": "<p>Abençoa os alvos, que recebem +1 em testes de ataque e rolagens de dano. <em>Bênção</em> anula <em>Perdição</em>.</p>"
             }
           }
         },
@@ -2530,19 +2506,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 round",
             "alvo": "1 humanóide",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; d&aacute; uma ordem irresist&iacute;vel, que o alvo deve ser capaz de ouvir (mas n&atilde;o precisa entender). Se falhar na resist&ecirc;ncia, ele deve obedecer ao comando em seu pr&oacute;prio turno da melhor maneira poss&iacute;vel. Escolha um dos efeitos.</p>\n<p><em>Fuja:</em> o alvo gasta seu turno se afastando de voc&ecirc; (usando todas as suas a&ccedil;&otilde;es).</p>\n<p><em>Largue:</em> o alvo solta quaisquer itens que esteja segurando e n&atilde;o pode peg&aacute;-los novamente at&eacute; o in&iacute;cio de seu pr&oacute;ximo turno. Como esta &eacute; uma a&ccedil;&atilde;o livre, ele ainda pode executar outras a&ccedil;&otilde;es (exceto pegar aquilo que largou).</p>\n<p><em>Pare:</em> o alvo fica pasmo (uma vez por cena).</p>\n<p><em>Senta:</em> com uma a&ccedil;&atilde;o livre, o alvo senta no ch&atilde;o (se estava pendurado ou voando, desce at&eacute; o ch&atilde;o). Ele pode fazer outras a&ccedil;&otilde;es, mas n&atilde;o se levantar at&eacute; o in&iacute;cio de seu pr&oacute;ximo turno.</p>\n<p><em>Venha:</em> o alvo gasta seu turno se aproximando de voc&ecirc; (usando todas as suas a&ccedil;&otilde;es).</p>"
+              "value": "<p>Você dá uma ordem irresistível, que o alvo deve ser capaz de ouvir (mas não precisa entender). Se falhar na resistência, ele deve obedecer ao comando em seu próprio turno da melhor maneira possível. Escolha um dos efeitos.</p>\n<p><em>Fuja:</em> o alvo gasta seu turno se afastando de você (usando todas as suas ações).</p>\n<p><em>Largue:</em> o alvo solta quaisquer itens que esteja segurando e não pode pegá-los novamente até o início de seu próximo turno. Como esta é uma ação livre, ele ainda pode executar outras ações (exceto pegar aquilo que largou).</p>\n<p><em>Pare:</em> o alvo fica pasmo (uma vez por cena).</p>\n<p><em>Senta:</em> com uma ação livre, o alvo senta no chão (se estava pendurado ou voando, desce até o chão). Ele pode fazer outras ações, mas não se levantar até o início de seu próximo turno.</p>\n<p><em>Venha:</em> o alvo gasta seu turno se aproximando de você (usando todas as suas ações).</p>"
             }
           }
         },
@@ -2554,10 +2529,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2565,7 +2540,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; emana ondas de serenidade. Se falhar na resist&ecirc;ncia, o alvo tem sua atitude mudada para indiferente (veja a p&aacute;gina 259) e n&atilde;o pode atacar ou realizar qualquer a&ccedil;&atilde;o agressiva. Se passar, sofre &ndash;2 em testes de ataque. Qualquer a&ccedil;&atilde;o hostil contra o alvo ou seus aliados dissipa a magia e faz ele retornar &agrave; atitude que tinha antes (ou pior, de acordo com o mestre).</p>"
+              "value": "<p>Você emana ondas de serenidade. Se falhar na resistência, o alvo tem sua atitude mudada para indiferente (veja a página 259) e não pode atacar ou realizar qualquer ação agressiva. Se passar, sofre –2 em testes de ataque. Qualquer ação hostil contra o alvo ou seus aliados dissipa a magia e faz ele retornar à atitude que tinha antes (ou pior, de acordo com o mestre).</p>"
             }
           }
         }
@@ -2579,19 +2554,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 day",
             "alvo": "esfera com 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; enche a &aacute;rea com energia positiva. Pontos de vida curados por efeitos de luz s&atilde;o maximizados dentro da &aacute;rea. Isso tamb&eacute;m afeta dano causado em mortos-vivos por esses efeitos.</p>\n<p>Por exemplo, Curar Ferimentos cura automaticamente 18 PV. Esta magia n&atilde;o pode ser lan&ccedil;ada em uma &aacute;rea contendo um s&iacute;mbolo vis&iacute;vel dedicado a uma divindade que n&atilde;o a sua. Consagrar anula Profanar.</p>"
+              "value": "<p>Você enche a área com energia positiva. Pontos de vida curados por efeitos de luz são maximizados dentro da área. Isso também afeta dano causado em mortos-vivos por esses efeitos.</p>\n<p>Por exemplo, Curar Ferimentos cura automaticamente 18 PV. Esta magia não pode ser lançada em uma área contendo um símbolo visível dedicado a uma divindade que não a sua. Consagrar anula Profanar.</p>"
             }
           }
         },
@@ -2603,18 +2577,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; canaliza energia positiva que recupera 2d8+2 pontos de vida na criatura tocada.</p>"
+              "value": "<p>Você canaliza energia positiva que recupera 2d8+2 pontos de vida na criatura tocada.</p>"
             }
           }
         },
@@ -2626,10 +2600,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2637,7 +2611,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial ou Reflexos anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Esta magia emite um som alto e agudo. O alvo sofre 1d8+2 pontos de dano de impacto (ou o dobro disso e ignora RD se for um construto ou objeto mundano) e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado} por uma rodada (apenas uma vez por cena). Um teste de Fortitude reduz o dano &agrave; metade e evita o atordoamento.</p>"
+              "value": "<p>Esta magia emite um som alto e agudo. O alvo sofre 1d8+2 pontos de dano de impacto (ou o dobro disso e ignora RD se for um construto ou objeto mundano) e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado} por uma rodada (apenas uma vez por cena). Um teste de Fortitude reduz o dano à metade e evita o atordoamento.</p>"
             }
           }
         }
@@ -2651,18 +2625,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Fortitude reduz à metade",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; canaliza energia negativa contra um alvo, causando 2d8+2 pontos de dano de trevas (ou curando 2d8+2 PV, se for um morto-vivo). <em>Infligir Ferimentos</em> anula <em>Curar Ferimentos</em>.</p>"
+              "value": "<p>Você canaliza energia negativa contra um alvo, causando 2d8+2 pontos de dano de trevas (ou curando 2d8+2 PV, se for um morto-vivo). <em>Infligir Ferimentos</em> anula <em>Curar Ferimentos</em>.</p>"
             }
           }
         },
@@ -2674,10 +2648,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2685,7 +2659,7 @@ const spellsData = {
             "resistencia": "nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Amaldi&ccedil;oa os alvos, que recebem &ndash;1 em testes de ataque e rolagens de dano. <em>Perdi&ccedil;&atilde;o</em> anula <em>B&ecirc;n&ccedil;&atilde;o</em>.</p>"
+              "value": "<p>Amaldiçoa os alvos, que recebem –1 em testes de ataque e rolagens de dano. <em>Perdição</em> anula <em>Bênção</em>.</p>"
             }
           }
         },
@@ -2697,19 +2671,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 day",
             "alvo": "esfera com 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; enche a &aacute;rea com energia negativa. Dano causado por efeitos de trevas &eacute; maximizado dentro da &aacute;rea. Isso tamb&eacute;m afeta PV curados em mortos-vivos por esses efeitos. Esta magia n&atilde;o pode ser lan&ccedil;ada em uma &aacute;rea contendo um s&iacute;mbolo vis&iacute;vel dedicado a uma divindade que n&atilde;o a sua. Profanar anula Consagrar.</p>"
+              "value": "<p>Você enche a área com energia negativa. Dano causado por efeitos de trevas é maximizado dentro da área. Isso também afeta PV curados em mortos-vivos por esses efeitos. Esta magia não pode ser lançada em uma área contendo um símbolo visível dedicado a uma divindade que não a sua. Profanar anula Consagrar.</p>"
             }
           }
         }
@@ -2723,10 +2696,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2734,7 +2707,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; purifica e aben&ccedil;oa uma por&ccedil;&atilde;o de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado pr&oacute;prio para consumo. Al&eacute;m disso, se for consumido at&eacute; o final da dura&ccedil;&atilde;o, o alimento oferece 5 PV tempor&aacute;rios ou 1 PM tempor&aacute;rio (al&eacute;m de quaisquer b&ocirc;nus que j&aacute; oferecesse). B&ocirc;nus de alimenta&ccedil;&atilde;o duram um dia e cada personagem s&oacute; pode receber um b&ocirc;nus de alimenta&ccedil;&atilde;o por dia.</p>"
+              "value": "<p>Você purifica e abençoa uma porção de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado próprio para consumo. Além disso, se for consumido até o final da duração, o alimento oferece 5 PV temporários ou 1 PM temporário (além de quaisquer bônus que já oferecesse). Bônus de alimentação duram um dia e cada personagem só pode receber um bônus de alimentação por dia.</p>"
             }
           }
         },
@@ -2746,18 +2719,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 arma (veja texto)",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Voc&ecirc; fortalece uma arma mundana primitiva (sem custo em T$, como bord&atilde;o, clava, funda ou tacape), uma arma natural ou um ataque desarmado. O dano da arma aumenta em um passo e ela &eacute; considerada m&aacute;gica. Ao lan&ccedil;ar a magia, voc&ecirc; pode mudar o tipo de dano da arma (escolhendo entre corte, impacto ou perfura&ccedil;&atilde;o).</p>"
+              "value": "<p>Você fortalece uma arma mundana primitiva (sem custo em T$, como bordão, clava, funda ou tacape), uma arma natural ou um ataque desarmado. O dano da arma aumenta em um passo e ela é considerada mágica. Ao lançar a magia, você pode mudar o tipo de dano da arma (escolhendo entre corte, impacto ou perfuração).</p>"
             }
           }
         },
@@ -2769,10 +2742,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2780,7 +2753,7 @@ const spellsData = {
             "resistencia": "Reflexos anula",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Esta magia s&oacute; pode ser lan&ccedil;ada em uma &aacute;rea com vegeta&ccedil;&atilde;o. As plantas se enroscam nas criaturas da &aacute;rea. Aquelas que falharem na resist&ecirc;ncia ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw]{Enredado}. Uma v&iacute;tima pode se libertar com uma a&ccedil;&atilde;o padr&atilde;o e um teste de Acrobacia ou Atletismo. Al&eacute;m disso, a &aacute;rea &eacute; considerada terreno dif&iacute;cil. No in&iacute;cio de seus turnos, a vegeta&ccedil;&atilde;o tenta enredar novamente qualquer criatura na &aacute;rea, exigindo um novo teste de Reflexos.</p>"
+              "value": "<p>Esta magia só pode ser lançada em uma área com vegetação. As plantas se enroscam nas criaturas da área. Aquelas que falharem na resistência ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw]{Enredado}. Uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo. Além disso, a área é considerada terreno difícil. No início de seus turnos, a vegetação tenta enredar novamente qualquer criatura na área, exigindo um novo teste de Reflexos.</p>"
             }
           }
         }
@@ -2794,21 +2767,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/circulo-da-justica.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 day",
             "alvo": "cubo com 9m de lado;",
             "resistencia": "Vontade parcial",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Tamb&eacute;m conhecida como <em>L&aacute;grimas do Deus da Trapa&ccedil;a</em>, esta magia &eacute; usada em tribunais e para proteger &aacute;reas sens&iacute;veis. Criaturas na &aacute;rea sofrem &ndash;10 em testes de Acrobacia, Engana&ccedil;&atilde;o, Furtividade e Ladinagem e n&atilde;o podem mentir deliberadamente &mdash; mas podem tentar evitar perguntas que normalmente responderiam com uma mentira (sendo evasivas ou cometendo omiss&otilde;es, por exemplo). Uma criatura que passe na resist&ecirc;ncia tem as penalidades reduzidas para &ndash;5 e pode mentir.</p>"
+              "value": "<p>Também conhecida como <em>Lágrimas do Deus da Trapaça</em>, esta magia é usada em tribunais e para proteger áreas sensíveis. Criaturas na área sofrem –10 em testes de Acrobacia, Enganação, Furtividade e Ladinagem e não podem mentir deliberadamente — mas podem tentar evitar perguntas que normalmente responderiam com uma mentira (sendo evasivas ou cometendo omissões, por exemplo). Uma criatura que passe na resistência tem as penalidades reduzidas para –5 e pode mentir.</p>"
             }
           }
         },
@@ -2818,21 +2790,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/vestimenta-da-fe.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "1 day",
+            "alcance": "toque",
             "alvo": "1 armadura, escudo ou vestimenta",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; fortalece um item, aumentando o b&ocirc;nus de Defesa de uma armadura ou escudo em +2. No caso de um vestu&aacute;rio, ele passa a oferecer +2 na Defesa (n&atilde;o cumulativo com armadura). Os efeitos desta magia s&atilde;o uma melhoria no item, portanto s&atilde;o cumulativos com outras magias, mas n&atilde;o com b&ocirc;nus por encantos nesse item.</p>"
+              "value": "<p>Você fortalece um item, aumentando o bônus de Defesa de uma armadura ou escudo em +2. No caso de um vestuário, ele passa a oferecer +2 na Defesa (não cumulativo com armadura). Os efeitos desta magia são uma melhoria no item, portanto são cumulativos com outras magias, mas não com bônus por encantos nesse item.</p>"
             }
           }
         }
@@ -2846,18 +2817,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia diz se uma a&ccedil;&atilde;o que voc&ecirc; tomar&aacute; em breve &mdash; no m&aacute;ximo uma hora no futuro &mdash; trar&aacute; resultados bons ou ruins. O mestre rola 1d6 em segredo; com um resultado de 2 a 6, a magia funciona e voc&ecirc; recebe uma das seguintes respostas: &ldquo;felicidade&rdquo; (a a&ccedil;&atilde;o trar&aacute; bons resultados); &ldquo;mis&eacute;ria&rdquo; (a a&ccedil;&atilde;o trar&aacute; maus resultados); &ldquo;felicidade e mis&eacute;ria&rdquo; (para ambos) ou &ldquo;nada&rdquo; (para a&ccedil;&otilde;es que n&atilde;o trar&atilde;o resultados bons ou ruins).</p>\n<p>Com um resultado 1, a magia falha e oferece o resultado &ldquo;nada&rdquo;. N&atilde;o h&aacute; como saber se esse resultado foi dado porque a magia falhou ou n&atilde;o. Lan&ccedil;ar esta magia m&uacute;ltiplas vezes sobre o mesmo assunto gera sempre o primeiro resultado.</p>\n<p>Por exemplo, se o grupo est&aacute; prestes a entrar em uma c&acirc;mara, o aug&uacute;rio dir&aacute; &ldquo;felicidade&rdquo; se a c&acirc;mara cont&eacute;m um tesouro desprotegido, &ldquo;mis&eacute;ria&rdquo; se cont&eacute;m um monstro, &ldquo;felicidade e mis&eacute;ria&rdquo; se houver um tesouro e um monstro ou &ldquo;nada&rdquo; se a c&acirc;mara estiver vazia.</p>"
+              "value": "<p>Esta magia diz se uma ação que você tomará em breve — no máximo uma hora no futuro — trará resultados bons ou ruins. O mestre rola 1d6 em segredo; com um resultado de 2 a 6, a magia funciona e você recebe uma das seguintes respostas: &ldquo;felicidade&rdquo; (a ação trará bons resultados); &ldquo;miséria&rdquo; (a ação trará maus resultados); &ldquo;felicidade e miséria&rdquo; (para ambos) ou &ldquo;nada&rdquo; (para ações que não trarão resultados bons ou ruins).</p>\n<p>Com um resultado 1, a magia falha e oferece o resultado &ldquo;nada&rdquo;. Não há como saber se esse resultado foi dado porque a magia falhou ou não. Lançar esta magia múltiplas vezes sobre o mesmo assunto gera sempre o primeiro resultado.</p>\n<p>Por exemplo, se o grupo está prestes a entrar em uma câmara, o augúrio dirá &ldquo;felicidade&rdquo; se a câmara contém um tesouro desprotegido, &ldquo;miséria&rdquo; se contém um monstro, &ldquo;felicidade e miséria&rdquo; se houver um tesouro e um monstro ou &ldquo;nada&rdquo; se a câmara estiver vazia.</p>"
             }
           }
         },
@@ -2869,10 +2840,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2880,7 +2851,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Pela dura&ccedil;&atilde;o da magia, voc&ecirc; sabe a posi&ccedil;&atilde;o e status (PV atuais, se est&atilde;o sob efeito de magia...) dos alvos. Depois de lan&ccedil;ada, a dist&acirc;ncia entre voc&ecirc; e os alvos n&atilde;o importa &mdash; a magia s&oacute; deixa de detectar um alvo se ele morrer ou for para outro plano.</p>"
+              "value": "<p>Pela duração da magia, você sabe a posição e status (PV atuais, se estão sob efeito de magia...) dos alvos. Depois de lançada, a distância entre você e os alvos não importa — a magia só deixa de detectar um alvo se ele morrer ou for para outro plano.</p>"
             }
           }
         },
@@ -2892,10 +2863,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -2914,18 +2885,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; fortalece a mente do alvo. Ele recebe +2 em Intelig&ecirc;ncia, Sabedoria ou Carisma, a sua escolha. Esse aumento n&atilde;o oferece PV, PM ou per&iacute;cias adicionais.</p>"
+              "value": "<p>Você fortalece a mente do alvo. Ele recebe +2 em Inteligência, Sabedoria ou Carisma, a sua escolha. Esse aumento não oferece PV, PM ou perícias adicionais.</p>"
             }
           }
         },
@@ -2937,13 +2908,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -2962,17 +2933,17 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Fortitude reduz à metade",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; conjura um enxame de criaturas a sua escolha, como besouros, gafanhotos, ratos, morcegos ou serpentes. O enxame pode passar pelo espa&ccedil;o de outras criaturas e n&atilde;o impede que outras criaturas entrem no espa&ccedil;o dele. No final de seus turnos, o enxame causa 2d12 pontos de dano de corte a qualquer criatura em seu espa&ccedil;o (Fortitude reduz &agrave; metade). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para mover o enxame 12m.</p>"
+              "value": "<p>Você conjura um enxame de criaturas a sua escolha, como besouros, gafanhotos, ratos, morcegos ou serpentes. O enxame pode passar pelo espaço de outras criaturas e não impede que outras criaturas entrem no espaço dele. No final de seus turnos, o enxame causa 2d12 pontos de dano de corte a qualquer criatura em seu espaço (Fortitude reduz à metade). Você pode gastar uma ação de movimento para mover o enxame 12m.</p>"
             }
           }
         },
@@ -2984,10 +2955,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -2995,7 +2966,7 @@ const spellsData = {
             "resistencia": "Fortitude parcial",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Ningu&eacute;m sabe se Mestre foi realmente o criador desta magia &mdash; mas ele foi o primeiro a utiliz&aacute;-la. Voc&ecirc; fecha o punho e gesticula como se estivesse golpeando o alvo, causando dano de impacto igual a 4d6 + sua For&ccedil;a. A v&iacute;tima &eacute; empurrada 3m na dire&ccedil;&atilde;o oposta &agrave; sua. Passar no teste de resist&ecirc;ncia reduz o dano &agrave; metade e evita o empurr&atilde;o.</p>"
+              "value": "<p>Ninguém sabe se Mestre foi realmente o criador desta magia — mas ele foi o primeiro a utilizá-la. Você fecha o punho e gesticula como se estivesse golpeando o alvo, causando dano de impacto igual a 4d6 + sua Força. A vítima é empurrada 3m na direção oposta à sua. Passar no teste de resistência reduz o dano à metade e evita o empurrão.</p>"
             }
           }
         }
@@ -3009,10 +2980,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -3020,7 +2991,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria um v&iacute;nculo mental com um animal prestativo em rela&ccedil;&atilde;o a voc&ecirc;. O <em>Aliado Animal</em> obedece a voc&ecirc; no melhor de suas capacidades, mesmo que isso arrisque a vida dele. Ele funciona como um parceiro veterano, de um tipo a sua escolha entre ajudante, combatente, fort&atilde;o, guardi&atilde;o, montaria ou perseguidor.</p>"
+              "value": "<p>Você cria um vínculo mental com um animal prestativo em relação a você. O <em>Aliado Animal</em> obedece a você no melhor de suas capacidades, mesmo que isso arrisque a vida dele. Ele funciona como um parceiro veterano, de um tipo a sua escolha entre ajudante, combatente, fortão, guardião, montaria ou perseguidor.</p>"
             }
           }
         },
@@ -3032,10 +3003,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -3043,7 +3014,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; e todos os seus aliados no alcance recebem +2 em testes de per&iacute;cia e rolagens de dano, e todos os seus inimigos no alcance sofrem &ndash;2 em testes de per&iacute;cia e rolagens de dano. Esse efeito &eacute; cumulativo com outras magias.</p>\n<p>Componente Material: T$ 25por PM gastos em incensos ou outras oferendas.</p>"
+              "value": "<p>Você e todos os seus aliados no alcance recebem +2 em testes de perícia e rolagens de dano, e todos os seus inimigos no alcance sofrem –2 em testes de perícia e rolagens de dano. Esse efeito é cumulativo com outras magias.</p>\n<p>Componente Material: T$ 25por PM gastos em incensos ou outras oferendas.</p>"
             }
           }
         }
@@ -3057,10 +3028,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -3068,7 +3039,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; pode criar, moldar, mover ou extinguir chamas e emana&ccedil;&otilde;es de calor. Ao lan&ccedil;ar a magia, escolha um dos efeitos.</p>\n<p><em>Chamejar:</em> o alvo &eacute; armas escolhidas. Elas causam +1d6 de dano de fogo. Tamb&eacute;m afeta armas naturais e ataques desarmados.</p>\n<p><em>Esquentar:</em> o alvo &eacute; 1 objeto, que come&ccedil;a a esquentar. Ele sofre 1d6 pontos de dano de fogo por rodada e causa o mesmo dano a qualquer criatura que o esteja segurando ou vestindo. A crit&eacute;rio do mestre, o objeto ou a criatura vestindo-o tamb&eacute;m podem fica em chamas. Uma criatura pode gastar uma a&ccedil;&atilde;o completa para resfriar o objeto (jogando areia ou se jogando numa fonte de &aacute;gua pr&oacute;xima, por exemplo) e cancelar o efeito da magia.</p>\n<p><em>Extinguir:</em> o alvo &eacute; 1 chama de tamanho Grande ou menor, que &eacute; apagada. Isso cria uma nuvem de fuma&ccedil;a que ocupa uma esfera de 3m de raio centrada onde estava a chama. Dentro da fuma&ccedil;a, criaturas t&ecirc;m camuflagem leve.</p>\n<p><em>Modelar:</em> o alvo &eacute; 1 chama de tamanho Grande ou menor. A cada rodada, voc&ecirc; pode gastar uma a&ccedil;&atilde;o livre para moviment&aacute;-la 9m em qualquer dire&ccedil;&atilde;o. Se atravessar o espa&ccedil;o ocupado por uma criatura, causa 2d6 pontos de dano de fogo. Uma criatura s&oacute; pode receber dano dessa maneira uma vez por rodada.</p>"
+              "value": "<p>Você pode criar, moldar, mover ou extinguir chamas e emanações de calor. Ao lançar a magia, escolha um dos efeitos.</p>\n<p><em>Chamejar:</em> o alvo é armas escolhidas. Elas causam +1d6 de dano de fogo. Também afeta armas naturais e ataques desarmados.</p>\n<p><em>Esquentar:</em> o alvo é 1 objeto, que começa a esquentar. Ele sofre 1d6 pontos de dano de fogo por rodada e causa o mesmo dano a qualquer criatura que o esteja segurando ou vestindo. A critério do mestre, o objeto ou a criatura vestindo-o também podem fica em chamas. Uma criatura pode gastar uma ação completa para resfriar o objeto (jogando areia ou se jogando numa fonte de água próxima, por exemplo) e cancelar o efeito da magia.</p>\n<p><em>Extinguir:</em> o alvo é 1 chama de tamanho Grande ou menor, que é apagada. Isso cria uma nuvem de fumaça que ocupa uma esfera de 3m de raio centrada onde estava a chama. Dentro da fumaça, criaturas têm camuflagem leve.</p>\n<p><em>Modelar:</em> o alvo é 1 chama de tamanho Grande ou menor. A cada rodada, você pode gastar uma ação livre para movimentá-la 9m em qualquer direção. Se atravessar o espaço ocupado por uma criatura, causa 2d6 pontos de dano de fogo. Uma criatura só pode receber dano dessa maneira uma vez por rodada.</p>"
             }
           }
         },
@@ -3080,18 +3051,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; purifica a criatura tocada, removendo uma condi&ccedil;&atilde;o dela entre abalado, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.uub1TaaEaq0Vuncl\" data-id=\"uub1TaaEaq0Vuncl\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Alquebrado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K\" data-id=\"qN5JjvnXDq4Xak1K\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Cego</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf\" data-id=\"ynLMPpmMnZwV6rxf\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Confuso</a>, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.z3nQhg8FEmhh0a7m]{Envenenado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm]{Esmorecido}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.R5FPPrfq68i9ddyv]{Fascinado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado},@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r]{Ofuscado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.CMPtwuGkHgeKu8CC]{Pasmo} ou @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}.</p>"
+              "value": "<p>Você purifica a criatura tocada, removendo uma condição dela entre abalado, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.uub1TaaEaq0Vuncl\" data-id=\"uub1TaaEaq0Vuncl\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Alquebrado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K\" data-id=\"qN5JjvnXDq4Xak1K\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Cego</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf\" data-id=\"ynLMPpmMnZwV6rxf\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Confuso</a>, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.z3nQhg8FEmhh0a7m]{Envenenado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm]{Esmorecido}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.R5FPPrfq68i9ddyv]{Fascinado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado},@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r]{Ofuscado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.CMPtwuGkHgeKu8CC]{Pasmo} ou @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}.</p>"
             }
           }
         },
@@ -3103,10 +3074,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3114,7 +3085,7 @@ const spellsData = {
             "resistencia": "Reflexos (veja texto)",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; canaliza uma poderosa rajada de energia positiva que ilumina o campo de batalha. Criaturas na &aacute;rea sofrem 4d8 pontos de dano de luz (ou 4d12, se forem mortos-vivos) e ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r\" data-id=\"lm0ybs4xkYuERx1r\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Ofuscado</a> por uma rodada. Se passarem na resist&ecirc;ncia, sofrem metade do dano e n&atilde;o ficam ofuscadas.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}</p>"
+              "value": "<p>Você canaliza uma poderosa rajada de energia positiva que ilumina o campo de batalha. Criaturas na área sofrem 4d8 pontos de dano de luz (ou 4d12, se forem mortos-vivos) e ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r\" data-id=\"lm0ybs4xkYuERx1r\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Ofuscado</a> por uma rodada. Se passarem na resistência, sofrem metade do dano e não ficam ofuscadas.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}</p>"
             }
           }
         },
@@ -3126,10 +3097,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "evo",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -3137,7 +3108,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Esta magia s&oacute; pode ser usada em ambientes abertos. A &aacute;rea fica sujeita a um vendaval &mdash; ataques &agrave; dist&acirc;ncia sofrem penalidade de &ndash;5, chamas s&atilde;o apagadas e n&eacute;voas s&atilde;o dissipadas. Voc&ecirc; tamb&eacute;m pode gerar chuva (&ndash;5 em testes de Percep&ccedil;&atilde;o), neve (como chuva, e a &aacute;rea se torna terreno dif&iacute;cil) ou granizo (como chuva, mais 1 ponto de dano de impacto por rodada, no in&iacute;cio de seus turnos).</p>"
+              "value": "<p>Esta magia só pode ser usada em ambientes abertos. A área fica sujeita a um vendaval — ataques à distância sofrem penalidade de –5, chamas são apagadas e névoas são dissipadas. Você também pode gerar chuva (–5 em testes de Percepção), neve (como chuva, e a área se torna terreno difícil) ou granizo (como chuva, mais 1 ponto de dano de impacto por rodada, no início de seus turnos).</p>"
             }
           }
         }
@@ -3151,10 +3122,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3162,7 +3133,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Um sil&ecirc;ncio sepulcral recai sobre a &aacute;rea e nenhum som &eacute; produzido nela. Enquanto estiverem na &aacute;rea, todas as criaturas ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}. Al&eacute;m disso, como lan&ccedil;ar magias exige palavras m&aacute;gicas, normalmente nenhuma magia pode ser lan&ccedil;ada dentro da &aacute;rea.</p>"
+              "value": "<p>Um silêncio sepulcral recai sobre a área e nenhum som é produzido nela. Enquanto estiverem na área, todas as criaturas ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}. Além disso, como lançar magias exige palavras mágicas, normalmente nenhuma magia pode ser lançada dentro da área.</p>"
             }
           }
         }
@@ -3176,10 +3147,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3187,7 +3158,7 @@ const spellsData = {
             "resistencia": "Fortitude (veja texto)",
             "custo": "3 PM",
             "description": {
-              "value": "<p>A &aacute;rea &eacute; coberta por emana&ccedil;&otilde;es letais. Criaturas na &aacute;rea sofrem 5d6 pontos de dano de &aacute;cido e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por 1 rodada. Se passarem na resist&ecirc;ncia, sofrem metade do dano e n&atilde;o ficam enjoadas.</p>"
+              "value": "<p>A área é coberta por emanações letais. Criaturas na área sofrem 5d6 pontos de dano de ácido e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por 1 rodada. Se passarem na resistência, sofrem metade do dano e não ficam enjoadas.</p>"
             }
           }
         },
@@ -3199,10 +3170,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -3210,7 +3181,7 @@ const spellsData = {
             "resistencia": "Fortitude anula",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; entoa c&acirc;nticos mal&eacute;ficos que amaldi&ccedil;oam uma v&iacute;tima, criando efeitos variados. Ao lan&ccedil;ar a magia, escolha entre os seguintes.</p>\n<p><em>Debilidade:</em> o alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm\" data-id=\"YpyVEwCbNVAfFLBm\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Esmorecido</a> e n&atilde;o pode se comunicar ou lan&ccedil;ar magias. Ainda reconhece seus aliados e pode segui-los e ajud&aacute;-los, mas sempre de maneira simpl&oacute;ria.</p>\n<p><em>Doen&ccedil;a:</em> muda a dura&ccedil;&atilde;o para instant&acirc;nea. O alvo contrai uma doen&ccedil;a a sua escolha, que o afeta imediatamente (sem per&iacute;odo de incuba&ccedil;&atilde;o).</p>\n<p><em>Fraqueza:</em> o alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel\" data-id=\"AlTDv5dptSLGiZel\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Debilitado</a>e <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi\" data-id=\"e8JmqkgvL3H26vbi\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Lento</a>.</p>\n<p><em>Isolamento</em>: o alvo perde o uso de um de seus cinco sentidos a sua escolha. Se perder a vis&atilde;o, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}. Se perder a audi&ccedil;&atilde;o, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}. Se perder o olfato ou paladar, n&atilde;o pode usar a habilidade faro. Se perder o tato, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz]{Ca&iacute;do} e n&atilde;o pode se levantar.</p>\n<p>Voc&ecirc; tamb&eacute;m pode inventar sua pr&oacute;pria maldi&ccedil;&atilde;o, usando esses exemplos como sugest&otilde;es, mas o mestre tem a palavra final sobre o efeito.</p>"
+              "value": "<p>Você entoa cânticos maléficos que amaldiçoam uma vítima, criando efeitos variados. Ao lançar a magia, escolha entre os seguintes.</p>\n<p><em>Debilidade:</em> o alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm\" data-id=\"YpyVEwCbNVAfFLBm\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Esmorecido</a> e não pode se comunicar ou lançar magias. Ainda reconhece seus aliados e pode segui-los e ajudá-los, mas sempre de maneira simplória.</p>\n<p><em>Doença:</em> muda a duração para instantânea. O alvo contrai uma doença a sua escolha, que o afeta imediatamente (sem período de incubação).</p>\n<p><em>Fraqueza:</em> o alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel\" data-id=\"AlTDv5dptSLGiZel\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Debilitado</a>e <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi\" data-id=\"e8JmqkgvL3H26vbi\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Lento</a>.</p>\n<p><em>Isolamento</em>: o alvo perde o uso de um de seus cinco sentidos a sua escolha. Se perder a visão, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}. Se perder a audição, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}. Se perder o olfato ou paladar, não pode usar a habilidade faro. Se perder o tato, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.fJFNeZeKmfHMpblz]{Caído} e não pode se levantar.</p>\n<p>Você também pode inventar sua própria maldição, usando esses exemplos como sugestões, mas o mestre tem a palavra final sobre o efeito.</p>"
             }
           }
         }
@@ -3224,10 +3195,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3235,7 +3206,7 @@ const spellsData = {
             "resistencia": "veja texto",
             "custo": "3 PM",
             "description": {
-              "value": "<p><a href=\"https://blog.jamboeditora.com.br/errata-do-almanaque-dragao-brasil/\">ERRATA DO ALMANAQUE DRAG&Atilde;O BRASIL (jamboeditora.com.br)</a></p>\n<p>Voc&ecirc; pode controlar os movimentos e comportamentos de massas de ar. Ao lan&ccedil;ar a magia, escolha um dos efeitos abaixo.</p>\n<p><em>Ascender:</em>cria uma corrente de ar ascendente capaz de erguer do ch&atilde;o uma criatura ou objeto m&eacute;dio, fazendo o alvo ﬂutuar para cima e para baixo conforme sua vontade. Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para subir ou descer o alvo at&eacute; 6m por rodada, at&eacute; um m&aacute;ximo de 30m de altura. Voc&ecirc; n&atilde;o pode mover o alvo horizontalmente &mdash; mas o alvo pode, por exemplo, escalar uma colina ou se apoiar no teto para mover-se lateralmente (com metade de seu deslocamento normal). Uma criatura levitando fica vulner&aacute;vel e sofre &ndash;2 nas jogadas de ataque. Alvos involunt&aacute;rios tem direito a um teste de Fortitude no in&iacute;cio de seu turno para negar o efeito. Derrubar um alvo flutuando (simplesmente parando a corrente de ar) causa o dano normal de queda, mas um alvo que passe no teste pode &ldquo;nadar&rdquo; para o ch&atilde;o contra a corrente. Voc&ecirc; pode usar essa op&ccedil;&atilde;o para fazer uma manobra derrubar contra uma criatura voadora dentro do alcance, usando seu atributo-chave no lugar de For&ccedil;a.</p>\n<p><em>Sopro:</em>cria uma lufada de vento a partir de suas m&atilde;os, que empurra qualquer criatura M&eacute;dia ou menor em um cone de 4,5m &mdash; fa&ccedil;a uma manobra<em>empurrar</em>usando seu atributo-chave ao inv&eacute;s de for&ccedil;a, usando o mesmo resultado de sua rolagem para todos os alvos. A lufada de vento tamb&eacute;m faz qualquer coisa que um vento forte e s&uacute;bito faria, como levantar p&oacute;, dispersar vapores, apagar chamas, espalhar pap&eacute;is ou mover uma embarca&ccedil;&atilde;o. Manter o sopro ativo exige uma a&ccedil;&atilde;o padr&atilde;o.</p>\n<p><em>Vento:</em>cria uma &aacute;rea de vento forte (Tormenta20 p&aacute;gina 253) dentro do alcance da magia. Se lan&ccedil;ada numa &aacute;rea que j&aacute; esteja com algum efeito de vento, aumenta esse efeito em um passo. Manter o vento ativo requer uma a&ccedil;&atilde;o de movimento. Voc&ecirc; tamb&eacute;m pode usar essa op&ccedil;&atilde;o para reduzir os efeitos de vento em uma &aacute;rea.</p>"
+              "value": "<p><a href=\"https://blog.jamboeditora.com.br/errata-do-almanaque-dragao-brasil/\">ERRATA DO ALMANAQUE DRAGÃO BRASIL (jamboeditora.com.br)</a></p>\n<p>Você pode controlar os movimentos e comportamentos de massas de ar. Ao lançar a magia, escolha um dos efeitos abaixo.</p>\n<p><em>Ascender:</em>cria uma corrente de ar ascendente capaz de erguer do chão uma criatura ou objeto médio, fazendo o alvo ﬂutuar para cima e para baixo conforme sua vontade. Você pode gastar uma ação de movimento para subir ou descer o alvo até 6m por rodada, até um máximo de 30m de altura. Você não pode mover o alvo horizontalmente — mas o alvo pode, por exemplo, escalar uma colina ou se apoiar no teto para mover-se lateralmente (com metade de seu deslocamento normal). Uma criatura levitando fica vulnerável e sofre –2 nas jogadas de ataque. Alvos involuntários tem direito a um teste de Fortitude no início de seu turno para negar o efeito. Derrubar um alvo flutuando (simplesmente parando a corrente de ar) causa o dano normal de queda, mas um alvo que passe no teste pode &ldquo;nadar&rdquo; para o chão contra a corrente. Você pode usar essa opção para fazer uma manobra derrubar contra uma criatura voadora dentro do alcance, usando seu atributo-chave no lugar de Força.</p>\n<p><em>Sopro:</em>cria uma lufada de vento a partir de suas mãos, que empurra qualquer criatura Média ou menor em um cone de 4,5m — faça uma manobra<em>empurrar</em>usando seu atributo-chave ao invés de força, usando o mesmo resultado de sua rolagem para todos os alvos. A lufada de vento também faz qualquer coisa que um vento forte e súbito faria, como levantar pó, dispersar vapores, apagar chamas, espalhar papéis ou mover uma embarcação. Manter o sopro ativo exige uma ação padrão.</p>\n<p><em>Vento:</em>cria uma área de vento forte (Tormenta20 página 253) dentro do alcance da magia. Se lançada numa área que já esteja com algum efeito de vento, aumenta esse efeito em um passo. Manter o vento ativo requer uma ação de movimento. Você também pode usar essa opção para reduzir os efeitos de vento em uma área.</p>"
             }
           }
         },
@@ -3247,10 +3218,10 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3258,7 +3229,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; molda, retorce, altera ou repele madeira. Se lan&ccedil;ar esta magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. Ao lan&ccedil;ar a magia, escolha.</p>\n<p><em>Fortalecer: </em>deixa o alvo mais resistente. Armas t&ecirc;m seu dano aumentado em um passo. Escudos t&ecirc;m seu b&ocirc;nus de Defesa aumentado em +2 (isso &eacute; uma melhoria no item, portanto &eacute; cumulativa com outras magias). Esses e outros itens de madeira recebem +5 na RD e dobram seus PV.</p>\n<p><em>Modelar:</em> muda a forma do alvo. Pode transformar um galho em espada, criar uma porta onde antes havia apenas uma parede, transformar um tronco em uma caixa... Mas n&atilde;o pode criar mecanismos complexos (como uma besta) ou itens consum&iacute;veis.</p>\n<p><em>Repelir:</em> o alvo &eacute; repelido por voc&ecirc;. Se for uma arma, ataques feitos com ela contra voc&ecirc; falham automaticamente. Se for uma porta ou outro objeto que possa ser aberto, ele vai se abrir quando voc&ecirc; se aproximar, mesmo que esteja trancado. Um objeto que v&aacute; atingi-lo, como uma carro&ccedil;a, tronco ou barril, vai desviar ou parar adjacente a voc&ecirc;, sem lhe causar dano. Os efeitos de regras em outros objetos de madeira ficam a cargo do mestre.</p>\n<p><em>Retorcer:</em> estraga o alvo. Uma porta retorcida emperra (exigindo um teste de For&ccedil;a contra CD 25 para ser aberta). Armas e itens retorcidos imp&otilde;em &ndash;5 em testes de per&iacute;cia. Escudos retorcidos deixam de oferecer b&ocirc;nus (mas ainda imp&otilde;em penalidades). Um barco retorcido come&ccedil;a a afundar e naufraga ao final da cena. Os efeitos de regras em outros objetos de madeira ficam a cargo do mestre.</p>"
+              "value": "<p>Você molda, retorce, altera ou repele madeira. Se lançar esta magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Ao lançar a magia, escolha.</p>\n<p><em>Fortalecer: </em>deixa o alvo mais resistente. Armas têm seu dano aumentado em um passo. Escudos têm seu bônus de Defesa aumentado em +2 (isso é uma melhoria no item, portanto é cumulativa com outras magias). Esses e outros itens de madeira recebem +5 na RD e dobram seus PV.</p>\n<p><em>Modelar:</em> muda a forma do alvo. Pode transformar um galho em espada, criar uma porta onde antes havia apenas uma parede, transformar um tronco em uma caixa... Mas não pode criar mecanismos complexos (como uma besta) ou itens consumíveis.</p>\n<p><em>Repelir:</em> o alvo é repelido por você. Se for uma arma, ataques feitos com ela contra você falham automaticamente. Se for uma porta ou outro objeto que possa ser aberto, ele vai se abrir quando você se aproximar, mesmo que esteja trancado. Um objeto que vá atingi-lo, como uma carroça, tronco ou barril, vai desviar ou parar adjacente a você, sem lhe causar dano. Os efeitos de regras em outros objetos de madeira ficam a cargo do mestre.</p>\n<p><em>Retorcer:</em> estraga o alvo. Uma porta retorcida emperra (exigindo um teste de Força contra CD 25 para ser aberta). Armas e itens retorcidos impõem –5 em testes de perícia. Escudos retorcidos deixam de oferecer bônus (mas ainda impõem penalidades). Um barco retorcido começa a afundar e naufraga ao final da cena. Os efeitos de regras em outros objetos de madeira ficam a cargo do mestre.</p>"
             }
           }
         },
@@ -3270,18 +3241,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; fortalece o corpo do alvo. Ele recebe +2 em For&ccedil;a, Destreza ou Constitui&ccedil;&atilde;o, a sua escolha. Esse aumento n&atilde;o oferece PV ou PM adicionais.</p>"
+              "value": "<p>Você fortalece o corpo do alvo. Ele recebe +2 em Força, Destreza ou Constituição, a sua escolha. Esse aumento não oferece PV ou PM adicionais.</p>"
             }
           }
         }
@@ -3295,12 +3266,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/banimento.webp",
           "system": {
             "circulo": "3",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "special",
+              "execução": "special",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": "1d3+1 rodadas"
             },
             "alcance": "short",
@@ -3308,7 +3279,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; expulsa uma criatura n&atilde;o nativa de Arton. Um alvo nativo de outro mundo (como muitos esp&iacute;ritos), &eacute; teletransportado de volta para um lugar aleat&oacute;rio de seu mundo de origem. J&aacute; um alvo morto-vivo tem sua conex&atilde;o com as energias negativas rompidas, sendo reduzido a 0 PV. Se passar na resist&ecirc;ncia, em vez dos efeitos acima, o alvo fica enjoado por 1d4 rodadas.</p>\n<p>Se voc&ecirc; tiver um ou mais itens que se oponham ao alvo de alguma maneira, a CD do teste de resist&ecirc;ncia aumenta em +2 por item. Por exemplo, se lan&ccedil;ar a magia contra dem&ocirc;nios do frio (vulner&aacute;veis a &aacute;gua benta e que odeiam luz e calor) enquanto segura um frasco de &aacute;gua benta e uma tocha acesa, a CD aumenta em +4. O mestre decide se determinado item &eacute; forte o bastante contra a criatura para isso.</p>"
+              "value": "<p>Você expulsa uma criatura não nativa de Arton. Um alvo nativo de outro mundo (como muitos espíritos), é teletransportado de volta para um lugar aleatório de seu mundo de origem. Já um alvo morto-vivo tem sua conexão com as energias negativas rompidas, sendo reduzido a 0 PV. Se passar na resistência, em vez dos efeitos acima, o alvo fica enjoado por 1d4 rodadas.</p>\n<p>Se você tiver um ou mais itens que se oponham ao alvo de alguma maneira, a CD do teste de resistência aumenta em +2 por item. Por exemplo, se lançar a magia contra demônios do frio (vulneráveis a água benta e que odeiam luz e calor) enquanto segura um frasco de água benta e uma tocha acesa, a CD aumenta em +4. O mestre decide se determinado item é forte o bastante contra a criatura para isso.</p>"
             }
           }
         },
@@ -3318,15 +3289,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/protecao-contra-magia.webp",
           "system": {
             "circulo": "3",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -3345,19 +3316,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "1 day",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Ap&oacute;s uma breve uni&atilde;o com a natureza local, voc&ecirc; obt&eacute;m informa&ccedil;&otilde;es e intui&ccedil;&otilde;es sobre a regi&atilde;o em que est&aacute;, numa dist&acirc;ncia equivalente a um dia de viagem. Voc&ecirc; recebe 6d4 dados de aux&iacute;lio.</p>\n<p>Enquanto a magia durar, sempre que for realizar um teste de per&iacute;cia em &aacute;reas naturais, voc&ecirc; pode gastar 2d4 (mais 2d4 para cada c&iacute;rculo de magias acima do 3&ordm; que puder lan&ccedil;ar) e adicionar o resultado rolado como b&ocirc;nus no teste. A magia termina se voc&ecirc; ficar sem dados.</p>"
+              "value": "<p>Após uma breve união com a natureza local, você obtém informações e intuições sobre a região em que está, numa distância equivalente a um dia de viagem. Você recebe 6d4 dados de auxílio.</p>\n<p>Enquanto a magia durar, sempre que for realizar um teste de perícia em áreas naturais, você pode gastar 2d4 (mais 2d4 para cada círculo de magias acima do 3&ordm; que puder lançar) e adicionar o resultado rolado como bônus no teste. A magia termina se você ficar sem dados.</p>"
             }
           }
         }
@@ -3371,14 +3341,13 @@ const spellsData = {
             "circulo": "3",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "Cena ou até ser descarregada",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
@@ -3394,18 +3363,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Como parte da execu&ccedil;&atilde;o, voc&ecirc; entra em uma &aacute;rvore adjacente que seja maior do que voc&ecirc;. Voc&ecirc; pode permanecer dentro da &aacute;rvore, percebendo os arredores de forma normal (mas sem poder fazer a&ccedil;&otilde;es). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para sair da mesma &aacute;rvore, ou de qualquer outra dentro de 1km. Se estiver dentro de uma &aacute;rvore que seja destru&iacute;da, a magia termina e voc&ecirc; sofre 10d6 pontos de dano de impacto. Enquanto a magia durar voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para entrar em outras &aacute;rvores.</p>"
+              "value": "<p>Como parte da execução, você entra em uma árvore adjacente que seja maior do que você. Você pode permanecer dentro da árvore, percebendo os arredores de forma normal (mas sem poder fazer ações). Você pode gastar uma ação de movimento para sair da mesma árvore, ou de qualquer outra dentro de 1km. Se estiver dentro de uma árvore que seja destruída, a magia termina e você sofre 10d6 pontos de dano de impacto. Enquanto a magia durar você pode gastar uma ação de movimento e 1 PM para entrar em outras árvores.</p>"
             }
           }
         }
@@ -3419,19 +3388,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "enc",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "1 day",
+            "alcance": "toque",
             "alvo": "1 animal ou planta",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; desperta a consci&ecirc;ncia de um animal ou planta. O alvo se torna um parceiro veterano de um tipo a sua escolha entre ajudante, combatente, fort&atilde;o, guardi&atilde;o, m&eacute;dico, perseguidor ou vigilante. Se usar esta magia em um parceiro que j&aacute; possua, o n&iacute;vel de poder de um de seus tipos aumenta em um passo (iniciante para veterano, veterano para mestre). Se j&aacute; for um parceiro mestre, recebe o b&ocirc;nus de outro tipo de parceiro iniciante (entre as escolhas acima). O alvo se torna uma criatura racional, com Intelig&ecirc;ncia &ndash;1, e pode falar</p>"
+              "value": "<p>Você desperta a consciência de um animal ou planta. O alvo se torna um parceiro veterano de um tipo a sua escolha entre ajudante, combatente, fortão, guardião, médico, perseguidor ou vigilante. Se usar esta magia em um parceiro que já possua, o nível de poder de um de seus tipos aumenta em um passo (iniciante para veterano, veterano para mestre). Se já for um parceiro mestre, recebe o bônus de outro tipo de parceiro iniciante (entre as escolhas acima). O alvo se torna uma criatura racional, com Inteligência –1, e pode falar</p>"
             }
           }
         },
@@ -3443,18 +3411,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia imbui uma criatura com coragem e valentia. O alvo fica imune a medo e recebe 40 PV tempor&aacute;rios e +4 em testes de ataque e rolagens de dano contra o inimigo de maior ND na cena.</p>"
+              "value": "<p>Esta magia imbui uma criatura com coragem e valentia. O alvo fica imune a medo e recebe 40 PV temporários e +4 em testes de ataque e rolagens de dano contra o inimigo de maior ND na cena.</p>"
             }
           }
         },
@@ -3466,19 +3434,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "1 semana ou até ser descarregada",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula (veja texto)",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia obriga o alvo a cumprir uma tarefa a sua escolha. Ela dura uma semana ou at&eacute; o alvo cumprir a tarefa, o que vier primeiro. O alvo pode recusar a miss&atilde;o &mdash; mas, no fim de cada dia em que n&atilde;o se esfor&ccedil;ar para cumprir a tarefa, deve fazer um teste de Vontade; se falhar, sofre uma penalidade cumulativa de &ndash;2 em todos os testes e rolagens.</p>\n<p>A <em>Miss&atilde;o Divina</em> n&atilde;o pode for&ccedil;ar uma criatura a um ato suicida, nem designar uma miss&atilde;o imposs&iacute;vel (como matar uma criatura que n&atilde;o existe).</p>"
+              "value": "<p>Esta magia obriga o alvo a cumprir uma tarefa a sua escolha. Ela dura uma semana ou até o alvo cumprir a tarefa, o que vier primeiro. O alvo pode recusar a missão — mas, no fim de cada dia em que não se esforçar para cumprir a tarefa, deve fazer um teste de Vontade; se falhar, sofre uma penalidade cumulativa de –2 em todos os testes e rolagens.</p>\n<p>A <em>Missão Divina</em> não pode forçar uma criatura a um ato suicida, nem designar uma missão impossível (como matar uma criatura que não existe).</p>"
             }
           }
         }
@@ -3492,10 +3459,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -3515,19 +3482,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "veja texto",
+            "alcance": "pessoal",
             "alvo": "Esfera de 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia cria um forte brilho (multicolorido ou de uma cor que remeta a sua divindade) que causa diversos efeitos. Todas as magias de 3&ordm; c&iacute;rculo ou menor ativas na &aacute;rea s&atilde;o dissipadas se voc&ecirc; passar num teste de Religi&atilde;o contra a CD de cada magia. Seus aliados na &aacute;rea recebem +4 em testes de resist&ecirc;ncia e redu&ccedil;&atilde;o de trevas 10 at&eacute; o fim da cena, protegidos por uma aura sutil da mesma cor. Inimigos na &aacute;rea ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas (apenas uma vez pela magia). <em>Dispersar as Trevas </em>anula <em>Anular a Luz </em>(este efeito tem dura&ccedil;&atilde;o instant&acirc;nea).</p>"
+              "value": "<p>Esta magia cria um forte brilho (multicolorido ou de uma cor que remeta a sua divindade) que causa diversos efeitos. Todas as magias de 3&ordm; círculo ou menor ativas na área são dissipadas se você passar num teste de Religião contra a CD de cada magia. Seus aliados na área recebem +4 em testes de resistência e redução de trevas 10 até o fim da cena, protegidos por uma aura sutil da mesma cor. Inimigos na área ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas (apenas uma vez pela magia). <em>Dispersar as Trevas </em>anula <em>Anular a Luz </em>(este efeito tem duração instantânea).</p>"
             }
           }
         },
@@ -3539,18 +3505,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "cone de 9m",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; enche seus pulm&otilde;es de energia positiva e sopra um cone de poeira reluzente. O sopro afeta apenas seus aliados na &aacute;rea, curando 2d8+4 pontos de vida e removendo uma das seguintes condi&ccedil;&otilde;es de todos os alvos: @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX]{Apavorado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.uub1TaaEaq0Vuncl]{Alquebrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm]{Esmorecido}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.R5FPPrfq68i9ddyv]{Fascinado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.CMPtwuGkHgeKu8CC]{Pasmo} e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}.</p>"
+              "value": "<p>Você enche seus pulmões de energia positiva e sopra um cone de poeira reluzente. O sopro afeta apenas seus aliados na área, curando 2d8+4 pontos de vida e removendo uma das seguintes condições de todos os alvos: @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX]{Apavorado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.uub1TaaEaq0Vuncl]{Alquebrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm]{Esmorecido}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.R5FPPrfq68i9ddyv]{Fascinado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado}, @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.CMPtwuGkHgeKu8CC]{Pasmo} e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}.</p>"
             }
           }
         }
@@ -3564,19 +3530,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
-            "duracao": "Ver Texto",
+            "alcance": "pessoal",
             "alvo": "esfera de 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia cria uma onda de escurid&atilde;o que causa diversos efeitos. Todas as magias de 3&ordm; c&iacute;rculo ou menor ativas na &aacute;rea s&atilde;o dissipadas se voc&ecirc; passar num teste de Religi&atilde;o contra a CD de cada magia. Seus aliados na &aacute;rea s&atilde;o protegidos por uma aura sombria e recebem +4 na Defesa at&eacute; o fim da cena. Inimigos na &aacute;rea ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj\" data-id=\"BUMyxT4YI9mdC8Aj\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enjoado</a>por 1d4 rodadas (apenas uma vez por cena). <em>Anular a Luz</em> anula <em>Dispersar as Trevas</em> (este efeito tem dura&ccedil;&atilde;o instant&acirc;nea).</p>"
+              "value": "<p>Esta magia cria uma onda de escuridão que causa diversos efeitos. Todas as magias de 3&ordm; círculo ou menor ativas na área são dissipadas se você passar num teste de Religião contra a CD de cada magia. Seus aliados na área são protegidos por uma aura sombria e recebem +4 na Defesa até o fim da cena. Inimigos na área ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj\" data-id=\"BUMyxT4YI9mdC8Aj\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enjoado</a>por 1d4 rodadas (apenas uma vez por cena). <em>Anular a Luz</em> anula <em>Dispersar as Trevas</em> (este efeito tem duração instantânea).</p>"
             }
           }
         },
@@ -3588,10 +3553,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -3599,7 +3564,7 @@ const spellsData = {
             "resistencia": "Fortitude (veja texto)",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; manifesta uma nuvem de poeira carregada de energia negativa, que apodrece lentamente as criaturas na &aacute;rea. Ao lan&ccedil;ar a magia, e no in&iacute;cio de seus turnos, criaturas na &aacute;rea sofrem 2d8+8 pontos de dano de trevas (Fortitude reduz &agrave; metade). Alvos que falharem no teste n&atilde;o podem recuperar PV por uma rodada.</p>"
+              "value": "<p>Você manifesta uma nuvem de poeira carregada de energia negativa, que apodrece lentamente as criaturas na área. Ao lançar a magia, e no início de seus turnos, criaturas na área sofrem 2d8+8 pontos de dano de trevas (Fortitude reduz à metade). Alvos que falharem no teste não podem recuperar PV por uma rodada.</p>"
             }
           }
         }
@@ -3613,10 +3578,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -3624,7 +3589,7 @@ const spellsData = {
             "resistencia": "Veja texto",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; controla os movimentos e comportamentos da &aacute;gua. Ao lan&ccedil;ar a magia, escolha um dos efeitos abaixo.</p>\n<p><em>Congelar:</em> toda a &aacute;gua mundana na &aacute;rea &eacute; congelada. Criaturas nadando na &aacute;rea ficam im&oacute;veis; escapar exige gastar uma a&ccedil;&atilde;o padr&atilde;o e passar num teste de Atletismo ou Acrobacia.</p>\n<p><em>Derreter:</em> gelo mundano na &aacute;rea vira &aacute;gua e a magia termina. A crit&eacute;rio do mestre, isso pode criar terreno dif&iacute;cil.</p>\n<p><em>Enchente:</em> eleva o n&iacute;vel da &aacute;gua mundana na &aacute;rea em at&eacute; 4,5m. A sua escolha, muda &aacute;rea para alvo: uma embarca&ccedil;&atilde;o. O alvo recebe +3m em seu deslocamento pela dura&ccedil;&atilde;o do efeito.</p>\n<p><em>Evaporar:</em> toda a &aacute;gua e gelo mundano na &aacute;rea evaporam instantaneamente e a magia termina. Elementais da &aacute;gua, plantas monstruosas e criaturas com imunidade a frio na &aacute;rea sofrem 10d8 pontos de dano de fogo; outras criaturas vivas recebem metade desse dano (Fortitude reduz &agrave; metade).</p>\n<p><em>Partir:</em> diminui o n&iacute;vel de toda &aacute;gua mundana na &aacute;rea em at&eacute; 4,5m. Em um corpo d&rsquo;&aacute;gua raso, isso abre um caminho seco, que pode ser atravessado a p&eacute;. Em um corpo d&rsquo;&aacute;gua profundo, cria um redemoinho que pode prender barcos (um teste de Pilotagem com CD igual &agrave; da magia permite ao piloto livrar a embarca&ccedil;&atilde;o). Elementais da &aacute;gua na &aacute;rea ficam lentos.</p>"
+              "value": "<p>Você controla os movimentos e comportamentos da água. Ao lançar a magia, escolha um dos efeitos abaixo.</p>\n<p><em>Congelar:</em> toda a água mundana na área é congelada. Criaturas nadando na área ficam imóveis; escapar exige gastar uma ação padrão e passar num teste de Atletismo ou Acrobacia.</p>\n<p><em>Derreter:</em> gelo mundano na área vira água e a magia termina. A critério do mestre, isso pode criar terreno difícil.</p>\n<p><em>Enchente:</em> eleva o nível da água mundana na área em até 4,5m. A sua escolha, muda área para alvo: uma embarcação. O alvo recebe +3m em seu deslocamento pela duração do efeito.</p>\n<p><em>Evaporar:</em> toda a água e gelo mundano na área evaporam instantaneamente e a magia termina. Elementais da água, plantas monstruosas e criaturas com imunidade a frio na área sofrem 10d8 pontos de dano de fogo; outras criaturas vivas recebem metade desse dano (Fortitude reduz à metade).</p>\n<p><em>Partir:</em> diminui o nível de toda água mundana na área em até 4,5m. Em um corpo d&rsquo;água raso, isso abre um caminho seco, que pode ser atravessado a pé. Em um corpo d&rsquo;água profundo, cria um redemoinho que pode prender barcos (um teste de Pilotagem com CD igual à da magia permite ao piloto livrar a embarcação). Elementais da água na área ficam lentos.</p>"
             }
           }
         },
@@ -3636,10 +3601,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -3659,18 +3624,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; canaliza o poder de sua divindade. Voc&ecirc; aumenta uma categoria de tamanho (seu equipamento muda de acordo) e recebe For&ccedil;a +4 e RD 10. Voc&ecirc; n&atilde;o pode lan&ccedil;ar magias enquanto estiver sob efeito de Pot&ecirc;ncia Divina.</p>"
+              "value": "<p>Você canaliza o poder de sua divindade. Você aumenta uma categoria de tamanho (seu equipamento muda de acordo) e recebe Força +4 e RD 10. Você não pode lançar magias enquanto estiver sob efeito de Potência Divina.</p>"
             }
           }
         }
@@ -3684,20 +3649,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/cupula-de-repulsao.webp",
           "system": {
             "circulo": "4",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Vontade Anula",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Uma c&uacute;pula de energia invis&iacute;vel o cerca, impedindo a aproxima&ccedil;&atilde;o de certas criaturas. Escolha um tipo de criatura (animais, esp&iacute;ritos, monstros...) ou uma ra&ccedil;a de humanoides (elfos, goblins, minotauros..). Criaturas do grupo escolhido que tentem se aproximar a menos de 3m de voc&ecirc; (ou seja, que tentem ficar adjacentes a voc&ecirc;) devem fazer um teste de Vontade. Se falharem, n&atilde;o conseguem, gastam a a&ccedil;&atilde;o e s&oacute; podem tentar novamente na rodada seguinte. Isso impede ataques corpo a corpo, mas n&atilde;o ataques ou outros efeitos &agrave; dist&acirc;ncia. Se voc&ecirc; tentar se aproximar al&eacute;m do limite de 3m, rompe a c&uacute;pula e a magia &eacute; dissipada.</p>"
+              "value": "<p>Uma cúpula de energia invisível o cerca, impedindo a aproximação de certas criaturas. Escolha um tipo de criatura (animais, espíritos, monstros...) ou uma raça de humanoides (elfos, goblins, minotauros..). Criaturas do grupo escolhido que tentem se aproximar a menos de 3m de você (ou seja, que tentem ficar adjacentes a você) devem fazer um teste de Vontade. Se falharem, não conseguem, gastam a ação e só podem tentar novamente na rodada seguinte. Isso impede ataques corpo a corpo, mas não ataques ou outros efeitos à distância. Se você tentar se aproximar além do limite de 3m, rompe a cúpula e a magia é dissipada.</p>"
             }
           }
         }
@@ -3711,18 +3676,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Vislumbres do futuro permitem que voc&ecirc; reavalie suas a&ccedil;&otilde;es. Uma vez por rodada, voc&ecirc; pode rolar novamente um teste rec&eacute;m realizado, mas deve aceitar o resultado da nova rolagem.</p>"
+              "value": "<p>Vislumbres do futuro permitem que você reavalie suas ações. Uma vez por rodada, você pode rolar novamente um teste recém realizado, mas deve aceitar o resultado da nova rolagem.</p>"
             }
           }
         }
@@ -3736,14 +3701,13 @@ const spellsData = {
             "circulo": "4",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "Cena ou até ser descarregado",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -3761,19 +3725,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "permanente ou até ser descarregada",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; transfere um pouco de seu poder divino a outra criatura. Escolha uma magia de at&eacute; 2&ordm; c&iacute;rculo que voc&ecirc; conhe&ccedil;a; o alvo pode lan&ccedil;ar essa magia uma vez, sem pagar o custo base dela em PM (aprimoramentos podem ser usados, mas o alvo deve gastar seus pr&oacute;prios PM). Voc&ecirc; sofre uma penalidade de &ndash;3 PM at&eacute; que o alvo lance a magia.</p>"
+              "value": "<p>Você transfere um pouco de seu poder divino a outra criatura. Escolha uma magia de até 2&ordm; círculo que você conheça; o alvo pode lançar essa magia uma vez, sem pagar o custo base dela em PM (aprimoramentos podem ser usados, mas o alvo deve gastar seus próprios PM). Você sofre uma penalidade de –3 PM até que o alvo lance a magia.</p>"
             }
           }
         }
@@ -3787,19 +3750,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "5 round",
             "alvo": "esfera de 3m de raio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; evoca um c&iacute;rculo de luz que emana uma energia poderosa. Qualquer criatura viva que termine o turno dentro do c&iacute;rculo recupera 3d8+3 PV e 1 PM. Mortos-vivos e criaturas que sofrem dano por luz perdem PV e PM na mesma quantidade. Uma criatura pode recuperar no m&aacute;ximo 5 PM por dia com esta magia.</p>"
+              "value": "<p>Você evoca um círculo de luz que emana uma energia poderosa. Qualquer criatura viva que termine o turno dentro do círculo recupera 3d8+3 PV e 1 PM. Mortos-vivos e criaturas que sofrem dano por luz perdem PV e PM na mesma quantidade. Uma criatura pode recuperar no máximo 5 PM por dia com esta magia.</p>"
             }
           }
         },
@@ -3811,19 +3773,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
-            "duracao": "5 inst",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Reflexos Parcial",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma explos&atilde;o de luz dourada e intensa. Criaturas na &aacute;rea ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2M8CXrGavdU6g1ZI]{Em Chamas} , e sofrem 10d6 pontos de dano de fogo (mortos-vivos sofrem 10d8 pontos de dano). Uma criatura que passe no teste de resist&ecirc;ncia n&atilde;o fica cega, nem em chamas e sofre metade do dano.</p>"
+              "value": "<p>Você cria uma explosão de luz dourada e intensa. Criaturas na área ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2M8CXrGavdU6g1ZI]{Em Chamas} , e sofrem 10d6 pontos de dano de fogo (mortos-vivos sofrem 10d8 pontos de dano). Uma criatura que passe no teste de resistência não fica cega, nem em chamas e sofre metade do dano.</p>"
             }
           }
         },
@@ -3835,18 +3796,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "vocẽ",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; invoca o poder de sua divindade na forma de um manto de energia que reveste seu corpo. Esta magia tem duas vers&otilde;es. Voc&ecirc; escolhe qual vers&atilde;o pode lan&ccedil;ar quando aprende esta magia. Ela n&atilde;o pode ser mudada.</p>\n<p><em>Manto de Luz:</em> um manto dourado e luminoso. No in&iacute;cio de cada um de seus turnos, voc&ecirc; e todos os seus aliados em alcance curto recuperam 2d8 PV. Voc&ecirc; recebe imunidade a dano de trevas e seus ataques corpo a corpo causam +2d8 pontos de dano de luz.</p>\n<p><em>Manto de Trevas:</em> um manto negro como a noite. No in&iacute;cio de cada um de seus turnos, todos os inimigos em alcance curto sofrem 4d8 pontos de dano de trevas. Voc&ecirc; cura metade de todo o dano causado pela magia.</p>"
+              "value": "<p>Você invoca o poder de sua divindade na forma de um manto de energia que reveste seu corpo. Esta magia tem duas versões. Você escolhe qual versão pode lançar quando aprende esta magia. Ela não pode ser mudada.</p>\n<p><em>Manto de Luz:</em> um manto dourado e luminoso. No início de cada um de seus turnos, você e todos os seus aliados em alcance curto recuperam 2d8 PV. Você recebe imunidade a dano de trevas e seus ataques corpo a corpo causam +2d8 pontos de dano de luz.</p>\n<p><em>Manto de Trevas:</em> um manto negro como a noite. No início de cada um de seus turnos, todos os inimigos em alcance curto sofrem 4d8 pontos de dano de trevas. Você cura metade de todo o dano causado pela magia.</p>"
             }
           }
         },
@@ -3858,19 +3819,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 round",
             "alvo": "esfera com 30m de raio",
             "resistencia": "veja texto",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Esta magia cria um tremor de terra que rasga o solo. O terremoto dura uma rodada, durante a qual criaturas sobre o solo ficam atordoadas. Barreiras f&iacute;sicas n&atilde;ointerrompem a &aacute;rea de<em> Terremoto</em>.</p>\n<p>O efeito exato depende do terreno.</p>\n<p><em>Caverna ou subterr&acirc;neo:</em> a magia derruba o teto, causando 12d6 pontos de dano de impacto e agarrando (@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}) todas as criaturas na &aacute;rea. Um teste de Reflexos reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o.</p>\n<p><em>Constru&ccedil;&atilde;o:</em> todas as estruturas na &aacute;rea sofrem 200 pontos de dano de impacto, o suficiente para derrubar constru&ccedil;&otilde;es de madeira ou alvenaria simples, mas n&atilde;o de alvenaria refor&ccedil;ada. Criaturas em uma constru&ccedil;&atilde;o que desmorone sofrem o mesmo efeito de criaturas em uma caverna (veja acima).</p>\n<p><em>Espa&ccedil;o aberto:</em> fendas se abrem no ch&atilde;o. Cada criatura na &aacute;rea precisa rolar um dado; em um resultado &iacute;mpar, uma fenda se abre sob ela e ela precisa fazer um teste de Reflexos; se falhar, cai na fenda. A criatura pode escapar gastando uma a&ccedil;&atilde;o completa e passando em um teste de Atletismo (CD igual &agrave; da magia). No in&iacute;cio do seu pr&oacute;ximo turno as fendas se fecham, matando todos que estejam dentro delas.</p>\n<p><em>Penhascos:</em> o penhasco racha, criando um desmoronamento que percorre uma dist&acirc;ncia horizontal igual &agrave; dist&acirc;ncia da queda. Por exemplo, um penhasco com 30m de altura desmorona em uma &aacute;rea de 30m de comprimento al&eacute;m da base. Qualquer criatura no caminho sofre 12d6 pontos de dano de impacto e fica agarrada. Um teste de Reflexos reduz o dano &agrave; metade e evita ficar agarrado.</p>\n<p><em>Rio, lago ou p&acirc;ntano:</em> fissuras se abrem sob a &aacute;gua, drenando-a e formando um lama&ccedil;al. Criaturas na &aacute;rea precisam fazer um teste de Reflexos para n&atilde;o afundarem na lama e ficarem agarradas. No in&iacute;cio do seu pr&oacute;ximo turno as fissuras se fecham, possivelmente afogando as criaturas que ficaram agarradas.</p>\n<p>Criaturas agarradas (efeito poss&iacute;vel decaverna, constru&ccedil;&atilde;o, penhasco e rio, lago ou p&acirc;ntano) sofrem 1d6 pontos de dano por rodada at&eacute; serem libertadas, o que exige uma a&ccedil;&atilde;o completa e um teste de Atletismo (por parte da pr&oacute;pria criatura ou de um aliado adjacente).</p>"
+              "value": "<p>Esta magia cria um tremor de terra que rasga o solo. O terremoto dura uma rodada, durante a qual criaturas sobre o solo ficam atordoadas. Barreiras físicas nãointerrompem a área de<em> Terremoto</em>.</p>\n<p>O efeito exato depende do terreno.</p>\n<p><em>Caverna ou subterrâneo:</em> a magia derruba o teto, causando 12d6 pontos de dano de impacto e agarrando (@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}) todas as criaturas na área. Um teste de Reflexos reduz o dano à metade e evita a condição.</p>\n<p><em>Construção:</em> todas as estruturas na área sofrem 200 pontos de dano de impacto, o suficiente para derrubar construções de madeira ou alvenaria simples, mas não de alvenaria reforçada. Criaturas em uma construção que desmorone sofrem o mesmo efeito de criaturas em uma caverna (veja acima).</p>\n<p><em>Espaço aberto:</em> fendas se abrem no chão. Cada criatura na área precisa rolar um dado; em um resultado ímpar, uma fenda se abre sob ela e ela precisa fazer um teste de Reflexos; se falhar, cai na fenda. A criatura pode escapar gastando uma ação completa e passando em um teste de Atletismo (CD igual à da magia). No início do seu próximo turno as fendas se fecham, matando todos que estejam dentro delas.</p>\n<p><em>Penhascos:</em> o penhasco racha, criando um desmoronamento que percorre uma distância horizontal igual à distância da queda. Por exemplo, um penhasco com 30m de altura desmorona em uma área de 30m de comprimento além da base. Qualquer criatura no caminho sofre 12d6 pontos de dano de impacto e fica agarrada. Um teste de Reflexos reduz o dano à metade e evita ficar agarrado.</p>\n<p><em>Rio, lago ou pântano:</em> fissuras se abrem sob a água, drenando-a e formando um lamaçal. Criaturas na área precisam fazer um teste de Reflexos para não afundarem na lama e ficarem agarradas. No início do seu próximo turno as fissuras se fecham, possivelmente afogando as criaturas que ficaram agarradas.</p>\n<p>Criaturas agarradas (efeito possível decaverna, construção, penhasco e rio, lago ou pântano) sofrem 1d6 pontos de dano por rodada até serem libertadas, o que exige uma ação completa e um teste de Atletismo (por parte da própria criatura ou de um aliado adjacente).</p>"
             }
           }
         }
@@ -3884,14 +3844,13 @@ const spellsData = {
             "circulo": "4",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "1 day",
             "alvo": "1 criatura",
             "resistencia": "Fortitude anula",
             "custo": "10 PM",
@@ -3910,19 +3869,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "tra",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "km",
-            "duracao": "4d12 horas",
             "alvo": "esfera com 2km de raio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; muda o clima da &aacute;rea onde se encontra, podendo criar qualquer condi&ccedil;&atilde;o clim&aacute;tica: chuva, neve, ventos, n&eacute;voas... Veja o Cap&iacute;tulo 6: O Mestre para os efeitos em jogo do clima.</p>"
+              "value": "<p>Você muda o clima da área onde se encontra, podendo criar qualquer condição climática: chuva, neve, ventos, névoas... Veja o Capítulo 6: O Mestre para os efeitos em jogo do clima.</p>"
             }
           }
         }
@@ -3936,20 +3894,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aura-divina.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "esfera com 9m de raio",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; se torna um condu&iacute;te da energia de sua divindade, emanando uma aura brilhante. Voc&ecirc; e aliados devotos da mesma divindade ficam imunes a encantamento e recebem +10 na Defesa e em testes de resist&ecirc;ncia. Aliados n&atilde;o devotos da mesma divindade recebem+5 na Defesa e em testes de resist&ecirc;ncia.</p>\n<p>Al&eacute;m disso, inimigos que entrem na &aacute;rea afetada devem fazer um teste de Vontade; em caso de falha, recebem uma condi&ccedil;&atilde;o a sua escolha entre <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm\" data-id=\"YpyVEwCbNVAfFLBm\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Esmorecido</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel\" data-id=\"AlTDv5dptSLGiZel\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Debilitado</a>ou <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi\" data-id=\"e8JmqkgvL3H26vbi\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Lento</a> at&eacute; o fim da cena. O teste deve ser refeito cada vez que a criatura entrar novamente na &aacute;rea.</p>"
+              "value": "<p>Você se torna um conduíte da energia de sua divindade, emanando uma aura brilhante. Você e aliados devotos da mesma divindade ficam imunes a encantamento e recebem +10 na Defesa e em testes de resistência. Aliados não devotos da mesma divindade recebem+5 na Defesa e em testes de resistência.</p>\n<p>Além disso, inimigos que entrem na área afetada devem fazer um teste de Vontade; em caso de falha, recebem uma condição a sua escolha entre <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm\" data-id=\"YpyVEwCbNVAfFLBm\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Esmorecido</a>, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel\" data-id=\"AlTDv5dptSLGiZel\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Debilitado</a>ou <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi\" data-id=\"e8JmqkgvL3H26vbi\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Lento</a> até o fim da cena. O teste deve ser refeito cada vez que a criatura entrar novamente na área.</p>"
             }
           }
         },
@@ -3959,19 +3917,19 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/engenho-de-mana.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado. O disco &eacute; imune a dano, n&atilde;o pode ser movido e faz uma contram&aacute;gica autom&aacute;tica contra qualquer magia lan&ccedil;ada em alcance m&eacute;dio dele (exceto as suas), usando seu teste de Misticismo. Caso ven&ccedil;a o teste, o engenho n&atilde;o s&oacute; anula a magia como absorve os PM usados para lan&ccedil;&aacute;-la, acumulando PM tempor&aacute;rios. No seu turno, se estiver ao alcance do disco, voc&ecirc; pode gastar PM nele para lan&ccedil;ar magias.</p>"
+              "value": "<p>Você cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado. O disco é imune a dano, não pode ser movido e faz uma contramágica automática contra qualquer magia lançada em alcance médio dele (exceto as suas), usando seu teste de Misticismo. Caso vença o teste, o engenho não só anula a magia como absorve os PM usados para lançá-la, acumulando PM temporários. No seu turno, se estiver ao alcance do disco, você pode gastar PM nele para lançar magias.</p>"
             }
           }
         },
@@ -3981,12 +3939,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/lagrimas-da-deusa-da-magia.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4008,10 +3966,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "any",
@@ -4019,7 +3977,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta magia faz com que sua consci&ecirc;ncia deixe seu corpo e se transporte instantaneamente para um local ou para perto de uma criatura alvo. Se escolher um local, ele precisa ser conhecido por voc&ecirc;. Se escolher uma criatura, voc&ecirc; transporta sua consci&ecirc;ncia at&eacute; onde a criatura estiver, contanto que estejam no mesmo plano.</p>\n<p>Voc&ecirc; adquire uma forma fantasmag&oacute;rica invis&iacute;vel, mas pode se mostrar sando uma a&ccedil;&atilde;o de movimento. Pode se mover em qualquer dire&ccedil;&atilde;o com deslocamento de voo 18m e, por ser incorp&oacute;reo, &eacute; capaz de atravessar objetos s&oacute;lidos, mas fica limitado a se mover dentro dos limites do local, ou dentro de alcance curto da criatura alvo. Voc&ecirc; pode ver e ouvir como se estivesse presente no local e pode falar mentalmente com qualquer criatura que possa ver, contanto que tenham um idioma em comum.</p>"
+              "value": "<p>Esta magia faz com que sua consciência deixe seu corpo e se transporte instantaneamente para um local ou para perto de uma criatura alvo. Se escolher um local, ele precisa ser conhecido por você. Se escolher uma criatura, você transporta sua consciência até onde a criatura estiver, contanto que estejam no mesmo plano.</p>\n<p>Você adquire uma forma fantasmagórica invisível, mas pode se mostrar sando uma ação de movimento. Pode se mover em qualquer direção com deslocamento de voo 18m e, por ser incorpóreo, é capaz de atravessar objetos sólidos, mas fica limitado a se mover dentro dos limites do local, ou dentro de alcance curto da criatura alvo. Você pode ver e ouvir como se estivesse presente no local e pode falar mentalmente com qualquer criatura que possa ver, contanto que tenham um idioma em comum.</p>"
             }
           }
         }
@@ -4033,10 +3991,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "spec",
@@ -4044,7 +4002,7 @@ const spellsData = {
             "resistencia": "veja texto",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; pede a sua divindade para interceder diretamente. Voc&ecirc; pode:</p>\n<p>&bull; Curar todos os PV e condi&ccedil;&otilde;es de at&eacute; 10 criaturas em alcance longo (este efeito cura mortos-vivos, em vez de causar dano).</p>\n<p>&bull; Dissipar os efeitos de qualquer magia de 4&ordm; c&iacute;rculo ou menor.</p>\n<p>Voc&ecirc; pode implorar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrif&iacute;cio de 2 PM e pode fazer coisas como:</p>\n<p>&bull; Criar um item mundano de at&eacute; T$ 30.000.</p>\n<p>&bull; Duplicar os efeitos de qualquer magia de at&eacute; 4&ordm; c&iacute;rculo. Caso a magia precise de um componente material para ser lan&ccedil;ada, ainda &eacute; necess&aacute;rio providenciar o componente.</p>\n<p>&bull; Proteger uma cidade de um desastre, como uma erup&ccedil;&atilde;o vulc&acirc;nica, enchente ou terremoto.</p>\n<p>&bull; Ressuscitar uma criatura em alcance longo que tenha morrido h&aacute; at&eacute; uma rodada. A criatura acorda com 1 PV.</p>\n<p>&bull; Qualquer outra coisa que o mestre autorize, conforme os desejos e objetivos da divindade do conjurador.</p>"
+              "value": "<p>Você pede a sua divindade para interceder diretamente. Você pode:</p>\n<p>&bull; Curar todos os PV e condições de até 10 criaturas em alcance longo (este efeito cura mortos-vivos, em vez de causar dano).</p>\n<p>&bull; Dissipar os efeitos de qualquer magia de 4&ordm; círculo ou menor.</p>\n<p>Você pode implorar por algo ainda mais poderoso. Nesse caso, a magia requer o sacrifício de 2 PM e pode fazer coisas como:</p>\n<p>&bull; Criar um item mundano de até T$ 30.000.</p>\n<p>&bull; Duplicar os efeitos de qualquer magia de até 4&ordm; círculo. Caso a magia precise de um componente material para ser lançada, ainda é necessário providenciar o componente.</p>\n<p>&bull; Proteger uma cidade de um desastre, como uma erupção vulcânica, enchente ou terremoto.</p>\n<p>&bull; Ressuscitar uma criatura em alcance longo que tenha morrido há até uma rodada. A criatura acorda com 1 PV.</p>\n<p>&bull; Qualquer outra coisa que o mestre autorize, conforme os desejos e objetivos da divindade do conjurador.</p>"
             }
           }
         }
@@ -4058,10 +4016,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "evo",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -4069,7 +4027,7 @@ const spellsData = {
             "resistencia": "veja texto",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; cria uma nuvem de tempestade violenta. Os ventos tornam ataques &agrave; dist&acirc;ncia imposs&iacute;veis e fazem a &aacute;rea contar como condi&ccedil;&atilde;o terr&iacute;vel para lan&ccedil;ar magia. Al&eacute;m disso, inimigos na &aacute;rea t&ecirc;m a visibilidade reduzida (como a magia N&eacute;voa). Uma vez por turno, voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para gerar um dos efeitosa seguir.</p>\n<p><em>Nevasca.</em> Inimigos na &aacute;rea sofrem 10d6 pontos de dano de frio (Fortitude reduz &agrave; metade). A &aacute;rea fica coberta de neve, virando terreno dif&iacute;cil at&eacute; o fim da cena ou at&eacute; voc&ecirc; usar siroco.</p>\n<p><em>Raios.</em> At&eacute; 6 inimigos a sua escolha na &aacute;rea sofrem 10d8 pontos de dano de eletricidade (Reflexos reduz &agrave; metade).</p>\n<p><em>Siroco.</em> Transforma a chuva em uma tempestade de areia escaldante. Inimigos na &aacute;rea sofrem 10d6 pontos de dano (metade corte, metade fogo) e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.kzVyzFyYroPrv8gb]{Sangrando} (Fortitude reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o).</p>\n<p><em>Trov&otilde;es.</em> Inimigos sofrem 10d6 pontos de dano de impacto e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} por uma rodada (Fortitude reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o).</p>"
+              "value": "<p>Você cria uma nuvem de tempestade violenta. Os ventos tornam ataques à distância impossíveis e fazem a área contar como condição terrível para lançar magia. Além disso, inimigos na área têm a visibilidade reduzida (como a magia Névoa). Uma vez por turno, você pode gastar uma ação de movimento para gerar um dos efeitosa seguir.</p>\n<p><em>Nevasca.</em> Inimigos na área sofrem 10d6 pontos de dano de frio (Fortitude reduz à metade). A área fica coberta de neve, virando terreno difícil até o fim da cena ou até você usar siroco.</p>\n<p><em>Raios.</em> Até 6 inimigos a sua escolha na área sofrem 10d8 pontos de dano de eletricidade (Reflexos reduz à metade).</p>\n<p><em>Siroco.</em> Transforma a chuva em uma tempestade de areia escaldante. Inimigos na área sofrem 10d6 pontos de dano (metade corte, metade fogo) e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.kzVyzFyYroPrv8gb]{Sangrando} (Fortitude reduz o dano à metade e evita a condição).</p>\n<p><em>Trovões.</em> Inimigos sofrem 10d6 pontos de dano de impacto e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} por uma rodada (Fortitude reduz o dano à metade e evita a condição).</p>"
             }
           }
         },
@@ -4081,13 +4039,13 @@ const spellsData = {
             "circulo": "5",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
@@ -4106,18 +4064,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "nec",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; reanima uma criatura morta recentemente (dentro da mesma cena), trazendo sua alma de volta ao corpo de forma for&ccedil;ada. O tipo da criatura muda para morto-vivo, mas ela ret&eacute;m suas mem&oacute;rias e habilidades de quando estava viva, podendo inclusive lan&ccedil;ar magias. A criatura pode pensar e falar livremente, mas obedece cegamente a seus comandos. Quando a cena termina, a criatura volta a ficar morta, mas muitos cl&eacute;rigos malignos usam meios para guardar e preservar o corpo de criaturas poderosas para serem reanimadas dessa forma quando necess&aacute;rio. Se for destru&iacute;da, a criatura n&atilde;o pode ser reanimada novamente com esta magia.</p>"
+              "value": "<p>Você reanima uma criatura morta recentemente (dentro da mesma cena), trazendo sua alma de volta ao corpo de forma forçada. O tipo da criatura muda para morto-vivo, mas ela retém suas memórias e habilidades de quando estava viva, podendo inclusive lançar magias. A criatura pode pensar e falar livremente, mas obedece cegamente a seus comandos. Quando a cena termina, a criatura volta a ficar morta, mas muitos clérigos malignos usam meios para guardar e preservar o corpo de criaturas poderosas para serem reanimadas dessa forma quando necessário. Se for destruída, a criatura não pode ser reanimada novamente com esta magia.</p>"
             }
           }
         },
@@ -4129,10 +4087,10 @@ const spellsData = {
             "circulo": "5",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4140,7 +4098,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; rouba a alma da v&iacute;tima, armazenando-a em um objeto. Se o alvo passar no teste de resist&ecirc;ncia, sente o impacto de sua alma ser puxada para fora do corpo e fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo\" data-id=\"ccqJXj25EVIzUhzo\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Abalado</a>por 1 rodada. Se falhar, seu corpo fica ca&iacute;do, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv\" data-id=\"2jgO4I5cMaSKa9fv\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Inconsciente</a>e inerte, enquanto sua alma &eacute; transportada para dentro do objeto. O corpo n&atilde;o envelhece nem se decomp&otilde;e, permanecendo em estase. Ele pode ser atacado e destru&iacute;do normalmente. O objeto escolhido deve custar T$ 1.000 por n&iacute;vel ou ND da criatura e n&atilde;o possuir uma alma presa ou se quebrar&aacute; quando a magia for lan&ccedil;ada (embora personagens n&atilde;o conhe&ccedil;am o conceito de &ldquo;n&iacute;vel&rdquo; dentro do mundo de jogo, podem ter no&ccedil;&atilde;o do poder geral de uma criatura, estimando assim o valor do objeto). Se o objeto for destru&iacute;do, a magia se esvai. Se o corpo ainda estiver dispon&iacute;vel, a alma retorna para ele. Caso contr&aacute;rio, escapa para os Mundos dos Deuses.</p>\n<p><em>Custo adicional:</em> sacrif&iacute;cio de 1 PM.</p>"
+              "value": "<p>Você rouba a alma da vítima, armazenando-a em um objeto. Se o alvo passar no teste de resistência, sente o impacto de sua alma ser puxada para fora do corpo e fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo\" data-id=\"ccqJXj25EVIzUhzo\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Abalado</a>por 1 rodada. Se falhar, seu corpo fica caído, <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv\" data-id=\"2jgO4I5cMaSKa9fv\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Inconsciente</a>e inerte, enquanto sua alma é transportada para dentro do objeto. O corpo não envelhece nem se decompõe, permanecendo em estase. Ele pode ser atacado e destruído normalmente. O objeto escolhido deve custar T$ 1.000 por nível ou ND da criatura e não possuir uma alma presa ou se quebrará quando a magia for lançada (embora personagens não conheçam o conceito de &ldquo;nível&rdquo; dentro do mundo de jogo, podem ter noção do poder geral de uma criatura, estimando assim o valor do objeto). Se o objeto for destruído, a magia se esvai. Se o corpo ainda estiver disponível, a alma retorna para ele. Caso contrário, escapa para os Mundos dos Deuses.</p>\n<p><em>Custo adicional:</em> sacrifício de 1 PM.</p>"
             }
           }
         }
@@ -4156,20 +4114,20 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_resistnature.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Ao lan&ccedil;ar esta magia, escolha entre &aacute;cido, eletricidade, fogo, frio, luz ou trevas. O alvo recebe redu&ccedil;&atilde;o de dano 10 contra o tipo de dano escolhido.</p>"
+              "value": "<p>Ao lançar esta magia, escolha entre ácido, eletricidade, fogo, frio, luz ou trevas. O alvo recebe redução de dano 10 contra o tipo de dano escolhido.</p>"
             }
           }
         }
@@ -4183,10 +4141,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "move",
+              "execução": "move",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
@@ -4194,7 +4152,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Envia um aviso telep&aacute;tico para uma criatura, mesmo que n&atilde;o possa v&ecirc;-la nem tenha linha de efeito.</p>\n<p>Escolha um:</p>\n<p>Alerta: o alvo recebe +5 em seu pr&oacute;ximo teste de Iniciativa e de Percep&ccedil;&atilde;o dentro da cena.</p>\n<p>Mensagem: o alvo recebe uma mensagem sua de at&eacute; 25 palavras. Voc&ecirc;s devem ter um idioma em comum para o alvo poder entend&ecirc;-lo.</p>\n<p>Localiza&ccedil;&atilde;o: o alvo sabe onde voc&ecirc; est&aacute; naquele momento. Se voc&ecirc; mudar de posi&ccedil;&atilde;o, ele n&atilde;o saber&aacute;.</p>"
+              "value": "<p>Envia um aviso telepático para uma criatura, mesmo que não possa vê-la nem tenha linha de efeito.</p>\n<p>Escolha um:</p>\n<p>Alerta: o alvo recebe +5 em seu próximo teste de Iniciativa e de Percepção dentro da cena.</p>\n<p>Mensagem: o alvo recebe uma mensagem sua de até 25 palavras. Vocês devem ter um idioma em comum para o alvo poder entendê-lo.</p>\n<p>Localização: o alvo sabe onde você está naquele momento. Se você mudar de posição, ele não saberá.</p>"
             }
           }
         },
@@ -4206,18 +4164,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura ou texto",
             "resistencia": "Vontade anula (veja descrição)",
             "custo": "1 PM",
             "description": {
-              "value": "<p>Essa magia lhe confere compreens&atilde;o sobrenatural. Voc&ecirc; pode tocar um texto e entender as palavras mesmo que n&atilde;o conhe&ccedil;a o idioma. Se tocar numa criatura inteligente, pode se comunicar com ela mesmo que n&atilde;o tenham um idioma em comum. Se tocar uma criatura n&atilde;o inteligente, como um animal, pode perceber seus sentimentos.</p>\n<p>Voc&ecirc; tamb&eacute;m pode gastar uma a&ccedil;&atilde;o de movimento para ouvir os pensamentos de uma criatura tocada (voc&ecirc; &ldquo;ouve&rdquo; o que o alvo est&aacute; pensando), mas um alvo involunt&aacute;rio tem direito a um teste de Vontade para proteger seus pensamentos e evitar este efeito.</p>"
+              "value": "<p>Essa magia lhe confere compreensão sobrenatural. Você pode tocar um texto e entender as palavras mesmo que não conheça o idioma. Se tocar numa criatura inteligente, pode se comunicar com ela mesmo que não tenham um idioma em comum. Se tocar uma criatura não inteligente, como um animal, pode perceber seus sentimentos.</p>\n<p>Você também pode gastar uma ação de movimento para ouvir os pensamentos de uma criatura tocada (você &ldquo;ouve&rdquo; o que o alvo está pensando), mas um alvo involuntário tem direito a um teste de Vontade para proteger seus pensamentos e evitar este efeito.</p>"
             }
           }
         },
@@ -4229,13 +4187,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -4254,10 +4212,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4278,10 +4236,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "evo",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4289,7 +4247,7 @@ const spellsData = {
             "resistencia": "Vontade anula (veja texto)",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O alvo emite luz (mas n&atilde;o produz calor) em uma &aacute;rea com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltar&aacute; a funcionar caso o objeto seja revelado. Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. <em>Luz</em> anula <em>Escurid&atilde;o</em>.</p>"
+              "value": "<p>O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. <em>Luz</em> anula <em>Escuridão</em>.</p>"
             }
           }
         }
@@ -4303,10 +4261,10 @@ const spellsData = {
             "circulo": "1",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4314,7 +4272,7 @@ const spellsData = {
             "resistencia": "Vontade anula (veja texto)",
             "custo": "1 PM",
             "description": {
-              "value": "<p>O alvo emana sombras em uma &aacute;rea com 6m de raio. Criaturas dentro da &aacute;rea recebem camuflagem leve por escurid&atilde;o leve. As sombras n&atilde;o podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escurid&atilde;o, que voltar&aacute; a funcionar caso o objeto seja revelado. Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. <em>Escurid&atilde;o</em> anula <em>Luz</em>.</p>"
+              "value": "<p>O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. <em>Escuridão</em> anula <em>Luz</em>.</p>"
             }
           }
         }
@@ -4328,18 +4286,18 @@ const spellsData = {
             "circulo": "1",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 1,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 arma empunhada",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
-              "value": "<p>A arma fornece um b&ocirc;nus de +1 nos testes de ataque e rolagens de dano e &eacute; considerada m&aacute;gica (n&atilde;o cumulativo com b&ocirc;nus de encantos). Caso voc&ecirc; esteja empunhando a arma, pode usar seu atributo-chave de magias em vez do atributo original nos testes de ataque (n&atilde;o cumulativo com efeitos que somam este atributo).</p>"
+              "value": "<p>A arma fornece um bônus de +1 nos testes de ataque e rolagens de dano e é considerada mágica (não cumulativo com bônus de encantos). Caso você esteja empunhando a arma, pode usar seu atributo-chave de magias em vez do atributo original nos testes de ataque (não cumulativo com efeitos que somam este atributo).</p>"
             }
           }
         }
@@ -4353,12 +4311,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/dissipar-magia.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
@@ -4376,21 +4334,20 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/runa-de-protecao.webp",
           "system": {
             "circulo": "2",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "hour",
+              "execução": "hour",
               "custo": 3,
               "qtd": "1",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "permanente até ser descarregada",
+            "alcance": "toque",
             "alvo": "uma área com 6m de raio",
             "resistencia": "varia (veja o texto)",
             "custo": "3 PM",
             "description": {
-              "value": "<p>Voc&ecirc; escreve uma runa pessoal em uma superf&iacute;cie fixa, como uma parede ou o ch&atilde;o, que protege uma pequena &aacute;rea ao redor. Quando uma criatura entra na &aacute;rea afetada a runa explode, causando 6d6 pontos de dano em todos os alvos a at&eacute; 6m. A criatura que ativa a runa n&atilde;o tem direito a teste de resist&ecirc;ncia; outras criaturas na &aacute;rea t&ecirc;m direito a um teste de Reflexos para reduzir o dano &agrave; metade. Quando lan&ccedil;a a magia, voc&ecirc; escolhe o tipo de dano, entre &aacute;cido, eletricidade, fogo, frio, luz ou trevas.</p>\n<p>Voc&ecirc; pode determinar que a runa se ative apenas em condi&ccedil;&otilde;es espec&iacute;ficas &mdash; por exemplo, apenas por goblins ou apenas por mortos-vivos. Voc&ecirc; tamb&eacute;m pode criar uma palavra m&aacute;gica que impe&ccedil;a a runa de se ativar.</p>\n<p>Um personagem pode encontrar a runa com um teste de Investiga&ccedil;&atilde;o e desarm&aacute;-la com um teste de Ladinagem (CD da magia).</p>\n<p><em>Componente material:</em> p&oacute; de diamante no valor de T$ 200, com o qual o conjurador desenha a runa, que brilha por alguns instantes e depois se torna praticamente invis&iacute;vel.</p>"
+              "value": "<p>Você escreve uma runa pessoal em uma superfície fixa, como uma parede ou o chão, que protege uma pequena área ao redor. Quando uma criatura entra na área afetada a runa explode, causando 6d6 pontos de dano em todos os alvos a até 6m. A criatura que ativa a runa não tem direito a teste de resistência; outras criaturas na área têm direito a um teste de Reflexos para reduzir o dano à metade. Quando lança a magia, você escolhe o tipo de dano, entre ácido, eletricidade, fogo, frio, luz ou trevas.</p>\n<p>Você pode determinar que a runa se ative apenas em condições específicas — por exemplo, apenas por goblins ou apenas por mortos-vivos. Você também pode criar uma palavra mágica que impeça a runa de se ativar.</p>\n<p>Um personagem pode encontrar a runa com um teste de Investigação e desarmá-la com um teste de Ladinagem (CD da magia).</p>\n<p><em>Componente material:</em> pó de diamante no valor de T$ 200, com o qual o conjurador desenha a runa, que brilha por alguns instantes e depois se torna praticamente invisível.</p>"
             }
           }
         }
@@ -4404,19 +4361,18 @@ const spellsData = {
             "circulo": "2",
             "escola": "con",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "Custo Adicional: penalidade de 1 PM",
+              "condição": "Custo Adicional: penalidade de 1 PM",
               "special": ""
             },
-            "alcance": "touch",
-            "duracao": "Permanente até ser descarregada",
+            "alcance": "toque",
             "alvo": "até dois itens que você possua, entre armas, armaduras e escudos",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p><strong>Custo Adicional:</strong> penalidade de 1 PM</p>\n<p>Essa magia &eacute; muito utilizada por cl&eacute;rigos e bardos que n&atilde;o precisam (ou n&atilde;o podem) estar sempre com suas armas ou armaduras. A magia &eacute; lan&ccedil;ada sobre at&eacute; dois itens que voc&ecirc; possua. A partir da&iacute;, em qualquer momento, voc&ecirc; pode usar uma a&ccedil;&atilde;o completa para convocar os itens, que aparecem sobre seu corpo e em suas m&atilde;os. O efeito &eacute; espalhafatoso, sendo praticamente imposs&iacute;vel utiliz&aacute;-lo sem chamar aten&ccedil;&atilde;o. A magia funciona independentemente da dist&acirc;ncia dos itens, contanto que estejam no mesmo plano, mas termina se voc&ecirc; perder a posse deles.</p>"
+              "value": "<p><strong>Custo Adicional:</strong> penalidade de 1 PM</p>\n<p>Essa magia é muito utilizada por clérigos e bardos que não precisam (ou não podem) estar sempre com suas armas ou armaduras. A magia é lançada sobre até dois itens que você possua. A partir daí, em qualquer momento, você pode usar uma ação completa para convocar os itens, que aparecem sobre seu corpo e em suas mãos. O efeito é espalhafatoso, sendo praticamente impossível utilizá-lo sem chamar atenção. A magia funciona independentemente da distância dos itens, contanto que estejam no mesmo plano, mas termina se você perder a posse deles.</p>"
             }
           }
         }
@@ -4430,13 +4386,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula",
             "custo": "3 PM",
@@ -4455,17 +4411,17 @@ const spellsData = {
             "circulo": "2",
             "escola": "nec",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 3,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
-              "value": "<p class=\"MsoNormal\">Voc&ecirc; conjura seis esqueletos capangas de tamanho M&eacute;dio feitos de energia negativa em espa&ccedil;os desocupados dentro do alcance. Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para fazer os mortos-vivos andarem (eles t&ecirc;m deslocamento 9m) ou uma a&ccedil;&atilde;o padr&atilde;o para faz&ecirc;-los causar dano a criaturas adjacentes (1d6+2 pontos de dano de trevas cada). Os esqueletos t&ecirc;m For 2, Des 2, Defesa 18 e todos os outros atributos nulos; eles t&ecirc;m 1 PV e falham automaticamente em qualquer teste de resist&ecirc;ncia ou oposto, mas s&atilde;o imunes a atordoamento, dano n&atilde;o letal, doen&ccedil;a, encantamento, fadiga, frio, ilus&atilde;o, paralisia, sono e veneno. Eles desaparecem quando s&atilde;o reduzidos a 0 PV ou no fim da cena. Os mortos- -vivos n&atilde;o agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a crit&eacute;rio do mestre.</p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"></span></p>\n<p class=\"MsoNormal\"><em>Carni&ccedil;al:</em> como esqueletos, mas t&ecirc;m For 3, Des 3, Defesa 27 e causam 1d8+3 pontos de dano de trevas mais perda de 1d8 PV por veneno. Al&eacute;m disso, criaturas atingidas por um carni&ccedil;al devem passar num teste de Fortitude ou ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado} por 1 rodada. Uma criatura que passe no teste de resist&ecirc;ncia fica imune &agrave; paralisia dos carni&ccedil;ais por um dia.</p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"></span></p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><em>Sombra:</em> </span>como esqueletos, mas t&ecirc;m Des 4, Defesa 35, a habilidade incorp&oacute;reo e causam 2d10 pontos de dano de trevas. Al&eacute;m disso, criaturas vivas atingidas por uma sombra devem passar num teste de Fortitude ou perdem 1d4 PM. Sombras perdem a habilidade incorp&oacute;reo quando expostas &agrave; luz do sol.</p>"
+              "value": "<p class=\"MsoNormal\">Você conjura seis esqueletos capangas de tamanho Médio feitos de energia negativa em espaços desocupados dentro do alcance. Você pode gastar uma ação de movimento para fazer os mortos-vivos andarem (eles têm deslocamento 9m) ou uma ação padrão para fazê-los causar dano a criaturas adjacentes (1d6+2 pontos de dano de trevas cada). Os esqueletos têm For 2, Des 2, Defesa 18 e todos os outros atributos nulos; eles têm 1 PV e falham automaticamente em qualquer teste de resistência ou oposto, mas são imunes a atordoamento, dano não letal, doença, encantamento, fadiga, frio, ilusão, paralisia, sono e veneno. Eles desaparecem quando são reduzidos a 0 PV ou no fim da cena. Os mortos- -vivos não agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a critério do mestre.</p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"></span></p>\n<p class=\"MsoNormal\"><em>Carniçal:</em> como esqueletos, mas têm For 3, Des 3, Defesa 27 e causam 1d8+3 pontos de dano de trevas mais perda de 1d8 PV por veneno. Além disso, criaturas atingidas por um carniçal devem passar num teste de Fortitude ou ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU]{Paralisado} por 1 rodada. Uma criatura que passe no teste de resistência fica imune à paralisia dos carniçais por um dia.</p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"></span></p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><em>Sombra:</em> </span>como esqueletos, mas têm Des 4, Defesa 35, a habilidade incorpóreo e causam 2d10 pontos de dano de trevas. Além disso, criaturas vivas atingidas por uma sombra devem passar num teste de Fortitude ou perdem 1d4 PM. Sombras perdem a habilidade incorpóreo quando expostas à luz do sol.</p>"
             }
           }
         }
@@ -4481,18 +4437,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 craitura, objeto ou local",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; descobre informa&ccedil;&otilde;es sobre uma criatura, objeto ou local que esteja tocando. O que exatamente voc&ecirc; descobre depende do mestre: talvez voc&ecirc; n&atilde;o descubra tudo que h&aacute; para saber, mas ganhe pistas para continuar a investiga&ccedil;&atilde;o. A cada rodada que mantiver a magia, voc&ecirc; descobre:</p>\n<ul>\n<li>Todas as informa&ccedil;&otilde;es sobre o alvo, como se tivesse passado em todos os testes de Conhecimento para tal.</li>\n<li>Todas as habilidades do alvo. Se for uma criatura, voc&ecirc; sabe suas estat&iacute;sticas de jogo como ra&ccedil;a, classe, n&iacute;vel, atributos, magias, resist&ecirc;ncias e fraquezas. Se for um item m&aacute;gico, aprende seu efeito e funcionamento.</li>\n<li>Se o alvo est&aacute; sob influ&ecirc;ncia de alguma magia e todas as informa&ccedil;&otilde;es sobre as magias ativas, se houver alguma.</li>\n</ul>"
+              "value": "<p>Você descobre informações sobre uma criatura, objeto ou local que esteja tocando. O que exatamente você descobre depende do mestre: talvez você não descubra tudo que há para saber, mas ganhe pistas para continuar a investigação. A cada rodada que mantiver a magia, você descobre:</p>\n<ul>\n<li>Todas as informações sobre o alvo, como se tivesse passado em todos os testes de Conhecimento para tal.</li>\n<li>Todas as habilidades do alvo. Se for uma criatura, você sabe suas estatísticas de jogo como raça, classe, nível, atributos, magias, resistências e fraquezas. Se for um item mágico, aprende seu efeito e funcionamento.</li>\n<li>Se o alvo está sob influência de alguma magia e todas as informações sobre as magias ativas, se houver alguma.</li>\n</ul>"
             }
           }
         },
@@ -4504,10 +4460,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "any",
@@ -4529,10 +4485,10 @@ const spellsData = {
             "circulo": "3",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4540,7 +4496,7 @@ const spellsData = {
             "resistencia": "Vontade parcial",
             "custo": "6 PM",
             "description": {
-              "value": "<p>O alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU\" data-id=\"3dcJKe2SGu8mnafU\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Paralisado</a>; se passar na resist&ecirc;ncia, em vez disso fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}. A cada rodada, pode gastar uma a&ccedil;&atilde;o completa para fazer um novo teste de Vontade. Se passar, se liberta do efeito.</p>"
+              "value": "<p>O alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU\" data-id=\"3dcJKe2SGu8mnafU\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Paralisado</a>; se passar na resistência, em vez disso fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}. A cada rodada, pode gastar uma ação completa para fazer um novo teste de Vontade. Se passar, se liberta do efeito.</p>"
             }
           }
         },
@@ -4552,13 +4508,13 @@ const spellsData = {
             "circulo": "3",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Vontade Parcial",
             "custo": "6 PM",
@@ -4577,18 +4533,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "ilu",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Voc&ecirc; fica coberto por um manto de energia sombria. Nesta forma, torna-se incorp&oacute;reo (inclui seu equipamento): s&oacute; pode ser afetado por armas m&aacute;gicas, ou por outras criaturas incorp&oacute;reas e pode atravessar objetos s&oacute;lidos, mas n&atilde;o manipul&aacute;-los. Tamb&eacute;m n&atilde;o pode atacar criaturas normais (mas ainda pode lan&ccedil;ar magias nelas). Al&eacute;m disso, se torna vulner&aacute;vel &agrave; luz direta: se exposto a uma fonte de luz, sofre 1 ponto de dano por rodada.</p>\n<p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para &ldquo;entrar&rdquo; em uma sombra do seu tamanho ou maior e se teletransportar para outra sombra, tamb&eacute;m do seu tamanho ou maior, em alcance m&eacute;dio.</p>"
+              "value": "<p>Você fica coberto por um manto de energia sombria. Nesta forma, torna-se incorpóreo (inclui seu equipamento): só pode ser afetado por armas mágicas, ou por outras criaturas incorpóreas e pode atravessar objetos sólidos, mas não manipulá-los. Também não pode atacar criaturas normais (mas ainda pode lançar magias nelas). Além disso, se torna vulnerável à luz direta: se exposto a uma fonte de luz, sofre 1 ponto de dano por rodada.</p>\n<p>Você pode gastar uma ação de movimento e 1 PM para &ldquo;entrar&rdquo; em uma sombra do seu tamanho ou maior e se teletransportar para outra sombra, também do seu tamanho ou maior, em alcance médio.</p>"
             }
           }
         }
@@ -4602,18 +4558,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "nec",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 cadáver",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Esta magia transforma o cad&aacute;ver de um humanoide, animal ou monstro em um esqueleto ou zumbi (conforme o estado de conserva&ccedil;&atilde;o do corpo). O morto-vivo ent&atilde;o obedece a todos os seus comandos, mesmo suicidas. Se quiser que o morto-vivo o acompanhe, ele funciona como um aliado iniciante, de um tipo a sua escolha entre ajudante, atirador, combatente, fort&atilde;o, guardi&atilde;o ou montaria.</p>\n<p>Uma vez por rodada, quando sofre dano, voc&ecirc; pode sacrificar um servo morto-vivo e evitar esse dano. O servo &eacute; destru&iacute;do no processo e n&atilde;o pode ser reanimado.</p>\n<p><em>Componente material:</em> um &ocirc;nix negro (T$ 100), inserido na boca ou olho do cad&aacute;ver.</p>"
+              "value": "<p>Esta magia transforma o cadáver de um humanoide, animal ou monstro em um esqueleto ou zumbi (conforme o estado de conservação do corpo). O morto-vivo então obedece a todos os seus comandos, mesmo suicidas. Se quiser que o morto-vivo o acompanhe, ele funciona como um aliado iniciante, de um tipo a sua escolha entre ajudante, atirador, combatente, fortão, guardião ou montaria.</p>\n<p>Uma vez por rodada, quando sofre dano, você pode sacrificar um servo morto-vivo e evitar esse dano. O servo é destruído no processo e não pode ser reanimado.</p>\n<p><em>Componente material:</em> um ônix negro (T$ 100), inserido na boca ou olho do cadáver.</p>"
             }
           }
         }
@@ -4627,18 +4583,18 @@ const spellsData = {
             "circulo": "3",
             "escola": "tra",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 6,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
-              "value": "<p>Sua pele ganha aspecto e dureza de rocha. Voc&ecirc; recebe redu&ccedil;&atilde;o de dano 5.</p>"
+              "value": "<p>Sua pele ganha aspecto e dureza de rocha. Você recebe redução de dano 5.</p>"
             }
           }
         }
@@ -4652,12 +4608,12 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/libertacao.webp",
           "system": {
             "circulo": "4",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
@@ -4665,7 +4621,7 @@ const spellsData = {
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>O alvo fica imune a efeitos de movimento e ignora qualquer efeito que impe&ccedil;a ou restrinja seu deslocamento. Por fim, pode usar habilidades que exigem liberdade de movimentos mesmo se estiver usando armadura ou escudo.</p>"
+              "value": "<p>O alvo fica imune a efeitos de movimento e ignora qualquer efeito que impeça ou restrinja seu deslocamento. Por fim, pode usar habilidades que exigem liberdade de movimentos mesmo se estiver usando armadura ou escudo.</p>"
             }
           }
         }
@@ -4679,18 +4635,18 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execucao": "move",
+              "execução": "move",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Voc&ecirc; enxerga a forma real das coisas. Voc&ecirc; pode ver atrav&eacute;s de camuflagem e escurid&atilde;o (normais e m&aacute;gicas), assim como efeitos de ilus&atilde;o e transmuta&ccedil;&atilde;o (enxergando a verdade como formas transl&uacute;cidas ou sobrepostas).</p>"
+              "value": "<p>Você enxerga a forma real das coisas. Você pode ver através de camuflagem e escuridão (normais e mágicas), assim como efeitos de ilusão e transmutação (enxergando a verdade como formas translúcidas ou sobrepostas).</p>"
             }
           }
         }
@@ -4704,13 +4660,13 @@ const spellsData = {
             "circulo": "4",
             "escola": "con",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "pessoal",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -4729,17 +4685,17 @@ const spellsData = {
             "circulo": "4",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 10,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "medium",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
-              "value": "<p>Uma parede de ossos se eleva da terra. A parede tem 15m de comprimento, 9m de altura e 1,5m de espessura. Ela pode ter qualquer forma &mdash; n&atilde;o precisa ser uma linha reta &mdash;, mas sua base precisa estar sempre tocando o solo. Quando a parede surge, criaturas na &aacute;rea ocupada ou adjacentes sofrem 4d8 pontos de dano de corte e precisam fazer um teste de Reflexos para n&atilde;o ficarem presas no emaranhado de ossos. Uma criatura presa dessa maneira fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}, e pode usar uma a&ccedil;&atilde;o padr&atilde;o para fazer um teste de Atletismo (CD da magia) para se soltar. Se passar no teste, sai da muralha para um dos lados adjacentes. Se falhar, sofre 4d8 pontos de dano de corte.</p>\n<p>&Eacute; poss&iacute;vel destruir o muro para atravess&aacute;-lo ou libertar uma criatura agarrada. Cada trecho de 3m do muro tem Defesa 8, 40 PV e redu&ccedil;&atilde;o de corte, frio e perfura&ccedil;&atilde;o 10. Tamb&eacute;m &eacute; poss&iacute;vel escalar a parede. Isso exige um teste de Atletismo (CD da magia) e causa 4d8 pontos de dano de corte para cada 3m escalados.</p>"
+              "value": "<p>Uma parede de ossos se eleva da terra. A parede tem 15m de comprimento, 9m de altura e 1,5m de espessura. Ela pode ter qualquer forma — não precisa ser uma linha reta —, mas sua base precisa estar sempre tocando o solo. Quando a parede surge, criaturas na área ocupada ou adjacentes sofrem 4d8 pontos de dano de corte e precisam fazer um teste de Reflexos para não ficarem presas no emaranhado de ossos. Uma criatura presa dessa maneira fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}, e pode usar uma ação padrão para fazer um teste de Atletismo (CD da magia) para se soltar. Se passar no teste, sai da muralha para um dos lados adjacentes. Se falhar, sofre 4d8 pontos de dano de corte.</p>\n<p>É possível destruir o muro para atravessá-lo ou libertar uma criatura agarrada. Cada trecho de 3m do muro tem Defesa 8, 40 PV e redução de corte, frio e perfuração 10. Também é possível escalar a parede. Isso exige um teste de Atletismo (CD da magia) e causa 4d8 pontos de dano de corte para cada 3m escalados.</p>"
             }
           }
         }
@@ -4753,20 +4709,19 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/buraco-negro.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "full",
+              "execução": "full",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "long",
-            "duracao": "3 round",
             "resistencia": "Fortitude parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Esta magia cria um v&aacute;cuo capaz de sugar tudo nas proximidades. Escolha um espa&ccedil;o desocupado para o buraco negro. No in&iacute;cio de cada um de seus tr&ecirc;s turnos seguintes, todas as criaturas a at&eacute; alcance longo do buraco negro, incluindo voc&ecirc;, devem fazer um teste de Fortitude. Em caso de falha, ficam ca&iacute;das e s&atilde;o puxadas 30m na dire&ccedil;&atilde;o do buraco. Objetos soltos tamb&eacute;m s&atilde;o puxados. Criaturas podem gastar uma a&ccedil;&atilde;o de movimento para se segurar em algum objeto fixo, recebendo +2 em seus testes de resist&ecirc;ncia.</p>\n<p>Criaturas e objetos que toquem o buraco negro s&atilde;o sugadas, desaparecendo para sempre.Criaturas e objetos que iniciem seu turno no espa&ccedil;o do buraco negro devem gastar uma a&ccedil;&atilde;o de movimento e fazer um teste de Fortitude. Se passarem, podem escapar se arrastando (metade de seu deslocamento) para longe dele. Se falharem, perdem a a&ccedil;&atilde;o (mas podem gastar outra para tentar novamente). Se terminarem seu turno no espa&ccedil;o do buraco negro, s&atilde;o sugadas, desaparecendo para sempre.</p>\n<p>N&atilde;o se conhece o destino das coisas sugadas pelo buraco negro, uma vez que jamais retornam. Alguns estudiosos sugerem que podem ser enviadas para outros mundos. Muitos cl&eacute;rigos da Noite acreditam que esta magia abre um portal para Sombria, o lar de sua deusa, e sonham um dia poder realizar essa jornada.</p>"
+              "value": "<p>Esta magia cria um vácuo capaz de sugar tudo nas proximidades. Escolha um espaço desocupado para o buraco negro. No início de cada um de seus três turnos seguintes, todas as criaturas a até alcance longo do buraco negro, incluindo você, devem fazer um teste de Fortitude. Em caso de falha, ficam caídas e são puxadas 30m na direção do buraco. Objetos soltos também são puxados. Criaturas podem gastar uma ação de movimento para se segurar em algum objeto fixo, recebendo +2 em seus testes de resistência.</p>\n<p>Criaturas e objetos que toquem o buraco negro são sugadas, desaparecendo para sempre.Criaturas e objetos que iniciem seu turno no espaço do buraco negro devem gastar uma ação de movimento e fazer um teste de Fortitude. Se passarem, podem escapar se arrastando (metade de seu deslocamento) para longe dele. Se falharem, perdem a ação (mas podem gastar outra para tentar novamente). Se terminarem seu turno no espaço do buraco negro, são sugadas, desaparecendo para sempre.</p>\n<p>Não se conhece o destino das coisas sugadas pelo buraco negro, uma vez que jamais retornam. Alguns estudiosos sugerem que podem ser enviadas para outros mundos. Muitos clérigos da Noite acreditam que esta magia abre um portal para Sombria, o lar de sua deusa, e sonham um dia poder realizar essa jornada.</p>"
             }
           }
         },
@@ -4776,15 +4731,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/invulnerabilidade.webp",
           "system": {
             "circulo": "5",
-            "escola": "abj",
+            "escola": "abjuração",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "self",
+            "alcance": "pessoal",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
@@ -4803,19 +4758,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "enc",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
             "alcance": "short",
-            "duracao": "instantânea ou veja texto",
             "alvo": "1 criatura com menos níveis que você",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Voc&ecirc; pronuncia uma palavra do idioma primordial da Cria&ccedil;&atilde;o, que causa um dos efeitos abaixo, a sua escolha.</p>\n<p><em>Atordoar:</em> a criatura fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a>por 2d4 rodadas. Se passar no teste de resist&ecirc;ncia, fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii\" data-id=\"my1HxIcUGVr2Mbii\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Desprevenido</a>por 1d4 rodadas e n&atilde;o pode mais ser atordoada por esta magia at&eacute; o final da cena.</p>\n<p><em>Cegar:</em> a criatura fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}. Se passar no teste de resist&ecirc;ncia, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r]{Ofuscado}por 1d4 rodadas.</p>\n<p><em>Matar:</em> a criatura morre. Al&eacute;m do teste de Vontade, a criatura tem direito a um teste de Fortitude se tiver mais da metade de seus PV. Se passar em qualquer um deles, em vez de morrer perde 10d8 pontos de vida e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.kzVyzFyYroPrv8gb]{Sangrando}.</p>"
+              "value": "<p>Você pronuncia uma palavra do idioma primordial da Criação, que causa um dos efeitos abaixo, a sua escolha.</p>\n<p><em>Atordoar:</em> a criatura fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ\" data-id=\"bD6XAyHQrWYr0BTQ\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Atordoado</a>por 2d4 rodadas. Se passar no teste de resistência, fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii\" data-id=\"my1HxIcUGVr2Mbii\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Desprevenido</a>por 1d4 rodadas e não pode mais ser atordoada por esta magia até o final da cena.</p>\n<p><em>Cegar:</em> a criatura fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}. Se passar no teste de resistência, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r]{Ofuscado}por 1d4 rodadas.</p>\n<p><em>Matar:</em> a criatura morre. Além do teste de Vontade, a criatura tem direito a um teste de Fortitude se tiver mais da metade de seus PV. Se passar em qualquer um deles, em vez de morrer perde 10d8 pontos de vida e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.kzVyzFyYroPrv8gb]{Sangrando}.</p>"
             }
           }
         }
@@ -4829,18 +4783,18 @@ const spellsData = {
             "circulo": "5",
             "escola": "nec",
             "ativacao": {
-              "execucao": "action",
+              "execução": "ação",
               "custo": 15,
               "qtd": "",
-              "condicao": "",
+              "condição": "",
               "special": ""
             },
-            "alcance": "touch",
+            "alcance": "toque",
             "alvo": "1 criatura",
             "resistencia": "Veja texto",
             "custo": "15 PM",
             "description": {
-              "value": "<p>Sua m&atilde;o exala energias letais. A criatura sofre 10d8+10 pontos de dano de trevas. Se estiver com menos da metade de seus PV, em vez disso deve fazer um teste de Fortitude. Se passar, sofre o dano normal. Se falhar, seus PV s&atilde;o reduzidos a &ndash;10.</p>"
+              "value": "<p>Sua mão exala energias letais. A criatura sofre 10d8+10 pontos de dano de trevas. Se estiver com menos da metade de seus PV, em vez disso deve fazer um teste de Fortitude. Se passar, sofre o dano normal. Se falhar, seus PV são reduzidos a –10.</p>"
             }
           }
         }

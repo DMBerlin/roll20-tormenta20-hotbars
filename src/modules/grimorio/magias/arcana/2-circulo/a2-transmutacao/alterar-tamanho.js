@@ -8,7 +8,7 @@ module.exports = {
       "_id": "HVWDInqh2swfM9NB",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -66,7 +66,7 @@ module.exports = {
       "_id": "Os1QpQXkllq68WBr",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -149,7 +149,7 @@ module.exports = {
       "_id": "oP2xU4GWsFT7QZAa",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -232,7 +232,7 @@ module.exports = {
       "_id": "uurtgE1BFd5Jt342",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -271,7 +271,7 @@ module.exports = {
           "priority": null
         },
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "permanente",
           "mode": 5,
           "priority": null
@@ -499,13 +499,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 179",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "day",
       "special": ""
@@ -537,7 +537,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "2",
     "preparada": false,
     "escola": "tra",

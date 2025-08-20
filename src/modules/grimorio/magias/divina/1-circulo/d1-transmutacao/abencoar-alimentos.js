@@ -8,7 +8,7 @@ module.exports = {
       "_id": "stE1aQS78iamg8A5",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -59,7 +59,7 @@ module.exports = {
       "_id": "8tPnJoXVcIhXbVkw",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -117,7 +117,7 @@ module.exports = {
       "_id": "S9PfJej9nKnyc6sE",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -133,7 +133,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "mode": 5,
           "value": "permanente",
           "priority": 0
@@ -232,15 +232,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 184",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {

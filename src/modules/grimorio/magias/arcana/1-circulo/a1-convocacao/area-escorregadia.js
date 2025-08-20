@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "attack": false,
           "skill": false,
@@ -67,7 +67,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2"
         }
       },
@@ -110,7 +110,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5"
         }
       },
@@ -160,15 +160,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 180",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -198,7 +198,7 @@ module.exports = {
       "txt": "Reflexos (veja texto)"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
     "escola": "con",

@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "4",
           "aumenta": false
         }
@@ -53,14 +53,14 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "9",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "permanente",
           "mode": 5,
           "priority": null
@@ -111,13 +111,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 199",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 6,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "day",
       "special": ""
@@ -149,7 +149,7 @@ module.exports = {
       "txt": "Vontade desacredita"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "3",
     "preparada": false,
     "escola": "ilu",

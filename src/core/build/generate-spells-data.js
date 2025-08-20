@@ -2,6 +2,64 @@ const fs = require('fs');
 const path = require('path');
 
 /**
+ * Decode HTML entities to their corresponding characters
+ * @param {string} text - Text containing HTML entities
+ * @returns {string} - Text with HTML entities decoded
+ */
+function decodeHtmlEntities(text) {
+  if (typeof text !== 'string') return text;
+
+  const htmlEntities = {
+    '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä',
+    '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë',
+    '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï',
+    '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö',
+    '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü',
+    '&ccedil;': 'ç', '&ntilde;': 'ñ',
+    '&Aacute;': 'Á', '&Agrave;': 'À', '&Acirc;': 'Â', '&Atilde;': 'Ã', '&Auml;': 'Ä',
+    '&Eacute;': 'É', '&Egrave;': 'È', '&Ecirc;': 'Ê', '&Euml;': 'Ë',
+    '&Iacute;': 'Í', '&Igrave;': 'Ì', '&Icirc;': 'Î', '&Iuml;': 'Ï',
+    '&Oacute;': 'Ó', '&Ograve;': 'Ò', '&Ocirc;': 'Ô', '&Otilde;': 'Õ', '&Ouml;': 'Ö',
+    '&Uacute;': 'Ú', '&Ugrave;': 'Ù', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
+    '&Ccedil;': 'Ç', '&Ntilde;': 'Ñ',
+    '&mdash;': '—', '&ndash;': '–', '&hellip;': '…',
+    '&quot;': '"', '&apos;': "'", '&amp;': '&', '&lt;': '<', '&gt;': '>'
+  };
+
+  let decodedText = text;
+  for (const [entity, char] of Object.entries(htmlEntities)) {
+    decodedText = decodedText.replace(new RegExp(entity, 'g'), char);
+  }
+
+  return decodedText;
+}
+
+/**
+ * Recursively decode HTML entities in an object
+ * @param {any} obj - Object to process
+ * @returns {any} - Object with HTML entities decoded
+ */
+function decodeHtmlEntitiesRecursive(obj) {
+  if (typeof obj === 'string') {
+    return decodeHtmlEntities(obj);
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => decodeHtmlEntitiesRecursive(item));
+  }
+
+  if (obj && typeof obj === 'object') {
+    const decoded = {};
+    for (const [key, value] of Object.entries(obj)) {
+      decoded[key] = decodeHtmlEntitiesRecursive(value);
+    }
+    return decoded;
+  }
+
+  return obj;
+}
+
+/**
  * Generate spellsData object from individual spell files
  * This script runs during build time to create a consolidated spells data object
  */
@@ -89,14 +147,17 @@ function generateSpellsData() {
               }
             };
 
+            // Decode HTML entities in the entire transformed spell object
+            const decodedSpell = decodeHtmlEntitiesRecursive(transformedSpell);
+
             // Clean up empty or undefined values
-            Object.keys(transformedSpell.system).forEach(key => {
-              if (transformedSpell.system[key] === undefined || transformedSpell.system[key] === '') {
-                delete transformedSpell.system[key];
+            Object.keys(decodedSpell.system).forEach(key => {
+              if (decodedSpell.system[key] === undefined || decodedSpell.system[key] === '') {
+                delete decodedSpell.system[key];
               }
             });
 
-            spellsData[tradition][circleKey][schoolKey][spellFile] = transformedSpell;
+            spellsData[tradition][circleKey][schoolKey][spellFile] = decodedSpell;
 
           } catch (error) {
             console.error(`❌ Erro ao processar magia ${spellPath}:`, error.message);
@@ -117,7 +178,7 @@ module.exports = spellsData;
 
   // Write the generated file
   const outputPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'generated-spells-data.js');
-  fs.writeFileSync(outputPath, spellsDataCode);
+  fs.writeFileSync(outputPath, spellsDataCode, 'utf8');
 
   console.log(`✅ Dados de magias gerados: ${outputPath}`);
 

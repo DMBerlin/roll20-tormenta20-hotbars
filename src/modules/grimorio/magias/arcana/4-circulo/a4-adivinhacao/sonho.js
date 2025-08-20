@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false,
           "attack": false,
@@ -68,7 +68,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": true
         }
@@ -161,13 +161,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 207",
     "ativacao": {
-      "execucao": "minute",
+      "execução": "minute",
       "custo": 10,
       "qtd": "10",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "Veja Texto"
@@ -213,7 +213,7 @@ module.exports = {
         "versatil": ""
       }
     ],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "4",
     "preparada": false,
     "escola": "adv",

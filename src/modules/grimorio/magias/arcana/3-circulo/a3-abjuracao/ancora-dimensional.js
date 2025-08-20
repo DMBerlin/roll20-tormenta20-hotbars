@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "attack": false,
           "skill": false,
@@ -81,7 +81,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2"
         }
       },
@@ -124,7 +124,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "4",
           "attack": false,
           "skill": false,
@@ -177,7 +177,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "4",
           "attack": false,
           "skill": false,
@@ -191,7 +191,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "permanente",
           "mode": 5,
           "priority": null
@@ -241,7 +241,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "9",
           "attack": false,
           "skill": false,
@@ -360,15 +360,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 179",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 6,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -398,10 +398,10 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "3",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

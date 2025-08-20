@@ -34,9 +34,135 @@
     const IMAGE_CACHE_KEY = 'roll20-hotbar-image-cache';
     const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
 
+    // Sistema de fallback para ícones de magias
+    const TORMENTA20_ICONS_BASE_URL = 'https://gitlab.com/vizael/Tormenta20/-/raw/master/icons/magias/';
+    const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
+
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
 
+
+    // Funções para gerenciamento de ícones com fallback
+    function getSpellIconCache() {
+        try {
+            const cached = localStorage.getItem(IMAGE_CACHE_KEY);
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                if (parsed.version === IMAGE_CACHE_VERSION) {
+                    return parsed.data || {};
+                }
+            }
+        } catch (error) {
+            console.warn('Erro ao carregar cache de ícones de magias:', error);
+        }
+        return {};
+    }
+
+    function saveSpellIconCache(cache) {
+        try {
+            localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify({
+                version: IMAGE_CACHE_VERSION,
+                data: cache,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.warn('Erro ao salvar cache de ícones de magias:', error);
+        }
+    }
+
+    function normalizeSpellName(spellName) {
+        // Normaliza o nome da magia para corresponder ao nome do arquivo no GitLab
+        return spellName
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+            .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais
+            .replace(/\s+/g, '-') // Substitui espaços por hífens
+            .replace(/-+/g, '-') // Remove hífens duplicados
+            .replace(/^-|-$/g, ''); // Remove hífens no início e fim
+    }
+
+    function getTormenta20IconUrl(spellName) {
+        const normalizedName = normalizeSpellName(spellName);
+        return `${TORMENTA20_ICONS_BASE_URL}${normalizedName}.webp`;
+    }
+
+    function testImageUrl(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+            // Timeout de 5 segundos
+            setTimeout(() => resolve(false), 5000);
+        });
+    }
+
+    async function loadSpellIcon(spellName, originalIconUrl) {
+        const cache = getSpellIconCache();
+        const cacheKey = `spell_${spellName}`;
+
+        // Verificar se já temos o ícone em cache
+        if (cache[cacheKey]) {
+            return cache[cacheKey];
+        }
+
+        let finalIconUrl = DEFAULT_ICON;
+
+        try {
+            // Verificar se o ícone original é um caminho relativo do Tormenta20
+            const isTormenta20RelativePath = originalIconUrl &&
+                originalIconUrl.startsWith('systems/tormenta20/icons/magias/') &&
+                originalIconUrl.endsWith('.webp');
+
+            if (isTormenta20RelativePath) {
+                // Se é um caminho relativo do Tormenta20, converter para URL completa
+                const iconName = originalIconUrl.replace('systems/tormenta20/icons/magias/', '').replace('.webp', '');
+                const tormenta20Url = `${TORMENTA20_ICONS_BASE_URL}${iconName}.webp`;
+
+                const tormenta20Works = await testImageUrl(tormenta20Url);
+                if (tormenta20Works) {
+                    finalIconUrl = tormenta20Url;
+                } else {
+                    // Se falhar, tentar com o nome normalizado da magia
+                    const normalizedUrl = getTormenta20IconUrl(spellName);
+                    const normalizedWorks = await testImageUrl(normalizedUrl);
+                    if (normalizedWorks) {
+                        finalIconUrl = normalizedUrl;
+                    }
+                }
+            } else if (originalIconUrl && originalIconUrl !== DEFAULT_ICON) {
+                // Se é uma URL do Wowhead ou outra fonte
+                const originalWorks = await testImageUrl(originalIconUrl);
+                if (originalWorks) {
+                    finalIconUrl = originalIconUrl;
+                } else {
+                    // Se falhar, tentar o ícone do Tormenta20
+                    const tormenta20Url = getTormenta20IconUrl(spellName);
+                    const tormenta20Works = await testImageUrl(tormenta20Url);
+                    if (tormenta20Works) {
+                        finalIconUrl = tormenta20Url;
+                    }
+                }
+            } else {
+                // Se não há ícone original, tentar diretamente o Tormenta20
+                const tormenta20Url = getTormenta20IconUrl(spellName);
+                const tormenta20Works = await testImageUrl(tormenta20Url);
+                if (tormenta20Works) {
+                    finalIconUrl = tormenta20Url;
+                }
+            }
+
+            // Salvar no cache
+            cache[cacheKey] = finalIconUrl;
+            saveSpellIconCache(cache);
+
+        } catch (error) {
+            console.warn(`Erro ao carregar ícone para magia "${spellName}":`, error);
+        }
+
+        return finalIconUrl;
+    }
 
 
     // Componente reutilizável para botões da hotbar
@@ -2866,10 +2992,17 @@
 
         // Mapeamento de execução
         const execucaoMap = {
+            'ação': 'Ação',
             'action': 'Ação',
             'bonus': 'Ação Bônus',
             'reacao': 'Reação',
+            'reaction': 'Reação',
             'free': 'Livre',
+            'full': 'Ação Completa',
+            'minute': '1 Minuto',
+            'hour': '1 Hora',
+            'move': 'Movimento',
+            'special': 'Especial',
             'ritual': 'Ritual'
         };
 
@@ -2896,7 +3029,7 @@
                                 ...spell,
                                 tradition: tradition,
                                 escola: escolaMap[spell.system.escola] || spell.system.escola,
-                                execucao: execucaoMap[spell.system.ativacao?.execucao] || spell.system.ativacao?.execucao || '',
+                                execucao: execucaoMap[spell.system.ativacao?.execução] || spell.system.ativacao?.execução || '',
                                 circulo: spell.system.circulo,
                                 circuloDisplay: circuloMap[spell.system.circulo] || `${spell.system.circulo}º Círculo`
                             });
@@ -2953,12 +3086,37 @@
         header.style.alignItems = 'center';
         header.style.marginBottom = '20px';
 
+        // Container para título e ícone
+        const titleContainer = document.createElement('div');
+        titleContainer.style.display = 'flex';
+        titleContainer.style.alignItems = 'center';
+        titleContainer.style.flex = '1';
+
+        // Ícone da magia com fallback
+        const icon = document.createElement('img');
+        icon.style.width = '48px';
+        icon.style.height = '48px';
+        icon.style.borderRadius = '6px';
+        icon.style.marginRight = '16px';
+        icon.style.border = '2px solid #9c27b0';
+
+        // Carregar ícone com fallback
+        loadSpellIcon(spell.name, spell.img).then(iconUrl => {
+            icon.src = iconUrl;
+        }).catch(error => {
+            console.warn(`Erro ao carregar ícone para "${spell.name}":`, error);
+            icon.src = DEFAULT_ICON;
+        });
+
         const title = document.createElement('h3');
         title.textContent = spell.name;
         title.style.color = '#9c27b0';
         title.style.margin = '0';
         title.style.fontSize = '24px';
         title.style.fontWeight = 'bold';
+
+        titleContainer.appendChild(icon);
+        titleContainer.appendChild(title);
 
         // Usar o componente de close button
         const closeBtn = window.Roll20Components.createCloseButton({
@@ -2971,7 +3129,7 @@
             onClick: closePopup
         });
 
-        header.appendChild(title);
+        header.appendChild(titleContainer);
         header.appendChild(closeBtn.render());
 
         // Informações da magia
@@ -3472,15 +3630,6 @@
             header.style.alignItems = 'center';
             header.style.marginBottom = '12px';
 
-            // Ícone da magia
-            const icon = document.createElement('img');
-            icon.src = spell.img || 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
-            icon.style.width = '32px';
-            icon.style.height = '32px';
-            icon.style.borderRadius = '4px';
-            icon.style.marginRight = '12px';
-            icon.style.border = '1px solid #9c27b0';
-
             // Nome da magia
             const name = document.createElement('div');
             name.textContent = spell.name;
@@ -3489,7 +3638,6 @@
             name.style.fontWeight = 'bold';
             name.style.flex = '1';
 
-            header.appendChild(icon);
             header.appendChild(name);
 
             // Informações da magia
@@ -3861,10 +4009,11 @@
             const learnedSpellItems = learnedSpells.map(spellName => {
                 const fullSpell = spellsCache.find(spell => spell.name === spellName);
                 if (fullSpell) {
-                    return spellTemplates.createSpell({
+                    return {
                         nome: fullSpell.name,
-                        comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=${fullSpell.name}}}{{type=${fullSpell.tradition.charAt(0).toUpperCase() + fullSpell.tradition.slice(1)}}}{{execution=${fullSpell.execucao || 'Padrão'}}}{{duration=${fullSpell.system?.duracao || 'Cena'}}}{{range=${fullSpell.system?.alcance || 'Curto'}}}{{targetarea=${fullSpell.system?.alvo || '1 Alvo'}}}{{resistance=${fullSpell.system?.resistencia || 'Nenhuma'}}}{{description=${fullSpell.system?.description?.value || 'Descrição não disponível'}}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
-                    });
+                        comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=${fullSpell.name}}}{{type=${fullSpell.tradition.charAt(0).toUpperCase() + fullSpell.tradition.slice(1)}}}{{execution=${fullSpell.execucao || 'Padrão'}}}{{duration=${fullSpell.system?.duracao || 'Cena'}}}{{range=${fullSpell.system?.alcance || 'Curto'}}}{{targetarea=${fullSpell.system?.alvo || '1 Alvo'}}}{{resistance=${fullSpell.system?.resistencia || 'Nenhuma'}}}{{description=${fullSpell.system?.description?.value || 'Descrição não disponível'}}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`,
+                        onClick: () => showSpellDetails(fullSpell)
+                    };
                 }
                 return null;
             }).filter(item => item !== null);

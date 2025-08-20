@@ -9,21 +9,21 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "padrão",
           "mode": 5,
           "priority": null
         },
         {
-          "key": "duracao",
-          "value": "Cena",
+          "key": "duração",
+          "value": "cena",
           "mode": 5,
           "priority": null
         }
@@ -66,7 +66,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5",
           "aumenta": false
         }
@@ -110,14 +110,14 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "9",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "padrão",
           "mode": 5,
           "priority": null
@@ -135,8 +135,8 @@ module.exports = {
           "priority": null
         },
         {
-          "key": "duracao",
-          "value": "Cena",
+          "key": "duração",
+          "value": "cena",
           "mode": 5,
           "priority": null
         }
@@ -179,32 +179,32 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "14",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "padrão",
           "mode": 5,
           "priority": null
         },
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "1 dia",
           "mode": 5,
           "priority": null
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "surpreendido",
           "mode": 0,
           "priority": null
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "desprevenido",
           "mode": 0,
           "priority": null
@@ -352,13 +352,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 185",
     "ativacao": {
-      "execucao": "free",
+      "execução": "free",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "round",
       "special": ""
@@ -380,7 +380,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "self",
+    "alcance": "pessoal",
     "alvo": "Você",
     "area": "",
     "resistencia": {
@@ -390,7 +390,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
     "escola": "adv",

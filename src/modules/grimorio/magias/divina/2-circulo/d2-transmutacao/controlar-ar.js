@@ -8,7 +8,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": true,
           "attack": false,
@@ -29,9 +29,9 @@ module.exports = {
           "priority": 0
         },
         {
-          "key": "duracao",
+          "key": "duração",
           "mode": 5,
-          "value": "Cena",
+          "value": "cena",
           "priority": 0
         },
         {
@@ -139,15 +139,15 @@ module.exports = {
     },
     "source": "Errata ADB, Blog da Jambô",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {

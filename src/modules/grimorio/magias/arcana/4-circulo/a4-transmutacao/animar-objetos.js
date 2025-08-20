@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5",
           "attack": false,
           "skill": false,
@@ -23,7 +23,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "permanente",
           "mode": 5,
           "priority": null
@@ -88,7 +88,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": true,
-          "self": false,
+          "pessoal": false,
           "attack": true,
           "skill": false,
           "ability": false,
@@ -148,7 +148,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": true,
-          "self": false,
+          "pessoal": false,
           "attack": true,
           "skill": false,
           "ability": false,
@@ -257,7 +257,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": true,
-          "self": false,
+          "pessoal": false,
           "attack": true,
           "skill": false,
           "ability": false,
@@ -317,7 +317,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": true,
-          "self": false,
+          "pessoal": false,
           "attack": true,
           "skill": false,
           "ability": false,
@@ -487,7 +487,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": true,
-          "self": false,
+          "pessoal": false,
           "attack": true,
           "skill": false,
           "ability": false,
@@ -661,15 +661,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 179",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 10,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -699,7 +699,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "4",
     "preparada": false,
     "escola": "tra",

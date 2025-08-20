@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -80,7 +80,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "4",
           "aumenta": true,
           "attack": false,
@@ -156,7 +156,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "7",
           "aumenta": false,
           "attack": false,
@@ -289,7 +289,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": false,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -365,13 +365,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 210",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "day",
       "special": ""
@@ -393,7 +393,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "1 armadura, escudo ou vestimenta",
     "area": "",
     "resistencia": {
@@ -406,7 +406,7 @@ module.exports = {
     "tipo": "div",
     "circulo": "2",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

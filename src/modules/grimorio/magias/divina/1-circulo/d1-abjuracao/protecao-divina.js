@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": true,
           "skill": false,
@@ -80,7 +80,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false,
           "attack": false,
@@ -95,7 +95,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "mode": 5,
           "value": "reação",
           "priority": 0
@@ -107,7 +107,7 @@ module.exports = {
           "priority": 0
         },
         {
-          "key": "duracao",
+          "key": "duração",
           "mode": 5,
           "value": "1 rodada",
           "priority": 0
@@ -151,7 +151,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false,
           "attack": false,
@@ -211,7 +211,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5",
           "aumenta": false,
           "attack": false,
@@ -345,15 +345,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 202",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -373,7 +373,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "1 criatura",
     "area": "",
     "resistencia": {
@@ -386,7 +386,7 @@ module.exports = {
     "tipo": "div",
     "circulo": "1",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

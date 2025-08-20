@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -61,7 +61,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -201,7 +201,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "ability": false,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "power": false,
@@ -259,7 +259,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -320,7 +320,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "ability": false,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "power": false,
@@ -380,7 +380,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "ability": false,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "power": false,
@@ -421,7 +421,7 @@ module.exports = {
         "tormenta20": {
           "onuse": true,
           "durationScene": false,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -478,15 +478,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 198",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -506,7 +506,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "1 criatura",
     "area": "",
     "resistencia": {

@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": true
         }
@@ -53,7 +53,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false
         }
@@ -97,21 +97,21 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "9",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "Completa",
           "mode": 5,
           "priority": null
         },
         {
-          "key": "duracao",
-          "value": "Cena",
+          "key": "duração",
+          "value": "cena",
           "mode": 5,
           "priority": null
         }
@@ -161,13 +161,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 208",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 6,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "inst",
       "special": ""
@@ -189,7 +189,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "até 5 criaturas voluntárias",
     "area": "",
     "resistencia": {
@@ -199,7 +199,7 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "3",
     "preparada": false,
     "escola": "con",

@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "",
           "aumenta": false,
           "attack": false,
@@ -36,13 +36,13 @@ module.exports = {
           "priority": 0
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "fatigado",
           "priority": 0
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "exausto",
           "priority": 0
@@ -86,20 +86,20 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "exausto",
           "mode": 0,
           "priority": null
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "fatigado",
           "mode": 0,
           "priority": null
@@ -143,7 +143,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5",
           "aumenta": false,
           "attack": false,
@@ -159,13 +159,13 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "inconsciente",
           "priority": 0
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "exausto",
           "priority": 0
@@ -216,15 +216,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 202",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -254,7 +254,7 @@ module.exports = {
       "txt": "Fortitude parcial"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
     "escola": "nec",

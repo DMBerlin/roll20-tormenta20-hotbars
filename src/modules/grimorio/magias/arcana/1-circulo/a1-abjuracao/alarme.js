@@ -1,14 +1,14 @@
 module.exports = {
   "_id": "kgD9swQEhzwDC1tb",
   "name": "Alarme",
-  "type": "magia",
+  "type": "Magia",
   "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_orb_01.jpg",
   "effects": [
     {
       "_id": "OYOQjSwW2hUP5Z3n",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -66,7 +66,7 @@ module.exports = {
       "_id": "bfMpC2zKMn2fxsqt",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -117,7 +117,7 @@ module.exports = {
       "_id": "Z5HPTpIRymv7xenI",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -134,7 +134,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "mode": 5,
           "value": "1 dia ou até ser descarregada",
           "priority": 0
@@ -146,7 +146,7 @@ module.exports = {
           "priority": 0
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "Paralisado",
           "priority": 0
@@ -294,13 +294,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 178",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 1,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 1,
       "units": "day",
       "special": ""
@@ -332,10 +332,10 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

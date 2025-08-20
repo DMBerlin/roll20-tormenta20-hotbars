@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": true
         }
@@ -60,7 +60,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false,
           "attack": false,
@@ -112,7 +112,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -170,13 +170,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 205",
     "ativacao": {
-      "execucao": "hour",
+      "execução": "hour",
       "custo": 3,
       "qtd": "1",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "permanente até ser descarregada"
@@ -198,7 +198,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "uma área com 6m de raio",
     "area": "",
     "resistencia": {
@@ -225,7 +225,7 @@ module.exports = {
     "tipo": "uni",
     "circulo": "2",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

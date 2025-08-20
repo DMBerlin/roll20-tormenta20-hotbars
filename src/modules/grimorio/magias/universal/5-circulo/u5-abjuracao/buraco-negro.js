@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "5",
           "aumenta": false,
           "attack": false,
@@ -68,13 +68,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 182",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 15,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 3,
       "units": "round",
       "special": ""
@@ -109,7 +109,7 @@ module.exports = {
     "tipo": "uni",
     "circulo": "5",
     "preparada": false,
-    "escola": "abj",
+    "escola": "abjuração",
     "chatFlavor": "",
     "origin": "",
     "tags": [],

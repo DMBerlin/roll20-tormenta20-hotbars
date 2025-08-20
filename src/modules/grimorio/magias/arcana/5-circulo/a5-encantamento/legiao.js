@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": true
         }
@@ -102,13 +102,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 196",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 15,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "sust",
       "special": ""
@@ -140,7 +140,7 @@ module.exports = {
       "txt": "Vontade parcial"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "5",
     "preparada": false,
     "escola": "enc",

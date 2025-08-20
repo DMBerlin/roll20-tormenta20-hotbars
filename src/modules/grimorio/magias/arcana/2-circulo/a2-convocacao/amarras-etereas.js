@@ -8,7 +8,7 @@ module.exports = {
       "_id": "Of4OHjVeJJYFGMVR",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -66,7 +66,7 @@ module.exports = {
       "_id": "nh1Tjykbn8LIPdO3",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -119,7 +119,7 @@ module.exports = {
       "_id": "7jKy7zfPfM0bHxB9",
       "flags": {
         "tormenta20": {
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -222,15 +222,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 197",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -260,7 +260,7 @@ module.exports = {
       "txt": "Reflexos anula"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "2",
     "preparada": false,
     "escola": "con",

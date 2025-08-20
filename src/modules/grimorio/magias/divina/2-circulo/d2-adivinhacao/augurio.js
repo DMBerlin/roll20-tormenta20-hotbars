@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -23,7 +23,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "1 minuto",
           "mode": 5,
           "priority": null
@@ -67,7 +67,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "7",
           "aumenta": false,
           "attack": false,
@@ -81,13 +81,13 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "duracao",
+          "key": "duração",
           "value": "1 minuto",
           "mode": 5,
           "priority": null
         },
         {
-          "key": "execucao",
+          "key": "execução",
           "value": "10 minutos",
           "mode": 5,
           "priority": null
@@ -131,7 +131,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "7",
           "aumenta": false,
           "attack": false,
@@ -182,7 +182,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -240,13 +240,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 187",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "inst",
       "special": ""
@@ -268,7 +268,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "self",
+    "alcance": "pessoal",
     "alvo": "Você",
     "area": "",
     "resistencia": {

@@ -58,13 +58,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 200",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 15,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "instantânea ou veja texto"

@@ -9,20 +9,20 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "2",
           "aumenta": false
         }
       },
       "changes": [
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "debilitado",
           "mode": 0,
           "priority": null
         },
         {
-          "key": "condicao",
+          "key": "condição",
           "value": "esmorecido",
           "mode": 0,
           "priority": null
@@ -66,7 +66,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false
         }
@@ -110,7 +110,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "3",
           "aumenta": false,
           "attack": false,
@@ -125,7 +125,7 @@ module.exports = {
       },
       "changes": [
         {
-          "key": "condicao",
+          "key": "condição",
           "mode": 0,
           "value": "pasmo",
           "priority": 0
@@ -218,15 +218,15 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 190",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
-      "units": "scene",
+      "units": "cena",
       "special": ""
     },
     "target": {
@@ -246,7 +246,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "self",
+    "alcance": "pessoal",
     "alvo": "",
     "area": "Cone de 6m",
     "resistencia": {
@@ -256,7 +256,7 @@ module.exports = {
       "txt": "Vontade parcial"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "2",
     "preparada": false,
     "escola": "enc",

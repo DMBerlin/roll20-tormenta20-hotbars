@@ -65,13 +65,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 204",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 15,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "sust",
       "special": ""
@@ -103,7 +103,7 @@ module.exports = {
       "txt": "Vontade anula"
     },
     "rolls": [],
-    "tipo": "arc",
+    "tipo": "arcana",
     "circulo": "5",
     "preparada": false,
     "escola": "ilu",

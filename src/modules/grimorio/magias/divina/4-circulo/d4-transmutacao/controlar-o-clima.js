@@ -22,7 +22,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "attack": false,
           "skill": false,
           "ability": false,
@@ -67,13 +67,13 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 187",
     "ativacao": {
-      "execucao": "full",
+      "execução": "full",
       "custo": 10,
       "qtd": "",
-      "condicao": "",
+      "condição": "",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "4d12 horas"

@@ -9,7 +9,7 @@ module.exports = {
       "flags": {
         "tormenta20": {
           "onuse": true,
-          "self": true,
+          "pessoal": true,
           "custo": "1",
           "aumenta": false
         }
@@ -60,13 +60,13 @@ module.exports = {
     },
     "source": "Guia de NPCs, p. 16 (1.2)",
     "ativacao": {
-      "execucao": "action",
+      "execução": "ação",
       "custo": 3,
       "qtd": "",
-      "condicao": "Custo Adicional: penalidade de 1 PM",
+      "condição": "Custo Adicional: penalidade de 1 PM",
       "special": ""
     },
-    "duracao": {
+    "duração": {
       "value": 0,
       "units": "special",
       "special": "Permanente até ser descarregada"
@@ -88,7 +88,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "touch",
+    "alcance": "toque",
     "alvo": "até dois itens que você possua, entre armas, armaduras e escudos",
     "area": "",
     "resistencia": {
