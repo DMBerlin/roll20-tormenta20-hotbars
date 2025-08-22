@@ -163,7 +163,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Uma c&uacute;pula de energia invis&iacute;vel o cerca, impedindo a aproxima&ccedil;&atilde;o de certas criaturas. Escolha um tipo de criatura (animais, esp&iacute;ritos, monstros...) ou uma ra&ccedil;a de humanoides (elfos, goblins, minotauros..). Criaturas do grupo escolhido que tentem se aproximar a menos de 3m de voc&ecirc; (ou seja, que tentem ficar adjacentes a voc&ecirc;) devem fazer um teste de Vontade. Se falharem, n&atilde;o conseguem, gastam a a&ccedil;&atilde;o e s&oacute; podem tentar novamente na rodada seguinte. Isso impede ataques corpo a corpo, mas n&atilde;o ataques ou outros efeitos &agrave; dist&acirc;ncia. Se voc&ecirc; tentar se aproximar al&eacute;m do limite de 3m, rompe a c&uacute;pula e a magia &eacute; dissipada.</p>",
+      "value": "Uma cúpula de energia invisível o cerca, impedindo a aproximação de certas criaturas. Escolha um tipo de criatura (animais, espíritos, monstros...) ou uma raça de humanoides (elfos, goblins, minotauros..). Criaturas do grupo escolhido que tentem se aproximar a menos de 3m de você (ou seja, que tentem ficar adjacentes a você) devem fazer um teste de Vontade. Se falharem, não conseguem, gastam a ação e só podem tentar novamente na rodada seguinte. Isso impede ataques corpo a corpo, mas não ataques ou outros efeitos à distância. Se você tentar se aproximar além do limite de 3m, rompe a cúpula e a magia é dissipada.",
       "chat": "",
       "unidentified": ""
     },

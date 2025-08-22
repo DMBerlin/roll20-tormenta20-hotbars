@@ -105,7 +105,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; sopra ar g&eacute;lido que causa 4d6 pontos de dano de frio (Fortitude reduz &agrave; metade). Criaturas de tamanho M&eacute;dio ou menor que falhem na resist&ecirc;ncia ficam ca&iacute;das e s&atilde;o empurradas 6m na dire&ccedil;&atilde;o oposta. Se houver uma parede ou outro objeto s&oacute;lido (mas n&atilde;o uma criatura) no caminho, a criatura para de se mover, mas sofre +2d6 pontos de dano de impacto.</p>",
+      "value": "Você sopra ar gélido que causa 4d6 pontos de dano de frio (Fortitude reduz à metade). Criaturas de tamanho Médio ou menor que falhem na resistência ficam caídas e são empurradas 6m na direção oposta. Se houver uma parede ou outro objeto sólido (mas não uma criatura) no caminho, a criatura para de se mover, mas sofre +2d6 pontos de dano de impacto.",
       "chat": "",
       "unidentified": ""
     },

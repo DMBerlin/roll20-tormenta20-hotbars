@@ -162,7 +162,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O sangue do alvo aquece rapidamente at&eacute; entrar em ebuli&ccedil;&atilde;o. Quando a magia &eacute; lan&ccedil;ada, e no in&iacute;cio de cada um de seus turnos, o alvo sofre 4d8 pontos de dano de fogo e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por uma rodada (Fortitude reduz o dano &agrave; metade e evita a condi&ccedil;&atilde;o). Se o alvo passar em dois testes de Fortitude seguidos, dissipa a magia. Se o alvo for reduzido a 0 PV pelo dano desta magia, seu corpo explode, matando-o e causando 6d6 pontos de dano de fogo em todas as criaturas a at&eacute; 3m (Reflexos reduz &agrave; metade). Essa magia n&atilde;o afeta criaturas sem sangue, como construtos ou mortos-vivos.</p>",
+      "value": "O sangue do alvo aquece rapidamente até entrar em ebulição. Quando a magia é lançada, e no início de cada um de seus turnos, o alvo sofre 4d8 pontos de dano de fogo e fica Enjoado por uma rodada (Fortitude reduz o dano à metade e evita a condição). Se o alvo passar em dois testes de Fortitude seguidos, dissipa a magia. Se o alvo for reduzido a 0 PV pelo dano desta magia, seu corpo explode, matando-o e causando 6d6 pontos de dano de fogo em todas as criaturas a até 3m (Reflexos reduz à metade). Essa magia não afeta criaturas sem sangue, como construtos ou mortos-vivos.",
       "chat": "",
       "unidentified": ""
     },

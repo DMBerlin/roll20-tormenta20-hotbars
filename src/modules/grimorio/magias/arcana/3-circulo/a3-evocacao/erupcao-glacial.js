@@ -147,7 +147,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Estacas de gelo irrompem do ch&atilde;o. Criaturas na &aacute;rea sofrem 4d6 de dano de corte, 4d6 de dano de frio e ficam ca&iacute;das. Passar no teste de Reflexos evita o dano de corte e a queda. As estacas duram pela cena, o que torna a &aacute;rea afetada terreno dif&iacute;cil, e concedem cobertura leve para criaturas dentro da &aacute;rea ou atr&aacute;s dela. As estacas s&atilde;o destru&iacute;das caso sofram qualquer quantidade de dano por fogo m&aacute;gico.</p>",
+      "value": "Estacas de gelo irrompem do chão. Criaturas na área sofrem 4d6 de dano de corte, 4d6 de dano de frio e ficam caídas. Passar no teste de Reflexos evita o dano de corte e a queda. As estacas duram pela cena, o que torna a área afetada terreno difícil, e concedem cobertura leve para criaturas dentro da área ou atrás dela. As estacas são destruídas caso sofram qualquer quantidade de dano por fogo mágico.",
       "chat": "",
       "unidentified": ""
     },

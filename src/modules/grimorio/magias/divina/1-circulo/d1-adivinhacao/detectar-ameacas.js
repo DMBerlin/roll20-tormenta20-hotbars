@@ -182,7 +182,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; recebe uma intui&ccedil;&atilde;o agu&ccedil;ada sobre perigos ao seu redor. Quando uma criatura hostil ou armadilha entra na &aacute;rea do efeito, voc&ecirc; faz um teste de Percep&ccedil;&atilde;o (CD determinada pelo mestre de acordo com a situa&ccedil;&atilde;o). Se passar, sabe a origem (criatura ou armadilha), dire&ccedil;&atilde;o e dist&acirc;ncia do perigo. Se falhar, sabe apenas que o perigo existe.</p>",
+      "value": "Você recebe uma intuição aguçada sobre perigos ao seu redor. Quando uma criatura hostil ou armadilha entra na área do efeito, você faz um teste de Percepção (CD determinada pelo mestre de acordo com a situação). Se passar, sabe a origem (criatura ou armadilha), direção e distância do perigo. Se falhar, sabe apenas que o perigo existe.",
       "chat": "",
       "unidentified": ""
     },

@@ -154,7 +154,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia pode encontrar uma criatura ou objeto a sua escolha. Voc&ecirc; pode pensar em termos gerais (&ldquo;um elfo&rdquo;, &ldquo;algo de metal&rdquo;) ou espec&iacute;ficos (&ldquo;Gwen, a elfa&rdquo;, &ldquo;uma espada longa&rdquo;). A magia indica a dire&ccedil;&atilde;o e dist&acirc;ncia da criatura ou objeto mais pr&oacute;ximo desse tipo, caso esteja ao alcance. Voc&ecirc; pode movimentar-se para continuar procurando. Procurar algo muito espec&iacute;fico (&ldquo;a espada longa encantada do Bar&atilde;o Rulyn&rdquo;) exige que voc&ecirc; tenha em mente uma imagem precisa do objeto; caso a imagem n&atilde;o seja muito pr&oacute;xima da verdade, a magia falha, mas voc&ecirc; gasta os PM mesmo assim. Esta magia pode ser bloqueada por uma fina camada de chumbo.</p>",
+      "value": "Esta magia pode encontrar uma criatura ou objeto a sua escolha. Você pode pensar em termos gerais (\"um elfo\", \"algo de metal\") ou específicos (\"Gwen, a elfa\", \"uma espada longa\"). A magia indica a direção e distância da criatura ou objeto mais próximo desse tipo, caso esteja ao alcance. Você pode movimentar-se para continuar procurando. Procurar algo muito específico (\"a espada longa encantada do Barão Rulyn\") exige que você tenha em mente uma imagem precisa do objeto; caso a imagem não seja muito próxima da verdade, a magia falha, mas você gasta os PM mesmo assim. Esta magia pode ser bloqueada por uma fina camada de chumbo.",
       "chat": "",
       "unidentified": ""
     },

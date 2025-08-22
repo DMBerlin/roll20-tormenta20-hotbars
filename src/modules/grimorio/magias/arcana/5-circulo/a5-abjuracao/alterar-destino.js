@@ -143,7 +143,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Sua mente visualiza todas as possibilidades de um evento, permitindo a voc&ecirc; escolher o melhor curso de a&ccedil;&atilde;o. Voc&ecirc; pode rolar novamente um teste de resist&ecirc;ncia com um b&ocirc;nus de +10 ou um inimigo deve rolar novamente um ataque contra voc&ecirc; com uma penalidade de &ndash;10</p>",
+      "value": "Sua mente visualiza todas as possibilidades de um evento, permitindo a você escolher o melhor curso de ação. Você pode rolar novamente um teste de resistência com um bônus de +10 ou um inimigo deve rolar novamente um ataque contra você com uma penalidade de –10",
       "chat": "",
       "unidentified": ""
     },

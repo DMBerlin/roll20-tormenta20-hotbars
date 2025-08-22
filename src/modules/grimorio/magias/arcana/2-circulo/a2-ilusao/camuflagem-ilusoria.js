@@ -161,7 +161,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo fica com sua imagem nublada, como se vista atrav&eacute;s de um l&iacute;quido, recebendo os efeitos de camuflagem leve.</p>",
+      "value": "O alvo fica com sua imagem nublada, como se vista através de um líquido, recebendo os efeitos de camuflagem leve.",
       "chat": "",
       "unidentified": ""
     },

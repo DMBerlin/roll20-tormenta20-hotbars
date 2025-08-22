@@ -142,7 +142,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia imbui uma criatura com coragem e valentia. O alvo fica imune a medo e recebe 40 PV tempor&aacute;rios e +4 em testes de ataque e rolagens de dano contra o inimigo de maior ND na cena.</p>",
+      "value": "Esta magia imbui uma criatura com coragem e valentia sobrenaturais. O alvo fica imune a medo e recebe 40 pontos de vida temporários. Além disso, recebe +4 em testes de ataque e rolagens de dano contra o inimigo de maior ND na cena. Se houver múltiplos inimigos com o mesmo ND mais alto, você escolhe qual será o alvo dos bônus. Os bônus se aplicam a todos os tipos de ataque (corpo a corpo, à distância e magias de ataque).",
       "chat": "",
       "unidentified": ""
     },

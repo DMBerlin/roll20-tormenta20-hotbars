@@ -130,7 +130,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um pilar de fogo sagrado desce dos céus, causando 6d6 pontos de dano de fogo mais 6d6 pontos de dano de luz nas criaturas e objetos livres na área.</p>",
+      "value": "Um pilar de fogo sagrado desce dos céus, causando 6d6 pontos de dano de fogo mais 6d6 pontos de dano de luz nas criaturas e objetos livres na área.",
       "chat": "",
       "unidentified": ""
     },

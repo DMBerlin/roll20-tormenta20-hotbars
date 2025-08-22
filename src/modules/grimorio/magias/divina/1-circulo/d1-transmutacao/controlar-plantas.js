@@ -267,7 +267,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia s&oacute; pode ser lan&ccedil;ada em uma &aacute;rea com vegeta&ccedil;&atilde;o. As plantas se enroscam nas criaturas da &aacute;rea. Aquelas que falharem na resist&ecirc;ncia ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw]{Enredado}. Uma v&iacute;tima pode se libertar com uma a&ccedil;&atilde;o padr&atilde;o e um teste de Acrobacia ou Atletismo. Al&eacute;m disso, a &aacute;rea &eacute; considerada terreno dif&iacute;cil. No in&iacute;cio de seus turnos, a vegeta&ccedil;&atilde;o tenta enredar novamente qualquer criatura na &aacute;rea, exigindo um novo teste de Reflexos.</p>",
+      "value": "Esta magia só pode ser lançada em uma área com vegetação. As plantas se enroscam nas criaturas da área. Aquelas que falharem na resistência ficam Enredado. Uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo. Além disso, a área é considerada terreno difícil. No início de seus turnos, a vegetação tenta enredar novamente qualquer criatura na área, exigindo um novo teste de Reflexos.",
       "chat": "",
       "unidentified": ""
     },

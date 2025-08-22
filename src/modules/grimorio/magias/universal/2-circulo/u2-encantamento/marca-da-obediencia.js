@@ -155,7 +155,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você toca uma criatura, gravando uma marca mística no corpo dela enquanto profere uma ordem, como \"não ataque a mim ou meus aliados\", \"siga-me\" ou \"não saia desta sala\". A criatura deve seguir essa ordem, gastando todas as ações de seu turno para isso. A ordem não pode ser genérica demais (como \"ajude-me\", por exemplo), nem forçar o alvo a atos suicidas. A cada rodada, o alvo pode fazer um teste de Vontade. Se passar, a magia é dissipada.</p>",
+      "value": "Você toca uma criatura, gravando uma marca mística no corpo dela enquanto profere uma ordem, como \"não ataque a mim ou meus aliados\", \"siga-me\" ou \"não saia desta sala\". A criatura deve seguir essa ordem, gastando todas as ações de seu turno para isso. A ordem não pode ser genérica demais (como \"ajude-me\", por exemplo), nem forçar o alvo a atos suicidas. A cada rodada, o alvo pode fazer um teste de Vontade. Se passar, a magia é dissipada.",
       "chat": "",
       "unidentified": ""
     },

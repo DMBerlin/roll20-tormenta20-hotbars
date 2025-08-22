@@ -115,7 +115,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Como parte da execu&ccedil;&atilde;o, voc&ecirc; entra em uma &aacute;rvore adjacente que seja maior do que voc&ecirc;. Voc&ecirc; pode permanecer dentro da &aacute;rvore, percebendo os arredores de forma normal (mas sem poder fazer a&ccedil;&otilde;es). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para sair da mesma &aacute;rvore, ou de qualquer outra dentro de 1km. Se estiver dentro de uma &aacute;rvore que seja destru&iacute;da, a magia termina e voc&ecirc; sofre 10d6 pontos de dano de impacto. Enquanto a magia durar voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para entrar em outras &aacute;rvores.</p>",
+      "value": "Como parte da execução, você entra em uma árvore adjacente que seja maior do que você. Você pode permanecer dentro da árvore, percebendo os arredores de forma normal (mas sem poder fazer ações). Você pode gastar uma ação de movimento para sair da mesma árvore, ou de qualquer outra dentro de 1km. Se estiver dentro de uma árvore que seja destruída, a magia termina e você sofre 10d6 pontos de dano de impacto. Enquanto a magia durar você pode gastar uma ação de movimento e 1 PM para entrar em outras árvores.",
       "chat": "",
       "unidentified": ""
     },

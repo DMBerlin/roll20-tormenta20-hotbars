@@ -208,7 +208,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um cone de luzes brilhantes surge das suas m&atilde;os, deixando os animais e humanoides na &aacute;rea atordoados por 1 rodada (apenas uma vez por cena, Vontade anula) e ofuscados pela cena.</p>",
+      "value": "Um cone de luzes brilhantes surge das suas mãos, deixando os animais e humanoides na área atordoados por 1 rodada (apenas uma vez por cena, Vontade anula) e ofuscados pela cena.",
       "chat": "",
       "unidentified": ""
     },

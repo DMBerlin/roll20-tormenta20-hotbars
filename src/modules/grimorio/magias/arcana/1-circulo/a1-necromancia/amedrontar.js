@@ -199,7 +199,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo &eacute; envolvido por energias sombrias e assustadoras. Se falhar na resist&ecirc;ncia, fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a> por 1 rodada, depois @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo]{Abalado}. Se passar, fica abalado por 1d4 rodadas.</p>",
+      "value": "O alvo é envolvido por energias sombrias e assustadoras. Se falhar na resistência, fica Apavorado por 1 rodada, depois Abalado. Se passar, fica abalado por 1d4 rodadas.",
       "chat": "",
       "unidentified": ""
     },

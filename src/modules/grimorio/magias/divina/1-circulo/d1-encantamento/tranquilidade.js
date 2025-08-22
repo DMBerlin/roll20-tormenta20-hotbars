@@ -211,7 +211,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; emana ondas de serenidade. Se falhar na resist&ecirc;ncia, o alvo tem sua atitude mudada para indiferente (veja a p&aacute;gina 259) e n&atilde;o pode atacar ou realizar qualquer a&ccedil;&atilde;o agressiva. Se passar, sofre &ndash;2 em testes de ataque. Qualquer a&ccedil;&atilde;o hostil contra o alvo ou seus aliados dissipa a magia e faz ele retornar &agrave; atitude que tinha antes (ou pior, de acordo com o mestre).</p>",
+      "value": "Você emana ondas de serenidade. Se falhar na resistência, o alvo tem sua atitude mudada para indiferente (veja a página 259) e não pode atacar ou realizar qualquer ação agressiva. Se passar, sofre –2 em testes de ataque. Qualquer ação hostil contra o alvo ou seus aliados dissipa a magia e faz ele retornar à atitude que tinha antes (ou pior, de acordo com o mestre).",
       "chat": "",
       "unidentified": ""
     },

@@ -147,7 +147,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria um elo mental entre duas criaturas com Intelig&ecirc;ncia -3 ou maior (voc&ecirc; pode ser uma delas). As criaturas podem se comunicar independente de idioma ou dist&acirc;ncia, mas n&atilde;o em mundos diferentes.</p>",
+      "value": "Você cria um elo mental entre duas criaturas com Inteligência -3 ou maior (você pode ser uma delas). As criaturas podem se comunicar independente de idioma ou distância, mas não em mundos diferentes.",
       "chat": "",
       "unidentified": ""
     },

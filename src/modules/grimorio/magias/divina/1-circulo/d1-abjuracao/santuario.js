@@ -48,7 +48,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "além do normal, escolha um tipo de criatura entre animal, construto ou morto-vivo. Você não pode ser percebido por criaturas não inteligentes (Int –4 ou menor) do tipo escolhido.",
+      "name": "além do normal, escolha um tipo de criatura entre animal, construto ou morto-vivo. Você não pode ser percebido por criaturas não inteligentes (Int -4 ou menor) do tipo escolhido.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -149,7 +149,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Qualquer criatura que tente fazer uma a&ccedil;&atilde;o hostil contra o alvo deve fazer um teste de Vontade. Se falhar, n&atilde;o consegue, perde a a&ccedil;&atilde;o e n&atilde;o pode tentar novamente at&eacute; o fim da cena. <em>Santu&aacute;rio</em> n&atilde;o protege o alvo de efeitos de &aacute;rea. Al&eacute;m disso, o pr&oacute;prio alvo tamb&eacute;m n&atilde;o pode fazer a&ccedil;&otilde;es hostis (incluindo for&ccedil;ar outras criaturas a atac&aacute;-lo), ou a magia &eacute; dissipada &mdash; mas pode usar habilidades e magias de cura e suporte como @UUID[Item.soVAGPRWQmKxOrPm]{Curar Ferimentos} e @UUID[Item.OTsBw84Ci2IKPStn]{B&ecirc;n&ccedil;&atilde;o}.</p>",
+      "value": "Qualquer criatura que tente fazer uma ação hostil contra o alvo deve fazer um teste de Vontade. Se falhar, não consegue, perde a ação e não pode tentar novamente até o fim da cena. Santuário não protege o alvo de efeitos de área. Além disso, o próprio alvo também não pode fazer ações hostis (incluindo forçar outras criaturas a atacá-lo), ou a magia é dissipada — mas pode usar habilidades e magias de cura e suporte como Curar Ferimentos e Bênção.",
       "chat": "",
       "unidentified": ""
     },

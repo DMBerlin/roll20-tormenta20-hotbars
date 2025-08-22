@@ -39,7 +39,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "muda o círculo da magia concedida para 3º e a penalidade de PM para –6.",
+      "name": "muda o círculo da magia concedida para 3º e a penalidade de PM para -6.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -96,7 +96,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; transfere um pouco de seu poder divino a outra criatura. Escolha uma magia de at&eacute; 2&ordm; c&iacute;rculo que voc&ecirc; conhe&ccedil;a; o alvo pode lan&ccedil;ar essa magia uma vez, sem pagar o custo base dela em PM (aprimoramentos podem ser usados, mas o alvo deve gastar seus pr&oacute;prios PM). Voc&ecirc; sofre uma penalidade de &ndash;3 PM at&eacute; que o alvo lance a magia.</p>",
+      "value": "Você transfere um pouco de seu poder divino a outra criatura. Escolha uma magia de até 2º círculo que você conheça; o alvo pode lançar essa magia uma vez, sem pagar o custo base dela em PM (aprimoramentos podem ser usados, mas o alvo deve gastar seus próprios PM). Você sofre uma penalidade de –3 PM até que o alvo lance a magia.",
       "chat": "",
       "unidentified": ""
     },

@@ -262,7 +262,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; dispara um proj&eacute;til que causa 4d6 pontos de dano de &aacute;cido. Se falhar no teste de resist&ecirc;ncia, o alvo tamb&eacute;m fica coberto por um muco corrosivo, sofrendo mais 2d6 de dano de &aacute;cido no in&iacute;cio de seus dois pr&oacute;ximos turnos. Se lan&ccedil;ada contra um objeto que n&atilde;o esteja em posse de uma criatura a magia causa dano dobrado e ignora a RD do objeto.</p>",
+      "value": "Você dispara um projétil que causa 4d6 pontos de dano de ácido. Se falhar no teste de resistência, o alvo também fica coberto por um muco corrosivo, sofrendo mais 2d6 de dano de ácido no início de seus dois próximos turnos. Se lançada contra um objeto que não esteja em posse de uma criatura a magia causa dano dobrado e ignora a RD do objeto.",
       "chat": "",
       "unidentified": ""
     },

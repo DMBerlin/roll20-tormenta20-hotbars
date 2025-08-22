@@ -147,7 +147,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado. O disco &eacute; imune a dano, n&atilde;o pode ser movido e faz uma contram&aacute;gica autom&aacute;tica contra qualquer magia lan&ccedil;ada em alcance m&eacute;dio dele (exceto as suas), usando seu teste de Misticismo. Caso ven&ccedil;a o teste, o engenho n&atilde;o s&oacute; anula a magia como absorve os PM usados para lan&ccedil;&aacute;-la, acumulando PM tempor&aacute;rios. No seu turno, se estiver ao alcance do disco, voc&ecirc; pode gastar PM nele para lan&ccedil;ar magias.</p>",
+      "value": "Você cria um disco de energia que lembra uma roda de engenho e flutua no ponto em que foi conjurado. O disco é imune a dano, não pode ser movido e faz uma contramágica automática contra qualquer magia lançada em alcance médio dele (exceto as suas), usando seu teste de Misticismo. Caso vença o teste, o engenho não só anula a magia como absorve os PM usados para lançá-la, acumulando PM temporários. No seu turno, se estiver ao alcance do disco, você pode gastar PM nele para lançar magias.",
       "chat": "",
       "unidentified": ""
     },

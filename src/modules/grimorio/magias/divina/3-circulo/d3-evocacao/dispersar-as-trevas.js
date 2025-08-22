@@ -299,7 +299,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria um forte brilho (multicolorido ou de uma cor que remeta a sua divindade) que causa diversos efeitos. Todas as magias de 3&ordm; c&iacute;rculo ou menor ativas na &aacute;rea s&atilde;o dissipadas se voc&ecirc; passar num teste de Religi&atilde;o contra a CD de cada magia. Seus aliados na &aacute;rea recebem +4 em testes de resist&ecirc;ncia e redu&ccedil;&atilde;o de trevas 10 at&eacute; o fim da cena, protegidos por uma aura sutil da mesma cor. Inimigos na &aacute;rea ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas (apenas uma vez pela magia). <em>Dispersar as Trevas </em>anula <em>Anular a Luz </em>(este efeito tem dura&ccedil;&atilde;o instant&acirc;nea).</p>",
+      "value": "Esta magia cria um forte brilho (multicolorido ou de uma cor que remeta a sua divindade) que causa diversos efeitos. Todas as magias de 3º círculo ou menor ativas na área são dissipadas se você passar num teste de Religião contra a CD de cada magia. Seus aliados na área recebem +4 em testes de resistência e redução de trevas 10 até o fim da cena, protegidos por uma aura sutil da mesma cor. Inimigos na área ficam Cego por 1d4 rodadas (apenas uma vez pela magia). Dispersar as Trevas anula Anular a Luz (este efeito tem duração instantânea).",
       "chat": "",
       "unidentified": ""
     },

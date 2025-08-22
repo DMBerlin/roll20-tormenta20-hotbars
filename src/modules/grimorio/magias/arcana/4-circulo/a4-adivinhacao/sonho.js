@@ -155,7 +155,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; entra nos sonhos de uma criatura. Uma vez l&aacute;, pode conversar com ela at&eacute; que ela acorde. Se o alvo n&atilde;o estiver dormindo quando voc&ecirc; lan&ccedil;ar a magia, voc&ecirc; pode permanecer em transe at&eacute; que ele adorme&ccedil;a. Durante o transe, voc&ecirc; fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e sem consci&ecirc;ncia dos arredores. Voc&ecirc; pode sair do transe quando quiser, mas a magia termina.</p>",
+      "value": "Você entra nos sonhos de uma criatura. Uma vez lá, pode conversar com ela até que ela acorde. Se o alvo não estiver dormindo quando você lançar a magia, você pode permanecer em transe até que ele adormeça. Durante o transe, você fica Indefeso e sem consciência dos arredores. Você pode sair do transe quando quiser, mas a magia termina.",
       "chat": "",
       "unidentified": ""
     },

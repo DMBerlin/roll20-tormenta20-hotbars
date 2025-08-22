@@ -207,7 +207,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo cai lentamente. A velocidade da queda &eacute; reduzida para 18m por rodada &mdash; o suficiente para n&atilde;o causar dano.</p>\n<p>Como lan&ccedil;ar esta magia &eacute; uma rea&ccedil;&atilde;o, voc&ecirc; pode lan&ccedil;&aacute;-la r&aacute;pido o bastante para salvar a si ou um aliado de quedas inesperadas.</p>\n<p>Lan&ccedil;ada sobre um proj&eacute;til &mdash; como uma flecha ou uma rocha largada do alto de um penhasco &mdash;, a magia faz com que ele cause metade do dano normal, devido &agrave; lentid&atilde;o.</p>\n<p><em>Queda Suave</em> s&oacute; funciona em criaturas e objetos em queda livre ou similar; a magia n&atilde;o vai frear um golpe de espada ou o mergulho rasante de um atacante voador.</p>",
+      "value": "O alvo cai lentamente. A velocidade da queda é reduzida para 18m por rodada — o suficiente para não causar dano. Como lançar esta magia é uma reação, você pode lançá-la rápido o bastante para salvar a si ou um aliado de quedas inesperadas. Lançada sobre um projétil — como uma flecha ou uma rocha largada do alto de um penhasco —, a magia faz com que ele cause metade do dano normal, devido à lentidão. Queda Suave só funciona em criaturas e objetos em queda livre ou similar; a magia não vai frear um golpe de espada ou o mergulho rasante de um atacante voador.",
       "chat": "",
       "unidentified": ""
     },

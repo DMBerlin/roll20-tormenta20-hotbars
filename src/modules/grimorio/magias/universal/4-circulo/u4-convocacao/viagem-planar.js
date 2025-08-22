@@ -61,7 +61,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você viaja instantaneamente para outro plano da Criação. Lá, você chega de 10 a 1.000km do destino pretendido (role 1d100 e multiplique por 10km).</p><p><i>Componente material:</i> um bastão de metal precioso em forma de forquilha (no valor de T$ 1.000). O tipo de metal determina para qual plano de existência você será enviado. Os metais que levam a dimensões específicas podem ser difíceis de encontrar, de acordo com o mestre.</p>",
+      "value": "Você e os alvos viajam instantaneamente para outro plano da Criação através de um portal dimensional temporário. No plano de destino, vocês chegam de 10 a 1.000km do local pretendido (role 1d100 e multiplique por 10km). A precisão da chegada depende do seu conhecimento sobre o destino: locais bem conhecidos tendem a ter menos variação na distância. Esta magia não funciona se você estiver em um local protegido contra viagem planar (como sob efeito de Âncora Dimensional). Componente material: um bastão de metal precioso em forma de forquilha (no valor de T$ 1.000), que é consumido pela magia. O tipo específico de metal determina para qual plano de existência você será enviado - diferentes planos requerem diferentes metais, e alguns podem ser extremamente raros ou difíceis de encontrar, a critério do mestre. Exemplos incluem prata para o Plano Astral, ferro frio para o Reino das Fadas, ou ouro para planos celestiais.",
       "chat": "",
       "unidentified": ""
     },

@@ -196,7 +196,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia lhe concede um rosto idealizado, porte f&iacute;sico garboso, voz melodiosa e olhar sedutor. Enquanto a magia estiver ativa, seu Carisma torna-se 5 (ou recebe um b&ocirc;nus de +2, caso seja 5 ou maior) e voc&ecirc; recebe +5 nos testes de Diplomacia e Engana&ccedil;&atilde;o. Quando a magia acaba, quaisquer observadores percebem a mudan&ccedil;a e tendem a suspeitar de voc&ecirc;. Da mesma maneira, pessoas que o viram sob o efeito da magia sentir&atilde;o que &ldquo;algo est&aacute; errado&rdquo; ao v&ecirc;-lo em condi&ccedil;&otilde;es normais. Quando a cena acabar, voc&ecirc; pode gastar os PM da magia novamente como uma a&ccedil;&atilde;o livre para mant&ecirc;-la ativa. Este efeito n&atilde;o fornece PV ou PM adicionais.</p>",
+      "value": "Esta magia lhe concede um rosto idealizado, porte físico garboso, voz melodiosa e olhar sedutor, deixando-o mais atraente e confiável. Enquanto a magia estiver ativa, seu Carisma torna-se 20 (ou recebe um bônus de +4, caso seja 20 ou maior) e você recebe +5 nos testes de Diplomacia e Enganação. Quando a magia acaba, quaisquer observadores percebem a mudança e tendem a suspeitar de você. Da mesma maneira, pessoas que o viram sob o efeito da magia sentirão que \"algo está errado\" ao vê-lo em condições normais. Quando a cena acabar, você pode gastar os PM da magia novamente como uma ação livre para mantê-la ativa. Este efeito não fornece PV ou PM adicionais.",
       "chat": "",
       "unidentified": ""
     },

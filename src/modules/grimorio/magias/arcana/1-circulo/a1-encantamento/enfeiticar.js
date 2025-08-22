@@ -247,7 +247,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo fica enfeiti&ccedil;ado (veja a p&aacute;gina 394). Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resist&ecirc;ncia. Se voc&ecirc; ou seus aliados tomarem qualquer a&ccedil;&atilde;o hostil contra o alvo, a magia &eacute; dissipada e o alvo retorna &agrave; atitude que tinha antes (ou piorada, de acordo com o mestre).</p>",
+      "value": "O alvo fica enfeitiçado (veja a página 394). Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resistência. Se você ou seus aliados tomarem qualquer ação hostil contra o alvo, a magia é dissipada e o alvo retorna à atitude que tinha antes (ou piorada, de acordo com o mestre).",
       "chat": "",
       "unidentified": ""
     },

@@ -397,7 +397,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria uma pel&iacute;cula protetora sobre voc&ecirc;. Voc&ecirc; recebe 30 pontos de vida tempor&aacute;rios.</p>",
+      "value": "Esta magia cria uma película protetora sobre você. Você recebe 30 pontos de vida temporários.",
       "chat": "",
       "unidentified": ""
     },

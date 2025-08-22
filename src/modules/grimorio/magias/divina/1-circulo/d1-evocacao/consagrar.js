@@ -39,7 +39,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "além do normal, mortos-vivos na área sofrem –2 em testes e Defesa.",
+      "name": "além do normal, mortos-vivos na área sofrem -2 em testes e Defesa.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -103,7 +103,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "aumenta as penalidades para mortos-vivos em –1.",
+      "name": "aumenta as penalidades para mortos-vivos em -1.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -230,7 +230,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; enche a &aacute;rea com energia positiva. Pontos de vida curados por efeitos de luz s&atilde;o maximizados dentro da &aacute;rea. Isso tamb&eacute;m afeta dano causado em mortos-vivos por esses efeitos.</p>\n<p>Por exemplo, Curar Ferimentos cura automaticamente 18 PV. Esta magia n&atilde;o pode ser lan&ccedil;ada em uma &aacute;rea contendo um s&iacute;mbolo vis&iacute;vel dedicado a uma divindade que n&atilde;o a sua. Consagrar anula Profanar.</p>",
+      "value": "Você enche a área com energia positiva. Pontos de vida curados por efeitos de luz são maximizados dentro da área. Isso também afeta dano causado em mortos-vivos por esses efeitos. Por exemplo, Curar Ferimentos cura automaticamente 18 PV. Esta magia não pode ser lançada em uma área contendo um símbolo visível dedicado a uma divindade que não a sua. Consagrar anula Profanar.",
       "chat": "",
       "unidentified": ""
     },

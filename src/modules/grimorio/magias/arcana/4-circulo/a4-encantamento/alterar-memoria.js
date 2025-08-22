@@ -169,7 +169,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; invade a mente do alvo e altera ou apaga suas mem&oacute;rias da &uacute;ltima hora.</p>",
+      "value": "Você invade a mente do alvo e altera ou apaga suas memórias da última hora.",
       "chat": "",
       "unidentified": ""
     },

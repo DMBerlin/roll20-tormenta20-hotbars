@@ -109,7 +109,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; fica coberto por um manto de energia sombria. Nesta forma, torna-se incorp&oacute;reo (inclui seu equipamento): s&oacute; pode ser afetado por armas m&aacute;gicas, ou por outras criaturas incorp&oacute;reas e pode atravessar objetos s&oacute;lidos, mas n&atilde;o manipul&aacute;-los. Tamb&eacute;m n&atilde;o pode atacar criaturas normais (mas ainda pode lan&ccedil;ar magias nelas). Al&eacute;m disso, se torna vulner&aacute;vel &agrave; luz direta: se exposto a uma fonte de luz, sofre 1 ponto de dano por rodada.</p>\n<p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para &ldquo;entrar&rdquo; em uma sombra do seu tamanho ou maior e se teletransportar para outra sombra, tamb&eacute;m do seu tamanho ou maior, em alcance m&eacute;dio.</p>",
+      "value": "Você fica coberto por um manto de energia sombria. Nesta forma, torna-se incorpóreo (inclui seu equipamento): só pode ser afetado por armas mágicas, ou por outras criaturas incorpóreas e pode atravessar objetos sólidos, mas não manipulá-los. Também não pode atacar criaturas normais (mas ainda pode lançar magias nelas). Além disso, se torna vulnerável à luz direta: se exposto a uma fonte de luz, sofre 1 ponto de dano por rodada. Você pode gastar uma ação de movimento e 1 PM para \"entrar\" em uma sombra do seu tamanho ou maior e se teletransportar para outra sombra, também do seu tamanho ou maior, em alcance médio.",
       "chat": "",
       "unidentified": ""
     },

@@ -101,7 +101,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; invoca o poder de sua divindade na forma de um manto de energia que reveste seu corpo. Esta magia tem duas vers&otilde;es. Voc&ecirc; escolhe qual vers&atilde;o pode lan&ccedil;ar quando aprende esta magia. Ela n&atilde;o pode ser mudada.</p>\n<p><em>Manto de Luz:</em> um manto dourado e luminoso. No in&iacute;cio de cada um de seus turnos, voc&ecirc; e todos os seus aliados em alcance curto recuperam 2d8 PV. Voc&ecirc; recebe imunidade a dano de trevas e seus ataques corpo a corpo causam +2d8 pontos de dano de luz.</p>\n<p><em>Manto de Trevas:</em> um manto negro como a noite. No in&iacute;cio de cada um de seus turnos, todos os inimigos em alcance curto sofrem 4d8 pontos de dano de trevas. Voc&ecirc; cura metade de todo o dano causado pela magia.</p>",
+      "value": "Você invoca o poder de sua divindade na forma de um manto de energia que reveste seu corpo. Esta magia tem duas versões. Você escolhe qual versão pode lançar quando aprende esta magia. Ela não pode ser mudada. Manto de Luz: um manto dourado e luminoso. No início de cada um de seus turnos, você e todos os seus aliados em alcance curto recuperam 2d8 PV. Você recebe imunidade a dano de trevas e seus ataques corpo a corpo causam +2d8 pontos de dano de luz. Manto de Trevas: um manto negro como a noite. No início de cada um de seus turnos, todos os inimigos em alcance curto sofrem 4d8 pontos de dano de trevas. Você cura metade de todo o dano causado pela magia.",
       "chat": "",
       "unidentified": ""
     },

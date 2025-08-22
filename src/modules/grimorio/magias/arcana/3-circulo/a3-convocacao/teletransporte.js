@@ -83,7 +83,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "em vez do normal, a magia teletransporta os alvos para seu santuário — um local familiar e previamente preparado. A magia pode ser usada sem limite de distância ou necessidade de testes, mas apenas dentro do mesmo plano. Preparar um local como seu santuário exige um ritual de um dia e o gasto de T$ 1.000. Você só pode ter um santuário por vez.",
+      "name": "em vez do normal, a magia teletransporta os alvos para seu santuário - um local familiar e previamente preparado. A magia pode ser usada sem limite de distância ou necessidade de testes, mas apenas dentro do mesmo plano. Preparar um local como seu santuário exige um ritual de um dia e o gasto de T$ 1.000. Você só pode ter um santuário por vez.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -155,7 +155,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia transporta os alvos para um lugar a sua escolha a at&eacute; 1.000km. Voc&ecirc; precisa fazer um teste de Misticismo, com dificuldade que depende de seu conhecimento sobre o local de destino.</p>\n<p><em>CD 20.</em> Um lugar familiar, que voc&ecirc; visita com frequ&ecirc;ncia.</p>\n<p><em>CD 30.</em> Um lugar conhecido, que voc&ecirc; j&aacute; visitou pelo menos uma vez.</p>\n<p><em>CD 40.</em> Um que voc&ecirc; nunca visitou e s&oacute; conhece a partir da descri&ccedil;&atilde;o de outra pessoa que esteve l&aacute;.</p>\n<p>Voc&ecirc; n&atilde;o pode se teletransportar para um lugar que nunca visitou sem a descri&ccedil;&atilde;o de algu&eacute;m. Ou seja, n&atilde;o pode se transportar para a &ldquo;sala de tesouro do rei&rdquo; se nunca esteve nela nem falou com algu&eacute;m que esteve.</p>\n<p>Se passar no teste, os alvos chegam ao lugar desejado. Se falhar, os alvos surgem 1d10 x 10km afastados em qualquer dire&ccedil;&atilde;o (se o destino &eacute; uma cidade costeira, voc&ecirc; pode surgir em alto-mar). Se falhar por 5 ou mais, voc&ecirc; chega em um lugar parecido, mas errado. E se voc&ecirc; rolar 1 natural no teste a magia falha (mas voc&ecirc; gasta os PM) e fica atordoado por 1d4 rodadas.</p>",
+      "value": "Esta magia transporta os alvos para um lugar a sua escolha a até 1.000km. Você precisa fazer um teste de Misticismo, com dificuldade que depende de seu conhecimento sobre o local de destino. CD 20. Um lugar familiar, que você visita com frequência. CD 30. Um lugar conhecido, que você já visitou pelo menos uma vez. CD 40. Um que você nunca visitou e só conhece a partir da descrição de outra pessoa que esteve lá. Você não pode se teletransportar para um lugar que nunca visitou sem a descrição de alguém. Ou seja, não pode se transportar para a \"sala de tesouro do rei\" se nunca esteve nela nem falou com alguém que esteve. Se passar no teste, os alvos chegam ao lugar desejado. Se falhar, os alvos surgem 1d10 x 10km afastados em qualquer direção (se o destino é uma cidade costeira, você pode surgir em alto-mar). Se falhar por 5 ou mais, você chega em um lugar parecido, mas errado. E se você rolar 1 natural no teste a magia falha (mas você gasta os PM) e fica atordoado por 1d4 rodadas.",
       "chat": "",
       "unidentified": ""
     },

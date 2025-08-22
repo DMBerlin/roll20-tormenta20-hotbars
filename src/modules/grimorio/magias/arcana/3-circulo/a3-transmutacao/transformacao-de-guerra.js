@@ -206,7 +206,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; se torna uma m&aacute;quina de combate, ficando mais forte, r&aacute;pido e resistente. Voc&ecirc; recebe +6 na Defesa, testes de ataque e rolagens de dano corpo a corpo, e 30 PV tempor&aacute;rios. Durante a <em>Transforma&ccedil;&atilde;o de Guerra</em> voc&ecirc; n&atilde;o pode lan&ccedil;ar magias, mas se torna proficiente em todas as armas.</p>",
+      "value": "Você se torna uma máquina de combate, ficando mais forte, rápido e resistente. Você recebe +6 na Defesa, testes de ataque e rolagens de dano corpo a corpo, e 30 PV temporários. Durante a Transformação de Guerra você não pode lançar magias, mas se torna proficiente em todas as armas.",
       "chat": "",
       "unidentified": ""
     },

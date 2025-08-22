@@ -288,7 +288,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; conjura um enxame de pequenas criaturas da Tormenta. O enxame pode passar pelo espa&ccedil;o de outras criaturas e n&atilde;o impede que outras criaturas entrem no espa&ccedil;o dele. No final de cada um de seus turnos, o enxame causa 4d12 pontos de dano de &aacute;cido a qualquer criatura em seu espa&ccedil;o (Reflexos reduz &agrave; metade). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para mover o enxame com deslocamento de 12m.</p>",
+      "value": "Você conjura um enxame de pequenas criaturas corrosivas da Tormenta que ocupa um quadrado de 3m de lado. O enxame pode passar pelo espaço de outras criaturas e não impede que outras criaturas entrem no espaço dele, mas é perigoso fazê-lo. No final de cada um de seus turnos, o enxame causa 4d12 pontos de dano de ácido a qualquer criatura que esteja ocupando o mesmo espaço que ele. As criaturas afetadas podem fazer um teste de Reflexos para reduzir o dano à metade. Você pode gastar uma ação de movimento para mover o enxame até 12m em qualquer direção. O enxame persiste enquanto você mantiver concentração na magia.",
       "chat": "",
       "unidentified": ""
     },

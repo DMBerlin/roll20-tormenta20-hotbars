@@ -250,7 +250,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; enche a &aacute;rea com energia negativa. Dano causado por efeitos de trevas &eacute; maximizado dentro da &aacute;rea. Isso tamb&eacute;m afeta PV curados em mortos-vivos por esses efeitos. Esta magia n&atilde;o pode ser lan&ccedil;ada em uma &aacute;rea contendo um s&iacute;mbolo vis&iacute;vel dedicado a uma divindade que n&atilde;o a sua. Profanar anula Consagrar.</p>",
+      "value": "Você enche a área com energia negativa. Dano causado por efeitos de trevas é maximizado dentro da área. Isso também afeta PV curados em mortos-vivos por esses efeitos. Esta magia não pode ser lançada em uma área contendo um símbolo visível dedicado a uma divindade que não a sua. Profanar anula Consagrar.",
       "chat": "",
       "unidentified": ""
     },

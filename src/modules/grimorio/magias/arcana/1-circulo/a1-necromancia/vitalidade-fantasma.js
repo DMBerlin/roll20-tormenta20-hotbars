@@ -142,7 +142,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; suga energia vital da terra, recebendo 2d10 pontos de vida tempor&aacute;rios. Os PV tempor&aacute;rios desaparecem ao final da cena.</p>",
+      "value": "Você suga energia vital da terra, recebendo 2d10 pontos de vida temporários. Os PV temporários desaparecem ao final da cena.",
       "chat": "",
       "unidentified": ""
     },

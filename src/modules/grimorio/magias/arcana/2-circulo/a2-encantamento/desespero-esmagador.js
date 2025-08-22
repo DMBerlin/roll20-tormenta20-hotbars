@@ -212,7 +212,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Humanoides na &aacute;rea s&atilde;o acometidos de grande tristeza, adquirindo as condi&ccedil;&otilde;es @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco} e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.XvqIlV5v4YBeFUBs]{Frustrado}. Se passarem na resist&ecirc;ncia, adquirem essas condi&ccedil;&otilde;es por uma rodada.</p>",
+      "value": "Humanoides na área são acometidos de grande tristeza, adquirindo as condições Fraco e Frustrado. Se passarem na resistência, adquirem essas condições por uma rodada.",
       "chat": "",
       "unidentified": ""
     },

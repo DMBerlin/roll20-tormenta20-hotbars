@@ -346,7 +346,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; amplia sua percep&ccedil;&atilde;o, antecipando movimentos dos inimigos e achando brechas em sua defesa. Quando fazum teste de ataque, voc&ecirc; rola dois dados e usa o melhor resultado</p>",
+      "value": "Esta magia amplia sua percepção, antecipando movimentos dos inimigos e encontrando brechas em suas defesas. Quando faz um ataque, você rola dois dados e usa o melhor resultado.",
       "chat": "",
       "unidentified": ""
     },

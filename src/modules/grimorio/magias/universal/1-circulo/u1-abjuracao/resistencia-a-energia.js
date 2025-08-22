@@ -997,7 +997,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Ao lan&ccedil;ar esta magia, escolha entre &aacute;cido, eletricidade, fogo, frio, luz ou trevas. O alvo recebe redu&ccedil;&atilde;o de dano 10 contra o tipo de dano escolhido.</p>",
+      "value": "Ao lançar esta magia, escolha entre ácido, eletricidade, fogo, frio, luz ou trevas. O alvo recebe redução de dano 10 contra o tipo de dano escolhido.",
       "chat": "",
       "unidentified": ""
     },

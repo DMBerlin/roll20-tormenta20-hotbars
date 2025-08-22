@@ -256,7 +256,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria uma explos&atilde;o de luz dourada e intensa. Criaturas na &aacute;rea ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego} por 1d4 rodadas e @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.2M8CXrGavdU6g1ZI]{Em Chamas} , e sofrem 10d6 pontos de dano de fogo (mortos-vivos sofrem 10d8 pontos de dano). Uma criatura que passe no teste de resist&ecirc;ncia n&atilde;o fica cega, nem em chamas e sofre metade do dano.</p>",
+      "value": "Você cria uma explosão de luz dourada e intensa. Criaturas na área ficam Cego por 1d4 rodadas e Em Chamas , e sofrem 10d6 pontos de dano de fogo (mortos-vivos sofrem 10d8 pontos de dano). Uma criatura que passe no teste de resistência não fica cega, nem em chamas e sofre metade do dano.",
       "chat": "",
       "unidentified": ""
     },

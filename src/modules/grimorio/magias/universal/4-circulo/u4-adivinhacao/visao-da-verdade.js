@@ -282,7 +282,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; enxerga a forma real das coisas. Voc&ecirc; pode ver atrav&eacute;s de camuflagem e escurid&atilde;o (normais e m&aacute;gicas), assim como efeitos de ilus&atilde;o e transmuta&ccedil;&atilde;o (enxergando a verdade como formas transl&uacute;cidas ou sobrepostas).</p>",
+      "value": "Seus olhos brilham com uma luz dourada sutil e você passa a enxergar a forma real de todas as coisas. Esta visão mística permite que você veja através de camuflagem e escuridão (tanto normais quanto mágicas), assim como todos os efeitos de ilusão e transmutação. Quando olha para algo afetado por magia de ilusão ou transmutação, você vê tanto a aparência falsa quanto a verdadeira forma, sendo a verdadeira mais nítida. Você automaticamente detecta criaturas invisíveis, polimorfadas, disfarçadas magicamente ou escondidas por ilusões. Além disso, pode identificar a verdadeira natureza de construtos, mortos-vivos e criaturas extraplanares, vendo uma aura característica ao redor delas. Esta magia também revela a presença de magias ativas em objetos e criaturas, mostrando-as como uma tênue aura colorida.",
       "chat": "",
       "unidentified": ""
     },

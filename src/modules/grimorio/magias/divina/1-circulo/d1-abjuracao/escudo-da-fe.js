@@ -404,7 +404,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um escudo místico se manifesta momentaneamente para bloquear um golpe. O alvo recebe +2 na Defesa.</p>",
+      "value": "Um escudo místico se manifesta momentaneamente para bloquear um golpe. O alvo recebe +2 na Defesa.",
       "chat": "",
       "unidentified": ""
     },

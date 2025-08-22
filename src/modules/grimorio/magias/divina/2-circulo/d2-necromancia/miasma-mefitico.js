@@ -189,7 +189,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>A &aacute;rea &eacute; coberta por emana&ccedil;&otilde;es letais. Criaturas na &aacute;rea sofrem 5d6 pontos de dano de &aacute;cido e ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj]{Enjoado} por 1 rodada. Se passarem na resist&ecirc;ncia, sofrem metade do dano e n&atilde;o ficam enjoadas.</p>",
+      "value": "A área é coberta por emanações letais. Criaturas na área sofrem 5d6 pontos de dano de ácido e ficam Enjoado por 1 rodada. Se passarem na resistência, sofrem metade do dano e não ficam enjoadas.",
       "chat": "",
       "unidentified": ""
     },

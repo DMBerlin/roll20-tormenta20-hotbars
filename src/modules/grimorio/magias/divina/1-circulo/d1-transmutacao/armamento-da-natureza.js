@@ -310,7 +310,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; fortalece uma arma mundana primitiva (sem custo em T$, como bord&atilde;o, clava, funda ou tacape), uma arma natural ou um ataque desarmado. O dano da arma aumenta em um passo e ela &eacute; considerada m&aacute;gica. Ao lan&ccedil;ar a magia, voc&ecirc; pode mudar o tipo de dano da arma (escolhendo entre corte, impacto ou perfura&ccedil;&atilde;o).</p>",
+      "value": "Você fortalece uma arma mundana primitiva (sem custo em T$, como bordão, clava, funda ou tacape), uma arma natural ou um ataque desarmado. O dano da arma aumenta em um passo e ela é considerada mágica. Ao lançar a magia, você pode mudar o tipo de dano da arma (escolhendo entre corte, impacto ou perfuração).",
       "chat": "",
       "unidentified": ""
     },

@@ -480,7 +480,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; fortalece o corpo do alvo. Ele recebe +2 em For&ccedil;a, Destreza ou Constitui&ccedil;&atilde;o, a sua escolha. Esse aumento n&atilde;o oferece PV ou PM adicionais.</p>",
+      "value": "Você fortalece o corpo do alvo. Ele recebe +2 em Força, Destreza ou Constituição, a sua escolha. Esse aumento não oferece PV ou PM adicionais.",
       "chat": "",
       "unidentified": ""
     },

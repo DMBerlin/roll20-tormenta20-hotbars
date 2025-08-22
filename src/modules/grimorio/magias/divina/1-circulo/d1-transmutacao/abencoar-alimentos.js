@@ -226,7 +226,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; purifica e aben&ccedil;oa uma por&ccedil;&atilde;o de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado pr&oacute;prio para consumo. Al&eacute;m disso, se for consumido at&eacute; o final da dura&ccedil;&atilde;o, o alimento oferece 5 PV tempor&aacute;rios ou 1 PM tempor&aacute;rio (al&eacute;m de quaisquer b&ocirc;nus que j&aacute; oferecesse). B&ocirc;nus de alimenta&ccedil;&atilde;o duram um dia e cada personagem s&oacute; pode receber um b&ocirc;nus de alimenta&ccedil;&atilde;o por dia.</p>",
+      "value": "Você purifica e abençoa uma porção de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado próprio para consumo. Além disso, se for consumido até o final da duração, o alimento oferece 5 PV temporários ou 1 PM temporário (além de quaisquer bônus que já oferecesse). Bônus de alimentação duram um dia e cada personagem só pode receber um bônus de alimentação por dia.",
       "chat": "",
       "unidentified": ""
     },

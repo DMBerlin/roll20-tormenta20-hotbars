@@ -210,7 +210,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; dispara um raio p&uacute;rpura que drena as for&ccedil;as do alvo. Se falhar na resist&ecirc;ncia, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado}. Se passar, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulner&aacute;vel}.</p>\n<p>Note que, como efeitos de magia n&atilde;o acumulam, lan&ccedil;ar esta magia duas vezes contra o mesmo alvo n&atilde;o ir&aacute; deix&aacute;-lo exausto.</p>",
+      "value": "Você dispara um raio púrpura que drena as forças do alvo. Se falhar na resistência, o alvo fica Fatigado. Se passar, fica Vulnerável. Note que, como efeitos de magia não acumulam, lançar esta magia duas vezes contra o mesmo alvo não irá deixá-lo exausto.",
       "chat": "",
       "unidentified": ""
     },

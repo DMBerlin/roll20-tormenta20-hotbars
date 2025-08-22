@@ -269,7 +269,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Envia um aviso telep&aacute;tico para uma criatura, mesmo que n&atilde;o possa v&ecirc;-la nem tenha linha de efeito.</p>\n<p>Escolha um:</p>\n<p>Alerta: o alvo recebe +5 em seu pr&oacute;ximo teste de Iniciativa e de Percep&ccedil;&atilde;o dentro da cena.</p>\n<p>Mensagem: o alvo recebe uma mensagem sua de at&eacute; 25 palavras. Voc&ecirc;s devem ter um idioma em comum para o alvo poder entend&ecirc;-lo.</p>\n<p>Localiza&ccedil;&atilde;o: o alvo sabe onde voc&ecirc; est&aacute; naquele momento. Se voc&ecirc; mudar de posi&ccedil;&atilde;o, ele n&atilde;o saber&aacute;.</p>",
+      "value": "Envia um aviso telepático para uma criatura, mesmo que não possa vê-la nem tenha linha de efeito. Escolha um: Alerta: o alvo recebe +5 em seu próximo teste de Iniciativa e de Percepção dentro da cena. Mensagem: o alvo recebe uma mensagem sua de até 25 palavras. Vocês devem ter um idioma em comum para o alvo poder entendê-lo. Localização: o alvo sabe onde você está naquele momento. Se você mudar de posição, ele não saberá.",
       "chat": "",
       "unidentified": ""
     },

@@ -226,7 +226,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; conjura um enxame de criaturas a sua escolha, como besouros, gafanhotos, ratos, morcegos ou serpentes. O enxame pode passar pelo espa&ccedil;o de outras criaturas e n&atilde;o impede que outras criaturas entrem no espa&ccedil;o dele. No final de seus turnos, o enxame causa 2d12 pontos de dano de corte a qualquer criatura em seu espa&ccedil;o (Fortitude reduz &agrave; metade). Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento para mover o enxame 12m.</p>",
+      "value": "Você conjura um enxame de criaturas a sua escolha, como besouros, gafanhotos, ratos, morcegos ou serpentes. O enxame pode passar pelo espaço de outras criaturas e não impede que outras criaturas entrem no espaço dele. No final de seus turnos, o enxame causa 2d12 pontos de dano de corte a qualquer criatura em seu espaço (Fortitude reduz à metade). Você pode gastar uma ação de movimento para mover o enxame 12m.",
       "chat": "",
       "unidentified": ""
     },

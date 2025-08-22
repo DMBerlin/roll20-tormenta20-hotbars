@@ -268,7 +268,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Ningu&eacute;m sabe se Mestre foi realmente o criador desta magia &mdash; mas ele foi o primeiro a utiliz&aacute;-la. Voc&ecirc; fecha o punho e gesticula como se estivesse golpeando o alvo, causando dano de impacto igual a 4d6 + sua For&ccedil;a. A v&iacute;tima &eacute; empurrada 3m na dire&ccedil;&atilde;o oposta &agrave; sua. Passar no teste de resist&ecirc;ncia reduz o dano &agrave; metade e evita o empurr&atilde;o.</p>",
+      "value": "Ninguém sabe se Mestre foi realmente o criador desta magia — mas ele foi o primeiro a utilizá-la. Você fecha o punho e gesticula como se estivesse golpeando o alvo, causando dano de impacto igual a 4d6 + sua Força. A vítima é empurrada 3m na direção oposta à sua. Passar no teste de resistência reduz o dano à metade e evita o empurrão.",
       "chat": "",
       "unidentified": ""
     },

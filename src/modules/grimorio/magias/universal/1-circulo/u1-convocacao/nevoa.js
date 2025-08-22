@@ -322,7 +322,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "além do normal, a nuvem fica espessa, quase sólida. Qualquer criatura dentro dela tem seu deslocamento reduzido para 3m (independentemente de seu deslocamento normal) e sofre –2 em testes de ataque e rolagens de dano.",
+      "name": "além do normal, a nuvem fica espessa, quase sólida. Qualquer criatura dentro dela tem seu deslocamento reduzido para 3m (independentemente de seu deslocamento normal) e sofre -2 em testes de ataque e rolagens de dano.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -398,7 +398,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Uma névoa espessa eleva-se de um ponto a sua escolha, obscurecendo toda a visão — criaturas a até 1,5m têm camuflagem e criaturas a partir de 3m têm camuflagem total. Um vento forte dispersa a névoa em 4 rodadas e um vendaval a dispersa em 1 rodada. Esta magia não funciona sob a água.</p>",
+      "value": "Uma névoa espessa eleva-se de um ponto a sua escolha, obscurecendo toda a visão — criaturas a até 1,5m têm camuflagem e criaturas a partir de 3m têm camuflagem total. Um vento forte dispersa a névoa em 4 rodadas e um vendaval a dispersa em 1 rodada. Esta magia não funciona sob a água.",
       "chat": "",
       "unidentified": ""
     },

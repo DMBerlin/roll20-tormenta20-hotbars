@@ -154,7 +154,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia recobre uma superf&iacute;cie com uma subst&acirc;ncia gordurosa e escorregadia. Criaturas na &aacute;rea devem passar na resist&ecirc;ncia para n&atilde;o cair. Nas rodadas seguintes, criaturas que tentem movimentar-se pela &aacute;rea devem fazer testes de Acrobacia para equil&iacute;brio (CD 10).</p>\n<p><em>&Aacute;rea Escorregadia</em> pode tornar um item escorregadio. Uma criatura segurando um objeto afetado deve passar na resist&ecirc;ncia para n&atilde;o deixar o item cair cada vez que us&aacute;-lo.</p>",
+      "value": "Esta magia recobre uma superfície com uma substância gordurosa e escorregadia. Criaturas na área devem passar na resistência para não cair. Nas rodadas seguintes, criaturas que tentem movimentar-se pela área devem fazer testes de Acrobacia para equilíbrio (CD 10). área Escorregadia pode tornar um item escorregadio. Uma criatura segurando um objeto afetado deve passar na resistência para não deixar o item cair cada vez que usá-lo.",
       "chat": "",
       "unidentified": ""
     },

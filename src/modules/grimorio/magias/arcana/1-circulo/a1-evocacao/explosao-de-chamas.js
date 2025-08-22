@@ -187,7 +187,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um leque de chamas irrompe de suas mãos, causando 2d6 pontos de dano de fogo às criaturas na área.</p>",
+      "value": "Um leque de chamas irrompe de suas mãos, causando 2d6 pontos de dano de fogo às criaturas na área.",
       "chat": "",
       "unidentified": ""
     },

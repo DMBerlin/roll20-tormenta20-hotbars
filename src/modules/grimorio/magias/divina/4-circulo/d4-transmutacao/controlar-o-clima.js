@@ -61,7 +61,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; muda o clima da &aacute;rea onde se encontra, podendo criar qualquer condi&ccedil;&atilde;o clim&aacute;tica: chuva, neve, ventos, n&eacute;voas... Veja o Cap&iacute;tulo 6: O Mestre para os efeitos em jogo do clima.</p>",
+      "value": "Você muda o clima da área onde se encontra, podendo criar qualquer condição climática: chuva, neve, ventos, névoas... Veja o Capítulo 6: O Mestre para os efeitos em jogo do clima.",
       "chat": "",
       "unidentified": ""
     },

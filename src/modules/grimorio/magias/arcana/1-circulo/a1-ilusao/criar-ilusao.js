@@ -399,7 +399,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria uma ilus&atilde;o visual (uma criatura, uma parede...) ou sonora (um grito de socorro, um uivo assustador...). A magia cria apenas imagens ou sons simples, com volume equivalente ao tom de voz normal para cada cubo de 1,5m no efeito. N&atilde;o &eacute; poss&iacute;vel criar cheiros, texturas ou temperaturas, nem sons complexos, como uma m&uacute;sica ou di&aacute;logo. Criaturas e objetos atravessam uma ilus&atilde;o sem sofrer dano, mas a magia pode, por exemplo, esconder uma armadilha ou inimigo. A magia &eacute; dissipada se voc&ecirc; sair do alcance.</p>",
+      "value": "Esta magia cria uma ilusão visual (uma criatura, uma parede...) ou sonora (um grito de socorro, um uivo assustador...). A magia cria apenas imagens ou sons simples, com volume equivalente ao tom de voz normal para cada cubo de 1,5m no efeito. Não é possível criar cheiros, texturas ou temperaturas, nem sons complexos, como uma música ou diálogo. Criaturas e objetos atravessam uma ilusão sem sofrer dano, mas a magia pode, por exemplo, esconder uma armadilha ou inimigo. A magia é dissipada se você sair do alcance.",
       "chat": "",
       "unidentified": ""
     },

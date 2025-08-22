@@ -247,7 +247,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Ap&oacute;s uma breve uni&atilde;o com a natureza local, voc&ecirc; obt&eacute;m informa&ccedil;&otilde;es e intui&ccedil;&otilde;es sobre a regi&atilde;o em que est&aacute;, numa dist&acirc;ncia equivalente a um dia de viagem. Voc&ecirc; recebe 6d4 dados de aux&iacute;lio.</p>\n<p>Enquanto a magia durar, sempre que for realizar um teste de per&iacute;cia em &aacute;reas naturais, voc&ecirc; pode gastar 2d4 (mais 2d4 para cada c&iacute;rculo de magias acima do 3&ordm; que puder lan&ccedil;ar) e adicionar o resultado rolado como b&ocirc;nus no teste. A magia termina se voc&ecirc; ficar sem dados.</p>",
+      "value": "Após uma breve união com a natureza local, você obtém informações e intuições sobre a região em que está, numa distância equivalente a um dia de viagem. Você recebe 6d4 dados de auxílio. Enquanto a magia durar, sempre que for realizar um teste de perícia em áreas naturais, você pode gastar 2d4 (mais 2d4 para cada círculo de magias acima do 3º que puder lançar) e adicionar o resultado rolado como bônus no teste. A magia termina se você ficar sem dados.",
       "chat": "",
       "unidentified": ""
     },

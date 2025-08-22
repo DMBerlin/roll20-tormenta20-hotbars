@@ -147,7 +147,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Pela dura&ccedil;&atilde;o da magia, voc&ecirc; sabe a posi&ccedil;&atilde;o e status (PV atuais, se est&atilde;o sob efeito de magia...) dos alvos. Depois de lan&ccedil;ada, a dist&acirc;ncia entre voc&ecirc; e os alvos n&atilde;o importa &mdash; a magia s&oacute; deixa de detectar um alvo se ele morrer ou for para outro plano.</p>",
+      "value": "Pela duração da magia, você sabe a posição e status (PV atuais, se estão sob efeito de magia...) dos alvos. Depois de lançada, a distância entre você e os alvos não importa — a magia só deixa de detectar um alvo se ele morrer ou for para outro plano.",
       "chat": "",
       "unidentified": ""
     },

@@ -140,7 +140,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; &eacute; envolto por uma esfera m&aacute;gica brilhante com 3m de raio, que det&eacute;m qualquer magia de 2&ordm; c&iacute;rculo ou menor. Nenhuma magia pode ser lan&ccedil;ada contra um alvo dentro do globo e magias de &aacute;rea n&atilde;o o penetram. No entanto, magias ainda podem ser lan&ccedil;adas de dentro para fora.</p>\n<p>Uma magia que dissipa outras magias s&oacute; dissipa o globo se for usada diretamente sobre voc&ecirc;, n&atilde;o o afetando se usada em &aacute;rea. Efeitos m&aacute;gicos n&atilde;o s&atilde;o dissipados quando entram na esfera, apenas suprimidos (voltam a funcionar fora do globo, caso sua dura&ccedil;&atilde;o n&atilde;o tenha acabado). O globo &eacute; im&oacute;vel e n&atilde;o tem efeito sobre criaturas ou objetos. Ap&oacute;s lan&ccedil;&aacute;-lo, voc&ecirc; pode entrar ou sair livremente.</p>",
+      "value": "Você é envolto por uma esfera mágica brilhante com 3m de raio, que detém qualquer magia de 2º círculo ou menor. Nenhuma magia pode ser lançada contra um alvo dentro do globo e magias de área não o penetram. No entanto, magias ainda podem ser lançadas de dentro para fora. Uma magia que dissipa outras magias só dissipa o globo se for usada diretamente sobre você, não o afetando se usada em área. Efeitos mágicos não são dissipados quando entram na esfera, apenas suprimidos (voltam a funcionar fora do globo, caso sua duração não tenha acabado). O globo é imóvel e não tem efeito sobre criaturas ou objetos. Após lançá-lo, você pode entrar ou sair livremente.",
       "chat": "",
       "unidentified": ""
     },

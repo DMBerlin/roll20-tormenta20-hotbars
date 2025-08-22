@@ -249,7 +249,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; canaliza o poder de sua divindade. Voc&ecirc; aumenta uma categoria de tamanho (seu equipamento muda de acordo) e recebe For&ccedil;a +4 e RD 10. Voc&ecirc; n&atilde;o pode lan&ccedil;ar magias enquanto estiver sob efeito de Pot&ecirc;ncia Divina.</p>",
+      "value": "Você canaliza o poder de sua divindade. Você aumenta uma categoria de tamanho (seu equipamento muda de acordo) e recebe Força +4 e RD 10. Você não pode lançar magias enquanto estiver sob efeito de Potência Divina.",
       "chat": "",
       "unidentified": ""
     },

@@ -493,7 +493,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia aumenta ou diminui o tamanho de um item mundano em at&eacute; tr&ecirc;s categorias (um objeto Enorme vira Pequeno, por exemplo). Voc&ecirc; tamb&eacute;m pode mudar a consist&ecirc;ncia do item, deixando-o r&iacute;gido como pedra ou flex&iacute;vel como seda (isso n&atilde;o altera sua RD ou PV, apenas suas propriedades f&iacute;sicas). Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela pode fazer um teste de Vontade para anul&aacute;-la.</p>",
+      "value": "Esta magia aumenta ou diminui o tamanho de um item mundano em até três categorias (um objeto Enorme vira Pequeno, por exemplo). Você também pode mudar a consistência do item, deixando-o rígido como pedra ou flexível como seda (isso não altera sua RD ou PV, apenas suas propriedades físicas). Se lançar a magia num objeto de uma criatura involuntária, ela pode fazer um teste de Vontade para anulá-la.",
       "chat": "",
       "unidentified": ""
     },

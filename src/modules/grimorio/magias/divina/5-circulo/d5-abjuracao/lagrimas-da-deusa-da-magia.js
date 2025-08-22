@@ -167,7 +167,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Se falhar no teste de resistência, o alvo perde a habilidade de lançar magias arcanas até o fim da cena. Se passar, perde a habilidade por uma rodada.</p>",
+      "value": "Se falhar no teste de resistência, o alvo perde a habilidade de lançar magias arcanas até o fim da cena. Se passar, perde a habilidade por uma rodada.",
       "chat": "",
       "unidentified": ""
     },

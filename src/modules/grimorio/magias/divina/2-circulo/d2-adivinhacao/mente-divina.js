@@ -472,7 +472,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; fortalece a mente do alvo. Ele recebe +2 em Intelig&ecirc;ncia, Sabedoria ou Carisma, a sua escolha. Esse aumento n&atilde;o oferece PV, PM ou per&iacute;cias adicionais.</p>",
+      "value": "Você fortalece a mente do alvo. Ele recebe +2 em Inteligência, Sabedoria ou Carisma, a sua escolha. Esse aumento não oferece PV, PM ou perícias adicionais.",
       "chat": "",
       "unidentified": ""
     },

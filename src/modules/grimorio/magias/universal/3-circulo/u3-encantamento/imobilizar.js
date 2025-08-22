@@ -198,7 +198,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.3dcJKe2SGu8mnafU\" data-id=\"3dcJKe2SGu8mnafU\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Paralisado</a>; se passar na resist&ecirc;ncia, em vez disso fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}. A cada rodada, pode gastar uma a&ccedil;&atilde;o completa para fazer um novo teste de Vontade. Se passar, se liberta do efeito.</p>",
+      "value": "Esta magia paralisa o alvo com energia mágica. Se falhar no teste de resistência, o alvo fica com a condição Paralisado (não pode realizar ações, fica indefeso e automaticamente falha em testes de Reflexos). Se passar no teste de resistência, em vez disso fica com a condição Lento (pode realizar apenas uma ação padrão ou de movimento por turno, não ambas). A cada rodada, o alvo pode gastar uma ação completa para fazer um novo teste de Vontade. Se passar, se liberta completamente do efeito.",
       "chat": "",
       "unidentified": ""
     },

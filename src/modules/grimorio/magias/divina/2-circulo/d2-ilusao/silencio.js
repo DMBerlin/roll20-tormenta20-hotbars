@@ -154,7 +154,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um sil&ecirc;ncio sepulcral recai sobre a &aacute;rea e nenhum som &eacute; produzido nela. Enquanto estiverem na &aacute;rea, todas as criaturas ficam @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.eaJwtq58TBZw0Oyo]{Surdo}. Al&eacute;m disso, como lan&ccedil;ar magias exige palavras m&aacute;gicas, normalmente nenhuma magia pode ser lan&ccedil;ada dentro da &aacute;rea.</p>",
+      "value": "Um silêncio sepulcral recai sobre a área e nenhum som é produzido nela. Enquanto estiverem na área, todas as criaturas ficam Surdo. Além disso, como lançar magias exige palavras mágicas, normalmente nenhuma magia pode ser lançada dentro da área.",
       "chat": "",
       "unidentified": ""
     },

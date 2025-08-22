@@ -175,7 +175,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia foi desenvolvida por um mago imortal, um entusiasta dos estudos vulc&acirc;nicos. Ela dispara um proj&eacute;til de magma contra o alvo, que sofre 4d6 pontos de dano de fogo e 4d6 pontos de dano de perfura&ccedil;&atilde;o e fica em chamas. As chamas causam 2d6 pontos de dano por rodada, em vez do dano normal. Se passar no teste de resist&ecirc;ncia, o alvo sofre metade do dano e n&atilde;o fica em chamas.</p>\n<p>Respingos de rocha incandescente se espalham com a explos&atilde;o, atingindo todas as criaturas adjacentes ao alvo, que devem fazer um teste de Reflexos. Se falharem, ficam em chamas, como descrito acima.</p>",
+      "value": "Esta magia foi desenvolvida por um mago imortal, um entusiasta dos estudos vulcânicos. Ela dispara um projétil de magma contra o alvo, que sofre 4d6 pontos de dano de fogo e 4d6 pontos de dano de perfuração e fica em chamas. As chamas causam 2d6 pontos de dano por rodada, em vez do dano normal. Se passar no teste de resistência, o alvo sofre metade do dano e não fica em chamas. Respingos de rocha incandescente se espalham com a explosão, atingindo todas as criaturas adjacentes ao alvo, que devem fazer um teste de Reflexos. Se falharem, ficam em chamas, como descrito acima.",
       "chat": "",
       "unidentified": ""
     },

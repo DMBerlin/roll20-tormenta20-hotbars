@@ -112,7 +112,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você pede a sua divindade que envie um espírito para ajudá-lo. Esse espírito realiza uma tarefa a sua escolha que possa ser cumprida em até uma hora — desde algo simples como \"use suas asas para nos levar até o topo da montanha\" até algo complexo como \"escolte esses camponeses até o castelo\". A magia é descarregada quando a criatura cumpre a tarefa, retornando a seu plano natal. O tipo de criatura é escolhido pelo mestre, de acordo com as necessidades da tarefa.</p><p><i>Componente material:</i> um pagamento de T$ 100 ao espírito. A forma de pagamento varia — doações a um templo, um item mágico ou mesmo dinheiro.</p>",
+      "value": "Você pede a sua divindade que envie um espírito para ajudá-lo. Esse espírito realiza uma tarefa a sua escolha que possa ser cumprida em até uma hora — desde algo simples como \"use suas asas para nos levar até o topo da montanha\" até algo complexo como \"escolte esses camponeses até o castelo\". A magia é descarregada quando a criatura cumpre a tarefa, retornando a seu plano natal. O tipo de criatura é escolhido pelo mestre, de acordo com as necessidades da tarefa.Componente material: um pagamento de T$ 100 ao espírito. A forma de pagamento varia — doações a um templo, um item mágico ou mesmo dinheiro.",
       "chat": "",
       "unidentified": ""
     },

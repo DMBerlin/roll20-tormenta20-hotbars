@@ -354,7 +354,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo &eacute; envolvido por um campo de for&ccedil;a cor de esmeralda que impede qualquer movimento planar. Isso inclui magias de convoca&ccedil;&atilde;o (como Salto Dimensional e Teletransporte), viagens astrais e a habilidade incorp&oacute;reo.</p>",
+      "value": "O alvo é envolvido por um campo de força cor de esmeralda que impede qualquer forma de movimento planar ou extradimensional. Isso inclui magias de teletransporte (como Salto Dimensional e Teletransporte), convocação que mova o alvo (como ser banido ou convocado), viagens astrais, movimento através de portais dimensionais e a habilidade incorpóreo. O alvo não pode deixar o plano atual por nenhum meio mágico, mas ainda pode se mover normalmente dentro do plano. Criaturas incorpóreas afetadas tornam-se temporariamente corpóreas enquanto durar o efeito.",
       "chat": "",
       "unidentified": ""
     },

@@ -114,7 +114,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um c&iacute;rculo de energias sombrias se abre no ch&atilde;o, de onde surgem tent&aacute;culos feitos de treva viscosa. Ao lan&ccedil;ar a magia e no in&iacute;cio de cada um de seus turnos, voc&ecirc; faz um teste da manobra agarrar (usando seu b&ocirc;nus de Misticismo) contra cada criatura na &aacute;rea. Se voc&ecirc; passar, a criatura &eacute; agarrada; se a v&iacute;tima j&aacute; est&aacute; agarrada, &eacute; esmagada, sofrendo 4d6 pontos de dano de trevas. A &aacute;rea conta como terreno dif&iacute;cil. Os tent&aacute;culos s&atilde;o imunes a dano.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.TSRZ1cAIIIpsvOfK]{Agarrado}</p>",
+      "value": "Um círculo de energias sombrias se abre no chão, de onde surgem tentáculos feitos de treva viscosa. Ao lançar a magia e no início de cada um de seus turnos, você faz um teste da manobra agarrar (usando seu bônus de Misticismo) contra cada criatura na área. Se você passar, a criatura é agarrada; se a vítima já está agarrada, é esmagada, sofrendo 4d6 pontos de dano de trevas. A área conta como terreno difícil. Os tentáculos são imunes a dano. Agarrado",
       "chat": "",
       "unidentified": ""
     },

@@ -103,7 +103,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria uma duplicata ilus&oacute;ria do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifesta&ccedil;&atilde;o s&oacute;lida de sua pr&oacute;pria sombra. A duplicata de sombras segue automaticamente o alvo. Sempre que o alvo faz uma a&ccedil;&atilde;o hostil &mdash; fazer um ataque, usar uma habilidade, lan&ccedil;ar uma magia &mdash; a sombra imediatamente realiza a mesma a&ccedil;&atilde;o contra o alvo, usando as mesmas estat&iacute;sticas e rolagens. A sombra pode ser atacada, tem as mesmas estat&iacute;sticas do alvo e &eacute; destru&iacute;da quando chega a 0 PV. Se o alvo passar no teste de resist&ecirc;ncia, a sombra desaparece no final do turno do alvo, depois de copiar sua a&ccedil;&atilde;o dessa rodada.</p>",
+      "value": "Esta magia cria uma duplicata ilusória do alvo na forma de uma silhueta, ligada a ele como se fosse uma manifestação sólida de sua própria sombra. A duplicata de sombras segue automaticamente o alvo. Sempre que o alvo faz uma ação hostil — fazer um ataque, usar uma habilidade, lançar uma magia — a sombra imediatamente realiza a mesma ação contra o alvo, usando as mesmas estatísticas e rolagens. A sombra pode ser atacada, tem as mesmas estatísticas do alvo e é destruída quando chega a 0 PV. Se o alvo passar no teste de resistência, a sombra desaparece no final do turno do alvo, depois de copiar sua ação dessa rodada.",
       "chat": "",
       "unidentified": ""
     },

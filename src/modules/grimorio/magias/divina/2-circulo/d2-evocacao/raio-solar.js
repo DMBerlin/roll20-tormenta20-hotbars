@@ -213,7 +213,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; canaliza uma poderosa rajada de energia positiva que ilumina o campo de batalha. Criaturas na &aacute;rea sofrem 4d8 pontos de dano de luz (ou 4d12, se forem mortos-vivos) e ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.lm0ybs4xkYuERx1r\" data-id=\"lm0ybs4xkYuERx1r\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Ofuscado</a> por uma rodada. Se passarem na resist&ecirc;ncia, sofrem metade do dano e n&atilde;o ficam ofuscadas.</p>\n<p>@UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.qN5JjvnXDq4Xak1K]{Cego}</p>",
+      "value": "Você canaliza uma poderosa rajada de energia positiva que ilumina o campo de batalha. Criaturas na área sofrem 4d8 pontos de dano de luz (ou 4d12, se forem mortos-vivos) e ficam Ofuscado por uma rodada. Se passarem na resistência, sofrem metade do dano e não ficam ofuscadas. Cego",
       "chat": "",
       "unidentified": ""
     },

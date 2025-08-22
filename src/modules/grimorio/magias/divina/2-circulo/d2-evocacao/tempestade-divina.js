@@ -468,7 +468,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia s&oacute; pode ser usada em ambientes abertos. A &aacute;rea fica sujeita a um vendaval &mdash; ataques &agrave; dist&acirc;ncia sofrem penalidade de &ndash;5, chamas s&atilde;o apagadas e n&eacute;voas s&atilde;o dissipadas. Voc&ecirc; tamb&eacute;m pode gerar chuva (&ndash;5 em testes de Percep&ccedil;&atilde;o), neve (como chuva, e a &aacute;rea se torna terreno dif&iacute;cil) ou granizo (como chuva, mais 1 ponto de dano de impacto por rodada, no in&iacute;cio de seus turnos).</p>",
+      "value": "Esta magia só pode ser usada em ambientes abertos. A área fica sujeita a um vendaval — ataques à distância sofrem penalidade de –5, chamas são apagadas e névoas são dissipadas. Você também pode gerar chuva (–5 em testes de Percepção), neve (como chuva, e a área se torna terreno difícil) ou granizo (como chuva, mais 1 ponto de dano de impacto por rodada, no início de seus turnos).",
       "chat": "",
       "unidentified": ""
     },

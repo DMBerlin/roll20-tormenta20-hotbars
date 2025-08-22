@@ -227,7 +227,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo pode realizar uma a&ccedil;&atilde;o padr&atilde;o ou de movimento adicional por turno. Esta a&ccedil;&atilde;o n&atilde;o pode ser usada para lan&ccedil;ar magias e ativar engenhocas.</p>",
+      "value": "O alvo pode realizar uma ação padrão ou de movimento adicional por turno. Esta ação não pode ser usada para lançar magias e ativar engenhocas.",
       "chat": "",
       "unidentified": ""
     },

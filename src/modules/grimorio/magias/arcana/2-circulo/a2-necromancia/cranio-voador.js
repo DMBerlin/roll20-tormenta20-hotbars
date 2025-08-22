@@ -112,7 +112,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria um cr&acirc;nio envolto em energia negativa. Quando atinge o alvo, causa 4d8+4 pontos de dano de trevas e se desfaz emitindo um som horrendo, deixando abalado o alvo e todos os inimigos num raio de 3m dele (criaturas j&aacute; abaladas ficam apavoradas por 1d4 rodadas). Passar no teste de resist&ecirc;ncia diminui o dano &agrave; metade e evita a condi&ccedil;&atilde;o (as demais criaturas na &aacute;rea tamb&eacute;m tem direito ao teste de resist&ecirc;ncia, para evitar a condi&ccedil;&atilde;o).</p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ccqJXj25EVIzUhzo\" data-id=\"ccqJXj25EVIzUhzo\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Abalado</a></p>\n<p><a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX\" data-id=\"5n105JaAFlwIfkyX\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Apavorado</a></p>",
+      "value": "Esta magia cria um crânio envolto em energia negativa. Quando atinge o alvo, causa 4d8+4 pontos de dano de trevas e se desfaz emitindo um som horrendo, deixando abalado o alvo e todos os inimigos num raio de 3m dele (criaturas já abaladas ficam apavoradas por 1d4 rodadas). Passar no teste de resistência diminui o dano à metade e evita a condição (as demais criaturas na área também tem direito ao teste de resistência, para evitar a condição). Abalado Apavorado",
       "chat": "",
       "unidentified": ""
     },

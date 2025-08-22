@@ -68,7 +68,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; dispara um raio fino e esverdeado que causa 10d12 pontos de dano de ess&ecirc;ncia. Se o alvo passar no teste de resist&ecirc;ncia, em vez disso sofre 2d12 pontos de dano.</p>\n<p>Independentemente do resultado do teste de Fortitude, se os PV do alvo forem reduzidos a 0 ou menos, ele ser&aacute; completamente desintegrado, restando apenas p&oacute;.</p>",
+      "value": "Você dispara um raio fino e esverdeado de energia desintegradora que causa 10d12 pontos de dano de essência. Este dano ignora qualquer resistência ou redução de dano, pois ataca diretamente a estrutura molecular do alvo. Se o alvo passar no teste de resistência de Fortitude, em vez disso sofre apenas 2d12 pontos de dano. Independentemente do resultado do teste de resistência, se os pontos de vida do alvo forem reduzidos a 0 ou menos por esta magia, ele será completamente desintegrado, restando apenas uma pequena pilha de pó fino. Criaturas desintegradas não podem ser ressuscitadas por magias normais, apenas por Desejo ou intervenção divina direta.",
       "chat": "",
       "unidentified": ""
     },

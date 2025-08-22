@@ -420,7 +420,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>A magia transforma mat&eacute;ria bruta para moldar um novo objeto. Voc&ecirc; pode usar mat&eacute;ria-prima mundana para criar um objeto de tamanho Pequeno ou menor e pre&ccedil;o m&aacute;ximo de T$ 25, como um balde ou uma espada. O objeto reverte &agrave; mat&eacute;ria-prima no final da cena, ou se for tocado por um objeto feito de chumbo. Esta magia n&atilde;o pode ser usada para criar objetos consum&iacute;veis, como alimentos ou itens alqu&iacute;micos, nem objetos com mecanismos complexos, como bestas ou armas de fogo.</p>\n<p><em>Transmutar Objetos </em>anula <em>Despeda&ccedil;ar</em>.</p>",
+      "value": "A magia transforma matéria bruta para moldar um novo objeto. Você pode usar matéria-prima mundana para criar um objeto de tamanho Pequeno ou menor e preço máximo de T$ 25, como um balde ou uma espada. O objeto reverte à matéria-prima no final da cena, ou se for tocado por um objeto feito de chumbo. Esta magia não pode ser usada para criar objetos consumíveis, como alimentos ou itens alquímicos, nem objetos com mecanismos complexos, como bestas ou armas de fogo. Transmutar Objetos anula Despedaçar.",
       "chat": "",
       "unidentified": ""
     },

@@ -142,7 +142,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Teia cria v&aacute;rias camadas de fibras entrela&ccedil;adas e pegajosas na &aacute;rea. Qualquer criatura na &aacute;rea que falhar na resist&ecirc;ncia fica <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.GwCDzhOvdqD8zEaw\" data-id=\"GwCDzhOvdqD8zEaw\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enredado</a>. Uma v&iacute;tima pode se libertar com uma a&ccedil;&atilde;o padr&atilde;o e um teste de Acrobacia ou Atletismo. A &aacute;rea ocupada por Teia &eacute; terreno dif&iacute;cil.</p>\n<p>A Teia &eacute; inflam&aacute;vel. Qualquer ataque que cause dano de fogo destr&oacute;i as teias por onde passar, libertando as criaturas enredadas mas deixando-as em chamas.</p>",
+      "value": "Teia cria várias camadas de fibras entrelaçadas e pegajosas na área. Qualquer criatura na área que falhar na resistência fica Enredado. Uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo. A área ocupada por Teia é terreno difícil. A Teia é inflamável. Qualquer ataque que cause dano de fogo destrói as teias por onde passar, libertando as criaturas enredadas mas deixando-as em chamas.",
       "chat": "",
       "unidentified": ""
     },

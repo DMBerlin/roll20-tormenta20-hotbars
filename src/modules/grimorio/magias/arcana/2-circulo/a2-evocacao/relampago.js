@@ -125,7 +125,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você dispara um poderoso raio que causa 6d6 pontos de dano de eletricidade em todas as criaturas e objetos livres na área.</p>",
+      "value": "Você dispara um poderoso raio que causa 6d6 pontos de dano de eletricidade em todas as criaturas e objetos livres na área.",
       "chat": "",
       "unidentified": ""
     },

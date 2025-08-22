@@ -162,7 +162,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; desperta a consci&ecirc;ncia de um animal ou planta. O alvo se torna um parceiro veterano de um tipo a sua escolha entre ajudante, combatente, fort&atilde;o, guardi&atilde;o, m&eacute;dico, perseguidor ou vigilante. Se usar esta magia em um parceiro que j&aacute; possua, o n&iacute;vel de poder de um de seus tipos aumenta em um passo (iniciante para veterano, veterano para mestre). Se j&aacute; for um parceiro mestre, recebe o b&ocirc;nus de outro tipo de parceiro iniciante (entre as escolhas acima). O alvo se torna uma criatura racional, com Intelig&ecirc;ncia &ndash;1, e pode falar</p>",
+      "value": "Você desperta a consciência de um animal ou planta. O alvo se torna um parceiro veterano de um tipo a sua escolha entre ajudante, combatente, fortão, guardião, médico, perseguidor ou vigilante. Se usar esta magia em um parceiro que já possua, o nível de poder de um de seus tipos aumenta em um passo (iniciante para veterano, veterano para mestre). Se já for um parceiro mestre, recebe o bônus de outro tipo de parceiro iniciante (entre as escolhas acima). O alvo se torna uma criatura racional, com Inteligência –1, e pode falar",
       "chat": "",
       "unidentified": ""
     },

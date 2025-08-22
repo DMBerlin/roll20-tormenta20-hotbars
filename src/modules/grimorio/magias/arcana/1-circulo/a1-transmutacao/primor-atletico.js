@@ -295,7 +295,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você modifica os limites físicos do alvo, que recebe deslocamento +9m e +10 em testes de Atletismo.</p>",
+      "value": "Você modifica os limites físicos do alvo, que recebe deslocamento +9m e +10 em testes de Atletismo.",
       "chat": "",
       "unidentified": ""
     },

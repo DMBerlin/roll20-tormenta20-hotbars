@@ -288,7 +288,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria uma barreira protetora invis&iacute;vel que detecta qualquer criatura que tocar ou entrar na &aacute;rea protegida. Ao lan&ccedil;ar a magia, voc&ecirc; pode escolher quais criaturas podem entrar na &aacute;rea sem ativar seus efeitos. <em>Alarme</em> pode emitir um aviso telep&aacute;tico ou sonoro, decidido quando a magia &eacute; lan&ccedil;ada. Um aviso telep&aacute;tico alerta apenas voc&ecirc;, inclusive acordando-o se estiver dormindo, mas apenas se estiver a at&eacute; 1km da &aacute;rea protegida. Um aviso sonoro alerta todas as criaturas em alcance longo.</p>",
+      "value": "Você cria uma barreira protetora invisível que detecta qualquer criatura que tocar ou entrar na área protegida. Ao lançar a magia, você pode escolher quais criaturas podem entrar na área sem ativar seus efeitos. Alarme pode emitir um aviso telepático ou sonoro, decidido quando a magia é lançada. Um aviso telepático alerta apenas você, inclusive acordando-o se estiver dormindo, mas apenas se estiver a até 1km da área protegida. Um aviso sonoro alerta todas as criaturas em alcance longo.",
       "chat": "",
       "unidentified": ""
     },

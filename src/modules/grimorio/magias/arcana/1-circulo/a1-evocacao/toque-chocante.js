@@ -186,7 +186,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Arcos elétricos envolvem sua mão, causando 2d8+2 pontos de dano de eletricidade. Se o alvo usa armadura de metal (ou carrega muito metal, a critério do mestre), sofre uma penalidade de –5 no teste de resistência.</p>",
+      "value": "Arcos elétricos envolvem sua mão, causando 2d8+2 pontos de dano de eletricidade. Se o alvo usa armadura de metal (ou carrega muito metal, a critério do mestre), sofre uma penalidade de –5 no teste de resistência.",
       "chat": "",
       "unidentified": ""
     },

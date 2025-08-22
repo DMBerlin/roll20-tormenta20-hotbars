@@ -219,7 +219,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; manifesta e dispara uma adaga imaterial contra a mente do alvo, que sofre 2d6 pontos de dano ps&iacute;quico e fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.bD6XAyHQrWYr0BTQ]{Atordoado} por uma rodada. Se passar no teste de resist&ecirc;ncia, sofre apenas metade do dano e evita a condi&ccedil;&atilde;o. Uma criatura s&oacute; pode ficar atordoada por esta magia uma vez por cena.</p>",
+      "value": "Você manifesta e dispara uma adaga imaterial contra a mente do alvo, que sofre 2d6 pontos de dano psíquico e fica Atordoado por uma rodada. Se passar no teste de resistência, sofre apenas metade do dano e evita a condição. Uma criatura só pode ficar atordoada por esta magia uma vez por cena.",
       "chat": "",
       "unidentified": ""
     },

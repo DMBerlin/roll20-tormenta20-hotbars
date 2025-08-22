@@ -387,7 +387,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Sua pele ganha aspecto e dureza de rocha. Voc&ecirc; recebe redu&ccedil;&atilde;o de dano 5.</p>",
+      "value": "Sua pele ganha aspecto e dureza de rocha, tornando-se mais resistente a ferimentos. Você recebe redução de dano 5, reduzindo em 5 pontos todo dano físico (corte, impacto e perfuração) que sofrer. Esta redução não se aplica a dano de energia (fogo, frio, eletricidade, ácido, trevas, luz) ou dano mental.",
       "chat": "",
       "unidentified": ""
     },

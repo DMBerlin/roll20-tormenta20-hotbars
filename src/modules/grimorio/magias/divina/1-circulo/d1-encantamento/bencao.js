@@ -195,7 +195,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Aben&ccedil;oa os alvos, que recebem +1 em testes de ataque e rolagens de dano. <em>B&ecirc;n&ccedil;&atilde;o</em> anula <em>Perdi&ccedil;&atilde;o</em>.</p>",
+      "value": "Abençoa os alvos, que recebem +1 em testes de ataque e rolagens de dano. Bênção anula Perdição.",
       "chat": "",
       "unidentified": ""
     },

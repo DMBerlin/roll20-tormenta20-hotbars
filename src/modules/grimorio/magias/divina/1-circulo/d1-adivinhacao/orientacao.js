@@ -216,7 +216,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Em seu pr&oacute;ximo teste de per&iacute;cia, o alvo pode rolar dois dados e ficar com o melhor resultado</p>",
+      "value": "Em seu próximo teste de perícia, o alvo pode rolar dois dados e ficar com o melhor resultado",
       "chat": "",
       "unidentified": ""
     },

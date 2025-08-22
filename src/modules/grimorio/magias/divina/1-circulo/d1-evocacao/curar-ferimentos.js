@@ -264,7 +264,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; canaliza energia positiva que recupera 2d8+2 pontos de vida na criatura tocada.</p>",
+      "value": "Você canaliza energia positiva que recupera 2d8+2 pontos de vida na criatura tocada.",
       "chat": "",
       "unidentified": ""
     },

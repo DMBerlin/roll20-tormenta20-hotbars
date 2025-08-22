@@ -202,7 +202,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; murmura palavras desconexas que afetam a mente do alvo. O alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.ynLMPpmMnZwV6rxf]{Confuso}.</p>",
+      "value": "Você murmura palavras desconexas que afetam a mente do alvo. O alvo fica Confuso.",
       "chat": "",
       "unidentified": ""
     },

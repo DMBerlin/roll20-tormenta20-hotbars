@@ -54,7 +54,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p><strong>Custo Adicional:</strong> penalidade de 1 PM</p>\n<p>Essa magia &eacute; muito utilizada por cl&eacute;rigos e bardos que n&atilde;o precisam (ou n&atilde;o podem) estar sempre com suas armas ou armaduras. A magia &eacute; lan&ccedil;ada sobre at&eacute; dois itens que voc&ecirc; possua. A partir da&iacute;, em qualquer momento, voc&ecirc; pode usar uma a&ccedil;&atilde;o completa para convocar os itens, que aparecem sobre seu corpo e em suas m&atilde;os. O efeito &eacute; espalhafatoso, sendo praticamente imposs&iacute;vel utiliz&aacute;-lo sem chamar aten&ccedil;&atilde;o. A magia funciona independentemente da dist&acirc;ncia dos itens, contanto que estejam no mesmo plano, mas termina se voc&ecirc; perder a posse deles.</p>",
+      "value": "Custo Adicional: penalidade de 1 PM Essa magia é muito utilizada por clérigos e bardos que não precisam (ou não podem) estar sempre com suas armas ou armaduras. A magia é lançada sobre até dois itens que você possua. A partir daí, em qualquer momento, você pode usar uma ação completa para convocar os itens, que aparecem sobre seu corpo e em suas mãos. O efeito é espalhafatoso, sendo praticamente impossível utilizá-lo sem chamar atenção. A magia funciona independentemente da distância dos itens, contanto que estejam no mesmo plano, mas termina se você perder a posse deles.",
       "chat": "",
       "unidentified": ""
     },

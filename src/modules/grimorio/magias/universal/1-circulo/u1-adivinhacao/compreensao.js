@@ -268,7 +268,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Essa magia lhe confere compreens&atilde;o sobrenatural. Voc&ecirc; pode tocar um texto e entender as palavras mesmo que n&atilde;o conhe&ccedil;a o idioma. Se tocar numa criatura inteligente, pode se comunicar com ela mesmo que n&atilde;o tenham um idioma em comum. Se tocar uma criatura n&atilde;o inteligente, como um animal, pode perceber seus sentimentos.</p>\n<p>Voc&ecirc; tamb&eacute;m pode gastar uma a&ccedil;&atilde;o de movimento para ouvir os pensamentos de uma criatura tocada (voc&ecirc; &ldquo;ouve&rdquo; o que o alvo est&aacute; pensando), mas um alvo involunt&aacute;rio tem direito a um teste de Vontade para proteger seus pensamentos e evitar este efeito.</p>",
+      "value": "Esta magia confere a você uma compreensão sobrenatural. Você pode tocar um texto e entender as palavras, mesmo que não conheça o idioma. Se tocar uma criatura inteligente, pode se comunicar com ela, mesmo que não tenham um idioma em comum. Se tocar uma criatura não inteligente, como um animal, pode perceber seus sentimentos. Além disso, você pode gastar uma ação de movimento para ouvir os pensamentos de uma criatura tocada. Um alvo involuntário tem direito a um teste de Vontade para proteger seus pensamentos e evitar este efeito.",
       "chat": "",
       "unidentified": ""
     },

@@ -229,7 +229,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você protege o alvo contra efeitos mágicos nocivos. O alvo recebe +5 em testes de resistência contra magias.</p>",
+      "value": "Você protege o alvo contra efeitos mágicos nocivos. O alvo recebe +5 em testes de resistência contra magias.",
       "chat": "",
       "unidentified": ""
     },

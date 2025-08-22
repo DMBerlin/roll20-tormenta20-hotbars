@@ -315,7 +315,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Você invoca espíritos da natureza, pedindo que eles abram seu caminho. As criaturas afetadas recebem deslocamento +3m e ignoram penalidades por terreno difícil em terrenos naturais.</p>",
+      "value": "Você invoca espíritos da natureza, pedindo que eles abram seu caminho. As criaturas afetadas recebem deslocamento +3m e ignoram penalidades por terreno difícil em terrenos naturais.",
       "chat": "",
       "unidentified": ""
     },

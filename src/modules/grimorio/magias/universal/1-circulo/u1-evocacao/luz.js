@@ -506,7 +506,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo emite luz (mas n&atilde;o produz calor) em uma &aacute;rea com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltar&aacute; a funcionar caso o objeto seja revelado. Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. <em>Luz</em> anula <em>Escurid&atilde;o</em>.</p>",
+      "value": "O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.",
       "chat": "",
       "unidentified": ""
     },

@@ -339,7 +339,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria uma barreira mística invisível que fornece ao alvo +2 em testes de resistência.</p>",
+      "value": "Esta magia cria uma barreira mística invisível que fornece ao alvo +2 em testes de resistência.",
       "chat": "",
       "unidentified": ""
     },

@@ -124,7 +124,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cruel foi desenvolvida por um mago de combate, quando ainda era um b&iacute;pede. Voc&ecirc; faz um gesto r&aacute;pido e dispara uma l&acirc;mina de ar em alta velocidade. Criaturas na &aacute;rea sofrem 10d8 pontos de dano de corte e ficam sangrando. Alvos que passem no teste de resist&ecirc;ncia sofrem metade do dano e n&atilde;o ficam sangrando.</p>",
+      "value": "Esta magia cruel foi desenvolvida por um mago de combate, quando ainda era um bípede. Você faz um gesto rápido e dispara uma lâmina de ar em alta velocidade. Criaturas na área sofrem 10d8 pontos de dano de corte e ficam sangrando. Alvos que passem no teste de resistência sofrem metade do dano e não ficam sangrando.",
       "chat": "",
       "unidentified": ""
     },

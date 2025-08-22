@@ -374,7 +374,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; invoca a arma preferida de sua divindade (se tiver uma), que surge flutuando a seu lado. Uma vez por rodada, quando voc&ecirc; sofre um ataque corpo a corpo, pode usar uma rea&ccedil;&atilde;o para que a arma cause automaticamente 2d6pontos de dano do tipo da arma &mdash; por exemplo, uma espada longa causa dano de corte &mdash; no oponente que fez o ataque. Esta magia se dissipa se voc&ecirc; morrer.</p>",
+      "value": "Você invoca a arma preferida de sua divindade (se tiver uma), que surge flutuando a seu lado. Uma vez por rodada, quando você sofre um ataque corpo a corpo, pode usar uma reação para que a arma cause automaticamente 2d6pontos de dano do tipo da arma — por exemplo, uma espada longa causa dano de corte — no oponente que fez o ataque. Esta magia se dissipa se você morrer.",
       "chat": "",
       "unidentified": ""
     },

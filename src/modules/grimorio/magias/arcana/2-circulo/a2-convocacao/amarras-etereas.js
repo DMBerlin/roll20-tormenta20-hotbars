@@ -216,7 +216,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Tr&ecirc;s la&ccedil;os de energia surgem e se enroscam no alvo, deixando-o agarrado. A v&iacute;tima pode tentar se livrar, gastando uma a&ccedil;&atilde;o padr&atilde;o para fazer um teste de Atletismo (CD igual &agrave; da magia). Se passar, destr&oacute;i um la&ccedil;o, mais um la&ccedil;o adicional para cada 5 pontos pelos quais superou a CD. Os la&ccedil;os tamb&eacute;m podem ser atacados e destru&iacute;dos: cada um tem Defesa 10, 10 PV, RD 5 e imunidade a dano m&aacute;gico. Se todos os la&ccedil;os forem destru&iacute;dos, a magia &eacute; dissipada. Por serem feitos de energia, os la&ccedil;os afetam criaturas incorp&oacute;reas.</p>",
+      "value": "Três laços de energia surgem e se enroscam no alvo, deixando-o agarrado. A vítima pode tentar se livrar, gastando uma ação padrão para fazer um teste de Atletismo (CD igual à da magia). Se passar, destrói um laço, mais um laço adicional para cada 5 pontos pelos quais superou a CD. Os laços também podem ser atacados e destruídos: cada um tem Defesa 10, 10 PV, RD 5 e imunidade a dano mágico. Se todos os laços forem destruídos, a magia é dissipada. Por serem feitos de energia, os laços afetam criaturas incorpóreas.",
       "chat": "",
       "unidentified": ""
     },

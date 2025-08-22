@@ -181,7 +181,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Vislumbres do futuro permitem que voc&ecirc; reavalie suas a&ccedil;&otilde;es. Uma vez por rodada, voc&ecirc; pode rolar novamente um teste rec&eacute;m realizado, mas deve aceitar o resultado da nova rolagem.</p>",
+      "value": "Vislumbres do futuro permitem que você reavalie suas ações. Uma vez por rodada, você pode rolar novamente um teste recém realizado, mas deve aceitar o resultado da nova rolagem.",
       "chat": "",
       "unidentified": ""
     },

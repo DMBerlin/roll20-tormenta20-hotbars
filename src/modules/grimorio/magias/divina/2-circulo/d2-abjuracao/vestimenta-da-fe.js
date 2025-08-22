@@ -359,7 +359,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; fortalece um item, aumentando o b&ocirc;nus de Defesa de uma armadura ou escudo em +2. No caso de um vestu&aacute;rio, ele passa a oferecer +2 na Defesa (n&atilde;o cumulativo com armadura). Os efeitos desta magia s&atilde;o uma melhoria no item, portanto s&atilde;o cumulativos com outras magias, mas n&atilde;o com b&ocirc;nus por encantos nesse item.</p>",
+      "value": "Você fortalece um item, aumentando o bônus de Defesa de uma armadura ou escudo em +2. No caso de um vestuário, ele passa a oferecer +2 na Defesa (não cumulativo com armadura). Os efeitos desta magia são uma melhoria no item, portanto são cumulativos com outras magias, mas não com bônus por encantos nesse item.",
       "chat": "",
       "unidentified": ""
     },

@@ -89,7 +89,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "muda o alvo para 1 animal Minúsculo e a duração para 1 semana. Em vez do normal, o animal se desloca no melhor de suas capacidades até um local designado por você — em geral, para levar um item, carta ou similar. Quando o animal chega ao destino, fica esperando até o fim da magia, permitindo apenas que uma ou mais criaturas escolhidas por você se aproximem e peguem o que ele estiver carregando.",
+      "name": "muda o alvo para 1 animal Minúsculo e a duração para 1 semana. Em vez do normal, o animal se desloca no melhor de suas capacidades até um local designado por você - em geral, para levar um item, carta ou similar. Quando o animal chega ao destino, fica esperando até o fim da magia, permitindo apenas que uma ou mais criaturas escolhidas por você se aproximem e peguem o que ele estiver carregando.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -208,7 +208,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria um v&iacute;nculo mental com um animal prestativo em rela&ccedil;&atilde;o a voc&ecirc;. O <em>Aliado Animal</em> obedece a voc&ecirc; no melhor de suas capacidades, mesmo que isso arrisque a vida dele. Ele funciona como um parceiro veterano, de um tipo a sua escolha entre ajudante, combatente, fort&atilde;o, guardi&atilde;o, montaria ou perseguidor.</p>",
+      "value": "Você cria um vínculo mental com um animal prestativo em relação a você. O Aliado Animal obedece a você no melhor de suas capacidades, mesmo que isso arrisque a vida dele. Ele funciona como um parceiro veterano, de um tipo a sua escolha entre ajudante, combatente, fortão, guardião, montaria ou perseguidor.",
       "chat": "",
       "unidentified": ""
     },

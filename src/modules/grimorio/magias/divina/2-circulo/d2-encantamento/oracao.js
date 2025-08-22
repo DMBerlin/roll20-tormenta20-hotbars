@@ -125,7 +125,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "aumenta as penalidades em –1, limitado pelo círculo máximo de magia que você pode lançar.",
+      "name": "aumenta as penalidades em -1, limitado pelo círculo máximo de magia que você pode lançar.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -368,7 +368,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; e todos os seus aliados no alcance recebem +2 em testes de per&iacute;cia e rolagens de dano, e todos os seus inimigos no alcance sofrem &ndash;2 em testes de per&iacute;cia e rolagens de dano. Esse efeito &eacute; cumulativo com outras magias.</p>\n<p>Componente Material: T$ 25por PM gastos em incensos ou outras oferendas.</p>",
+      "value": "Você e todos os seus aliados no alcance recebem +2 em testes de perícia e rolagens de dano, e todos os seus inimigos no alcance sofrem –2 em testes de perícia e rolagens de dano. Esse efeito é cumulativo com outras magias. Componente Material: T$ 25por PM gastos em incensos ou outras oferendas.",
       "chat": "",
       "unidentified": ""
     },

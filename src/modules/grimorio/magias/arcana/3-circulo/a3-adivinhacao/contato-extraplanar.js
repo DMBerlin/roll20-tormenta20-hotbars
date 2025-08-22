@@ -140,7 +140,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Sua mente viaja at&eacute; outro plano de exist&ecirc;ncia, onde entra em contato com seres extraplanares como g&ecirc;nios e dem&ocirc;nios. Voc&ecirc; firma um contrato com uma dessas entidades para que o auxilie durante o dia, em troca de se alimentar de seu mana. Quando a magia &eacute; lan&ccedil;ada, voc&ecirc; recebe 6d6 dados de aux&iacute;lio. Enquanto a magia durar, sempre que for realizar um teste de per&iacute;cia, voc&ecirc; pode gastar 1d6 (mais 1d6 para cada c&iacute;rculo de magias acima do 3&ordm; que puder lan&ccedil;ar) e adicionar o resultado como b&ocirc;nus no teste. No entanto, sempre que rolar um &ldquo;6&rdquo; num desses dados, a entidade &ldquo;suga&rdquo; 1 PM de voc&ecirc;. A magia termina se voc&ecirc; gastar todos os dados, ficar sem PM ou no fim do dia (o que acontecer primeiro).</p>",
+      "value": "Sua mente viaja até outro plano de existência, onde entra em contato com seres extraplanares como gênios e demônios. Você firma um contrato com uma dessas entidades para que o auxilie durante o dia, em troca de se alimentar de seu mana. Quando a magia é lançada, você recebe 6d6 dados de auxílio. Enquanto a magia durar, sempre que for realizar um teste de perícia, você pode gastar 1d6 (mais 1d6 para cada círculo de magias acima do 3º que puder lançar) e adicionar o resultado como bônus no teste. No entanto, sempre que rolar um \"6\" num desses dados, a entidade \"suga\" 1 PM de você. A magia termina se você gastar todos os dados, ficar sem PM ou no fim do dia (o que acontecer primeiro).",
       "chat": "",
       "unidentified": ""
     },

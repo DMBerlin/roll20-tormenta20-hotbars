@@ -224,7 +224,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; recebe deslocamento de voo 12m. Voar por meio desta magia &eacute; simples como andar &mdash; voc&ecirc; pode atacar e lan&ccedil;ar magias normalmente enquanto voa. Quando a magia termina, voc&ecirc; desce lentamente at&eacute; o ch&atilde;o, como se estivesse sob efeito de <em>Queda Suave</em>.</p>",
+      "value": "Você recebe deslocamento de voo 12m. Voar por meio desta magia é simples como andar — você pode atacar e lançar magias normalmente enquanto voa. Quando a magia termina, você desce lentamente até o chão, como se estivesse sob efeito de Queda Suave.",
       "chat": "",
       "unidentified": ""
     },

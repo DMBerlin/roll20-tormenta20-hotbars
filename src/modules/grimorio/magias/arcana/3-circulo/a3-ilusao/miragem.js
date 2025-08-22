@@ -105,7 +105,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; faz um terreno parecer outro, incluindo sons e cheiros. Uma plan&iacute;cie pode parecer um p&acirc;ntano, uma floresta pode parecer uma montanha etc. Esta magia pode ser usada para criar armadilhas: areia movedi&ccedil;a pode parecer terra firme ou um precip&iacute;cio pode parecer um lago. Voc&ecirc; pode alterar, incluir e esconder estruturas dentro da &aacute;rea, mas n&atilde;o criaturas (embora elas possam se esconder nas estruturas ilus&oacute;rias).</p>",
+      "value": "Você faz um terreno parecer outro, incluindo sons e cheiros. Uma planície pode parecer um pântano, uma floresta pode parecer uma montanha etc. Esta magia pode ser usada para criar armadilhas: areia movediça pode parecer terra firme ou um precipício pode parecer um lago. Você pode alterar, incluir e esconder estruturas dentro da área, mas não criaturas (embora elas possam se esconder nas estruturas ilusórias).",
       "chat": "",
       "unidentified": ""
     },

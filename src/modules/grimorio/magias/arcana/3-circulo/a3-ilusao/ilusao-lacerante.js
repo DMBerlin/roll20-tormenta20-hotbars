@@ -123,7 +123,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; cria uma ilus&atilde;o de algum perigo mortal. Quando a magia &eacute; lan&ccedil;ada, criaturas na &aacute;rea devem fazer um teste de Vontade; uma falha significa que a criatura acredita que a ilus&atilde;o &eacute; real e sofre 3d6 pontos de dano ps&iacute;quico n&atilde;o letal. Sempre que uma criatura iniciar seu turno dentro da &aacute;rea, deve repetir o teste de Vontade. Se falhar, sofre o dano novamente. Somente criaturas que falham veem a ilus&atilde;o, e racionalizam o efeito sempre que falham no teste (por exemplo, acredita que o mesmo teto pode cair sobre ela v&aacute;rias vezes).</p>",
+      "value": "Você cria uma ilusão de algum perigo mortal. Quando a magia é lançada, criaturas na área devem fazer um teste de Vontade; uma falha significa que a criatura acredita que a ilusão é real e sofre 3d6 pontos de dano psíquico não letal. Sempre que uma criatura iniciar seu turno dentro da área, deve repetir o teste de Vontade. Se falhar, sofre o dano novamente. Somente criaturas que falham veem a ilusão, e racionalizam o efeito sempre que falham no teste (por exemplo, acredita que o mesmo teto pode cair sobre ela várias vezes).",
       "chat": "",
       "unidentified": ""
     },

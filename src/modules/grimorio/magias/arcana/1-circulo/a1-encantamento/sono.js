@@ -222,7 +222,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Um cansa&ccedil;o m&iacute;stico recai sobre o alvo. Se falhar na resist&ecirc;ncia, ele fica inconsciente e ca&iacute;do ou, se estiver envolvido em combate ou outra situa&ccedil;&atilde;o perigosa, fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto} por 1 rodada, depois fatigado. Em ambos os casos, se passar, o alvo fica @UUID[JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.MCED18aEe4UFeEVf]{Fatigado} por 1d4 rodadas.</p>",
+      "value": "Um cansaço místico recai sobre o alvo. Se falhar na resistência, ele fica inconsciente e caído ou, se estiver envolvido em combate ou outra situação perigosa, fica Exausto por 1 rodada, depois fatigado. Em ambos os casos, se passar, o alvo fica Fatigado por 1d4 rodadas.",
       "chat": "",
       "unidentified": ""
     },

@@ -68,7 +68,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; evoca um c&iacute;rculo de luz que emana uma energia poderosa. Qualquer criatura viva que termine o turno dentro do c&iacute;rculo recupera 3d8+3 PV e 1 PM. Mortos-vivos e criaturas que sofrem dano por luz perdem PV e PM na mesma quantidade. Uma criatura pode recuperar no m&aacute;ximo 5 PM por dia com esta magia.</p>",
+      "value": "Você evoca um círculo de luz que emana uma energia poderosa. Qualquer criatura viva que termine o turno dentro do círculo recupera 3d8+3 PV e 1 PM. Mortos-vivos e criaturas que sofrem dano por luz perdem PV e PM na mesma quantidade. Uma criatura pode recuperar no máximo 5 PM por dia com esta magia.",
       "chat": "",
       "unidentified": ""
     },

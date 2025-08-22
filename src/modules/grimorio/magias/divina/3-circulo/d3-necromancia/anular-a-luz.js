@@ -261,7 +261,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria uma onda de escurid&atilde;o que causa diversos efeitos. Todas as magias de 3&ordm; c&iacute;rculo ou menor ativas na &aacute;rea s&atilde;o dissipadas se voc&ecirc; passar num teste de Religi&atilde;o contra a CD de cada magia. Seus aliados na &aacute;rea s&atilde;o protegidos por uma aura sombria e recebem +4 na Defesa at&eacute; o fim da cena. Inimigos na &aacute;rea ficam <a class=\"content-link\" draggable=\"true\" data-uuid=\"JournalEntry.s15J5SOYixL3Ajzr.JournalEntryPage.BUMyxT4YI9mdC8Aj\" data-id=\"BUMyxT4YI9mdC8Aj\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\">Enjoado</a>por 1d4 rodadas (apenas uma vez por cena). <em>Anular a Luz</em> anula <em>Dispersar as Trevas</em> (este efeito tem dura&ccedil;&atilde;o instant&acirc;nea).</p>",
+      "value": "Esta magia cria uma onda de escuridão que causa diversos efeitos. Todas as magias de 3º círculo ou menor ativas na área são dissipadas se você passar num teste de Religião contra a CD de cada magia. Seus aliados na área são protegidos por uma aura sombria e recebem +4 na Defesa até o fim da cena. Inimigos na área ficam Enjoadopor 1d4 rodadas (apenas uma vez por cena). Anular a Luz anula Dispersar as Trevas (este efeito tem duração instantânea).",
       "chat": "",
       "unidentified": ""
     },

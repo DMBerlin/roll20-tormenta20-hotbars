@@ -268,7 +268,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>A arma fornece um b&ocirc;nus de +1 nos testes de ataque e rolagens de dano e &eacute; considerada m&aacute;gica (n&atilde;o cumulativo com b&ocirc;nus de encantos). Caso voc&ecirc; esteja empunhando a arma, pode usar seu atributo-chave de magias em vez do atributo original nos testes de ataque (n&atilde;o cumulativo com efeitos que somam este atributo).</p>",
+      "value": "A arma fornece um bônus de +1 nos testes de ataque e rolagens de dano e é considerada mágica (não cumulativo com bônus de encantos). Caso você esteja empunhando a arma, pode usar seu atributo-chave de magias em vez do atributo original nos testes de ataque (não cumulativo com efeitos que somam este atributo).",
       "chat": "",
       "unidentified": ""
     },

@@ -322,7 +322,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "muda a penalidade nas perícias para –10 (se passar na resistência) e –20 (se falhar). Requer 4º círculo.",
+      "name": "muda a penalidade nas perícias para -10 (se passar na resistência) e -20 (se falhar). Requer 4º círculo.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -455,7 +455,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Tamb&eacute;m conhecida como <em>L&aacute;grimas do Deus da Trapa&ccedil;a</em>, esta magia &eacute; usada em tribunais e para proteger &aacute;reas sens&iacute;veis. Criaturas na &aacute;rea sofrem &ndash;10 em testes de Acrobacia, Engana&ccedil;&atilde;o, Furtividade e Ladinagem e n&atilde;o podem mentir deliberadamente &mdash; mas podem tentar evitar perguntas que normalmente responderiam com uma mentira (sendo evasivas ou cometendo omiss&otilde;es, por exemplo). Uma criatura que passe na resist&ecirc;ncia tem as penalidades reduzidas para &ndash;5 e pode mentir.</p>",
+      "value": "Também conhecida como Lágrimas do Deus da Trapaça, esta magia é usada em tribunais e para proteger áreas sensíveis. Criaturas na área sofrem –10 em testes de Acrobacia, Enganação, Furtividade e Ladinagem e não podem mentir deliberadamente — mas podem tentar evitar perguntas que normalmente responderiam com uma mentira (sendo evasivas ou cometendo omissões, por exemplo). Uma criatura que passe na resistência tem as penalidades reduzidas para –5 e pode mentir.",
       "chat": "",
       "unidentified": ""
     },

@@ -142,7 +142,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "aumenta o tamanho da montaria em uma categoria. Isso também aumenta o número de criaturas que ela pode carregar — duas para uma criatura Enorme, seis para Colossal. Uma única criatura controla a montaria; as outras apenas são deslocadas.",
+      "name": "aumenta o tamanho da montaria em uma categoria. Isso também aumenta o número de criaturas que ela pode carregar - duas para uma criatura Enorme, seis para Colossal. Uma única criatura controla a montaria; as outras apenas são deslocadas.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -269,7 +269,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia convoca um parceiro cavalo (ou p&ocirc;nei) de guerra veterano. Sua apar&ecirc;ncia &eacute; de um animal negro com crina e cauda cinzentas e cascos feitos de fuma&ccedil;a, mas voc&ecirc; pode mud&aacute;-la se quiser. Al&eacute;m dos benef&iacute;cios normais, a <em>Montaria Arcana</em> pode atravessar terreno dif&iacute;cil sem redu&ccedil;&atilde;o em seu deslocamento.Voc&ecirc; pode usar Misticismo no lugar de Cavalgar para efeitos desta montaria (incluindo ser considerado treinado).</p>",
+      "value": "Esta magia convoca um parceiro cavalo (ou pônei) de guerra veterano. Sua aparência é de um animal negro com crina e cauda cinzentas e cascos feitos de fumaça, mas você pode mudá-la se quiser. Além dos benefícios normais, a Montaria Arcana pode atravessar terreno difícil sem redução em seu deslocamento.Você pode usar Misticismo no lugar de Cavalgar para efeitos desta montaria (incluindo ser considerado treinado).",
       "chat": "",
       "unidentified": ""
     },

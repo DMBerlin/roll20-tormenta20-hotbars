@@ -61,7 +61,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Voc&ecirc; manifesta uma nuvem de poeira carregada de energia negativa, que apodrece lentamente as criaturas na &aacute;rea. Ao lan&ccedil;ar a magia, e no in&iacute;cio de seus turnos, criaturas na &aacute;rea sofrem 2d8+8 pontos de dano de trevas (Fortitude reduz &agrave; metade). Alvos que falharem no teste n&atilde;o podem recuperar PV por uma rodada.</p>",
+      "value": "Você manifesta uma nuvem de poeira carregada de energia negativa, que apodrece lentamente as criaturas na área. Ao lançar a magia, e no início de seus turnos, criaturas na área sofrem 2d8+8 pontos de dano de trevas (Fortitude reduz à metade). Alvos que falharem no teste não podem recuperar PV por uma rodada.",
       "chat": "",
       "unidentified": ""
     },

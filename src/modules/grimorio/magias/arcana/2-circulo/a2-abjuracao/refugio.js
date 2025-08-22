@@ -186,7 +186,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia cria um domo im&oacute;vel e quase opaco por fora, mas transparente pelo lado de dentro. Ele protege contra calor, frio e for&ccedil;as pequenas, mas n&atilde;o contra qualquer coisa capaz de causar dano. Assim, o domo protege contra neve e vento comuns, mas n&atilde;o contra uma flecha ou Bola de Fogo. Por&eacute;m, como o domo &eacute; quase opaco, qualquer criatura dentro dele tem camuflagem total contra ataques vindos de fora. Criaturas podem entrar e sair do domo livremente. Descansar dentro do Ref&uacute;gio concede recupera&ccedil;&atilde;o normal de PV e PM.</p>",
+      "value": "Esta magia cria um domo imóvel e quase opaco por fora, mas transparente pelo lado de dentro. Ele protege contra calor, frio e forças pequenas, mas não contra qualquer coisa capaz de causar dano. Assim, o domo protege contra neve e vento comuns, mas não contra uma flecha ou Bola de Fogo. Porém, como o domo é quase opaco, qualquer criatura dentro dele tem camuflagem total contra ataques vindos de fora. Criaturas podem entrar e sair do domo livremente. Descansar dentro do Refúgio concede recuperação normal de PV e PM.",
       "chat": "",
       "unidentified": ""
     },

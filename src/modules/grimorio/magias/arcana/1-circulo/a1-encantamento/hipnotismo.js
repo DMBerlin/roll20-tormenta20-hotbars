@@ -453,7 +453,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Suas palavras e movimentos ritmados deixam o alvo fascinado. Esta magia s&oacute; afeta criaturas que possam perceber voc&ecirc;. Se usar esta magia em combate, o alvo recebe +5 em seu teste de resist&ecirc;ncia. Se a criatura passar, fica imune a este efeito por um dia.</p>",
+      "value": "Suas palavras e movimentos ritmados deixam o alvo fascinado. Esta magia só afeta criaturas que possam perceber você. Se usar esta magia em combate, o alvo recebe +5 em seu teste de resistência. Se a criatura passar, fica imune a este efeito por um dia.",
       "chat": "",
       "unidentified": ""
     },

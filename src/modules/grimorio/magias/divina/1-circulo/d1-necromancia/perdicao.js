@@ -60,7 +60,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "aumenta as penalidades em –1, limitado pelo círculo máximo de magia que você pode lançar.",
+      "name": "aumenta as penalidades em -1, limitado pelo círculo máximo de magia que você pode lançar.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},
@@ -130,7 +130,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Amaldi&ccedil;oa os alvos, que recebem &ndash;1 em testes de ataque e rolagens de dano. <em>Perdi&ccedil;&atilde;o</em> anula <em>B&ecirc;n&ccedil;&atilde;o</em>.</p>",
+      "value": "Amaldiçoa os alvos, que recebem –1 em testes de ataque e rolagens de dano. Perdição anula Bênção.",
       "chat": "",
       "unidentified": ""
     },

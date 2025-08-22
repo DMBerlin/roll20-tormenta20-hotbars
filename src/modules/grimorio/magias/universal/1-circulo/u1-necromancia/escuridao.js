@@ -391,7 +391,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>O alvo emana sombras em uma &aacute;rea com 6m de raio. Criaturas dentro da &aacute;rea recebem camuflagem leve por escurid&atilde;o leve. As sombras n&atilde;o podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escurid&atilde;o, que voltar&aacute; a funcionar caso o objeto seja revelado. Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. <em>Escurid&atilde;o</em> anula <em>Luz</em>.</p>",
+      "value": "O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.",
       "chat": "",
       "unidentified": ""
     },

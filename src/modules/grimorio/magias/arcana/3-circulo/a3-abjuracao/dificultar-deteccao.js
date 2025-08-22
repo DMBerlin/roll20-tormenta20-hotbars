@@ -154,7 +154,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta magia oculta a presen&ccedil;a do alvo contra qualquer meio m&aacute;gico de detec&ccedil;&atilde;o, inclusive detectar magia. Um conjurador que lance uma magia de adivinha&ccedil;&atilde;o para detectar a presen&ccedil;a ou localiza&ccedil;&atilde;o do alvo deve fazer um teste de Vontade. Se falhar, a magia n&atilde;o funciona, mas os PM s&atilde;o gastos mesmo assim. Se for lan&ccedil;ada sobre uma criatura, <em>Dificultar Detec&ccedil;&atilde;o</em> protege tanto a criatura quanto seu equipamento.</p>",
+      "value": "Esta magia oculta a presença do alvo contra qualquer meio mágico de detecção, inclusive detectar magia. Um conjurador que lance uma magia de adivinhação para detectar a presença ou localização do alvo deve fazer um teste de Vontade. Se falhar, a magia não funciona, mas os PM são gastos mesmo assim. Se for lançada sobre uma criatura, Dificultar Detecção protege tanto a criatura quanto seu equipamento.",
       "chat": "",
       "unidentified": ""
     },

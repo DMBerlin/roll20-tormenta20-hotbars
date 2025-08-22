@@ -225,7 +225,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Sua mão brilha com energia sombria, causando 6d6 pontos de dano de trevas. Você recupera pontos de vida iguais à metade do dano causado (se causou algum dano).</p>",
+      "value": "Sua mão brilha com energia sombria, causando 6d6 pontos de dano de trevas. Você recupera pontos de vida iguais à metade do dano causado (se causou algum dano).",
       "chat": "",
       "unidentified": ""
     },

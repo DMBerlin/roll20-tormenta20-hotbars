@@ -61,7 +61,7 @@ module.exports = {
   "flags": {},
   "system": {
     "description": {
-      "value": "<p>Esta &eacute; uma das mais poderosas magias de destrui&ccedil;&atilde;o existentes. Ap&oacute;s entoar longos c&acirc;nticos, o conjurador dispara uma carga de energia que varre uma enorme &aacute;rea &agrave; sua frente, causando 20d12 pontos de dano de ess&ecirc;ncia em todas as criaturas, constru&ccedil;&otilde;es e objetos livres atingidos. Sempre que rola um resultado 12 em um dado de dano, a magia causa +1d12 pontos de dano. Apesar de seu poder destrutivo, esta magia &eacute; lenta, tornando seu uso dif&iacute;cil em combate.</p>",
+      "value": "Esta é uma das mais poderosas magias de destruição existentes. Após entoar longos cânticos, o conjurador dispara uma carga de energia que varre uma enorme área à sua frente, causando 20d12 pontos de dano de essência em todas as criaturas, construções e objetos livres atingidos. Sempre que rola um resultado 12 em um dado de dano, a magia causa +1d12 pontos de dano. Apesar de seu poder destrutivo, esta magia é lenta, tornando seu uso difícil em combate.",
       "chat": "",
       "unidentified": ""
     },
