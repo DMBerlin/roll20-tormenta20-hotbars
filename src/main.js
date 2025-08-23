@@ -14371,7 +14371,11 @@
                 return { version: IMAGE_CACHE_VERSION, images: {} };
             }
 
-            return parsedCache;
+            // Garante que o objeto tem a estrutura correta
+            return {
+                version: parsedCache.version || IMAGE_CACHE_VERSION,
+                images: parsedCache.images || {}
+            };
         } catch (error) {
             console.error('Erro ao carregar cache de imagens:', error);
             return { version: IMAGE_CACHE_VERSION, images: {} };
@@ -14870,7 +14874,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             const cache = getImageCache();
 
             // Verifica se a imagem está no cache
-            if (cache.images[url]) {
+            if (cache.images && cache.images[url]) {
                 console.log(`Imagem carregada do cache: ${url}`);
                 resolve(cache.images[url]);
                 return;
@@ -14898,7 +14902,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                     // Converte para base64
                     const dataUrl = canvas.toDataURL('image/png');
 
-                    // Salva no cache
+                    // Salva no cache (garante que images existe)
+                    if (!cache.images) cache.images = {};
                     cache.images[url] = dataUrl;
                     saveImageCache(cache);
 
