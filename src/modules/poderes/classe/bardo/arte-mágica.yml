@@ -1,0 +1,171 @@
+_id: GUst5lolzfdVXbd8
+name: Arte Mágica
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects:
+  - origin: Item.b8LQf0XzW0yX8KH5
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+        equipment: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: YQj0gWrJPcY81fD8
+    changes:
+      - key: cd
+        mode: 2
+        value: '2'
+        priority: 0
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Inspiração (Arte Mágica)
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!GUst5lolzfdVXbd8.YQj0gWrJPcY81fD8'
+  - origin: Item.b8LQf0XzW0yX8KH5
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: Inspiração
+        aumenta: false
+        custo: ''
+        equipment: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: clwCpt9muSsa4c7y
+    changes:
+      - key: efeito
+        mode: 0
+        value: Inspiração (Arte Mágica)
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Arte Mágica
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!GUst5lolzfdVXbd8.clwCpt9muSsa4c7y'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p data-pm-slice="0 0 []">Enquanto voc&ecirc; estiver sob efeito de sua
+      Inspira&ccedil;&atilde;o, a CD para resistir a suas habilidades de bardo
+      aumenta em +2.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 44
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716921
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!GUst5lolzfdVXbd8'
+

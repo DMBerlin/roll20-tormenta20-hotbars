@@ -1,0 +1,109 @@
+name: Aumento de Atributo (Constituição)
+type: poder
+img: systems/tormenta20/icons/poderes/destino.webp
+effects:
+  - origin: Item.4HdbtBRKRs32aYY9
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: EaZM3e5aTcml3PpB
+    changes:
+      - key: system.atributos.con.value
+        mode: 2
+        value: '1'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aumento de Atributo - Constituição
+    img: systems/tormenta20/icons/poderes/destino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!4HdbtBRKRs32aYY9.EaZM3e5aTcml3PpB'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +1 em um atributo. Voc&ecirc; pode escolher este
+      poder v&aacute;rias vezes, mas apenas uma vez por patamar para um mesmo
+      atributo.</p>
+    chat: ''
+    unidentified: ''
+  source: ''
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Geral
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184299
+  modifiedTime: 1684630481702
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 4HdbtBRKRs32aYY9
+folder: 8epgcaCOcfgSspZf
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!4HdbtBRKRs32aYY9'
+

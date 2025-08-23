@@ -1,0 +1,69 @@
+_id: 3VjKAe6oPOjqeA6K
+name: Busca Interior
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects: []
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando voc&ecirc; e seus companheiros est&atilde;o diante de um
+      mist&eacute;rio, incapazes de prosseguir, voc&ecirc; pode gastar 1 PM para
+      meditar sozinho durante algum tempo e receber uma dica do mestre.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 89
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Eremita
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183307
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!3VjKAe6oPOjqeA6K'
+

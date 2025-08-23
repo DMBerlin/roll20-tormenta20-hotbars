@@ -1,0 +1,106 @@
+_id: pjuN5W676oemur1X
+name: Graça
+type: poder
+img: systems/tormenta20/icons/racas/elfo.webp
+effects:
+  - origin: Item.pjuN5W676oemur1X
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: YdN4kksnYD2zbrpe
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '12'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Graça
+    img: systems/tormenta20/icons/racas/elfo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!pjuN5W676oemur1X.YdN4kksnYD2zbrpe'
+folder: sP6NJ3uhryFkjai6
+sort: 0
+flags: {}
+system:
+  description:
+    value: <p>Seu deslocamento é 12m (em vez de 9m).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 22
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Elfo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185212
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!pjuN5W676oemur1X'
+

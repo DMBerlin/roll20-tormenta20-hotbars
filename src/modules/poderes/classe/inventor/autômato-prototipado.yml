@@ -1,0 +1,86 @@
+name: Autômato Prototipado
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.el4bMlvdx58Ltgbd
+    defaultPermission: 3
+    hash: 7a69904dcc44a7e1d9c1644e668f2ee95d03a9a5
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o padr&atilde;o e 2 PM para
+      ativar uma melhoria experimental em seu aut&ocirc;mato. Role 1d6. Em um
+      resultado 2 a 6, voc&ecirc; aumenta o n&iacute;vel de parceiro do
+      aut&ocirc;mato em um passo (at&eacute; mestre), ou concede a ele a
+      habilidade iniciante de outro de seus tipos, at&eacute; o fim da cena. Em
+      um resultado 1, o aut&ocirc;mato engui&ccedil;a como uma engenhoca.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Aut&ocirc;mato.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: action
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Em um resultado 1, o autômato enguiça como uma engenhoca.
+      key: formula0
+      type: formula
+      parts:
+        - - 1d6
+          - ''
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051642891
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: igQaqKf0NM0GYz7d
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!igQaqKf0NM0GYz7d'
+

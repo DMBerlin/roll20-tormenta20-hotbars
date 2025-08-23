@@ -1,0 +1,70 @@
+_id: WlwBBa1mvr6etx24
+name: Fúria Raivosa
+type: poder
+img: systems/tormenta20/icons/classes/barbaro.webp
+effects: []
+folder: UhsYJ0BvPTkMyG53
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se sua F&uacute;ria for terminar por voc&ecirc; n&atilde;o ter atacado
+      nem sido alvo de um efeito hostil, voc&ecirc; pode pagar 1 PM para
+      continuar em f&uacute;ria nesta rodada. Se voc&ecirc; atacar ou for
+      atacado na rodada seguinte, sua f&uacute;ria continua normalmente.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 42
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bárbaro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717174
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!WlwBBa1mvr6etx24'
+

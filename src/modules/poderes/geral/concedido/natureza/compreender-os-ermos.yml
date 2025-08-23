@@ -1,0 +1,108 @@
+name: Compreender os Ermos
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-natureza.webp
+effects:
+  - origin: Item.wRvYCrpwaWALmLPg
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 0aqKbLrGiJEg3rJs
+    changes:
+      - key: system.pericias.sobr.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Compreender os Ermos
+    img: systems/tormenta20/icons/poderes/concedidos-natureza.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!wRvYCrpwaWALmLPg.0aqKbLrGiJEg3rJs'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Sobreviv&ecirc;ncia e pode usar Sabedoria para
+      Adestramento (em vez de Carisma).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 132
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Natureza
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184711
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: wRvYCrpwaWALmLPg
+folder: ejRVzM51zpwUVntj
+sort: 0
+ownership:
+  default: 0
+_key: '!items!wRvYCrpwaWALmLPg'
+

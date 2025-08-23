@@ -1,0 +1,119 @@
+_id: M1brJAJBNptnmcSe
+name: Cultura Exótica
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects:
+  - _id: wCkw87K2YVqyCqUI
+    changes:
+      - key: treinado
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.yEzw7z7YtccgktKf
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: false
+        skill: true
+        self: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '1'
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Cultura Exótica
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!M1brJAJBNptnmcSe.wCkw87K2YVqyCqUI'
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Por sua diferente vis&atilde;o de mundo, voc&ecirc; encontra
+      solu&ccedil;&otilde;es inesperadas. Voc&ecirc; pode gastar 1 PM para fazer
+      um teste de per&iacute;cia somente treinada, mesmo sem ser treinado na
+      per&iacute;cia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 90
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Forasteiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184246
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!M1brJAJBNptnmcSe'
+

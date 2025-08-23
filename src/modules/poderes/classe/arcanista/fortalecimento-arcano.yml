@@ -1,0 +1,123 @@
+_id: KhQoVoaIZ8huXnPY
+name: Fortalecimento Arcano
+type: poder
+img: systems/tormenta20/icons/classes/arcanista.webp
+effects:
+  - origin: Item.KhQoVoaIZ8huXnPY
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: LOw7iACjwpDi0GXg
+    changes:
+      - key: CD
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      Fortalecimento Arcano: +1 na CD de magias. +2 se puder lançar magias de 4º
+      cículo.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!KhQoVoaIZ8huXnPY.LOw7iACjwpDi0GXg'
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A CD para resistir a suas magias aumenta em +1. Se voc&ecirc; puder
+      lan&ccedil;ar magias de 4&ordm; c&iacute;rculo, em vez disso ela aumenta
+      em +2. <em>Pr&eacute;-requisito:</em> 5&ordm; n&iacute;vel de
+      arcanista.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 38
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Arcanista
+  tags:
+    - Arcanista
+  origin: ''
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184241
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!KhQoVoaIZ8huXnPY'
+

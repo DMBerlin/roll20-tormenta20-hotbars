@@ -1,0 +1,71 @@
+_id: S1Rj3QDTfM8qytad
+name: Sorte do Louco
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/sorte-louco.webp
+effects: []
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 20&ordm; n&iacute;vel, voc&ecirc; encara os piores desafios e ri na
+      cara deles &mdash; pois sabe que tem a sorte ao seu lado. Voc&ecirc; pode
+      gastar 5 PM para rolar novamente um teste rec&eacute;m realizado. Qualquer
+      resultado 11 ou mais na segunda rolagem ser&aacute; considerado um 20
+      natural.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 48
+  ativacao:
+    execucao: ''
+    custo: 5
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717057
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!S1Rj3QDTfM8qytad'
+

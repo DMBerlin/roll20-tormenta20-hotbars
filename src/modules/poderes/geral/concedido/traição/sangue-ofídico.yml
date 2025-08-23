@@ -1,0 +1,158 @@
+_id: tkixzUzqKytmZJW0
+name: Sangue Ofídico
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-traicao.webp
+effects:
+  - origin: Item.tkixzUzqKytmZJW0
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: kz0qyMmEeYXOOtzn
+    changes:
+      - key: system.tracos.resistencias.veneno.value
+        mode: 2
+        value: '5'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sangue Ofídico
+    img: systems/tormenta20/icons/poderes/concedidos-traicao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!tkixzUzqKytmZJW0.kz0qyMmEeYXOOtzn'
+  - origin: Item.tkixzUzqKytmZJW0
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: true
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: oUgvcGZEJjVB7kFh
+    changes:
+      - key: cd
+        mode: 2
+        value: '2'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sangue Ofídico
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!tkixzUzqKytmZJW0.oUgvcGZEJjVB7kFh'
+folder: s8308RXiyAhaEjoG
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você recebe resistência a veneno 5 e a CD para resistir aos seus
+      venenos aumenta em +2.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 135
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Traição
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185651
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!tkixzUzqKytmZJW0'
+

@@ -1,0 +1,119 @@
+_id: HK0MNc7j4rjDDbA9
+name: Inspiração Marcial
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects:
+  - origin: Item.BUXCrWU8Z4ESIyZS
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: Inspiração
+        aumenta: true
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 8pYTk7r2AD2AY2hL
+    changes:
+      - key: system.modificadores.dano.geral
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Inspiração Marcial
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!HK0MNc7j4rjDDbA9.8pYTk7r2AD2AY2hL'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando voc&ecirc; usa Inspira&ccedil;&atilde;o, voc&ecirc; e seus
+      aliados aplicam o b&ocirc;nus recebido em rolagens de dano (al&eacute;m de
+      testes de per&iacute;cia).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 45
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716923
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!HK0MNc7j4rjDDbA9'
+

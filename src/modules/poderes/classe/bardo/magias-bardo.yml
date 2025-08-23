@@ -1,0 +1,134 @@
+_id: 5i2hWzYKWOjGtnyA
+name: Magias (Bardo)
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/magias-b.webp
+effects:
+  - name: Magias (Bardo)
+    img: systems/tormenta20/icons/poderes/classes/especialistas/magias-b.webp
+    origin: Compendium.tormenta20.poderes.Item.5i2hWzYKWOjGtnyA
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: wNpc57DBoBST0B0y
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.pm.atributos.car
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747120028898
+      modifiedTime: 1747120038396
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!5i2hWzYKWOjGtnyA.wNpc57DBoBST0B0y'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Escolha tr&ecirc;s escolas de magia. Uma vez feita, essa escolha
+      n&atilde;o pode ser mudada. Voc&ecirc; pode lan&ccedil;ar magias arcanas
+      de 1&ordm; c&iacute;rculo que perten&ccedil;am a essas escolas. &Agrave;
+      medida que sobe de n&iacute;vel, pode lan&ccedil;ar magias de
+      c&iacute;rculos maiores (2&ordm; c&iacute;rculo no 6&ordm; n&iacute;vel,
+      3&ordm; c&iacute;rculo no 10&ordm; n&iacute;vel e 4&ordm; c&iacute;rculo
+      no 14&ordm; n&iacute;vel).</p>
+
+      <p>Voc&ecirc; come&ccedil;a com duas magias de 1&ordm; c&iacute;rculo. A
+      cada n&iacute;vel par (2&ordm;, 4&ordm; etc.), aprende uma magia de
+      qualquer c&iacute;rculo e escola que possa lan&ccedil;ar. Voc&ecirc; pode
+      lan&ccedil;ar essas magias vestindo armaduras leves sem precisar de testes
+      de Misticismo.</p>
+
+      <p>Seu atributo-chave para lan&ccedil;ar magias &eacute; Carisma e
+      voc&ecirc; soma seu Carisma no seu total de PM. Veja o Cap&iacute;tulo 4
+      para as regras de magia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 44
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1658361717184
+  modifiedTime: 1747120039188
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!5i2hWzYKWOjGtnyA'
+

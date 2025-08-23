@@ -1,0 +1,70 @@
+_id: BdmNL98w2J5dVzlp
+name: Arma Secundária Grande
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects: []
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode empunhar duas armas de uma m&atilde;o com o poder
+      Estilo de Duas Armas.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Estilo de Duas Armas.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 124
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183810
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!BdmNL98w2J5dVzlp'
+

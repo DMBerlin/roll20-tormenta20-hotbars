@@ -1,0 +1,69 @@
+_id: 9LjWgSEYKGmd0ix9
+name: Híbrido
+type: poder
+img: systems/tormenta20/icons/racas/kliren.webp
+effects: []
+folder: 6zI7CiCTyZW5lI4F
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sua natureza multifacetada fez com que você aprendesse conhecimentos
+      variados. Você se torna treinado em uma perícia a sua escolha (não precisa
+      ser da sua classe).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 28
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Kliren
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183396
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!9LjWgSEYKGmd0ix9'
+

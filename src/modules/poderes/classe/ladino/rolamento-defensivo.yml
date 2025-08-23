@@ -1,0 +1,75 @@
+_id: 4B7V1Vr5EXSFKTTw
+name: Rolamento Defensivo
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects: []
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sempre que sofre dano, voc&ecirc; pode gastar 2 PM para reduzir esse
+      dano &agrave; metade. Ap&oacute;s usar este poder, voc&ecirc; fica <a
+      class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.condicoes.BKYcxIS1rITnglUE"
+      data-id="BKYcxIS1rITnglUE" data-type="JournalEntry"
+      data-pack="tormenta20.condicoes" data-tooltip="Registro de
+      Di&aacute;rio">Ca&iacute;do</a>.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> treinado em Reflexos.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: reaction
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183309
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!4B7V1Vr5EXSFKTTw'
+

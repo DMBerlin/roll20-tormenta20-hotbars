@@ -1,0 +1,92 @@
+_id: 2z58hpmL9p4VNyPW
+name: Mordida
+type: poder
+img: systems/tormenta20/icons/racas/trog.webp
+effects: []
+folder: yZkJsw7mVnvsffNC
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; possui uma arma natural de mordida (dano 1d6, cr&iacute;tico
+      x2, perfura&ccedil;&atilde;o). Uma vez por rodada, quando usa a
+      a&ccedil;&atilde;o agredir para atacar com outra arma, pode gastar 1 PM
+      para fazer um ataque corpo a corpo extra com a mordida.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 31
+  ativacao:
+    execucao: free
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Ataque
+      key: ataque0
+      type: ataque
+      parts:
+        - - 1d20
+          - ''
+          - ''
+        - - luta
+          - ''
+          - ''
+        - - ''
+          - ''
+          - ''
+      versatil: ''
+    - name: Dano
+      key: dano1
+      type: dano
+      parts:
+        - - 1d6+@for
+          - perfuracao
+          - ''
+      versatil: ''
+  tipo: racial
+  subtipo: Trog
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183303
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!2z58hpmL9p4VNyPW'
+

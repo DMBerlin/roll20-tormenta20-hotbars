@@ -1,0 +1,116 @@
+_id: Mqyj3NlGuv9rhQpH
+name: Mente Analítica
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos.webp
+effects:
+  - origin: Item.Mqyj3NlGuv9rhQpH
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: VOInw2ZSEVdVpwhK
+    changes:
+      - key: system.pericias.intu.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.inve.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.vont.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Mente Analítica
+    img: systems/tormenta20/icons/poderes/concedidos.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Mqyj3NlGuv9rhQpH.VOInw2ZSEVdVpwhK'
+folder: 1IwfK0tzrOPpjXTW
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Intui&ccedil;&atilde;o,
+      Investiga&ccedil;&atilde;o e Vontade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 134
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Conhecimento
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184252
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Mqyj3NlGuv9rhQpH'
+

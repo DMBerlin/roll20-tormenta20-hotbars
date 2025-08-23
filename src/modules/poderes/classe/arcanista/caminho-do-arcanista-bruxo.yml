@@ -1,0 +1,130 @@
+_id: cfV8GthtoVPbREG6
+name: 'Caminho do Arcanista: Bruxo'
+type: poder
+img: >-
+  systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-bruxo.webp
+effects:
+  - name: 'Caminho do Arcanista: Bruxo'
+    img: >-
+      systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-bruxo.webp
+    origin: Compendium.tormenta20.poderes.Item.cfV8GthtoVPbREG6
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: SzuzL9pH5KcX8AcE
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.pm.atributos.int
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747120182017
+      modifiedTime: 1747120188981
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!cfV8GthtoVPbREG6.SzuzL9pH5KcX8AcE'
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você lança magias através de um foco — uma varinha, cajado, chapéu...
+      Para lançar uma magia, você precisa segurar o foco com uma mão (e
+      gesticular com a outra) ou fazer um teste de Misticismo (CD 20 + o custo
+      em PM da magia; se falhar, a magia não funciona, mas você gasta os PM
+      mesmo assim). O foco tem resistência a dano 10 e PV iguais à metade dos
+      seus, independentemente de seu material ou forma. Se for danificado, é
+      totalmente restaurado na próxima vez que você recuperar seus PM. Se for
+      destruído (reduzido a 0 PV), você fica atordoado por uma rodada. Você pode
+      recuperar um foco destruído ou perdido com uma semana de trabalho e T$
+      100. Seu atributo-chave para magias é Inteligência.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 37
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Arcanista
+  chatFlavor: ''
+  tags:
+    - Arcanista
+  origin: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306184742
+  modifiedTime: 1747120190199
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!cfV8GthtoVPbREG6'
+

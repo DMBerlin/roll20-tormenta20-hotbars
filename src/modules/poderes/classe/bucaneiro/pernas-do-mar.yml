@@ -1,0 +1,114 @@
+_id: QUqBvHLdSXPrVWQ0
+name: Pernas do Mar
+type: poder
+img: systems/tormenta20/icons/classes/bucaneiro.webp
+effects:
+  - origin: Item.QUqBvHLdSXPrVWQ0
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: PV0IjiVrhiaYfpcP
+    changes:
+      - key: system.pericias.acro.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.atle.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Pernas do Mar
+    img: systems/tormenta20/icons/classes/bucaneiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!QUqBvHLdSXPrVWQ0.PV0IjiVrhiaYfpcP'
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Acrobacia e Atletismo. Al&eacute;m disso,
+      quando est&aacute; se equilibrando ou escalando, voc&ecirc; n&atilde;o
+      fica desprevenido e seu deslocamento n&atilde;o &eacute; reduzido &agrave;
+      metade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 48
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717054
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!QUqBvHLdSXPrVWQ0'
+

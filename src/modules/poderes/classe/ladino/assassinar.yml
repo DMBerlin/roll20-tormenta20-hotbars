@@ -1,0 +1,126 @@
+_id: lLl9k9aibbKKzgf5
+name: Assassinar
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - _id: 8xWG7thykkQ1N0Yc
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.DROQ7l6JIWpvfIVq
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '3'
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Assassinar
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!lLl9k9aibbKKzgf5.8xWG7thykkQ1N0Yc'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 3 PM para
+      analisar uma criatura em alcance curto. At&eacute; o fim de seu
+      pr&oacute;ximo turno, seu primeiro Ataque Furtivo que causar dano a ela
+      tem seus dados de dano extras dessa habilidade dobrados.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> 5&ordm; n&iacute;vel de ladino.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 73
+  ativacao:
+    execucao: move
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 1d6
+          - dano
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: Ladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185141
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!lLl9k9aibbKKzgf5'
+

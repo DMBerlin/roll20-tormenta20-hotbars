@@ -1,0 +1,78 @@
+_id: HHvwLN3CaB6N1PnI
+name: Escrever Pergaminho
+type: poder
+img: systems/tormenta20/icons/poderes/magia.webp
+effects: []
+folder: Kye2KzNfCgJW92Kb
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode usar a per&iacute;cia Of&iacute;cio (escriba) para
+      fabricar pergaminhos com magias que conhe&ccedil;a. Veja a p&aacute;gina
+      121 para a regra de fabricar itens e as p&aacute;ginas 333 e 341 para as
+      regras de pergaminhos. De acordo com o mestre, voc&ecirc; pode usar
+      objetos similares, como runas, tabuletas de argila etc.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> habilidade de classe Magias, treinado
+      em <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.pericias.iviKBc19dNgZYBJ0"
+      data-id="iviKBc19dNgZYBJ0" data-type="JournalEntry"
+      data-pack="tormenta20.pericias" data-tooltip="Registro de
+      Di&aacute;rio">Of&iacute;cio</a>(escriba).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 131
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Magia
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183902
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!HHvwLN3CaB6N1PnI'
+

@@ -1,0 +1,100 @@
+_id: trBGcYqkld7y3QMF
+name: 'Armadilha: Espinhos'
+type: poder
+img: systems/tormenta20/icons/classes/cacador.webp
+effects: []
+folder: iT3rUBmGhu5hbNic
+sort: 2400000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A v&iacute;tima sofre 6d6pontos de dano de perfura&ccedil;&atilde;o. Um
+      teste de Reflexos (CD Sab) reduz o dano &agrave; metade.</p>
+
+
+
+      <p><strong>Armadilhas</strong><br>Esses poderes compartilham as seguintes
+      regras.</p>
+
+      <p>&bull; Preparar uma armadilha gasta uma a&ccedil;&atilde;o completa e 3
+      PM.</p>
+
+      <p>&bull; Uma armadilha afeta uma &aacute;rea de 3m de lado adjacente a
+      voc&ecirc; e &eacute; acionada pela primeira criatura que entrar na
+      &aacute;rea.</p>
+
+      <p>&bull; Uma criatura que o veja preparando a armadilha saber&aacute; que
+      ela est&aacute; l&aacute;. Uma criatura que n&atilde;o o veja preparando a
+      armadilha pode encontr&aacute;-la se gastar uma a&ccedil;&atilde;o
+      padr&atilde;o procurando e passar em um teste de
+      Investiga&ccedil;&atilde;o (CD Sab).</p>
+
+      <p>&bull; &Eacute; poss&iacute;vel aplicar veneno a uma armadilha, como se
+      ela fosse uma arma.</p>
+
+      <p>Voc&ecirc; n&atilde;o precisa de nenhum item para criar a armadilha,
+      pois usa materiais naturais, como galhos e cip&oacute;s. Por&eacute;m,
+      precisa estar em um ambiente prop&iacute;cio, como uma floresta, um beco
+      repleto de entulhos etc.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 50
+  ativacao:
+    execucao: full
+    custo: 3
+    qtd: ''
+    condicao: criatura entra na área
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: quadrado 3m
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: Reflexos reduz o dano à metade.
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 6d6
+          - perfuracao
+  tipo: classe
+  subtipo: Caçador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717757
+  modifiedTime: 1684630426990
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!trBGcYqkld7y3QMF'
+

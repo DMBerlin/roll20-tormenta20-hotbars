@@ -1,0 +1,120 @@
+_id: ZfvrgyuDZB7CAptc
+name: Tradição
+type: poder
+img: systems/tormenta20/icons/racas/anao.webp
+effects:
+  - _id: CFa98uGhH9FyF6oB
+    changes:
+      - key: ataque
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.itxhR4yeQgkkB4pE
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Tradição de Heredrimm
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!ZfvrgyuDZB7CAptc.CFa98uGhH9FyF6oB'
+folder: QXmpsdR2yksENTdS
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; &eacute; perito nas armas tradicionais an&atilde;s, seja por
+      ter treinado com elas, seja por us&aacute;-las como ferramentas de
+      of&iacute;cio. Para voc&ecirc;, todos os machados, martelos, marretas e
+      picaretas s&atilde;o armas simples. Voc&ecirc; recebe +2 em ataques com
+      essas armas.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 20
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Anão
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184734
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ZfvrgyuDZB7CAptc'
+

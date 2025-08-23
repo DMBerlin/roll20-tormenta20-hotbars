@@ -1,0 +1,142 @@
+_id: l20AJzxzQrw6pWfW
+name: 'Missa: Chamado às Armas'
+type: poder
+img: systems/tormenta20/icons/classes/clerigo.webp
+effects:
+  - origin: Item.l20AJzxzQrw6pWfW
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 9999
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: LhgNebTC6X8ejEgM
+    changes:
+      - key: system.modificadores.ataque.geral
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.modificadores.dano.geral
+        mode: 2
+        value: '1'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Missa: chamado às armas'
+    img: systems/tormenta20/icons/classes/clerigo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!l20AJzxzQrw6pWfW.LhgNebTC6X8ejEgM'
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sua prece fortalece o esp&iacute;rito de luta. Os participantes recebem
+      +1 em testes de ataque e rolagens de dano.</p>
+
+
+
+      <p><strong>Missas</strong></p>
+
+      <p>Missas compartilham as seguintes regras.</p>
+
+      <p>&bull; Rezar uma Missa exige uma hora e o gasto de materiais especiais
+      (como velas, incensos, &aacute;gua benta...) no valor de T$ 25. Um mesmo
+      celebrante pode aplicar mais de um poder de Missa na mesma
+      celebra&ccedil;&atilde;o.<br>Cada poder adicional aumenta o custo da Missa
+      em T$ 25.</p>
+
+      <p>&bull; Uma Missa afeta um n&uacute;mero m&aacute;ximo de pessoas igual
+      a 1 + sua Sabedoria. Todas as pessoas precisam estar presentes durante
+      toda a Missa.</p>
+
+      <p>&bull; Os efeitos de uma Missa duram um dia. Uma mesma criatura
+      s&oacute; pode receber os benef&iacute;cios da mesma Missa uma vez por
+      dia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 58
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 1
+    units: day
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Clérigo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185140
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!l20AJzxzQrw6pWfW'
+

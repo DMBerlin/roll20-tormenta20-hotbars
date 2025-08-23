@@ -1,0 +1,122 @@
+_id: 1GKFOwZTHwrMVq3z
+name: Desejo de Liberdade
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects:
+  - origin: Item.1GKFOwZTHwrMVq3z
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: true
+        ability: true
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: e7UoGGONglikz4gC
+    changes:
+      - key: ataque
+        mode: 2
+        value: '5'
+        priority: 0
+      - key: roll
+        mode: 2
+        value: '5'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Desejo de Liberdade
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!1GKFOwZTHwrMVq3z.e7UoGGONglikz4gC'
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Ningu&eacute;m voltar&aacute; a torn&aacute;-lo um escravo! Voc&ecirc;
+      recebe +5 em testes contra a manobra agarrar e efeitos de movimento.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 90
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Escravo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183293
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!1GKFOwZTHwrMVq3z'
+

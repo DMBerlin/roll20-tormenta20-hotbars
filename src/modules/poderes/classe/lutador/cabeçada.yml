@@ -1,0 +1,121 @@
+_id: 6KpYDSIPOvoO8yiK
+name: Cabeçada
+type: poder
+img: systems/tormenta20/icons/classes/lutador.webp
+effects:
+  - origin: Item.6KpYDSIPOvoO8yiK
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: W5OirGiR8frSm1Tr
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Cabeçada
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6KpYDSIPOvoO8yiK.W5OirGiR8frSm1Tr'
+folder: csRpG81AedPycko0
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando faz um ataque desarmado, voc&ecirc; pode gastar 2 PM. Se fizer
+      isso, o oponente fica <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.condicoes.QBpAB16MIn9BVLNw"
+      data-id="QBpAB16MIn9BVLNw" data-type="JournalEntry"
+      data-pack="tormenta20.condicoes" data-tooltip="Registro de
+      Di&aacute;rio">Desprevenido</a><span style="white-space: nowrap;
+      background-color: rgb(221, 221, 221);"> </span>contra este ataque.
+      Voc&ecirc; s&oacute; pode usar este poder uma vez por cena contra um mesmo
+      alvo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 76
+  ativacao:
+    execucao: free
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Lutador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183319
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!6KpYDSIPOvoO8yiK'
+

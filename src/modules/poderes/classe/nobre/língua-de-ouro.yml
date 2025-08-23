@@ -1,0 +1,78 @@
+_id: vkEMHB8LOif8TNlr
+name: Língua de Ouro
+type: poder
+img: systems/tormenta20/icons/classes/nobre.webp
+effects: []
+folder: 1gk4CeDo7oR1b0oD
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o padr&atilde;o e 4 PM para
+      gerar o efeito da magia <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.magias.lJYJQFhk5oai46Ty"
+      data-id="lJYJQFhk5oai46Ty" data-type="Item" data-pack="tormenta20.magias"
+      data-tooltip="Magia Item">Enfeiti&ccedil;ar</a><em></em>com os
+      aprimoramentos de sugerir a&ccedil;&atilde;o e afetar todas as criaturas
+      dentro do alcance (CD Car). Esta n&atilde;o &eacute; uma habilidade
+      m&aacute;gica e prov&eacute;m de sua capacidade de influenciar outras
+      pessoas.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> L&iacute;ngua de Prata, 8&ordm;
+      n&iacute;vel de nobre.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 80
+  ativacao:
+    execucao: action
+    custo: 4
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: car
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Nobre
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185697
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!vkEMHB8LOif8TNlr'
+

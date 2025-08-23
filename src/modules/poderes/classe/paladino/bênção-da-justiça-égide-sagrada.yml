@@ -1,0 +1,171 @@
+_id: ADxFgOnsvGnXmPVS
+name: 'Bênção da Justiça: Égide Sagrada'
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/bencao-justica-egide.webp
+effects:
+  - _id: xk1rV2xWb6LgNGV0
+    changes:
+      - key: roll
+        mode: 2
+        value: '@car'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.poderes.ADxFgOnsvGnXmPVS
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        skill: true
+        self: false
+        attack: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '5'
+        durationScene: false
+        items: Fortitude;Reflexos;Vontade
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Vindicação Refletir Magia (11º nível)
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!ADxFgOnsvGnXmPVS.xk1rV2xWb6LgNGV0'
+  - _id: fjL4ll6NmPj96riX
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '@car'
+        priority: null
+    disabled: false
+    duration:
+      rounds: 99
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.tormenta20.poderes.ADxFgOnsvGnXmPVS
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Bênção da Justiça: Égide Sagrada'
+    img: systems/tormenta20/icons/classes/paladino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!ADxFgOnsvGnXmPVS.fjL4ll6NmPj96riX'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p data-pm-slice="0 0 []">No 5&ordm; n&iacute;vel, escolha entre
+      &eacute;gide sagrada e montaria sagrada. Uma vez feita, esta escolha
+      n&atilde;o pode ser mudada.</p>
+
+      <p data-pm-slice="0 0 []">&Eacute;gide Sagrada - Voc&ecirc; pode gastar
+      uma a&ccedil;&atilde;o de movimento e 2 PM para recobrir de energia seu
+      escudo ou s&iacute;mbolo sagrado. At&eacute; o fim da cena, voc&ecirc; e
+      todos os aliados adjacentes recebem um b&ocirc;nus na Defesa igual ao seu
+      Carisma. A partir do 11&ordm; n&iacute;vel, voc&ecirc; pode gastar 5 PM
+      para rolar novamente um teste de resist&ecirc;ncia contra uma magia
+      rec&eacute;m lan&ccedil;ada contra voc&ecirc;. Se voc&ecirc; passar no
+      teste de resist&ecirc;ncia e a magia tiver voc&ecirc; como &uacute;nico
+      alvo, ela &eacute; revertida de volta ao conjurador (que se torna o novo
+      alvo da magia; todas as demais caracter&iacute;sticas da magia, incluindo
+      CD do teste de resist&ecirc;ncia, se mant&ecirc;m).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 84
+  ativacao:
+    execucao: move
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Paladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183398
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ADxFgOnsvGnXmPVS'
+

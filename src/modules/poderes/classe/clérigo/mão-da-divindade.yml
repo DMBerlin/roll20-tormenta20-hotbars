@@ -1,0 +1,75 @@
+_id: zIcI0vQGjAj1uCm0
+name: Mão da Divindade
+type: poder
+img: systems/tormenta20/icons/poderes/classes/conjuradores/mao-divindade.webp
+effects: []
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 20&ordm; n&iacute;vel, voc&ecirc; pode gastar uma a&ccedil;&atilde;o
+      completa e 15 PM para canalizar energia divina. Ao fazer isso, voc&ecirc;
+      lan&ccedil;a tr&ecirc;s magias divinas quaisquer (de qualquer
+      c&iacute;rculo, incluindo magias que voc&ecirc; n&atilde;o conhece), como
+      uma a&ccedil;&atilde;o livre e sem gastar PM (mas ainda precisa pagar
+      outros custos). Voc&ecirc; pode aplicar aprimoramentos, mas precisa pagar
+      por eles. Ap&oacute;s usar esta habilidade, voc&ecirc; fica atordoado por
+      1d4 rodadas (mesmo se for imune a esta condi&ccedil;&atilde;o). Corpos
+      mortais n&atilde;o foram feitos para lidar com tanto poder.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 58
+  ativacao:
+    execucao: full
+    custo: 15
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Clérigo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185706
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!zIcI0vQGjAj1uCm0'
+

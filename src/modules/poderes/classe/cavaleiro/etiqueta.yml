@@ -1,0 +1,152 @@
+_id: jk2rvo8wHDXhDuEm
+name: Etiqueta
+type: poder
+img: systems/tormenta20/icons/classes/cavaleiro.webp
+effects:
+  - origin: Item.jk2rvo8wHDXhDuEm
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: zG4W0d7lLCniHMmh
+    changes:
+      - key: system.pericias.dipl.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Etiqueta - Diplomacia
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!jk2rvo8wHDXhDuEm.zG4W0d7lLCniHMmh'
+  - origin: Item.jk2rvo8wHDXhDuEm
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: ioZVEDsQ5B3TvBcG
+    changes:
+      - key: system.pericias.nobr.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Etiqueta - Nobreza
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!jk2rvo8wHDXhDuEm.ioZVEDsQ5B3TvBcG'
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 Diplomacia ou Nobreza e pode gastar 1 PM para
+      rolar novamente um teste rec&eacute;m realizado de uma dessas
+      per&iacute;cias.</p>
+
+      <p>(Escolha um dos dois b&ocirc;nus e desative o b&ocirc;nus descartado na
+      aba de efeitos da ficha)</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 54
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Cavaleiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185131
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!jk2rvo8wHDXhDuEm'
+

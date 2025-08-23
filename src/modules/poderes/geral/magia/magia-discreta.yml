@@ -1,0 +1,119 @@
+_id: a7FEhf1T8KVwr0iA
+name: Magia Discreta
+type: poder
+img: systems/tormenta20/icons/poderes/magia.webp
+effects:
+  - _id: lrVarlOdV81mTDg7
+    flags:
+      tormenta20:
+        onuse: true
+        spell: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        consumable: false
+        aumenta: false
+        custo: '2'
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.gcqTpSNvs89w3ejS
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Magia Discreta
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!a7FEhf1T8KVwr0iA.lrVarlOdV81mTDg7'
+folder: Kye2KzNfCgJW92Kb
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; lan&ccedil;a a magia sem gesticular e falar, usando apenas
+      concentra&ccedil;&atilde;o. Isso permite lan&ccedil;ar magias com as
+      m&atilde;os presas, amorda&ccedil;ado etc. Tamb&eacute;m permite
+      lan&ccedil;ar magias arcanas usando armadura sem teste de Misticismo.
+      Outros personagens s&oacute; percebem que voc&ecirc; lan&ccedil;ou uma
+      magia se passarem num teste de Misticismo (CD 20).</p>
+
+      <p>Custo: +2 PM.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 131
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Magia
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184735
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!a7FEhf1T8KVwr0iA'
+

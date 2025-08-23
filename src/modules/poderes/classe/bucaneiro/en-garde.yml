@@ -1,0 +1,162 @@
+_id: IqJ3GFdasl7Q9h59
+name: En Garde
+type: poder
+img: systems/tormenta20/icons/classes/bucaneiro.webp
+effects:
+  - origin: Item.DXIHxwU97pgwp4RZ
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: ouxTd4Gqy6ItBcIp
+    changes:
+      - key: criticoM
+        mode: 2
+        value: '-2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: En Garde
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!IqJ3GFdasl7Q9h59.ouxTd4Gqy6ItBcIp'
+  - origin: Item.DXIHxwU97pgwp4RZ
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 6djn8PYwO60K56ZM
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: En Garde
+    img: systems/tormenta20/icons/classes/bucaneiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!IqJ3GFdasl7Q9h59.6djn8PYwO60K56ZM'
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para
+      assumir postura de luta. At&eacute; o fim da cena, se estiver usando uma
+      arma corpo a corpo leve ou &aacute;gil, voc&ecirc; recebe +2 na margem de
+      amea&ccedil;a com essas armas e +2 na Defesa.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Esgrimista.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 48
+  ativacao:
+    execucao: move
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716926
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!IqJ3GFdasl7Q9h59'
+

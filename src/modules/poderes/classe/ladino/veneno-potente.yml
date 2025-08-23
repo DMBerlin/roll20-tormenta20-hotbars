@@ -1,0 +1,120 @@
+_id: Ue9TQbWuCwnvO3WV
+name: Veneno Potente
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - origin: Item.Ue9TQbWuCwnvO3WV
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: true
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: hiG5Zs29RZQkOuRc
+    changes:
+      - key: cd
+        mode: 2
+        value: '5'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Veneno Potente: +5 na CD de venenos.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Ue9TQbWuCwnvO3WV.hiG5Zs29RZQkOuRc'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A CD para resistir aos venenos que voc&ecirc; usa aumenta em +5.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> treinado em Of&iacute;cio
+      (alquimista).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184316
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Ue9TQbWuCwnvO3WV'
+

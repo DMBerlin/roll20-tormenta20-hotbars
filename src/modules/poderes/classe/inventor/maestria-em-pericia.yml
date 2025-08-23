@@ -1,0 +1,74 @@
+name: Maestria em Pericia
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.YQi7wgNyw2XPuIvz
+    defaultPermission: 3
+    hash: 8ca673fb54df9858f38c74ee6ef933866de8992c
+system:
+  description:
+    value: >-
+      <p>Escolha um n&uacute;mero de per&iacute;cias treinadas igual a sua
+      Intelig&ecirc;ncia, exceto b&ocirc;nus tempor&aacute;rios. Com essas
+      per&iacute;cias, voc&ecirc; pode gastar 1 PM para escolher 10 em qualquer
+      situa&ccedil;&atilde;o, exceto testes de ataque.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051645580
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: ymJZ5W60c8iBO8ua
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!ymJZ5W60c8iBO8ua'
+

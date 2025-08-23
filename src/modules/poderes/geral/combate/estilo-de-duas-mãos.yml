@@ -1,0 +1,111 @@
+_id: aeXR1kOB1PZt2sUL
+name: Estilo de Duas Mãos
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - _id: BBiO7aceLqeW90k2
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.modificadores.dano.cac
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.GGt3eyNynhOzLs2U
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Estilo de Duas Mãos
+    img: systems/tormenta20/icons/poderes/combate.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!aeXR1kOB1PZt2sUL.BBiO7aceLqeW90k2'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se estiver usando uma arma corpo a corpo com as duas m&atilde;os,
+      voc&ecirc; recebe +5 nas rolagens de dano. Este poder n&atilde;o pode ser
+      usado com armas leves.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> For 2, Treinado em Luta.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 128
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184737
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!aeXR1kOB1PZt2sUL'
+

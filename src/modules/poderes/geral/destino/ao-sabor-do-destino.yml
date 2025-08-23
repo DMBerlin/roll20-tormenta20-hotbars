@@ -1,0 +1,240 @@
+_id: SRvf9NbvHRu0NNvN
+name: Ao Sabor do Destino
+type: poder
+img: systems/tormenta20/icons/poderes/destino.webp
+effects:
+  - _id: 5m4Yy27Zs1X4uBgq
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '0'
+        priority: null
+      - key: system.modificadores.dano.geral
+        mode: 2
+        value: '0'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.YNYs89oxMxdU6UuS
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Ao Sabor do Destino
+    img: systems/tormenta20/icons/poderes/destino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!SRvf9NbvHRu0NNvN.5m4Yy27Zs1X4uBgq'
+folder: NvFFFNI6JHPuMkck
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Confiando em suas pr&oacute;prias habilidades (ou em sua pr&oacute;pria
+      sorte), voc&ecirc; abre m&atilde;o de usar itens m&aacute;gicos. Sua
+      autoconfian&ccedil;a fornece diversos benef&iacute;cios, de acordo com seu
+      n&iacute;vel de personagem e a tabela abaixo.</p>
+
+
+
+      <table style="width: 100%; height: 237.8px;" border="1">
+
+      <tbody>
+
+      <tr style="height: 17px;">
+
+      <th style="width: 18.22%; height: 17px;">N&iacute;vel</th>
+
+      <th style="width: 81.1234%; height: 17px;">Benef&iacute;cio</th>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">6&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+2 em uma per&iacute;cia</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">7&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+1 na defesa</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">8&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+1 em rolagens de dano</td>
+
+      </tr>
+
+      <tr style="height: 16.8px;">
+
+      <td style="width: 18.22%; height: 16.8px;">9&ordm;</td>
+
+      <td style="width: 81.1234%; height: 16.8px;">+1 em um atributo</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">11&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+2 em uma per&iacute;cia</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">12&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+2 na Defesa</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">13&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+2 nas rolagens de dano</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">14&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+1 em um atributo</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">16&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+2 em uma per&iacute;cia</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">17&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+3 na Defesa</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">18&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+3 nas rolagens de dano</td>
+
+      </tr>
+
+      <tr style="height: 17px;">
+
+      <td style="width: 18.22%; height: 17px;">19&ordm;</td>
+
+      <td style="width: 81.1234%; height: 17px;">+1 em um atributo</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p>Os b&ocirc;nus n&atilde;o s&atilde;o cumulativos (os b&ocirc;nus em
+      atributos e per&iacute;cias devem ser aplicados num atributo ou
+      per&iacute;cia diferente a cada vez). Quando voc&ecirc; utiliza
+      voluntariamente qualquer item m&aacute;gico (exceto po&ccedil;&otilde;es),
+      perde o benef&iacute;cio deste poder at&eacute; o fim da aventura.
+      Voc&ecirc; ainda pode lan&ccedil;ar magias, receber magias
+      ben&eacute;ficas ou beneficiar-se de itens usados por outros &mdash; por
+      exemplo, pode &ldquo;ir de carona&rdquo; em um tapete voador, mas
+      n&atilde;o pode voc&ecirc; mesmo conduzi-lo.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> 6&ordm; n&iacute;vel de personagem.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 129 e 130
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Destino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184309
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!SRvf9NbvHRu0NNvN'
+

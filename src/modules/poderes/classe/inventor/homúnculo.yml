@@ -1,0 +1,90 @@
+name: Homúnculo
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.u9WYrwDRWBYQOB3m
+    defaultPermission: 3
+    hash: 3e1ac946a6273c6239689b9e7bb26c54b6df94ea
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; possui um hom&uacute;nculo, uma criatura Min&uacute;scula
+      feita de alquimia. Voc&ecirc;s podem se comunicar telepaticamente em
+      alcance longo e ele obedece a suas ordens, mas ainda est&aacute; limitado
+      ao que uma criatura de seu tamanho pode fazer. Um hom&uacute;nculo
+      &eacute; um parceiro ajudante iniciante. Voc&ecirc; pode perder 1d6 pontos
+      de vida para seu hom&uacute;nculo assumir uma forma capaz de
+      proteg&ecirc;-lo e se tornar tamb&eacute;m um parceiro guardi&atilde;o
+      iniciante at&eacute; o fim da cena.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Alquimista Iniciado.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: free
+    custo: null
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: >-
+    sofre 1d6 pontos de dano para seu homúnculo assumir uma forma capaz de
+    protegê-lo e fornecer +2 de Defesa até o fim da cena
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 1d6
+          - perda
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051645206
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: hT8faKFcx31ReX1e
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!hT8faKFcx31ReX1e'
+

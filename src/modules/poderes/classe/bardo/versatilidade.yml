@@ -1,0 +1,65 @@
+_id: gNEm9epTikpKnYU4
+name: Versatilidade
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects: []
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A partir do 2º nível, você pode gastar 1 PM para receber todos os
+      benefícios de ser treinado em uma perícia a sua escolha por um teste.</p>
+    chat: ''
+    unidentified: ''
+  source: ''
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: 0
+    condicao: ''
+    special: ''
+  duracao:
+    value: ''
+    units: ''
+    special: ''
+    valor: ''
+    unidade: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: null
+    amount: null
+  efeito: ''
+  alcance: ''
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bardo
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: null
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!gNEm9epTikpKnYU4'
+

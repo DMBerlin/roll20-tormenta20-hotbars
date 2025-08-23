@@ -1,0 +1,229 @@
+_id: hzUeT5gDd8pM9oqW
+name: 'Julgamento Divino: Vindicação'
+type: poder
+img: systems/tormenta20/icons/classes/paladino.webp
+effects:
+  - _id: Iat9tmm0FwvMiNsu
+    changes: []
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.IJwGqZpRUp4gIRtu
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Marcar Inimigo
+    img: systems/tormenta20/icons/classes/paladino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!hzUeT5gDd8pM9oqW.Iat9tmm0FwvMiNsu'
+  - name: Aumenta o bônus de ataque em +1 e o bônus de dano em +1d8
+    img: icons/svg/upgrade.svg
+    origin: Compendium.tormenta20.poderes.Item.hzUeT5gDd8pM9oqW
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: '1'
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: BWWirXu8SGDXfiak
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.344'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1748390935625
+      modifiedTime: 1748390951002
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!hzUeT5gDd8pM9oqW.BWWirXu8SGDXfiak'
+  - name: +1 de ataque e +1d8 de dano
+    img: icons/svg/upgrade.svg
+    origin: Compendium.tormenta20.poderes.Item.hzUeT5gDd8pM9oqW
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 1f4lh2VUnbZL9mA4
+    type: base
+    system: {}
+    changes:
+      - key: dano
+        mode: 2
+        value: 1d8
+        priority: null
+      - key: ataque
+        mode: 2
+        value: '1'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.344'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1748390956395
+      modifiedTime: 1748390988123
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!hzUeT5gDd8pM9oqW.1f4lh2VUnbZL9mA4'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar 2 PM para marcar um inimigo que tenha causado
+      dano a voc&ecirc; ou a seus aliados na cena. Voc&ecirc; recebe +1 em
+      testes de ataque e +1d8 em rolagens de dano contra o inimigo escolhido,
+      mas sofre &ndash;5 em testes de ataque contra quaisquer outros alvos. No
+      5&ordm; n&iacute;vel, e a cada cinco n&iacute;veis seguintes, voc&ecirc;
+      pode pagar +1 PM para aumentar o b&ocirc;nus de ataque em +1 e o
+      b&ocirc;nus de dano em +1d8. O efeito termina caso o alvo fique
+      inconsciente.</p>
+
+
+
+      <p><strong>Julgamentos Divinos</strong></p>
+
+      <p>Alguns poderes do paladino s&atilde;o Julgamentos Divinos. Esses
+      poderes compartilham as seguintes regras.</p>
+
+      <p>&bull; Proferir um julgamento gasta uma a&ccedil;&atilde;o de
+      movimento, a menos que a descri&ccedil;&atilde;o diga o
+      contr&aacute;rio.</p>
+
+      <p>&bull; Julgamentos que n&atilde;o t&ecirc;m um efeito instant&acirc;neo
+      duram at&eacute; o fim da cena.</p>
+
+      <p>&bull; Uma mesma criatura pode ser alvo de v&aacute;rios julgamentos
+      diferentes, mas efeitos do mesmo julgamento n&atilde;o se acumulam.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 83
+  ativacao:
+    execucao: move
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Paladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185122
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!hzUeT5gDd8pM9oqW'
+

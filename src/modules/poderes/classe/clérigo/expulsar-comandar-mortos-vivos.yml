@@ -1,0 +1,78 @@
+_id: nuSBip4f2Ytz3on6
+name: Expulsar/Comandar Mortos-Vivos
+type: poder
+img: systems/tormenta20/icons/classes/clerigo.webp
+effects: []
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o padr&atilde;o e 3 PM para
+      expulsar (se sua divindade canaliza energia positiva) ou comandar (se
+      canaliza energia negativa) todos os mortos-vivos em alcance curto.
+      Mortos-vivos expulsos ficam apavorados por 1d6 rodadas. Mortos-vivos
+      comandados n&atilde;o inteligentes (Int &ndash;4 ou menor) ficam sob suas
+      ordens por um dia (at&eacute; um limite de ND somados igual a seu
+      n&iacute;vel +3; dar uma ordem a todos eles &eacute; uma
+      a&ccedil;&atilde;o de movimento) e mortos-vivos comandados inteligentes
+      ficam fascinados por uma rodada. Mortos-vivos t&ecirc;m direito a um teste
+      de Vontade (CD Sab) para evitar qualquer destes efeitos.</p>
+
+      <p>Pr&eacute;-requisito: Canalizar Energia Positiva ou Negativa.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 58
+  ativacao:
+    execucao: ''
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: car
+    bonus: 0
+    txt: Vontade
+  rolls: []
+  tipo: classe
+  subtipo: Clérigo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185153
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!nuSBip4f2Ytz3on6'
+

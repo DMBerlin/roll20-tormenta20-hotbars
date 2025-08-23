@@ -1,0 +1,122 @@
+name: Ativação Rápida
+type: poder
+img: systems/tormenta20/icons/classes/inventor.webp
+effects:
+  - origin: Item.6acyRMGwUv0BCbXR
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: ioUGY07wN9C3qybj
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Ativação Rápida (Engenhoca).
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6acyRMGwUv0BCbXR.ioUGY07wN9C3qybj'
+flags:
+  scene-packer:
+    sourceId: Item.adT6XIuMaNek3A97
+    defaultPermission: 3
+    hash: 4ee1dcfa1ce218e57a3f98ef352353a3f68d06b4
+system:
+  description:
+    value: >-
+      <p>Ao ativar uma engenhoca com a&ccedil;&atilde;o padr&atilde;o,
+      voc&ecirc; pode pagar 2 PM para ativ&aacute;-la com uma a&ccedil;&atilde;o
+      de movimento, em vez disto.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Engenhoqueiro, 7&ordm; n&iacute;vel de
+      inventor.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 68
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051642519
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 6acyRMGwUv0BCbXR
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!6acyRMGwUv0BCbXR'
+

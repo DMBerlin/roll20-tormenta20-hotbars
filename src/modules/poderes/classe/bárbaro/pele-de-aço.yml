@@ -1,0 +1,109 @@
+_id: 1WIJH1LhIqUxQPfQ
+name: Pele de Aço
+type: poder
+img: systems/tormenta20/icons/classes/barbaro.webp
+effects:
+  - _id: rMyFCUlet6vafSxi
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '4'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.vmkdg2rXbQejqc2y
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Pele de Aço
+    img: systems/tormenta20/icons/classes/barbaro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!1WIJH1LhIqUxQPfQ.rMyFCUlet6vafSxi'
+folder: UhsYJ0BvPTkMyG53
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>O b&ocirc;nus de Pele de Ferro aumenta para +8.
+      <em>Pr&eacute;-requisitos:</em> Pele de Ferro, 8&ordm; n&iacute;vel de
+      b&aacute;rbaro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 42
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bárbaro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716776
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!1WIJH1LhIqUxQPfQ'
+

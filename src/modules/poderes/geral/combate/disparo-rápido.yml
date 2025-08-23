@@ -1,0 +1,124 @@
+_id: VXLq2BMz6sDSotBa
+name: Disparo Rápido
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - _id: Ijy6kK7jv20mHATd
+    flags:
+      tormenta20:
+        onuse: true
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+    changes:
+      - key: ataque
+        mode: 2
+        value: '-2'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.0exJPa3CapwKc8Pw
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Disparo Rápido
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!VXLq2BMz6sDSotBa.Ijy6kK7jv20mHATd'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se estiver empunhando uma arma de disparo que possa recarregar como
+      a&ccedil;&atilde;o livre e gastar uma a&ccedil;&atilde;o completa para
+      agredir, pode fazer um ataque adicional com ela. Se fizer isso, sofre
+      &ndash;2 em todos os testes de ataque at&eacute; o seu pr&oacute;ximo
+      turno.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Des 1, Estilo de Disparo ou Estilo de
+      Arremesso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 125
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184716
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!VXLq2BMz6sDSotBa'
+

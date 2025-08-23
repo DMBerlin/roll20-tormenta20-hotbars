@@ -1,0 +1,170 @@
+_id: 7pVeIeJX6mRBoZ21
+name: Esgrima Mágica
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects:
+  - origin: Item.bmCmzuXy2wJupAbr
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: Inspiração
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: V3qJ4zyrWsXjIYRe
+    changes:
+      - key: efeito
+        mode: 0
+        value: Inspiração (Esgrima Mágica)
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Esgrima Mágica
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!7pVeIeJX6mRBoZ21.V3qJ4zyrWsXjIYRe'
+  - origin: Item.bmCmzuXy2wJupAbr
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: true
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 8GI6aQbAMmVtvbD6
+    changes:
+      - key: pericia
+        mode: 5
+        value: atua
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Inspiração (Esgrima Mágica)
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!7pVeIeJX6mRBoZ21.8GI6aQbAMmVtvbD6'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sua arte mescla esgrima e magia, transformando dan&ccedil;a em golpes.
+      Enquanto estiver sob efeito de Inspira&ccedil;&atilde;o, voc&ecirc; pode
+      substituir testes de Luta por testes de Atua&ccedil;&atilde;o, mas apenas
+      se estiver empunhando armas leves ou de uma m&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 44
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716800
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!7pVeIeJX6mRBoZ21'
+

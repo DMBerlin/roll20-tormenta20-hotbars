@@ -1,0 +1,126 @@
+_id: i98ipNXoK3Uw17HX
+name: Esquiva Sagaz
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/esquiva-sagaz.webp
+effects:
+  - _id: qpSrtUIVTUtWEQwF
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: floor((@nvl.bucaneiro - 3)/4 + 1)
+        priority: null
+      - key: system.pericias.refl.bonus
+        mode: 2
+        value: floor((@nvl.bucaneiro - 3)/4 + 1)
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.ikieUBwE3GDg3pAZ
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1747113150028
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Esquiva Sagaz
+    img: systems/tormenta20/icons/poderes/classes/especialistas/esquiva-sagaz.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!i98ipNXoK3Uw17HX.qpSrtUIVTUtWEQwF'
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 3&ordm; n&iacute;vel, voc&ecirc; recebe +1 na Defesa e em Reflexos.
+      Esse b&ocirc;nus aumenta em +1 a cada quatro n&iacute;veis. Esta
+      habilidade exige liberdade de movimentos; voc&ecirc; n&atilde;o pode
+      us&aacute;-la se estiver de armadura pesada ou na condi&ccedil;&atilde;o
+      im&oacute;vel.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 48
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1658361717640
+  modifiedTime: 1747112745262
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!i98ipNXoK3Uw17HX'
+

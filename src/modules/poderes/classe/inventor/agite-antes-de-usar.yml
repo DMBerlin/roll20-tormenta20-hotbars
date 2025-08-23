@@ -1,0 +1,177 @@
+name: Agite Antes de Usar
+type: poder
+img: systems/tormenta20/icons/classes/inventor.webp
+effects:
+  - _id: Q07ieVMJB7URdq4f
+    changes:
+      - key: dano
+        mode: 0
+        value: 1d4
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.t60Sf1sKaQm9EBta
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        consumable: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        aumenta: true
+        custo: '1'
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Agite Antes de Usar (1d4).
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!3wD3n0qjYTFvkQon.Q07ieVMJB7URdq4f'
+  - origin: Item.3wD3n0qjYTFvkQon
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: true
+        items: ''
+        aumenta: true
+        custo: '1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: MiTli7H3WvU4mRTV
+    changes:
+      - key: dano
+        mode: 2
+        value: 1d6
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Agite Antes de Usar (1d6).
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!3wD3n0qjYTFvkQon.MiTli7H3WvU4mRTV'
+flags:
+  scene-packer:
+    sourceId: Item.t60Sf1sKaQm9EBta
+    defaultPermission: 3
+    hash: d2a39b857438ea93e8e01e337036c3b5d521ad22
+system:
+  description:
+    value: >-
+      <p>Quando usa um preparado alqu&iacute;mico que cause dano, voc&ecirc;
+      pode gastar uma quantidade de PM a sua escolha (limitado por sua
+      Intelig&ecirc;ncia). Para cada PM que gastar, o item causa um dado extra
+      de dano do mesmo tipo.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Treinado em Of&iacute;cio
+      (alquimista).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 68
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051642007
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 3wD3n0qjYTFvkQon
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!3wD3n0qjYTFvkQon'
+

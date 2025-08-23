@@ -1,0 +1,119 @@
+_id: aJa8qNTitp4dBVWh
+name: Destruidor (Bárbaro)
+type: poder
+img: systems/tormenta20/icons/classes/barbaro.webp
+effects:
+  - origin: Item.sPRzgJ1hb8kpO8JD
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: lPw3zb4IV6y9qdtX
+    changes:
+      - key: dano
+        mode: 0
+        value: r<3
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Destruidor
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!aJa8qNTitp4dBVWh.lPw3zb4IV6y9qdtX'
+folder: UhsYJ0BvPTkMyG53
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando causa dano com uma arma corpo a corpo de duas m&atilde;os,
+      voc&ecirc; pode rolar novamente qualquer resultado 1 ou 2 das rolagens de
+      dano da arma. <em>Pr&eacute;-requisito:</em> For 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 41
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bárbaro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717756
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!aJa8qNTitp4dBVWh'
+

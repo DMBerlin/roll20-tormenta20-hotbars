@@ -1,0 +1,122 @@
+_id: MfqDUMq8Oqr7xMEc
+name: Esse Cheiro...
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects:
+  - origin: Item.MfqDUMq8Oqr7xMEc
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: MEpf8LGT8Pmnfui5
+    changes:
+      - key: system.pericias.fort.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.344'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1748406393607
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Esse Cheiro...
+    img: systems/tormenta20/icons/poderes/origem.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!MfqDUMq8Oqr7xMEc.MEpf8LGT8Pmnfui5'
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em
+      @UUID[Compendium.tormenta20.basico.gPPLzgFvC0JKi5UE.JournalEntryPage.PcT6ZdZqQgsF5xh2]{Fortitude}
+      e detecta automaticamente a presen&ccedil;a (mas n&atilde;o a
+      localiza&ccedil;&atilde;o ou natureza) de itens alqu&iacute;micos em
+      alcance curto.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 88
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Assistente de Laboratório
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306184248
+  modifiedTime: 1748405990062
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!MfqDUMq8Oqr7xMEc'
+

@@ -1,0 +1,116 @@
+_id: LP0qBb4I92k2cpdK
+name: Magia Sagrada/Profana
+type: poder
+img: systems/tormenta20/icons/classes/clerigo.webp
+effects:
+  - origin: Item.LP0qBb4I92k2cpdK
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: VAaNWOwGbCOrnvYL
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Magia Sagrada/Profana
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LP0qBb4I92k2cpdK.VAaNWOwGbCOrnvYL'
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando lan&ccedil;a uma magia divina que causa dano, voc&ecirc; pode
+      gastar +1 PM. Se fizer isso, muda o tipo de dano da magia para luz (se sua
+      divindade canalliza energia positiva) ou trevas (se canaliza energia
+      negativa).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 58
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Clérigo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184245
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!LP0qBb4I92k2cpdK'
+

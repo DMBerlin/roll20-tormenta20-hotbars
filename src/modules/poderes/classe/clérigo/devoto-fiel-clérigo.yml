@@ -1,0 +1,80 @@
+_id: VPqDSTuhkXo58XzA
+name: Devoto Fiel (Clérigo)
+type: poder
+img: systems/tormenta20/icons/poderes/classes/conjuradores/devoto-c.webp
+effects: []
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; se torna devoto de um deus maior. Veja as regras de devotos
+      na p&aacute;gina 96. Ao contr&aacute;rio de devotos normais, voc&ecirc;
+      recebe dois poderes concedidos por se tornar devoto, em vez de apenas
+      um.</p>
+
+      <p><br>Como alternativa, voc&ecirc; pode cultuar o Pante&atilde;o como um
+      todo. N&atilde;o recebe nenhum Poder Concedido, mas sua &uacute;nica
+      obriga&ccedil;&atilde;o e restri&ccedil;&atilde;o &eacute; n&atilde;o usar
+      armas cortantes ou perfurantes (porque derramam sangue, algo que
+      cl&eacute;rigos do Pante&atilde;o consideram proibido). Sua arma preferida
+      &eacute; a ma&ccedil;a e voc&ecirc; pode canalizar energia positiva ou
+      negativa a sua escolha (uma vez feita, essa escolha n&atilde;o pode ser
+      mudada). Cultuar o Pante&atilde;o conta como sua
+      devo&ccedil;&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 57
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Clérigo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184714
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!VPqDSTuhkXo58XzA'
+

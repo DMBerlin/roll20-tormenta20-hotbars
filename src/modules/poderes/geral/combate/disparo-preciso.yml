@@ -1,0 +1,72 @@
+_id: SKQ0qQsrNjSTjKXJ
+name: Disparo Preciso
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects: []
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode fazer ataques &agrave; dist&acirc;ncia contra oponentes
+      envolvidos em combate corpo a corpo sem sofrer a penalidade padr&atilde;o
+      de &ndash;5 no teste de ataque.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Estilo de Disparo ou Estilo de
+      Arremesso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 125
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184306
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!SKQ0qQsrNjSTjKXJ'
+

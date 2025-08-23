@@ -1,0 +1,71 @@
+_id: 49W6ulVKcMAyd47P
+name: Código do Herói
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/codigo-heroi.webp
+effects: []
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; deve sempre manter sua palavra e nunca pode recusar um
+      pedido de ajuda de algu&eacute;m inocente. Al&eacute;m disso, nunca pode
+      mentir, trapacear ou roubar. Se violar o c&oacute;digo, voc&ecirc; perde
+      todos os seus PM e s&oacute; pode recuper&aacute;-los a partir do
+      pr&oacute;ximo dia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 82
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Paladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183309
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!49W6ulVKcMAyd47P'
+

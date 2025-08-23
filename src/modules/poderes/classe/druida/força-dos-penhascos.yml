@@ -1,0 +1,156 @@
+_id: K8Wy8fozgA2sA5se
+name: Força dos Penhascos
+type: poder
+img: systems/tormenta20/icons/classes/druida.webp
+effects:
+  - origin: Item.K8Wy8fozgA2sA5se
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: H4yVWSAlqsKEmGZl
+    changes:
+      - key: system.pericias.fort.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Força dos Penhascos
+    img: systems/tormenta20/icons/classes/druida.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!K8Wy8fozgA2sA5se.H4yVWSAlqsKEmGZl'
+  - origin: Item.K8Wy8fozgA2sA5se
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: '1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 5x3PGd3qyvEgpBmp
+    changes: []
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Reduz o dano em 10 para cada PM gasto.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!K8Wy8fozgA2sA5se.5x3PGd3qyvEgpBmp'
+folder: 8LraP5E2KHsZTAz8
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Fortitude. Quando sofre dano enquanto em
+      contato com o solo ou uma superf&iacute;cie de pedra, pode gastar uma
+      quantidade de PM limitada por sua Sabedoria. Para cada PM gasto, reduz
+      esse dano em 10. Pr&eacute;-requisito: 4&ordm; n&iacute;vel de Druida.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 62
+  ativacao:
+    execucao: reaction
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Druida
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183912
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!K8Wy8fozgA2sA5se'
+

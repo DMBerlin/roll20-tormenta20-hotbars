@@ -1,0 +1,164 @@
+_id: OTpGtbdURrqTWfM4
+name: Sombras Profanas
+type: poder
+img: systems/tormenta20/icons/racas/suraggel.webp
+effects:
+  - _id: 7y2bemiGX7Js4Zy6
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.22jQBOeNpCDDsO4z
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        spell: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        consumable: false
+        aumenta: false
+        custo: '-1'
+        durationScene: false
+        items: Escuridão
+        equipment: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sombras Profanas
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!OTpGtbdURrqTWfM4.7y2bemiGX7Js4Zy6'
+  - _id: LFTR2VivKIk5zReC
+    changes:
+      - key: system.pericias.furt.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.enga.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.22jQBOeNpCDDsO4z
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sombras Profanas
+    img: systems/tormenta20/icons/racas/suraggel.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!OTpGtbdURrqTWfM4.LFTR2VivKIk5zReC'
+folder: ynxWPPRSK2yaInsF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Engana&ccedil;&atilde;o e Furtividade.
+      Al&eacute;m disso, pode lan&ccedil;ar <a class="content-link"
+      draggable="true" data-uuid="Compendium.tormenta20.magias.Bt364TPpNUI1QVPP"
+      data-id="Bt364TPpNUI1QVPP" data-type="Item" data-pack="tormenta20.magias"
+      data-tooltip="Magia Item">Escurid&atilde;o</a> (como uma magia divina;
+      atributo-chave Intelig&ecirc;ncia). Caso aprenda novamente essa magia, seu
+      custo diminui em &ndash;1 PM.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 31
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Suraggel (Sulfure)
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184255
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!OTpGtbdURrqTWfM4'
+

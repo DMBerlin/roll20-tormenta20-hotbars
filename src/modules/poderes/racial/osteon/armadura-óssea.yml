@@ -1,0 +1,114 @@
+_id: l1E04OA0ThZFOeL5
+name: Armadura Óssea
+type: poder
+img: systems/tormenta20/icons/racas/osteon.webp
+effects:
+  - _id: bXFpzQbW5UlL3LzW
+    changes:
+      - key: system.tracos.resistencias.corte.value
+        mode: 2
+        value: '5'
+        priority: null
+      - key: system.tracos.resistencias.frio.value
+        mode: 2
+        value: '5'
+        priority: null
+      - key: system.tracos.resistencias.perfuracao.value
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.09PR1n01v742BpR8
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Armadura Óssea
+    img: systems/tormenta20/icons/racas/osteon.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!l1E04OA0ThZFOeL5.bXFpzQbW5UlL3LzW'
+folder: voEJdcAKDfYsKoTC
+sort: 500000
+flags: {}
+system:
+  description:
+    value: <p>Você recebe resistência a corte, frio e perfuração 5.</p>
+    chat: ''
+    unidentified: ''
+  source: ''
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Osteon
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.341'
+  createdTime: 1664306185138
+  modifiedTime: 1746636168835
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!l1E04OA0ThZFOeL5'
+

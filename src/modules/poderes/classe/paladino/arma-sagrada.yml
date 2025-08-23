@@ -1,0 +1,124 @@
+_id: d5oh4raZ5joNKqS7
+name: Arma Sagrada
+type: poder
+img: systems/tormenta20/icons/classes/paladino.webp
+effects:
+  - _id: Yjpuat1yCNqacmly
+    changes:
+      - key: '@Golpe Divino#dano'
+        mode: 0
+        value: d12
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uptEOemeIMOvoApe
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+        equipment: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Arma Sagrada
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!d5oh4raZ5joNKqS7.Yjpuat1yCNqacmly'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando usa Golpe Divino para atacar com a arma preferida de sua
+      divindade, o dado de dano que voc&ecirc; rola por Golpe Divino aumenta
+      para d12.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> devoto de uma divindade (exceto Vida e
+      Paz).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 82
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Paladino
+  chatFlavor: ''
+  tags:
+    - magico
+  origin: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184743
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!d5oh4raZ5joNKqS7'
+

@@ -1,0 +1,134 @@
+_id: zcqfqdZfcQiOM5Sv
+name: Palavras Afiadas
+type: poder
+img: systems/tormenta20/icons/classes/nobre.webp
+effects:
+  - _id: I8A9dao7Mx04k20B
+    changes:
+      - key: dano
+        mode: 2
+        value: 2d6
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.pWy1Vj1gYJhHjiv3
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: ' '
+        durationScene: false
+        items: ''
+        equipment: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: 1748389721111
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aumenta o dano em 2d6.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!zcqfqdZfcQiOM5Sv.I8A9dao7Mx04k20B'
+folder: 1gk4CeDo7oR1b0oD
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você pode gastar uma ação padrão e 1 PM para fazer um teste de
+      Diplomacia ou Intimidação oposto ao teste de Vontade de uma criatura
+      inteligente (Int –3 ou maior) em alcance curto. Se vencer, você causa 2d6
+      pontos de dano psíquico não letal à criatura. Se perder, causa metade
+      deste dano. Se a criatura for reduzida a 0 ou menos PV, em vez de cair
+      inconsciente, ela se rende (se você usou Diplomacia) ou fica apavorada e
+      foge de você da maneira mais eficiente possível (se usou Intimidação). A
+      cada quatro níveis, você pode gastar +1 PM para aumentar o dano (veja a
+      tabela da classe). Mental.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 80
+  ativacao:
+    execucao: action
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: inst
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: short
+  alvo: uma criatura com int -3 ou mais
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: Vontade
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 2d6
+          - psiquico
+          - ''
+      versatil: ''
+  tipo: ability
+  subtipo: Nobre
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306185708
+  modifiedTime: 1748389749345
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!zcqfqdZfcQiOM5Sv'
+

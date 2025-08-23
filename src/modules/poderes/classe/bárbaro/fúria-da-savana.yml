@@ -1,0 +1,123 @@
+_id: SLzX7RCThmZEtTvG
+name: Fúria da Savana
+type: poder
+img: systems/tormenta20/icons/classes/barbaro.webp
+effects:
+  - origin: Item.xrq4jb7udlNKLPJT
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: Fúria
+        aumenta: true
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 1yraXw2XowdqWFiV
+    changes:
+      - key: system.modificadores.ataque.cac
+        mode: 2
+        value: '1'
+        priority: 0
+      - key: system.modificadores.dano.ad
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Fúria da Savana
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!SLzX7RCThmZEtTvG.1yraXw2XowdqWFiV'
+folder: UhsYJ0BvPTkMyG53
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Seu deslocamento aumenta em +3m. Quando usa F&uacute;ria, voc&ecirc;
+      aplica o b&ocirc;nus em ataque e dano tamb&eacute;m a armas de
+      arremesso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 42
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bárbaro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717058
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!SLzX7RCThmZEtTvG'
+

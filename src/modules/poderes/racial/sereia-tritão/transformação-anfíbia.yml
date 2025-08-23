@@ -1,0 +1,110 @@
+_id: lQuRjelAvkrV6nVY
+name: Transformação Anfíbia
+type: poder
+img: systems/tormenta20/icons/racas/sereia.webp
+effects:
+  - origin: Item.lQuRjelAvkrV6nVY
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: hhqKsZynz9bYIvP0
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 2
+        value: '12'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Transformação Anfíbia
+    img: systems/tormenta20/icons/racas/sereia.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!lQuRjelAvkrV6nVY.hhqKsZynz9bYIvP0'
+folder: deNUAIMEeSNoJ1Tx
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você pode respirar debaixo d'água e possui uma cauda que fornece
+      deslocamento de natação 12m. Quando fora d'água, sua cauda desaparece e dá
+      lugar a pernas (deslocamento 9m). Se permanecer mais de um dia sem contato
+      com água, você não recupera PM com descanso até voltar para a água (ou,
+      pelo menos, tomar um bom banho!).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 30
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Sereia/tritão
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185143
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!lQuRjelAvkrV6nVY'
+

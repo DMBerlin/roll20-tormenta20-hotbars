@@ -1,0 +1,70 @@
+_id: DuYQHabcHMZHQvRk
+name: Propósito de Criação
+type: poder
+img: systems/tormenta20/icons/racas/golem.webp
+effects: []
+folder: JbWoTw5WRQStJu6M
+sort: 200000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; foi contru&iacute;do "pronto" para um prop&oacute;sito
+      espec&iacute;fico e n&atilde;o teve uma inf&acirc;ncia. Voc&ecirc;
+      n&atilde;o tem direito a escolher uma origem, mas recebe um poder geral a
+      sua escolha.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 27
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Golem
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183826
+  modifiedTime: 1746812830528
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!DuYQHabcHMZHQvRk'
+

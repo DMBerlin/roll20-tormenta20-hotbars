@@ -1,0 +1,122 @@
+_id: 0tfJ1wT2LbC6YcJN
+name: Quebrar Aprimorado
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - _id: e9bp7tMgiV8AS9wU
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+    changes:
+      - key: ataque
+        value: '2'
+        mode: 2
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.VJ573IwQcrVCHjkO
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Quebrar Aprimorado
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!0tfJ1wT2LbC6YcJN.e9bp7tMgiV8AS9wU'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em testes de ataque para quebrar. Quando reduz os
+      PV de uma arma para 0 ou menos, voc&ecirc; pode gastar 1 PM para realizar
+      um ataque extra contra o usu&aacute;rio dela. O ataque adicional usa os
+      mesmos valores de ataque e dano, mas os dados devem ser rolados
+      novamente.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Ataque Poderoso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 129
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183284
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!0tfJ1wT2LbC6YcJN'
+

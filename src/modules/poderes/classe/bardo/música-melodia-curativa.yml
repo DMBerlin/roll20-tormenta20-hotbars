@@ -1,0 +1,143 @@
+_id: zeUv5BxKHLn0NgbF
+name: 'Música: Melodia Curativa'
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects:
+  - _id: Lfdmaa9s3IkThlvO
+    changes:
+      - key: dano
+        mode: 2
+        value: 1d6
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.T86oX26S0OuOnV6p
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '1'
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aumenta a Cura em +1d6
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!zeUv5BxKHLn0NgbF.Lfdmaa9s3IkThlvO'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Criaturas a sua escolha no alcance recuperam 1d6 PV. Quando usa esta
+      habilidade, voc&ecirc; pode gastar mais pontos de mana. Para cada PM
+      extra, aumente a cura em +1d6 PV.</p>
+
+
+
+      <p><strong>M&uacute;sicas de Bardo</strong></p>
+
+      <p>Alguns poderes do bardo s&atilde;o M&uacute;sicas. Esses poderes
+      compartilham as seguintes regras.</p>
+
+      <p>&bull; Para ativar uma m&uacute;sica, voc&ecirc; precisa ser treinado
+      em Atua&ccedil;&atilde;o e empunhar um instrumento musical (veja a
+      p&aacute;gina 159).</p>
+
+      <p>&bull; Ativar uma m&uacute;sica gasta uma a&ccedil;&atilde;o
+      padr&atilde;o e 1 PM.</p>
+
+      <p>&bull; Efeitos de m&uacute;sicas t&ecirc;m alcance curto.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 45
+  ativacao:
+    execucao: action
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: short
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Cura
+      key: dano0
+      type: dano
+      parts:
+        - - 1d6
+          - curapv
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717765
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!zeUv5BxKHLn0NgbF'
+

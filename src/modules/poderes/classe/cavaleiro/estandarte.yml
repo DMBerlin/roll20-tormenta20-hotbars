@@ -1,0 +1,73 @@
+_id: oORNocLguIQvaDqL
+name: Estandarte
+type: poder
+img: systems/tormenta20/icons/classes/cavaleiro.webp
+effects: []
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sua fl&acirc;mula torna-se um s&iacute;mbolo de
+      inspira&ccedil;&atilde;o. No in&iacute;cio de cada cena, voc&ecirc; e
+      todos os aliados que possam ver seu estandarte recebem um n&uacute;mero de
+      PM tempor&aacute;rios igual ao seu Carisma (m&iacute;nimo 1). PM
+      tempor&aacute;rios desaparecem no final da cena.
+      <em>Pr&eacute;-requisito:</em> T&iacute;tulo, 14&ordm; n&iacute;vel de
+      cavaleiro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 54
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Cavaleiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185203
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!oORNocLguIQvaDqL'
+

@@ -1,0 +1,123 @@
+name: Invenção Potente
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects:
+  - _id: OinaYpWMzsTEadNR
+    changes:
+      - key: cd
+        mode: 2
+        value: '2'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.BLNdDR80Xs02ocjo
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        consumable: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: true
+        aumenta: false
+        custo: '1'
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Invenção potente
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!siUgo1SjC1CbAAPr.OinaYpWMzsTEadNR'
+flags:
+  scene-packer:
+    sourceId: Item.BLNdDR80Xs02ocjo
+    defaultPermission: 3
+    hash: 48805a03929afb235b78b58cbab56133094caac3
+system:
+  description:
+    value: >-
+      <p>Quando usa um item ou engenhoca fabricado por voc&ecirc; mesmo,
+      voc&ecirc; pode pagar 1 PM para aumentar em +2 a CD para resistir a
+      ele.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051645360
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: siUgo1SjC1CbAAPr
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!siUgo1SjC1CbAAPr'
+

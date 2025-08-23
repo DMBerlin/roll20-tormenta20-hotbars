@@ -1,0 +1,71 @@
+name: Apostar com o Trapaceiro
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-trapaca.webp
+system:
+  description:
+    value: >-
+      <p>Quando faz um teste de per&iacute;cia, voc&ecirc; pode gastar 1 PM para
+      apostar com o Trapaceiro. Voc&ecirc; e o mestre rolam 1d20, mas o mestre
+      mant&eacute;m o resultado dele em segredo. Voc&ecirc; ent&atilde;o escolhe
+      entre usar seu pr&oacute;prio resultado ou o resultado oculto do mestre
+      (neste caso, ele revela o resultado).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 132
+  ativacao:
+    execucao: free
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Trapaça
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+effects: []
+flags: {}
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664906004943
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: zeEpAhQcqAHA0qsn
+folder: p925DvI25xp3j71U
+sort: 0
+ownership:
+  default: 0
+_key: '!items!zeEpAhQcqAHA0qsn'
+

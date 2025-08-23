@@ -1,0 +1,72 @@
+_id: suFpHfckhlVgiVSw
+name: Bloqueio com Escudo
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects: []
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando sofre dano, voc&ecirc; pode gastar 1 PM para receber
+      redu&ccedil;&atilde;o de dano igual ao b&ocirc;nus na Defesa que seu
+      escudo fornece contra este dano. Voc&ecirc; s&oacute; pode usar este poder
+      se estiver usando um escudo.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Estilo de Arma e Escudo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 124
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185649
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!suFpHfckhlVgiVSw'
+

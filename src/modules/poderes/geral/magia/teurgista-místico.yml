@@ -1,0 +1,72 @@
+_id: Esp2Su5Fyg0g52TM
+name: Teurgista Místico
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-magia.webp
+effects: []
+folder: Kye2KzNfCgJW92Kb
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>At&eacute; uma magia de cada c&iacute;rculo que voc&ecirc; aprender
+      poder&aacute; ser escolhida entre magias divinas (se voc&ecirc; for um
+      conjurador arcano) ou entre magias arcanas (se for um conjurador
+      divino).</p>
+
+      <p><em>Pr&eacute;-requisito:</em> habilidade de classe Magias.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 135
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Magia
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183830
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Esp2Su5Fyg0g52TM'
+

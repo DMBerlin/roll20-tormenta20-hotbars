@@ -1,0 +1,74 @@
+_id: kVmOn7TQXvedO40o
+name: Código de Honra
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/codigo-honra.webp
+effects: []
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Cavaleiros distinguem-se de meros combatentes por seguir um código de
+      conduta. Fazem isto para mostrar que estão acima dos mercenários e
+      bandoleiros que infestam os campos de batalha. Você não pode atacar um
+      oponente pelas costas (em termos de jogo, não pode se beneficiar do bônus
+      de flanquear), caído, desprevenido ou incapaz de lutar. Se violar o
+      código, você perde todos os seus PM e só pode recuperá-los a partir do
+      próximo dia. Rebaixar-se ao nível dos covardes e desesperados abala a
+      autoconfiança que eleva o cavaleiro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 53
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Cavaleiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185136
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!kVmOn7TQXvedO40o'
+

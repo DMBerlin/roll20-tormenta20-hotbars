@@ -1,0 +1,85 @@
+_id: UB3sYP3377eAPcN2
+name: Linhagem Feérica
+type: poder
+img: systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-feerica.webp
+effects: []
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Seu sangue foi tocado pelas fadas.</p>
+
+      <ul>
+
+      <li>B&aacute;sica. Voc&ecirc; se torna treinado em Engana&ccedil;&atilde;o
+      e aprende uma magia de 1&ordm; c&iacute;rculo de encantamento ou
+      ilus&atilde;o, arcana ou divina, a sua escolha.</li>
+
+      <li>Aprimorada. A CD para resistir a suas magias de encantamento e
+      ilus&atilde;o aumenta em +2 e suas magias dessas escolas custam &ndash;1
+      PM.</li>
+
+      <li>Superior. Voc&ecirc; recebe +2 em Carisma. Se uma criatura passar no
+      teste de resist&ecirc;ncia contra uma magia de encantamento ou
+      ilus&atilde;o lan&ccedil;ada por voc&ecirc;, voc&ecirc; fica alquebrado
+      at&eacute; o final da cena.</li>
+
+      </ul>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 39
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Arcanista
+  tags:
+    - Arcanista
+  origin: ''
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184315
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!UB3sYP3377eAPcN2'
+

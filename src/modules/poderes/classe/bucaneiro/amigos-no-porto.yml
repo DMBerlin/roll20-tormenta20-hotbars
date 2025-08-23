@@ -1,0 +1,72 @@
+_id: jHQ74ZZTuFIL7AyE
+name: Amigos no Porto
+type: poder
+img: systems/tormenta20/icons/classes/bucaneiro.webp
+effects: []
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando chega em uma comunidade portu&aacute;ria, voc&ecirc; pode fazer
+      um teste de Carisma (CD 10). Se passar, encontra um amigo para o qual pode
+      pedir um favor ou que pode ajud&aacute;-lo como parceiro veterano de um
+      tipo a sua escolha por um dia.</p>
+
+      <p>Pr&eacute;-requisitos: Car 1, 6&ordm; n&iacute;vel de bucaneiro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 47
+  ativacao:
+    execucao: ''
+    custo: null
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717641
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!jHQ74ZZTuFIL7AyE'
+

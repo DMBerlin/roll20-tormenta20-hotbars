@@ -1,0 +1,130 @@
+_id: AUHTUQExPifU7clf
+name: Abençoado
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/abencoado.webp
+effects:
+  - name: Abençoado
+    img: systems/tormenta20/icons/poderes/classes/combatentes/abencoado.webp
+    origin: Compendium.tormenta20.poderes.Item.AUHTUQExPifU7clf
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 7g5YM1E6QnEPB0To
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.pm.atributos.car
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747120640948
+      modifiedTime: 1747120662057
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!AUHTUQExPifU7clf.7g5YM1E6QnEPB0To'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; soma seu Carisma no seu total de pontos de mana no 1&ordm;
+      n&iacute;vel. Al&eacute;m disso, torna-se devoto de um deus
+      dispon&iacute;vel para paladinos (Ambição, Conhecimento, Honra, Justiça,
+      Paz, Ressurreição, Sol, Vida). Veja as regras de devotos na p&aacute;gina
+      96. Ao contr&aacute;rio de devotos normais, voc&ecirc; recebe dois poderes
+      concedidos por se tornar devoto, em vez de apenas um.</p>
+
+      <p>Como alternativa, voc&ecirc; pode ser um paladino do bem, lutando em
+      prol da bondade e da justi&ccedil;a como um todo. N&atilde;o recebe nenhum
+      Poder Concedido, mas n&atilde;o precisa seguir nenhuma
+      Obriga&ccedil;&atilde;o &amp; Restri&ccedil;&atilde;o (al&eacute;m do
+      C&oacute;digo do Her&oacute;i, abaixo). Cultuar o bem conta como sua
+      devo&ccedil;&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 82
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Paladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183805
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!AUHTUQExPifU7clf'
+

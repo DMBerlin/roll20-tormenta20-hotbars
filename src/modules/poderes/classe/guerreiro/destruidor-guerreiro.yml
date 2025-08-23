@@ -1,0 +1,121 @@
+_id: tJ3oBwonUaC9sSXR
+name: Destruidor (Guerreiro)
+type: poder
+img: systems/tormenta20/icons/classes/guerreiro.webp
+effects:
+  - origin: Item.t0v9j9yqXWssODlV
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: Cysm5KQGw2oQpNlY
+    changes:
+      - key: dano
+        mode: 0
+        value: r<3
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Destruidor
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!tJ3oBwonUaC9sSXR.Cysm5KQGw2oQpNlY'
+folder: LJQ1SKk2Y0QmZI03
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando causa dano com uma arma corpo a corpo de duas m&atilde;os,
+      voc&ecirc; pode rolar novamente qualquer resultado 1 ou 2 da rolagem de
+      dano da arma.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> For 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 65
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Guerreiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185649
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!tJ3oBwonUaC9sSXR'
+

@@ -1,0 +1,111 @@
+_id: u9TgbL6zCLQADGZg
+name: Comandar
+type: poder
+img: systems/tormenta20/icons/poderes/destino.webp
+effects:
+  - _id: DtP4A3p2LN9mTayV
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    changes:
+      - key: system.modificadores.pericias.geral
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      rounds: 99
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.0MAxzlV1Co6JZI3A
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Comandar
+    img: systems/tormenta20/icons/poderes/destino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!u9TgbL6zCLQADGZg.DtP4A3p2LN9mTayV'
+folder: NvFFFNI6JHPuMkck
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para
+      gritar ordens para seus aliados em alcance m&eacute;dio. Eles recebem +1
+      em testes de per&iacute;cia at&eacute; o fim da cena.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Car 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 130
+  ativacao:
+    execucao: move
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Destino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185652
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!u9TgbL6zCLQADGZg'
+

@@ -1,0 +1,80 @@
+_id: CsTu9cMRXHv90a2I
+name: Aura Ardente
+type: poder
+img: systems/tormenta20/icons/classes/paladino.webp
+effects: []
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Enquanto sua aura estiver ativa, no in&iacute;cio de cada um de seus
+      turnos, esp&iacute;ritos e mortos-vivos a sua escolha dentro dela sofrem
+      dano de luz igual a 5 + seu Carisma.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> 10&deg; n&iacute;vel de paladino.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 83
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 5+@car
+          - luz
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: Paladino
+  chatFlavor: ''
+  tags:
+    - magico
+  origin: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183822
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!CsTu9cMRXHv90a2I'
+

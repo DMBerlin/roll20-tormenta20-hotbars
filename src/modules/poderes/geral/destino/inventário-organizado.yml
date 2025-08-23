@@ -1,0 +1,116 @@
+name: Inventário organizado
+type: poder
+img: systems/tormenta20/icons/poderes/destino.webp
+effects:
+  - origin: Item.4JUP8DbkCkOZguQb
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 1MpEavtjpRyxiFDk
+    changes:
+      - key: system.attributes.carga.bonus
+        mode: 2
+        value: '@int'
+        priority: null
+      - key: flags.tormenta20.inventarioOrganizado
+        mode: 5
+        value: 'true'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Inventário organizado
+    img: systems/tormenta20/icons/poderes/destino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!4JUP8DbkCkOZguQb.1MpEavtjpRyxiFDk'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; soma sua Intelig&ecirc;ncia no limite de espa&ccedil;os que
+      pode carregar. Para voc&ecirc;, itens muito leves ou pequenos, que
+      normalmente ocupam meio espa&ccedil;o, em vez disso ocupam 1/4 de
+      espa&ccedil;o.</p>
+
+      <p>Pr&eacute;-requisito: Int 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 130
+  ativacao:
+    execucao: ''
+    custo: null
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Destino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183302
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 4JUP8DbkCkOZguQb
+folder: NvFFFNI6JHPuMkck
+sort: 0
+ownership:
+  default: 0
+_key: '!items!4JUP8DbkCkOZguQb'
+

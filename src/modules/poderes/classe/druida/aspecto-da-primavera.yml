@@ -1,0 +1,117 @@
+_id: nOcM2ylgOcnsWvxM
+name: Aspecto da Primavera
+type: poder
+img: systems/tormenta20/icons/classes/druida.webp
+effects:
+  - origin: Item.nOcM2ylgOcnsWvxM
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '-1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 7hkxNTPRJaBWNsZu
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Aspecto da Primavera: -1 PM para magias escolhidas.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!nOcM2ylgOcnsWvxM.7hkxNTPRJaBWNsZu'
+folder: 8LraP5E2KHsZTAz8
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; aprende e pode lan&ccedil;ar uma magia de encantamento ou
+      ilus&atilde;o, arcana ou divina, de qualquer c&iacute;rculo que possa
+      lan&ccedil;ar. Al&eacute;m disso, escolha uma quantidade de magias igual
+      ao seu Carisma (m&iacute;nimo 1). O custo dessas magias &eacute; reduzido
+      em &minus;1 PM.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 61
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Druida
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185152
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!nOcM2ylgOcnsWvxM'
+

@@ -1,0 +1,73 @@
+_id: LJ5XHh4FYEgJgUwz
+name: Truque Mágico
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects: []
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; aprende e pode lan&ccedil;ar uma magia arcana de 1&ordm;
+      c&iacute;rculo a sua escolha, pagando seu custo normal em PM. Seu
+      atributo-chave para esta magia &eacute; Intelig&ecirc;ncia. Voc&ecirc;
+      pode escolher este poder quantas vezes quiser.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Int 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  tags:
+    - magico
+  origin: ''
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184245
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!LJ5XHh4FYEgJgUwz'
+

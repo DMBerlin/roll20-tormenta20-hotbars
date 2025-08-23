@@ -1,0 +1,136 @@
+_id: 7l8QfEV23EubxDfx
+name: 'Caminho do Arcanista: Mago'
+type: poder
+img: >-
+  systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-mago.webp
+effects:
+  - name: 'Caminho do Arcanista: Mago'
+    img: >-
+      systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-mago.webp
+    origin: Compendium.tormenta20.poderes.Item.7l8QfEV23EubxDfx
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: cTsCzLPJixSqb4Cb
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.pm.atributos.int
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747120208603
+      modifiedTime: 1747120214423
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!7l8QfEV23EubxDfx.cTsCzLPJixSqb4Cb'
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; lan&ccedil;a magias atrav&eacute;s de estudo e
+      memoriza&ccedil;&atilde;o de f&oacute;rmulas arcanas. Voc&ecirc; s&oacute;
+      pode lan&ccedil;ar magias memorizadas; suas outras magias n&atilde;o podem
+      ser lan&ccedil;adas, mesmo que voc&ecirc; tenha pontos de mana para tal.
+      Para memorizar magias, voc&ecirc; precisa estudar seu grim&oacute;rio por
+      uma hora. Quando faz isso, escolhe metade das magias que conhece (por
+      exemplo, se conhece 7 magias, escolhe 3). Essas ser&atilde;o suas magias
+      memorizadas. Voc&ecirc; pode memorizar magias uma vez por dia. Caso
+      n&atilde;o possa estudar (por n&atilde;o ter tempo, por ter perdido o
+      grim&oacute;rio...), n&atilde;o poder&aacute; trocar suas magias
+      memorizadas. Um grim&oacute;rio tem as mesmas estat&iacute;sticas de um
+      foco (veja acima) e pode ser recuperado da mesma forma. Voc&ecirc;
+      come&ccedil;a com uma magia adicional (para um total de 4) e, sempre que
+      ganha acesso a um novo c&iacute;rculo de magias, aprende uma magia
+      adicional daquele c&iacute;rculo. Seu atributo-chave para magias &eacute;
+      Intelig&ecirc;ncia.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 37
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Arcanista
+  chatFlavor: ''
+  tags:
+    - Arcanista
+  origin: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306183328
+  modifiedTime: 1747120215231
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!7l8QfEV23EubxDfx'
+

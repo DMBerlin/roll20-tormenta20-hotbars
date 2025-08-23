@@ -1,0 +1,121 @@
+_id: 6BsXApytiJlmZBxV
+name: Artista Completo
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/artista-completo.webp
+effects:
+  - origin: Item.rE9Gpv4QLlwyChwC
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: true
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: tZ1I9b63OtaddMEZ
+    changes:
+      - key: custo
+        mode: 0
+        value: /2
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Artista Completo
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!6BsXApytiJlmZBxV.tZ1I9b63OtaddMEZ'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 20&ordm; n&iacute;vel, voc&ecirc; pode usar Inspira&ccedil;&atilde;o
+      como uma a&ccedil;&atilde;o livre. Enquanto estiver sob efeito de sua
+      Inspira&ccedil;&atilde;o, qualquer habilidade de bardo (incluindo magias)
+      que voc&ecirc; usar tem seu custo em PM reduzido pela metade (ap&oacute;s
+      aplicar quaisquer outras habilidades que reduzam o custo).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 45
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716796
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!6BsXApytiJlmZBxV'
+

@@ -1,0 +1,78 @@
+name: Catalizador Instável
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.90oiaVYRIXzEgUZ2
+    defaultPermission: 3
+    hash: 9ab8633ceac5fe73d4dbfb58536ef10d5515a785
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o completa e 3 PM para
+      fabricar um preparado alqu&iacute;mico ou po&ccedil;&atilde;o cuja
+      f&oacute;rmula conhe&ccedil;a instantaneamente. O custo do item &eacute;
+      reduzido &agrave; metade e voc&ecirc; n&atilde;o precisa fazer o teste de
+      Of&iacute;cio (alquimista), mas ele s&oacute; dura at&eacute; o fim da
+      cena.</p>
+
+      <p><em>Pr&eacute;-requisito: </em>Alquimista Iniciado.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: full
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051643381
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: e4j577dYux3DcLzL
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!e4j577dYux3DcLzL'
+

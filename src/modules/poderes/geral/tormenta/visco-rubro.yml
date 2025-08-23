@@ -1,0 +1,112 @@
+_id: Mce6xvlRf48rWmMf
+name: Visco Rubro
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects:
+  - _id: XfsrjWXV3xA2ybOJ
+    changes:
+      - key: system.modificadores.dano.cac
+        mode: 2
+        value: 1+(@Tormenta2)
+    disabled: false
+    duration:
+      rounds: 99
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.OaODAVqPWU2Fs7yi
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Visco Rubro
+    img: systems/tormenta20/icons/poderes/tormenta.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Mce6xvlRf48rWmMf.XfsrjWXV3xA2ybOJ'
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar 1 PM para expelir um l&iacute;quido grosso e
+      corrosivo. At&eacute; o final da cena, voc&ecirc; recebe +1 nas rolagens
+      de dano corpo a corpo. Este b&ocirc;nus aumenta em +1 para cada dois
+      outros poderes da Tormenta que voc&ecirc; possui.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: passive
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  tags:
+    - Tormenta
+  origin: ''
+  chatGif: ''
+  rolltags:
+    - Tormenta
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306184248
+  modifiedTime: 1748407299640
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Mce6xvlRf48rWmMf'
+
