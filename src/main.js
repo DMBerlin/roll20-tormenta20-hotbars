@@ -9402,6 +9402,16 @@
             const filterContainer = document.createElement('div');
             filterContainer.style.position = 'relative';
             filterContainer.style.marginBottom = '10px';
+
+            // Instrução para detalhes
+            const instructionText = document.createElement('div');
+            instructionText.innerHTML = '💡 <strong>Dica:</strong> Clique segurando CTRL para ver detalhes completos da manobra';
+            instructionText.style.color = '#ff6e6e';
+            instructionText.style.fontSize = '12px';
+            instructionText.style.marginBottom = '8px';
+            instructionText.style.textAlign = 'center';
+            instructionText.style.fontStyle = 'italic';
+            popup.appendChild(instructionText);
             const filterInput = document.createElement('input');
             filterInput.type = 'text';
             filterInput.placeholder = 'Filtrar manobras...';
@@ -9454,43 +9464,106 @@
             maneuversList.style.gap = '6px';
             maneuversList.style.marginTop = '2px';
 
-            // Lista de manobras
+            // Lista de manobras atualizada conforme Tormenta 20
             const maneuvers = [
                 {
                     name: 'Investida',
                     description: 'Você avança até o dobro de seu deslocamento (e no mínimo 3m) em linha reta e, no fim do movimento, faz um ataque corpo a corpo. Você recebe +2 no teste de ataque, mas sofre –2 na Defesa até o seu próximo turno, porque sua guarda fica aberta. Você não pode fazer uma investida em terreno difícil. Durante uma investida, você pode fazer a manobra atropelar como uma ação livre (mas não pode atropelar e atacar o mesmo alvo).',
                     icon: '⚡',
-                    shortDesc: 'Ação completa: Ataque corpo a corpo com +2 no teste de ataque (rolagem: 1d20 + Pontaria + bônus da investida), mas sofra –2 na Defesa até o próximo turno.'
+                    shortDesc: 'Ação completa: Ataque corpo a corpo com +2 no teste de ataque, mas sofra –2 na Defesa até o próximo turno.',
+                    actionType: 'Ação Completa',
+                    testType: 'Ataque corpo a corpo',
+                    difficulty: 'Teste de Pontaria +2',
+                    effects: ['+2 no teste de ataque', '-2 na Defesa até próximo turno', 'Pode fazer Atropelar como ação livre'],
+                    restrictions: ['Não pode ser feita em terreno difícil', 'Mínimo 3m de movimento']
                 },
                 {
                     name: 'Atropelar',
                     description: 'Você pode tentar atropelar um oponente como uma ação de movimento. Faça um teste de Força (Atletismo) oposto ao teste de Força (Atletismo) do oponente. Se você vencer, empurra o oponente 1,5m para trás e pode continuar seu movimento. Se você perder, para no espaço do oponente.',
                     icon: '💨',
-                    shortDesc: 'Ação de movimento: Teste de Atletismo (rolagem: 1d20 + Atletismo total) para empurrar oponente 1,5m para trás.'
+                    shortDesc: 'Ação de movimento: Teste de Atletismo para empurrar oponente 1,5m para trás.',
+                    actionType: 'Ação de Movimento',
+                    testType: 'Teste de Força (Atletismo)',
+                    difficulty: 'Oposto ao teste de Força (Atletismo) do oponente',
+                    effects: ['Empurra oponente 1,5m para trás', 'Pode continuar movimento'],
+                    restrictions: ['Se perder, para no espaço do oponente']
                 },
                 {
                     name: 'Agarrar',
                     description: 'Você pode tentar agarrar um oponente como uma ação padrão. Faça um teste de Força (Luta) oposto ao teste de Força (Luta) ou Destreza (Acrobacia) do oponente. Se você vencer, o oponente fica agarrado.',
                     icon: '🤝',
-                    shortDesc: 'Ação padrão: Teste de Luta (rolagem: 1d20 + Luta total) para agarrar oponente.'
+                    shortDesc: 'Ação padrão: Teste de Luta para agarrar oponente.',
+                    actionType: 'Ação Padrão',
+                    testType: 'Teste de Força (Luta)',
+                    difficulty: 'Oposto ao teste de Força (Luta) ou Destreza (Acrobacia) do oponente',
+                    effects: ['Oponente fica agarrado'],
+                    restrictions: ['Oponente pode usar Luta ou Acrobacia para resistir']
                 },
                 {
                     name: 'Desarmar',
                     description: 'Você pode tentar desarmar um oponente como uma ação padrão. Faça um teste de Força (Luta) oposto ao teste de Força (Luta) do oponente. Se você vencer, o oponente solta a arma.',
                     icon: '🗡️',
-                    shortDesc: 'Ação padrão: Teste de Luta (rolagem: 1d20 + Luta total) para fazer oponente soltar arma.'
+                    shortDesc: 'Ação padrão: Teste de Luta para fazer oponente soltar arma.',
+                    actionType: 'Ação Padrão',
+                    testType: 'Teste de Força (Luta)',
+                    difficulty: 'Oposto ao teste de Força (Luta) do oponente',
+                    effects: ['Oponente solta a arma'],
+                    restrictions: ['Só funciona contra oponentes empunhando armas']
                 },
                 {
                     name: 'Derrubar',
                     description: 'Você deixa o alvo caído. Esta queda normalmente não causa dano. Se você vencer o teste oposto por 5 pontos ou mais, derruba o oponente com tanta força que também o empurra um quadrado em uma direção a sua escolha. Se isso o jogar além de um parapeito ou precipício, ele pode fazer um teste de Reflexos (CD 20) para se agarrar numa beirada.',
                     icon: '🔻',
-                    shortDesc: 'Ação padrão: Deixe o alvo caído (teste de manobra oposto). Se vencer por 5+, empurre o alvo 1 quadrado. Se cair de um parapeito, teste Reflexos (CD 20) para se segurar.'
+                    shortDesc: 'Ação padrão: Deixe o alvo caído. Se vencer por 5+, empurre o alvo 1 quadrado.',
+                    actionType: 'Ação Padrão',
+                    testType: 'Teste de Força (Luta)',
+                    difficulty: 'Oposto ao teste de Força (Luta) do oponente',
+                    effects: ['Alvo fica caído', 'Se vencer por 5+, empurra 1 quadrado'],
+                    restrictions: ['Queda não causa dano', 'Teste de Reflexos CD 20 se cair de altura']
                 },
                 {
                     name: 'Empurrar',
                     description: 'Você empurra a criatura 1,5m. Para cada 5 pontos de diferença entre os testes, você empurra o alvo mais 1,5m. Você pode gastar uma ação de movimento para avançar junto com a criatura (até o limite do seu deslocamento).',
                     icon: '➡️',
-                    shortDesc: 'Ação padrão: Empurre o alvo 1,5m (teste de manobra oposto). Para cada 5 pontos de diferença, empurre mais 1,5m. Pode avançar junto usando ação de movimento.'
+                    shortDesc: 'Ação padrão: Empurre o alvo 1,5m. Para cada 5 pontos de diferença, empurre mais 1,5m.',
+                    actionType: 'Ação Padrão',
+                    testType: 'Teste de Força (Luta)',
+                    difficulty: 'Oposto ao teste de Força (Luta) do oponente',
+                    effects: ['Empurra 1,5m', 'Cada 5 pontos de diferença = +1,5m', 'Pode avançar junto usando ação de movimento'],
+                    restrictions: ['Limitado pelo deslocamento do personagem']
+                },
+                {
+                    name: 'Bloquear',
+                    description: 'Você pode tentar bloquear um ataque como uma reação. Faça um teste de Força (Luta) oposto ao teste de ataque do oponente. Se você vencer, o ataque é bloqueado e não causa dano.',
+                    icon: '🛡️',
+                    shortDesc: 'Reação: Teste de Luta para bloquear ataque.',
+                    actionType: 'Reação',
+                    testType: 'Teste de Força (Luta)',
+                    difficulty: 'Oposto ao teste de ataque do oponente',
+                    effects: ['Bloqueia o ataque', 'Não causa dano'],
+                    restrictions: ['Só pode ser usada como reação', 'Precisa estar empunhando escudo ou arma']
+                },
+                {
+                    name: 'Esquivar',
+                    description: 'Você pode tentar esquivar de um ataque como uma reação. Faça um teste de Destreza (Acrobacia) oposto ao teste de ataque do oponente. Se você vencer, o ataque erra completamente.',
+                    icon: '🔄',
+                    shortDesc: 'Reação: Teste de Acrobacia para esquivar de ataque.',
+                    actionType: 'Reação',
+                    testType: 'Teste de Destreza (Acrobacia)',
+                    difficulty: 'Oposto ao teste de ataque do oponente',
+                    effects: ['Ataque erra completamente'],
+                    restrictions: ['Só pode ser usada como reação', 'Precisa estar livre de movimento']
+                },
+                {
+                    name: 'Contra-ataque',
+                    description: 'Quando um oponente erra um ataque corpo a corpo contra você, você pode fazer um contra-ataque como uma reação. Faça um teste de ataque normal. Se acertar, causa dano normal.',
+                    icon: '⚔️',
+                    shortDesc: 'Reação: Ataque quando oponente erra ataque corpo a corpo.',
+                    actionType: 'Reação',
+                    testType: 'Teste de ataque normal',
+                    difficulty: 'Teste de Pontaria normal',
+                    effects: ['Ataque normal se acertar'],
+                    restrictions: ['Só quando oponente erra ataque corpo a corpo', 'Precisa estar empunhando arma corpo a corpo']
                 }
             ];
 
@@ -9612,7 +9685,14 @@
                     }
                 };
 
-                btn.onclick = () => {
+                btn.onclick = (event) => {
+                    // Verificar se CTRL está pressionado para mostrar detalhes
+                    if (event.ctrlKey) {
+                        event.preventDefault();
+                        showManeuverDetails(maneuver);
+                        return;
+                    }
+
                     // Remover tooltip se estiver visível
                     if (tooltipTimeout) {
                         clearTimeout(tooltipTimeout);
@@ -9684,6 +9764,18 @@
                         // Teste de Força (Luta) para empurrar
                         const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Empurrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
                         sendToChat(macro);
+                    } else if (maneuver.name === 'Bloquear') {
+                        // Teste de Força (Luta) para bloquear
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Bloquear}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Esquivar') {
+                        // Teste de Destreza (Acrobacia) para esquivar
+                        const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Esquivar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}`;
+                        sendToChat(macro);
+                    } else if (maneuver.name === 'Contra-ataque') {
+                        // Teste de ataque normal para contra-ataque
+                        const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Contra-ataque}}{{attackroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Contra-ataque**}}`;
+                        executeAttackWithBloodEffect(macro);
                     }
 
                     // Fechar popup
@@ -9717,6 +9809,340 @@
             filterInput.addEventListener('input', filterManeuvers);
 
             popup.appendChild(maneuversList);
+            document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'red');
+        }
+
+        // Função para mostrar detalhes completos da manobra
+        function showManeuverDetails(maneuver) {
+            // Remove popup de detalhes existente se houver
+            const existingDetailsPopup = document.getElementById('maneuver-details-popup');
+            if (existingDetailsPopup) existingDetailsPopup.remove();
+            const existingDetailsOverlay = document.getElementById('maneuver-details-overlay');
+            if (existingDetailsOverlay) existingDetailsOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'maneuver-details-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.7)';
+            overlay.style.zIndex = '10002';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup de detalhes
+            const popup = document.createElement('div');
+            popup.id = 'maneuver-details-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(20,20,30,0.98)';
+            popup.style.border = '2px solid #ff6e6e';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '20px';
+            popup.style.zIndex = '10003';
+            popup.style.maxWidth = '500px';
+            popup.style.maxHeight = '80vh';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 12px 40px rgba(0,0,0,0.8)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '20px';
+            header.style.width = '100%';
+
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ecf0f1',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('maneuver-details-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+
+            const title = document.createElement('h2');
+            title.innerHTML = `${maneuver.icon} ${maneuver.name}`;
+            title.style.color = '#ff6e6e';
+            title.style.margin = '0';
+            title.style.fontSize = '22px';
+            title.style.fontWeight = 'bold';
+
+            header.appendChild(title);
+            header.appendChild(closeBtn.render());
+            popup.appendChild(header);
+
+            // Container de conteúdo
+            const content = document.createElement('div');
+            content.style.display = 'flex';
+            content.style.flexDirection = 'column';
+            content.style.gap = '16px';
+
+            // Tags de classificação
+            const tagsContainer = document.createElement('div');
+            tagsContainer.style.display = 'flex';
+            tagsContainer.style.gap = '8px';
+            tagsContainer.style.flexWrap = 'wrap';
+
+            // Tag de tipo de ação
+            const actionTag = document.createElement('span');
+            actionTag.textContent = maneuver.actionType;
+            actionTag.style.background = '#8B4513';
+            actionTag.style.color = '#fff';
+            actionTag.style.fontSize = '12px';
+            actionTag.style.fontWeight = 'bold';
+            actionTag.style.borderRadius = '6px';
+            actionTag.style.padding = '4px 10px';
+            actionTag.style.display = 'inline-block';
+            tagsContainer.appendChild(actionTag);
+
+            // Tag de tipo de teste
+            const testTag = document.createElement('span');
+            testTag.textContent = maneuver.testType;
+            testTag.style.background = '#4a90e2';
+            testTag.style.color = '#fff';
+            testTag.style.fontSize = '12px';
+            testTag.style.fontWeight = 'bold';
+            testTag.style.borderRadius = '6px';
+            testTag.style.padding = '4px 10px';
+            testTag.style.display = 'inline-block';
+            tagsContainer.appendChild(testTag);
+
+            content.appendChild(tagsContainer);
+
+            // Seção de Dificuldade
+            const difficultySection = document.createElement('div');
+            difficultySection.style.background = 'rgba(255,110,110,0.1)';
+            difficultySection.style.border = '1px solid #ff6e6e';
+            difficultySection.style.borderRadius = '8px';
+            difficultySection.style.padding = '12px';
+
+            const difficultyTitle = document.createElement('h3');
+            difficultyTitle.textContent = '🎯 Dificuldade';
+            difficultyTitle.style.color = '#ff6e6e';
+            difficultyTitle.style.margin = '0 0 8px 0';
+            difficultyTitle.style.fontSize = '16px';
+            difficultyTitle.style.fontWeight = 'bold';
+            difficultySection.appendChild(difficultyTitle);
+
+            const difficultyText = document.createElement('p');
+            difficultyText.textContent = maneuver.difficulty;
+            difficultyText.style.color = '#ecf0f1';
+            difficultyText.style.margin = '0';
+            difficultyText.style.fontSize = '14px';
+            difficultyText.style.lineHeight = '1.4';
+            difficultySection.appendChild(difficultyText);
+
+            content.appendChild(difficultySection);
+
+            // Seção de Efeitos
+            const effectsSection = document.createElement('div');
+            effectsSection.style.background = 'rgba(76,175,80,0.1)';
+            effectsSection.style.border = '1px solid #4CAF50';
+            effectsSection.style.borderRadius = '8px';
+            effectsSection.style.padding = '12px';
+
+            const effectsTitle = document.createElement('h3');
+            effectsTitle.textContent = '✨ Efeitos';
+            effectsTitle.style.color = '#4CAF50';
+            effectsTitle.style.margin = '0 0 8px 0';
+            effectsTitle.style.fontSize = '16px';
+            effectsTitle.style.fontWeight = 'bold';
+            effectsSection.appendChild(effectsTitle);
+
+            const effectsList = document.createElement('ul');
+            effectsList.style.margin = '0';
+            effectsList.style.paddingLeft = '20px';
+            effectsList.style.color = '#ecf0f1';
+            effectsList.style.fontSize = '14px';
+            effectsList.style.lineHeight = '1.4';
+
+            maneuver.effects.forEach(effect => {
+                const li = document.createElement('li');
+                li.textContent = effect;
+                li.style.marginBottom = '4px';
+                effectsList.appendChild(li);
+            });
+
+            effectsSection.appendChild(effectsList);
+            content.appendChild(effectsSection);
+
+            // Seção de Restrições
+            if (maneuver.restrictions && maneuver.restrictions.length > 0) {
+                const restrictionsSection = document.createElement('div');
+                restrictionsSection.style.background = 'rgba(255,152,0,0.1)';
+                restrictionsSection.style.border = '1px solid #FF9800';
+                restrictionsSection.style.borderRadius = '8px';
+                restrictionsSection.style.padding = '12px';
+
+                const restrictionsTitle = document.createElement('h3');
+                restrictionsTitle.textContent = '⚠️ Restrições';
+                restrictionsTitle.style.color = '#FF9800';
+                restrictionsTitle.style.margin = '0 0 8px 0';
+                restrictionsTitle.style.fontSize = '16px';
+                restrictionsTitle.style.fontWeight = 'bold';
+                restrictionsSection.appendChild(restrictionsTitle);
+
+                const restrictionsList = document.createElement('ul');
+                restrictionsList.style.margin = '0';
+                restrictionsList.style.paddingLeft = '20px';
+                restrictionsList.style.color = '#ecf0f1';
+                restrictionsList.style.fontSize = '14px';
+                restrictionsList.style.lineHeight = '1.4';
+
+                maneuver.restrictions.forEach(restriction => {
+                    const li = document.createElement('li');
+                    li.textContent = restriction;
+                    li.style.marginBottom = '4px';
+                    restrictionsList.appendChild(li);
+                });
+
+                restrictionsSection.appendChild(restrictionsList);
+                content.appendChild(restrictionsSection);
+            }
+
+            // Seção de Descrição Completa
+            const descriptionSection = document.createElement('div');
+            descriptionSection.style.background = 'rgba(156,39,176,0.1)';
+            descriptionSection.style.border = '1px solid #9C27B0';
+            descriptionSection.style.borderRadius = '8px';
+            descriptionSection.style.padding = '12px';
+
+            const descriptionTitle = document.createElement('h3');
+            descriptionTitle.textContent = '📖 Descrição Completa';
+            descriptionTitle.style.color = '#9C27B0';
+            descriptionTitle.style.margin = '0 0 8px 0';
+            descriptionTitle.style.fontSize = '16px';
+            descriptionTitle.style.fontWeight = 'bold';
+            descriptionSection.appendChild(descriptionTitle);
+
+            const descriptionText = document.createElement('p');
+            descriptionText.textContent = maneuver.description;
+            descriptionText.style.color = '#ecf0f1';
+            descriptionText.style.margin = '0';
+            descriptionText.style.fontSize = '14px';
+            descriptionText.style.lineHeight = '1.5';
+            descriptionSection.appendChild(descriptionText);
+
+            content.appendChild(descriptionSection);
+
+            // Botão de Executar Manobra
+            const executeBtn = document.createElement('button');
+            executeBtn.textContent = `⚡ Executar ${maneuver.name}`;
+            executeBtn.style.width = '100%';
+            executeBtn.style.padding = '12px 0';
+            executeBtn.style.background = '#ff6e6e';
+            executeBtn.style.color = '#23243a';
+            executeBtn.style.border = 'none';
+            executeBtn.style.borderRadius = '8px';
+            executeBtn.style.fontSize = '16px';
+            executeBtn.style.fontWeight = 'bold';
+            executeBtn.style.cursor = 'pointer';
+            executeBtn.style.transition = 'all 0.2s';
+            executeBtn.style.marginTop = '16px';
+
+            executeBtn.onmouseover = () => {
+                executeBtn.style.background = '#ff8e8e';
+            };
+            executeBtn.onmouseout = () => {
+                executeBtn.style.background = '#ff6e6e';
+            };
+
+            executeBtn.onclick = () => {
+                // Executar a manobra baseada no tipo
+                if (maneuver.name === 'Investida') {
+                    const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                    let savedAttackEffects = [];
+                    try {
+                        const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                        if (saved) savedAttackEffects = JSON.parse(saved);
+                    } catch (err) {
+                        console.error('Erro ao carregar seleção:', err);
+                        savedAttackEffects = [];
+                    }
+                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const effects = getDynamicAttackEffects(charLevel);
+                    let extraDamage = '';
+                    let extraDescription = '';
+                    let critThreshold = 18;
+                    let attackBonus = 2; // +2 da investida
+                    let marcaPresaActive = false;
+                    let inimigoActive = false;
+                    effects.forEach(effect => {
+                        if (savedAttackEffects.includes(effect.value)) {
+                            if (effect.dice) {
+                                extraDamage += `+${effect.dice}`;
+                            }
+                            if (effect.critMod) {
+                                critThreshold += effect.critMod;
+                            }
+                            if (effect.attackMod) {
+                                attackBonus += effect.attackMod;
+                            }
+                            extraDescription += '%NEWLINE% ' + effect.desc;
+                            if (effect.value === 'marca_presa') marcaPresaActive = true;
+                            if (effect.value === 'inimigo') inimigoActive = true;
+                        }
+                    });
+                    if (inimigoActive && marcaPresaActive) {
+                        if (critThreshold === 16) critThreshold = 14;
+                    }
+                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Investida}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Investida c/ Espada Longa** ${extraDescription}}}`;
+                    executeAttackWithBloodEffect(macro);
+                } else if (maneuver.name === 'Atropelar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Atropelar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Agarrar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Agarrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Desarmar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Desarmar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Derrubar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Derrubar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Empurrar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Empurrar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Bloquear') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Bloquear}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Esquivar') {
+                    const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Esquivar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}`;
+                    sendToChat(macro);
+                } else if (maneuver.name === 'Contra-ataque') {
+                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Contra-ataque}}{{attackroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Contra-ataque**}}`;
+                    executeAttackWithBloodEffect(macro);
+                }
+
+                // Fechar popup de detalhes
+                popup.remove();
+                const overlay = document.getElementById('maneuver-details-overlay');
+                if (overlay) overlay.remove();
+            };
+
+            content.appendChild(executeBtn);
+            popup.appendChild(content);
             document.body.appendChild(popup);
 
             // Aplica scrollbars customizadas
