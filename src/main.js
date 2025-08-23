@@ -3255,6 +3255,77 @@
         detailsPopup.appendChild(detailsContainer);
         detailsPopup.appendChild(description);
 
+        // Seção de Aprimoramentos
+        if (spell.aprimoramentos && spell.aprimoramentos.length > 0) {
+            const aprimoramentosSection = document.createElement('div');
+            aprimoramentosSection.style.marginBottom = '20px';
+
+            const aprimoramentosTitle = document.createElement('h4');
+            aprimoramentosTitle.textContent = 'Aprimoramentos';
+            aprimoramentosTitle.style.color = '#ff9800';
+            aprimoramentosTitle.style.fontSize = '18px';
+            aprimoramentosTitle.style.fontWeight = 'bold';
+            aprimoramentosTitle.style.marginBottom = '12px';
+            aprimoramentosTitle.style.borderBottom = '2px solid #ff9800';
+            aprimoramentosTitle.style.paddingBottom = '8px';
+
+            aprimoramentosSection.appendChild(aprimoramentosTitle);
+
+            // Lista de aprimoramentos
+            spell.aprimoramentos.forEach((aprimoramento) => {
+                const aprimoramentoItem = document.createElement('div');
+                aprimoramentoItem.style.background = 'rgba(35, 36, 58, 0.8)';
+                aprimoramentoItem.style.border = '1px solid #ff9800';
+                aprimoramentoItem.style.borderRadius = '8px';
+                aprimoramentoItem.style.padding = '12px';
+                aprimoramentoItem.style.marginBottom = '8px';
+
+                // Cabeçalho do aprimoramento
+                const aprimoramentoHeader = document.createElement('div');
+                aprimoramentoHeader.style.display = 'flex';
+                aprimoramentoHeader.style.justifyContent = 'space-between';
+                aprimoramentoHeader.style.alignItems = 'center';
+                aprimoramentoHeader.style.marginBottom = '8px';
+
+                // Custo do aprimoramento
+                const custoElement = document.createElement('span');
+                custoElement.textContent = `+${aprimoramento.custo} PM`;
+                custoElement.style.background = '#ff9800';
+                custoElement.style.color = '#fff';
+                custoElement.style.padding = '4px 8px';
+                custoElement.style.borderRadius = '12px';
+                custoElement.style.fontSize = '12px';
+                custoElement.style.fontWeight = 'bold';
+
+                // Tipo do aprimoramento
+                const tipoElement = document.createElement('span');
+                tipoElement.textContent = aprimoramento.aumenta ? 'Aumenta Custo' : 'Modifica Efeito';
+                tipoElement.style.background = aprimoramento.aumenta ? '#e91e63' : '#2196f3';
+                tipoElement.style.color = '#fff';
+                tipoElement.style.padding = '4px 8px';
+                tipoElement.style.borderRadius = '12px';
+                tipoElement.style.fontSize = '11px';
+                tipoElement.style.fontWeight = 'bold';
+
+                aprimoramentoHeader.appendChild(custoElement);
+                aprimoramentoHeader.appendChild(tipoElement);
+
+                // Descrição do aprimoramento
+                const descricaoElement = document.createElement('div');
+                descricaoElement.textContent = aprimoramento.descricao;
+                descricaoElement.style.color = '#fff';
+                descricaoElement.style.fontSize = '14px';
+                descricaoElement.style.lineHeight = '1.4';
+
+                aprimoramentoItem.appendChild(aprimoramentoHeader);
+                aprimoramentoItem.appendChild(descricaoElement);
+
+                aprimoramentosSection.appendChild(aprimoramentoItem);
+            });
+
+            detailsPopup.appendChild(aprimoramentosSection);
+        }
+
         // Container para botões
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
@@ -3689,9 +3760,40 @@
             description.style.fontSize = '14px';
             description.style.lineHeight = '1.4';
 
-            card.appendChild(header);
-            card.appendChild(info);
-            card.appendChild(description);
+            // Indicador de aprimoramentos
+            if (spell.aprimoramentos && spell.aprimoramentos.length > 0) {
+                const aprimoramentosIndicator = document.createElement('div');
+                aprimoramentosIndicator.style.display = 'flex';
+                aprimoramentosIndicator.style.alignItems = 'center';
+                aprimoramentosIndicator.style.gap = '6px';
+                aprimoramentosIndicator.style.marginTop = '8px';
+                aprimoramentosIndicator.style.padding = '6px 10px';
+                aprimoramentosIndicator.style.background = 'rgba(255, 152, 0, 0.1)';
+                aprimoramentosIndicator.style.border = '1px solid rgba(255, 152, 0, 0.3)';
+                aprimoramentosIndicator.style.borderRadius = '6px';
+
+                const aprimoramentosIcon = document.createElement('span');
+                aprimoramentosIcon.textContent = '⚡';
+                aprimoramentosIcon.style.fontSize = '14px';
+
+                const aprimoramentosText = document.createElement('span');
+                aprimoramentosText.textContent = `${spell.aprimoramentos.length} aprimoramento${spell.aprimoramentos.length > 1 ? 's' : ''} disponível${spell.aprimoramentos.length > 1 ? 'eis' : ''}`;
+                aprimoramentosText.style.color = '#ff9800';
+                aprimoramentosText.style.fontSize = '12px';
+                aprimoramentosText.style.fontWeight = 'bold';
+
+                aprimoramentosIndicator.appendChild(aprimoramentosIcon);
+                aprimoramentosIndicator.appendChild(aprimoramentosText);
+
+                card.appendChild(header);
+                card.appendChild(info);
+                card.appendChild(description);
+                card.appendChild(aprimoramentosIndicator);
+            } else {
+                card.appendChild(header);
+                card.appendChild(info);
+                card.appendChild(description);
+            }
 
             return card;
         }

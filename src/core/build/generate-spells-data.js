@@ -147,6 +147,31 @@ function generateSpellsData() {
               }
             };
 
+            // Process aprimoramentos (effects)
+            if (spellModule.effects && Array.isArray(spellModule.effects)) {
+              const aprimoramentos = [];
+
+              for (const effect of spellModule.effects) {
+                // Verificar se é um aprimoramento (tem custo e não é o efeito base da magia)
+                if (effect.flags?.tormenta20?.custo &&
+                  effect.flags.tormenta20.custo !== spellModule.system?.ativacao?.custo?.toString()) {
+
+                  const aprimoramento = {
+                    custo: parseInt(effect.flags.tormenta20.custo),
+                    descricao: effect.name,
+                    aumenta: effect.flags.tormenta20.aumenta || false
+                  };
+
+                  aprimoramentos.push(aprimoramento);
+                }
+              }
+
+              // Adicionar aprimoramentos ao spell se houver
+              if (aprimoramentos.length > 0) {
+                transformedSpell.aprimoramentos = aprimoramentos;
+              }
+            }
+
             // Decode HTML entities in the entire transformed spell object
             const decodedSpell = decodeHtmlEntitiesRecursive(transformedSpell);
 
