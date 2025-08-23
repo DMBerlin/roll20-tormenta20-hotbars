@@ -648,16 +648,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 185",
     "ativacao": {
-      "execução": "full",
       "custo": 1,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "sust",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -676,7 +671,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "1 criatura conjurada",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -689,11 +684,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
-    "escola": "con",
+    "escola": "convocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "sust",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

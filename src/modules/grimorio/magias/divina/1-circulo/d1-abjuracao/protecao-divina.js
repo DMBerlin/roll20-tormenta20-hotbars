@@ -345,16 +345,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 202",
     "ativacao": {
-      "execução": "ação",
       "custo": 1,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -386,11 +381,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "1",
     "preparada": false,
-    "escola": "abjuração",
+    "escola": "abjuracao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

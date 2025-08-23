@@ -139,16 +139,11 @@ module.exports = {
     },
     "source": "Errata ADB, Blog da Jambô",
     "ativacao": {
-      "execução": "ação",
       "custo": 3,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -167,7 +162,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "",
     "area": "varia",
     "resistencia": {
@@ -180,11 +175,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "2",
     "preparada": false,
-    "escola": "tra",
+    "escola": "transmutacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "_stats": {
     "systemId": "tormenta20",

@@ -15,16 +15,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 209",
     "ativacao": {
-      "execução": "ação",
       "custo": 10,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 1,
-      "units": "round",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -43,7 +38,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "long",
+    "alcance": "longo",
     "alvo": "",
     "area": "esfera com 30m de raio",
     "resistencia": {
@@ -56,11 +51,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "4",
     "preparada": false,
-    "escola": "evo",
+    "escola": "evocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 1,
+      "units": "rodada",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

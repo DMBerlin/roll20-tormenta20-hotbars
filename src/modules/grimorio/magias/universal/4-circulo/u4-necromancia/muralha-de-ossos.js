@@ -127,16 +127,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 199",
     "ativacao": {
-      "execução": "ação",
       "custo": 10,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -155,7 +150,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "muro de ossos",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -165,14 +160,19 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "4",
     "preparada": false,
-    "escola": "nec",
+    "escola": "necromancia",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

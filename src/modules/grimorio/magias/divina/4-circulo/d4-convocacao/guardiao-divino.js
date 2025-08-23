@@ -15,16 +15,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 196",
     "ativacao": {
-      "execução": "ação",
       "custo": 10,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "Cena ou até ser descarregado"
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -43,7 +38,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "elemental de luz invocado",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -56,11 +51,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "4",
     "preparada": false,
-    "escola": "con",
+    "escola": "convocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "Cena ou até ser descarregado"
+    }
   },
   "ownership": {
     "default": 0

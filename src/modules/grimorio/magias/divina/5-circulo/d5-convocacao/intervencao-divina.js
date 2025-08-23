@@ -15,16 +15,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 195",
     "ativacao": {
-      "execução": "full",
       "custo": 15,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -43,7 +38,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "spec",
+    "alcance": "especial",
     "alvo": "veja texto",
     "area": "",
     "resistencia": {
@@ -56,11 +51,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "5",
     "preparada": false,
-    "escola": "con",
+    "escola": "convocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

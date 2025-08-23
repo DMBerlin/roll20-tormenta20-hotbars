@@ -11,15 +11,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_orb_01.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "alvo": "Esfera de 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -34,13 +35,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -57,13 +58,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane01.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 objeto Grande ou menor",
@@ -84,13 +85,14 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "free",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "free"
             },
             "alcance": "pessoal",
+            "duracao": "1 rodada",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -107,15 +109,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_web.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "ou",
             "resistencia": "Reflexos (veja texto)",
             "custo": "1 PM",
@@ -130,15 +132,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_summonnatureguardian.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
@@ -152,15 +154,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_web.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "cubo com 6m de lado",
             "resistencia": "Reflexos anula",
             "custo": "1 PM",
@@ -177,15 +179,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
@@ -200,15 +202,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_charm.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 humanóide",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
@@ -223,15 +225,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soothingkiss.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1d4 Rodadas",
             "alvo": "1 animal ou humanoide",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
@@ -246,15 +249,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 humanoide",
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
@@ -271,13 +274,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Cone de 6m",
@@ -294,15 +297,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane02.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "até 2 criaturas",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -317,13 +320,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -342,15 +345,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_illusion.jpg",
           "system": {
             "circulo": "1",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Vontade desacredita",
             "custo": "1 PM",
             "description": {
@@ -364,13 +367,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_disguise.jpg",
           "system": {
             "circulo": "1",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -387,13 +390,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_mirrorimage.jpg",
           "system": {
             "circulo": "1",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -410,13 +413,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane03.jpg",
           "system": {
             "circulo": "1",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "cone de 4,5m",
@@ -435,15 +438,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 animal ou humanoide",
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
@@ -458,15 +461,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_rayofweakness.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Fortitude parcial",
             "custo": "1 PM",
@@ -481,13 +484,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_lifedrain.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -506,13 +509,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_agility.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -529,15 +532,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_featherfall.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "reaction",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "reaction"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "até chegar ao solo ou cena, o que vier primeiro",
             "alvo": "1 criatura ou objeto com até 200kg",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -552,13 +556,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane04.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "matéria-prima, como madeira, rochas, ossos",
@@ -579,13 +583,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/campo-de-forca.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -602,15 +606,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/refugio.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
@@ -628,13 +633,14 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "1 dia",
             "alvo": "2 criaturas voluntárias",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -651,11 +657,11 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "esfera com 90m de raio",
@@ -674,11 +680,11 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "superfície ou objeto plano, como uma mesa ou pergaminho",
@@ -697,15 +703,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/amarras-etereas.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Reflexos anula",
             "custo": "3 PM",
@@ -720,15 +726,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/montaria-arcana.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
@@ -742,15 +749,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/salto-dimensional.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -765,15 +772,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/servos-invisiveis.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
@@ -789,13 +796,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/desespero-esmagador.webp",
           "system": {
             "circulo": "2",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Cone de 6m",
@@ -812,15 +819,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/sussurros-insanos.webp",
           "system": {
             "circulo": "2",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 humanoide",
             "resistencia": "Vontade anula",
             "custo": "3 PM",
@@ -837,15 +844,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/bola-de-fogo.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Reflexos reduz à metade",
             "custo": "3 PM",
@@ -860,15 +867,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/flecha-acida.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Reflexos parcial",
             "custo": "3 PM",
@@ -883,15 +890,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/relampago.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "linha",
             "resistencia": "Reflexos reduz à metade",
             "custo": "3 PM",
@@ -906,15 +913,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/sopro-das-uivantes.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "cone de 9m",
             "resistencia": "Fortitude parcial",
             "custo": "3 PM",
@@ -931,13 +938,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aparencia-perfeita.webp",
           "system": {
             "circulo": "2",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -954,13 +961,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/camuflagem-ilusoria.webp",
           "system": {
             "circulo": "2",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -977,15 +984,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/esculpir-sons.webp",
           "system": {
             "circulo": "2",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Vontade anula",
             "custo": "3 PM",
@@ -1000,15 +1007,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/invisibilidade.webp",
           "system": {
             "circulo": "2",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "free",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "free"
             },
             "alcance": "pessoal",
+            "duracao": "1 rodada",
             "alvo": "você",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -1025,15 +1033,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/cranio-voador.webp",
           "system": {
             "circulo": "2",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Fortitude reduz à metade",
             "custo": "3 PM",
@@ -1048,13 +1056,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/toque-vampirico.webp",
           "system": {
             "circulo": "2",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -1073,15 +1081,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/alterar-tamanho.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "alvo": "1 objeto",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -1096,13 +1105,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/metamorfose.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -1119,15 +1128,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/velocidade.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -1146,15 +1155,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/ancora-dimensional.webp",
           "system": {
             "circulo": "3",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -1169,15 +1178,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/dificultar-deteccao.webp",
           "system": {
             "circulo": "3",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "1 dia",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -1192,13 +1202,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/globo-de-invulnerabilidade.webp",
           "system": {
             "circulo": "3",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -1219,13 +1229,14 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
+            "duracao": "1 dia",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -1242,13 +1253,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/convocacao-instantanea.webp",
           "system": {
             "circulo": "3",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "any",
             "alvo": "1 objeto de 2 espaços",
@@ -1265,15 +1276,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/enxame-rubro.webp",
           "system": {
             "circulo": "3",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Reflexos reduz à metade",
             "custo": "6 PM",
             "description": {
@@ -1287,13 +1298,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/teletransporte.webp",
           "system": {
             "circulo": "3",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "até 5 criaturas voluntárias",
@@ -1312,15 +1323,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/erupcao-glacial.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "quadrado de 6m de lado",
             "resistencia": "Relfexos parcial",
             "custo": "6 PM",
@@ -1335,15 +1346,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/lanca-ignea.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Reflexos parcial",
             "custo": "6 PM",
@@ -1358,15 +1369,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/muralha-elemental.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "veja texto",
             "custo": "6 PM",
             "description": {
@@ -1382,15 +1393,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/ilusao-lacerante.webp",
           "system": {
             "circulo": "3",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "cubo de 9m",
             "resistencia": "Vontade anula",
             "custo": "6 PM",
@@ -1405,15 +1416,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/miragem.webp",
           "system": {
             "circulo": "3",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 dia",
             "alvo": "cubo de até 90m de lado",
             "resistencia": "Vontade desacredita",
             "custo": "6 PM",
@@ -1430,15 +1442,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/ferver-sangue.webp",
           "system": {
             "circulo": "3",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Fortitude parcial",
             "custo": "6 PM",
@@ -1453,15 +1465,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/tentaculos-de-trevas.webp",
           "system": {
             "circulo": "3",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -1478,15 +1490,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/telecinesia.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
+            "duracao": "sustentada ou instantânea (veja texto)",
             "alvo": "veja texto;",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -1501,13 +1514,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/transformacao-de-guerra.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -1524,13 +1537,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/voo.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -1551,13 +1564,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/campo-antimagia.webp",
           "system": {
             "circulo": "4",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -1578,13 +1591,14 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execução": "minute",
               "custo": 10,
               "qtd": "10",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "minuto"
             },
             "alcance": "any",
+            "duracao": "Veja Texto",
             "alvo": "1 criatura viva",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -1601,15 +1615,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/conjurar-elemental.webp",
           "system": {
             "circulo": "4",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -1623,15 +1637,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/mao-poderosa.webp",
           "system": {
             "circulo": "4",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -1647,13 +1661,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/alterar-memoria.webp",
           "system": {
             "circulo": "4",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -1670,15 +1684,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/marionete.webp",
           "system": {
             "circulo": "4",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Fortitude anula",
             "custo": "10 PM",
@@ -1695,15 +1709,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/raio-polar.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
@@ -1718,15 +1732,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/relampago-flamejante.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "special",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": "Duas Rodadas"
+              "special": "Duas Rodadas",
+              "execucao": "especial"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Reflexos reduz à metade",
             "custo": "10 PM",
             "description": {
@@ -1740,13 +1754,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/talho-invisivel.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "cone de 9m",
@@ -1765,15 +1779,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/duplicata-ilusoria.webp",
           "system": {
             "circulo": "4",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -1787,15 +1801,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/explosao-caleidoscopica.webp",
           "system": {
             "circulo": "4",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
@@ -1812,15 +1826,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/assassino-fantasmagorico.webp",
           "system": {
             "circulo": "4",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "cena, até ser descarregada",
             "alvo": "1 criatura",
             "resistencia": "Vontade Anula, Fortitude Parcial",
             "custo": "10 PM",
@@ -1837,15 +1852,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/animar-objetos.webp",
           "system": {
             "circulo": "4",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "Até 8 objetos Minúsculos ou Pequenos, 4 objetos Médios, 2 objetos Grandes ou 1 objeto Enorme",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -1860,15 +1875,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-gravidade.webp",
           "system": {
             "circulo": "4",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "cubo de 12m de lado",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -1883,15 +1898,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/desintegrar.webp",
           "system": {
             "circulo": "4",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura ou objeto",
             "resistencia": "Fortitude parcial",
             "custo": "10 PM",
@@ -1906,13 +1921,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/forma-eterea.webp",
           "system": {
             "circulo": "4",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "full",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -1933,13 +1948,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/alterar-destino.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "reaction",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "reaction"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -1956,15 +1971,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aprisionamento.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula",
             "custo": "15 PM",
@@ -1981,15 +1996,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/chuva-de-meteoros.webp",
           "system": {
             "circulo": "5",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "quadrado com 18m de lado",
             "resistencia": "Reflexos parcial",
             "custo": "15 PM",
@@ -2004,15 +2019,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/semiplano.webp",
           "system": {
             "circulo": "5",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
@@ -2028,15 +2044,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/legiao.webp",
           "system": {
             "circulo": "5",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "até 10 criaturas na área",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
@@ -2051,15 +2067,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/possessao.webp",
           "system": {
             "circulo": "5",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 dia",
             "alvo": "1 criatura",
             "resistencia": "Vontade anual",
             "custo": "15 PM",
@@ -2076,15 +2093,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/barragem-elemental.webp",
           "system": {
             "circulo": "5",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "resistencia": "Reflexos parcial",
             "custo": "15 PM",
             "description": {
@@ -2098,13 +2115,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/deflagracao-de-mana.webp",
           "system": {
             "circulo": "5",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
             "alvo": "esfera de 15m de raio",
@@ -2121,13 +2138,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/mata-dragao.webp",
           "system": {
             "circulo": "5",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "special",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": "2 Rodadas"
+              "special": "2 Rodadas",
+              "execucao": "especial"
             },
             "alcance": "pessoal",
             "alvo": "cone de 30m",
@@ -2146,15 +2163,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/requiem.webp",
           "system": {
             "circulo": "5",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "criaturas escolhidas",
             "resistencia": "Vontade anula",
             "custo": "15 PM",
@@ -2169,15 +2186,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/sombra-assassina.webp",
           "system": {
             "circulo": "5",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
@@ -2194,15 +2211,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-tempo.webp",
           "system": {
             "circulo": "5",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "veja texto",
             "alvo": "veja texto",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
@@ -2217,15 +2235,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/desejo.webp",
           "system": {
             "circulo": "5",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "spec",
+            "alcance": "especial",
+            "duracao": "veja texto",
             "alvo": "veja texto",
             "resistencia": "veja texto",
             "custo": "15 PM",
@@ -2246,15 +2265,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_powerwordshield.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "reaction",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "reaction"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 turn",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2269,13 +2289,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_divineprotection.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -2292,13 +2312,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_sanctuary.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -2315,15 +2335,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_protectionformnature.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "1 dia",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2342,13 +2363,14 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
+            "duracao": "Cena, até ser descarregada",
             "alvo": "Esfera de 18m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2365,13 +2387,14 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 rodada",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2388,13 +2411,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_spiritualguidence.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -2411,15 +2434,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_naturepath.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "alvo": "criaturas escolhidas",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2434,15 +2458,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_elementalprecision_01.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
@@ -2458,15 +2482,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_calmanimal.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 animal",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
@@ -2481,15 +2505,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessing.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "Aliados",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2504,15 +2528,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_command.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 rodada",
             "alvo": "1 humanóide",
             "resistencia": "Vontade anula",
             "custo": "1 PM",
@@ -2527,15 +2552,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_tranquility.jpg",
           "system": {
             "circulo": "1",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 animal ou humanóide",
             "resistencia": "Vontade parcial",
             "custo": "1 PM",
@@ -2552,15 +2577,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_consecration.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 dia",
             "alvo": "esfera com 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2575,13 +2601,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -2598,15 +2624,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_smite.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura ou objeto mundano pequeno",
             "resistencia": "Fortitude parcial ou Reflexos anula",
             "custo": "1 PM",
@@ -2623,13 +2649,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_inflictpain.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -2646,15 +2672,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curse.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "Criaturas Escolhidas",
             "resistencia": "nenhuma",
             "custo": "1 PM",
@@ -2669,15 +2695,16 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_desecration.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 dia",
             "alvo": "esfera com 9m de raio",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2694,15 +2721,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingoffood.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "Alimento para 1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -2717,13 +2744,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_natureweapon.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 arma (veja texto)",
@@ -2740,15 +2767,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_controlplants.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "quadrado com 9m de lado",
             "resistencia": "Reflexos anula",
             "custo": "1 PM",
@@ -2767,15 +2794,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/circulo-da-justica.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 dia",
             "alvo": "cubo com 9m de lado;",
             "resistencia": "Vontade parcial",
             "custo": "3 PM",
@@ -2790,15 +2818,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/vestimenta-da-fe.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "1 dia",
             "alvo": "1 armadura, escudo ou vestimenta",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -2817,11 +2846,11 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -2840,13 +2869,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "até 5 criaturas",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -2863,13 +2892,13 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
@@ -2885,11 +2914,11 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -2908,11 +2937,11 @@ const spellsData = {
             "circulo": "2",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -2931,15 +2960,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/enxame-de-pestes.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Fortitude reduz à metade",
             "custo": "3 PM",
             "description": {
@@ -2953,15 +2982,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/soco-do-mestre.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura",
             "resistencia": "Fortitude parcial",
             "custo": "3 PM",
@@ -2978,15 +3007,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aliado-animal.webp",
           "system": {
             "circulo": "2",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 animal prestativo",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3001,15 +3030,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/oracao.webp",
           "system": {
             "circulo": "2",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "todas as criaturas (veja texto)",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3026,15 +3055,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-fogo.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "veja texto",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3049,13 +3078,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/purificacao.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -3072,15 +3101,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/raio-solar.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "linha",
             "resistencia": "Reflexos (veja texto)",
             "custo": "3 PM",
@@ -3095,15 +3124,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/tempestade-divina.webp",
           "system": {
             "circulo": "2",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "cilindro com 15m de raio e 15m de altura",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3120,15 +3149,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/silencio.webp",
           "system": {
             "circulo": "2",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3145,15 +3174,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/miasma-mefitico.webp",
           "system": {
             "circulo": "2",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "nuvem com 6m de raio",
             "resistencia": "Fortitude (veja texto)",
             "custo": "3 PM",
@@ -3168,15 +3197,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/rogar-maldicao.webp",
           "system": {
             "circulo": "2",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Fortitude anula",
             "custo": "3 PM",
@@ -3193,15 +3222,15 @@ const spellsData = {
           "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "varia",
             "resistencia": "veja texto",
             "custo": "3 PM",
@@ -3216,15 +3245,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-madeira.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1objeto de madeira grande ou menor",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -3239,13 +3268,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/fisico-divino.webp",
           "system": {
             "circulo": "2",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -3266,15 +3295,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/banimento.webp",
           "system": {
             "circulo": "3",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "special",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": "1d3+1 rodadas"
+              "special": "1d3+1 rodadas",
+              "execucao": "especial"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade parcial",
             "custo": "6 PM",
@@ -3289,13 +3318,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/protecao-contra-magia.webp",
           "system": {
             "circulo": "3",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -3316,13 +3345,14 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
+            "duracao": "1 dia",
             "alvo": "Você",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -3339,15 +3369,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/servo-divino.webp",
           "system": {
             "circulo": "3",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "Cena ou até ser descarregada",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
             "description": {
@@ -3361,13 +3392,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/viagem-arborea.webp",
           "system": {
             "circulo": "3",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -3386,15 +3417,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/despertar-consciencia.webp",
           "system": {
             "circulo": "3",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "toque",
+            "duracao": "1 dia",
             "alvo": "1 animal ou planta",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -3409,13 +3441,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/heroismo.webp",
           "system": {
             "circulo": "3",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -3432,15 +3464,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/missao-divina.webp",
           "system": {
             "circulo": "3",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "1 semana ou até ser descarregada",
             "alvo": "1 criatura",
             "resistencia": "Vontade anula (veja texto)",
             "custo": "6 PM",
@@ -3457,15 +3490,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/coluna-de-chamas.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "cilindro com 3m de raio e 30m de altura",
             "resistencia": "Reflexos reduz à metade",
             "custo": "6 PM",
@@ -3480,15 +3513,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/dispersar-trevas.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
+            "duracao": "veja texto",
             "alvo": "Esfera de 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -3503,13 +3537,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/sopro-da-salvacao.webp",
           "system": {
             "circulo": "3",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "cone de 9m",
@@ -3528,15 +3562,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/anular-luz.webp",
           "system": {
             "circulo": "3",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
+            "duracao": "Ver Texto",
             "alvo": "esfera de 6m de raio",
             "resistencia": "Nenhuma",
             "custo": "6 PM",
@@ -3551,15 +3586,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/poeira-da-podridao.webp",
           "system": {
             "circulo": "3",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "nuvem com 6m de raio",
             "resistencia": "Fortitude (veja texto)",
             "custo": "6 PM",
@@ -3576,15 +3611,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-agua.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "esfera com 30m de raio",
             "resistencia": "Veja texto",
             "custo": "6 PM",
@@ -3599,15 +3634,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-terra.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "9 cubos com 1,5m de lado",
             "resistencia": "Veja texto",
             "custo": "6 PM",
@@ -3622,13 +3657,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/potencia-divina.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -3649,13 +3684,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/cupula-de-repulsao.webp",
           "system": {
             "circulo": "4",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -3676,11 +3711,11 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -3699,15 +3734,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/guardiao-divino.webp",
           "system": {
             "circulo": "4",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "Cena ou até ser descarregado",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -3723,15 +3759,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/conceder-milagre.webp",
           "system": {
             "circulo": "4",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "permanente ou até ser descarregada",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -3748,15 +3785,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/circulo-da-restauracao.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "5 rodada",
             "alvo": "esfera de 3m de raio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -3771,15 +3809,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/colera-do-deus-sol.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
+            "duracao": "5 instantanea",
             "alvo": "esfera com 6m de raio",
             "resistencia": "Reflexos Parcial",
             "custo": "10 PM",
@@ -3794,13 +3833,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/manto-do-cruzado.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "vocẽ",
@@ -3817,15 +3856,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/terremoto.webp",
           "system": {
             "circulo": "4",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 rodada",
             "alvo": "esfera com 30m de raio",
             "resistencia": "veja texto",
             "custo": "10 PM",
@@ -3842,15 +3882,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/ligacao-sombria.webp",
           "system": {
             "circulo": "4",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "1 dia",
             "alvo": "1 criatura",
             "resistencia": "Fortitude anula",
             "custo": "10 PM",
@@ -3867,15 +3908,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/controlar-clima.webp",
           "system": {
             "circulo": "4",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "full",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "km",
+            "duracao": "4d12 horas",
             "alvo": "esfera com 2km de raio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -3894,13 +3936,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/aura-divina.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "esfera com 9m de raio",
@@ -3917,15 +3959,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/engenho-de-mana.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Nenhuma",
             "custo": "15 PM",
             "description": {
@@ -3939,15 +3981,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/lagrimas-da-deusa-da-magia.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
@@ -3966,11 +4008,11 @@ const spellsData = {
             "circulo": "5",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "any",
             "alvo": "local ou criatura conhecidos",
@@ -3989,15 +4031,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/intervencao-divina.webp",
           "system": {
             "circulo": "5",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "spec",
+            "alcance": "especial",
             "alvo": "veja texto",
             "resistencia": "veja texto",
             "custo": "15 PM",
@@ -4014,15 +4056,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/furia-do-panteao.webp",
           "system": {
             "circulo": "5",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "cubo de 90m",
             "resistencia": "veja texto",
             "custo": "15 PM",
@@ -4037,13 +4079,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/segunda-chance.webp",
           "system": {
             "circulo": "5",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -4062,13 +4104,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/reanimacao-impura.webp",
           "system": {
             "circulo": "5",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -4085,15 +4127,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/roubar-alma.webp",
           "system": {
             "circulo": "5",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
@@ -4114,13 +4156,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_resistnature.jpg",
           "system": {
             "circulo": "1",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -4141,13 +4183,13 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "move",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "move"
             },
-            "alcance": "long",
+            "alcance": "longo",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
@@ -4164,11 +4206,11 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura ou texto",
@@ -4187,11 +4229,11 @@ const spellsData = {
             "circulo": "1",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -4210,15 +4252,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_fog.jpg",
           "system": {
             "circulo": "1",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "resistencia": "Nenhuma",
             "custo": "1 PM",
             "description": {
@@ -4234,15 +4276,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_light.jpg",
           "system": {
             "circulo": "1",
-            "escola": "evo",
+            "escola": "evocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 objeto",
             "resistencia": "Vontade anula (veja texto)",
             "custo": "1 PM",
@@ -4259,15 +4301,15 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_darkness.jpg",
           "system": {
             "circulo": "1",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 objeto",
             "resistencia": "Vontade anula (veja texto)",
             "custo": "1 PM",
@@ -4284,13 +4326,13 @@ const spellsData = {
           "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane08.jpg",
           "system": {
             "circulo": "1",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 1,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 arma empunhada",
@@ -4311,15 +4353,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/dissipar-magia.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "alvo": "1 criatura ou 1 objeto mágico",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -4334,15 +4376,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/runa-de-protecao.webp",
           "system": {
             "circulo": "2",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "hour",
               "custo": 3,
               "qtd": "1",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "hora"
             },
             "alcance": "toque",
+            "duracao": "permanente até ser descarregada",
             "alvo": "uma área com 6m de raio",
             "resistencia": "varia (veja o texto)",
             "custo": "3 PM",
@@ -4359,15 +4402,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/preparacao-de-batalha.webp",
           "system": {
             "circulo": "2",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "Custo Adicional: penalidade de 1 PM",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
+            "duracao": "Permanente até ser descarregada",
             "alvo": "até dois itens que você possua, entre armas, armaduras e escudos",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
@@ -4384,13 +4428,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/marca-da-obediencia.webp",
           "system": {
             "circulo": "2",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -4409,15 +4453,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/conjurar-mortos-vivos.webp",
           "system": {
             "circulo": "2",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "full",
               "custo": 3,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "resistencia": "Nenhuma",
             "custo": "3 PM",
             "description": {
@@ -4437,11 +4481,11 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 craitura, objeto ou local",
@@ -4460,11 +4504,11 @@ const spellsData = {
             "circulo": "3",
             "escola": "adv",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "any",
             "alvo": "1 criatura",
@@ -4483,15 +4527,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/imobilizar.webp",
           "system": {
             "circulo": "3",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 humanóide ou animal",
             "resistencia": "Vontade parcial",
             "custo": "6 PM",
@@ -4506,13 +4550,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/selo-de-mana.webp",
           "system": {
             "circulo": "3",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",
@@ -4531,13 +4575,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/manto-de-sombras.webp",
           "system": {
             "circulo": "3",
-            "escola": "ilu",
+            "escola": "ilusao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -4556,13 +4600,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/servo-morto-vivo.webp",
           "system": {
             "circulo": "3",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "full",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "toque",
             "alvo": "1 cadáver",
@@ -4581,13 +4625,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/pele-de-pedra.webp",
           "system": {
             "circulo": "3",
-            "escola": "tra",
+            "escola": "transmutacao",
             "ativacao": {
-              "execução": "ação",
               "custo": 6,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -4608,15 +4652,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/libertacao.webp",
           "system": {
             "circulo": "4",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
             "alvo": "1 criatura",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
@@ -4635,11 +4679,11 @@ const spellsData = {
             "circulo": "4",
             "escola": "adv",
             "ativacao": {
-              "execução": "move",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "move"
             },
             "alcance": "pessoal",
             "alvo": "você",
@@ -4658,13 +4702,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/viagem-planar.webp",
           "system": {
             "circulo": "4",
-            "escola": "con",
+            "escola": "convocacao",
             "ativacao": {
-              "execução": "full",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
             "alcance": "toque",
             "alvo": "pessoal",
@@ -4683,15 +4727,15 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/muralha-de-ossos.webp",
           "system": {
             "circulo": "4",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 10,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "medium",
+            "alcance": "medio",
             "resistencia": "Nenhuma",
             "custo": "10 PM",
             "description": {
@@ -4709,15 +4753,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/buraco-negro.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "full",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "completa"
             },
-            "alcance": "long",
+            "alcance": "longo",
+            "duracao": "3 rodada",
             "resistencia": "Fortitude parcial",
             "custo": "15 PM",
             "description": {
@@ -4731,13 +4776,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/invulnerabilidade.webp",
           "system": {
             "circulo": "5",
-            "escola": "abjuração",
+            "escola": "abjuracao",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "pessoal",
             "alvo": "Você",
@@ -4756,15 +4801,16 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/palavra-primordial.webp",
           "system": {
             "circulo": "5",
-            "escola": "enc",
+            "escola": "encantamento",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
-            "alcance": "short",
+            "alcance": "curto",
+            "duracao": "instantânea ou veja texto",
             "alvo": "1 criatura com menos níveis que você",
             "resistencia": "Vontade parcial",
             "custo": "15 PM",
@@ -4781,13 +4827,13 @@ const spellsData = {
           "img": "systems/tormenta20/icons/magias/toque-da-morte.webp",
           "system": {
             "circulo": "5",
-            "escola": "nec",
+            "escola": "necromancia",
             "ativacao": {
-              "execução": "ação",
               "custo": 15,
               "qtd": "",
               "condição": "",
-              "special": ""
+              "special": "",
+              "execucao": "acao"
             },
             "alcance": "toque",
             "alvo": "1 criatura",

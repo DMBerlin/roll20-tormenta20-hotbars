@@ -405,16 +405,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 189",
     "ativacao": {
-      "execução": "ação",
       "custo": 1,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -433,7 +428,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "ilusão que se estende a até 4 cubos de 1,5m",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -446,11 +441,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
-    "escola": "ilu",
+    "escola": "ilusao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

@@ -68,16 +68,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 182",
     "ativacao": {
-      "execução": "full",
       "custo": 15,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 3,
-      "units": "round",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -96,7 +91,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "Buraco Negro",
-    "alcance": "long",
+    "alcance": "longo",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -106,14 +101,19 @@ module.exports = {
       "txt": "Fortitude parcial"
     },
     "rolls": [],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "5",
     "preparada": false,
-    "escola": "abjuração",
+    "escola": "abjuracao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 3,
+      "units": "rodada",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

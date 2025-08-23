@@ -58,16 +58,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 200",
     "ativacao": {
-      "execução": "ação",
       "custo": 15,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "instantânea ou veja texto"
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -86,7 +81,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "1 criatura com menos níveis que você",
     "area": "",
     "resistencia": {
@@ -110,14 +105,19 @@ module.exports = {
         "versatil": ""
       }
     ],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "5",
     "preparada": false,
-    "escola": "enc",
+    "escola": "encantamento",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "instantânea ou veja texto"
+    }
   },
   "ownership": {
     "default": 0

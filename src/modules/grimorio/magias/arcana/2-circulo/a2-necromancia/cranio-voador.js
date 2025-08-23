@@ -118,16 +118,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 188",
     "ativacao": {
-      "execução": "ação",
       "custo": 3,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "inst",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -146,7 +141,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "1 criatura",
     "area": "",
     "resistencia": {
@@ -173,11 +168,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "2",
     "preparada": false,
-    "escola": "nec",
+    "escola": "necromancia",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "instantanea",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

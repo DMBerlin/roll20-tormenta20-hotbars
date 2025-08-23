@@ -153,16 +153,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 192",
     "ativacao": {
-      "execução": "ação",
       "custo": 6,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "inst",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -181,7 +176,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "",
     "area": "quadrado de 6m de lado",
     "resistencia": {
@@ -213,11 +208,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "3",
     "preparada": false,
-    "escola": "evo",
+    "escola": "evocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "instantanea",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

@@ -213,16 +213,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 202",
     "ativacao": {
-      "execução": "reaction",
       "custo": 1,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "até chegar ao solo ou cena, o que vier primeiro"
+      "special": "",
+      "execucao": "reaction"
     },
     "target": {
       "value": null,
@@ -241,7 +236,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "1 criatura ou objeto com até 200kg",
     "area": "",
     "resistencia": {
@@ -254,11 +249,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
-    "escola": "tra",
+    "escola": "transmutacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "até chegar ao solo ou cena, o que vier primeiro"
+    }
   },
   "ownership": {
     "default": 0

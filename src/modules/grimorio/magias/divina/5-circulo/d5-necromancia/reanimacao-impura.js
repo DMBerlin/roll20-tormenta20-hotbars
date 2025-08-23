@@ -58,16 +58,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 203",
     "ativacao": {
-      "execução": "full",
       "custo": 15,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -99,11 +94,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "5",
     "preparada": false,
-    "escola": "nec",
+    "escola": "necromancia",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

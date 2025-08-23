@@ -192,16 +192,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 203",
     "ativacao": {
-      "execução": "full",
       "custo": 3,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 1,
-      "units": "day",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -220,7 +215,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "domo com 6m de raio",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -233,11 +228,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "2",
     "preparada": false,
-    "escola": "abjuração",
+    "escola": "abjuracao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 1,
+      "units": "dia",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

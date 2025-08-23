@@ -15,16 +15,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 211",
     "ativacao": {
-      "execução": "full",
       "custo": 6,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "sust",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -53,14 +48,19 @@ module.exports = {
       "txt": "Vontade anula"
     },
     "rolls": [],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "3",
     "preparada": false,
     "escola": "adv",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "sust",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

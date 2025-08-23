@@ -60,16 +60,11 @@ module.exports = {
     },
     "source": "Guia de NPCs, p. 16 (1.2)",
     "ativacao": {
-      "execução": "ação",
       "custo": 3,
       "qtd": "",
       "condição": "Custo Adicional: penalidade de 1 PM",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "Permanente até ser descarregada"
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -98,14 +93,19 @@ module.exports = {
       "txt": ""
     },
     "rolls": [],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "2",
     "preparada": false,
-    "escola": "con",
+    "escola": "convocacao",
     "chatFlavor": "Custo adicional: penalidade de 1 PM.",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "Permanente até ser descarregada"
+    }
   },
   "ownership": {
     "default": 0

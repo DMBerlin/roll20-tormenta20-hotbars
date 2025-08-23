@@ -142,16 +142,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 203",
     "ativacao": {
-      "execução": "special",
       "custo": 10,
       "qtd": "",
       "condição": "",
-      "special": "Duas Rodadas"
-    },
-    "duração": {
-      "value": 0,
-      "units": "sust",
-      "special": ""
+      "special": "Duas Rodadas",
+      "execucao": "especial"
     },
     "target": {
       "value": null,
@@ -170,7 +165,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "bolas de fogo e relâmpagos",
-    "alcance": "medium",
+    "alcance": "medio",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -213,11 +208,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "4",
     "preparada": false,
-    "escola": "evo",
+    "escola": "evocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "sust",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

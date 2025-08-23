@@ -178,16 +178,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 186",
     "ativacao": {
-      "execução": "full",
       "custo": 3,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "sust",
-      "special": ""
+      "special": "",
+      "execucao": "completa"
     },
     "target": {
       "value": null,
@@ -206,7 +201,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "6 mortos-vivos",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -230,14 +225,19 @@ module.exports = {
         "versatil": ""
       }
     ],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "2",
     "preparada": false,
-    "escola": "nec",
+    "escola": "necromancia",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "sust",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0

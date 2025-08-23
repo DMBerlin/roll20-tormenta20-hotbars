@@ -459,16 +459,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 194",
     "ativacao": {
-      "execução": "ação",
       "custo": 1,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "1d4 Rodadas"
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -487,7 +482,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "1 animal ou humanoide",
     "area": "",
     "resistencia": {
@@ -500,11 +495,16 @@ module.exports = {
     "tipo": "arcana",
     "circulo": "1",
     "preparada": false,
-    "escola": "enc",
+    "escola": "encantamento",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "1d4 Rodadas"
+    }
   },
   "ownership": {
     "default": 0

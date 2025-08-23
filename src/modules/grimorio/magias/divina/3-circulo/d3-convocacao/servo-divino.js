@@ -118,16 +118,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 205",
     "ativacao": {
-      "execução": "ação",
       "custo": 6,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "special",
-      "special": "Cena ou até ser descarregada"
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -146,7 +141,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "criatura conjurada",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "",
     "area": "",
     "resistencia": {
@@ -159,11 +154,16 @@ module.exports = {
     "tipo": "div",
     "circulo": "3",
     "preparada": false,
-    "escola": "con",
+    "escola": "convocacao",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "especial",
+      "special": "Cena ou até ser descarregada"
+    }
   },
   "ownership": {
     "default": 0

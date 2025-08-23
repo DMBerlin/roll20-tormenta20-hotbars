@@ -2992,7 +2992,7 @@
 
         // Mapeamento de execução
         const execucaoMap = {
-            'ação': 'Ação',
+            'acao': 'Ação',
             'action': 'Ação',
             'bonus': 'Ação Bônus',
             'reacao': 'Reação',
@@ -3158,7 +3158,7 @@
         schoolChip.style.fontWeight = 'bold';
 
         const executionChip = document.createElement('span');
-        executionChip.textContent = spell.execucao;
+        executionChip.textContent = spell.system?.ativacao?.execucao || 'N/A';
         executionChip.style.background = '#ff9800';
         executionChip.style.color = '#fff';
         executionChip.style.padding = '6px 12px';
@@ -3669,7 +3669,7 @@
 
             // Execução
             const executionChip = document.createElement('span');
-            executionChip.textContent = spell.execucao;
+            executionChip.textContent = spell.system?.ativacao?.execucao || 'N/A';
             executionChip.style.background = '#ff9800';
             executionChip.style.color = '#fff';
             executionChip.style.padding = '4px 8px';

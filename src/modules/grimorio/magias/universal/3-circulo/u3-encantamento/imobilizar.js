@@ -204,16 +204,11 @@ module.exports = {
     },
     "source": "Tormenta20 — Edição Jogo do Ano, p. 195",
     "ativacao": {
-      "execução": "ação",
       "custo": 6,
       "qtd": "",
       "condição": "",
-      "special": ""
-    },
-    "duração": {
-      "value": 0,
-      "units": "cena",
-      "special": ""
+      "special": "",
+      "execucao": "acao"
     },
     "target": {
       "value": null,
@@ -232,7 +227,7 @@ module.exports = {
       "mpMultiplier": false
     },
     "efeito": "",
-    "alcance": "short",
+    "alcance": "curto",
     "alvo": "1 humanóide ou animal",
     "area": "",
     "resistencia": {
@@ -242,14 +237,19 @@ module.exports = {
       "txt": "Vontade parcial"
     },
     "rolls": [],
-    "tipo": "uni",
+    "tipo": "universal",
     "circulo": "3",
     "preparada": false,
-    "escola": "enc",
+    "escola": "encantamento",
     "chatFlavor": "",
     "origin": "",
     "tags": [],
-    "chatGif": ""
+    "chatGif": "",
+    "duracao": {
+      "value": 0,
+      "units": "cena",
+      "special": ""
+    }
   },
   "ownership": {
     "default": 0
