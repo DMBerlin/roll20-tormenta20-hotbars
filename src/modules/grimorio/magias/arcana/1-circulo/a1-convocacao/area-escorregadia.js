@@ -184,7 +184,7 @@ module.exports = {
     },
     "efeito": "",
     "alcance": "curto",
-    "alvo": "ou",
+    "alvo": "Quadrado de 3m ou 1 objeto",
     "area": "Quadrado de 3m ou 1 objeto",
     "resistencia": {
       "pericia": "",

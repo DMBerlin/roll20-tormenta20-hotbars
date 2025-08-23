@@ -181,7 +181,7 @@ const spellsData = {
               "execucao": "acao"
             },
             "alcance": "curto",
-            "alvo": "ou",
+            "alvo": "Quadrado de 3m ou 1 objeto",
             "resistencia": "Reflexos (veja texto)",
             "custo": "1 PM",
             "description": {
