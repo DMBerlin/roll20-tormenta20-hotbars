@@ -10,3 +10,12 @@
 /.idea
 /.vscode
 /generated-spells-data.js
+/chrome-extension/node_modules
+/chrome-extension/.DS_Store
+/chrome-extension/.env
+/chrome-extension/.env.local
+/chrome-extension/.env.development.local
+/chrome-extension/.env.test.local
+/chrome-extension/.env.production.local
+/chrome-extension/dist
+/chrome-extension/build
