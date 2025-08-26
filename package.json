@@ -19,8 +19,5 @@
     "eslint": "^9.30.0",
     "globals": "^16.2.0",
     "terser": "^5.28.1"
-  },
-  "dependencies": {
-    "handlebars": "^4.7.8"
   }
 }
