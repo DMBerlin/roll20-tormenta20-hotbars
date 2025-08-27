@@ -4,6 +4,7 @@ const { minify } = require('terser');
 const { execSync } = require('child_process');
 const { generateSpellsData } = require('./generate-spells-data.js');
 const { generatePotionsData } = require('./generate-potions-data.js');
+const { generateConditionsData } = require('./generate-conditions-data.js');
 
 async function build() {
   try {
@@ -14,6 +15,9 @@ async function build() {
 
     // Generate potions data from YAML files
     generatePotionsData();
+
+    // Generate conditions data from YAML files
+    generateConditionsData();
 
     // Detectar branch atual
     let currentBranch = 'unknown';
@@ -79,6 +83,20 @@ async function build() {
       console.log('🧪 Dados de poções integrados ao build');
     } else {
       console.log('⚠️ Arquivo de dados de poções não encontrado, usando require original');
+    }
+
+    // Inline the generated conditions data into the main.js content
+    const generatedConditionsDataPath = path.join(__dirname, '..', '..', 'modules', 'conditions', 'generated-conditions-data.js');
+    if (fs.existsSync(generatedConditionsDataPath)) {
+      const conditionsDataContent = fs.readFileSync(generatedConditionsDataPath, 'utf8');
+      // Replace the require statement with the actual conditions data
+      finalCombinedContent = finalCombinedContent.replace(
+        /const conditionsData = require\('\.\/generated-conditions-data\.js'\);/,
+        conditionsDataContent.replace('module.exports = conditionsData;', '')
+      );
+      console.log('⚡ Dados de condições integrados ao build');
+    } else {
+      console.log('⚠️ Arquivo de dados de condições não encontrado, usando require original');
     }
 
     // Extrair metadata do Tampermonkey (se presente)
