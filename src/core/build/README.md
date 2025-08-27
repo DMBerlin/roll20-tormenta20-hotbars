@@ -1,82 +1,94 @@
-# Sistema de Build - Roll20 Hotbar
+# Build System
 
-Este projeto inclui um sistema de build automatizado que minifica o código JavaScript e gera arquivos otimizados para produção.
+Este diretório contém os scripts de build e geração de dados para o projeto Roll20 Tormenta20 Hotbars.
 
-## Arquivos Gerados
+## Scripts Disponíveis
 
-O sistema de build gera dois arquivos na pasta `dist/`:
+### Geração de Dados
 
-- **`tormenta20hotbar.js`** - Versão minificada para produção (338KB)
-- **`tormenta20hotbar.dev.js`** - Versão não minificada para desenvolvimento (621KB)
+- **`generate-spells-data.js`** - Gera dados consolidados das magias a partir dos arquivos individuais
+- **`generate-potions-data.js`** - Gera dados consolidados das poções a partir dos arquivos YAML
+- **`build.js`** - Script principal de build que combina todos os dados e gera o arquivo final
 
-## Comandos Disponíveis
+### Normalização de Propriedades
 
-### Build
+- **`normalize-spell-properties.js`** - Normaliza propriedades das magias (remove acentos, padroniza valores)
+- **`normalize-potion-properties.js`** - Normaliza propriedades das poções (remove acentos, padroniza valores)
+
+## Workflow de Desenvolvimento
+
+### Para Magias:
+1. Adicione novos arquivos de magia em `src/modules/grimorio/magias/`
+2. Execute `pnpm generate-spells-data` para normalizar propriedades e gerar dados consolidados
+3. Execute `pnpm build` para integrar ao build final
+
+### Para Poções:
+1. Adicione novos arquivos YAML de poção em `src/assets/pocoes/`
+2. Execute `pnpm generate-potions-data` para normalizar propriedades e gerar dados consolidados
+3. Execute `pnpm build` para integrar ao build final
+
+### Workflow Completo:
 ```bash
-pnpm run build
+make dev  # Executa lint + spells + potions + build + dev server
 ```
-- Minifica o código do `src/main.js`
-- Gera ambos os arquivos (produção e desenvolvimento)
-- Mostra estatísticas de compressão
 
-### Desenvolvimento
+## Normalização de Propriedades
+
+### O que é normalizado:
+
+#### Chaves (removendo acentos):
+- `execução` → `execucao`
+- `duração` → `duracao`
+- `resistência` → `resistencia`
+
+#### Valores (padronização):
+- **Execução**: `ação` → `acao`, `full` → `completa`
+- **Duração**: `day` → `dia`, `hour` → `hora`, `inst` → `instantanea`
+- **Alcance**: `short` → `curto`, `medium` → `medio`, `touch` → `toque`
+- **Tipo**: `potion` → `pocao`, `consumivel` → `consumivel`
+
+### Por que normalizar?
+
+1. **Consistência**: Garante que todas as propriedades usem o mesmo padrão
+2. **Compatibilidade**: Evita problemas com caracteres especiais
+3. **Manutenibilidade**: Facilita a busca e filtragem de dados
+4. **Performance**: Melhora a eficiência do processamento
+
+## Estrutura de Dados
+
+### Magias:
+```
+src/modules/grimorio/magias/
+├── arcana/
+│   ├── 1-circulo/
+│   │   ├── a1-abjuracao/
+│   │   └── ...
+│   └── ...
+├── divina/
+└── universal/
+```
+
+### Poções:
+```
+src/assets/pocoes/
+├── poção-de-curar-ferimentos-2d8-2-pv.yml
+├── óleo-de-arma-mágica.yml
+├── granada-de-bola-de-fogo.yml
+└── ...
+```
+
+## Comandos Úteis
+
 ```bash
-pnpm run dev
-```
-- Alterna o arquivo de teste para usar a versão de desenvolvimento
-- Útil para debug e desenvolvimento
+# Gerar dados de magias (inclui normalização)
+pnpm generate-spells-data
 
-### Produção
-```bash
-pnpm run prod
-```
-- Alterna o arquivo de teste para usar a versão minificada
-- Simula o ambiente de produção
+# Gerar dados de poções (inclui normalização)
+pnpm generate-potions-data
 
-## Fluxo de Trabalho
+# Build completo
+pnpm build
 
-1. **Desenvolvimento**: Use `pnpm run dev` para trabalhar com código não minificado
-2. **Teste**: Abra `src/test/index.html` no navegador para testar
-3. **Build**: Execute `pnpm run build` para gerar arquivos de produção
-4. **Produção**: Use `pnpm run prod` para testar a versão minificada
-
-## Configuração de Minificação
-
-O processo de minificação usa **Terser** com as seguintes configurações:
-
-- **Compressão**: Remove espaços em branco e otimiza código
-- **Mangling**: Preserva nomes de funções importantes (GM_*)
-- **Console**: Mantém `console.log` para debug
-- **Debugger**: Remove declarações `debugger`
-
-## Estrutura de Arquivos
-
-```
-roll20/
-├── src/
-│   ├── main.js              # Código fonte original
-│   └── test/
-│       └── index.html       # Arquivo de teste
-├── dist/
-│   ├── tormenta20hotbar.js      # Versão minificada
-│   └── tormenta20hotbar.dev.js  # Versão desenvolvimento
-├── src/
-│   └── core/
-│       └── build/
-│           └── build.js    # Script de build
-├── toggle-env.js           # Script de alternância de ambiente
-└── package.json            # Configurações e scripts
-```
-
-## Estatísticas de Compressão
-
-- **Tamanho original**: 620.73 KB
-- **Tamanho minificado**: 337.57 KB
-- **Redução**: 45.6%
-
-## Notas Importantes
-
-- O arquivo de teste (`index.html`) é automaticamente atualizado pelos scripts
-- A versão de desenvolvimento mantém formatação e comentários
-- A versão de produção é otimizada para tamanho e performance
-- Sempre execute `pnpm run build` após modificar o código fonte 
+# Desenvolvimento (workflow completo)
+make dev
+``` 

@@ -1,0 +1,163 @@
+_id: 9FkEtT2rpDxBZmEQ
+name: Poção de Disfarce Ilusório
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects:
+  - origin: Item.9FkEtT2rpDxBZmEQ
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: XyEPRdwfBhn1TavM
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Poção de Disfarce Ilusório
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!9FkEtT2rpDxBZmEQ.XyEPRdwfBhn1TavM'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Voc&ecirc; muda a apar&ecirc;ncia do alvo, incluindo seu equipamento. Isso inclui altura, peso, tom de pele, cor de cabelo, timbre de voz etc. O alvo recebe +10 em testes de Engana&ccedil;&atilde;o para disfarce. O alvo n&atilde;o recebe novas habilidades (voc&ecirc; pode ficar parecido com outra ra&ccedil;a, mas n&atilde;o ganhar&aacute; as habilidades dela), nem modifica o equipamento (uma espada longa disfar&ccedil;ada de bord&atilde;o continua funcionando e causando dano como uma espada).
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 191
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: self
+  alvo: Você
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: Vontade desacredita
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  melhorias:
+    accurate: null
+    pungent: null
+    cruel: null
+    atrocious: null
+    balanced: null
+    harmonized: null
+    injection: null
+    massive: null
+    specialmaterial: null
+    scope: null
+    precise: null
+    golden: null
+    gems: null
+    discreet: null
+    macabre: null
+  encantos:
+    keen: null
+    bane: null
+    throwable: null
+    assassin: null
+    seeking: null
+    frost: null
+    caster: null
+    corrosive: null
+    dancing: null
+    defending: null
+    destructive: null
+    lacerating: null
+    draining: null
+    shock: null
+    energy: null
+    excruciating: null
+    flaming: null
+    formidable: null
+    lancinating: null
+    magnificent: null
+    merciful: null
+    unholy: null
+    holy: null
+    bloodthirsty: null
+    thundering: null
+    sepulchral: null
+    speed: null
+    poisonous: null
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007034
+  modifiedTime: 1667351628038
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!9FkEtT2rpDxBZmEQ'

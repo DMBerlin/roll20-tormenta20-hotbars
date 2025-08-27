@@ -1,0 +1,84 @@
+_id: 8zETItgIUrQgW0ck
+name: Poção de Purificação
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: 'Seu toque purifica a criatura tocada. Esta magia remove uma das seguintes condi&ccedil;&otilde;es: abalado, apavorado, alquebrado, atordoado, cego, confuso, debilitado, enjoado, envenenado, esmorecido, exausto, fascinado, fatigado, fraco, frustrado, lento, ofuscado, paralisado, pasmo ou surdo.'
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 202
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 270
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: instantanea
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007033
+  modifiedTime: 1667351628040
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!8zETItgIUrQgW0ck'

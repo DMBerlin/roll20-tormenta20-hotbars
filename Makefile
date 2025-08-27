@@ -1,8 +1,14 @@
 dev:
-	pnpm lint && pnpm generate-spells-data && pnpm build && pnpm dev
-
-build:
-	pnpm lint && pnpm build
+	make lint && make spells && make potions && make build && pnpm dev
 
 lint:
 	pnpm lint
+
+spells:
+	pnpm generate-spells-data
+
+potions:
+	pnpm generate-potions-data
+
+build:
+	pnpm build

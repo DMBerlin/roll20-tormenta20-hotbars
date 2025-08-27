@@ -1,0 +1,135 @@
+_id: 28yPkXVQIVmlfF3W
+name: Óleo de Armamento da Natureza
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+effects:
+  - origin: Item.28yPkXVQIVmlfF3W
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: vC7DEeDcbkAuLq6G
+    changes:
+      - key: passos
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Óleo de Armamento da Natureza
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!28yPkXVQIVmlfF3W.vC7DEeDcbkAuLq6G'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Voc&ecirc; fortalece uma arma mundana primitiva (sem custo em T$, como bord&atilde;o, clava, funda ou tacape), uma arma natural ou um ataque desarmado. O dano da arma aumenta em um passo e ela &eacute; considerada m&aacute;gica. Ao lan&ccedil;ar a magia, voc&ecirc; pode mudar o tipo de dano da arma (escolhendo entre corte, impacto ou perfura&ccedil;&atilde;o).
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 181
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 270
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: self
+  alvo: 1 arma (veja texto)
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007030
+  modifiedTime: 1667351628036
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!28yPkXVQIVmlfF3W'

@@ -3,6 +3,7 @@ const path = require('path');
 const { minify } = require('terser');
 const { execSync } = require('child_process');
 const { generateSpellsData } = require('./generate-spells-data.js');
+const { generatePotionsData } = require('./generate-potions-data.js');
 
 async function build() {
   try {
@@ -10,6 +11,9 @@ async function build() {
 
     // Generate spells data from individual files
     generateSpellsData();
+
+    // Generate potions data from YAML files
+    generatePotionsData();
 
     // Detectar branch atual
     let currentBranch = 'unknown';
@@ -61,6 +65,20 @@ async function build() {
       console.log('🔮 Dados de magias integrados ao build');
     } else {
       console.log('⚠️ Arquivo de dados de magias não encontrado, usando require original');
+    }
+
+    // Inline the generated potions data into the main.js content
+    const generatedPotionsDataPath = path.join(__dirname, '..', '..', 'modules', 'potions', 'generated-potions-data.js');
+    if (fs.existsSync(generatedPotionsDataPath)) {
+      const potionsDataContent = fs.readFileSync(generatedPotionsDataPath, 'utf8');
+      // Replace the require statement with the actual potions data
+      finalCombinedContent = finalCombinedContent.replace(
+        /const potionsData = require\('\.\/generated-potions-data\.js'\);/,
+        potionsDataContent.replace('module.exports = potionsData;', '')
+      );
+      console.log('🧪 Dados de poções integrados ao build');
+    } else {
+      console.log('⚠️ Arquivo de dados de poções não encontrado, usando require original');
     }
 
     // Extrair metadata do Tampermonkey (se presente)

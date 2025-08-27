@@ -1,0 +1,120 @@
+_id: 7MWQRNmlsHSYPZT1
+name: Poção de Velocidade
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects:
+  - origin: Item.7MWQRNmlsHSYPZT1
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 05FA02uioJXFrQ45
+    changes: []
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Poção de Velocidade
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!7MWQRNmlsHSYPZT1.05FA02uioJXFrQ45'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: O alvo pode realizar uma a&ccedil;&atilde;o padr&atilde;o ou de movimento adicional por turno. Esta a&ccedil;&atilde;o n&atilde;o pode ser usada para lan&ccedil;ar magias e ativar engenhocas.
+    unidentified: ''
+  source: ''
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 270
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007032
+  modifiedTime: 1667351628041
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!7MWQRNmlsHSYPZT1'

@@ -1,0 +1,186 @@
+_id: LkTy80bVtw0jegr3
+name: Poção de Físico Divino (3 atributos)
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects:
+  - origin: Item.hSqgnFjh4qbtFzFq
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: F0zVn89RuO4sSv6u
+    changes:
+      - key: system.atributos.for.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.atributos.con.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.atributos.des.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Poção de Físico Divino
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!LkTy80bVtw0jegr3.F0zVn89RuO4sSv6u'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: O alvo se torna uma vers&atilde;o mais poderosa de si mesmo. O alvo recebe +2 em For&ccedil;a, Destreza e Constitui&ccedil;&atilde;o. Esse aumento n&atilde;o oferece PV ou PM adicionais.
+    unidentified: ''
+  source: ''
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 1080
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  melhorias:
+    accurate: null
+    pungent: null
+    cruel: null
+    atrocious: null
+    balanced: null
+    harmonized: null
+    injection: null
+    massive: null
+    specialmaterial: null
+    scope: null
+    precise: null
+    golden: null
+    gems: null
+    discreet: null
+    macabre: null
+  encantos:
+    keen: null
+    bane: null
+    throwable: null
+    assassin: null
+    seeking: null
+    frost: null
+    caster: null
+    corrosive: null
+    dancing: null
+    defending: null
+    destructive: null
+    lacerating: null
+    draining: null
+    shock: null
+    energy: null
+    excruciating: null
+    flaming: null
+    formidable: null
+    lancinating: null
+    magnificent: null
+    merciful: null
+    unholy: null
+    holy: null
+    bloodthirsty: null
+    thundering: null
+    sepulchral: null
+    speed: null
+    poisonous: null
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007041
+  modifiedTime: 1667351628038
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!LkTy80bVtw0jegr3'

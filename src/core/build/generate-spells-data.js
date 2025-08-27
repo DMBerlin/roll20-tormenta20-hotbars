@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Import the normalization functions
+const { processSpellFile } = require('./normalize-spell-properties');
+
 /**
  * Decode HTML entities to their corresponding characters
  * @param {string} text - Text containing HTML entities
@@ -66,6 +69,10 @@ function decodeHtmlEntitiesRecursive(obj) {
 
 function generateSpellsData() {
   console.log('🔮 Gerando dados de magias...');
+
+  // First, normalize all spell properties
+  console.log('🔧 Normalizando propriedades das magias...');
+  normalizeAllSpells();
 
   const spellsData = {
     arcana: {},
@@ -220,6 +227,47 @@ module.exports = spellsData;
   console.log(`📊 Total de magias processadas: ${totalSpells}`);
 
   return spellsData;
+}
+
+// Function to normalize all spell files
+function normalizeAllSpells() {
+  const magiasPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'magias');
+
+  if (!fs.existsSync(magiasPath)) {
+    console.log(`⚠️ Diretório de magias não encontrado: ${magiasPath}`);
+    return;
+  }
+
+  let updatedCount = 0;
+
+  // Walk through all spell files and normalize them
+  walkSync(magiasPath, (filePath) => {
+    if (processSpellFile(filePath)) {
+      updatedCount++;
+    }
+  });
+
+  if (updatedCount > 0) {
+    console.log(`  📊 Normalização: ${updatedCount} arquivos atualizados`);
+  } else {
+    console.log(`  ℹ️  Todas as propriedades já estavam normalizadas`);
+  }
+}
+
+// Function to walk through directories recursively
+function walkSync(dir, callback) {
+  const files = fs.readdirSync(dir);
+
+  files.forEach(file => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      walkSync(filePath, callback);
+    } else if (stat.isFile() && file.endsWith('.js') && file !== 'index.js') {
+      callback(filePath);
+    }
+  });
 }
 
 // Export for use in build process

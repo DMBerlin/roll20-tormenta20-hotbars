@@ -1,0 +1,163 @@
+_id: cF4QKw8RShT0h7O7
+name: Óleo de Escuridão
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+effects:
+  - origin: Item.cF4QKw8RShT0h7O7
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: FrDjcMPDkrjgjSDH
+    changes: []
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Óleo de Escuridão
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!cF4QKw8RShT0h7O7.FrDjcMPDkrjgjSDH'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: O alvo emana sombras em uma &aacute;rea com 6m de raio. Criaturas dentro da &aacute;rea recebem camuflagem leve por escurid&atilde;o leve. As sombras n&atilde;o podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escurid&atilde;o, que voltar&aacute; a funcionar caso o objeto seja revelado. Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela tem direito a um teste de Vontade para anul&aacute;-la. Escurid&atilde;o anula Luz.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 193
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: instantanea
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: 1 alvo
+  area: 6m de raio
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: Vontade anula (veja texto)
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  melhorias:
+    accurate: null
+    pungent: null
+    cruel: null
+    atrocious: null
+    balanced: null
+    harmonized: null
+    injection: null
+    massive: null
+    specialmaterial: null
+    scope: null
+    precise: null
+    golden: null
+    gems: null
+    discreet: null
+    macabre: null
+  encantos:
+    keen: null
+    bane: null
+    throwable: null
+    assassin: null
+    seeking: null
+    frost: null
+    caster: null
+    corrosive: null
+    dancing: null
+    defending: null
+    destructive: null
+    lacerating: null
+    draining: null
+    shock: null
+    energy: null
+    excruciating: null
+    flaming: null
+    formidable: null
+    lancinating: null
+    magnificent: null
+    merciful: null
+    unholy: null
+    holy: null
+    bloodthirsty: null
+    thundering: null
+    sepulchral: null
+    speed: null
+    poisonous: null
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007039
+  modifiedTime: 1667351628038
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!cF4QKw8RShT0h7O7'

@@ -1,0 +1,84 @@
+_id: m8Iw8iH1H0OkWeYj
+name: Granada de Névoa
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-granada.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Uma n&eacute;voa espessa eleva-se de um ponto a sua escolha, obscurecendo toda a vis&atilde;o &mdash; criaturas a at&eacute; 1,5m t&ecirc;m camuflagem leve e criaturas a partir de 3m t&ecirc;m camuflagem total. Um vento forte dispersa a n&eacute;voa em 4 rodadas e um vendaval a dispersa em 1 rodada. Esta magia n&atilde;o funciona sob a &aacute;gua.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 200
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: curto
+  alvo: ''
+  area: nuvem com 6m de raio e 6m de altura
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007042
+  modifiedTime: 1667351628040
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!m8Iw8iH1H0OkWeYj'

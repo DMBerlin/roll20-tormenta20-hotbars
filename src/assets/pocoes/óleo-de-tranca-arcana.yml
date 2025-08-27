@@ -1,0 +1,127 @@
+_id: ffDA6IdF1QAMWu8L
+name: Óleo de Tranca Arcana
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Esta magia tranca uma porta ou outro item que possa ser aberto ou fechado (como um ba&uacute;, caixa etc.), aumentando a CD de testes de For&ccedil;a ou Ladinagem para abri-lo em +10. Voc&ecirc; pode abrir livremente sua pr&oacute;pria tranca sem problemas.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 209
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: especial
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: 1 objeto Grande ou menor
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  melhorias:
+    accurate: null
+    pungent: null
+    cruel: null
+    atrocious: null
+    balanced: null
+    harmonized: null
+    injection: null
+    massive: null
+    specialmaterial: null
+    scope: null
+    precise: null
+    golden: null
+    gems: null
+    discreet: null
+    macabre: null
+  encantos:
+    keen: null
+    bane: null
+    throwable: null
+    assassin: null
+    seeking: null
+    frost: null
+    caster: null
+    corrosive: null
+    dancing: null
+    defending: null
+    destructive: null
+    lacerating: null
+    draining: null
+    shock: null
+    energy: null
+    excruciating: null
+    flaming: null
+    formidable: null
+    lancinating: null
+    magnificent: null
+    merciful: null
+    unholy: null
+    holy: null
+    bloodthirsty: null
+    thundering: null
+    sepulchral: null
+    speed: null
+    poisonous: null
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007040
+  modifiedTime: 1667351628041
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ffDA6IdF1QAMWu8L'

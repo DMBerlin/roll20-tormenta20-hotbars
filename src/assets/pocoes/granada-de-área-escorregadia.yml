@@ -1,0 +1,84 @@
+_id: XgRYUChRMmaCzVdw
+name: Granada de Área Escorregadia
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-granada.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Esta magia recobre uma superf&iacute;cie com uma subst&acirc;ncia gordurosa e escorregadia. Criaturas na &aacute;rea devem passar na resist&ecirc;ncia para n&atilde;o cair. Nas rodadas seguintes, criaturas que tentem movimentar- se pela &aacute;rea devem fazer testes de Acrobacia para equil&iacute;brio (CD 10). &Aacute;rea Escorregadia pode tornar um item escorregadio. Uma criatura segurando um objeto afetado deve passar na resist&ecirc;ncia para n&atilde;o deixar o item cair cada vez que us&aacute;-lo.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 180
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ou
+  alcance: curto
+  alvo: ''
+  area: Quadrado de 3m ou 1 objeto
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: Reflexos (veja texto)
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007038
+  modifiedTime: 1667351628035
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!XgRYUChRMmaCzVdw'

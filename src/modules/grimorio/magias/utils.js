@@ -1,4 +1,4 @@
-const spells = require('./index.js');
+const spells = require('./generated-spells-data.js');
 
 /**
  * Utility functions for working with converted spells

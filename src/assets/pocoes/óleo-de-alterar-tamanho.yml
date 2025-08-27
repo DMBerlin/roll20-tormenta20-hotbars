@@ -1,0 +1,127 @@
+_id: RYMxcUZXKLWCCSff
+name: Óleo de Alterar Tamanho
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Esta magia aumenta ou diminui o tamanho de um item mundano em at&eacute; tr&ecirc;s categorias (um objeto Enorme vira Pequeno, por exemplo). Voc&ecirc; tamb&eacute;m pode mudar a consist&ecirc;ncia do item, deixando-o r&iacute;gido como pedra ou flex&iacute;vel como seda (isso n&atilde;o altera sua RD ou PV, apenas suas propriedades f&iacute;sicas). Se lan&ccedil;ar a magia num objeto de uma criatura involunt&aacute;ria, ela pode fazer um teste de Vontade para anul&aacute;-la.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 179
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 270
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 1
+    units: dia
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: 1 objeto
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: int
+    bonus: 0
+    txt: Vontade
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  melhorias:
+    accurate: null
+    pungent: null
+    cruel: null
+    atrocious: null
+    balanced: null
+    harmonized: null
+    injection: null
+    massive: null
+    specialmaterial: null
+    scope: null
+    precise: null
+    golden: null
+    gems: null
+    discreet: null
+    macabre: null
+  encantos:
+    keen: null
+    bane: null
+    throwable: null
+    assassin: null
+    seeking: null
+    frost: null
+    caster: null
+    corrosive: null
+    dancing: null
+    defending: null
+    destructive: null
+    lacerating: null
+    draining: null
+    shock: null
+    energy: null
+    excruciating: null
+    flaming: null
+    formidable: null
+    lancinating: null
+    magnificent: null
+    merciful: null
+    unholy: null
+    holy: null
+    bloodthirsty: null
+    thundering: null
+    sepulchral: null
+    speed: null
+    poisonous: null
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007036
+  modifiedTime: 1667351628035
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!RYMxcUZXKLWCCSff'

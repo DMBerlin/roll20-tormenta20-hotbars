@@ -1,0 +1,175 @@
+_id: cLTZXcoMq9C8oNpB
+name: Poção de Escudo da Fé (cena)
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects:
+  - origin: Item.cLTZXcoMq9C8oNpB
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: mPPiFWoGZuYQ5O6N
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '2'
+        priority: 0
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Escudo da Fé
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!cLTZXcoMq9C8oNpB.mPPiFWoGZuYQ5O6N'
+  - origin: Item.cLTZXcoMq9C8oNpB
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: P5zOLoymH3TkghzN
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '0'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Poção de Escudo da Fé (cena)
+    img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!cLTZXcoMq9C8oNpB.P5zOLoymH3TkghzN'
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Um escudo m&iacute;stico se manifesta momentaneamente para bloquear um golpe. O alvo recebe +2 na Defesa.
+    unidentified: ''
+  source: ''
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007039
+  modifiedTime: 1667351628038
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!cLTZXcoMq9C8oNpB'

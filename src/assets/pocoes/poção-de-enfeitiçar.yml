@@ -1,0 +1,77 @@
+_id: fFpSZAPGZDUVJNOG
+name: Poção de Enfeitiçar
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: O alvo da poção fica enfeitiçado pela primeira criatura que enxergar.Esta magia torna o alvo prestativo (veja a p&aacute;gina 118). Ele n&atilde;o fica sob seu controle, mas percebe suas palavras e a&ccedil;&otilde;es da maneira mais favor&aacute;vel poss&iacute;vel. Voc&ecirc; recebe um b&ocirc;nus de +10 em testes de Diplomacia com a v&iacute;tima. Um alvo hostil ou que esteja envolvido em um combate recebe +5 em seu teste de resist&ecirc;ncia. Se voc&ecirc; ou seus aliados tomarem qualquer a&ccedil;&atilde;o hostil contra o alvo, a magia &eacute; dissipada e o alvo retorna &agrave; atitude que tinha antes (ou piorada, de acordo com o mestre).
+    chat: ''
+    unidentified: ''
+  source: ''
+  carregado: true
+  peso: 0.5
+  espacos: 0
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: self
+  alvo: 1 humanoide
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: Vontade anula
+  rolls: []
+  tipo: ammo
+  uses:
+    autoDestroy: false
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  subtipo: ''
+  melhorias: {}
+  encantos: {}
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1002
+  coreVersion: '13.342'
+  createdTime: 1664314007040
+  modifiedTime: 1666662581659
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!fFpSZAPGZDUVJNOG'

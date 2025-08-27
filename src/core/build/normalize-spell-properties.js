@@ -208,8 +208,13 @@ function walkSync(dir, callback) {
 
     if (stat.isDirectory()) {
       walkSync(filePath, callback);
-    } else if (stat.isFile() && file.endsWith('.js') && file !== 'index.js') {
-      callback(filePath);
+    } else if (stat.isFile() && file.endsWith('.js')) {
+      console.log(`  🔍 Verificando arquivo: ${file}`);
+      if (!['index.js', 'utils.js'].includes(file)) {
+        callback(filePath);
+      } else {
+        console.log(`  ⏭️  Pulando arquivo: ${file}`);
+      }
     }
   });
 }

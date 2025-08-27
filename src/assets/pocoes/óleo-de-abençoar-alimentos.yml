@@ -1,0 +1,84 @@
+_id: 5sxPQieeeYZYbJAZ
+name: Óleo de Abençoar Alimentos
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-oleo.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Voc&ecirc; purifica e aben&ccedil;oa uma por&ccedil;&atilde;o de comida ou dose de bebida. Isso torna um alimento sujo, estragado ou envenenado pr&oacute;prio para consumo. Al&eacute;m disso, se for consumido at&eacute; o final da dura&ccedil;&atilde;o, o alimento oferece 5 PV tempor&aacute;rios ou 1 PM tempor&aacute;rio (al&eacute;m de quaisquer b&ocirc;nus que j&aacute; oferecesse). B&ocirc;nus de alimenta&ccedil;&atilde;o duram um dia e cada personagem s&oacute; pode receber um b&ocirc;nus de alimenta&ccedil;&atilde;o por dia.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 178
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 30
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: instantanea
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: toque
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007031
+  modifiedTime: 1667351628035
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!5sxPQieeeYZYbJAZ'

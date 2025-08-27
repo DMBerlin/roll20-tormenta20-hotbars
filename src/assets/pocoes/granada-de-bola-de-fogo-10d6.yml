@@ -1,0 +1,92 @@
+_id: uujNCTQJR9CjJg2N
+name: Granada de Bola de Fogo (10d6)
+type: consumivel
+img: systems/tormenta20/icons/itens/itens-magicos/pocao-granada.webp
+effects: []
+folder: null
+sort: 0
+flags: {}
+system:
+  description:
+    value: Esta famosa magia de ataque cria uma poderosa explos&atilde;o, causando 6d6 pontos de dano de fogo em todas as criaturas e objetos livres na &aacute;rea.
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 182
+  carregado: true
+  peso: 0.5
+  espacos: 0.5
+  qtd: 1
+  preco: 1470
+  pv:
+    value: 0
+    min: 0
+    max: 0
+  rd: 0
+  ativacao:
+    execucao: action
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: instantanea
+    special: ''
+  target:
+    value: null
+    width: null
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: 10d6
+  alcance: medio
+  alvo: ''
+  area: esfera com 6m de raio
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: null
+    txt: Reflexos reduz à metade
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - 10d6
+          - fogo
+          - ''
+      versatil: ''
+  tipo: pocao
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+  upgrades:
+    melhoria1: ''
+    melhoria2: ''
+    melhoria3: ''
+    melhoria4: ''
+    material: ''
+    encanto1: ''
+    encanto2: ''
+    encanto3: ''
+  melhorias: {}
+  encantos: {}
+  subtipo: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1008
+  coreVersion: '13.342'
+  createdTime: 1664314007043
+  modifiedTime: 1667351628036
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!uujNCTQJR9CjJg2N'

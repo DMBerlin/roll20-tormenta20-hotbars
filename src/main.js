@@ -5326,350 +5326,14 @@
 
     // Dados completos das poções baseados no arquivo MD
     function getPocoesCompletas() {
-        return [
-            {
-                nome: 'Abençoar Alimentos (óleo)',
-                preco: 'T$ 30',
-                efeito: 'Bênção sobre alimentos e bebidas, purificando-os e conferindo pequenos benefícios a quem os consome (benefício varia conforme a quantidade ingerida).',
-                descricao: 'Óleo sagrado que purifica e abençoa alimentos.',
-                tipo: 'Óleo',
-                icone: '🛢️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofstrength.jpg'
-            },
-            {
-                nome: 'Área Escorregadia (granada)',
-                preco: 'T$ 30',
-                efeito: 'Cria uma superfície escorregadia em área escolhida; criaturas devem passar em Reflexos ou cair.',
-                descricao: 'Granada que cria uma superfície escorregadia.',
-                tipo: 'Granada',
-                icone: '💣',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg'
-            },
-            {
-                nome: 'Arma Mágica (óleo)',
-                preco: 'T$ 30',
-                efeito: 'Concede bônus mágico (+1) a uma arma tocada, tornando-a mágica por cena.',
-                descricao: 'Óleo que torna uma arma mágica temporariamente.',
-                tipo: 'Óleo',
-                icone: '⚔️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_sword_30.jpg'
-            },
-            {
-                nome: 'Compreensão',
-                preco: 'T$ 30',
-                efeito: 'Permite entender qualquer língua falada ou escrita e ouvir pensamentos.',
-                descricao: 'Poção que concede compreensão universal.',
-                tipo: 'Poção',
-                icone: '🧠',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_invisibilitytotem.jpg'
-            },
-            {
-                nome: 'Curar Ferimentos',
-                preco: 'T$ 30',
-                efeito: 'Recupera 2d8+2 pontos de vida ao ser consumida.',
-                descricao: 'Poção de cura básica.',
-                tipo: 'Poção',
-                icone: '❤️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_54.jpg'
-            },
-            {
-                nome: 'Disfarce Ilusório',
-                preco: 'T$ 30',
-                efeito: 'Muda sua aparência (roupas, cor de pele, estatura) por cena; +10 em Enganação.',
-                descricao: 'Poção que altera a aparência do usuário.',
-                tipo: 'Poção',
-                icone: '🎭',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_polymorph.jpg'
-            },
-            {
-                nome: 'Escuridão (óleo)',
-                preco: 'T$ 30',
-                efeito: 'Objeto emana esfera de escuridão; só luz mágica de nível ≥3 contraria.',
-                descricao: 'Óleo que cria escuridão mágica.',
-                tipo: 'Óleo',
-                icone: '🌑',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowbolt.jpg'
-            },
-            {
-                nome: 'Luz (óleo)',
-                preco: 'T$ 30',
-                efeito: 'Objeto ilumina como tocha (6 m de raio).',
-                descricao: 'Óleo que ilumina objetos.',
-                tipo: 'Óleo',
-                icone: '💡',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_flashheal.jpg'
-            },
-            {
-                nome: 'Névoa (granada)',
-                preco: 'T$ 30',
-                efeito: 'Cria névoa que concede cobertura leve (–2 na Mira) a criaturas na área.',
-                descricao: 'Granada que cria névoa protetora.',
-                tipo: 'Granada',
-                icone: '🌫️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_fogwalking.jpg'
-            },
-            {
-                nome: 'Primor Atlético',
-                preco: 'T$ 30',
-                efeito: '+4 em Deslocamento e Atletismo por cena.',
-                descricao: 'Poção que melhora habilidades atléticas.',
-                tipo: 'Poção',
-                icone: '🏃',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_swiftness.jpg'
-            },
-            {
-                nome: 'Proteção Divina',
-                preco: 'T$ 30',
-                efeito: '+4 em Defesa e Resistência contra ataques físicos por cena.',
-                descricao: 'Poção que concede proteção divina.',
-                tipo: 'Poção',
-                icone: '🛡️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_barrier.jpg'
-            },
-            {
-                nome: 'Resistência a Energia',
-                preco: 'T$ 30',
-                efeito: 'Concede resistência 10 a um tipo de dano (fogo, frio, eletricidade etc.) por cena.',
-                descricao: 'Poção que concede resistência a danos elementais.',
-                tipo: 'Poção',
-                icone: '🔥',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_frost_frostresistancetotem_01.jpg'
-            },
-            {
-                nome: 'Sono',
-                preco: 'T$ 30',
-                efeito: 'Alvo cai em sono profundo (CD de Vontade reduz à exaustão).',
-                descricao: 'Poção que induz sono.',
-                tipo: 'Poção',
-                icone: '😴',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_sleep.jpg'
-            },
-            {
-                nome: 'Suporte Ambiental',
-                preco: 'T$ 30',
-                efeito: 'Permite respirar debaixo d\'água, em vácuo ou locais tóxicos por cena.',
-                descricao: 'Poção que permite respirar em ambientes hostis.',
-                tipo: 'Poção',
-                icone: '🌊',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_ancestralguardian.jpg'
-            },
-            {
-                nome: 'Tranca Arcana (óleo)',
-                preco: 'T$ 30',
-                efeito: 'Tranca porta, baú ou objeto como se tivesse sido fechado por chave mágica.',
-                descricao: 'Óleo que tranca objetos magicamente.',
-                tipo: 'Óleo',
-                icone: '🔒',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_rogue_sprint.jpg'
-            },
-            {
-                nome: 'Visão Mística',
-                preco: 'T$ 30',
-                efeito: 'Permite ver auras mágicas e criaturas invisíveis por cena.',
-                descricao: 'Poção que concede visão mística.',
-                tipo: 'Poção',
-                icone: '👁️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_searinglightpriest.jpg'
-            },
-            {
-                nome: 'Vitalidade Fantasma',
-                preco: 'T$ 30',
-                efeito: 'Concede pontos de vida temporários iguais a 1d8+ mod. por cena.',
-                descricao: 'Poção que concede vida temporária.',
-                tipo: 'Poção',
-                icone: '👻',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_deathknight_ghoulfrenzy.jpg'
-            },
-            {
-                nome: 'Escudo da Fé',
-                preco: 'T$ 120',
-                efeito: 'Concede bônus de +2 em Defesa para você e aliado por cena.',
-                descricao: 'Poção que concede proteção divina a aliados.',
-                tipo: 'Poção',
-                icone: '✝️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_powerwordshield.jpg'
-            },
-            {
-                nome: 'Alterar Tamanho',
-                preco: 'T$ 270',
-                efeito: 'Aumenta ou diminui seu porte em uma categoria por cena (modificadores em For, Con, Des).',
-                descricao: 'Poção que altera o tamanho do usuário.',
-                tipo: 'Poção',
-                icone: '📏',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbind.jpg'
-            },
-            {
-                nome: 'Aparência Perfeita',
-                preco: 'T$ 270',
-                efeito: 'Remove imperfeições físicas; concede +10 em Enganação e Carisma por cena.',
-                descricao: 'Poção que melhora a aparência do usuário.',
-                tipo: 'Poção',
-                icone: '✨',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterclaw_02.jpg'
-            },
-            {
-                nome: 'Armamento da Natureza (óleo)',
-                preco: 'T$ 270',
-                efeito: 'Sua arma causa +1d6 de dano de veneno ou ácido por cena.',
-                descricao: 'Óleo que envenena armas.',
-                tipo: 'Óleo',
-                icone: '🌿',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_corrosiveskin.jpg'
-            },
-            {
-                nome: 'Bola de Fogo (granada)',
-                preco: 'T$ 270',
-                efeito: 'Explode em esfera de 9 m causando 6d6 de fogo; Reflexos reduz metade.',
-                descricao: 'Granada que explode em bola de fogo.',
-                tipo: 'Granada',
-                icone: '🔥',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg'
-            },
-            {
-                nome: 'Camuflagem Ilusória',
-                preco: 'T$ 270',
-                efeito: 'Você e até +2 aliados (com +PM) ganham camuflagem por cena (–5 em Percepção).',
-                descricao: 'Poção que concede camuflagem.',
-                tipo: 'Poção',
-                icone: '🥷',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_invisibility.jpg'
-            },
-            {
-                nome: 'Concentração de Combate',
-                preco: 'T$ 270',
-                efeito: 'Ao atacar, role 2d20 e escolha o maior; dura cena.',
-                descricao: 'Poção que melhora a concentração em combate.',
-                tipo: 'Poção',
-                icone: '🎯',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessedrecovery.jpg'
-            },
-            {
-                nome: 'Curar Ferimentos (4d8+4 PV)',
-                preco: 'T$ 270',
-                efeito: 'Recupera 4d8+4 pontos de vida.',
-                descricao: 'Poção de cura avançada.',
-                tipo: 'Poção',
-                icone: '❤️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
-            },
-            {
-                nome: 'Físico Divino',
-                preco: 'T$ 270',
-                efeito: '+2 em Força, Con ou Des por cena.',
-                descricao: 'Poção que melhora atributos físicos.',
-                tipo: 'Poção',
-                icone: '💪',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_fistofjustice.jpg'
-            },
-            {
-                nome: 'Mente Divina',
-                preco: 'T$ 270',
-                efeito: '+2 em Int, Sab ou Car por cena.',
-                descricao: 'Poção que melhora atributos mentais.',
-                tipo: 'Poção',
-                icone: '🧠',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane01.jpg'
-            },
-            {
-                nome: 'Metamorfose',
-                preco: 'T$ 270',
-                efeito: 'Você se transforma em outra forma (item e equipamentos também mudam) por cena.',
-                descricao: 'Poção que permite transformação.',
-                tipo: 'Poção',
-                icone: '🦋',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_polymorph.jpg'
-            },
-            {
-                nome: 'Purificação',
-                preco: 'T$ 270',
-                efeito: 'Dissipa efeitos negativos (venenos, doenças, paralisia) de você ou alvo por cena.',
-                descricao: 'Poção que remove efeitos negativos.',
-                tipo: 'Poção',
-                icone: '🧹',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_purify.jpg'
-            },
-            {
-                nome: 'Velocidade',
-                preco: 'T$ 270',
-                efeito: 'Dobra seu número de ações (ação extra) por cena.',
-                descricao: 'Poção que aumenta a velocidade de ação.',
-                tipo: 'Poção',
-                icone: '⚡',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_swiftness.jpg'
-            },
-            {
-                nome: 'Vestimenta da Fé (óleo)',
-                preco: 'T$ 270',
-                efeito: 'Sua armadura ganha bônus +1 em Defesa e resistência a magia por cena.',
-                descricao: 'Óleo que fortalece armaduras.',
-                tipo: 'Óleo',
-                icone: '🛡️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_sealofprotection.jpg'
-            },
-            {
-                nome: 'Voz Divina',
-                preco: 'T$ 270',
-                efeito: 'Sua voz ressoa com poder divino; +4 em Tests Sociais e auras podem ser ouvidas a até 30 m.',
-                descricao: 'Poção que melhora a voz do usuário.',
-                tipo: 'Poção',
-                icone: '🗣️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_divinespirit.jpg'
-            },
-            {
-                nome: 'Arma Mágica (++): óleo',
-                preco: 'T$ 750',
-                efeito: 'Como Arma Mágica, mas bônus +3 em vez de +1.',
-                descricao: 'Óleo que torna uma arma muito mágica.',
-                tipo: 'Óleo',
-                icone: '⚔️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_sword_07.jpg'
-            },
-            {
-                nome: 'Curar Ferimentos (7d8+7 PV)',
-                preco: 'T$ 1 080',
-                efeito: 'Recupera 7d8+7 PV.',
-                descricao: 'Poção de cura superior.',
-                tipo: 'Poção',
-                icone: '❤️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
-            },
-            {
-                nome: 'Físico Divino (++): aprimoramento',
-                preco: 'T$ 1 080',
-                efeito: 'Concede +2 em três atributos físicos (For, Con, Des) por cena.',
-                descricao: 'Poção que melhora todos os atributos físicos.',
-                tipo: 'Poção',
-                icone: '💪',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_greaterblessingofkings.jpg'
-            },
-            {
-                nome: 'Invisibilidade (aprimoramento)',
-                preco: 'T$ 1 080',
-                efeito: 'Você fica invisível por cena; ação de ataque ou conjurar quebra o efeito.',
-                descricao: 'Poção que concede invisibilidade.',
-                tipo: 'Poção',
-                icone: '👻',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_lesserinvisibilty.jpg'
-            },
-            {
-                nome: 'Bola de Fogo (granada ++): aprimoramento',
-                preco: 'T$ 1 470',
-                efeito: 'Como Bola de Fogo, mas causa 10d6 de fogo.',
-                descricao: 'Granada de bola de fogo aprimorada.',
-                tipo: 'Granada',
-                icone: '🔥',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg'
-            },
-            {
-                nome: 'Curar Ferimentos (11d8+11 PV)',
-                preco: 'T$ 3 000',
-                efeito: 'Recupera 11d8+11 PV.',
-                descricao: 'Poção de cura suprema.',
-                tipo: 'Poção',
-                icone: '❤️',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_potion_76.jpg'
-            }
-        ];
+        // Use generated potions data if available, otherwise fall back to hardcoded data
+        try {
+            const potionsData = require('./generated-potions-data.js');
+            return potionsData;
+        } catch {
+            console.warn('Generated potions data not available, using hardcoded data');
+            return [];
+        }
     }
 
     function createPratoDetailModal(prato) {
@@ -6363,8 +6027,8 @@
         modal.style.borderRadius = '12px';
         modal.style.padding = '20px';
         modal.style.zIndex = '10003';
-        modal.style.maxWidth = '500px';
-        modal.style.maxHeight = '80vh';
+        modal.style.maxWidth = '600px';
+        modal.style.maxHeight = '85vh';
         modal.style.overflowY = 'auto';
         modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
 
@@ -6373,7 +6037,7 @@
         header.style.display = 'flex';
         header.style.justifyContent = 'space-between';
         header.style.alignItems = 'flex-start';
-        header.style.marginBottom = '15px';
+        header.style.marginBottom = '20px';
 
         // Container do ícone e informações da poção
         const pocaoInfo = document.createElement('div');
@@ -6454,110 +6118,147 @@
         header.appendChild(closeBtn.render());
         modal.appendChild(header);
 
-        // Descrição
-        const descSection = document.createElement('div');
-        descSection.style.marginBottom = '15px';
-        const descTitle = document.createElement('h3');
-        descTitle.textContent = 'Descrição';
-        descTitle.style.color = '#6ec6ff';
-        descTitle.style.fontSize = '16px';
-        descTitle.style.margin = '0 0 8px 0';
-        descSection.appendChild(descTitle);
-        const descText = document.createElement('p');
-        descText.textContent = pocao.descricao;
-        descText.style.color = '#ecf0f1';
-        descText.style.fontSize = '14px';
-        descText.style.margin = '0';
-        descText.style.lineHeight = '1.4';
-        descSection.appendChild(descText);
-        modal.appendChild(descSection);
+        // Chips informativos
+        const chipsContainer = document.createElement('div');
+        chipsContainer.style.display = 'flex';
+        chipsContainer.style.flexWrap = 'wrap';
+        chipsContainer.style.gap = '8px';
+        chipsContainer.style.marginBottom = '20px';
 
-        // Efeito
-        const efeitoSection = document.createElement('div');
-        efeitoSection.style.marginBottom = '15px';
-        const efeitoTitle = document.createElement('h3');
-        efeitoTitle.textContent = 'Efeito';
-        efeitoTitle.style.color = '#6ec6ff';
-        efeitoTitle.style.fontSize = '16px';
-        efeitoTitle.style.margin = '0 0 8px 0';
-        efeitoSection.appendChild(efeitoTitle);
-        const efeitoText = document.createElement('p');
-        efeitoText.textContent = pocao.efeito;
-        efeitoText.style.color = '#ffb86c';
-        efeitoText.style.fontSize = '14px';
-        efeitoText.style.fontWeight = 'bold';
-        efeitoText.style.margin = '0';
-        efeitoSection.appendChild(efeitoText);
-        modal.appendChild(efeitoSection);
+        // Função para criar chip
+        const createChip = (text, color, bgColor) => {
+            const chip = document.createElement('div');
+            chip.textContent = text;
+            chip.style.padding = '4px 8px';
+            chip.style.borderRadius = '12px';
+            chip.style.fontSize = '12px';
+            chip.style.fontWeight = 'bold';
+            chip.style.color = color;
+            chip.style.backgroundColor = bgColor;
+            chip.style.border = `1px solid ${color}`;
+            return chip;
+        };
 
-        // Duração do Efeito
-        const duracaoSection = document.createElement('div');
-        duracaoSection.style.marginBottom = '15px';
-        const duracaoTitle = document.createElement('h3');
-        duracaoTitle.textContent = 'Duração do Efeito';
-        duracaoTitle.style.color = '#6ec6ff';
-        duracaoTitle.style.fontSize = '16px';
-        duracaoTitle.style.margin = '0 0 8px 0';
-        duracaoSection.appendChild(duracaoTitle);
+        // Chips baseados nas informações disponíveis
+        if (pocao.preco) {
+            chipsContainer.appendChild(createChip(pocao.preco, '#ffb86c', 'rgba(255,184,108,0.1)'));
+        }
+        if (pocao.system?.alcance) {
+            chipsContainer.appendChild(createChip(`Alcance: ${pocao.system.alcance}`, '#6ec6ff', 'rgba(110,198,255,0.1)'));
+        }
+        if (pocao.system?.alvo) {
+            chipsContainer.appendChild(createChip(`Alvo: ${pocao.system.alvo}`, '#a78bfa', 'rgba(167,139,250,0.1)'));
+        }
+        if (pocao.system?.duracao) {
+            chipsContainer.appendChild(createChip(`Duração: ${pocao.system.duracao}`, '#27ae60', 'rgba(39,174,96,0.1)'));
+        }
+        if (pocao.system?.resistencia && pocao.system.resistencia !== 'Nenhuma') {
+            chipsContainer.appendChild(createChip(`Resistência: ${pocao.system.resistencia}`, '#e74c3c', 'rgba(231,76,60,0.1)'));
+        }
+        if (pocao.system?.ativacao) {
+            chipsContainer.appendChild(createChip(`Ativação: ${pocao.system.ativacao}`, '#f39c12', 'rgba(243,156,18,0.1)'));
+        }
 
-        const duracaoText = document.createElement('p');
-        duracaoText.textContent = 'Por cena';
-        duracaoText.style.color = '#27ae60';
-        duracaoText.style.fontSize = '14px';
-        duracaoText.style.fontWeight = 'bold';
-        duracaoText.style.margin = '0';
-        duracaoText.style.padding = '8px 12px';
-        duracaoText.style.background = '#1a1a2e';
-        duracaoText.style.border = '1px solid #27ae60';
-        duracaoText.style.borderRadius = '6px';
-        duracaoSection.appendChild(duracaoText);
-        modal.appendChild(duracaoSection);
+        modal.appendChild(chipsContainer);
 
-        // Informações da Poção
-        const pocaoInfoSection = document.createElement('div');
-        pocaoInfoSection.style.marginBottom = '20px';
-        const pocaoInfoTitle = document.createElement('h3');
-        pocaoInfoTitle.textContent = 'Informações da Poção';
-        pocaoInfoTitle.style.color = '#6ec6ff';
-        pocaoInfoTitle.style.fontSize = '16px';
-        pocaoInfoTitle.style.margin = '0 0 8px 0';
-        pocaoInfoSection.appendChild(pocaoInfoTitle);
+        // Efeito Principal (destaque)
+        if (pocao.efeito) {
+            const efeitoSection = document.createElement('div');
+            efeitoSection.style.marginBottom = '20px';
+            efeitoSection.style.padding = '15px';
+            efeitoSection.style.background = 'rgba(255,184,108,0.05)';
+            efeitoSection.style.border = '1px solid rgba(255,184,108,0.2)';
+            efeitoSection.style.borderRadius = '8px';
 
-        const pocaoInfoGrid = document.createElement('div');
-        pocaoInfoGrid.style.display = 'grid';
-        pocaoInfoGrid.style.gridTemplateColumns = '1fr 1fr';
-        pocaoInfoGrid.style.gap = '10px';
+            const efeitoTitle = document.createElement('h3');
+            efeitoTitle.textContent = '🎯 Efeito Principal';
+            efeitoTitle.style.color = '#ffb86c';
+            efeitoTitle.style.fontSize = '16px';
+            efeitoTitle.style.margin = '0 0 10px 0';
+            efeitoTitle.style.fontWeight = 'bold';
+            efeitoSection.appendChild(efeitoTitle);
 
-        const infoItems = [
-            { label: 'Preço', value: pocao.preco, color: '#ffb86c' }
-        ];
+            const efeitoText = document.createElement('p');
+            efeitoText.textContent = pocao.efeito;
+            efeitoText.style.color = '#ecf0f1';
+            efeitoText.style.fontSize = '15px';
+            efeitoText.style.fontWeight = 'bold';
+            efeitoText.style.margin = '0';
+            efeitoText.style.lineHeight = '1.4';
+            efeitoSection.appendChild(efeitoText);
+            modal.appendChild(efeitoSection);
+        }
 
-        infoItems.forEach(item => {
-            const infoItem = document.createElement('div');
-            infoItem.style.background = '#23243a';
-            infoItem.style.padding = '8px 10px';
-            infoItem.style.borderRadius = '6px';
-            infoItem.style.border = '1px solid #444';
+        // Descrição Detalhada
+        if (pocao.descricao) {
+            const descSection = document.createElement('div');
+            descSection.style.marginBottom = '20px';
+            const descTitle = document.createElement('h3');
+            descTitle.textContent = '📖 Descrição';
+            descTitle.style.color = '#6ec6ff';
+            descTitle.style.fontSize = '16px';
+            descTitle.style.margin = '0 0 10px 0';
+            descTitle.style.fontWeight = 'bold';
+            descSection.appendChild(descTitle);
+            const descText = document.createElement('p');
+            descText.textContent = pocao.descricao;
+            descText.style.color = '#ecf0f1';
+            descText.style.fontSize = '14px';
+            descText.style.margin = '0';
+            descText.style.lineHeight = '1.5';
+            descSection.appendChild(descText);
+            modal.appendChild(descSection);
+        }
 
-            const label = document.createElement('div');
-            label.textContent = item.label;
-            label.style.color = '#888';
-            label.style.fontSize = '12px';
-            label.style.marginBottom = '2px';
-            infoItem.appendChild(label);
+        // Informações Técnicas (se disponíveis)
+        const technicalInfo = [];
+        if (pocao.system?.peso) technicalInfo.push({ label: 'Peso', value: `${pocao.system.peso} kg` });
+        if (pocao.system?.espacos) technicalInfo.push({ label: 'Espaços', value: pocao.system.espacos });
+        if (pocao.system?.source) technicalInfo.push({ label: 'Fonte', value: pocao.system.source });
 
-            const value = document.createElement('div');
-            value.textContent = item.value;
-            value.style.color = item.color;
-            value.style.fontSize = '13px';
-            value.style.fontWeight = 'bold';
-            infoItem.appendChild(value);
+        if (technicalInfo.length > 0) {
+            const techSection = document.createElement('div');
+            techSection.style.marginBottom = '20px';
+            const techTitle = document.createElement('h3');
+            techTitle.textContent = '⚙️ Informações Técnicas';
+            techTitle.style.color = '#6ec6ff';
+            techTitle.style.fontSize = '16px';
+            techTitle.style.margin = '0 0 10px 0';
+            techTitle.style.fontWeight = 'bold';
+            techSection.appendChild(techTitle);
 
-            pocaoInfoGrid.appendChild(infoItem);
-        });
+            const techGrid = document.createElement('div');
+            techGrid.style.display = 'grid';
+            techGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(150px, 1fr))';
+            techGrid.style.gap = '10px';
 
-        pocaoInfoSection.appendChild(pocaoInfoGrid);
-        modal.appendChild(pocaoInfoSection);
+            technicalInfo.forEach(item => {
+                const infoItem = document.createElement('div');
+                infoItem.style.background = '#23243a';
+                infoItem.style.padding = '8px 12px';
+                infoItem.style.borderRadius = '6px';
+                infoItem.style.border = '1px solid #444';
+
+                const label = document.createElement('div');
+                label.textContent = item.label;
+                label.style.color = '#888';
+                label.style.fontSize = '12px';
+                label.style.marginBottom = '2px';
+                infoItem.appendChild(label);
+
+                const value = document.createElement('div');
+                value.textContent = item.value;
+                value.style.color = '#ecf0f1';
+                value.style.fontSize = '13px';
+                value.style.fontWeight = 'bold';
+                infoItem.appendChild(value);
+
+                techGrid.appendChild(infoItem);
+            });
+
+            techSection.appendChild(techGrid);
+            modal.appendChild(techSection);
+        }
 
         // Botões
         const buttonsContainer = document.createElement('div');
@@ -6567,15 +6268,16 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar';
+        shareBtn.textContent = '📤 Compartilhar';
         shareBtn.style.flex = '1';
-        shareBtn.style.padding = '10px 15px';
+        shareBtn.style.padding = '12px 15px';
         shareBtn.style.background = '#2c3e50';
         shareBtn.style.border = '1px solid #34495e';
         shareBtn.style.borderRadius = '6px';
         shareBtn.style.color = '#ecf0f1';
         shareBtn.style.cursor = 'pointer';
         shareBtn.style.fontSize = '14px';
+        shareBtn.style.fontWeight = 'bold';
         shareBtn.onclick = () => {
             const template = `&{template:t20-info}{{infoname=${pocao.nome}}}{{description=${pocao.descricao} ${pocao.efeito}}}`;
             sendToChat(template);
@@ -6587,15 +6289,16 @@
 
         // Botão Usar
         const useBtn = document.createElement('button');
-        useBtn.textContent = 'Usar Poção';
+        useBtn.textContent = '🧪 Usar Poção';
         useBtn.style.flex = '1';
-        useBtn.style.padding = '10px 15px';
+        useBtn.style.padding = '12px 15px';
         useBtn.style.background = '#27ae60';
         useBtn.style.border = '1px solid #2ecc71';
         useBtn.style.borderRadius = '6px';
         useBtn.style.color = '#ecf0f1';
         useBtn.style.cursor = 'pointer';
         useBtn.style.fontSize = '14px';
+        useBtn.style.fontWeight = 'bold';
         useBtn.onclick = () => {
             const effectKey = 'pocao_' + pocao.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_');
             const effect = {
@@ -6653,13 +6356,38 @@
             itemType === 'drink' ? 'drink' :
                 itemType === 'potion' ? 'potion' : 'condition';
 
+        // Para poções, limitar o tamanho da descrição e adicionar chips informativos
+        let summary = item.descricao;
+        let additionalInfo = null;
+
+        if (itemType === 'potion') {
+            // Limitar descrição a 120 caracteres
+            if (summary && summary.length > 120) {
+                summary = summary.substring(0, 120) + '...';
+            }
+
+            // Criar chips informativos para poções
+            const chips = [];
+            if (item.preco) chips.push({ text: item.preco, color: '#ffb86c' });
+            if (item.system?.alcance) chips.push({ text: `Alcance: ${item.system.alcance}`, color: '#6ec6ff' });
+            if (item.system?.duracao) chips.push({ text: `Duração: ${item.system.duracao}`, color: '#27ae60' });
+            if (item.system?.resistencia && item.system.resistencia !== 'Nenhuma') {
+                chips.push({ text: `Resistência: ${item.system.resistencia}`, color: '#e74c3c' });
+            }
+
+            if (chips.length > 0) {
+                additionalInfo = chips;
+            }
+        }
+
         const card = window.Roll20Components.createFavoritableCardWithPreset(preset, {
             title: item.nome,
-            summary: item.descricao,
+            summary: summary,
             // Adiciona os efeitos específicos para cada tipo de item
             bonus: itemType === 'food' ? item.bonus : undefined,
             efeito: (itemType === 'drink' || itemType === 'potion') ? item.efeito : undefined,
             efeitos: itemType === 'condition' ? item.efeitos : undefined,
+            additionalInfo: additionalInfo, // Chips informativos para poções
             isFavorite: itemType === 'food' ? isPratoFavorito(item.nome) :
                 itemType === 'drink' ? isBebidaFavorita(item.nome) :
                     itemType === 'potion' ? isPocaoFavorita(item.nome) : false,
