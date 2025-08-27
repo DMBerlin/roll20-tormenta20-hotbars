@@ -1,5 +1,8 @@
 dev:
-	make lint && make spells && make potions && make build && pnpm dev
+	make lint && make spells && make potions && make build && make run-dev
+
+run-dev:
+	pnpm dev
 
 lint:
 	pnpm lint
@@ -12,3 +15,6 @@ potions:
 
 build:
 	pnpm build
+
+plugin:
+	pnpm build-plugin

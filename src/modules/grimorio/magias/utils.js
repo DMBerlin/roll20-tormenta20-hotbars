@@ -1,5 +1,4 @@
-const spells = require('./generated-spells-data.js');
-
+const spells = require('../../generated-spells-data');
 /**
  * Utility functions for working with converted spells
  */
@@ -30,7 +29,7 @@ function getSpellsByCircle(type, circle) {
  * @param {string} circle - The circle (1-circulo, 2-circulo, etc.)
  * @param {string} school - The school (abjuracao, adivinhacao, etc.)
  * @returns {Object} All spells of that school
- */
+*/
 function getSpellsBySchool(type, circle, school) {
   const circleSpells = getSpellsByCircle(type, circle);
   return circleSpells[school] || {};
@@ -40,7 +39,7 @@ function getSpellsBySchool(type, circle, school) {
  * Get a specific spell by name
  * @param {string} spellName - The name of the spell
  * @returns {Object|null} The spell object or null if not found
- */
+*/
 function getSpellByName(spellName) {
   for (const type in spells) {
     for (const circle in spells[type]) {

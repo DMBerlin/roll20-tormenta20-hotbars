@@ -264,7 +264,7 @@ function walkSync(dir, callback) {
 
     if (stat.isDirectory()) {
       walkSync(filePath, callback);
-    } else if (stat.isFile() && file.endsWith('.js') && file !== 'index.js') {
+    } else if (stat.isFile() && file.endsWith('.js') && file !== 'index.js' && file !== 'utils.js') {
       callback(filePath);
     }
   });

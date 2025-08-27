@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Roll20 Hotbar Extra - Caçador
+// @name         Tormenta 20 - Roll20 Companion Extension
 // @namespace    http://tampermonkey.net/
 // @version      0.0.2
-// @description  Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20 - Especializada para Caçadores
+// @description  Adiciona uma hotbar flutuante arrastável adicionando funcionalidades extras ao Roll20
 // @author       Você
 // @match        https://app.roll20.net/editor/*
 // @grant        none
