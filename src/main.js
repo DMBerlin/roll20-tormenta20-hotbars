@@ -959,7 +959,19 @@
             descriptionLabel.style.marginBottom = '8px';
 
             const descriptionText = document.createElement('div');
-            descriptionText.innerHTML = conditionData.descricaoCompleta.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // Convert newlines to proper HTML structure
+            const formattedDescription = conditionData.descricaoCompleta
+                .split('\n\n') // Split by double newlines to get paragraphs
+                .map(paragraph => {
+                    // Handle bullet points within paragraphs
+                    const formattedParagraph = paragraph
+                        .replace(/\n/g, '<br>') // Convert single newlines to line breaks
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Handle italics
+                    return `<p>${formattedParagraph}</p>`;
+                })
+                .join('');
+
+            descriptionText.innerHTML = formattedDescription;
             descriptionText.style.color = '#ecf0f1';
             descriptionText.style.fontSize = '14px';
             descriptionText.style.lineHeight = '1.5';
@@ -967,6 +979,13 @@
             descriptionText.style.background = 'rgba(255,184,108,0.1)';
             descriptionText.style.borderRadius = '6px';
             descriptionText.style.border = '1px solid rgba(255,184,108,0.3)';
+
+            // Style paragraphs within the description
+            const paragraphs = descriptionText.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.style.margin = '0 0 8px 0';
+                p.style.padding = '0';
+            });
 
             descriptionDiv.appendChild(descriptionLabel);
             descriptionDiv.appendChild(descriptionText);
@@ -3218,11 +3237,32 @@
 
         // Descrição completa
         const description = document.createElement('div');
-        description.innerHTML = spell.system?.description?.value || 'Descrição não disponível';
+        const descValue = spell.system?.description?.value || 'Descrição não disponível';
+        
+        // Convert newlines to proper HTML structure
+        const formattedDescription = descValue
+            .split('\n\n') // Split by double newlines to get paragraphs
+            .map(paragraph => {
+                // Handle bullet points within paragraphs
+                const formattedParagraph = paragraph
+                    .replace(/\n/g, '<br>') // Convert single newlines to line breaks
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Handle italics
+                return `<p>${formattedParagraph}</p>`;
+            })
+            .join('');
+        
+        description.innerHTML = formattedDescription;
         description.style.color = '#fff';
         description.style.fontSize = '16px';
         description.style.lineHeight = '1.6';
         description.style.marginBottom = '16px';
+        
+        // Style paragraphs within the description
+        const paragraphs = description.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            p.style.margin = '0 0 12px 0';
+            p.style.padding = '0';
+        });
 
         // Função auxiliar para criar itens de detalhes
         function createDetailItem(label, value) {
@@ -6178,13 +6218,32 @@
             efeitoTitle.style.fontWeight = 'bold';
             efeitoSection.appendChild(efeitoTitle);
 
-            const efeitoText = document.createElement('p');
-            efeitoText.textContent = pocao.efeito;
+            const efeitoText = document.createElement('div');
+            // Convert newlines to proper HTML structure
+            const formattedEffect = pocao.efeito
+                .split('\n\n') // Split by double newlines to get paragraphs
+                .map(paragraph => {
+                    // Handle bullet points within paragraphs
+                    const formattedParagraph = paragraph
+                        .replace(/\n/g, '<br>') // Convert single newlines to line breaks
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Handle italics
+                    return `<p>${formattedParagraph}</p>`;
+                })
+                .join('');
+            
+            efeitoText.innerHTML = formattedEffect;
             efeitoText.style.color = '#ecf0f1';
             efeitoText.style.fontSize = '15px';
             efeitoText.style.fontWeight = 'bold';
-            efeitoText.style.margin = '0';
             efeitoText.style.lineHeight = '1.4';
+            
+            // Style paragraphs within the effect
+            const paragraphs = efeitoText.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.style.margin = '0 0 8px 0';
+                p.style.padding = '0';
+            });
+            
             efeitoSection.appendChild(efeitoText);
             modal.appendChild(efeitoSection);
         }
@@ -6200,12 +6259,31 @@
             descTitle.style.margin = '0 0 10px 0';
             descTitle.style.fontWeight = 'bold';
             descSection.appendChild(descTitle);
-            const descText = document.createElement('p');
-            descText.textContent = pocao.descricao;
+            const descText = document.createElement('div');
+            // Convert newlines to proper HTML structure
+            const formattedDescription = pocao.descricao
+                .split('\n\n') // Split by double newlines to get paragraphs
+                .map(paragraph => {
+                    // Handle bullet points within paragraphs
+                    const formattedParagraph = paragraph
+                        .replace(/\n/g, '<br>') // Convert single newlines to line breaks
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Handle italics
+                    return `<p>${formattedParagraph}</p>`;
+                })
+                .join('');
+            
+            descText.innerHTML = formattedDescription;
             descText.style.color = '#ecf0f1';
             descText.style.fontSize = '14px';
-            descText.style.margin = '0';
             descText.style.lineHeight = '1.5';
+            
+            // Style paragraphs within the description
+            const paragraphs = descText.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.style.margin = '0 0 8px 0';
+                p.style.padding = '0';
+            });
+            
             descSection.appendChild(descText);
             modal.appendChild(descSection);
         }

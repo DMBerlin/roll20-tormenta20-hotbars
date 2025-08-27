@@ -48,13 +48,63 @@ const valueNormalization = {
 };
 
 /**
- * Remove HTML tags from text
+ * Extract text content from HTML string with preserved paragraph breaks
  * @param {string} text - Text containing HTML tags
- * @returns {string} - Text with HTML tags removed
+ * @returns {string} - Text with HTML tags removed but paragraph breaks preserved
  */
 function removeHtmlTags(text) {
   if (typeof text !== 'string') return text;
-  return text.replace(/<[^>]*>/g, '');
+
+  // First, let's preserve paragraph and list structure
+  let processedContent = text
+    // Replace paragraph tags with double newlines to preserve paragraph breaks
+    .replace(/<\/p>\s*<p[^>]*>/g, '\n\n')
+    .replace(/<p[^>]*>/g, '')
+    .replace(/<\/p>/g, '\n')
+    // Handle list items
+    .replace(/<\/li>\s*<li[^>]*>/g, '\n• ')
+    .replace(/<li[^>]*>/g, '• ')
+    .replace(/<\/li>/g, '\n')
+    // Handle list containers
+    .replace(/<ul[^>]*>/g, '\n')
+    .replace(/<\/ul>/g, '\n')
+    // Handle other block elements
+    .replace(/<\/div>/g, '\n')
+    // Remove UUID references but preserve the text inside
+    .replace(/@UUID\[[^\]]+\]\{([^}]+)\}/g, '$1')
+    // Remove other HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Decode HTML entities
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    // Clean up excessive whitespace while preserving paragraph breaks
+    .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove excessive newlines
+    .replace(/[ \t]+/g, ' ') // Replace multiple spaces/tabs with single space
+    .trim();
+
+  // Split into lines and process
+  const lines = processedContent.split('\n');
+  const processedLines = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    // Skip empty lines
+    if (!line) continue;
+
+    // Skip decorative elements
+    if (line === '_' || line === '•') {
+      continue;
+    }
+
+    processedLines.push(line);
+  }
+
+  return processedLines.join('\n\n');
 }
 
 // Função para normalizar uma chave (remover caracteres especiais)

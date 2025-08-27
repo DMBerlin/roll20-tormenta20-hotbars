@@ -3,36 +3,71 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 /**
- * Extract text content from HTML string
+ * Extract text content from HTML string with preserved paragraph breaks
  */
 function extractTextFromHtml(htmlContent) {
   if (!htmlContent) return '';
 
-  // Remove HTML tags and decode entities
-  let cleanedText = htmlContent
-    .replace(/<[^>]*>/g, '') // Remove HTML tags
-    .replace(/&nbsp;/g, ' ') // Replace &nbsp; with space
-    .replace(/&amp;/g, '&') // Replace &amp; with &
-    .replace(/&lt;/g, '<') // Replace &lt; with <
-    .replace(/&gt;/g, '>') // Replace &gt; with >
-    .replace(/&quot;/g, '"') // Replace &quot; with "
-    .replace(/&#39;/g, "'") // Replace &#39; with '
-    .replace(/@UUID\[[^\]]+\]/g, '') // Remove UUID references
-    .replace(/\n\s*\n/g, '\n') // Remove multiple consecutive newlines
-    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+  // First, let's preserve paragraph and list structure
+  let processedContent = htmlContent
+    // Replace paragraph tags with double newlines to preserve paragraph breaks
+    .replace(/<\/p>\s*<p[^>]*>/g, '\n\n')
+    .replace(/<p[^>]*>/g, '')
+    .replace(/<\/p>/g, '\n')
+    // Handle list items
+    .replace(/<\/li>\s*<li[^>]*>/g, '\n• ')
+    .replace(/<li[^>]*>/g, '• ')
+    .replace(/<\/li>/g, '\n')
+    // Handle list containers
+    .replace(/<ul[^>]*>/g, '\n')
+    .replace(/<\/ul>/g, '\n')
+    // Handle other block elements
+    .replace(/<\/div>/g, '\n')
+    // Remove UUID references but preserve the text inside
+    .replace(/@UUID\[[^\]]+\]\{([^}]+)\}/g, '$1')
+    // Remove other HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Decode HTML entities
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    // Clean up excessive whitespace while preserving paragraph breaks
+    .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove excessive newlines
+    .replace(/[ \t]+/g, ' ') // Replace multiple spaces/tabs with single space
     .trim();
 
-  // Remove the condition name from the beginning if it appears
-  const lines = cleanedText.split('\n');
-  if (lines.length > 0) {
-    const firstLine = lines[0].trim();
-    // If the first line is just the condition name, remove it
-    if (firstLine && !firstLine.includes(' ')) {
-      lines.shift();
+  // Split into lines and process
+  const lines = processedContent.split('\n');
+  const processedLines = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    // Skip empty lines
+    if (!line) continue;
+
+    // Skip lines that are just the condition name (usually the first line)
+    if (i === 0 && line && !line.includes(' ') && !line.includes(':')) {
+      continue;
     }
+
+    // Skip lines that are just category labels (e.g., "Condição de Paralisia")
+    if (line.startsWith('Condição de ') || line === 'Condição') {
+      continue;
+    }
+
+    // Skip decorative elements
+    if (line === '_' || line === '•') {
+      continue;
+    }
+
+    processedLines.push(line);
   }
 
-  return lines.join('\n').trim();
+  return processedLines.join('\n\n');
 }
 
 /**

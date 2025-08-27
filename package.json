@@ -11,9 +11,7 @@
     "dev": "node src/core/dev/server.js",
     "build": "node src/core/build/build.js",
     "build-plugin": "node src/core/build/build-plugin.js",
-    "update-version": "node src/core/versioning/update-version.js",
-    "generate-spells-data": "node src/core/build/generate-spells-data.js",
-    "generate-potions-data": "node src/core/build/generate-potions-data.js"
+    "update-version": "node src/core/versioning/update-version.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
