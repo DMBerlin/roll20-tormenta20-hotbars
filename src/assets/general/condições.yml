@@ -1,0 +1,1027 @@
+name: Condições
+pages:
+  - name: Ofuscado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Ofuscado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #40916c 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/ofuscado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Sentidos</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #40916c 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -2 em testes de ataque e de Percepção.</p>"
+      format: 1
+    _id: lm0ybs4xkYuERx1r
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 350000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.lm0ybs4xkYuERx1r'
+  - name: Fascinado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Fascinado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><img style=\"position:absolute;top:0;right:0;width:28px;border:none\" src=\"systems/tormenta20/icons/conditions/fascinado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Mental</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\_</div>\n<p>Com a atenção presa em alguma coisa. O personagem sofre -5 em Percepção e não pode fazer ações, exceto observar aquilo que o fascinou. Qualquer ação hostil contra o personagem anula esta condição. Balançar uma criatura fascinada para tirá-la desse estado gasta uma ação padrão.</p>"
+      format: 1
+    _id: R5FPPrfq68i9ddyv
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 122364
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.R5FPPrfq68i9ddyv'
+  - name: Enjoado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Enjoado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/enjoado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem só pode realizar uma ação padrão ou de movimento (não ambas) por rodada. Ele ainda pode fazer ações livres ou extras, como o normal. Ele pode gastar uma ação padrão para fazer uma investida, mas pode avançar no máximo seu deslocamento (e não o dobro).</p>"
+      format: 1
+    _id: BUMyxT4YI9mdC8Aj
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 74122
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.BUMyxT4YI9mdC8Aj'
+  - name: Pasmo
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Pasmo</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/pasmo.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Mental</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem não pode fazer ações, exceto reações.</p>"
+      format: 1
+    _id: CMPtwuGkHgeKu8CC
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 362500
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.CMPtwuGkHgeKu8CC'
+  - name: Sangrando
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Sangrando</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7d7d7d 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/sangrando.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7d7d7d 70%, #ddd9d500 70%)\">\_</div>\n<p>Com um ferimento aberto. No início de seus turnos, o personagem deve fazer um teste de Constituição (CD 15). Se passar, estabiliza e remove essa condição. Se falhar, perde [[/r 1d6]] pontos de vida e continua sangrando.</p>"
+      format: 1
+    _id: kzVyzFyYroPrv8gb
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 1100000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.kzVyzFyYroPrv8gb'
+  - name: Caído
+    type: text
+    text:
+      content: "<p>Caído</p><div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><p><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/caido.svg\" /></p></div><p>Condição Física</p><div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\"><p>\_</p></div><p>Deitado no chão. O personagem sofre -5 em ataques corpo a corpo e seu deslocamento é reduzido a 1,5m. Além disso, sofre -5 de Defesa contra ataques corpo a corpo, mas recebe +5 de Defesa contra ataques à distância.</p>"
+      format: 1
+    _id: fJFNeZeKmfHMpblz
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 68750
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.fJFNeZeKmfHMpblz'
+  - name: Atordoado
+    type: text
+    text:
+      content: "<p>Atordoado</p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\">\n<p><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/atordoado.svg\" /></p>\n</div>\n<p>Condição Mental</p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\n<p>\_</p>\n</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} e não pode fazer ações.</p>\n<p>\_</p>\n<ul>\n<li>\n<p><em>Desprevenido:</em>\_ Defesa -5 e Reflexos -5.</p>\n</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: bD6XAyHQrWYr0BTQ
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 37500
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.bD6XAyHQrWYr0BTQ'
+  - name: Doente
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Doente</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/doente.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>Sob efeito de uma doença.</p>"
+      format: 1
+    _id: dbNu1LpnvpCFm268
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 72657
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.dbNu1LpnvpCFm268'
+  - name: Debilitado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Debilitado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/debilitado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -5 em testes de atributos físicos (Força, Destreza e Constituição) e de perícias baseadas nesses atributos. Se o personagem ficar debilitado novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv]{Inconsciente}.</p>"
+      format: 1
+      markdown: ''
+    _id: AlTDv5dptSLGiZel
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 69727
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.AlTDv5dptSLGiZel'
+  - name: Inconsciente
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Inconsciente</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:28px;border:none\" src=\"systems/tormenta20/icons/conditions/inconsciente.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e não pode fazer ações. Balançar uma criatura para acordá-la gasta uma ação padrão.</p>\n<ul>\n<li><em>Indefeso:</em> É considerado @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido}, sofre -10 na Defesa, falha automaticamente em testes de Reflexos e pode sofrer golpes de misericórdia.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: 2jgO4I5cMaSKa9fv
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 237500
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.2jgO4I5cMaSKa9fv'
+  - name: Esmorecido
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Esmorecido</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/esmorecido.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Mental</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -5 em testes de atributos mentais (Inteligência, Sabedoria e Carisma) e de perícias baseadas nesses atributos.</p>"
+      format: 1
+    _id: YpyVEwCbNVAfFLBm
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 74610
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.YpyVEwCbNVAfFLBm'
+  - name: Surdo
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Surdo</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #40916c 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/surdo.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Sentidos</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #40916c 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem não pode fazer testes de Percepção para ouvir e sofre -5 em testes de Iniciativa. Além disso, é considerado em condição ruim para lançar magias.</p>"
+      format: 1
+    _id: eaJwtq58TBZw0Oyo
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 1200000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.eaJwtq58TBZw0Oyo'
+  - name: Enredado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Enredado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #435178 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/enredado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Paralisia</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #435178 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento} e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulnerável} e sofre -2 em testes de ataque.</p>\n<ul>\n<li><em>Lento:</em> Movimento reduzido a metade e não pode correr ou fazer investidas.</li>\n<li><em>Vúlnerável:</em> Defesa -2.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: GwCDzhOvdqD8zEaw
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 74366
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.GwCDzhOvdqD8zEaw'
+  - name: Desprevenido
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Desprevenido</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/desprevenido.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>Despreparado para reagir. O personagem sofre -5 na Defesa e em Reflexos. Você fica desprevenido contra inimigos que não possa ver.</p>"
+      format: 1
+    _id: my1HxIcUGVr2Mbii
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 70704
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.my1HxIcUGVr2Mbii'
+  - name: Apavorado
+    type: text
+    text:
+      content: "<p>Apavorado</p><div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #000000 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/apavorado.svg\" /></div><p>Condição de Medo</p><div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #000000 70%, #ddd9d500 70%)\"><p>\_</p></div><p>O personagem sofre –5 em testes de perícia e não pode se aproximar voluntariamente da fonte do medo.</p>"
+      format: 1
+      markdown: ''
+    _id: 5n105JaAFlwIfkyX
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 32813
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: 1746424707471
+      lastModifiedBy: t20builder000000
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.5n105JaAFlwIfkyX'
+  - name: Fraco
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Fraco</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/fraco.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -2 em testes de atributos físicos (Força, Destreza e Constituição) e de perícias baseadas nesses atributos. Se ficar fraco novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}.</p>"
+      format: 1
+      markdown: ''
+    _id: Q6GUW7cDfTW5AXRz
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 132313
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.Q6GUW7cDfTW5AXRz'
+  - name: Frustrado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Frustrado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/frustrado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Mental</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -2 em testes de atributos mentais (Inteligência, Sabedoria e Carisma) e de perícias baseadas nesses atributos. Se ficar frustrado novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.YpyVEwCbNVAfFLBm]{Esmorecido}.</p>"
+      format: 1
+      markdown: ''
+    _id: XvqIlV5v4YBeFUBs
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 134303
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.XvqIlV5v4YBeFUBs'
+  - name: Cego
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Cego</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/cego.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento}, não pode fazer testes de Percepção para observar e sofre -5 em testes de perícias baseadas em Força ou Destreza. Todos os alvos de seus ataques recebem camuflagem total. Condição de sentidos.</p>\n<ul>\n<li><em>Desprevenido:</em> defesa -5 e reflexos -5.</li>\n<li><em>Lento:</em> movimento reduzido a metade e não pode correr ou fazer investidas.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: qN5JjvnXDq4Xak1K
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 68873
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.qN5JjvnXDq4Xak1K'
+  - name: Imóvel
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Imóvel</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #435178 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/imovel.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Paralisia</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #435178 70%, #ddd9d500 70%)\">\_</div>\n<p>Todas as formas de deslocamento do personagem são reduzidas a 0m.</p>"
+      format: 1
+    _id: dFm2XAr8F1WkuXC8
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 225000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.dFm2XAr8F1WkuXC8'
+  - name: Alquebrado
+    type: text
+    text:
+      content: "<p>Alquebrado</p><div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><p><img style=\"position:absolute;top:0;right:0;width:30px;border:none\" src=\"systems/tormenta20/icons/conditions/alquebrado.svg\" /></p></div><p>Condição Mental</p><div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\"><p>\_</p></div><p>O custo em pontos de mana das habilidades e magias do personagem aumenta em +1.</p>"
+      format: 1
+      markdown: ''
+    _id: uub1TaaEaq0Vuncl
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 28125
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.uub1TaaEaq0Vuncl'
+  - name: Agarrado
+    type: text
+    text:
+      content: "<p>Agarrado</p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #435178 50%)\">\n<p><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/agarrado.svg\" /></p>\n</div>\n<p>Condição de Paralisia</p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #435178 70%, #ddd9d500 70%)\">\n<p>\_</p>\n</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} <span style=\"font-family:var(--font-primary);font-size:var(--font-size-14)\">e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.dFm2XAr8F1WkuXC8]{Imóvel}</span>, sofre -2 em testes de ataque e só pode atacar com armas leves. Um personagem fazendo um ataque à distância contra um alvo envolvido na manobra agarrar tem 50% de chance de acertar o alvo errado.</p>\n<ul>\n<li>\n<p><em>Desprevenido:</em> -5 defesa e -5 Reflexos.</p>\n</li>\n<li>\n<p><em>Imóvel:</em> Todas as formas de deslocamento são reduzidas a 0m.</p>\n</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: TSRZ1cAIIIpsvOfK
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 18750
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.TSRZ1cAIIIpsvOfK'
+  - name: Lento
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Lento</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #435178 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/lento.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Paralisia</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #435178 70%, #ddd9d500 70%)\">\_</div>\n<p>Todas as formas de deslocamento do personagem são reduzidas à metade (arredonde para baixo para o primeiro incremento de 1,5m) e ele não pode correr ou fazer investidas.</p>"
+      format: 1
+    _id: e8JmqkgvL3H26vbi
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 325000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.e8JmqkgvL3H26vbi'
+  - name: Indefeso
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Indefeso</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7d7d7d 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/indefeso.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7d7d7d 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem é considerado @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido}, mas sofre -10 na Defesa, falha automaticamente em testes de Reflexos e pode sofrer golpes de misericórdia.</p>"
+      format: 1
+      markdown: ''
+    _id: 8aj5sPol5mkAqTZv
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 250000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.8aj5sPol5mkAqTZv'
+  - name: Vulnerável
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Vulnerável</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/vulneravel.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem sofre -2 na Defesa.</p>"
+      format: 1
+    _id: iGWU5WVm57STW7am
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 2400000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.iGWU5WVm57STW7am'
+  - name: Envenenado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Envenenado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:30px;border:none\" src=\"systems/tormenta20/icons/conditions/envenenado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O efeito desta condição varia de acordo com o veneno. Pode ser outra condição (por exemplo, fraco ou enjoado) ou dano recorrente (por exemplo, 1d12 pontos de dano por rodada). A descrição do veneno determina a duração dele (caso nada seja dito, a condição dura pela cena).</p>"
+      format: 1
+    _id: z3nQhg8FEmhh0a7m
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 74488
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.z3nQhg8FEmhh0a7m'
+  - name: Surpreendido
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Surpreendido</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/surpreendido.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>Não ciente de seus inimigos. O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido} e não pode fazer ações, exceto reações.</p>\n<ul>\n<li><em>Desprevenido:</em> Sofre -5 na Defesa e em Reflexos.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: xOaeTMaijYgXoNJG
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 1800000
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.xOaeTMaijYgXoNJG'
+  - name: Exausto
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Exausto</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7c8a6f 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/exausto.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Fadiga</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7c8a6f 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.AlTDv5dptSLGiZel]{Debilitado}, @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.e8JmqkgvL3H26vbi]{Lento} e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulnerável}. Se ficar exausto novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.2jgO4I5cMaSKa9fv]{Inconsciente}.</p>\n<ul>\n<li><em>Debilitado:</em> -5 em testes de atributos físicos e de perícias baseadas nestes atributos.</li>\n<li><em>Lento:</em> Movimento reduzido a metade e não pode correr ou fazer investidas.</li>\n<li><em>Vulnerável:</em> Sofre Defesa -2.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: 6yXEaW3dSXtfsJ4i
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 106446
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.6yXEaW3dSXtfsJ4i'
+  - name: Em Chamas
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Em Chamas</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #b02b2e 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/em-chamas.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Física</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #b02b2e 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem está pegando fogo. No início de seus turnos, sofre [[/r 1d6]] pontos de dano de fogo. O personagem pode gastar uma ação padrão para apagar o fogo com as mãos. Imersão em água também apaga as chamas.</p>"
+      format: 1
+    _id: 2M8CXrGavdU6g1ZI
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 73634
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.2M8CXrGavdU6g1ZI'
+  - name: Fatigado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Fatigado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7c8a6f 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/fatigado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Fadiga</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7c8a6f 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.Q6GUW7cDfTW5AXRz]{Fraco} e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.iGWU5WVm57STW7am]{Vulnerável}. Se o personagem ficar fatigado novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.6yXEaW3dSXtfsJ4i]{Exausto}.</p>\n<ul>\n<li>Fraco: Sofre -2 em testes de atributos físicos (Força, Destreza e Constituição) e de perícias baseadas nestes atributos.</li>\n<li>Vulnerável: Sofre Defesa -2.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: MCED18aEe4UFeEVf
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 130323
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.MCED18aEe4UFeEVf'
+  - name: Paralisado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Paralisado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #435178 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/paralisado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição de Paralisia</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #435178 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.dFm2XAr8F1WkuXC8]{Imóvel} e @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e só pode realizar ações puramente mentais.</p>\n<ul>\n<li><em>Imóvel:</em> todas as formas de deslocamento são reduzidas a 0m.</li>\n<li><em>Indefeso:</em> É considerado desprevinido, sofre -10 na Defesa, falha automaticamente em testes de Reflexos e pode sofrer golpes de miseridórdia.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: 3dcJKe2SGu8mnafU
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 356250
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.3dcJKe2SGu8mnafU'
+  - name: Confuso
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Confuso</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7542f5 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/confuso.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição Mental</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7542f5 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem comporta-se de modo aleatório. Role 1d6 no início de seus turnos:</p>\n<ul>\n<li>1) Movimenta-se em uma direção escolhida por uma rolagem de 1d8;</li>\n<li>2-3) Não pode fazer ações, exceto reações, e fica balbuciando incoerentemente;</li>\n<li>4-5) Usa a arma que estiver empunhando para atacar a criatura mais próxima, ou a si mesmo se estiver sozinho (nesse caso, apenas role o dano);</li>\n<li>6) A condição termina e pode agir normalmente.</li>\n</ul>"
+      format: 1
+    _id: ynLMPpmMnZwV6rxf
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 68995
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.ynLMPpmMnZwV6rxf'
+  - name: Petrificado
+    type: text
+    text:
+      content: "<p><label class=\"titulo\" style=\"font-size:35px;color:#b02b2e\">Petrificado</label></p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #7d7d7d 50%)\"><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/petrificado.svg\" /></div>\n<p><label style=\"font-size:15px\">Condição</label></p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #7d7d7d 70%, #ddd9d500 70%)\">\_</div>\n<p>O personagem fica inconsciente e recebe resistência a dano 8.</p>\n<ul>\n<li><em>Incosciente:</em> O personagem fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.8aj5sPol5mkAqTZv]{Indefeso} e não pode fazer ações.</li>\n<li><em>Indefeso:</em> É considerado @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.my1HxIcUGVr2Mbii]{Desprevenido}, sofre -10 na Defesa, falha automaticamente em testes de Reflexos e pode sofrer golpes de misericórdia.</li>\n</ul>"
+      format: 1
+      markdown: ''
+    _id: emtHtUZAn82YFWQ9
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 387500
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.emtHtUZAn82YFWQ9'
+  - name: Abalado
+    type: text
+    text:
+      content: "<p>Abalado</p>\n<div style=\"position:absolute;top:0;right:0;width:50px;height:50px;background:linear-gradient(45deg, #00000000 50%, #000000 50%)\">\n<p><img style=\"position:absolute;top:0;right:0;width:25px;border:none\" src=\"systems/tormenta20/icons/conditions/abalado.svg\" /></p>\n</div>\n<p>Condição de Medo</p>\n<div style=\"margin-top:5px;height:5px;width:100%;background:linear-gradient(20deg,  #000000 70%, #ddd9d500 70%)\">\n<p>\_</p>\n</div>\n<p>O personagem sofre -2 em testes de perícia. Se ficar abalado novamente, em vez disso fica @UUID[Compendium.tormenta20.basico.s15J5SOYixL3Ajzr.JournalEntryPage.5n105JaAFlwIfkyX]{Apavorado}.</p>"
+      format: 1
+      markdown: ''
+    _id: ccqJXj25EVIzUhzo
+    video:
+      volume: 0.5
+      controls: true
+    src: null
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    image: {}
+    title:
+      show: true
+      level: 1
+    system: {}
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      duplicateSource: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!s15J5SOYixL3Ajzr.ccqJXj25EVIzUhzo'
+ownership:
+  default: 0
+flags: {}
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.1002
+  coreVersion: '13.342'
+  createdTime: 1658689321457
+  modifiedTime: 1666924804909
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+folder: null
+sort: 0
+_id: s15J5SOYixL3Ajzr
+categories: []
+_key: '!journal!s15J5SOYixL3Ajzr'
+

@@ -4,6 +4,7 @@ const { minify } = require('terser');
 const { execSync } = require('child_process');
 const { generateSpellsData } = require('./generate-spells-data.js');
 const { generatePotionsData } = require('./generate-potions-data.js');
+const { generateIcons } = require('./icon-generator.js');
 
 async function buildPlugin() {
   try {
@@ -119,6 +120,9 @@ async function buildPlugin() {
       throw new Error(`Erro na minificação: ${minifiedResult.error}`);
     }
 
+    // Generate PNG icons for Chrome extension
+    await generateIcons(packageDir);
+
     // Criar manifest.json para Chrome extension
     const manifest = {
       manifest_version: 3,
@@ -226,65 +230,15 @@ async function buildPlugin() {
     fs.writeFileSync(popupPath, popupHtml);
     console.log('🪟 popup.html criado');
 
-    // Limpar ícones antigos (SVG) se existirem
-    const oldIcon16Svg = path.join(packageDir, 'icon16.svg');
-    const oldIcon48Svg = path.join(packageDir, 'icon48.svg');
-    const oldIcon128Svg = path.join(packageDir, 'icon128.svg');
-
-    if (fs.existsSync(oldIcon16Svg)) {
-      fs.unlinkSync(oldIcon16Svg);
-      console.log('🗑️ Ícone antigo icon16.svg removido');
-    }
-    if (fs.existsSync(oldIcon48Svg)) {
-      fs.unlinkSync(oldIcon48Svg);
-      console.log('🗑️ Ícone antigo icon48.svg removido');
-    }
-    if (fs.existsSync(oldIcon128Svg)) {
-      fs.unlinkSync(oldIcon128Svg);
-      console.log('🗑️ Ícone antigo icon128.svg removido');
-    }
-
-    // Copiar ícones existentes da pasta assets
-    const iconsSourceDir = path.join(__dirname, '..', '..', 'assets', 'icons');
-    const icon16Source = path.join(iconsSourceDir, 'icon16.ico');
-    const icon48Source = path.join(iconsSourceDir, 'icon48.ico');
-    const icon128Source = path.join(iconsSourceDir, 'icon128.ico');
-
-    const icon16Dest = path.join(packageDir, 'icon16.ico');
-    const icon48Dest = path.join(packageDir, 'icon48.ico');
-    const icon128Dest = path.join(packageDir, 'icon128.ico');
-
-    // Verificar se os ícones existem e copiá-los
-    if (fs.existsSync(icon16Source)) {
-      fs.copyFileSync(icon16Source, icon16Dest);
-      console.log('📁 Ícone 16.ico copiado');
-    } else {
-      console.log('⚠️ Ícone 16.ico não encontrado em assets/icons/');
-    }
-
-    if (fs.existsSync(icon48Source)) {
-      fs.copyFileSync(icon48Source, icon48Dest);
-      console.log('📁 Ícone 48.ico copiado');
-    } else {
-      console.log('⚠️ Ícone 48.ico não encontrado em assets/icons/');
-    }
-
-    if (fs.existsSync(icon128Source)) {
-      fs.copyFileSync(icon128Source, icon128Dest);
-      console.log('📁 Ícone 128.ico copiado');
-    } else {
-      console.log('⚠️ Ícone 128.ico não encontrado em assets/icons/');
-    }
-
-    console.log('🎨 Ícones copiados da pasta assets');
-
-    // Atualizar manifest.json para usar ICO
-    manifest.icons = {
-      "16": "icon16.ico",
-      "48": "icon48.ico",
-      "128": "icon128.ico"
-    };
-    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    // Limpar ícones antigos se existirem
+    const oldIconFiles = ['icon16.ico', 'icon48.ico', 'icon128.ico', 'icon16.svg', 'icon48.svg', 'icon128.svg'];
+    oldIconFiles.forEach(iconFile => {
+      const iconPath = path.join(packageDir, iconFile);
+      if (fs.existsSync(iconPath)) {
+        fs.unlinkSync(iconPath);
+        console.log(`🗑️ Ícone antigo ${iconFile} removido`);
+      }
+    });
 
     // Criar README.md para o package
     const readmeContent = `# ${extensionName}
@@ -341,7 +295,7 @@ ${extensionAuthor}
     console.log('  - manifest.json (configuração da extensão)');
     console.log('  - content.js (script principal minificado)');
     console.log('  - popup.html (interface do popup)');
-    console.log('  - icon16.ico, icon48.ico, icon128.ico (ícones)');
+    console.log('  - icon16.png, icon48.png, icon128.png (ícones PNG)');
     console.log('  - README.md (instruções de instalação)');
     console.log('');
     console.log('🚀 Para instalar:');
