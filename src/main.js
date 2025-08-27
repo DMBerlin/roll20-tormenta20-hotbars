@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Tormenta 20 - Roll20 Companion Extension
 // @namespace    http://tampermonkey.net/
-// @version      0.0.2
+// @version      0.2.0
 // @description  Adiciona uma hotbar flutuante arrastável adicionando funcionalidades extras ao Roll20
 // @author       Você
 // @match        https://app.roll20.net/editor/*
@@ -39,7 +39,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
+    const SCRIPT_VERSION = 'v0.2.0'; // Última tag Git
 
 
     // Funções para gerenciamento de ícones com fallback
