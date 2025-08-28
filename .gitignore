@@ -9,7 +9,6 @@
 /test-results-*/
 /.idea
 /.vscode
-/.cursor
 /generated-spells-data.js
 /chrome-extension/node_modules
 /chrome-extension/.DS_Store
