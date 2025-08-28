@@ -285,7 +285,7 @@
   <div class="status">
     <div class="status-item">
       <span class="status-label">Arquivo carregado:</span>
-      <span id="scriptFile" class="status-ok script-file">tormenta20hotbar.js</span>
+      <span id="scriptFile" class="status-ok script-file">content.js</span>
     </div>
     <div class="status-item">
       <span class="status-label">Script Status:</span>
@@ -329,12 +329,12 @@
   <div class="logs">
     <div id="logContainer">
       <div class="log-entry log-info">🚀 Sistema de teste iniciado</div>
-      <div class="log-entry log-info">📁 Aguardando carregamento do script tormenta20hotbar.js</div>
+      <div class="log-entry log-info">📁 Aguardando carregamento do script content.js</div>
     </div>
   </div>
 
   <div class="footer">
-    <p>Simulador para desenvolvimento do script tormenta20hotbar.js</p>
+    <p>Simulador para desenvolvimento do script content.js (Chrome extension)</p>
     <p>Pressione <kbd>Ctrl + '</kbd> para mostrar/ocultar a hotbar (quando carregada)</p>
   </div>
 
@@ -343,7 +343,7 @@
     let scriptElement = null;
     let loadAttempts = 0;
     const maxLoadAttempts = 3;
-    const currentScriptFile = 'tormenta20hotbar.js'; // Sempre usa o arquivo principal
+    const currentScriptFile = 'content.js'; // Usa o content.js do Chrome extension
 
     // Função para adicionar logs
     function addLog(message, type = 'info') {
@@ -441,7 +441,7 @@
     // Função para carregar o script
     function loadScript() {
       const timestamp = new Date().getTime();
-      const scriptPath = `../../dist/${currentScriptFile}?t=${timestamp}`;
+      const scriptPath = `../../dist/package/${currentScriptFile}?t=${timestamp}`;
       scriptElement = document.createElement('script');
       scriptElement.src = scriptPath;
       scriptElement.type = 'text/javascript';

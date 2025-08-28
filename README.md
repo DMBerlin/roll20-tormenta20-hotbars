@@ -1,6 +1,6 @@
-# Scripts Tampermonkey para Roll20 - Tormenta20
+# Chrome Extension para Roll20 - Tormenta20
 
-Este repositório contém scripts personalizados para melhorar a experiência de jogo no Roll20, especificamente otimizados para o sistema Tormenta20.
+Este repositório contém uma extensão Chrome personalizada para melhorar a experiência de jogo no Roll20, especificamente otimizada para o sistema Tormenta20.
 
 ## 📁 Estrutura do Projeto
 
@@ -72,9 +72,9 @@ O sistema processa automaticamente:
 - **5 círculos**: 1º ao 5º círculo
 - **8 escolas**: Abjuração, Adivinhação, Convocação, Encantamento, Evocação, Ilusão, Necromancia, Transmutação
 
-## 🎯 Scripts Disponíveis
+## 🎯 Funcionalidades
 
-### Hotbar Extra - Caçador (`main.js`)
+### Hotbar Extra - Caçador
 
 Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, especializada para a classe Caçador do Tormenta20.
 
@@ -97,10 +97,12 @@ Um script completo que adiciona uma hotbar flutuante e arrastável ao Roll20, es
 #### 🎮 Como Usar
 
 1. **Instalação**:
-   - Instale a extensão Tampermonkey no seu navegador
-   - Copie o conteúdo do arquivo `main.js`
-   - Crie um novo script no Tampermonkey e cole o código
-   - Salve e ative o script
+   - Execute `npm run build` para gerar o Chrome extension
+   - Abra o Chrome/Edge e vá para `chrome://extensions/`
+   - Ative o "Modo desenvolvedor" (toggle no canto superior direito)
+   - Clique em "Carregar sem compactação"
+   - Selecione a pasta `dist/package/`
+   - O plugin será instalado e aparecerá na lista de extensões
 
 2. **Configuração Inicial**:
    - Acesse uma mesa do Roll20
@@ -171,7 +173,7 @@ npm install
 # Executar linting e correção automática
 npm run lint
 
-# Gerar build do script
+# Gerar build do Chrome extension
 npm run build
 
 # Atualizar versão
@@ -180,13 +182,23 @@ npm run update-version
 
 ### Sistema de Build
 
-O projeto utiliza um sistema de build baseado na branch atual:
+O projeto utiliza um sistema de build focado exclusivamente no Chrome extension:
 
 - **Branch `main`**: Build para produção
 - **Branch `development`**: Build para testes
 - **Outras branches**: Build para desenvolvimento
 
-O comando `npm run build` gera automaticamente o arquivo `dist/tormenta20hotbar.js` baseado na branch atual, eliminando a necessidade de arquivos separados para desenvolvimento e produção.
+O comando `npm run build` gera automaticamente:
+- `dist/package/content.js` - Script principal do Chrome extension
+- `dist/package/` - Pacote completo do Chrome extension (manifest.json, popup.html, ícones, etc.)
+
+#### 🎮 Playground de Desenvolvimento
+
+O projeto inclui um playground para testar o script durante o desenvolvimento:
+- Acesse `http://localhost:3000` após executar `npm run dev`
+- O playground carrega automaticamente o `content.js` do Chrome extension
+- Sistema de hot-reload para desenvolvimento rápido
+- Interface simulada do Roll20 para testes
 
 ### Configuração do ESLint
 

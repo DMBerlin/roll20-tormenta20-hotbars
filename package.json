@@ -1,7 +1,7 @@
 {
   "name": "roll20-tormenta20-hotbars",
   "version": "v0.2.0",
-  "description": "Hotbars para o Roll20 - Tormenta20",
+  "description": "Chrome Extension com hotbars para o Roll20 - Tormenta20",
   "license": "ISC",
   "author": "Daniel Marinho Goncalves",
   "type": "commonjs",
@@ -10,7 +10,6 @@
     "lint": "eslint --fix",
     "dev": "node src/core/dev/server.js",
     "build": "node src/core/build/build.js",
-    "build-plugin": "node src/core/build/build-plugin.js",
     "update-version": "node src/core/versioning/update-version.js"
   },
   "devDependencies": {

@@ -13,5 +13,5 @@ potions:
 build:
 	pnpm build
 
-plugin:
-	pnpm build-plugin
+preview:
+	pnpm lint && pnpm build && pnpm dev

@@ -7,7 +7,7 @@ function openDevServer() {
     // Obter o caminho absoluto do diretório do projeto
     const projectRoot = path.resolve(__dirname, '..', '..', '..');
     const htmlPath = path.join(projectRoot, 'src', 'playground', 'index.html');
-    const buildPath = path.join(projectRoot, 'dist', 'tormenta20hotbar.js');
+    const buildPath = path.join(projectRoot, 'dist', 'package', 'content.js');
     
     // Verificar se o arquivo HTML existe
     if (!fs.existsSync(htmlPath)) {
