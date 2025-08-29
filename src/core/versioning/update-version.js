@@ -35,12 +35,12 @@ function generateTimestamp() {
 // Função para formatar versão baseada na branch
 function formatVersion(baseVersion, branch) {
   const versionWithoutV = baseVersion.startsWith('v') ? baseVersion.substring(1) : baseVersion;
-  
+
   if (branch === 'develop') {
     const timestamp = generateTimestamp();
-    return `${versionWithoutV}-${timestamp}`;
+    return `${versionWithoutV}.${timestamp}`;
   }
-  
+
   return versionWithoutV;
 }
 
@@ -134,10 +134,10 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { 
-  getCurrentBranch, 
-  getLatestGitTag, 
-  updateVersionInFile, 
+module.exports = {
+  getCurrentBranch,
+  getLatestGitTag,
+  updateVersionInFile,
   updatePackageJsonVersion,
   formatVersion,
   generateTimestamp

@@ -13,5 +13,11 @@ potions:
 build:
 	pnpm build
 
+update-version:
+	pnpm update-version
+
 preview:
-	pnpm update-version && pnpm lint && pnpm build && pnpm dev
+	make update-version
+	make lint
+	make build
+	make dev
