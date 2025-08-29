@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.63517'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.10574'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -7196,7 +7196,7 @@
                 });
 
                 createNotification('Sincronização concluída com sucesso!', 'success', 3000);
-                
+
                 // Forçar atualização da UI da hotbar
                 triggerHotbarUpdate();
 
@@ -11139,10 +11139,10 @@
             }
 
             createHotbar();
-            
+
             // Inicializar observador de localStorage para atualização automática da UI
             setupLocalStorageObserver();
-            
+
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
                 // Ctrl + '
