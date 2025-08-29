@@ -7041,7 +7041,7 @@
 
         const clearButton = document.createElement('button');
         clearButton.id = 'clear-all-data-btn';
-        clearButton.textContent = 'Limpar Todos os Dados';
+        clearButton.textContent = 'Limpar Dados do Hotbar';
         clearButton.style.width = '100%';
         clearButton.style.padding = '12px 20px';
         clearButton.style.border = '1px solid #ff6e6e';
@@ -7056,7 +7056,7 @@
         clearButton.style.whiteSpace = 'nowrap';
         clearButton.style.overflow = 'hidden';
         clearButton.style.textOverflow = 'ellipsis';
-        clearButton.title = 'Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página';
+        clearButton.title = 'Remove apenas os dados do hotbar (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página';
 
         cacheSection.appendChild(clearButton);
 
@@ -7151,17 +7151,72 @@
             }
         };
 
+        // Função para limpar apenas os dados do hotbar
+        function clearHotbarData() {
+            // Lista de todas as chaves específicas do hotbar
+            const hotbarKeys = [
+                // Chaves principais do hotbar
+                FAVORITES_KEY,
+                AVATAR_KEY,
+                CHAR_NAME_KEY,
+                HUNTER_ABILITIES_KEY,
+                DESTINY_POWERS_KEY,
+                SELECTED_RACE_KEY,
+                SELECTED_RACE_TYPE_KEY,
+                LEARNED_SPELLS_KEY,
+                IMAGE_CACHE_KEY,
+                CHAR_LEVEL_KEY,
+                'roll20-hotbar-attack-effects',
+                ANIMAL_COMPANION_TYPE_KEY,
+                SELECTED_DIVINITY_KEY,
+                SELECTED_DIVINITY_POWER_KEY,
+                EFFECTS_ORDER_KEY,
+                SELECTABLE_CARDS_KEY,
+                
+                // Chaves de identificação e configuração
+                'char_identification_key',
+                
+                // Chaves de atributos configurados
+                'char_name_attr',
+                'char_race_attr',
+                'char_class_attr',
+                'char_level_attr',
+                'char_hp_total_attr',
+                'char_hp_current_attr',
+                'char_mp_total_attr',
+                'char_mp_current_attr',
+                'char_ac_attr',
+                
+                // Chaves de efeitos ativos
+                'roll20-hotbar-active-effects',
+                'roll20-hotbar-active-conditions',
+                'roll20-hotbar-comida-effects',
+                'roll20-hotbar-bebida-effects',
+                'roll20-hotbar-pocao-effects',
+                
+                // Chaves de favoritos
+                'roll20-hotbar-pratos-favoritos',
+                'roll20-hotbar-bebidas-favoritas',
+                'roll20-hotbar-pocoes-favoritas'
+            ];
+
+            // Limpar cada chave específica do hotbar
+            hotbarKeys.forEach(key => {
+                localStorage.removeItem(key);
+            });
+
+            // Limpar cache de imagens
+            clearImageCache();
+        }
+
         // Evento de clique do botão de limpar
         clearButton.onclick = () => {
-            if (confirm('Tem certeza que deseja limpar todos os dados salvos? Esta ação irá remover o cache de imagens, efeitos ativos, configurações e outros dados. Esta ação não pode ser desfeita.')) {
-                // Limpar cache de imagens
-                clearImageCache();
-
-                // Limpar todos os dados do localStorage
-                localStorage.clear();
+            if (confirm('Tem certeza que deseja limpar todos os dados do hotbar? Esta ação irá remover o cache de imagens, efeitos ativos, configurações e outros dados do hotbar. Esta ação não pode ser desfeita.')) {
+                // Limpar apenas os dados do hotbar
+                clearHotbarData();
 
                 // Notificação de sucesso
-                createNotification('Todos os dados foram limpos com sucesso!', 'success', 3000);
+                createNotification('Dados do hotbar foram limpos com sucesso!', 'success', 3000);
 
                 // Recarregar a página após 1 segundo
                 setTimeout(() => {
