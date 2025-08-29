@@ -9657,6 +9657,47 @@
         mainContent.style.padding = '14px 24px 14px 24px';
         mainContent.style.alignItems = 'center';
 
+        // Botão da classe Caçador (vertical, à esquerda)
+        const classButton = document.createElement('div');
+        classButton.textContent = 'CAÇADOR';
+        classButton.style.color = '#8B4513';
+        classButton.style.fontSize = '10px';
+        classButton.style.fontWeight = 'bold';
+        classButton.style.fontStyle = 'italic';
+        classButton.style.textTransform = 'uppercase';
+        classButton.style.letterSpacing = '1px';
+        classButton.style.cursor = 'pointer';
+        classButton.style.padding = '8px 4px';
+        classButton.style.background = 'rgba(139, 69, 19, 0.2)';
+        classButton.style.borderRadius = '8px';
+        classButton.style.border = '1px solid rgba(139, 69, 19, 0.4)';
+        classButton.style.transition = 'all 0.2s';
+        classButton.style.display = 'flex';
+        classButton.style.alignItems = 'center';
+        classButton.style.justifyContent = 'center';
+        classButton.style.width = '20px';
+        classButton.style.height = '80px';
+        classButton.style.position = 'relative';
+        classButton.style.title = 'Clique para ver informações da classe';
+        classButton.style.writingMode = 'vertical-rl';
+        classButton.style.textOrientation = 'mixed';
+        classButton.style.transform = 'rotate(180deg)';
+
+        // Hover effects para o botão da classe
+        classButton.onmouseover = () => {
+            classButton.style.background = 'rgba(139, 69, 19, 0.3)';
+            classButton.style.borderColor = 'rgba(139, 69, 19, 0.6)';
+            classButton.style.transform = 'rotate(180deg) scale(1.05)';
+        };
+        classButton.onmouseout = () => {
+            classButton.style.background = 'rgba(139, 69, 19, 0.2)';
+            classButton.style.borderColor = 'rgba(139, 69, 19, 0.4)';
+            classButton.style.transform = 'rotate(180deg) scale(1)';
+        };
+        classButton.onclick = () => {
+            createHunterClassModal();
+        };
+
         // Seção 1: Avatar do personagem (lado esquerdo)
         const characterSection = document.createElement('div');
         characterSection.style.display = 'flex';
@@ -9785,43 +9826,10 @@
         characterLevel.style.cursor = 'default';
         characterLevel.title = 'Nível do personagem (sincronizado da ficha)';
 
-        // Classe do personagem (agora como badge clicável)
-        const characterClass = document.createElement('div');
-        characterClass.textContent = 'Caçador';
-        characterClass.style.color = '#8B4513';
-        characterClass.style.fontSize = '11px';
-        characterClass.style.fontWeight = 'bold';
-        characterClass.style.fontStyle = 'italic';
-        characterClass.style.textTransform = 'uppercase';
-        characterClass.style.letterSpacing = '0.5px';
-        characterClass.style.cursor = 'pointer';
-        characterClass.style.padding = '2px 6px';
-        characterClass.style.background = 'rgba(139, 69, 19, 0.2)';
-        characterClass.style.borderRadius = '8px';
-        characterClass.style.border = '1px solid rgba(139, 69, 19, 0.4)';
-        characterClass.style.transition = 'all 0.2s';
-        characterClass.style.display = 'inline-block';
-        characterClass.style.width = 'fit-content';
-        characterClass.style.position = 'relative';
-        characterClass.title = 'Clique para ver informações da classe';
 
-        characterClass.onmouseover = () => {
-            characterClass.style.background = 'rgba(139, 69, 19, 0.3)';
-            characterClass.style.borderColor = 'rgba(139, 69, 19, 0.6)';
-            characterClass.style.transform = 'scale(1.05)';
-        };
-        characterClass.onmouseout = () => {
-            characterClass.style.background = 'rgba(139, 69, 19, 0.2)';
-            characterClass.style.borderColor = 'rgba(139, 69, 19, 0.4)';
-            characterClass.style.transform = 'scale(1)';
-        };
-        characterClass.onclick = () => {
-            createHunterClassModal();
-        };
 
         characterInfo.appendChild(characterName);
         characterInfo.appendChild(characterLevel);
-        characterInfo.appendChild(characterClass);
 
         characterSection.appendChild(avatarContainer);
         characterSection.appendChild(characterInfo);
@@ -11070,6 +11078,7 @@
         });
 
         // Adiciona as seções ao conteúdo principal
+        mainContent.appendChild(classButton);
         mainContent.appendChild(characterSection);
         mainContent.appendChild(separator1);
         mainContent.appendChild(combatSection);
