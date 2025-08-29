@@ -160,8 +160,6 @@ function normalizeObject(obj) {
 // Função para processar um arquivo de magia
 function processSpellFile(filePath) {
   try {
-    console.log(`Processando: ${filePath}`);
-
     const content = fs.readFileSync(filePath, 'utf8');
 
     // Extrair o objeto JavaScript
@@ -266,7 +264,6 @@ function processSpellFile(filePath) {
       console.log(`  ✅ Atualizado com sucesso`);
       return true;
     } else {
-      console.log(`  ℹ️  Nenhuma alteração necessária`);
       return false;
     }
 

@@ -146,8 +146,6 @@ function normalizeObject(obj) {
 // Função para processar um arquivo de poção YAML
 function processPotionFile(filePath) {
   try {
-    console.log(`Processando: ${filePath}`);
-
     const content = fs.readFileSync(filePath, 'utf8');
     const potionData = yaml.load(content);
 
@@ -257,7 +255,6 @@ function processPotionFile(filePath) {
       console.log(`  ✅ Atualizado com sucesso`);
       return true;
     } else {
-      console.log(`  ℹ️  Nenhuma alteração necessária`);
       return false;
     }
 
