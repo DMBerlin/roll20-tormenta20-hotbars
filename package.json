@@ -1,7 +1,17 @@
 {
-  "name": "roll20-tormenta20-hotbars",
-  "version": "0.3.0.83892",
-  "description": "Chrome Extension com hotbars para o Roll20 - Tormenta20",
+  "name": "Tormenta20 Hotbars",
+  "version": "0.3.0.43135",
+  "description": "Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano",
+  "keywords": [
+    "roll20",
+    "tormenta20",
+    "hotbars",
+    "chrome extension"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DMBerlin/roll20-tormenta20-hotbars"
+  },
   "license": "ISC",
   "author": "Daniel Marinho Goncalves",
   "type": "commonjs",

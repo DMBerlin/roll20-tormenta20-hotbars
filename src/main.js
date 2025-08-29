@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.83892'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.43135'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -9703,7 +9703,7 @@
         const characterName = document.createElement('div');
         characterName.id = 'character-name';
         // Usar valor sincronizado se disponível, senão usar valor padrão
-        const syncedName = localStorage.getItem('char_name') || getCharacterName();
+        const syncedName = localStorage.getItem(CHAR_NAME_KEY) || getCharacterName();
         characterName.textContent = syncedName;
         characterName.style.color = '#ecf0f1';
         characterName.style.fontSize = '14px';
@@ -9716,7 +9716,7 @@
         const characterLevel = document.createElement('div');
         characterLevel.id = 'character-level';
         // Usar valor sincronizado se disponível, senão usar valor padrão
-        const syncedLevel = localStorage.getItem('char_level') || getCharLevel();
+        const syncedLevel = localStorage.getItem(CHAR_LEVEL_KEY) || getCharLevel();
         characterLevel.textContent = `Nível ${syncedLevel}`;
         characterLevel.style.color = '#6ec6ff';
         characterLevel.style.fontSize = '12px';
@@ -10189,7 +10189,7 @@
                             console.error('Erro ao carregar seleção:', err);
                             savedAttackEffects = [];
                         }
-                        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                        const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
                         const effects = getDynamicAttackEffects(charLevel);
                         let extraDamage = '';
                         let extraDescription = '';
@@ -10554,7 +10554,7 @@
                         console.error('Erro ao carregar seleção:', err);
                         savedAttackEffects = [];
                     }
-                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
                     let extraDamage = '';
                     let extraDescription = '';
@@ -10693,7 +10693,7 @@
             popup.appendChild(header);
 
             // Obter nível do personagem
-            const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+            const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
             // Efeitos dinâmicos
             const effects = getDynamicAttackEffects(charLevel);
             const checkboxes = {};
@@ -10795,7 +10795,7 @@
                     porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
                     sopaCogumeloSelected || pizzaSelected || babaDeTrollSelected || hidromelUivanteSelected) {
                     // Executa o ataque com os efeitos selecionados
-                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
                     let extraDamage = '';
                     let extraDescription = '';
@@ -10934,7 +10934,7 @@
                         console.error('Erro ao carregar seleção:', err);
                         savedAttackEffects = [];
                     }
-                    const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
                     const effects = getDynamicAttackEffects(charLevel);
                     let extraDamage = '';
                     let extraDescription = '';
@@ -13038,7 +13038,7 @@
         function updateAbilityList() {
             const learnedAbilities = getLearnedAbilities();
             const automaticAbilities = getAutomaticAbilities();
-            const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+            const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
             const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
 
             abilitiesListContainer.innerHTML = '';
@@ -14628,7 +14628,7 @@
                     console.error('Erro ao carregar seleção:', err);
                     savedAttackEffects = [];
                 }
-                const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+                const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
                 const effects = getDynamicAttackEffects(charLevel);
                 let extraDamage = '';
                 let extraDescription = '';
@@ -17112,7 +17112,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Adiciona habilidades dinâmicas (aprendidas e automáticas)
         const learnedAbilities = getLearnedAbilities();
         const automaticAbilities = getAutomaticAbilities();
-        const charLevel = parseInt(localStorage.getItem('roll20-hotbar-charlevel') || '1', 10) || 1;
+        const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
         const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
 
         // Adiciona habilidades automáticas
