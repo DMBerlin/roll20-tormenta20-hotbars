@@ -28,6 +28,18 @@
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
     const SCRIPT_VERSION = '0.3.0'; // Última tag Git
 
+    let isTalkToMyselfActive = false;
+
+    // TTM (Talking to Yourself) status check function
+    function isTTMActive() {
+        const notifierElement = document.getElementById('textchat-notifier');
+        if (!notifierElement) {
+            return false;
+        }
+
+        const style = window.getComputedStyle(notifierElement);
+        return style.display !== 'none';
+    }
 
     // Funções para gerenciamento de ícones com fallback
     function getSpellIconCache() {
@@ -9318,8 +9330,6 @@
         talkToggle.appendChild(toggleLabel);
         talkToggle.appendChild(toggleSwitch);
 
-        let isTalkToMyselfActive = false;
-
         talkToggle.onclick = (e) => {
             e.stopPropagation(); // Previne que o header seja arrastado
 
@@ -10988,6 +10998,7 @@
                 // Ctrl + '
                 if (e.ctrlKey && (e.key === "'" || e.key === '"')) {
                     const hotbar = document.getElementById('roll20-hotbar');
+                    isTalkToMyselfActive = isTTMActive();
                     if (hotbar) {
                         if (hotbar.style.display === 'none') {
                             // Mostra a hotbar
