@@ -10,7 +10,7 @@ async function generateIcons(outputDir) {
   console.log('🎨 Gerando ícones PNG para Chrome extension...');
 
   const iconSizes = [16, 48, 128];
-  const iconsSourceDir = path.join(__dirname, '..', '..', 'assets', 'icons');
+  const iconsSourceDir = path.join(__dirname, '..', '..', 'source', 'icons');
 
   for (const size of iconSizes) {
     const iconName = `icon${size}`;

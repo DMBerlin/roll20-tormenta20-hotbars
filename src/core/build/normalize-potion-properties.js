@@ -287,7 +287,7 @@ function walkSync(dir, callback) {
 function main() {
   console.log('🧪 Normalizando propriedades das poções...\n');
 
-  const pocoesDir = path.join(__dirname, '../../assets/pocoes');
+  const pocoesDir = path.join(__dirname, '../../source/pocoes');
 
   if (!fs.existsSync(pocoesDir)) {
     console.log(`❌ Diretório de poções não encontrado: ${pocoesDir}`);

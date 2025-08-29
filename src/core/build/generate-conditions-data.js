@@ -252,7 +252,7 @@ function generateConditionsData() {
 
   const conditionsData = [];
 
-  const conditionsPath = path.join(__dirname, '..', '..', 'assets', 'general', 'condições.yml');
+  const conditionsPath = path.join(__dirname, '..', '..', 'source', 'general', 'condições.yml');
 
   if (!fs.existsSync(conditionsPath)) {
     console.log(`⚠️ Arquivo de condições não encontrado: ${conditionsPath}`);

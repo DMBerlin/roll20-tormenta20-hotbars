@@ -209,7 +209,7 @@ function generatePotionsData() {
 
   const potionsData = [];
 
-  const pocoesPath = path.join(__dirname, '..', '..', 'assets', 'pocoes');
+  const pocoesPath = path.join(__dirname, '..', '..', 'source', 'pocoes');
 
   if (!fs.existsSync(pocoesPath)) {
     console.log(`⚠️ Pasta de poções não encontrada: ${pocoesPath}`);
@@ -306,7 +306,7 @@ module.exports = potionsData;
 
 // Function to normalize all potion files
 function normalizeAllPotions() {
-  const pocoesDir = path.join(__dirname, '..', '..', 'assets', 'pocoes');
+  const pocoesDir = path.join(__dirname, '..', '..', 'source', 'pocoes');
 
   if (!fs.existsSync(pocoesDir)) {
     console.log(`⚠️ Diretório de poções não encontrado: ${pocoesDir}`);
