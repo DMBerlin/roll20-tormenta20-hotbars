@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.28318'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.83892'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1897,7 +1897,7 @@
     // Função para obter o nome do personagem sem aspas para uso em macros
     function getCharacterNameForMacro() {
         // Usar a chave de identificação se disponível, senão usar o nome padrão
-        const identificationKey = localStorage.getItem('char_identification_key');
+        const identificationKey = localStorage.getItem('roll20-hotbar-char-identification-key');
         if (identificationKey && identificationKey.trim() !== '') {
             return identificationKey.trim();
         }
@@ -6874,7 +6874,7 @@
         const charIdInput = document.createElement('input');
         charIdInput.type = 'text';
         charIdInput.id = 'char_identification_key';
-        charIdInput.value = localStorage.getItem('char_identification_key') || getCharacterNameForMacro();
+        charIdInput.value = localStorage.getItem('roll20-hotbar-char-identification-key') || getCharacterNameForMacro();
         charIdInput.placeholder = 'Ex: Aragorn, Gandalf, etc.';
         charIdInput.style.width = '100%';
         charIdInput.style.padding = '10px 12px';
@@ -6888,7 +6888,7 @@
 
         // Salvar valor quando mudar
         charIdInput.addEventListener('change', () => {
-            localStorage.setItem('char_identification_key', charIdInput.value);
+            localStorage.setItem('roll20-hotbar-char-identification-key', charIdInput.value);
             // Atualizar também o nome do personagem para macros
             localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
         });
@@ -6918,15 +6918,15 @@
 
         // Campos de configuração dos atributos
         const attributeFields = [
-            { key: 'char_name_attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
-            { key: 'char_race_attr', label: 'Raça', defaultValue: 'trace' },
-            { key: 'char_class_attr', label: 'Classe', defaultValue: 'tlevel' },
-            { key: 'char_level_attr', label: 'Nível', defaultValue: 'charnivel' },
-            { key: 'char_hp_total_attr', label: 'Vida Total', defaultValue: 'vidatotal' },
-            { key: 'char_hp_current_attr', label: 'Vida Atual', defaultValue: 'vida' },
-            { key: 'char_mp_total_attr', label: 'Mana Total', defaultValue: 'manatotal' },
-            { key: 'char_mp_current_attr', label: 'Mana Atual', defaultValue: 'mana' },
-            { key: 'char_ac_attr', label: 'Armadura', defaultValue: 'defesatotal' }
+            { key: 'roll20-hotbar-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
+            { key: 'roll20-hotbar-char-race-attr', label: 'Raça', defaultValue: 'trace' },
+            { key: 'roll20-hotbar-char-class-attr', label: 'Classe', defaultValue: 'tlevel' },
+            { key: 'roll20-hotbar-char-level-attr', label: 'Nível', defaultValue: 'charnivel' },
+            { key: 'roll20-hotbar-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal' },
+            { key: 'roll20-hotbar-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida' },
+            { key: 'roll20-hotbar-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
+            { key: 'roll20-hotbar-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
+            { key: 'roll20-hotbar-char-ac-attr', label: 'Armadura', defaultValue: 'defesatotal' }
         ];
 
         const fieldsContainer = document.createElement('div');
@@ -7153,55 +7153,26 @@
 
         // Função para limpar apenas os dados do hotbar
         function clearHotbarData() {
-            // Lista de todas as chaves específicas do hotbar
-            const hotbarKeys = [
-                // Chaves principais do hotbar
-                FAVORITES_KEY,
-                AVATAR_KEY,
-                CHAR_NAME_KEY,
-                HUNTER_ABILITIES_KEY,
-                DESTINY_POWERS_KEY,
-                SELECTED_RACE_KEY,
-                SELECTED_RACE_TYPE_KEY,
-                LEARNED_SPELLS_KEY,
-                IMAGE_CACHE_KEY,
-                CHAR_LEVEL_KEY,
-                'roll20-hotbar-attack-effects',
-                ANIMAL_COMPANION_TYPE_KEY,
-                SELECTED_DIVINITY_KEY,
-                SELECTED_DIVINITY_POWER_KEY,
-                EFFECTS_ORDER_KEY,
-                SELECTABLE_CARDS_KEY,
-                
-                // Chaves de identificação e configuração
-                'char_identification_key',
-                
-                // Chaves de atributos configurados
-                'char_name_attr',
-                'char_race_attr',
-                'char_class_attr',
-                'char_level_attr',
-                'char_hp_total_attr',
-                'char_hp_current_attr',
-                'char_mp_total_attr',
-                'char_mp_current_attr',
-                'char_ac_attr',
-                
-                // Chaves de efeitos ativos
-                'roll20-hotbar-active-effects',
-                'roll20-hotbar-active-conditions',
-                'roll20-hotbar-comida-effects',
-                'roll20-hotbar-bebida-effects',
-                'roll20-hotbar-pocao-effects',
-                
-                // Chaves de favoritos
-                'roll20-hotbar-pratos-favoritos',
-                'roll20-hotbar-bebidas-favoritas',
-                'roll20-hotbar-pocoes-favoritas'
-            ];
+            // Limpar todas as chaves que começam com o prefixo do hotbar
+            const keysToRemove = [];
+            
+            // Percorrer todas as chaves do localStorage
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && (
+                    // Chaves que começam com o prefixo do hotbar
+                    key.startsWith('roll20-hotbar-') ||
+                    // Chaves específicas que podem não ter o prefixo (legacy)
+                    key === 'char_identification_key' ||
+                    key === 'roll20-hotbar-char-identification-key' ||
+                    key.startsWith('char_') && key.endsWith('_attr')
+                )) {
+                    keysToRemove.push(key);
+                }
+            }
 
-            // Limpar cada chave específica do hotbar
-            hotbarKeys.forEach(key => {
+            // Remover as chaves identificadas
+            keysToRemove.forEach(key => {
                 localStorage.removeItem(key);
             });
 
