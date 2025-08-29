@@ -2389,105 +2389,13 @@
         return 'DATA_' + Math.random().toString(36).substr(2, 9).toUpperCase() + '_' + Date.now().toString(36);
     }
 
-    // Função para verificar se TTM está ativo
-    function isTTMActive() {
-        const notifier = document.querySelector('#textchat-notifier');
-        const isActive = notifier && notifier.style.display === 'block' && notifier.textContent.includes('Talking to Yourself');
-        console.log('TTM Status:', isActive ? 'Ativo' : 'Inativo');
-        return isActive;
-    }
 
-    // Função para ativar/desativar TTM (Talk to Myself)
-    function toggleTTM() {
-        sendToChat('/talktomyself');
-        // Pequeno delay para garantir que o comando seja processado
-        return new Promise(resolve => setTimeout(resolve, 100));
-    }
 
-    // Função para ativar TTM apenas se não estiver ativo
-    function ensureTTMActive() {
-        if (!isTTMActive()) {
-            console.log('Ativando TTM...');
-            return toggleTTM();
-        } else {
-            console.log('TTM já está ativo, mantendo...');
-            return Promise.resolve();
-        }
-    }
 
-    // Função para desativar TTM apenas se estiver ativo
-    function ensureTTMInactive() {
-        if (isTTMActive()) {
-            console.log('Desativando TTM...');
-            return toggleTTM();
-        } else {
-            console.log('TTM já está inativo, mantendo...');
-            return Promise.resolve();
-        }
-    }
 
-    // Schema de dados para coleta do personagem (Tormenta20)
-    const CHARACTER_DATA_SCHEMA = {
-        // Informações básicas
-        charnivel: 'Nível do personagem',
-        menace_name: 'Nome do personagem',
-        tlevel: 'Classe do personagem',
-        playername: 'Nome do jogador',
-        trace: 'Raça',
-        torigin: 'Origem',
-        divindade: 'Divindade',
 
-        // Atributos (modificadores)
-        for_mod: 'Modificador de Força',
-        des_mod: 'Modificador de Destreza',
-        con_mod: 'Modificador de Constituição',
-        int_mod: 'Modificador de Inteligência',
-        sab_mod: 'Modificador de Sabedoria',
-        car_mod: 'Modificador de Carisma',
 
-        // Atributos base
-        for: 'Força base',
-        des: 'Destreza base',
-        con: 'Constituição base',
-        int: 'Inteligência base',
-        sab: 'Sabedoria base',
-        car: 'Carisma base',
 
-        // Recursos
-        vidatotal: 'Vida máxima',
-        vida: 'Vida atual',
-        manatotal: 'Mana máxima',
-        mana: 'Mana atual',
-
-        // Defesas
-        defesatotal: 'Defesa total',
-        menace_defense: 'Defesa (menace)',
-        menace_fortitude: 'Fortitude',
-        menace_reflex: 'Reflexos',
-        menace_will: 'Vontade',
-
-        // Outros
-        menace_nd: 'Nível de Desafio',
-        menace_init: 'Iniciativa',
-        menace_percep: 'Percepção',
-        bonus_treino: 'Bônus de treino',
-        penalidades_armadura: 'Penalidades de armadura'
-    };
-
-    // Função para enviar comando de coleta de dados
-    function sendDataCollectionCommand(dataKey) {
-        const characterName = getCharacterNameForMacro();
-
-        // Cria o comando com todos os campos do schema
-        const fields = Object.keys(CHARACTER_DATA_SCHEMA);
-        const command = fields.map(field => `@{${characterName}|${field}}`).join(',') + ` [${dataKey}]`;
-
-        console.log('Comando enviado para coleta:', command);
-        console.log('Nome do personagem usado:', characterName);
-        console.log('Schema de dados:', CHARACTER_DATA_SCHEMA);
-
-        sendToChat(command);
-    }
 
     // Função para aguardar e encontrar mensagem com a chave específica
     function waitForDataMessage(dataKey, maxWaitTime = 5000) {
@@ -2518,59 +2426,128 @@
         });
     }
 
-    // Função para verificar se estamos em uma sessão do Roll20
-    function isRoll20Session() {
-        return window.location.hostname.includes('roll20.net') &&
-            document.querySelector('#textchat-input') !== null;
-    }
 
-    // Função para verificar se temos um personagem selecionado
-    function hasCharacterSelected() {
-        const characterName = getCharacterNameForMacro();
-        console.log('Verificando personagem selecionado:', characterName);
-        return characterName && characterName !== 'Nome do Personagem';
-    }
 
-    // Função para extrair dados da mensagem
-    function extractDataFromMessage(messageElement, dataKey) {
+    // Função para extrair dados JSON da mensagem
+    function extractJSONDataFromMessage(messageElement, dataKey) {
         try {
             const messageText = messageElement.textContent || messageElement.innerText;
 
             // Log da mensagem completa para debug
-            console.log('Mensagem completa recebida:', messageText);
+            console.log('Mensagem JSON completa recebida:', messageText);
 
             // Remove a chave da mensagem
-            const cleanText = messageText.replace(`[${dataKey}]`, '').trim();
-            console.log('Texto limpo (sem chave):', cleanText);
+            let cleanText = messageText.replace(`[${dataKey}]`, '').trim();
+            console.log('Texto JSON limpo (sem chave):', cleanText);
 
-            // Divide os valores por vírgula
-            const values = cleanText.split(',').map(v => v.trim());
-            console.log('Valores separados por vírgula:', values);
+            // Remove possíveis caracteres extras no início e fim
+            cleanText = cleanText.replace(/^[^{[]*/, '').replace(/[^}\]]*$/, '');
+            console.log('Texto JSON limpo (sem caracteres extras):', cleanText);
 
-            // Extrai os dados baseado no schema
-            const fields = Object.keys(CHARACTER_DATA_SCHEMA);
-            const extractedData = {};
+            // Tenta fazer parse do JSON
+            let jsonData;
+            try {
+                jsonData = JSON.parse(cleanText);
+            } catch (parseError) {
+                console.error('Erro ao fazer parse do JSON:', parseError);
+                console.log('Texto que falhou no parse:', cleanText);
 
-            fields.forEach((field, index) => {
-                extractedData[field] = values[index] || '';
-            });
+                // Tenta extrair dados manualmente se o JSON falhar
+                console.log('Tentando extração manual dos dados...');
+                return extractDataManually(cleanText);
+            }
 
-            // Log do schema completo com valores capturados
-            console.log('=== SCHEMA COMPLETO COM VALORES ===');
-            Object.keys(CHARACTER_DATA_SCHEMA).forEach(field => {
-                console.log(`${CHARACTER_DATA_SCHEMA[field]} (${field}):`, extractedData[field]);
-            });
-            console.log('===================================');
+            console.log('Dados JSON extraídos:', jsonData);
 
-            // Log para debug
-            console.log('Dados extraídos:', extractedData);
-
-            return extractedData;
+            return jsonData;
         } catch (error) {
-            console.error('Erro ao extrair dados da mensagem:', error);
+            console.error('Erro ao extrair dados JSON da mensagem:', error);
             return null;
         }
     }
+
+    // Função para extrair dados manualmente quando JSON falha
+    function extractDataManually(text) {
+        try {
+            console.log('Extraindo dados manualmente do texto:', text);
+
+            // Tenta diferentes abordagens de limpeza
+            let cleanedText = text;
+
+            // Remove chaves externas se existirem
+            cleanedText = cleanedText.replace(/^\{|\}$/g, '');
+
+            // Remove aspas duplas desnecessárias
+            cleanedText = cleanedText.replace(/"/g, '');
+
+            console.log('Texto limpo:', cleanedText);
+
+            // Divide por vírgulas e processa cada par chave-valor
+            const pairs = cleanedText.split(',').map(pair => pair.trim());
+            const extractedData = {};
+
+            pairs.forEach(pair => {
+                if (pair.includes(':')) {
+                    const colonIndex = pair.indexOf(':');
+                    const key = pair.substring(0, colonIndex).trim();
+                    const value = pair.substring(colonIndex + 1).trim();
+
+                    if (key && value) {
+                        // Remove possíveis caracteres especiais do valor
+                        const cleanValue = value.replace(/^['"]|['"]$/g, '');
+                        extractedData[key] = cleanValue;
+                        console.log(`Extraído: ${key} = ${cleanValue}`);
+                    }
+                }
+            });
+
+            console.log('Dados extraídos manualmente:', extractedData);
+
+            // Se não conseguiu extrair dados, tenta uma abordagem mais agressiva
+            if (Object.keys(extractedData).length === 0) {
+                console.log('Tentando extração agressiva...');
+                return extractDataAggressively(text);
+            }
+
+            return extractedData;
+        } catch (error) {
+            console.error('Erro na extração manual:', error);
+            return null;
+        }
+    }
+
+    // Função para extração agressiva de dados quando métodos normais falham
+    function extractDataAggressively(text) {
+        try {
+            console.log('Extração agressiva do texto:', text);
+
+            // Remove tudo que não seja texto, números, vírgulas e dois pontos
+            const cleanedText = text.replace(/[^\w\s,:]/g, '');
+            console.log('Texto limpo agressivamente:', cleanedText);
+
+            // Procura por padrões de chave:valor
+            const keyValuePattern = /(\w+):\s*([^,]+)/g;
+            const extractedData = {};
+            let match;
+
+            while ((match = keyValuePattern.exec(cleanedText)) !== null) {
+                const key = match[1].trim();
+                const value = match[2].trim();
+                if (key && value) {
+                    extractedData[key] = value;
+                    console.log(`Extraído agressivamente: ${key} = ${value}`);
+                }
+            }
+
+            console.log('Dados extraídos agressivamente:', extractedData);
+            return extractedData;
+        } catch (error) {
+            console.error('Erro na extração agressiva:', error);
+            return null;
+        }
+    }
+
+
 
     // Função para remover mensagem do DOM
     function removeMessageFromDOM(messageElement) {
@@ -2579,168 +2556,59 @@
         }
     }
 
-    // Função principal para coletar dados do personagem
-    async function collectCharacterData(showNotifications = true) {
+    // Função para sincronizar dados do personagem com atributos customizados
+    async function syncCharacterData(attributes) {
         try {
-            // Verificações prévias
-            if (!isRoll20Session()) {
-                throw new Error('Esta funcionalidade só funciona em sessões do Roll20');
-            }
-
-            if (!hasCharacterSelected()) {
-                throw new Error('Nenhum personagem selecionado. Configure o nome do personagem primeiro.');
-            }
-
-            if (showNotifications) {
-                showSuccessNotification('Iniciando coleta de dados do personagem...', 2000);
-            } else {
-                console.log('Iniciando coleta automática de dados do personagem...');
-            }
-
             // 1. Gera chave aleatória
             const dataKey = generateRandomKey();
 
-            // 2. Ativa TTM (apenas se não estiver ativo)
-            await ensureTTMActive();
+            // 2. Envia comando de coleta com atributos customizados em formato JSON
+            const characterName = getCharacterNameForMacro();
+            const jsonData = {};
 
-            // 3. Envia comando de coleta
-            sendDataCollectionCommand(dataKey);
+            // Cria objeto JSON com os atributos
+            Object.keys(attributes).forEach(key => {
+                const fieldName = attributes[key];
+                jsonData[key] = `@{${characterName}|${fieldName}}`;
+            });
 
-            // 4. Aguarda e encontra a mensagem
+            const jsonString = JSON.stringify(jsonData);
+            const command = `${jsonString} [${dataKey}]`;
+
+            console.log('Comando de sincronização JSON enviado:', command);
+            console.log('Atributos configurados:', attributes);
+
+            sendToChat(command);
+
+            // 3. Aguarda e encontra a mensagem
             const messageElement = await waitForDataMessage(dataKey);
 
-            // 5. Extrai os dados
-            const characterData = extractDataFromMessage(messageElement, dataKey);
+            // 4. Extrai os dados JSON
+            const characterData = extractJSONDataFromMessage(messageElement, dataKey);
 
             if (characterData) {
-                // 6. Remove a mensagem do DOM
+                // 5. Remove a mensagem do DOM
                 removeMessageFromDOM(messageElement);
 
-                // 7. Desativa TTM (apenas se estava ativo antes)
-                await ensureTTMInactive();
+                // 6. Salva os dados no localStorage com as chaves corretas
+                Object.keys(characterData).forEach(key => {
+                    const value = characterData[key];
+                    if (value !== undefined && value !== null) {
+                        localStorage.setItem(key, value);
+                        console.log(`Salvando ${key}: ${value}`);
+                    }
+                });
 
-                // 8. Atualiza os dados na hotbar
-                updateHotbarWithCharacterData(characterData);
-
-                if (showNotifications) {
-                    showSuccessNotification('Dados do personagem coletados com sucesso!', 3000);
-                } else {
-                    console.log('Dados do personagem coletados com sucesso!');
-                }
                 return characterData;
             } else {
-                throw new Error('Falha ao extrair dados da mensagem');
+                throw new Error('Falha ao extrair dados JSON da mensagem');
             }
 
         } catch (error) {
-            console.error('Erro na coleta de dados:', error);
-            if (showNotifications) {
-                showErrorNotification(`Erro na coleta de dados: ${error.message}`, 5000);
-            }
-
-            // Garante que TTM seja restaurado ao estado anterior em caso de erro
-            await ensureTTMInactive();
-            return null;
+            console.error('Erro na sincronização de dados:', error);
+            throw error;
         }
     }
-
-    // Função para atualizar a hotbar com os dados coletados
-    function updateHotbarWithCharacterData(data) {
-        console.log('Dados recebidos para atualização:', data);
-
-        // Atualiza o nível do personagem
-        if (data.charnivel) {
-            console.log('Valor bruto do charnivel:', data.charnivel);
-            const level = parseInt(data.charnivel);
-            console.log('Nível convertido para inteiro:', level);
-
-            if (!isNaN(level) && level >= 1 && level <= 20) {
-                saveCharLevel(level.toString());
-
-                // Atualiza o display do nível na hotbar
-                const characterLevelElement = document.querySelector('#character-level');
-                if (characterLevelElement) {
-                    characterLevelElement.textContent = `Nível ${level}`;
-                }
-
-                console.log(`Nível atualizado para: ${level}`);
-            } else {
-                console.log('Nível inválido ou fora do range 1-20:', level);
-            }
-        } else {
-            console.log('Nenhum valor de charnivel encontrado nos dados');
-        }
-
-        // Atualiza o nome do personagem
-        if (data.menace_name) {
-            localStorage.setItem(CHAR_NAME_KEY, data.menace_name);
-
-            // Atualiza o display do nome na hotbar
-            const characterNameElement = document.querySelector('#character-name');
-            if (characterNameElement) {
-                characterNameElement.textContent = data.menace_name;
-            }
-
-            console.log(`Nome atualizado para: ${data.menace_name}`);
-        }
-
-        // Log de outros dados úteis para debug
-        if (data.tlevel) {
-            console.log(`Classe: ${data.tlevel}`);
-        }
-        if (data.trace) {
-            console.log(`Raça: ${data.trace}`);
-        }
-        if (data.torigin) {
-            console.log(`Origem: ${data.torigin}`);
-        }
-        if (data.divindade) {
-            console.log(`Divindade: ${data.divindade}`);
-        }
-        if (data.vidatotal) {
-            console.log(`Vida máxima: ${data.vidatotal}`);
-        }
-        if (data.vida) {
-            console.log(`Vida atual: ${data.vida}`);
-        }
-        if (data.manatotal) {
-            console.log(`Mana máxima: ${data.manatotal}`);
-        }
-        if (data.mana) {
-            console.log(`Mana atual: ${data.mana}`);
-        }
-        if (data.defesatotal) {
-            console.log(`Defesa total: ${data.defesatotal}`);
-        }
-        if (data.menace_nd) {
-            console.log(`ND: ${data.menace_nd}`);
-        }
-        if (data.menace_init) {
-            console.log(`Iniciativa: ${data.menace_init}`);
-        }
-        if (data.menace_percep) {
-            console.log(`Percepção: ${data.menace_percep}`);
-        }
-        if (data.for_mod) {
-            console.log(`Força (mod): ${data.for_mod}`);
-        }
-        if (data.des_mod) {
-            console.log(`Destreza (mod): ${data.des_mod}`);
-        }
-        if (data.con_mod) {
-            console.log(`Constituição (mod): ${data.con_mod}`);
-        }
-        if (data.int_mod) {
-            console.log(`Inteligência (mod): ${data.int_mod}`);
-        }
-        if (data.sab_mod) {
-            console.log(`Sabedoria (mod): ${data.sab_mod}`);
-        }
-        if (data.car_mod) {
-            console.log(`Carisma (mod): ${data.car_mod}`);
-        }
-    }
-
 
     // Função para criar o popup de skills
     function createSkillsPopup() {
@@ -6885,10 +6753,13 @@
         modal.style.borderRadius = '12px';
         modal.style.padding = '20px';
         modal.style.zIndex = '10003';
-        modal.style.maxWidth = '500px';
+        modal.style.minWidth = '500px';
+        modal.style.maxWidth = '700px';
+        modal.style.width = 'auto';
         modal.style.maxHeight = '80vh';
         modal.style.overflowY = 'auto';
         modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+        modal.style.boxSizing = 'border-box';
 
         // Cabeçalho
         const header = document.createElement('div');
@@ -6919,27 +6790,223 @@
         }); header.appendChild(title);
         header.appendChild(closeBtn.render());
 
-        // Conteúdo simples
+        // Conteúdo com três seções
         const content = document.createElement('div');
         content.style.color = '#ecf0f1';
-        content.innerHTML = `
-                <div style="margin-bottom: 15px;">
-                    <h3 style="color: #ffb86c; margin-bottom: 10px;">Informações do Script</h3>
-                    <p><strong>Versão:</strong> ${getGitVersion()}</p>
-                    <p><strong>Autor:</strong> Daniel Marinho Goncalves</p>
-                    <p><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: center;">
-                        <button id="clear-all-data-btn" style="width: 100%; padding: 12px 20px; border: 1px solid #ff6e6e; border-radius: 6px; background: transparent; color: #ff6e6e; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s ease;" title="Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página">Limpar Dados</button>
-                    </div>
-                </div>
-            `;
 
-        // Evento do botão único
-        const clearButton = content.querySelector('#clear-all-data-btn');
+        // Seção 1: Informações do Script
+        const scriptInfoSection = document.createElement('div');
+        scriptInfoSection.style.marginBottom = '25px';
+        scriptInfoSection.style.padding = '15px';
+        scriptInfoSection.style.background = 'rgba(255,184,108,0.05)';
+        scriptInfoSection.style.borderRadius = '8px';
+        scriptInfoSection.style.border = '1px solid rgba(255,184,108,0.2)';
+        scriptInfoSection.style.boxSizing = 'border-box';
+        scriptInfoSection.style.width = '100%';
 
-        // Efeitos de hover
+        const scriptInfoTitle = document.createElement('h3');
+        scriptInfoTitle.textContent = '📋 Informações do Script';
+        scriptInfoTitle.style.color = '#ffb86c';
+        scriptInfoTitle.style.margin = '0 0 15px 0';
+        scriptInfoTitle.style.fontSize = '16px';
+        scriptInfoTitle.style.fontWeight = 'bold';
+
+        scriptInfoSection.appendChild(scriptInfoTitle);
+        scriptInfoSection.innerHTML += `
+            <p style="margin: 8px 0;"><strong>Versão:</strong> ${getGitVersion()}</p>
+            <p style="margin: 8px 0;"><strong>Autor:</strong> Daniel Marinho Goncalves</p>
+            <p style="margin: 8px 0;"><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+        `;
+
+        // Seção 2: Sincronização de Dados
+        const syncSection = document.createElement('div');
+        syncSection.style.marginBottom = '25px';
+        syncSection.style.padding = '15px';
+        syncSection.style.background = 'rgba(110,198,255,0.05)';
+        syncSection.style.borderRadius = '8px';
+        syncSection.style.border = '1px solid rgba(110,198,255,0.2)';
+        syncSection.style.boxSizing = 'border-box';
+        syncSection.style.width = '100%';
+
+        const syncTitle = document.createElement('h3');
+        syncTitle.textContent = '🔄 Sincronização de Dados da Ficha';
+        syncTitle.style.color = '#6ec6ff';
+        syncTitle.style.margin = '0 0 15px 0';
+        syncTitle.style.fontSize = '16px';
+        syncTitle.style.fontWeight = 'bold';
+
+        syncSection.appendChild(syncTitle);
+
+        // Campos de configuração dos atributos
+        const attributeFields = [
+            { key: 'char_name_attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
+            { key: 'char_race_attr', label: 'Raça', defaultValue: 'trace' },
+            { key: 'char_class_attr', label: 'Classe', defaultValue: 'tlevel' },
+            { key: 'char_level_attr', label: 'Nível', defaultValue: 'charnivel' },
+            { key: 'char_hp_total_attr', label: 'Vida Total', defaultValue: 'vidatotal' },
+            { key: 'char_hp_current_attr', label: 'Vida Atual', defaultValue: 'vida' },
+            { key: 'char_mp_total_attr', label: 'Mana Total', defaultValue: 'manatotal' },
+            { key: 'char_mp_current_attr', label: 'Mana Atual', defaultValue: 'mana' },
+            { key: 'char_ac_attr', label: 'Armadura', defaultValue: 'defesatotal' }
+        ];
+
+        const fieldsContainer = document.createElement('div');
+        fieldsContainer.style.marginBottom = '15px';
+        fieldsContainer.style.width = '100%';
+        fieldsContainer.style.boxSizing = 'border-box';
+
+        attributeFields.forEach(field => {
+            const fieldContainer = document.createElement('div');
+            fieldContainer.style.marginBottom = '12px';
+            fieldContainer.style.width = '100%';
+            fieldContainer.style.boxSizing = 'border-box';
+
+            const label = document.createElement('label');
+            label.textContent = field.label;
+            label.style.display = 'block';
+            label.style.marginBottom = '5px';
+            label.style.fontSize = '14px';
+            label.style.fontWeight = 'bold';
+            label.style.color = '#ecf0f1';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = field.key;
+            input.value = localStorage.getItem(field.key) || field.defaultValue;
+            input.style.width = '100%';
+            input.style.padding = '8px 12px';
+            input.style.border = '1px solid rgba(110,198,255,0.3)';
+            input.style.borderRadius = '6px';
+            input.style.background = 'rgba(30,30,40,0.8)';
+            input.style.color = '#ecf0f1';
+            input.style.fontSize = '13px';
+            input.style.boxSizing = 'border-box';
+
+            // Salvar valor quando mudar
+            input.addEventListener('change', () => {
+                localStorage.setItem(field.key, input.value);
+            });
+
+            // Label para mostrar valor atual
+            const currentValueLabel = document.createElement('div');
+            currentValueLabel.id = `${field.key}_current`;
+            currentValueLabel.style.fontSize = '11px';
+            currentValueLabel.style.color = '#888';
+            currentValueLabel.style.marginTop = '3px';
+            currentValueLabel.style.fontStyle = 'italic';
+
+            // Buscar valor atual do localStorage
+            const currentValue = localStorage.getItem(field.key.replace('_attr', ''));
+            if (currentValue) {
+                currentValueLabel.textContent = `Valor atual: ${currentValue}`;
+            } else {
+                currentValueLabel.textContent = 'Nenhum valor salvo';
+            }
+
+            fieldContainer.appendChild(label);
+            fieldContainer.appendChild(input);
+            fieldContainer.appendChild(currentValueLabel);
+            fieldsContainer.appendChild(fieldContainer);
+        });
+
+        syncSection.appendChild(fieldsContainer);
+
+        // Botão de sincronização
+        const syncButton = document.createElement('button');
+        syncButton.id = 'sync-data-btn';
+        syncButton.textContent = '🔄 Sincronizar Dados';
+        syncButton.style.width = '100%';
+        syncButton.style.padding = '12px 20px';
+        syncButton.style.border = '1px solid #6ec6ff';
+        syncButton.style.borderRadius = '6px';
+        syncButton.style.background = 'transparent';
+        syncButton.style.color = '#6ec6ff';
+        syncButton.style.cursor = 'pointer';
+        syncButton.style.fontSize = '14px';
+        syncButton.style.fontWeight = 'bold';
+        syncButton.style.transition = 'all 0.2s ease';
+        syncButton.style.position = 'relative';
+        syncButton.style.boxSizing = 'border-box';
+        syncButton.style.whiteSpace = 'nowrap';
+        syncButton.style.overflow = 'hidden';
+        syncButton.style.textOverflow = 'ellipsis';
+
+        // Configurar botão de sincronização (sem bloqueio TTM)
+        syncButton.disabled = false;
+        syncButton.style.opacity = '1';
+        syncButton.style.cursor = 'pointer';
+        syncButton.title = 'Sincroniza os dados da ficha com base nos atributos configurados acima';
+
+        syncSection.appendChild(syncButton);
+
+
+
+        // Seção 3: Limpar Cache
+        const cacheSection = document.createElement('div');
+        cacheSection.style.marginBottom = '15px';
+        cacheSection.style.padding = '15px';
+        cacheSection.style.background = 'rgba(255,110,110,0.05)';
+        cacheSection.style.borderRadius = '8px';
+        cacheSection.style.border = '1px solid rgba(255,110,110,0.2)';
+        cacheSection.style.boxSizing = 'border-box';
+        cacheSection.style.width = '100%';
+
+        const cacheTitle = document.createElement('h3');
+        cacheTitle.textContent = '🗑️ Limpar Cache da Hotbar';
+        cacheTitle.style.color = '#ff6e6e';
+        cacheTitle.style.margin = '0 0 15px 0';
+        cacheTitle.style.fontSize = '16px';
+        cacheTitle.style.fontWeight = 'bold';
+
+        cacheSection.appendChild(cacheTitle);
+
+        const clearButton = document.createElement('button');
+        clearButton.id = 'clear-all-data-btn';
+        clearButton.textContent = 'Limpar Todos os Dados';
+        clearButton.style.width = '100%';
+        clearButton.style.padding = '12px 20px';
+        clearButton.style.border = '1px solid #ff6e6e';
+        clearButton.style.borderRadius = '6px';
+        clearButton.style.background = 'transparent';
+        clearButton.style.color = '#ff6e6e';
+        clearButton.style.cursor = 'pointer';
+        clearButton.style.fontSize = '14px';
+        clearButton.style.fontWeight = 'bold';
+        clearButton.style.transition = 'all 0.2s ease';
+        clearButton.style.boxSizing = 'border-box';
+        clearButton.style.whiteSpace = 'nowrap';
+        clearButton.style.overflow = 'hidden';
+        clearButton.style.textOverflow = 'ellipsis';
+        clearButton.title = 'Remove todos os dados salvos (cache de imagens, efeitos ativos, configurações, etc.) e recarrega a página';
+
+        cacheSection.appendChild(clearButton);
+
+        // Adicionar seções ao conteúdo
+        content.appendChild(scriptInfoSection);
+        content.appendChild(syncSection);
+        content.appendChild(cacheSection);
+
+        // Eventos dos botões
+        // Efeitos de hover para botão de sincronização
+        syncButton.onmouseover = () => {
+            if (!syncButton.disabled) {
+                syncButton.style.background = 'rgba(110,198,255,0.1)';
+                syncButton.style.borderColor = '#8ed4ff';
+                syncButton.style.color = '#8ed4ff';
+                syncButton.style.transform = 'scale(1.02)';
+            }
+        };
+
+        syncButton.onmouseout = () => {
+            if (!syncButton.disabled) {
+                syncButton.style.background = 'transparent';
+                syncButton.style.borderColor = '#6ec6ff';
+                syncButton.style.color = '#6ec6ff';
+                syncButton.style.transform = 'scale(1)';
+            }
+        };
+
+        // Efeitos de hover para botão de limpar
         clearButton.onmouseover = () => {
             clearButton.style.background = 'rgba(255, 110, 110, 0.1)';
             clearButton.style.borderColor = '#ff8e8e';
@@ -6954,6 +7021,58 @@
             clearButton.style.transform = 'scale(1)';
         };
 
+        // Evento de clique do botão de sincronização
+        syncButton.onclick = async () => {
+            if (syncButton.disabled) return;
+
+            // Iniciar loading
+            syncButton.disabled = true;
+            syncButton.style.opacity = '0.7';
+            syncButton.style.cursor = 'not-allowed';
+            const originalText = syncButton.textContent;
+            syncButton.textContent = '⏳ Sincronizando...';
+
+            try {
+                // Coletar atributos configurados
+                const attributes = {};
+                attributeFields.forEach(field => {
+                    const input = document.getElementById(field.key);
+                    const attrName = field.key.replace('_attr', '');
+                    attributes[attrName] = input.value;
+                });
+
+                // Executar sincronização
+                await syncCharacterData(attributes);
+
+                // Atualizar labels de valores atuais
+                attributeFields.forEach(field => {
+                    const attrName = field.key.replace('_attr', '');
+                    const currentValue = localStorage.getItem(attrName);
+                    const currentValueLabel = document.getElementById(`${field.key}_current`);
+                    if (currentValue) {
+                        currentValueLabel.textContent = `Valor atual: ${currentValue}`;
+                        currentValueLabel.style.color = '#4caf50';
+                    } else {
+                        currentValueLabel.textContent = 'Nenhum valor salvo';
+                        currentValueLabel.style.color = '#888';
+                    }
+                });
+
+                createNotification('Sincronização concluída com sucesso!', 'success', 3000);
+
+            } catch (error) {
+                console.error('Erro na sincronização:', error);
+                createNotification(`Erro na sincronização: ${error.message}`, 'error', 5000);
+            } finally {
+                // Restaurar botão
+                syncButton.disabled = false;
+                syncButton.style.opacity = '1';
+                syncButton.style.cursor = 'pointer';
+                syncButton.textContent = originalText;
+            }
+        };
+
+        // Evento de clique do botão de limpar
         clearButton.onclick = () => {
             if (confirm('Tem certeza que deseja limpar todos os dados salvos? Esta ação irá remover o cache de imagens, efeitos ativos, configurações e outros dados. Esta ação não pode ser desfeita.')) {
                 // Limpar cache de imagens
@@ -10873,15 +10992,6 @@
                         if (hotbar.style.display === 'none') {
                             // Mostra a hotbar
                             hotbar.style.display = '';
-
-                            // Coleta dados automaticamente quando a hotbar é mostrada
-                            setTimeout(async () => {
-                                try {
-                                    await collectCharacterData(false); // Coleta silenciosa
-                                } catch (error) {
-                                    console.log('Erro na coleta automática de dados:', error);
-                                }
-                            }, 500); // Pequeno delay para garantir que a hotbar está visível
                         } else {
                             hotbar.style.display = 'none';
                         }
