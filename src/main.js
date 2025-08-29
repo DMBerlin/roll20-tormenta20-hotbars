@@ -1893,6 +1893,15 @@
         return name.replace(/['"]/g, '');
     }
 
+    // Funções para gerenciar nível do personagem
+    const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
+    function getCharLevel() {
+        return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
+    }
+    function saveCharLevel(level) {
+        localStorage.setItem(CHAR_LEVEL_KEY, level);
+    }
+
     function getFavorites() {
         try {
             const favorites = localStorage.getItem(FAVORITES_KEY);
@@ -2372,6 +2381,367 @@
             sendButton.click();
         }
     }
+
+    // Sistema de coleta de dados do Roll20
+
+    // Função para gerar uma chave aleatória única
+    function generateRandomKey() {
+        return 'DATA_' + Math.random().toString(36).substr(2, 9).toUpperCase() + '_' + Date.now().toString(36);
+    }
+
+    // Função para verificar se TTM está ativo
+    function isTTMActive() {
+        const notifier = document.querySelector('#textchat-notifier');
+        const isActive = notifier && notifier.style.display === 'block' && notifier.textContent.includes('Talking to Yourself');
+        console.log('TTM Status:', isActive ? 'Ativo' : 'Inativo');
+        return isActive;
+    }
+
+    // Função para ativar/desativar TTM (Talk to Myself)
+    function toggleTTM() {
+        sendToChat('/talktomyself');
+        // Pequeno delay para garantir que o comando seja processado
+        return new Promise(resolve => setTimeout(resolve, 100));
+    }
+
+    // Função para ativar TTM apenas se não estiver ativo
+    function ensureTTMActive() {
+        if (!isTTMActive()) {
+            console.log('Ativando TTM...');
+            return toggleTTM();
+        } else {
+            console.log('TTM já está ativo, mantendo...');
+            return Promise.resolve();
+        }
+    }
+
+    // Função para desativar TTM apenas se estiver ativo
+    function ensureTTMInactive() {
+        if (isTTMActive()) {
+            console.log('Desativando TTM...');
+            return toggleTTM();
+        } else {
+            console.log('TTM já está inativo, mantendo...');
+            return Promise.resolve();
+        }
+    }
+
+    // Schema de dados para coleta do personagem (Tormenta20)
+    const CHARACTER_DATA_SCHEMA = {
+        // Informações básicas
+        charnivel: 'Nível do personagem',
+        menace_name: 'Nome do personagem',
+        tlevel: 'Classe do personagem',
+        playername: 'Nome do jogador',
+        trace: 'Raça',
+        torigin: 'Origem',
+        divindade: 'Divindade',
+
+        // Atributos (modificadores)
+        for_mod: 'Modificador de Força',
+        des_mod: 'Modificador de Destreza',
+        con_mod: 'Modificador de Constituição',
+        int_mod: 'Modificador de Inteligência',
+        sab_mod: 'Modificador de Sabedoria',
+        car_mod: 'Modificador de Carisma',
+
+        // Atributos base
+        for: 'Força base',
+        des: 'Destreza base',
+        con: 'Constituição base',
+        int: 'Inteligência base',
+        sab: 'Sabedoria base',
+        car: 'Carisma base',
+
+        // Recursos
+        vidatotal: 'Vida máxima',
+        vida: 'Vida atual',
+        manatotal: 'Mana máxima',
+        mana: 'Mana atual',
+
+        // Defesas
+        defesatotal: 'Defesa total',
+        menace_defense: 'Defesa (menace)',
+        menace_fortitude: 'Fortitude',
+        menace_reflex: 'Reflexos',
+        menace_will: 'Vontade',
+
+        // Outros
+        menace_nd: 'Nível de Desafio',
+        menace_init: 'Iniciativa',
+        menace_percep: 'Percepção',
+        bonus_treino: 'Bônus de treino',
+        penalidades_armadura: 'Penalidades de armadura'
+    };
+
+    // Função para enviar comando de coleta de dados
+    function sendDataCollectionCommand(dataKey) {
+        const characterName = getCharacterNameForMacro();
+
+        // Cria o comando com todos os campos do schema
+        const fields = Object.keys(CHARACTER_DATA_SCHEMA);
+        const command = fields.map(field => `@{${characterName}|${field}}`).join(',') + ` [${dataKey}]`;
+
+        console.log('Comando enviado para coleta:', command);
+        console.log('Nome do personagem usado:', characterName);
+        console.log('Schema de dados:', CHARACTER_DATA_SCHEMA);
+
+        sendToChat(command);
+    }
+
+    // Função para aguardar e encontrar mensagem com a chave específica
+    function waitForDataMessage(dataKey, maxWaitTime = 5000) {
+        return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+
+            const checkForMessage = () => {
+                // Procura por mensagens no chat que contenham nossa chave
+                const chatMessages = document.querySelectorAll('#textchat .message');
+
+                for (let message of chatMessages) {
+                    const messageText = message.textContent || message.innerText;
+                    if (messageText.includes(dataKey)) {
+                        resolve(message);
+                        return;
+                    }
+                }
+
+                // Se ainda não encontrou e não excedeu o tempo limite
+                if (Date.now() - startTime < maxWaitTime) {
+                    setTimeout(checkForMessage, 100);
+                } else {
+                    reject(new Error('Timeout: Mensagem de dados não encontrada'));
+                }
+            };
+
+            checkForMessage();
+        });
+    }
+
+    // Função para verificar se estamos em uma sessão do Roll20
+    function isRoll20Session() {
+        return window.location.hostname.includes('roll20.net') &&
+            document.querySelector('#textchat-input') !== null;
+    }
+
+    // Função para verificar se temos um personagem selecionado
+    function hasCharacterSelected() {
+        const characterName = getCharacterNameForMacro();
+        console.log('Verificando personagem selecionado:', characterName);
+        return characterName && characterName !== 'Nome do Personagem';
+    }
+
+    // Função para extrair dados da mensagem
+    function extractDataFromMessage(messageElement, dataKey) {
+        try {
+            const messageText = messageElement.textContent || messageElement.innerText;
+
+            // Log da mensagem completa para debug
+            console.log('Mensagem completa recebida:', messageText);
+
+            // Remove a chave da mensagem
+            const cleanText = messageText.replace(`[${dataKey}]`, '').trim();
+            console.log('Texto limpo (sem chave):', cleanText);
+
+            // Divide os valores por vírgula
+            const values = cleanText.split(',').map(v => v.trim());
+            console.log('Valores separados por vírgula:', values);
+
+            // Extrai os dados baseado no schema
+            const fields = Object.keys(CHARACTER_DATA_SCHEMA);
+            const extractedData = {};
+
+            fields.forEach((field, index) => {
+                extractedData[field] = values[index] || '';
+            });
+
+            // Log do schema completo com valores capturados
+            console.log('=== SCHEMA COMPLETO COM VALORES ===');
+            Object.keys(CHARACTER_DATA_SCHEMA).forEach(field => {
+                console.log(`${CHARACTER_DATA_SCHEMA[field]} (${field}):`, extractedData[field]);
+            });
+            console.log('===================================');
+
+            // Log para debug
+            console.log('Dados extraídos:', extractedData);
+
+            return extractedData;
+        } catch (error) {
+            console.error('Erro ao extrair dados da mensagem:', error);
+            return null;
+        }
+    }
+
+    // Função para remover mensagem do DOM
+    function removeMessageFromDOM(messageElement) {
+        if (messageElement && messageElement.parentNode) {
+            messageElement.parentNode.removeChild(messageElement);
+        }
+    }
+
+    // Função principal para coletar dados do personagem
+    async function collectCharacterData(showNotifications = true) {
+        try {
+            // Verificações prévias
+            if (!isRoll20Session()) {
+                throw new Error('Esta funcionalidade só funciona em sessões do Roll20');
+            }
+
+            if (!hasCharacterSelected()) {
+                throw new Error('Nenhum personagem selecionado. Configure o nome do personagem primeiro.');
+            }
+
+            if (showNotifications) {
+                showSuccessNotification('Iniciando coleta de dados do personagem...', 2000);
+            } else {
+                console.log('Iniciando coleta automática de dados do personagem...');
+            }
+
+            // 1. Gera chave aleatória
+            const dataKey = generateRandomKey();
+
+            // 2. Ativa TTM (apenas se não estiver ativo)
+            await ensureTTMActive();
+
+            // 3. Envia comando de coleta
+            sendDataCollectionCommand(dataKey);
+
+            // 4. Aguarda e encontra a mensagem
+            const messageElement = await waitForDataMessage(dataKey);
+
+            // 5. Extrai os dados
+            const characterData = extractDataFromMessage(messageElement, dataKey);
+
+            if (characterData) {
+                // 6. Remove a mensagem do DOM
+                removeMessageFromDOM(messageElement);
+
+                // 7. Desativa TTM (apenas se estava ativo antes)
+                await ensureTTMInactive();
+
+                // 8. Atualiza os dados na hotbar
+                updateHotbarWithCharacterData(characterData);
+
+                if (showNotifications) {
+                    showSuccessNotification('Dados do personagem coletados com sucesso!', 3000);
+                } else {
+                    console.log('Dados do personagem coletados com sucesso!');
+                }
+                return characterData;
+            } else {
+                throw new Error('Falha ao extrair dados da mensagem');
+            }
+
+        } catch (error) {
+            console.error('Erro na coleta de dados:', error);
+            if (showNotifications) {
+                showErrorNotification(`Erro na coleta de dados: ${error.message}`, 5000);
+            }
+
+            // Garante que TTM seja restaurado ao estado anterior em caso de erro
+            await ensureTTMInactive();
+            return null;
+        }
+    }
+
+    // Função para atualizar a hotbar com os dados coletados
+    function updateHotbarWithCharacterData(data) {
+        console.log('Dados recebidos para atualização:', data);
+
+        // Atualiza o nível do personagem
+        if (data.charnivel) {
+            console.log('Valor bruto do charnivel:', data.charnivel);
+            const level = parseInt(data.charnivel);
+            console.log('Nível convertido para inteiro:', level);
+
+            if (!isNaN(level) && level >= 1 && level <= 20) {
+                saveCharLevel(level.toString());
+
+                // Atualiza o display do nível na hotbar
+                const characterLevelElement = document.querySelector('#character-level');
+                if (characterLevelElement) {
+                    characterLevelElement.textContent = `Nível ${level}`;
+                }
+
+                console.log(`Nível atualizado para: ${level}`);
+            } else {
+                console.log('Nível inválido ou fora do range 1-20:', level);
+            }
+        } else {
+            console.log('Nenhum valor de charnivel encontrado nos dados');
+        }
+
+        // Atualiza o nome do personagem
+        if (data.menace_name) {
+            localStorage.setItem(CHAR_NAME_KEY, data.menace_name);
+
+            // Atualiza o display do nome na hotbar
+            const characterNameElement = document.querySelector('#character-name');
+            if (characterNameElement) {
+                characterNameElement.textContent = data.menace_name;
+            }
+
+            console.log(`Nome atualizado para: ${data.menace_name}`);
+        }
+
+        // Log de outros dados úteis para debug
+        if (data.tlevel) {
+            console.log(`Classe: ${data.tlevel}`);
+        }
+        if (data.trace) {
+            console.log(`Raça: ${data.trace}`);
+        }
+        if (data.torigin) {
+            console.log(`Origem: ${data.torigin}`);
+        }
+        if (data.divindade) {
+            console.log(`Divindade: ${data.divindade}`);
+        }
+        if (data.vidatotal) {
+            console.log(`Vida máxima: ${data.vidatotal}`);
+        }
+        if (data.vida) {
+            console.log(`Vida atual: ${data.vida}`);
+        }
+        if (data.manatotal) {
+            console.log(`Mana máxima: ${data.manatotal}`);
+        }
+        if (data.mana) {
+            console.log(`Mana atual: ${data.mana}`);
+        }
+        if (data.defesatotal) {
+            console.log(`Defesa total: ${data.defesatotal}`);
+        }
+        if (data.menace_nd) {
+            console.log(`ND: ${data.menace_nd}`);
+        }
+        if (data.menace_init) {
+            console.log(`Iniciativa: ${data.menace_init}`);
+        }
+        if (data.menace_percep) {
+            console.log(`Percepção: ${data.menace_percep}`);
+        }
+        if (data.for_mod) {
+            console.log(`Força (mod): ${data.for_mod}`);
+        }
+        if (data.des_mod) {
+            console.log(`Destreza (mod): ${data.des_mod}`);
+        }
+        if (data.con_mod) {
+            console.log(`Constituição (mod): ${data.con_mod}`);
+        }
+        if (data.int_mod) {
+            console.log(`Inteligência (mod): ${data.int_mod}`);
+        }
+        if (data.sab_mod) {
+            console.log(`Sabedoria (mod): ${data.sab_mod}`);
+        }
+        if (data.car_mod) {
+            console.log(`Carisma (mod): ${data.car_mod}`);
+        }
+    }
+
+
     // Função para criar o popup de skills
     function createSkillsPopup() {
         // Remove popup existente se houver
@@ -3225,7 +3595,7 @@
         // Descrição completa
         const description = document.createElement('div');
         const descValue = spell.system?.description?.value || 'Descrição não disponível';
-        
+
         // Convert newlines to proper HTML structure
         const formattedDescription = descValue
             .split('\n\n') // Split by double newlines to get paragraphs
@@ -3237,13 +3607,13 @@
                 return `<p>${formattedParagraph}</p>`;
             })
             .join('');
-        
+
         description.innerHTML = formattedDescription;
         description.style.color = '#fff';
         description.style.fontSize = '16px';
         description.style.lineHeight = '1.6';
         description.style.marginBottom = '16px';
-        
+
         // Style paragraphs within the description
         const paragraphs = description.querySelectorAll('p');
         paragraphs.forEach(p => {
@@ -6217,20 +6587,20 @@
                     return `<p>${formattedParagraph}</p>`;
                 })
                 .join('');
-            
+
             efeitoText.innerHTML = formattedEffect;
             efeitoText.style.color = '#ecf0f1';
             efeitoText.style.fontSize = '15px';
             efeitoText.style.fontWeight = 'bold';
             efeitoText.style.lineHeight = '1.4';
-            
+
             // Style paragraphs within the effect
             const paragraphs = efeitoText.querySelectorAll('p');
             paragraphs.forEach(p => {
                 p.style.margin = '0 0 8px 0';
                 p.style.padding = '0';
             });
-            
+
             efeitoSection.appendChild(efeitoText);
             modal.appendChild(efeitoSection);
         }
@@ -6258,19 +6628,19 @@
                     return `<p>${formattedParagraph}</p>`;
                 })
                 .join('');
-            
+
             descText.innerHTML = formattedDescription;
             descText.style.color = '#ecf0f1';
             descText.style.fontSize = '14px';
             descText.style.lineHeight = '1.5';
-            
+
             // Style paragraphs within the description
             const paragraphs = descText.querySelectorAll('p');
             paragraphs.forEach(p => {
                 p.style.margin = '0 0 8px 0';
                 p.style.padding = '0';
             });
-            
+
             descSection.appendChild(descText);
             modal.appendChild(descSection);
         }
@@ -9094,19 +9464,13 @@
         characterInfo.style.gap = '2px';
 
         // --- NOVO: Buscar nome e nível do localStorage ou permitir configuração manual ---
-        const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
-        function getCharLevel() {
-            return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
-        }
         function saveCharName(name) {
             localStorage.setItem(CHAR_NAME_KEY, name);
-        }
-        function saveCharLevel(level) {
-            localStorage.setItem(CHAR_LEVEL_KEY, level);
         }
 
         // Nome editável
         const characterName = document.createElement('div');
+        characterName.id = 'character-name';
         characterName.textContent = getCharacterName();
         characterName.style.color = '#ecf0f1';
         characterName.style.fontSize = '14px';
@@ -9125,6 +9489,7 @@
 
         // Nível editável
         const characterLevel = document.createElement('div');
+        characterLevel.id = 'character-level';
         characterLevel.textContent = `Nível ${getCharLevel()}`;
         characterLevel.style.color = '#6ec6ff';
         characterLevel.style.fontSize = '12px';
@@ -10506,7 +10871,17 @@
                     const hotbar = document.getElementById('roll20-hotbar');
                     if (hotbar) {
                         if (hotbar.style.display === 'none') {
+                            // Mostra a hotbar
                             hotbar.style.display = '';
+
+                            // Coleta dados automaticamente quando a hotbar é mostrada
+                            setTimeout(async () => {
+                                try {
+                                    await collectCharacterData(false); // Coleta silenciosa
+                                } catch (error) {
+                                    console.log('Erro na coleta automática de dados:', error);
+                                }
+                            }, 500); // Pequeno delay para garantir que a hotbar está visível
                         } else {
                             hotbar.style.display = 'none';
                         }
