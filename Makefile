@@ -14,4 +14,4 @@ build:
 	pnpm build
 
 preview:
-	pnpm lint && pnpm build && pnpm dev
+	pnpm update-version && pnpm lint && pnpm build && pnpm dev

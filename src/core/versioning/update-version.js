@@ -4,6 +4,17 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
 
+// Função para obter a branch atual
+function getCurrentBranch() {
+  try {
+    const branch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+    return branch;
+  } catch (error) {
+    console.error('Erro ao obter a branch atual:', error.message);
+    return null;
+  }
+}
+
 // Função para obter a última tag Git
 function getLatestGitTag() {
   try {
@@ -15,28 +26,22 @@ function getLatestGitTag() {
   }
 }
 
-// Função para atualizar a tag @version do Tampermonkey
-function updateTampermonkeyVersion(filePath, newVersion) {
-  try {
-    let content = fs.readFileSync(filePath, 'utf8');
+// Função para gerar timestamp
+function generateTimestamp() {
+  const now = new Date();
+  return now.getTime().toString();
+}
 
-    // Atualizar a tag @version do Tampermonkey (remover o 'v' do início se existir)
-    const versionWithoutV = newVersion.startsWith('v') ? newVersion.substring(1) : newVersion;
-    const versionRegex = /\/\/ @version\s+([^\s]+)/;
-
-    if (versionRegex.test(content)) {
-      content = content.replace(versionRegex, `// @version      ${versionWithoutV}`);
-      fs.writeFileSync(filePath, content, 'utf8');
-      console.log(`✅ Tag @version do Tampermonkey atualizada para ${versionWithoutV} em ${filePath}`);
-      return true;
-    } else {
-      console.error('❌ Não foi possível encontrar a tag @version do Tampermonkey no arquivo');
-      return false;
-    }
-  } catch (error) {
-    console.error('❌ Erro ao atualizar a tag @version do Tampermonkey:', error.message);
-    return false;
+// Função para formatar versão baseada na branch
+function formatVersion(baseVersion, branch) {
+  const versionWithoutV = baseVersion.startsWith('v') ? baseVersion.substring(1) : baseVersion;
+  
+  if (branch === 'develop') {
+    const timestamp = generateTimestamp();
+    return `${versionWithoutV}-${timestamp}`;
   }
+  
+  return versionWithoutV;
 }
 
 // Função para atualizar a versão no arquivo main.js
@@ -88,6 +93,15 @@ function main() {
     process.exit(1);
   }
 
+  // Obter a branch atual
+  const currentBranch = getCurrentBranch();
+  if (!currentBranch) {
+    console.error('❌ Não foi possível obter a branch atual');
+    process.exit(1);
+  }
+
+  console.log(`🌿 Branch atual: ${currentBranch}`);
+
   // Obter a última tag Git
   const latestTag = getLatestGitTag();
   if (!latestTag) {
@@ -97,16 +111,17 @@ function main() {
 
   console.log(`🏷️  Última tag Git encontrada: ${latestTag}`);
 
-  // Atualizar a tag @version do Tampermonkey
-  const tampermonkeySuccess = updateTampermonkeyVersion(scriptPath, latestTag);
+  // Formatar versão baseada na branch
+  const formattedVersion = formatVersion(latestTag, currentBranch);
+  console.log(`📦 Versão formatada: ${formattedVersion}`);
 
   // Atualizar o arquivo main.js (constante SCRIPT_VERSION)
-  const mainJsSuccess = updateVersionInFile(scriptPath, latestTag);
+  const mainJsSuccess = updateVersionInFile(scriptPath, formattedVersion);
 
   // Atualizar o package.json
-  const packageJsonSuccess = updatePackageJsonVersion(latestTag);
+  const packageJsonSuccess = updatePackageJsonVersion(formattedVersion);
 
-  if (tampermonkeySuccess && mainJsSuccess && packageJsonSuccess) {
+  if (mainJsSuccess && packageJsonSuccess) {
     console.log('🎉 Atualização de versão concluída com sucesso!');
   } else {
     console.error('❌ Falha na atualização de versão');
@@ -119,4 +134,11 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { getLatestGitTag, updateVersionInFile, updatePackageJsonVersion, updateTampermonkeyVersion }; 
+module.exports = { 
+  getCurrentBranch, 
+  getLatestGitTag, 
+  updateVersionInFile, 
+  updatePackageJsonVersion,
+  formatVersion,
+  generateTimestamp
+}; 
