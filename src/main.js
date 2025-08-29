@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.43135'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.13691'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1891,6 +1891,9 @@
 
     // Função global para obter o nome do personagem
     function getCharacterName() {
+        // Primeiro tenta buscar valor sincronizado, depois valor padrão
+        const syncedName = localStorage.getItem('roll20-hotbar-sync-char-name');
+        if (syncedName) return syncedName;
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
     }
 
@@ -1910,6 +1913,9 @@
     // Funções para gerenciar nível do personagem
     const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
     function getCharLevel() {
+        // Primeiro tenta buscar valor sincronizado, depois valor padrão
+        const syncedLevel = localStorage.getItem('roll20-hotbar-sync-char-level');
+        if (syncedLevel) return syncedLevel;
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
@@ -2606,8 +2612,10 @@
                 Object.keys(characterData).forEach(key => {
                     const value = characterData[key];
                     if (value !== undefined && value !== null) {
-                        localStorage.setItem(key, value);
-                        console.log(`Salvando ${key}: ${value}`);
+                        // Usar chaves específicas para valores capturados, não sobrescrever configurações
+                        const syncKey = `roll20-hotbar-sync-${key}`;
+                        localStorage.setItem(syncKey, value);
+                        console.log(`Salvando ${syncKey}: ${value}`);
                     }
                 });
 
@@ -6974,8 +6982,9 @@
             currentValueLabel.style.marginTop = '3px';
             currentValueLabel.style.fontStyle = 'italic';
 
-            // Buscar valor atual do localStorage
-            const currentValue = localStorage.getItem(field.key.replace('_attr', ''));
+            // Buscar valor atual do localStorage (valor sincronizado)
+            const attrName = field.key.replace('_attr', '');
+            const currentValue = localStorage.getItem(`roll20-hotbar-sync-${attrName}`);
             if (currentValue) {
                 currentValueLabel.textContent = `Valor atual: ${currentValue}`;
             } else {
@@ -7126,7 +7135,7 @@
                 // Atualizar labels de valores atuais
                 attributeFields.forEach(field => {
                     const attrName = field.key.replace('_attr', '');
-                    const currentValue = localStorage.getItem(attrName);
+                    const currentValue = localStorage.getItem(`roll20-hotbar-sync-${attrName}`);
                     const currentValueLabel = document.getElementById(`${field.key}_current`);
                     if (currentValue) {
                         currentValueLabel.textContent = `Valor atual: ${currentValue}`;
@@ -7155,7 +7164,7 @@
         function clearHotbarData() {
             // Limpar todas as chaves que começam com o prefixo do hotbar
             const keysToRemove = [];
-            
+
             // Percorrer todas as chaves do localStorage
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
