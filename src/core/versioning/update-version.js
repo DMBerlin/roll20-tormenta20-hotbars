@@ -29,18 +29,19 @@ function getLatestGitTag() {
 // Função para gerar timestamp
 function generateTimestamp() {
   const now = new Date();
-  return now.getTime().toString();
+  // Usar apenas os últimos 5 dígitos do timestamp para manter compatibilidade
+  return (now.getTime() % 100000).toString();
 }
 
 // Função para formatar versão baseada na branch
 function formatVersion(baseVersion, branch) {
   const versionWithoutV = baseVersion.startsWith('v') ? baseVersion.substring(1) : baseVersion;
-
+  
   if (branch === 'develop') {
     const timestamp = generateTimestamp();
     return `${versionWithoutV}.${timestamp}`;
   }
-
+  
   return versionWithoutV;
 }
 
