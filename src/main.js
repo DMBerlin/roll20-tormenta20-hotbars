@@ -2649,9 +2649,9 @@
         console.log('Dados recebidos para atualização:', data);
 
         // Atualiza o nível do personagem
-        if (data.charnivel) {
-            console.log('Valor bruto do charnivel:', data.charnivel);
-            const level = parseInt(data.charnivel);
+        if (data.menace_nd) {
+            console.log('Valor bruto do menace_nd:', data.menace_nd);
+            const level = parseInt(data.menace_nd);
             console.log('Nível convertido para inteiro:', level);
 
             if (!isNaN(level) && level >= 1 && level <= 20) {
@@ -2668,7 +2668,7 @@
                 console.log('Nível inválido ou fora do range 1-20:', level);
             }
         } else {
-            console.log('Nenhum valor de charnivel encontrado nos dados');
+            console.log('Nenhum valor de menace_nd encontrado nos dados');
         }
 
         // Atualiza o nome do personagem
