@@ -162,8 +162,11 @@ async function build() {
       ],
       icons: {
         "16": "icon16.png",
+        "32": "icon32.png",
         "48": "icon48.png",
-        "128": "icon128.png"
+        "128": "icon128.png",
+        "256": "icon256.png",
+        "512": "icon512.png"
       },
       action: {
         default_title: extensionName,
@@ -244,7 +247,7 @@ async function build() {
     console.log('🪟 popup.html criado');
 
     // Limpar ícones antigos se existirem
-    const oldIconFiles = ['icon16.ico', 'icon48.ico', 'icon128.ico', 'icon16.svg', 'icon48.svg', 'icon128.svg'];
+    const oldIconFiles = ['icon16.ico', 'icon32.ico', 'icon48.ico', 'icon128.ico', 'icon256.ico', 'icon512.ico', 'icon16.svg', 'icon32.svg', 'icon48.svg', 'icon128.svg', 'icon256.svg', 'icon512.svg'];
     oldIconFiles.forEach(iconFile => {
       const iconPath = path.join(packageDir, iconFile);
       if (fs.existsSync(iconPath)) {
@@ -308,7 +311,7 @@ ${extensionAuthor}
     console.log('  - manifest.json (configuração da extensão)');
     console.log('  - content.js (script principal minificado)');
     console.log('  - popup.html (interface do popup)');
-    console.log('  - icon16.png, icon48.png, icon128.png (ícones PNG)');
+    console.log('  - icon16.png, icon32.png, icon48.png, icon128.png, icon256.png, icon512.png (ícones PNG)');
     console.log('  - README.md (instruções de instalação)');
     console.log('');
     console.log('🚀 Para instalar:');

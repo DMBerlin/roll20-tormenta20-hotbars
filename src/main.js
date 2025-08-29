@@ -1887,9 +1887,7 @@
         return createNotification(message, 'warning', duration);
     }
 
-    function showErrorNotification(message, duration = 5000) {
-        return createNotification(message, 'error', duration);
-    }
+
 
     // Função global para obter o nome do personagem
     function getCharacterName() {
@@ -1898,6 +1896,12 @@
 
     // Função para obter o nome do personagem sem aspas para uso em macros
     function getCharacterNameForMacro() {
+        // Usar a chave de identificação se disponível, senão usar o nome padrão
+        const identificationKey = localStorage.getItem('char_identification_key');
+        if (identificationKey && identificationKey.trim() !== '') {
+            return identificationKey.trim();
+        }
+
         const name = getCharacterName();
         // Remove aspas simples e duplas do nome
         return name.replace(/['"]/g, '');
@@ -1908,9 +1912,7 @@
     function getCharLevel() {
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
-    function saveCharLevel(level) {
-        localStorage.setItem(CHAR_LEVEL_KEY, level);
-    }
+
 
     function getFavorites() {
         try {
@@ -6847,6 +6849,73 @@
 
         syncSection.appendChild(syncTitle);
 
+        // Campo de identificação do personagem (IMPORTANTE)
+        const charIdSection = document.createElement('div');
+        charIdSection.style.marginBottom = '20px';
+        charIdSection.style.padding = '12px';
+        charIdSection.style.background = 'rgba(255, 193, 7, 0.1)';
+        charIdSection.style.border = '1px solid rgba(255, 193, 7, 0.3)';
+        charIdSection.style.borderRadius = '6px';
+
+        const charIdTitle = document.createElement('h4');
+        charIdTitle.textContent = '🔑 Chave de Identificação do Personagem';
+        charIdTitle.style.color = '#FFC107';
+        charIdTitle.style.margin = '0 0 8px 0';
+        charIdTitle.style.fontSize = '14px';
+        charIdTitle.style.fontWeight = 'bold';
+
+        const charIdDescription = document.createElement('p');
+        charIdDescription.textContent = 'Nome do personagem como aparece na ficha do Roll20. Esta chave é essencial para que as macros @{nome_do_personagem|atributo} funcionem corretamente.';
+        charIdDescription.style.color = '#ecf0f1';
+        charIdDescription.style.fontSize = '12px';
+        charIdDescription.style.margin = '0 0 10px 0';
+        charIdDescription.style.lineHeight = '1.4';
+
+        const charIdInput = document.createElement('input');
+        charIdInput.type = 'text';
+        charIdInput.id = 'char_identification_key';
+        charIdInput.value = localStorage.getItem('char_identification_key') || getCharacterNameForMacro();
+        charIdInput.placeholder = 'Ex: Aragorn, Gandalf, etc.';
+        charIdInput.style.width = '100%';
+        charIdInput.style.padding = '10px 12px';
+        charIdInput.style.border = '2px solid rgba(255, 193, 7, 0.4)';
+        charIdInput.style.borderRadius = '6px';
+        charIdInput.style.background = 'rgba(30,30,40,0.9)';
+        charIdInput.style.color = '#ecf0f1';
+        charIdInput.style.fontSize = '13px';
+        charIdInput.style.boxSizing = 'border-box';
+        charIdInput.style.fontWeight = 'bold';
+
+        // Salvar valor quando mudar
+        charIdInput.addEventListener('change', () => {
+            localStorage.setItem('char_identification_key', charIdInput.value);
+            // Atualizar também o nome do personagem para macros
+            localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
+        });
+
+        charIdSection.appendChild(charIdTitle);
+        charIdSection.appendChild(charIdDescription);
+        charIdSection.appendChild(charIdInput);
+        syncSection.appendChild(charIdSection);
+
+        // Informação sobre os campos de atributos
+        const attributeInfoSection = document.createElement('div');
+        attributeInfoSection.style.marginBottom = '15px';
+        attributeInfoSection.style.padding = '10px';
+        attributeInfoSection.style.background = 'rgba(110, 198, 255, 0.05)';
+        attributeInfoSection.style.border = '1px solid rgba(110, 198, 255, 0.2)';
+        attributeInfoSection.style.borderRadius = '6px';
+
+        const attributeInfoText = document.createElement('p');
+        attributeInfoText.textContent = 'Os campos abaixo são as chaves de atributo da ficha que devem ser usadas para preencher os valores das propriedades na hotbar (vida, mana, nível, etc.). Configure cada campo com o nome exato do atributo como aparece na sua ficha do Roll20.';
+        attributeInfoText.style.color = '#ecf0f1';
+        attributeInfoText.style.fontSize = '12px';
+        attributeInfoText.style.margin = '0';
+        attributeInfoText.style.lineHeight = '1.4';
+
+        attributeInfoSection.appendChild(attributeInfoText);
+        syncSection.appendChild(attributeInfoSection);
+
         // Campos de configuração dos atributos
         const attributeFields = [
             { key: 'char_name_attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
@@ -9328,28 +9397,38 @@
         talkToggle.appendChild(toggleLabel);
         talkToggle.appendChild(toggleSwitch);
 
-        let isTalkToMyselfActive = false;
+        // Function to update TTM toggle visual state based on actual TTM status
+        function updateTTMToggleVisual() {
+            const isTTMCurrentlyActive = isTTMActive();
 
-        talkToggle.onclick = (e) => {
-            e.stopPropagation(); // Previne que o header seja arrastado
-
-            isTalkToMyselfActive = !isTalkToMyselfActive;
-
-            if (isTalkToMyselfActive) {
-                // Ativa o toggle
+            if (isTTMCurrentlyActive) {
+                // Ativa o toggle visual
                 toggleSwitch.style.background = '#6ec6ff';
                 toggleSwitch.style.borderColor = '#6ec6ff';
                 toggleKnob.style.left = '13px';
                 toggleLabel.style.color = '#6ec6ff';
-                sendToChat('/talktomyself');
             } else {
-                // Desativa o toggle
+                // Desativa o toggle visual
                 toggleSwitch.style.background = '#444';
                 toggleSwitch.style.borderColor = '#666';
                 toggleKnob.style.left = '1px';
                 toggleLabel.style.color = '#ecf0f1';
-                sendToChat('/talktomyself');
             }
+        }
+
+        // Initialize toggle state based on current TTM status
+        updateTTMToggleVisual();
+
+        talkToggle.onclick = (e) => {
+            e.stopPropagation(); // Previne que o header seja arrastado
+
+            // Toggle TTM command
+            sendToChat('/talktomyself');
+
+            // Update visual state after a short delay to allow Roll20 to process the command
+            setTimeout(() => {
+                updateTTMToggleVisual();
+            }, 100);
         };
 
         header.appendChild(talkToggle);
@@ -9592,52 +9671,32 @@
         characterInfo.style.flexDirection = 'column';
         characterInfo.style.gap = '2px';
 
-        // --- NOVO: Buscar nome e nível do localStorage ou permitir configuração manual ---
-        function saveCharName(name) {
-            localStorage.setItem(CHAR_NAME_KEY, name);
-        }
 
-        // Nome editável
+
+        // Nome do personagem (usando dados sincronizados)
         const characterName = document.createElement('div');
         characterName.id = 'character-name';
-        characterName.textContent = getCharacterName();
+        // Usar valor sincronizado se disponível, senão usar valor padrão
+        const syncedName = localStorage.getItem('char_name') || getCharacterName();
+        characterName.textContent = syncedName;
         characterName.style.color = '#ecf0f1';
         characterName.style.fontSize = '14px';
         characterName.style.fontWeight = 'bold';
         characterName.style.whiteSpace = 'nowrap';
-        characterName.style.cursor = 'pointer';
-        characterName.title = 'Clique para editar o nome';
-        characterName.onclick = () => {
-            const novoNome = prompt('Nome do personagem:', getCharacterName());
-            if (novoNome !== null && novoNome.trim() !== '') {
-                saveCharName(novoNome.trim());
-                characterName.textContent = novoNome.trim();
-                showSuccessNotification(`Nome do personagem alterado para "${novoNome.trim()}"!`);
-            }
-        };
+        characterName.style.cursor = 'default';
+        characterName.title = 'Nome do personagem (sincronizado da ficha)';
 
-        // Nível editável
+        // Nível do personagem (usando dados sincronizados)
         const characterLevel = document.createElement('div');
         characterLevel.id = 'character-level';
-        characterLevel.textContent = `Nível ${getCharLevel()}`;
+        // Usar valor sincronizado se disponível, senão usar valor padrão
+        const syncedLevel = localStorage.getItem('char_level') || getCharLevel();
+        characterLevel.textContent = `Nível ${syncedLevel}`;
         characterLevel.style.color = '#6ec6ff';
         characterLevel.style.fontSize = '12px';
         characterLevel.style.fontWeight = 'bold';
-        characterLevel.style.cursor = 'pointer';
-        characterLevel.title = 'Clique para editar o nível';
-        characterLevel.onclick = () => {
-            const novoNivel = prompt('Nível do personagem (1-20):', getCharLevel());
-            if (novoNivel !== null && novoNivel.trim() !== '') {
-                const nivel = parseInt(novoNivel.trim());
-                if (nivel >= 1 && nivel <= 20) {
-                    saveCharLevel(nivel.toString());
-                    characterLevel.textContent = `Nível ${nivel}`;
-                    showSuccessNotification(`Nível do personagem alterado para ${nivel}!`);
-                } else {
-                    showErrorNotification('O nível deve ser entre 1 e 20!');
-                }
-            }
-        };
+        characterLevel.style.cursor = 'default';
+        characterLevel.title = 'Nível do personagem (sincronizado da ficha)';
 
         // Classe do personagem (agora como badge clicável)
         const characterClass = document.createElement('div');

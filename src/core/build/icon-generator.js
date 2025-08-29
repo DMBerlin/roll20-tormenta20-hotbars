@@ -9,37 +9,49 @@ const sharp = require('sharp');
 async function generateIcons(outputDir) {
   console.log('🎨 Gerando ícones PNG para Chrome extension...');
 
-  const iconSizes = [16, 48, 128];
-  const iconsSourceDir = path.join(__dirname, '..', '..', 'source', 'icons');
+  const iconSizes = [16, 32, 48, 128, 256, 512];
+  const iconsSourceDir = path.join(__dirname, '..', '..', 'source', 'plugin-icons');
 
   for (const size of iconSizes) {
-    const iconName = `icon${size}`;
+    const iconName = `icon-${size}`;
     const pngSource = path.join(iconsSourceDir, `${iconName}.png`);
-    const icoSource = path.join(iconsSourceDir, `${iconName}.ico`);
-    const pngDest = path.join(outputDir, `${iconName}.png`);
+    const pngDest = path.join(outputDir, `icon${size}.png`);
 
     try {
-      // First, try to use existing PNG icon
+      // Use the plugin icons from the plugin-icons directory
       if (fs.existsSync(pngSource)) {
-        // Copy the existing PNG icon
+        // Copy and resize the existing PNG icon
         await sharp(pngSource)
           .resize(size, size)
           .png()
           .toFile(pngDest);
         console.log(`✅ ${iconName}.png copiado e redimensionado (${size}x${size})`);
       }
-      // If PNG doesn't exist, try to convert ICO to PNG
-      else if (fs.existsSync(icoSource)) {
-        await sharp(icoSource)
-          .resize(size, size)
-          .png()
-          .toFile(pngDest);
-        console.log(`✅ ${iconName}.png gerado de ICO (${size}x${size})`);
-      }
-      // If neither exists, create a fallback icon
+      // If the specific size doesn't exist, try to use a larger one and resize down
       else {
-        await createFallbackIcon(size, pngDest);
-        console.log(`⚠️ ${iconName}.png não encontrado, criando ícone padrão`);
+        // Try to find a larger icon to resize down
+        const availableSizes = [512, 256, 128, 48, 32, 16];
+        let sourceIcon = null;
+
+        for (const availableSize of availableSizes) {
+          const largerIconPath = path.join(iconsSourceDir, `icon-${availableSize}.png`);
+          if (fs.existsSync(largerIconPath)) {
+            sourceIcon = largerIconPath;
+            break;
+          }
+        }
+
+        if (sourceIcon) {
+          await sharp(sourceIcon)
+            .resize(size, size)
+            .png()
+            .toFile(pngDest);
+          console.log(`✅ Ícone redimensionado de ${path.basename(sourceIcon)} para ${size}x${size}`);
+        } else {
+          // If no icons found, create a fallback icon
+          await createFallbackIcon(size, pngDest);
+          console.log(`⚠️ Nenhum ícone encontrado, criando ícone padrão`);
+        }
       }
     } catch (error) {
       console.log(`⚠️ Erro ao processar ${iconName}, criando ícone padrão: ${error.message}`);
