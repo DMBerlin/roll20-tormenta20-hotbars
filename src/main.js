@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.81301'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.63602'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -6886,160 +6886,16 @@
         charIdInput.style.boxSizing = 'border-box';
         charIdInput.style.fontWeight = 'bold';
 
-        // Função para validar o nome do personagem
-        async function validateCharacterName(characterName) {
-            if (!characterName || characterName.trim() === '') {
-                return { valid: false, message: 'Nome do personagem não pode estar vazio' };
-            }
-
-            try {
-                // Enviar macro de teste para validar o nome
-                const testMacro = `@{${characterName.trim()}|character_name}`;
-                
-                // Encontrar o campo de input do chat
-                const chatInput = document.querySelector('#textchat-input textarea');
-                const sendButton = document.querySelector('#chatSendBtn');
-                
-                if (!chatInput || !sendButton) {
-                    return { valid: false, message: 'Chat não encontrado' };
-                }
-
-                // Salvar o valor atual do chat
-                const originalValue = chatInput.value;
-                
-                // Enviar a macro de teste
-                chatInput.value = testMacro;
-                chatInput.dispatchEvent(new Event('input', { bubbles: true }));
-                chatInput.dispatchEvent(new Event('change', { bubbles: true }));
-                sendButton.click();
-
-                // Aguardar um pouco para a mensagem aparecer
-                await new Promise(resolve => setTimeout(resolve, 1000));
-
-                // Verificar se houve erro no chat
-                const chatMessages = document.querySelectorAll('#textchat .message');
-                const lastMessage = chatMessages[chatMessages.length - 1];
-                
-                if (lastMessage) {
-                    const messageText = lastMessage.textContent || lastMessage.innerText;
-                    
-                    // Verificar se há mensagens de erro
-                    if (messageText.includes('Could not find') || 
-                        messageText.includes('não encontrado') ||
-                        messageText.includes('error') ||
-                        messageText.includes('erro') ||
-                        messageText.includes('invalid') ||
-                        messageText.includes('inválido')) {
-                        
-                        // Restaurar valor original do chat
-                        chatInput.value = originalValue;
-                        chatInput.dispatchEvent(new Event('input', { bubbles: true }));
-                        
-                        return { valid: false, message: 'Nome do personagem inválido ou não encontrado na ficha' };
-                    }
-                    
-                    // Verificar se o nome retornado é diferente do esperado
-                    if (messageText.includes(characterName.trim())) {
-                        // Restaurar valor original do chat
-                        chatInput.value = originalValue;
-                        chatInput.dispatchEvent(new Event('input', { bubbles: true }));
-                        
-                        return { valid: true, message: 'Nome do personagem válido!' };
-                    }
-                }
-
-                // Restaurar valor original do chat
-                chatInput.value = originalValue;
-                chatInput.dispatchEvent(new Event('input', { bubbles: true }));
-                
-                return { valid: true, message: 'Nome do personagem parece válido' };
-                
-            } catch (error) {
-                console.error('Erro ao validar nome do personagem:', error);
-                return { valid: false, message: 'Erro ao validar nome do personagem' };
-            }
-        }
-
-        // Criar botão de validação
-        const validateButton = document.createElement('button');
-        validateButton.textContent = 'Validar Nome';
-        validateButton.style.marginTop = '8px';
-        validateButton.style.padding = '8px 12px';
-        validateButton.style.background = '#ffc107';
-        validateButton.style.color = '#23243a';
-        validateButton.style.border = 'none';
-        validateButton.style.borderRadius = '4px';
-        validateButton.style.fontSize = '12px';
-        validateButton.style.fontWeight = 'bold';
-        validateButton.style.cursor = 'pointer';
-        validateButton.style.transition = 'all 0.2s';
-
-        // Criar elemento para mostrar resultado da validação
-        const validationResult = document.createElement('div');
-        validationResult.id = 'char_validation_result';
-        validationResult.style.marginTop = '8px';
-        validationResult.style.padding = '8px';
-        validationResult.style.borderRadius = '4px';
-        validationResult.style.fontSize = '12px';
-        validationResult.style.fontWeight = 'bold';
-        validationResult.style.display = 'none';
-
-        // Adicionar evento de validação
-        validateButton.addEventListener('click', async () => {
-            const characterName = charIdInput.value.trim();
-            
-            if (!characterName) {
-                validationResult.textContent = 'Digite um nome para validar';
-                validationResult.style.display = 'block';
-                validationResult.style.background = '#f8d7da';
-                validationResult.style.color = '#721c24';
-                validationResult.style.border = '1px solid #f5c6cb';
-                return;
-            }
-
-            validateButton.disabled = true;
-            validateButton.textContent = 'Validando...';
-            validationResult.style.display = 'block';
-            validationResult.style.background = '#d1ecf1';
-            validationResult.style.color = '#0c5460';
-            validationResult.style.border = '1px solid #bee5eb';
-            validationResult.textContent = 'Validando nome do personagem...';
-
-            const result = await validateCharacterName(characterName);
-
-            if (result.valid) {
-                validationResult.style.background = '#d4edda';
-                validationResult.style.color = '#155724';
-                validationResult.style.border = '1px solid #c3e6cb';
-                charIdInput.style.borderColor = '#28a745';
-            } else {
-                validationResult.style.background = '#f8d7da';
-                validationResult.style.color = '#721c24';
-                validationResult.style.border = '1px solid #f5c6cb';
-                charIdInput.style.borderColor = '#dc3545';
-            }
-
-            validationResult.textContent = result.message;
-            validateButton.disabled = false;
-            validateButton.textContent = 'Validar Nome';
-        });
-
         // Salvar valor quando mudar
         charIdInput.addEventListener('change', () => {
             localStorage.setItem('char_identification_key', charIdInput.value);
             // Atualizar também o nome do personagem para macros
             localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
-            
-            // Limpar resultado da validação quando o nome mudar
-            validationResult.style.display = 'none';
-            charIdInput.style.borderColor = 'rgba(255, 193, 7, 0.4)';
         });
 
         charIdSection.appendChild(charIdTitle);
         charIdSection.appendChild(charIdDescription);
         charIdSection.appendChild(charIdInput);
-        charIdSection.appendChild(validateButton);
-        charIdSection.appendChild(validationResult);
         syncSection.appendChild(charIdSection);
 
         // Informação sobre os campos de atributos
