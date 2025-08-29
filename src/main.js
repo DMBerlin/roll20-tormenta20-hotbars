@@ -1919,6 +1919,52 @@
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
+    // Função para atualizar a UI da hotbar com dados sincronizados
+    function updateHotbarUI() {
+        // Atualizar nome do personagem
+        const characterNameElement = document.getElementById('character-name');
+        if (characterNameElement) {
+            const syncedName = getCharacterName();
+            characterNameElement.textContent = syncedName;
+        }
+
+        // Atualizar nível do personagem
+        const characterLevelElement = document.getElementById('character-level');
+        if (characterLevelElement) {
+            const syncedLevel = getCharLevel();
+            characterLevelElement.textContent = `Nível ${syncedLevel}`;
+        }
+
+        console.log('UI da hotbar atualizada com dados sincronizados');
+    }
+
+    // Sistema de observação de mudanças no localStorage
+    function setupLocalStorageObserver() {
+        // Armazenar valores iniciais
+        const initialValues = {
+            name: localStorage.getItem('roll20-hotbar-sync-char-name'),
+            level: localStorage.getItem('roll20-hotbar-sync-char-level')
+        };
+
+        // Verificar mudanças periodicamente (mais eficiente)
+        setInterval(() => {
+            const currentName = localStorage.getItem('roll20-hotbar-sync-char-name');
+            const currentLevel = localStorage.getItem('roll20-hotbar-sync-char-level');
+
+            // Se houve mudança, atualizar UI
+            if (currentName !== initialValues.name || currentLevel !== initialValues.level) {
+                initialValues.name = currentName;
+                initialValues.level = currentLevel;
+                updateHotbarUI();
+            }
+        }, 500); // Verificar a cada meio segundo para resposta mais rápida
+    }
+
+    // Função para disparar atualização manual da UI (para casos específicos)
+    function triggerHotbarUpdate() {
+        updateHotbarUI();
+    }
+
 
     function getFavorites() {
         try {
@@ -2618,6 +2664,9 @@
                         console.log(`Salvando ${syncKey}: ${value}`);
                     }
                 });
+
+                // 7. Atualizar a UI da hotbar imediatamente
+                updateHotbarUI();
 
                 return characterData;
             } else {
@@ -7147,6 +7196,9 @@
                 });
 
                 createNotification('Sincronização concluída com sucesso!', 'success', 3000);
+                
+                // Forçar atualização da UI da hotbar
+                triggerHotbarUpdate();
 
             } catch (error) {
                 console.error('Erro na sincronização:', error);
@@ -11087,6 +11139,10 @@
             }
 
             createHotbar();
+            
+            // Inicializar observador de localStorage para atualização automática da UI
+            setupLocalStorageObserver();
+            
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
                 // Ctrl + '
