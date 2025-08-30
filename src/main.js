@@ -1,7 +1,8 @@
 (function () {
     'use strict';
     // Sistema de favoritos para skills
-    const FAVORITES_KEY = 'tormenta-20-hotbars-favorites';
+    const FAVORITE_SKILLS_KEY = 'tormenta-20-hotbars-favorite-skills';
+    const FAVORITE_SPELLS_KEY = 'tormenta-20-hotbars-favorite-spells';
     // Sistema de avatar do personagem
     const AVATAR_KEY = 'tormenta-20-hotbars-avatar';
     // Sistema de nome do personagem
@@ -26,7 +27,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.37847'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.1796'; // Última tag Git
 
     const logger = window.console;
 
@@ -1111,16 +1112,8 @@
             // Aplica a condição
             toggleCondition(conditionData.nome);
 
-            // Fecha todos os popups relacionados às condições para limpar a cena
-            const conditionsPopup = document.getElementById('conditions-popup');
-            if (conditionsPopup) conditionsPopup.remove();
-            const conditionsOverlay = document.getElementById('conditions-overlay');
-            if (conditionsOverlay) conditionsOverlay.remove();
-
-            // Fecha o popup de detalhes
-            popup.remove();
-            const overlay = document.getElementById('condition-details-overlay');
-            if (overlay) overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(applyBtn);
 
@@ -1555,7 +1548,7 @@
     function createCtrlTipMessage(type = 'item') {
         const tipMessages = {
             'skill': '💡 Segure CTRL + Clique para ver detalhes da perícia',
-            'spell': '💡 Segure CTRL + Clique para ver detalhes da magia',
+            'spell': '💡 Clique para lançar magia • CTRL + Clique para ver detalhes',
             'power': '💡 Segure CTRL + Clique para ver detalhes do poder',
             'item': '💡 Segure CTRL + Clique para ver detalhes do item'
         };
@@ -2033,7 +2026,7 @@
 
     function getFavorites() {
         try {
-            const favorites = localStorage.getItem(FAVORITES_KEY);
+            const favorites = localStorage.getItem(FAVORITE_SKILLS_KEY);
             return favorites ? JSON.parse(favorites) : [];
         } catch (error) {
             logger.log('Erro ao carregar favoritos:', error);
@@ -2043,10 +2036,45 @@
 
     function saveFavorites(favorites) {
         try {
-            localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+            localStorage.setItem(FAVORITE_SKILLS_KEY, JSON.stringify(favorites));
         } catch (error) {
             logger.log('Erro ao salvar favoritos:', error);
         }
+    }
+
+    // Funções para gerenciar magias favoritas
+    function getFavoriteSpells() {
+        try {
+            const favorites = localStorage.getItem(FAVORITE_SPELLS_KEY);
+            return favorites ? JSON.parse(favorites) : [];
+        } catch (error) {
+            logger.log('Erro ao carregar magias favoritas:', error);
+            return [];
+        }
+    }
+
+    function saveFavoriteSpells(favorites) {
+        try {
+            localStorage.setItem(FAVORITE_SPELLS_KEY, JSON.stringify(favorites));
+        } catch (error) {
+            logger.log('Erro ao salvar magias favoritas:', error);
+        }
+    }
+
+    function toggleFavoriteSpell(spellName) {
+        const favorites = getFavoriteSpells();
+        const index = favorites.indexOf(spellName);
+
+        if (index > -1) {
+            favorites.splice(index, 1);
+            showWarningNotification(`Magia "${spellName}" removida dos favoritos.`);
+        } else {
+            favorites.push(spellName);
+            showSuccessNotification(`Magia "${spellName}" adicionada aos favoritos!`);
+        }
+
+        saveFavoriteSpells(favorites);
+        return favorites;
     }
 
     function getAvatarUrl() {
@@ -3035,9 +3063,8 @@
                     } else {
                         // Comportamento padrão: faz a rolagem normal
                         sendToChat(skill.comando);
-                        popup.remove();
-                        const overlay = document.getElementById('skills-overlay');
-                        if (overlay) overlay.remove();
+                        // Fechar todos os popups abertos
+                        closeAllPopups();
                     }
                 };
 
@@ -3660,6 +3687,7 @@
         // Seção de Aprimoramentos
         if (spell.aprimoramentos && spell.aprimoramentos.length > 0) {
             const aprimoramentosSection = document.createElement('div');
+            aprimoramentosSection.setAttribute('data-aprimoramentos-section', 'true');
             aprimoramentosSection.style.marginBottom = '20px';
 
             const aprimoramentosTitle = document.createElement('h4');
@@ -3673,7 +3701,32 @@
 
             aprimoramentosSection.appendChild(aprimoramentosTitle);
 
-            // Lista de aprimoramentos
+            // Container para seleção de aprimoramentos
+            const aprimoramentosContainer = document.createElement('div');
+            aprimoramentosContainer.style.marginBottom = '16px';
+
+            // Custo base da magia
+            const custoBase = parseInt(spell.system?.ativacao?.custo) || 0;
+
+            // Display do custo total
+            const custoTotalDisplay = document.createElement('div');
+            custoTotalDisplay.style.background = 'rgba(35, 36, 58, 0.8)';
+            custoTotalDisplay.style.border = '2px solid #ff9800';
+            custoTotalDisplay.style.borderRadius = '8px';
+            custoTotalDisplay.style.padding = '12px';
+            custoTotalDisplay.style.marginBottom = '16px';
+            custoTotalDisplay.style.textAlign = 'center';
+            custoTotalDisplay.style.fontWeight = 'bold';
+            custoTotalDisplay.style.fontSize = '16px';
+            custoTotalDisplay.style.color = '#ff9800';
+            custoTotalDisplay.textContent = `Custo Total: ${custoBase} PM`;
+
+            aprimoramentosContainer.appendChild(custoTotalDisplay);
+
+            // Array para armazenar aprimoramentos selecionados
+            const selectedAprimoramentos = [];
+
+            // Lista de aprimoramentos com seleção visual
             spell.aprimoramentos.forEach((aprimoramento) => {
                 const aprimoramentoItem = document.createElement('div');
                 aprimoramentoItem.style.background = 'rgba(35, 36, 58, 0.8)';
@@ -3681,6 +3734,8 @@
                 aprimoramentoItem.style.borderRadius = '8px';
                 aprimoramentoItem.style.padding = '12px';
                 aprimoramentoItem.style.marginBottom = '8px';
+                aprimoramentoItem.style.cursor = 'pointer';
+                aprimoramentoItem.style.transition = 'all 0.2s ease';
 
                 // Cabeçalho do aprimoramento
                 const aprimoramentoHeader = document.createElement('div');
@@ -3722,9 +3777,59 @@
                 aprimoramentoItem.appendChild(aprimoramentoHeader);
                 aprimoramentoItem.appendChild(descricaoElement);
 
-                aprimoramentosSection.appendChild(aprimoramentoItem);
+                // Event listeners para seleção
+                const updateCustoTotal = () => {
+                    const selectedCost = selectedAprimoramentos.reduce((total, apr) => total + apr.custo, 0);
+                    const totalCost = custoBase + selectedCost;
+                    custoTotalDisplay.textContent = `Custo Total: ${totalCost} PM`;
+                };
+
+                const updateVisual = () => {
+                    const isSelected = selectedAprimoramentos.includes(aprimoramento);
+                    if (isSelected) {
+                        aprimoramentoItem.style.border = '2px solid #4caf50';
+                        aprimoramentoItem.style.background = 'rgba(76, 175, 80, 0.1)';
+                        aprimoramentoItem.style.boxShadow = '0 0 10px rgba(76, 175, 80, 0.3)';
+                    } else {
+                        aprimoramentoItem.style.border = '1px solid #ff9800';
+                        aprimoramentoItem.style.background = 'rgba(35, 36, 58, 0.8)';
+                        aprimoramentoItem.style.boxShadow = 'none';
+                    }
+                };
+
+                aprimoramentoItem.addEventListener('click', () => {
+                    const index = selectedAprimoramentos.findIndex(apr => apr === aprimoramento);
+                    if (index > -1) {
+                        selectedAprimoramentos.splice(index, 1);
+                    } else {
+                        selectedAprimoramentos.push(aprimoramento);
+                    }
+                    updateVisual();
+                    updateCustoTotal();
+                });
+
+                aprimoramentoItem.addEventListener('mouseenter', () => {
+                    if (!selectedAprimoramentos.includes(aprimoramento)) {
+                        aprimoramentoItem.style.border = '1px solid #4caf50';
+                        aprimoramentoItem.style.background = 'rgba(76, 175, 80, 0.05)';
+                    }
+                });
+
+                aprimoramentoItem.addEventListener('mouseleave', () => {
+                    if (!selectedAprimoramentos.includes(aprimoramento)) {
+                        aprimoramentoItem.style.border = '1px solid #ff9800';
+                        aprimoramentoItem.style.background = 'rgba(35, 36, 58, 0.8)';
+                    }
+                });
+
+                aprimoramentosContainer.appendChild(aprimoramentoItem);
             });
 
+            // Armazenar dados para uso no compartilhamento
+            aprimoramentosSection.selectedAprimoramentos = selectedAprimoramentos;
+            aprimoramentosSection.custoBase = custoBase;
+
+            aprimoramentosSection.appendChild(aprimoramentosContainer);
             detailsPopup.appendChild(aprimoramentosSection);
         }
 
@@ -3791,7 +3896,16 @@
         };
 
         shareButton.onclick = () => {
-            shareSpellToChat(spell);
+            // Obter aprimoramentos selecionados se existirem
+            let selectedAprimoramentos = [];
+            // Procurar especificamente pela seção de aprimoramentos
+            const aprimoramentosSectionElement = detailsPopup.querySelector('div[data-aprimoramentos-section]');
+            if (aprimoramentosSectionElement && aprimoramentosSectionElement.selectedAprimoramentos) {
+                selectedAprimoramentos = aprimoramentosSectionElement.selectedAprimoramentos;
+            }
+            logger.log('aprimoramentosSectionElement', aprimoramentosSectionElement);
+            logger.log('selectedAprimoramentos', selectedAprimoramentos);
+            shareSpellToChat(spell, selectedAprimoramentos);
             // Fechar todos os popups abertos
             closeAllPopups();
         };
@@ -3808,10 +3922,27 @@
     }
 
     // Função para compartilhar magia no chat usando template T20 (global)
-    function shareSpellToChat(spell) {
+    function shareSpellToChat(spell, selectedAprimoramentos = []) {
         try {
             // Obter nome do personagem usando a mesma função do sistema existente
             const charName = getCharacterName();
+
+            // Calcular custo total
+            const custoBase = parseInt(spell.system?.ativacao?.custo) || 0;
+            const custoAprimoramentos = selectedAprimoramentos.reduce((total, apr) => total + apr.custo, 0);
+            const custoTotal = custoBase + custoAprimoramentos;
+
+            // Preparar descrição com aprimoramentos
+            let description = spell.system?.description?.value || 'Descrição não disponível';
+
+            // Adicionar informações dos aprimoramentos selecionados
+            if (selectedAprimoramentos.length > 0) {
+                description += '%NEWLINE%%NEWLINE%**Aprimoramentos aplicados:**';
+                selectedAprimoramentos.forEach((aprimoramento) => {
+                    description += `%NEWLINE%    +${aprimoramento.custo} PM: ${aprimoramento.descricao}`;
+                });
+                description += `%NEWLINE%%NEWLINE%**Custo Total: ${custoTotal} PM**`;
+            }
 
             // Preparar dados da magia
             const spellData = {
@@ -3822,9 +3953,15 @@
                 range: spell.system?.alcance || 'Curto',
                 target: spell.system?.alvo || '1 Alvo',
                 resistance: spell.system?.resistencia || 'Nenhuma',
-                description: spell.system?.description?.value || 'Descrição não disponível'
+                description: description
             };
-
+            logger.dir({
+                spellData,
+                selectedAprimoramentos,
+                custoTotal,
+                custoBase,
+                custoAprimoramentos
+            });
             // Criar template T20 usando o mesmo formato do sistema existente
             const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellData.name}}}{{type=${spellData.type}}}{{execution=${spellData.execution}}}{{duration=${spellData.duration}}}{{range=${spellData.range}}}{{targetarea=${spellData.target}}}{{resistance=${spellData.resistance}}}{{description=${spellData.description}}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
 
@@ -3845,6 +3982,8 @@
         } catch (error) {
             console.error('Erro ao compartilhar magia:', error);
             alert('Erro ao compartilhar magia no chat. Verifique o console para mais detalhes.');
+        } finally {
+            closeAllPopups();
         }
     }
 
@@ -4501,13 +4640,24 @@
         spellList.style.marginTop = '2px';
         popup.appendChild(spellList);
 
-        function updateSpellList() {
+        async function updateSpellList() {
             const filter = searchComponent.getValue().trim().toLowerCase();
             spellList.innerHTML = '';
 
             // Obter magias aprendidas do grimório
             const learnedSpells = getLearnedSpells();
-            const spellsCache = window.grimorioSpellsCache || [];
+
+            // Verificar se o cache está disponível, se não estiver, carregar
+            let spellsCache = window.grimorioSpellsCache || [];
+            if (spellsCache.length === 0 && learnedSpells.length > 0) {
+                try {
+                    window.grimorioSpellsCache = await loadSpellsDirectly();
+                    spellsCache = window.grimorioSpellsCache;
+                } catch (error) {
+                    logger.log('Erro ao carregar cache de magias:', error);
+                    spellsCache = [];
+                }
+            }
 
             // Criar lista de magias aprendidas do grimório
             const learnedSpellItems = learnedSpells.map(spellName => {
@@ -4539,7 +4689,19 @@
 
             // Combinar magias de raça e magias aprendidas
             const allSpells = [...raceSpells, ...learnedSpellItems];
-            const filteredSpells = allSpells.filter(s => s.nome.toLowerCase().includes(filter));
+
+            // Ordenar magias: favoritas primeiro, depois alfabeticamente
+            const favoriteSpells = getFavoriteSpells();
+            const sortedSpells = allSpells.sort((a, b) => {
+                const aIsFavorite = favoriteSpells.includes(a.nome);
+                const bIsFavorite = favoriteSpells.includes(b.nome);
+
+                if (aIsFavorite && !bIsFavorite) return -1;
+                if (!aIsFavorite && bIsFavorite) return 1;
+                return a.nome.localeCompare(b.nome);
+            });
+
+            const filteredSpells = sortedSpells.filter(s => s.nome.toLowerCase().includes(filter));
 
             if (filteredSpells.length === 0) {
                 const noSpellsMessage = document.createElement('div');
@@ -4581,9 +4743,36 @@
             }
 
             filteredSpells.forEach(spell => {
+                const favoriteSpells = getFavoriteSpells();
+                const isFavorite = favoriteSpells.includes(spell.nome);
+
+                const spellContainer = document.createElement('div');
+                spellContainer.style.display = 'flex';
+                spellContainer.style.alignItems = 'center';
+                spellContainer.style.gap = '8px';
+                spellContainer.style.background = isFavorite ? 'rgba(110, 198, 255, 0.1)' : 'transparent';
+                spellContainer.style.borderRadius = '6px';
+                spellContainer.style.padding = '2px';
+
+                // Botão principal da magia
                 const btn = document.createElement('button');
-                btn.textContent = spell.nome;
-                btn.style.width = '100%';
+
+                // Cria o conteúdo do botão centralizado
+                const btnContent = document.createElement('div');
+                btnContent.style.display = 'flex';
+                btnContent.style.alignItems = 'center';
+                btnContent.style.justifyContent = 'center';
+                btnContent.style.width = '100%';
+                btnContent.style.padding = '0 8px';
+
+                const spellName = document.createElement('span');
+                spellName.textContent = spell.nome;
+                spellName.style.textAlign = 'center';
+                spellName.style.fontWeight = 'bold';
+                btnContent.appendChild(spellName);
+
+                btn.appendChild(btnContent);
+                btn.style.flex = '1';
                 btn.style.background = '#23243a';
                 btn.style.color = '#fff';
                 btn.style.border = '1px solid #6ec6ff';
@@ -4593,133 +4782,62 @@
                 btn.style.fontWeight = 'bold';
                 btn.style.cursor = 'pointer';
                 btn.style.transition = 'all 0.2s';
-                btn.style.position = 'relative';
-
-                // Tooltip container
-                let tooltip = null;
-                let tooltipTimeout = null;
-
                 btn.onmouseover = () => {
                     btn.style.background = '#6ec6ff';
                     btn.style.color = '#23243a';
-
-                    // Criar tooltip após um pequeno delay
-                    tooltipTimeout = setTimeout(() => {
-                        // Remover tooltip existente se houver
-                        if (tooltip) tooltip.remove();
-
-                        tooltip = document.createElement('div');
-                        tooltip.style.position = 'fixed';
-                        tooltip.style.background = 'rgba(20,20,30,0.98)';
-                        tooltip.style.border = '2px solid #6ec6ff';
-                        tooltip.style.borderRadius = '8px';
-                        tooltip.style.padding = '12px';
-                        tooltip.style.minWidth = '280px';
-                        tooltip.style.maxWidth = '320px';
-                        tooltip.style.zIndex = '10004';
-                        tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
-                        tooltip.style.pointerEvents = 'none';
-
-                        // Calcular posição baseada na posição do botão
-                        const btnRect = btn.getBoundingClientRect();
-                        tooltip.style.left = (btnRect.right + 10) + 'px';
-                        tooltip.style.top = btnRect.top + 'px';
-
-                        // Conteúdo do tooltip
-                        const tooltipContent = document.createElement('div');
-                        tooltipContent.style.display = 'flex';
-                        tooltipContent.style.flexDirection = 'column';
-                        tooltipContent.style.gap = '8px';
-
-                        // Título da magia
-                        const tooltipTitle = document.createElement('div');
-                        tooltipTitle.textContent = spell.nome;
-                        tooltipTitle.style.color = '#6ec6ff';
-                        tooltipTitle.style.fontSize = '16px';
-                        tooltipTitle.style.fontWeight = 'bold';
-                        tooltipTitle.style.marginBottom = '4px';
-                        tooltipContent.appendChild(tooltipTitle);
-
-                        // Tag de classificação
-                        const classificationTag = document.createElement('div');
-                        classificationTag.textContent = 'Magia Arcana';
-                        classificationTag.style.background = '#6ec6ff';
-                        classificationTag.style.color = '#23243a';
-                        classificationTag.style.fontSize = '11px';
-                        classificationTag.style.fontWeight = 'bold';
-                        classificationTag.style.borderRadius = '4px';
-                        classificationTag.style.padding = '2px 8px';
-                        classificationTag.style.display = 'inline-block';
-                        classificationTag.style.width = 'fit-content';
-                        tooltipContent.appendChild(classificationTag);
-
-                        // Tag de ciclo
-                        const cycleTag = document.createElement('div');
-                        cycleTag.textContent = '1º Ciclo';
-                        cycleTag.style.background = '#9b59b6';
-                        cycleTag.style.color = '#fff';
-                        cycleTag.style.fontSize = '11px';
-                        cycleTag.style.fontWeight = 'bold';
-                        cycleTag.style.borderRadius = '4px';
-                        cycleTag.style.padding = '2px 8px';
-                        cycleTag.style.display = 'inline-block';
-                        cycleTag.style.width = 'fit-content';
-                        cycleTag.style.marginTop = '2px';
-                        tooltipContent.appendChild(cycleTag);
-
-                        // Tag de escola
-                        const schoolTag = document.createElement('div');
-                        if (spell.nome === 'Luz Sagrada') {
-                            schoolTag.textContent = 'Evocação';
-                        } else if (spell.nome === 'Sombras Profanas') {
-                            schoolTag.textContent = 'Necromancia';
-                        }
-                        schoolTag.style.background = '#e74c3c';
-                        schoolTag.style.color = '#fff';
-                        schoolTag.style.fontSize = '11px';
-                        schoolTag.style.fontWeight = 'bold';
-                        schoolTag.style.borderRadius = '4px';
-                        schoolTag.style.padding = '2px 8px';
-                        schoolTag.style.display = 'inline-block';
-                        schoolTag.style.width = 'fit-content';
-                        schoolTag.style.marginTop = '2px';
-                        tooltipContent.appendChild(schoolTag);
-
-                        // Descrição resumida
-                        const tooltipDesc = document.createElement('div');
-                        if (spell.nome === 'Luz Sagrada') {
-                            tooltipDesc.textContent = 'Ação padrão: Objeto emite luz de 6m de raio. A luz não produz calor e pode ser interrompida guardando o objeto. Luz anula Escuridão.';
-                        } else if (spell.nome === 'Sombras Profanas') {
-                            tooltipDesc.textContent = 'Ação padrão: Objeto emana sombras de 6m de raio. Criaturas na área recebem camuflagem leve. Sombras não podem ser iluminadas por luz natural.';
-                        }
-                        tooltipDesc.style.color = '#ecf0f1';
-                        tooltipDesc.style.fontSize = '13px';
-                        tooltipDesc.style.lineHeight = '1.4';
-                        tooltipDesc.style.marginTop = '6px';
-                        tooltipContent.appendChild(tooltipDesc);
-
-                        tooltip.appendChild(tooltipContent);
-                        document.body.appendChild(tooltip);
-                    }, 300); // Delay de 300ms antes de mostrar o tooltip
                 };
-
                 btn.onmouseout = () => {
                     btn.style.background = '#23243a';
                     btn.style.color = '#fff';
+                };
 
-                    // Limpar timeout e remover tooltip
-                    if (tooltipTimeout) {
-                        clearTimeout(tooltipTimeout);
-                        tooltipTimeout = null;
-                    }
-                    if (tooltip) {
-                        tooltip.remove();
-                        tooltip = null;
+                btn.onclick = (e) => {
+                    if (e.ctrlKey) {
+                        // Se CTRL estiver pressionado, abrir modal de detalhamento
+                        spell.onClick();
+                    } else {
+                        // Se não estiver pressionado CTRL, executar o comando da magia
+                        sendToChat(spell.comando);
+                        // Fechar todos os popups abertos
+                        closeAllPopups();
                     }
                 };
 
-                btn.onclick = spell.onClick;
-                spellList.appendChild(btn);
+                // Botão de pin/favorito
+                const pinBtn = document.createElement('button');
+                pinBtn.innerHTML = isFavorite ? '📌' : '📍';
+                pinBtn.style.background = 'none';
+                pinBtn.style.border = 'none';
+                pinBtn.style.color = isFavorite ? '#6ec6ff' : '#666';
+                pinBtn.style.fontSize = '14px';
+                pinBtn.style.cursor = 'pointer';
+                pinBtn.style.padding = '4px';
+                pinBtn.style.borderRadius = '4px';
+                pinBtn.style.transition = 'all 0.2s';
+                pinBtn.style.minWidth = '24px';
+                pinBtn.style.height = '24px';
+                pinBtn.style.display = 'flex';
+                pinBtn.style.alignItems = 'center';
+                pinBtn.style.justifyContent = 'center';
+                pinBtn.title = isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+
+                pinBtn.onmouseover = () => {
+                    pinBtn.style.background = 'rgba(110, 198, 255, 0.2)';
+                    pinBtn.style.color = '#6ec6ff';
+                };
+                pinBtn.onmouseout = () => {
+                    pinBtn.style.background = 'none';
+                    pinBtn.style.color = isFavorite ? '#6ec6ff' : '#666';
+                };
+                pinBtn.onclick = (e) => {
+                    e.stopPropagation(); // Previne que o botão principal seja clicado
+                    toggleFavoriteSpell(spell.nome);
+                    updateSpellList(); // Atualiza a lista para refletir as mudanças
+                };
+
+                spellContainer.appendChild(btn);
+                spellContainer.appendChild(pinBtn);
+                spellList.appendChild(spellContainer);
             });
         }
         updateSpellList();
@@ -6043,18 +6161,8 @@
                 showWarningNotification(`Prato "${prato.nome}" já está ativo nos efeitos!`);
             }
 
-            // Fechar todos os popups relacionados aos pratos especiais para limpar a cena
-            const pratosPopup = document.getElementById('pratos-popup');
-            if (pratosPopup) pratosPopup.remove();
-            const pratosOverlay = document.getElementById('pratos-overlay');
-            if (pratosOverlay) pratosOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(useBtn);
 
@@ -6374,18 +6482,8 @@
                 showWarningNotification(`Bebida "${bebida.nome}" já está ativa nos efeitos!`);
             }
 
-            // Fechar todos os popups relacionados às bebidas para limpar a cena
-            const bebidasPopup = document.getElementById('bebidas-popup');
-            if (bebidasPopup) bebidasPopup.remove();
-            const bebidasOverlay = document.getElementById('bebidas-overlay');
-            if (bebidasOverlay) bebidasOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(useBtn);
 
@@ -6771,18 +6869,8 @@
                 showWarningNotification(`Poção "${pocao.nome}" já está ativa nos efeitos!`);
             }
 
-            // Fechar todos os popups relacionados às poções para limpar a cena
-            const pocoesPopup = document.getElementById('pocoes-popup');
-            if (pocoesPopup) pocoesPopup.remove();
-            const pocoesOverlay = document.getElementById('pocoes-overlay');
-            if (pocoesOverlay) pocoesOverlay.remove();
-            const miscPopup = document.getElementById('misc-popup');
-            if (miscPopup) miscPopup.remove();
-            const miscOverlay = document.getElementById('misc-overlay');
-            if (miscOverlay) miscOverlay.remove();
-
-            modal.remove();
-            overlay.remove();
+            // Fechar todos os popups abertos
+            closeAllPopups();
         };
         buttonsContainer.appendChild(useBtn);
 
@@ -8844,19 +8932,7 @@
             usoContainer.style.wordBreak = 'break-word';
             usoContainer.style.overflowWrap = 'break-word';
 
-            // Adiciona indicador visual de seleção
-            const selectionIndicator = document.createElement('div');
-            selectionIndicator.style.position = 'absolute';
-            selectionIndicator.style.top = '8px';
-            selectionIndicator.style.right = '8px';
-            selectionIndicator.style.width = '16px';
-            selectionIndicator.style.height = '16px';
-            selectionIndicator.style.borderRadius = '50%';
-            selectionIndicator.style.border = '2px solid #6ec6ff';
-            selectionIndicator.style.background = 'transparent';
-            selectionIndicator.style.transition = 'all 0.2s';
-            selectionIndicator.style.display = 'none';
-            usoContainer.appendChild(selectionIndicator);
+
 
             const usoTitle = document.createElement('h4');
             usoTitle.textContent = uso.titulo;
@@ -8980,24 +9056,18 @@
                 allContainers.forEach(container => {
                     container.style.background = 'rgba(26,26,46,0.8)';
                     container.style.border = '1px solid rgba(110,198,255,0.2)';
-                    const indicator = container.querySelector('div[style*="position: absolute"]');
-                    if (indicator) {
-                        indicator.style.display = 'none';
-                        indicator.style.background = 'transparent';
-                    }
                 });
+
+                // Verifica se deve habilitar o botão após remover seleção
+                checkShouldEnableRollButton();
 
                 // Seleciona o atual
                 selectedSpecialization = uso.titulo;
                 usoContainer.style.background = 'rgba(110,198,255,0.2)';
                 usoContainer.style.border = '2px solid #6ec6ff';
-                selectionIndicator.style.display = 'block';
-                selectionIndicator.style.background = '#6ec6ff';
 
-                // Habilita o botão
-                rollButton.disabled = false;
-                rollButton.style.opacity = '1';
-                rollButton.style.cursor = 'pointer';
+                // Verifica se deve habilitar o botão
+                checkShouldEnableRollButton();
             };
 
             usosSection.appendChild(usoContainer);
@@ -9071,6 +9141,22 @@
         const cervejaDeheoniActive = isEffectActive('bebida_cerveja_deheoni');
         const sidraAhlenienseActive = isEffectActive('bebida_sidra_ahleniense');
 
+        // Função para verificar se o botão deve ser habilitado
+        function checkShouldEnableRollButton() {
+            const hasSpecialization = selectedSpecialization !== null;
+            const hasCheckedBonus = Array.from(bonusSection.querySelectorAll('input[type="checkbox"]')).some(checkbox => checkbox.checked);
+
+            if (hasSpecialization || hasCheckedBonus) {
+                rollButton.disabled = false;
+                rollButton.style.opacity = '1';
+                rollButton.style.cursor = 'pointer';
+            } else {
+                rollButton.disabled = true;
+                rollButton.style.opacity = '0.5';
+                rollButton.style.cursor = 'not-allowed';
+            }
+        }
+
         // Função para criar um bônus de comida
         function createFoodBonus(id, label, description, isActive) {
             if (!isActive) return null;
@@ -9086,6 +9172,9 @@
             checkbox.id = id;
             checkbox.style.width = '16px';
             checkbox.style.height = '16px';
+
+            // Adicionar event listener para verificar se deve habilitar o botão
+            checkbox.addEventListener('change', checkShouldEnableRollButton);
 
             const labelElement = document.createElement('label');
             labelElement.htmlFor = id;
@@ -9217,7 +9306,10 @@
         modal.appendChild(rollButton);
 
         rollButton.onclick = () => {
-            if (!selectedSpecialization) return;
+            const hasSpecialization = selectedSpecialization !== null;
+            const hasCheckedBonus = Array.from(bonusSection.querySelectorAll('input[type="checkbox"]')).some(checkbox => checkbox.checked);
+
+            if (!hasSpecialization && !hasCheckedBonus) return;
 
             // Verifica quais efeitos de comida foram selecionados
             const batataValkarianaSelected = document.getElementById('batata-valkariana-bonus') &&
@@ -9243,37 +9335,40 @@
             const cozidoDePimentaSelected = document.getElementById('cozido-de-pimenta-bonus') &&
                 document.getElementById('cozido-de-pimenta-bonus').checked;
 
+            // Constrói o nome da rolagem baseado na especialização ou teste puro
+            const rollName = hasSpecialization ? `${skillName} - ${selectedSpecialization}` : `${skillName} (Teste Puro)`;
+
             // Encontra o comando da skill na lista de skills
             const skills = [
-                { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Acrobacia - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}` },
-                { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Adestramento - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|adestramentototal}]]]]}}` },
-                { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atletismo - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}` },
-                { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Atuação - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atuacaototal}]]]]}}` },
-                { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cavalgar - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|cavalgartotal}]]]]}}` },
-                { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Conhecimento - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|conhecimentototal}]]]]}}` },
-                { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Cura - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|curatotal}]]]]}}` },
-                { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Diplomacia - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|diplomaciatotal}]]]]}}` },
-                { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Enganação - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|enganacaototal}]]]]}}` },
-                { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Fortitude - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|fortitudetotal}]]]]}}` },
-                { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Furtividade - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|furtividadetotal}]]]]}}` },
-                { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Guerra - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|guerratotal}]]]]}}` },
-                { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Iniciativa - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|iniciativatotal}]] &{tracker}]]}}` },
-                { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intimidação - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intimidacaototal}]]]]}}` },
-                { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Intuição - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intuicaototal}]]]]}}` },
-                { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Investigação - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|investigacaototal}]]]]}}` },
-                { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Jogatina - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|jogatinatotal}]]]]}}` },
-                { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ladinagem - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|ladinagemtotal}]]]]}}` },
-                { nome: 'Luta', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Luta - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}` },
-                { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Misticismo - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
-                { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Nobreza - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
-                { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Ofício @{${getCharacterNameForMacro()}|oficionome} - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
-                { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Percepção - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
-                { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pilotagem - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
-                { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Pontaria - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
-                { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Reflexos - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|reflexostotal}]]]]}}` },
-                { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Religião - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|religiaototal}]]]]}}` },
-                { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Sobrevivência - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|sobrevivenciatotal}]]]]}}` },
-                { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Vontade - ${selectedSpecialization}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|vontadetotal}]]]]}}` }
+                { nome: 'Acrobacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}` },
+                { nome: 'Adestramento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|adestramentototal}]]]]}}` },
+                { nome: 'Atletismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}` },
+                { nome: 'Atuação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atuacaototal}]]]]}}` },
+                { nome: 'Cavalgar', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|cavalgartotal}]]]]}}` },
+                { nome: 'Conhecimento', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|conhecimentototal}]]]]}}` },
+                { nome: 'Cura', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|curatotal}]]]]}}` },
+                { nome: 'Diplomacia', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|diplomaciatotal}]]]]}}` },
+                { nome: 'Enganação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|enganacaototal}]]]]}}` },
+                { nome: 'Fortitude', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|fortitudetotal}]]]]}}` },
+                { nome: 'Furtividade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|furtividadetotal}]]]]}}` },
+                { nome: 'Guerra', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|guerratotal}]]]]}}` },
+                { nome: 'Iniciativa', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|iniciativatotal}]] &{tracker}]]}}` },
+                { nome: 'Intimidação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intimidacaototal}]]]]}}` },
+                { nome: 'Intuição', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|intuicaototal}]]]]}}` },
+                { nome: 'Investigação', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|investigacaototal}]]]]}}` },
+                { nome: 'Jogatina', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|jogatinatotal}]]]]}}` },
+                { nome: 'Ladinagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|ladinagemtotal}]]]]}}` },
+                { nome: 'Luta', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|lutatotal}]]]]}}` },
+                { nome: 'Misticismo', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|misticismototal}]]]]}}` },
+                { nome: 'Nobreza', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|nobrezatotal}]]]]}}` },
+                { nome: 'Ofício', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|oficiototal}]]]]}}` },
+                { nome: 'Percepção', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|percepcaototal}]]]]}}` },
+                { nome: 'Pilotagem', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pilotagemtotal}]]]]}}` },
+                { nome: 'Pontaria', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}]]]]}}` },
+                { nome: 'Reflexos', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|reflexostotal}]]]]}}` },
+                { nome: 'Religião', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|religiaototal}]]]]}}` },
+                { nome: 'Sobrevivência', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|sobrevivenciatotal}]]]]}}` },
+                { nome: 'Vontade', comando: `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=${rollName}}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|vontadetotal}]]]]}}` }
             ];
 
             const skill = skills.find(s => s.nome === skillName);
@@ -17523,6 +17618,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const template = `&{template:t20-info}{{infoname=${item.data.name || 'Poder de Combate'}}}{{description=${item.data.description || ''}}}`;
                 sendToChat(template);
                 showSuccessNotification(`Poder "${item.name}" compartilhado no chat!`);
+                // Fechar todos os popups abertos
+                closeAllPopups();
                 break;
             }
             case 'divinity': {
@@ -17530,6 +17627,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
                 sendToChat(template);
                 showSuccessNotification(`Divindade "${item.name}" compartilhada no chat!`);
+                // Fechar todos os popups abertos
+                closeAllPopups();
                 break;
             }
             case 'ability': {
@@ -17542,11 +17641,15 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
                 sendToChat(template);
                 showSuccessNotification(`Poder de Destino "${item.name}" compartilhado no chat!`);
+                // Fechar todos os popups abertos
+                closeAllPopups();
                 break;
             }
             default:
                 // Envia para o chat
                 sendToChat(`&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || item.effects || ''}}}`);
+                // Fechar todos os popups abertos
+                closeAllPopups();
                 break;
         }
     }
