@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.24132'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.30914'; // Última tag Git
 
     const logger = window.console;
 
@@ -1994,13 +1994,14 @@
             }
         });
 
-        // Atualizar barra de vida
+                // Atualizar barra de vida
         logger.log('🔍 Procurando healthBarContainer...');
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
         const infoContainer = characterInfo.children[1];
         logger.log('infoContainer encontrado:', infoContainer);
         
-        const healthBarContainer = infoContainer.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
+        // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
+        const healthBarContainer = infoContainer.children[1];
         logger.log('healthBarContainer encontrado:', healthBarContainer);
 
         if (healthBarContainer) {
@@ -2044,7 +2045,8 @@
 
         // Atualizar barra de mana
         logger.log('🔍 Procurando manaBarContainer...');
-        const manaBarContainer = infoContainer.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
+        // Acessar diretamente pelos índices: infoContainer.children[2] = barra de mana
+        const manaBarContainer = infoContainer.children[2];
         logger.log('manaBarContainer encontrado:', manaBarContainer);
 
         if (manaBarContainer) {
