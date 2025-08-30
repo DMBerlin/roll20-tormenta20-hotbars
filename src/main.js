@@ -1921,7 +1921,7 @@
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
-        // Função para atualizar a UI da hotbar com dados sincronizados
+    // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
         // Atualizar nome do personagem
         const characterNameElement = document.getElementById('character-name');
@@ -1947,7 +1947,7 @@
         updateHealthAndManaBars();
     }
 
-        // Função para atualizar barras de vida e mana
+    // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
         // Buscar elementos de forma mais robusta
         const characterInfo = document.querySelector('#character-avatar')?.parentNode?.parentNode;
@@ -1955,10 +1955,10 @@
             return;
         }
 
-                // Atualizar barra de vida
+        // Atualizar barra de vida
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
         const infoContainer = characterInfo.children[1];
-        
+
         // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
         const healthBarContainer = infoContainer.children[1];
 
@@ -1986,7 +1986,7 @@
             }
         }
 
-                // Atualizar barra de mana
+        // Atualizar barra de mana
         // Acessar diretamente pelos índices: infoContainer.children[2] = barra de mana
         const manaBarContainer = infoContainer.children[2];
 
