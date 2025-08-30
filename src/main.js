@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.23706'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.68611'; // Última tag Git
 
     const logger = window.console;
 
@@ -1921,23 +1921,19 @@
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
-    // Função para atualizar a UI da hotbar com dados sincronizados
+        // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
-        logger.log('🔄 updateHotbarUI() chamada');
-
         // Atualizar nome do personagem
         const characterNameElement = document.getElementById('character-name');
         if (characterNameElement) {
             const syncedName = getCharacterName();
             characterNameElement.textContent = syncedName;
-            logger.log('✅ Nome atualizado:', syncedName);
         }
 
         // Atualizar nível no ícone do avatar
         const levelIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Nível do herói"]');
         if (levelIcon) {
             levelIcon.textContent = getCharLevel();
-            logger.log('✅ Nível atualizado:', getCharLevel());
         }
 
         // Atualizar defesa no ícone do avatar
@@ -1945,89 +1941,31 @@
         if (defenseIcon) {
             const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
             defenseIcon.textContent = defenseValue;
-            logger.log('✅ Defesa atualizada:', defenseValue);
         }
 
         // Atualizar barras de vida e mana
-        logger.log('🔄 Chamando updateHealthAndManaBars()...');
         updateHealthAndManaBars();
-
-        logger.log('✅ UI da hotbar atualizada com dados sincronizados');
     }
 
-    // Função para atualizar barras de vida e mana
+        // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
-        logger.log('🔄 updateHealthAndManaBars() chamada');
-
-        // Debug: mostrar valores atuais no console
-        logger.log('=== DEBUG: Atualizando Barras de Vida e Mana ===');
-        logger.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-hp-current'));
-        logger.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-hp-total'));
-        logger.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-mp-current'));
-        logger.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-mp-total'));
-        logger.log('===============================================');
-
         // Buscar elementos de forma mais robusta
         const characterInfo = document.querySelector('#character-avatar')?.parentNode?.parentNode;
         if (!characterInfo) {
-            logger.log('❌ Não foi possível encontrar characterInfo');
             return;
         }
 
-        logger.log('✅ characterInfo encontrado:', characterInfo);
-        logger.log('📋 Todos os elementos filhos de characterInfo:');
-        characterInfo.childNodes.forEach((child, index) => {
-            if (child.nodeType === Node.ELEMENT_NODE) {
-                logger.log(`  ${index}:`, child.tagName, child.className || 'sem classe');
-                logger.log(`     Estilo:`, child.style.cssText);
-
-                // Se for um div, mostrar seus filhos também
-                if (child.tagName === 'DIV') {
-                    logger.log(`     Filhos do ${index}:`);
-                    child.childNodes.forEach((grandChild, grandIndex) => {
-                        if (grandChild.nodeType === Node.ELEMENT_NODE) {
-                            logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.className || 'sem classe');
-                            logger.log(`         Estilo:`, grandChild.style.cssText);
-                        }
-                    });
-                }
-            }
-        });
-
-        // Atualizar barra de vida
-        logger.log('🔍 Procurando healthBarContainer...');
+                // Atualizar barra de vida
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
         const infoContainer = characterInfo.children[1];
-        logger.log('infoContainer encontrado:', infoContainer);
-
+        
         // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
         const healthBarContainer = infoContainer.children[1];
-        logger.log('healthBarContainer encontrado:', healthBarContainer);
 
         if (healthBarContainer) {
-            logger.log('📋 Elementos dentro do healthBarContainer:');
-            healthBarContainer.childNodes.forEach((child, index) => {
-                if (child.nodeType === Node.ELEMENT_NODE) {
-                    logger.log(`  ${index}:`, child.tagName, child.style.cssText);
-                    
-                    // Se for um div, mostrar seus filhos também
-                    if (child.tagName === 'DIV') {
-                        logger.log(`     Filhos do ${index}:`);
-                        child.childNodes.forEach((grandChild, grandIndex) => {
-                            if (grandChild.nodeType === Node.ELEMENT_NODE) {
-                                logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.style.cssText);
-                            }
-                        });
-                    }
-                }
-            });
-
             // Buscar elementos de forma mais específica
             const healthFill = healthBarContainer.children[0]?.children[0]; // Primeiro filho do primeiro filho
             const healthText = healthBarContainer.children[1]; // Segundo filho
-
-            logger.log('healthFill encontrado:', healthFill);
-            logger.log('healthText encontrado:', healthText);
 
             if (healthFill && healthText) {
                 const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
@@ -2045,45 +1983,17 @@
                 } else {
                     healthFill.style.background = '#f44336';
                 }
-
-                logger.log(`✅ Barra de vida atualizada: ${currentHP}/${maxHP} (${healthPercentage}%)`);
-            } else {
-                logger.log('❌ Não foi possível encontrar elementos da barra de vida');
             }
-        } else {
-            logger.log('❌ Não foi possível encontrar healthBarContainer');
         }
 
-        // Atualizar barra de mana
-        logger.log('🔍 Procurando manaBarContainer...');
+                // Atualizar barra de mana
         // Acessar diretamente pelos índices: infoContainer.children[2] = barra de mana
         const manaBarContainer = infoContainer.children[2];
-        logger.log('manaBarContainer encontrado:', manaBarContainer);
 
         if (manaBarContainer) {
-            logger.log('📋 Elementos dentro do manaBarContainer:');
-            manaBarContainer.childNodes.forEach((child, index) => {
-                if (child.nodeType === Node.ELEMENT_NODE) {
-                    logger.log(`  ${index}:`, child.tagName, child.style.cssText);
-                    
-                    // Se for um div, mostrar seus filhos também
-                    if (child.tagName === 'DIV') {
-                        logger.log(`     Filhos do ${index}:`);
-                        child.childNodes.forEach((grandChild, grandIndex) => {
-                            if (grandChild.nodeType === Node.ELEMENT_NODE) {
-                                logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.style.cssText);
-                            }
-                        });
-                    }
-                }
-            });
-
             // Buscar elementos de forma mais específica
             const manaFill = manaBarContainer.children[0]?.children[0]; // Primeiro filho do primeiro filho
             const manaText = manaBarContainer.children[1]; // Segundo filho
-
-            logger.log('manaFill encontrado:', manaFill);
-            logger.log('manaText encontrado:', manaText);
 
             if (manaFill && manaText) {
                 const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
@@ -2092,13 +2002,7 @@
 
                 manaFill.style.width = `${manaPercentage}%`;
                 manaText.textContent = `${currentMP}/${maxMP}`;
-
-                logger.log(`✅ Barra de mana atualizada: ${currentMP}/${maxMP} (${manaPercentage}%)`);
-            } else {
-                logger.log('❌ Não foi possível encontrar elementos da barra de mana');
             }
-        } else {
-            logger.log('❌ Não foi possível encontrar manaBarContainer');
         }
     }
 
@@ -2125,16 +2029,7 @@
             const currentMpTotal = localStorage.getItem('tormenta-20-hotbars-sync-mp-total');
             const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
 
-            // Debug: mostrar valores atuais a cada verificação
-            logger.log('🔍 Observer verificando valores:', {
-                name: currentName,
-                level: currentLevel,
-                hpCurrent: currentHpCurrent,
-                hpTotal: currentHpTotal,
-                mpCurrent: currentMpCurrent,
-                mpTotal: currentMpTotal,
-                ac: currentAc
-            });
+
 
             // Verificar se houve mudança em qualquer valor
             const hasChanges =
@@ -2148,15 +2043,6 @@
 
             // Se houve mudança, atualizar UI
             if (hasChanges) {
-                logger.log('🔄 Mudanças detectadas no localStorage, atualizando UI...');
-                logger.log('Nome:', initialValues.name, '->', currentName);
-                logger.log('Nível:', initialValues.level, '->', currentLevel);
-                logger.log('HP Atual:', initialValues.hpCurrent, '->', currentHpCurrent);
-                logger.log('HP Total:', initialValues.hpTotal, '->', currentHpTotal);
-                logger.log('MP Atual:', initialValues.mpCurrent, '->', currentMpCurrent);
-                logger.log('MP Total:', initialValues.mpTotal, '->', currentMpTotal);
-                logger.log('AC:', initialValues.ac, '->', currentAc);
-
                 // Atualizar valores iniciais
                 initialValues.name = currentName;
                 initialValues.level = currentLevel;
