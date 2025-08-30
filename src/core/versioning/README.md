@@ -1,69 +1,98 @@
-# Sistema de Versionamento da Hotbar
+# Scripts de Versionamento
 
-Este documento explica como funciona o sistema de versionamento da hotbar e como atualizar a versão quando uma nova tag Git for criada.
+Este diretório contém scripts para gerenciar versões e tags do projeto.
 
-## 🏷️ Indicador de Versão
+## Scripts Disponíveis
 
-A hotbar agora exibe a versão atual do script no canto superior direito da header. O indicador mostra:
+### 1. update-version.js
+Atualiza a versão do script baseada na branch atual e número de commits.
 
-- **Ícone**: 🏷️ (tag)
-- **Versão**: A última tag Git (ex: `v0.0.1`)
-- **Funcionalidade**: Clique para copiar a versão para a área de transferência
+**Uso:**
+```bash
+pnpm update-version
+# ou
+node src/core/versioning/update-version.js
+```
 
-## 🔄 Como Atualizar a Versão
+**Funcionalidades:**
+- Detecta a branch atual
+- Encontra a última tag Git
+- Gera uma nova versão formatada (ex: 0.3.0.12345)
+- Atualiza `src/main.js` e `package.json`
 
-### Método 1: Script Automático (Recomendado)
+### 2. create-tag.js
+Cria uma nova tag Git usando a versão atual do `package.json`.
 
-1. **Criar uma nova tag Git**:
+**Uso:**
+```bash
+# Uso básico (com confirmação)
+pnpm create-tag
+
+# Uso direto
+node src/core/versioning/create-tag.js
+
+# Com mensagem personalizada
+pnpm create-tag -- --message="Release com novas funcionalidades"
+
+# Sem confirmação
+pnpm create-tag -- --yes
+
+# Forçar criação (mesmo com mudanças não commitadas)
+pnpm create-tag -- --force
+```
+
+**Opções:**
+- `--message="texto"` - Mensagem personalizada para a tag
+- `--yes` - Criar tag sem confirmação
+- `--force` - Forçar criação mesmo com mudanças não commitadas
+
+**Funcionalidades:**
+- Lê a versão do `package.json`
+- Verifica se a tag já existe
+- Valida mudanças não commitadas
+- Cria tag anotada com mensagem
+- Faz push da tag para o repositório remoto
+
+## Fluxo de Trabalho Recomendado
+
+1. **Desenvolvimento:**
    ```bash
-   git tag v0.0.2
-   git push origin v0.0.2
+   # Fazer alterações no código
+   git add .
+   git commit -m "Nova funcionalidade"
    ```
 
-2. **Executar o script de atualização**:
+2. **Atualizar versão:**
    ```bash
-   npm run update-version
+   pnpm update-version
    ```
-   
-   Ou diretamente:
+
+3. **Criar tag de release:**
    ```bash
-   node src/core/versioning/update-version.js
+   pnpm create-tag -- --message="Release 0.3.0 - Novas funcionalidades"
    ```
 
-### Método 2: Atualização Manual
+## Exemplo de Saída
 
-1. Abrir o arquivo `tormenta20/hotbars/main.js`
-2. Localizar a linha com a constante `SCRIPT_VERSION`
-3. Atualizar o valor para a nova tag:
-   ```javascript
-   const SCRIPT_VERSION = 'v0.0.2'; // Última tag Git
-   ```
+```
+🚀 Script de criação de tag Git
+================================
 
-## 📁 Arquivos Envolvidos
+📦 Versão do package.json: 0.3.0.25043
+🌿 Branch atual: develop
+🏷️  Última tag: 0.3.0
 
-- **`src/main.js`**: Contém a constante `SCRIPT_VERSION` e o indicador visual
-- **`src/core/versioning/update-version.js`**: Script para atualização automática da versão
-- **`package.json`**: Contém o script npm `update-version`
+📝 Mensagem da tag: Release 0.3.0.25043 - 2024-01-15
 
-## 🎯 Fluxo de Trabalho Recomendado
+❓ Deseja criar a tag? (y/N)
+y
 
-1. Fazer as alterações no código
-2. Fazer commit das alterações
-3. Criar uma nova tag Git
-4. Executar `npm run update-version`
-5. Fazer commit da atualização da versão
-6. Fazer push das alterações e da tag
+🏷️  Criando tag: 0.3.0.25043
+📤 Fazendo push da tag...
 
-## 🔧 Funcionalidades do Indicador
+✅ Tag criada com sucesso!
+🏷️  Tag: 0.3.0.25043
+📝 Mensagem: Release 0.3.0.25043 - 2024-01-15
 
-- **Visual**: Fundo azul claro com borda azul
-- **Hover**: Efeito de escala e mudança de cor
-- **Clique**: Copia a versão para a área de transferência
-- **Tooltip**: Mostra informações sobre a versão
-- **Posicionamento**: Canto superior direito da header
-
-## 🚨 Importante
-
-- Sempre atualize a versão após criar uma nova tag Git
-- O indicador de versão ajuda a identificar qual versão está sendo executada
-- A funcionalidade de copiar versão é útil para reportar bugs ou solicitar suporte 
+🎉 Release pronto!
+``` 

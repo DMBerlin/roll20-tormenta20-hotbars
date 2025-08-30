@@ -20,7 +20,8 @@
     "lint": "eslint --fix",
     "dev": "node src/core/dev/server.js",
     "build": "node src/core/build/build.js",
-    "update-version": "node src/core/versioning/update-version.js"
+    "update-version": "node src/core/versioning/update-version.js",
+    "create-tag": "node src/core/versioning/create-tag.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
