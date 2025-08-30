@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.10574'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1928,14 +1928,61 @@
             characterNameElement.textContent = syncedName;
         }
 
-        // Atualizar nível do personagem
-        const characterLevelElement = document.getElementById('character-level');
-        if (characterLevelElement) {
-            const syncedLevel = getCharLevel();
-            characterLevelElement.textContent = `Nível ${syncedLevel}`;
+        // Atualizar nível no ícone do avatar
+        const levelIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Nível do herói"]');
+        if (levelIcon) {
+            levelIcon.textContent = getCharLevel();
         }
 
+        // Atualizar defesa no ícone do avatar
+        const defenseIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Defesa"]');
+        if (defenseIcon) {
+            const defenseValue = localStorage.getItem('roll20-hotbar-sync-char-ac') || '0';
+            defenseIcon.textContent = defenseValue;
+        }
+
+        // Atualizar barras de vida e mana
+        updateHealthAndManaBars();
+
         console.log('UI da hotbar atualizada com dados sincronizados');
+    }
+
+    // Função para atualizar barras de vida e mana
+    function updateHealthAndManaBars() {
+        // Atualizar barra de vida
+        const healthFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #ff4444"], div[style*="background: #4caf50"], div[style*="background: #ff9800"], div[style*="background: #f44336"]');
+        const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
+        
+        if (healthFill && healthText) {
+            const currentHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-current') || '0');
+            const maxHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-total') || '1');
+            const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
+            
+            healthFill.style.width = `${healthPercentage}%`;
+            healthText.textContent = `${currentHP}/${maxHP}`;
+
+            // Ajustar cor baseada na porcentagem
+            if (healthPercentage > 50) {
+                healthFill.style.background = '#4caf50';
+            } else if (healthPercentage > 25) {
+                healthFill.style.background = '#ff9800';
+            } else {
+                healthFill.style.background = '#f44336';
+            }
+        }
+
+        // Atualizar barra de mana
+        const manaFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #2196f3"]');
+        const manaText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #6ec6ff"]');
+        
+        if (manaFill && manaText) {
+            const currentMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-current') || '0');
+            const maxMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-total') || '1');
+            const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
+            
+            manaFill.style.width = `${manaPercentage}%`;
+            manaText.textContent = `${currentMP}/${maxMP}`;
+        }
     }
 
     // Sistema de observação de mudanças no localStorage
@@ -9776,20 +9823,66 @@
         classIcon.style.transition = 'all 0.2s';
         classIcon.title = 'Caçador';
 
+        // Ícone de nível no canto inferior esquerdo
+        const levelIcon = document.createElement('div');
+        levelIcon.textContent = getCharLevel();
+        levelIcon.style.position = 'absolute';
+        levelIcon.style.bottom = '-2px';
+        levelIcon.style.left = '-2px';
+        levelIcon.style.background = '#6ec6ff';
+        levelIcon.style.borderRadius = '50%';
+        levelIcon.style.width = '18px';
+        levelIcon.style.height = '18px';
+        levelIcon.style.display = 'flex';
+        levelIcon.style.alignItems = 'center';
+        levelIcon.style.justifyContent = 'center';
+        levelIcon.style.fontSize = '10px';
+        levelIcon.style.fontWeight = 'bold';
+        levelIcon.style.color = '#fff';
+        levelIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        levelIcon.style.transition = 'all 0.2s';
+        levelIcon.title = 'Nível do herói';
+
+        // Ícone de defesa no canto inferior direito
+        const defenseIcon = document.createElement('div');
+        defenseIcon.textContent = localStorage.getItem('roll20-hotbar-sync-char-ac') || '0';
+        defenseIcon.style.position = 'absolute';
+        defenseIcon.style.bottom = '-2px';
+        defenseIcon.style.right = '-2px';
+        defenseIcon.style.background = '#4caf50';
+        defenseIcon.style.borderRadius = '50%';
+        defenseIcon.style.width = '18px';
+        defenseIcon.style.height = '18px';
+        defenseIcon.style.display = 'flex';
+        defenseIcon.style.alignItems = 'center';
+        defenseIcon.style.justifyContent = 'center';
+        defenseIcon.style.fontSize = '9px';
+        defenseIcon.style.fontWeight = 'bold';
+        defenseIcon.style.color = '#fff';
+        defenseIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        defenseIcon.style.transition = 'all 0.2s';
+        defenseIcon.title = 'Defesa';
+
         avatarContainer.appendChild(avatar);
         avatarContainer.appendChild(editIcon);
         avatarContainer.appendChild(classIcon);
+        avatarContainer.appendChild(levelIcon);
+        avatarContainer.appendChild(defenseIcon);
 
         // Hover effects
         avatarContainer.onmouseover = () => {
             avatar.style.transform = 'scale(1.05)';
             editIcon.style.opacity = '1';
             classIcon.style.transform = 'scale(1.1)';
+            levelIcon.style.transform = 'scale(1.1)';
+            defenseIcon.style.transform = 'scale(1.1)';
         };
         avatarContainer.onmouseout = () => {
             avatar.style.transform = 'scale(1)';
             editIcon.style.opacity = '0';
             classIcon.style.transform = 'scale(1)';
+            levelIcon.style.transform = 'scale(1)';
+            defenseIcon.style.transform = 'scale(1)';
         };
         avatarContainer.onclick = createAvatarPopup;
 
@@ -9814,22 +9907,99 @@
         characterName.style.cursor = 'default';
         characterName.title = 'Nome do personagem (sincronizado da ficha)';
 
-        // Nível do personagem (usando dados sincronizados)
-        const characterLevel = document.createElement('div');
-        characterLevel.id = 'character-level';
-        // Usar valor sincronizado se disponível, senão usar valor padrão
-        const syncedLevel = localStorage.getItem(CHAR_LEVEL_KEY) || getCharLevel();
-        characterLevel.textContent = `Nível ${syncedLevel}`;
-        characterLevel.style.color = '#6ec6ff';
-        characterLevel.style.fontSize = '12px';
-        characterLevel.style.fontWeight = 'bold';
-        characterLevel.style.cursor = 'default';
-        characterLevel.title = 'Nível do personagem (sincronizado da ficha)';
+
 
 
 
         characterInfo.appendChild(characterName);
-        characterInfo.appendChild(characterLevel);
+
+        // Barra de vida
+        const healthBarContainer = document.createElement('div');
+        healthBarContainer.style.display = 'flex';
+        healthBarContainer.style.alignItems = 'center';
+        healthBarContainer.style.gap = '8px';
+        healthBarContainer.style.marginTop = '4px';
+
+        const healthBar = document.createElement('div');
+        healthBar.style.width = '80px';
+        healthBar.style.height = '8px';
+        healthBar.style.background = 'rgba(255, 0, 0, 0.3)';
+        healthBar.style.borderRadius = '4px';
+        healthBar.style.overflow = 'hidden';
+        healthBar.style.position = 'relative';
+
+        const healthFill = document.createElement('div');
+        healthFill.style.height = '100%';
+        healthFill.style.background = '#ff4444';
+        healthFill.style.transition = 'width 0.3s ease';
+        healthFill.style.borderRadius = '4px';
+
+        // Calcular porcentagem de vida
+        const currentHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-current') || '0');
+        const maxHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-total') || '1');
+        const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
+        healthFill.style.width = `${healthPercentage}%`;
+
+        // Ajustar cor baseada na porcentagem
+        if (healthPercentage > 50) {
+            healthFill.style.background = '#4caf50';
+        } else if (healthPercentage > 25) {
+            healthFill.style.background = '#ff9800';
+        } else {
+            healthFill.style.background = '#f44336';
+        }
+
+        const healthText = document.createElement('div');
+        healthText.textContent = `${currentHP}/${maxHP}`;
+        healthText.style.fontSize = '10px';
+        healthText.style.color = '#ecf0f1';
+        healthText.style.fontWeight = 'bold';
+        healthText.style.minWidth = '35px';
+
+        healthBar.appendChild(healthFill);
+        healthBarContainer.appendChild(healthBar);
+        healthBarContainer.appendChild(healthText);
+
+        // Barra de mana
+        const manaBarContainer = document.createElement('div');
+        manaBarContainer.style.display = 'flex';
+        manaBarContainer.style.alignItems = 'center';
+        manaBarContainer.style.gap = '8px';
+        manaBarContainer.style.marginTop = '2px';
+
+        const manaBar = document.createElement('div');
+        manaBar.style.width = '80px';
+        manaBar.style.height = '8px';
+        manaBar.style.background = 'rgba(0, 0, 255, 0.3)';
+        manaBar.style.borderRadius = '4px';
+        manaBar.style.overflow = 'hidden';
+        manaBar.style.position = 'relative';
+
+        const manaFill = document.createElement('div');
+        manaFill.style.height = '100%';
+        manaFill.style.background = '#2196f3';
+        manaFill.style.transition = 'width 0.3s ease';
+        manaFill.style.borderRadius = '4px';
+
+        // Calcular porcentagem de mana
+        const currentMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-current') || '0');
+        const maxMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-total') || '1');
+        const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
+        manaFill.style.width = `${manaPercentage}%`;
+
+        const manaText = document.createElement('div');
+        manaText.textContent = `${currentMP}/${maxMP}`;
+        manaText.style.fontSize = '10px';
+        manaText.style.color = '#6ec6ff';
+        manaText.style.fontWeight = 'bold';
+        manaText.style.minWidth = '35px';
+
+        manaBar.appendChild(manaFill);
+        manaBarContainer.appendChild(manaBar);
+        manaBarContainer.appendChild(manaText);
+
+        characterInfo.appendChild(healthBarContainer);
+        characterInfo.appendChild(manaBarContainer);
 
         characterSection.appendChild(avatarContainer);
         characterSection.appendChild(characterInfo);
