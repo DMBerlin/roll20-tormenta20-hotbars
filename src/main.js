@@ -1,24 +1,24 @@
 (function () {
     'use strict';
     // Sistema de favoritos para skills
-    const FAVORITES_KEY = 'roll20-hotbar-favorites';
+    const FAVORITES_KEY = 'tormenta-20-hotbars-favorites';
     // Sistema de avatar do personagem
-    const AVATAR_KEY = 'roll20-hotbar-avatar';
+    const AVATAR_KEY = 'tormenta-20-hotbars-avatar';
     // Sistema de nome do personagem
-    const CHAR_NAME_KEY = 'roll20-hotbar-charname';
+    const CHAR_NAME_KEY = 'tormenta-20-hotbars-charname';
     // Sistema de habilidades aprendidas do Caçador
-    const HUNTER_ABILITIES_KEY = 'roll20-hotbar-hunter-abilities';
+    const HUNTER_ABILITIES_KEY = 'tormenta-20-hotbars-hunter-abilities';
     // Sistema de poderes de destino aprendidos
-    const DESTINY_POWERS_KEY = 'roll20-hotbar-destiny-powers';
+    const DESTINY_POWERS_KEY = 'tormenta-20-hotbars-destiny-powers';
     // Sistema de raça selecionada
-    const SELECTED_RACE_KEY = 'roll20-hotbar-selected-race';
+    const SELECTED_RACE_KEY = 'tormenta-20-hotbars-selected-race';
     // Sistema de tipo de raça selecionado (para raças com subtipos)
-    const SELECTED_RACE_TYPE_KEY = 'roll20-hotbar-selected-race-type';
+    const SELECTED_RACE_TYPE_KEY = 'tormenta-20-hotbars-selected-race-type';
     // Sistema de magias aprendidas
-    const LEARNED_SPELLS_KEY = 'roll20-hotbar-learned-spells';
+    const LEARNED_SPELLS_KEY = 'tormenta-20-hotbars-learned-spells';
 
     // NOVO: Sistema de cache de imagens
-    const IMAGE_CACHE_KEY = 'roll20-hotbar-image-cache';
+    const IMAGE_CACHE_KEY = 'tormenta-20-hotbars-image-cache';
     const IMAGE_CACHE_VERSION = '1.0'; // Para invalidação de cache quando necessário
 
     // Sistema de fallback para ícones de magias
@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.34432'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.74169'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1892,7 +1892,7 @@
     // Função global para obter o nome do personagem
     function getCharacterName() {
         // Primeiro tenta buscar valor sincronizado, depois valor padrão
-        const syncedName = localStorage.getItem('roll20-hotbar-sync-char-name');
+        const syncedName = localStorage.getItem('tormenta-20-hotbars-sync-char-name');
         if (syncedName) return syncedName;
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
     }
@@ -1900,7 +1900,7 @@
     // Função para obter o nome do personagem sem aspas para uso em macros
     function getCharacterNameForMacro() {
         // Usar a chave de identificação se disponível, senão usar o nome padrão
-        const identificationKey = localStorage.getItem('roll20-hotbar-char-identification-key');
+        const identificationKey = localStorage.getItem('tormenta-20-hotbars-char-identification-key');
         if (identificationKey && identificationKey.trim() !== '') {
             return identificationKey.trim();
         }
@@ -1911,10 +1911,10 @@
     }
 
     // Funções para gerenciar nível do personagem
-    const CHAR_LEVEL_KEY = 'roll20-hotbar-charlevel';
+    const CHAR_LEVEL_KEY = 'tormenta-20-hotbars-charlevel';
     function getCharLevel() {
         // Primeiro tenta buscar valor sincronizado, depois valor padrão
-        const syncedLevel = localStorage.getItem('roll20-hotbar-sync-char-level');
+        const syncedLevel = localStorage.getItem('tormenta-20-hotbars-sync-char-level');
         if (syncedLevel) return syncedLevel;
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
@@ -1937,7 +1937,7 @@
         // Atualizar defesa no ícone do avatar
         const defenseIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Defesa"]');
         if (defenseIcon) {
-            const defenseValue = localStorage.getItem('roll20-hotbar-sync-char-ac') || '0';
+            const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-char-ac') || '0';
             defenseIcon.textContent = defenseValue;
         }
 
@@ -1951,12 +1951,12 @@
     function updateHealthAndManaBars() {
         // Debug: mostrar valores atuais no console
         console.log('=== DEBUG: Valores Sincronizados ===');
-        console.log('Nível:', localStorage.getItem('roll20-hotbar-sync-char-level'));
-        console.log('Defesa:', localStorage.getItem('roll20-hotbar-sync-char-ac'));
-        console.log('Vida Atual:', localStorage.getItem('roll20-hotbar-sync-char-hp-current'));
-        console.log('Vida Total:', localStorage.getItem('roll20-hotbar-sync-char-hp-total'));
-        console.log('Mana Atual:', localStorage.getItem('roll20-hotbar-sync-char-mp-current'));
-        console.log('Mana Total:', localStorage.getItem('roll20-hotbar-sync-char-mp-total'));
+        console.log('Nível:', localStorage.getItem('tormenta-20-hotbars-sync-char-level'));
+        console.log('Defesa:', localStorage.getItem('tormenta-20-hotbars-sync-char-ac'));
+        console.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current'));
+        console.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total'));
+        console.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current'));
+        console.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total'));
         console.log('=====================================');
 
         // Atualizar barra de vida
@@ -1964,8 +1964,8 @@
         const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
 
         if (healthFill && healthText) {
-            const currentHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-current') || '0');
-            const maxHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-total') || '1');
+            const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current') || '0');
+            const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total') || '1');
             const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
 
             healthFill.style.width = `${healthPercentage}%`;
@@ -1986,8 +1986,8 @@
         const manaText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #6ec6ff"]');
 
         if (manaFill && manaText) {
-            const currentMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-current') || '0');
-            const maxMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-total') || '1');
+            const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current') || '0');
+            const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total') || '1');
             const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
 
             manaFill.style.width = `${manaPercentage}%`;
@@ -1999,14 +1999,14 @@
     function setupLocalStorageObserver() {
         // Armazenar valores iniciais
         const initialValues = {
-            name: localStorage.getItem('roll20-hotbar-sync-char-name'),
-            level: localStorage.getItem('roll20-hotbar-sync-char-level')
+            name: localStorage.getItem('tormenta-20-hotbars-sync-char-name'),
+            level: localStorage.getItem('tormenta-20-hotbars-sync-char-level')
         };
 
         // Verificar mudanças periodicamente (mais eficiente)
         setInterval(() => {
-            const currentName = localStorage.getItem('roll20-hotbar-sync-char-name');
-            const currentLevel = localStorage.getItem('roll20-hotbar-sync-char-level');
+            const currentName = localStorage.getItem('tormenta-20-hotbars-sync-char-name');
+            const currentLevel = localStorage.getItem('tormenta-20-hotbars-sync-char-level');
 
             // Se houve mudança, atualizar UI
             if (currentName !== initialValues.name || currentLevel !== initialValues.level) {
@@ -2510,14 +2510,6 @@
         return 'DATA_' + Math.random().toString(36).substr(2, 9).toUpperCase() + '_' + Date.now().toString(36);
     }
 
-
-
-
-
-
-
-
-
     // Função para aguardar e encontrar mensagem com a chave específica
     function waitForDataMessage(dataKey, maxWaitTime = 5000) {
         return new Promise((resolve, reject) => {
@@ -2550,8 +2542,6 @@
             checkForMessage();
         });
     }
-
-
 
     // Função para extrair dados JSON da mensagem
     function extractJSONDataFromMessage(messageElement, dataKey) {
@@ -2727,7 +2717,7 @@
                     const value = characterData[key];
                     if (value !== undefined && value !== null) {
                         // Usar chaves específicas para valores capturados, não sobrescrever configurações
-                        const syncKey = `roll20-hotbar-sync-${key}`;
+                        const syncKey = `tormenta-20-hotbars-sync-${key}`;
                         localStorage.setItem(syncKey, value);
                         console.log(`Salvando ${syncKey}: ${value}`);
                     }
@@ -5214,11 +5204,11 @@
 
     // Funções auxiliares para pratos especiais
     function getPratosFavoritos() {
-        return JSON.parse(localStorage.getItem('roll20-hotbar-pratos-favoritos') || '[]');
+        return JSON.parse(localStorage.getItem('tormenta-20-hotbars-pratos-favoritos') || '[]');
     }
 
     function savePratosFavoritos(favoritos) {
-        localStorage.setItem('roll20-hotbar-pratos-favoritos', JSON.stringify(favoritos));
+        localStorage.setItem('tormenta-20-hotbars-pratos-favoritos', JSON.stringify(favoritos));
     }
 
     function togglePratoFavorito(nomePrato) {
@@ -5241,11 +5231,11 @@
 
     // Funções auxiliares para bebidas artonianas
     function getBebidasFavoritas() {
-        return JSON.parse(localStorage.getItem('roll20-hotbar-bebidas-favoritas') || '[]');
+        return JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebidas-favoritas') || '[]');
     }
 
     function saveBebidasFavoritas(favoritas) {
-        localStorage.setItem('roll20-hotbar-bebidas-favoritas', JSON.stringify(favoritas));
+        localStorage.setItem('tormenta-20-hotbars-bebidas-favoritas', JSON.stringify(favoritas));
     }
 
     function toggleBebidaFavorita(nomeBebida) {
@@ -5268,11 +5258,11 @@
 
     // Funções auxiliares para poções
     function getPocoesFavoritas() {
-        return JSON.parse(localStorage.getItem('roll20-hotbar-pocoes-favoritas') || '[]');
+        return JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocoes-favoritas') || '[]');
     }
 
     function savePocoesFavoritas(favoritas) {
-        localStorage.setItem('roll20-hotbar-pocoes-favoritas', JSON.stringify(favoritas));
+        localStorage.setItem('tormenta-20-hotbars-pocoes-favoritas', JSON.stringify(favoritas));
     }
 
     function togglePocaoFavorita(nomePocao) {
@@ -6024,10 +6014,10 @@
 
             let activeEffects = getActiveEffects();
             if (!activeEffects.includes(effectKey)) {
-                let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                 comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey);
                 comidaEffects.push(effect);
-                localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
                 activeEffects.push(effectKey);
 
                 // Adiciona à ordem dos efeitos
@@ -6350,10 +6340,10 @@
 
             let activeEffects = getActiveEffects();
             if (!activeEffects.includes(effectKey)) {
-                let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                 bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effectKey);
                 bebidaEffects.push(effect);
-                localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
                 activeEffects.push(effectKey);
 
                 // Adiciona à ordem dos efeitos
@@ -6752,10 +6742,10 @@
 
             let activeEffects = getActiveEffects();
             if (!activeEffects.includes(effectKey)) {
-                let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                let pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
                 pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effectKey);
                 pocaoEffects.push(effect);
-                localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+                localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
                 activeEffects.push(effectKey);
 
                 // Adiciona à ordem dos efeitos
@@ -7001,7 +6991,7 @@
         const charIdInput = document.createElement('input');
         charIdInput.type = 'text';
         charIdInput.id = 'char_identification_key';
-        charIdInput.value = localStorage.getItem('roll20-hotbar-char-identification-key') || getCharacterNameForMacro();
+        charIdInput.value = localStorage.getItem('tormenta-20-hotbars-char-identification-key') || getCharacterNameForMacro();
         charIdInput.placeholder = 'Ex: Aragorn, Gandalf, etc.';
         charIdInput.style.width = '100%';
         charIdInput.style.padding = '10px 12px';
@@ -7015,7 +7005,7 @@
 
         // Salvar valor quando mudar
         charIdInput.addEventListener('change', () => {
-            localStorage.setItem('roll20-hotbar-char-identification-key', charIdInput.value);
+            localStorage.setItem('tormenta-20-hotbars-char-identification-key', charIdInput.value);
             // Atualizar também o nome do personagem para macros
             localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
         });
@@ -7045,15 +7035,15 @@
 
         // Campos de configuração dos atributos
         const attributeFields = [
-            { key: 'roll20-hotbar-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
-            { key: 'roll20-hotbar-char-race-attr', label: 'Raça', defaultValue: 'trace' },
-            { key: 'roll20-hotbar-char-class-attr', label: 'Classe', defaultValue: 'tlevel' },
-            { key: 'roll20-hotbar-char-level-attr', label: 'Nível', defaultValue: 'charnivel' },
-            { key: 'roll20-hotbar-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal' },
-            { key: 'roll20-hotbar-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida' },
-            { key: 'roll20-hotbar-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
-            { key: 'roll20-hotbar-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
-            { key: 'roll20-hotbar-char-ac-attr', label: 'Armadura', defaultValue: 'defesatotal' }
+            { key: 'tormenta-20-hotbars-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
+            { key: 'tormenta-20-hotbars-char-race-attr', label: 'Raça', defaultValue: 'trace' },
+            { key: 'tormenta-20-hotbars-char-class-attr', label: 'Classe', defaultValue: 'tlevel' },
+            { key: 'tormenta-20-hotbars-char-level-attr', label: 'Nível', defaultValue: 'charnivel' },
+            { key: 'tormenta-20-hotbars-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal' },
+            { key: 'tormenta-20-hotbars-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida' },
+            { key: 'tormenta-20-hotbars-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
+            { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
+            { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Armadura', defaultValue: 'defesatotal' }
         ];
 
         const fieldsContainer = document.createElement('div');
@@ -7103,7 +7093,7 @@
 
             // Buscar valor atual do localStorage (valor sincronizado)
             const attrName = field.key.replace('_attr', '');
-            const currentValue = localStorage.getItem(`roll20-hotbar-sync-${attrName}`);
+            const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
             if (currentValue) {
                 currentValueLabel.textContent = `Valor atual: ${currentValue}`;
             } else {
@@ -7254,7 +7244,7 @@
                 // Atualizar labels de valores atuais
                 attributeFields.forEach(field => {
                     const attrName = field.key.replace('_attr', '');
-                    const currentValue = localStorage.getItem(`roll20-hotbar-sync-${attrName}`);
+                    const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
                     const currentValueLabel = document.getElementById(`${field.key}_current`);
                     if (currentValue) {
                         currentValueLabel.textContent = `Valor atual: ${currentValue}`;
@@ -7292,10 +7282,10 @@
                 const key = localStorage.key(i);
                 if (key && (
                     // Chaves que começam com o prefixo do hotbar
-                    key.startsWith('roll20-hotbar-') ||
+                    key.startsWith('tormenta-20-hotbars-') ||
                     // Chaves específicas que podem não ter o prefixo (legacy)
                     key === 'char_identification_key' ||
-                    key === 'roll20-hotbar-char-identification-key' ||
+                    key === 'tormenta-20-hotbars-char-identification-key' ||
                     key.startsWith('char_') && key.endsWith('_attr')
                 )) {
                     keysToRemove.push(key);
@@ -9384,9 +9374,9 @@
                 setTimeout(() => {
                     if (batataValkarianaSelected) {
                         toggleEffect('prato_batata_valkariana');
-                        let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                        let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                         comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
-                        localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                        localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
                         showSuccessNotification('🍟 Efeito da Batata Valkariana consumido no teste!');
                     }
 
@@ -9437,9 +9427,9 @@
                         toggleEffect('bebida_baba_de_troll');
 
                         // Remove também da lista de efeitos de bebida
-                        let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                        let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                         bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
-                        localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                        localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
 
                         showSuccessNotification('🧃 Efeito da Baba de Troll consumido no teste!');
                     }
@@ -9868,7 +9858,7 @@
 
         // Ícone de defesa no canto inferior direito
         const defenseIcon = document.createElement('div');
-        defenseIcon.textContent = localStorage.getItem('roll20-hotbar-sync-char-ac') || '0';
+        defenseIcon.textContent = localStorage.getItem('tormenta-20-hotbars-sync-char-ac') || '0';
         defenseIcon.style.position = 'absolute';
         defenseIcon.style.bottom = '-2px';
         defenseIcon.style.right = '-2px';
@@ -9954,8 +9944,8 @@
         healthFill.style.borderRadius = '4px';
 
         // Calcular porcentagem de vida
-        const currentHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-current') || '0');
-        const maxHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-total') || '1');
+        const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current') || '0');
+        const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total') || '1');
         const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
         healthFill.style.width = `${healthPercentage}%`;
 
@@ -10001,8 +9991,8 @@
         manaFill.style.borderRadius = '4px';
 
         // Calcular porcentagem de mana
-        const currentMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-current') || '0');
-        const maxMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-total') || '1');
+        const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current') || '0');
+        const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total') || '1');
         const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
         manaFill.style.width = `${manaPercentage}%`;
 
@@ -10438,7 +10428,7 @@
                     // Executar manobra baseada no tipo
                     if (maneuver.name === 'Investida') {
                         // Executar investida com +2 no ataque
-                        const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                        const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
                         let savedAttackEffects = [];
                         try {
                             const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
@@ -10803,7 +10793,7 @@
             executeBtn.onclick = () => {
                 // Executar a manobra baseada no tipo
                 if (maneuver.name === 'Investida') {
-                    const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                    const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
                     let savedAttackEffects = [];
                     try {
                         const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
@@ -10956,7 +10946,7 @@
             const effects = getDynamicAttackEffects(charLevel);
             const checkboxes = {};
             // Chave para persistência
-            const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+            const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
             // Carregar seleção anterior
             let savedAttackEffects = [];
             try {
@@ -11101,9 +11091,9 @@
                             toggleEffect('prato_batata_valkariana');
 
                             // Remove também da lista de efeitos de comida
-                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                             comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
-                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
 
                             showSuccessNotification('🍟 Efeito da Batata Valkariana consumido no ataque!');
                         }
@@ -11155,9 +11145,9 @@
                             toggleEffect('bebida_baba_de_troll');
 
                             // Remove também da lista de efeitos de bebida
-                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                             bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
-                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
 
                             showSuccessNotification('🧃 Efeito da Baba de Troll consumido no ataque!');
                         }
@@ -11183,7 +11173,7 @@
                     createAttackEffectsPopup();
                 } else {
                     // Novo: aplicar bônus persistidos
-                    const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                    const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
                     let savedAttackEffects = [];
                     try {
                         const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
@@ -13984,7 +13974,7 @@
     }
 
     // === NOVO: utilitários para Companheiro Animal ===
-    const ANIMAL_COMPANION_TYPE_KEY = 'roll20-hotbar-animal-companion-type';
+    const ANIMAL_COMPANION_TYPE_KEY = 'tormenta-20-hotbars-animal-companion-type';
     function getAnimalCompanionType() {
         return localStorage.getItem(ANIMAL_COMPANION_TYPE_KEY) || '';
     }
@@ -13993,8 +13983,8 @@
     }
 
     // === NOVO: Funções para gerenciar divindades e poderes concedidos ===
-    const SELECTED_DIVINITY_KEY = 'roll20-hotbar-selected-divinity';
-    const SELECTED_DIVINITY_POWER_KEY = 'roll20-hotbar-selected-divinity-power';
+    const SELECTED_DIVINITY_KEY = 'tormenta-20-hotbars-selected-divinity';
+    const SELECTED_DIVINITY_POWER_KEY = 'tormenta-20-hotbars-selected-divinity-power';
 
     function getSelectedDivinity() {
         return localStorage.getItem(SELECTED_DIVINITY_KEY) || null;
@@ -14882,7 +14872,7 @@
             };
             executeBtn.onclick = () => {
                 // Executar ataque com Bote (1 PM)
-                const ATTACK_EFFECTS_KEY = 'roll20-hotbar-attack-effects';
+                const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
                 let savedAttackEffects = [];
                 try {
                     const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
@@ -15413,13 +15403,13 @@
 
     // Função para obter efeitos ativos
     function getActiveEffects() {
-        const activeEffects = localStorage.getItem('roll20-hotbar-active-effects');
+        const activeEffects = localStorage.getItem('tormenta-20-hotbars-active-effects');
         return activeEffects ? JSON.parse(activeEffects) : [];
     }
 
     // Função para salvar efeitos ativos
     function saveActiveEffects(effects) {
-        localStorage.setItem('roll20-hotbar-active-effects', JSON.stringify(effects));
+        localStorage.setItem('tormenta-20-hotbars-active-effects', JSON.stringify(effects));
     }
 
     // Função para verificar se um efeito está ativo
@@ -15550,13 +15540,13 @@
 
     // Função para obter condições ativas
     function getActiveConditions() {
-        const activeConditions = localStorage.getItem('roll20-hotbar-active-conditions');
+        const activeConditions = localStorage.getItem('tormenta-20-hotbars-active-conditions');
         return activeConditions ? JSON.parse(activeConditions) : [];
     }
 
     // Função para salvar condições ativas
     function saveActiveConditions(conditions) {
-        localStorage.setItem('roll20-hotbar-active-conditions', JSON.stringify(conditions));
+        localStorage.setItem('tormenta-20-hotbars-active-conditions', JSON.stringify(conditions));
     }
 
 
@@ -15631,7 +15621,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     }
 
     // Sistema de ordem dos efeitos
-    const EFFECTS_ORDER_KEY = 'roll20-hotbar-effects-order';
+    const EFFECTS_ORDER_KEY = 'tormenta-20-hotbars-effects-order';
 
     // Função para obter a ordem dos efeitos
     function getEffectsOrder() {
@@ -16013,7 +16003,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 // Busca os dados do efeito de comida
                 let comidaEffects = [];
                 try {
-                    comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                    comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                 } catch (e) {
                     console.error('Erro ao carregar efeitos de comida:', e);
                     comidaEffects = [];
@@ -16042,7 +16032,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 // Busca os dados do efeito de bebida
                 let bebidaEffects = [];
                 try {
-                    bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                    bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                 } catch (e) {
                     console.error('Erro ao carregar efeitos de bebida:', e);
                     bebidaEffects = [];
@@ -16059,7 +16049,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 // Busca os dados do efeito de poção
                 let pocaoEffects = [];
                 try {
-                    pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                    pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
                 } catch (e) {
                     console.error('Erro ao carregar efeitos de poção:', e);
                     pocaoEffects = [];
@@ -16167,9 +16157,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Remove do localStorage de efeitos de comida
         let comidaEffects = [];
         try {
-            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+            comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
             comidaEffects = comidaEffects.filter(e => e.effectKey !== effectKey);
-            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+            localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
         } catch (e) {
             console.error('Erro ao remover efeito de comida:', e);
         }
@@ -16287,9 +16277,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Remove do localStorage de efeitos de bebida
         let bebidaEffects = [];
         try {
-            bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+            bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
             bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effectKey);
-            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+            localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
         } catch (e) {
             console.error('Erro ao remover efeito de bebida:', e);
         }
@@ -16409,9 +16399,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Remove do localStorage de efeitos de poção
         let pocaoEffects = [];
         try {
-            pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+            pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
             pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effectKey);
-            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+            localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
         } catch (e) {
             console.error('Erro ao remover efeito de poção:', e);
         }
@@ -16491,7 +16481,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     }
 
     // Sistema de selectable-cards
-    const SELECTABLE_CARDS_KEY = 'roll20-hotbar-selectable-cards';
+    const SELECTABLE_CARDS_KEY = 'tormenta-20-hotbars-selectable-cards';
 
     // Função para obter selectable-cards ativos
     function getActiveSelectableCards() {
@@ -16634,7 +16624,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Efeitos de comida (convertidos para selectable-cards)
         let comidaEffects = [];
         try {
-            comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+            comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
         } catch (e) {
             console.error('Erro ao carregar efeitos de comida:', e);
             comidaEffects = [];
@@ -16686,7 +16676,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Efeitos de bebida (convertidos para selectable-cards)
         let bebidaEffects = [];
         try {
-            bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+            bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
         } catch (e) {
             console.error('Erro ao carregar efeitos de bebida:', e);
             bebidaEffects = [];
@@ -16705,7 +16695,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Carrega efeitos de poção
         let pocaoEffects = [];
         try {
-            pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+            pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
         } catch (e) {
             console.error('Erro ao carregar efeitos de poção:', e);
             pocaoEffects = [];
@@ -16793,14 +16783,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                         const index = activeEffects.indexOf(effect.effectKey);
                         if (index > -1) {
                             activeEffects.splice(index, 1);
-                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                             comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
-                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
                             saveActiveEffects(activeEffects);
                             showWarningNotification(`Efeito "${effect.title}" removido.`);
                         } else {
                             activeEffects.push(effect.effectKey);
-                            let comidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-comida-effects') || '[]');
+                            let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
                             comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
                             comidaEffects.push({
                                 name: effect.title,
@@ -16808,7 +16798,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                                 type: 'Comida',
                                 effectKey: effect.effectKey
                             });
-                            localStorage.setItem('roll20-hotbar-comida-effects', JSON.stringify(comidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
                             saveActiveEffects(activeEffects);
                             showSuccessNotification(`Efeito "${effect.title}" ativado!`);
                         }
@@ -16818,14 +16808,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                         const index = activeEffects.indexOf(effect.effectKey);
                         if (index > -1) {
                             activeEffects.splice(index, 1);
-                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                             bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
-                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
                             saveActiveEffects(activeEffects);
                             showWarningNotification(`Efeito "${effect.title}" removido.`);
                         } else {
                             activeEffects.push(effect.effectKey);
-                            let bebidaEffects = JSON.parse(localStorage.getItem('roll20-hotbar-bebida-effects') || '[]');
+                            let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
                             bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
                             bebidaEffects.push({
                                 name: effect.title,
@@ -16833,7 +16823,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                                 type: 'Bebida',
                                 effectKey: effect.effectKey
                             });
-                            localStorage.setItem('roll20-hotbar-bebida-effects', JSON.stringify(bebidaEffects));
+                            localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
                             saveActiveEffects(activeEffects);
                             showSuccessNotification(`Efeito "${effect.title}" ativado!`);
                         }
@@ -16843,14 +16833,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                         const index = activeEffects.indexOf(effect.effectKey);
                         if (index > -1) {
                             activeEffects.splice(index, 1);
-                            let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                            let pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
                             pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
-                            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+                            localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
                             saveActiveEffects(activeEffects);
                             showWarningNotification(`Efeito "${effect.title}" removido.`);
                         } else {
                             activeEffects.push(effect.effectKey);
-                            let pocaoEffects = JSON.parse(localStorage.getItem('roll20-hotbar-pocao-effects') || '[]');
+                            let pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
                             pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
                             pocaoEffects.push({
                                 name: effect.title,
@@ -16858,7 +16848,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                                 type: 'Poção',
                                 effectKey: effect.effectKey
                             });
-                            localStorage.setItem('roll20-hotbar-pocao-effects', JSON.stringify(pocaoEffects));
+                            localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
                             saveActiveEffects(activeEffects);
                             showSuccessNotification(`Efeito "${effect.title}" ativado!`);
                         }
