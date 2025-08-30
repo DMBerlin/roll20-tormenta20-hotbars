@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.74169'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.69505'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1892,7 +1892,7 @@
     // Função global para obter o nome do personagem
     function getCharacterName() {
         // Primeiro tenta buscar valor sincronizado, depois valor padrão
-        const syncedName = localStorage.getItem('tormenta-20-hotbars-sync-char-name');
+        const syncedName = localStorage.getItem('tormenta-20-hotbars-sync-name');
         if (syncedName) return syncedName;
         return localStorage.getItem(CHAR_NAME_KEY) || 'Nome do Personagem';
     }
@@ -1911,10 +1911,10 @@
     }
 
     // Funções para gerenciar nível do personagem
-    const CHAR_LEVEL_KEY = 'tormenta-20-hotbars-charlevel';
+    const CHAR_LEVEL_KEY = 'tormenta-20-hotbars-char-level-attr';
     function getCharLevel() {
         // Primeiro tenta buscar valor sincronizado, depois valor padrão
-        const syncedLevel = localStorage.getItem('tormenta-20-hotbars-sync-char-level');
+        const syncedLevel = localStorage.getItem('tormenta-20-hotbars-sync-level');
         if (syncedLevel) return syncedLevel;
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
@@ -1937,7 +1937,7 @@
         // Atualizar defesa no ícone do avatar
         const defenseIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Defesa"]');
         if (defenseIcon) {
-            const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-char-ac') || '0';
+            const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
             defenseIcon.textContent = defenseValue;
         }
 
@@ -1949,23 +1949,13 @@
 
     // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
-        // Debug: mostrar valores atuais no console
-        console.log('=== DEBUG: Valores Sincronizados ===');
-        console.log('Nível:', localStorage.getItem('tormenta-20-hotbars-sync-char-level'));
-        console.log('Defesa:', localStorage.getItem('tormenta-20-hotbars-sync-char-ac'));
-        console.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current'));
-        console.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total'));
-        console.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current'));
-        console.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total'));
-        console.log('=====================================');
-
         // Atualizar barra de vida
         const healthFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #ff4444"], div[style*="background: #4caf50"], div[style*="background: #ff9800"], div[style*="background: #f44336"]');
         const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
 
         if (healthFill && healthText) {
-            const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current') || '0');
-            const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total') || '1');
+            const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
+            const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '1');
             const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
 
             healthFill.style.width = `${healthPercentage}%`;
@@ -1986,8 +1976,8 @@
         const manaText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #6ec6ff"]');
 
         if (manaFill && manaText) {
-            const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current') || '0');
-            const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total') || '1');
+            const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
+            const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '1');
             const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
 
             manaFill.style.width = `${manaPercentage}%`;
@@ -1999,14 +1989,14 @@
     function setupLocalStorageObserver() {
         // Armazenar valores iniciais
         const initialValues = {
-            name: localStorage.getItem('tormenta-20-hotbars-sync-char-name'),
-            level: localStorage.getItem('tormenta-20-hotbars-sync-char-level')
+            name: localStorage.getItem('tormenta-20-hotbars-char-name-attr'),
+            level: localStorage.getItem('tormenta-20-hotbars-char-level-attr')
         };
 
         // Verificar mudanças periodicamente (mais eficiente)
         setInterval(() => {
-            const currentName = localStorage.getItem('tormenta-20-hotbars-sync-char-name');
-            const currentLevel = localStorage.getItem('tormenta-20-hotbars-sync-char-level');
+            const currentName = localStorage.getItem('tormenta-20-hotbars-sync-name');
+            const currentLevel = localStorage.getItem('tormenta-20-hotbars-sync-level');
 
             // Se houve mudança, atualizar UI
             if (currentName !== initialValues.name || currentLevel !== initialValues.level) {
@@ -7092,7 +7082,7 @@
             currentValueLabel.style.fontStyle = 'italic';
 
             // Buscar valor atual do localStorage (valor sincronizado)
-            const attrName = field.key.replace('_attr', '');
+            const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
             const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
             if (currentValue) {
                 currentValueLabel.textContent = `Valor atual: ${currentValue}`;
@@ -7234,7 +7224,8 @@
                 const attributes = {};
                 attributeFields.forEach(field => {
                     const input = document.getElementById(field.key);
-                    const attrName = field.key.replace('_attr', '');
+                    // Extrair apenas o nome do atributo (ex: 'name' de 'tormenta-20-hotbars-char-name-attr')
+                    const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
                     attributes[attrName] = input.value;
                 });
 
@@ -7243,7 +7234,7 @@
 
                 // Atualizar labels de valores atuais
                 attributeFields.forEach(field => {
-                    const attrName = field.key.replace('_attr', '');
+                    const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
                     const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
                     const currentValueLabel = document.getElementById(`${field.key}_current`);
                     if (currentValue) {
@@ -9858,7 +9849,7 @@
 
         // Ícone de defesa no canto inferior direito
         const defenseIcon = document.createElement('div');
-        defenseIcon.textContent = localStorage.getItem('tormenta-20-hotbars-sync-char-ac') || '0';
+        defenseIcon.textContent = localStorage.getItem('tormenta-20-hotbars-char-ac-attr') || '0';
         defenseIcon.style.position = 'absolute';
         defenseIcon.style.bottom = '-2px';
         defenseIcon.style.right = '-2px';
@@ -9944,8 +9935,8 @@
         healthFill.style.borderRadius = '4px';
 
         // Calcular porcentagem de vida
-        const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-current') || '0');
-        const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-hp-total') || '1');
+        const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
+        const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '1');
         const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
         healthFill.style.width = `${healthPercentage}%`;
 
@@ -9991,8 +9982,8 @@
         manaFill.style.borderRadius = '4px';
 
         // Calcular porcentagem de mana
-        const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-current') || '0');
-        const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-char-mp-total') || '1');
+        const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
+        const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '1');
         const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
         manaFill.style.width = `${manaPercentage}%`;
 
