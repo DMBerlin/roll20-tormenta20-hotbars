@@ -5,7 +5,7 @@ Esta documentação explica como configurar e manter a landing page do projeto n
 ## 📁 Estrutura de Arquivos
 
 ```
-/
+landing-page/
 ├── index.html              # Página principal
 ├── styles.css              # Estilos da página
 ├── script.js               # JavaScript interativo
@@ -15,7 +15,8 @@ Esta documentação explica como configurar e manter a landing page do projeto n
 │   ├── content.js          # Script principal
 │   ├── manifest.json       # Manifesto da extensão
 │   └── icons/              # Ícones da extensão
-└── update-landing-page.js  # Script de atualização
+├── update-landing-page.js  # Script de atualização
+└── README.md               # Esta documentação
 ```
 
 ## 🚀 Configuração Inicial
@@ -24,12 +25,12 @@ Esta documentação explica como configurar e manter a landing page do projeto n
 
 1. Vá para **Settings** > **Pages** no repositório
 2. Em **Source**, selecione **Deploy from a branch**
-3. Selecione a branch **main** e pasta **/ (root)**
+3. Selecione a branch **main** e pasta **/landing-page**
 4. Clique em **Save**
 
 ### 2. Configurar GitHub Actions (Opcional)
 
-O arquivo `.github/workflows/deploy.yml` será criado automaticamente pelo script `update-landing-page.js`.
+O arquivo `.github/workflows/deploy.yml` será criado automaticamente pelo script `landing-page/update-landing-page.js`.
 
 ## 🔄 Atualização Automática
 
@@ -43,7 +44,7 @@ pnpm update-landing
 Este script:
 - Busca a versão da branch main
 - Atualiza o HTML com informações corretas
-- Copia arquivos necessários
+- Copia arquivos necessários para landing-page/
 - Cria configuração do GitHub Actions
 
 ### Fluxo de Trabalho
@@ -91,7 +92,7 @@ A landing page exibe automaticamente:
 
 ### Cores e Estilo
 
-As cores principais estão definidas em `styles.css`:
+As cores principais estão definidas em `landing-page/styles.css`:
 
 ```css
 :root {
@@ -105,7 +106,7 @@ As cores principais estão definidas em `styles.css`:
 
 ### Conteúdo
 
-Edite o arquivo `index.html` para modificar:
+Edite o arquivo `landing-page/index.html` para modificar:
 - Textos e descrições
 - Seções de recursos
 - FAQ
@@ -167,11 +168,11 @@ A página é totalmente responsiva e funciona em:
    - Confirme se a branch main está atualizada
 
 2. **Download não funciona**:
-   - Verifique se a pasta `package/` existe
+   - Verifique se a pasta `landing-page/package/` existe
    - Confirme se `content.js` está presente
 
 3. **Imagens não carregam**:
-   - Verifique se a pasta `assets/` existe
+   - Verifique se a pasta `landing-page/assets/` existe
    - Confirme se os arquivos foram copiados corretamente
 
 ### Logs do GitHub Actions

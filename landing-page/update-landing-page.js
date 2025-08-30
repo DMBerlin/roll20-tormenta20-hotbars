@@ -52,7 +52,7 @@ function getBuildInfo() {
 // Função para atualizar o HTML com a versão correta
 function updateHTML(version, fileSize) {
     try {
-        const htmlPath = path.join(process.cwd(), 'index.html');
+        const htmlPath = path.join(process.cwd(), 'landing-page', 'index.html');
         let htmlContent = fs.readFileSync(htmlPath, 'utf8');
         
         // Atualizar versão
@@ -88,23 +88,23 @@ function copyAssets() {
     try {
         // Copiar ícones
         const iconSource = path.join(process.cwd(), 'dist', 'package', 'icon128.png');
-        const iconDest = path.join(process.cwd(), 'assets', 'icon-128.png');
+        const iconDest = path.join(process.cwd(), 'landing-page', 'assets', 'icon-128.png');
         
         if (fs.existsSync(iconSource)) {
             fs.copyFileSync(iconSource, iconDest);
-            console.log('✅ Ícone copiado para assets/');
+            console.log('✅ Ícone copiado para landing-page/assets/');
         }
         
         // Copiar arquivo da extensão para download
         const extensionSource = path.join(process.cwd(), 'dist', 'package');
-        const extensionDest = path.join(process.cwd(), 'package');
+        const extensionDest = path.join(process.cwd(), 'landing-page', 'package');
         
         if (fs.existsSync(extensionSource)) {
             if (fs.existsSync(extensionDest)) {
                 fs.rmSync(extensionDest, { recursive: true, force: true });
             }
             fs.cpSync(extensionSource, extensionDest, { recursive: true });
-            console.log('✅ Arquivos da extensão copiados para package/');
+            console.log('✅ Arquivos da extensão copiados para landing-page/package/');
         }
         
         return true;
