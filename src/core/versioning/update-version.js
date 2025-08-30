@@ -37,7 +37,8 @@ function generateTimestamp() {
 function formatVersion(baseVersion, branch) {
   const versionWithoutV = baseVersion.startsWith('v') ? baseVersion.substring(1) : baseVersion;
   
-  if (branch === 'develop') {
+  // Adicionar timestamp para qualquer branch que não seja main ou master
+  if (branch !== 'main' && branch !== 'master') {
     const timestamp = generateTimestamp();
     return `${versionWithoutV}.${timestamp}`;
   }
