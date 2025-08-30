@@ -36,7 +36,7 @@ function getLatestTag() {
     try {
         const tags = execSync('git tag --sort=-version:refname', { encoding: 'utf8' }).trim();
         return tags.split('\n')[0] || 'Nenhuma tag encontrada';
-    } catch (error) {
+    } catch {
         return 'Nenhuma tag encontrada';
     }
 }
@@ -59,7 +59,7 @@ function createGitTag(version, message) {
             try {
                 execSync(`git push origin --delete ${version}`, { stdio: 'pipe' });
                 console.log('🗑️  Tag remota removida');
-            } catch (remoteError) {
+            } catch {
                 console.log('ℹ️  Tag remota não encontrada ou não pode ser removida');
             }
         }

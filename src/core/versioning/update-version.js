@@ -1,49 +1,25 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const { execSync } = require('child_process');
 const path = require('path');
 
-// Função para obter a branch atual
-function getCurrentBranch() {
+/**
+ * Script para sincronizar a versão do package.json com o main.js
+ * 
+ * Este script lê a versão definida manualmente no package.json e
+ * sincroniza com a constante SCRIPT_VERSION no main.js
+ */
+
+// Função para obter a versão do package.json
+function getPackageVersion() {
   try {
-    const branch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
-    return branch;
+    const packageJsonPath = path.join(__dirname, '..', '..', '..', 'package.json');
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    return packageJson.version;
   } catch (error) {
-    console.error('Erro ao obter a branch atual:', error.message);
-    return null;
+    console.error('❌ Erro ao ler package.json:', error.message);
+    process.exit(1);
   }
-}
-
-// Função para obter a última tag Git
-function getLatestGitTag() {
-  try {
-    const tag = execSync('git describe --tags --abbrev=0', { encoding: 'utf8' }).trim();
-    return tag;
-  } catch (error) {
-    console.error('Erro ao obter a última tag Git:', error.message);
-    return null;
-  }
-}
-
-// Função para gerar timestamp
-function generateTimestamp() {
-  const now = new Date();
-  // Usar apenas os últimos 5 dígitos do timestamp para manter compatibilidade
-  return (now.getTime() % 100000).toString();
-}
-
-// Função para formatar versão baseada na branch
-function formatVersion(baseVersion, branch) {
-  const versionWithoutV = baseVersion.startsWith('v') ? baseVersion.substring(1) : baseVersion;
-  
-  // Adicionar timestamp para qualquer branch que não seja main ou master
-  if (branch !== 'main' && branch !== 'master') {
-    const timestamp = generateTimestamp();
-    return `${versionWithoutV}.${timestamp}`;
-  }
-  
-  return versionWithoutV;
 }
 
 // Função para atualizar a versão no arquivo main.js
@@ -56,7 +32,7 @@ function updateVersionInFile(filePath, newVersion) {
     if (versionRegex.test(content)) {
       content = content.replace(versionRegex, `const SCRIPT_VERSION = '${newVersion}'; // Última tag Git`);
       fs.writeFileSync(filePath, content, 'utf8');
-      console.log(`✅ Versão atualizada para ${newVersion} em ${filePath}`);
+      console.log(`✅ Versão sincronizada para ${newVersion} em ${filePath}`);
       return true;
     } else {
       console.error('❌ Não foi possível encontrar a constante SCRIPT_VERSION no arquivo');
@@ -68,25 +44,11 @@ function updateVersionInFile(filePath, newVersion) {
   }
 }
 
-// Função para atualizar a versão no package.json
-function updatePackageJsonVersion(newVersion) {
-  try {
-    const packageJsonPath = path.join(__dirname, '..', '..', '..', 'package.json');
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-
-    packageJson.version = newVersion;
-
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n', 'utf8');
-    console.log(`✅ Versão atualizada para ${newVersion} em package.json`);
-    return true;
-  } catch (error) {
-    console.error('❌ Erro ao atualizar package.json:', error.message);
-    return false;
-  }
-}
-
 // Função principal
 function main() {
+  console.log('🔄 Script de sincronização de versão');
+  console.log('====================================\n');
+
   const scriptPath = path.join(__dirname, '..', '..', 'main.js');
 
   // Verificar se o arquivo existe
@@ -95,38 +57,18 @@ function main() {
     process.exit(1);
   }
 
-  // Obter a branch atual
-  const currentBranch = getCurrentBranch();
-  if (!currentBranch) {
-    console.error('❌ Não foi possível obter a branch atual');
-    process.exit(1);
-  }
+  // Obter a versão do package.json
+  const packageVersion = getPackageVersion();
+  console.log(`📦 Versão do package.json: ${packageVersion}`);
 
-  console.log(`🌿 Branch atual: ${currentBranch}`);
+  // Sincronizar com o main.js
+  const success = updateVersionInFile(scriptPath, packageVersion);
 
-  // Obter a última tag Git
-  const latestTag = getLatestGitTag();
-  if (!latestTag) {
-    console.error('❌ Não foi possível obter a última tag Git');
-    process.exit(1);
-  }
-
-  console.log(`🏷️  Última tag Git encontrada: ${latestTag}`);
-
-  // Formatar versão baseada na branch
-  const formattedVersion = formatVersion(latestTag, currentBranch);
-  console.log(`📦 Versão formatada: ${formattedVersion}`);
-
-  // Atualizar o arquivo main.js (constante SCRIPT_VERSION)
-  const mainJsSuccess = updateVersionInFile(scriptPath, formattedVersion);
-
-  // Atualizar o package.json
-  const packageJsonSuccess = updatePackageJsonVersion(formattedVersion);
-
-  if (mainJsSuccess && packageJsonSuccess) {
-    console.log('🎉 Atualização de versão concluída com sucesso!');
+  if (success) {
+    console.log('\n🎉 Sincronização de versão concluída com sucesso!');
+    console.log(`📝 A versão ${packageVersion} foi sincronizada do package.json para o main.js`);
   } else {
-    console.error('❌ Falha na atualização de versão');
+    console.error('\n❌ Falha na sincronização de versão');
     process.exit(1);
   }
 }
@@ -137,10 +79,6 @@ if (require.main === module) {
 }
 
 module.exports = {
-  getCurrentBranch,
-  getLatestGitTag,
-  updateVersionInFile,
-  updatePackageJsonVersion,
-  formatVersion,
-  generateTimestamp
+  getPackageVersion,
+  updateVersionInFile
 }; 

@@ -5,7 +5,7 @@ Este diretório contém scripts para gerenciar versões e tags do projeto.
 ## Scripts Disponíveis
 
 ### 1. update-version.js
-Atualiza a versão do script baseada na branch atual e número de commits.
+Sincroniza a versão do `package.json` com o `main.js`.
 
 **Uso:**
 ```bash
@@ -15,10 +15,9 @@ node src/core/versioning/update-version.js
 ```
 
 **Funcionalidades:**
-- Detecta a branch atual
-- Encontra a última tag Git
-- Gera uma nova versão formatada (ex: 0.3.0.12345)
-- Atualiza `src/main.js` e `package.json`
+- Lê a versão definida manualmente no `package.json`
+- Sincroniza com a constante `SCRIPT_VERSION` no `main.js`
+- Não gera versões automáticas - você controla a versão manualmente
 
 ### 2. create-tag.js
 Cria uma nova tag Git usando a versão atual do `package.json`.
@@ -62,14 +61,20 @@ pnpm create-tag -- --force
    git commit -m "Nova funcionalidade"
    ```
 
-2. **Atualizar versão:**
+2. **Definir versão manualmente:**
+   ```bash
+   # Editar package.json e definir a versão desejada
+   # Exemplo: "version": "0.3.1"
+   ```
+
+3. **Sincronizar versão:**
    ```bash
    pnpm update-version
    ```
 
-3. **Criar tag de release:**
+4. **Criar tag de release:**
    ```bash
-   pnpm create-tag -- --message="Release 0.3.0 - Novas funcionalidades"
+   pnpm create-tag -- --message="Release 0.3.1 - Novas funcionalidades"
    ```
 
 ## Exemplo de Saída
