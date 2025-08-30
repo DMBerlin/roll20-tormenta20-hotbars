@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.43251'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.62899'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1921,17 +1921,21 @@
 
     // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
+        console.log('🔄 updateHotbarUI() chamada');
+        
         // Atualizar nome do personagem
         const characterNameElement = document.getElementById('character-name');
         if (characterNameElement) {
             const syncedName = getCharacterName();
             characterNameElement.textContent = syncedName;
+            console.log('✅ Nome atualizado:', syncedName);
         }
 
         // Atualizar nível no ícone do avatar
         const levelIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Nível do herói"]');
         if (levelIcon) {
             levelIcon.textContent = getCharLevel();
+            console.log('✅ Nível atualizado:', getCharLevel());
         }
 
         // Atualizar defesa no ícone do avatar
@@ -1939,16 +1943,20 @@
         if (defenseIcon) {
             const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
             defenseIcon.textContent = defenseValue;
+            console.log('✅ Defesa atualizada:', defenseValue);
         }
 
         // Atualizar barras de vida e mana
+        console.log('🔄 Chamando updateHealthAndManaBars()...');
         updateHealthAndManaBars();
 
-        console.log('UI da hotbar atualizada com dados sincronizados');
+        console.log('✅ UI da hotbar atualizada com dados sincronizados');
     }
 
     // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
+        console.log('🔄 updateHealthAndManaBars() chamada');
+        
         // Debug: mostrar valores atuais no console
         console.log('=== DEBUG: Atualizando Barras de Vida e Mana ===');
         console.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-hp-current'));
@@ -1976,7 +1984,7 @@
         console.log('🔍 Procurando healthBarContainer...');
         const healthBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
         console.log('healthBarContainer encontrado:', healthBarContainer);
-        
+
         if (healthBarContainer) {
             console.log('📋 Elementos dentro do healthBarContainer:');
             healthBarContainer.childNodes.forEach((child, index) => {
@@ -1984,10 +1992,10 @@
                     console.log(`  ${index}:`, child.tagName, child.style.cssText);
                 }
             });
-            
+
             const healthFill = healthBarContainer.querySelector('div[style*="height: 100%"]');
             const healthText = healthBarContainer.querySelector('div[style*="color: #ecf0f1"]');
-            
+
             console.log('healthFill encontrado:', healthFill);
             console.log('healthText encontrado:', healthText);
 
@@ -2020,7 +2028,7 @@
         console.log('🔍 Procurando manaBarContainer...');
         const manaBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
         console.log('manaBarContainer encontrado:', manaBarContainer);
-        
+
         if (manaBarContainer) {
             console.log('📋 Elementos dentro do manaBarContainer:');
             manaBarContainer.childNodes.forEach((child, index) => {
@@ -2028,10 +2036,10 @@
                     console.log(`  ${index}:`, child.tagName, child.style.cssText);
                 }
             });
-            
+
             const manaFill = manaBarContainer.querySelector('div[style*="height: 100%"]');
             const manaText = manaBarContainer.querySelector('div[style*="color: #6ec6ff"]');
-            
+
             console.log('manaFill encontrado:', manaFill);
             console.log('manaText encontrado:', manaText);
 
@@ -2074,6 +2082,17 @@
             const currentMpCurrent = localStorage.getItem('tormenta-20-hotbars-sync-mp-current');
             const currentMpTotal = localStorage.getItem('tormenta-20-hotbars-sync-mp-total');
             const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
+
+            // Debug: mostrar valores atuais a cada verificação
+            console.log('🔍 Observer verificando valores:', {
+                name: currentName,
+                level: currentLevel,
+                hpCurrent: currentHpCurrent,
+                hpTotal: currentHpTotal,
+                mpCurrent: currentMpCurrent,
+                mpTotal: currentMpTotal,
+                ac: currentAc
+            });
 
             // Verificar se houve mudança em qualquer valor
             const hasChanges =
