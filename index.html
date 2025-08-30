@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tormenta20 Hotbars - Chrome Extension</title>
+    <meta name="description" content="Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dmberlin.github.io/roll20-tormenta20-hotbars/">
+    <meta property="og:title" content="Tormenta20 Hotbars - Chrome Extension">
+    <meta property="og:description" content="Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano">
+    <meta property="og:image" content="https://dmberlin.github.io/roll20-tormenta20-hotbars/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dmberlin.github.io/roll20-tormenta20-hotbars/">
+    <meta property="twitter:title" content="Tormenta20 Hotbars - Chrome Extension">
+    <meta property="twitter:description" content="Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano">
+    <meta property="twitter:image" content="https://dmberlin.github.io/roll20-tormenta20-hotbars/assets/og-image.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/icon-128.png" alt="Tormenta20 Hotbars" class="logo-icon">
+                    <h1>Tormenta20 Hotbars</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#download" class="nav-link">Download</a>
+                    <a href="#features" class="nav-link">Recursos</a>
+                    <a href="#installation" class="nav-link">Instalação</a>
+                    <a href="https://github.com/DMBerlin/roll20-tormenta20-hotbars" target="_blank" class="nav-link">GitHub</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2>Hotbars para Tormenta20 no Roll20</h2>
+                        <p class="hero-description">
+                            Chrome Extension que adiciona hotbars personalizadas ao Roll20, 
+                            otimizadas especificamente para o sistema Tormenta20: Jogo do Ano.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#download" class="btn btn-primary">Download Gratuito</a>
+                            <a href="#features" class="btn btn-secondary">Ver Recursos</a>
+                        </div>
+                        <div class="version-info">
+                            <span class="version-badge">Versão <span id="current-version">0.3.1</span></span>
+                            <span class="last-update">Última atualização: <span id="last-update">30/08/2025</span></span>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="assets/hero-screenshot.png" alt="Screenshot da Hotbar" class="screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download-section">
+            <div class="container">
+                <h2>Download</h2>
+                <div class="download-cards">
+                    <div class="download-card">
+                        <div class="card-header">
+                            <img src="assets/chrome-icon.png" alt="Chrome" class="browser-icon">
+                            <h3>Chrome / Edge</h3>
+                        </div>
+                        <p>Compatível com Google Chrome, Microsoft Edge e outros navegadores baseados em Chromium.</p>
+                        <div class="download-info">
+                            <span class="file-size">Tamanho: <span id="file-size">716 KB</span></span>
+                            <span class="downloads">Downloads: <span id="download-count">1.2k</span></span>
+                        </div>
+                        <a href="package/content.js" class="btn btn-download" download>
+                            <span class="btn-icon">⬇️</span>
+                            Download Extension
+                        </a>
+                        <div class="download-note">
+                            <small>⚠️ Instruções de instalação abaixo</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Recursos Principais</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Hotbars Personalizadas</h3>
+                        <p>Interface otimizada para Tormenta20 com botões de acesso rápido para magias, poções e condições.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔮</div>
+                        <h3>Grimório Completo</h3>
+                        <p>Acesso rápido a todas as magias do Tormenta20 com descrições detalhadas e filtros por escola.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3>Sistema de Poções</h3>
+                        <p>Catálogo completo de poções com efeitos, duração e aplicação automática de bônus.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Condições de Combate</h3>
+                        <p>Gerenciamento automático de condições como sangramento, envenenamento e efeitos mágicos.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Atalhos de Teclado</h3>
+                        <p>Controle total via teclado com atalhos personalizáveis para todas as funcionalidades.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Interface Moderna</h3>
+                        <p>Design responsivo e intuitivo que se integra perfeitamente ao Roll20.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="installation-section">
+            <div class="container">
+                <h2>Como Instalar</h2>
+                <div class="installation-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Baixe a Extensão</h3>
+                            <p>Clique no botão "Download Extension" acima para baixar o arquivo da extensão.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Abra o Chrome/Edge</h3>
+                            <p>Vá para <code>chrome://extensions/</code> ou <code>edge://extensions/</code></p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Ative o Modo Desenvolvedor</h3>
+                            <p>Clique no toggle "Modo desenvolvedor" no canto superior direito.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Carregue a Extensão</h3>
+                            <p>Clique em "Carregar sem compactação" e selecione a pasta da extensão baixada.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Acesse o Roll20</h3>
+                            <p>Entre em uma mesa do Roll20 e a hotbar aparecerá automaticamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2>Perguntas Frequentes</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>É seguro usar esta extensão?</h3>
+                        <p>Sim! A extensão é open-source e não coleta dados pessoais. Todo o código está disponível no GitHub para inspeção.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Funciona em outros navegadores?</h3>
+                        <p>A extensão é compatível com qualquer navegador baseado em Chromium: Chrome, Edge, Brave, Opera, etc.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Precisa de permissões especiais?</h3>
+                        <p>A extensão só funciona no Roll20 e não requer acesso a outros sites ou dados pessoais.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Como reportar bugs?</h3>
+                        <p>Use a seção Issues no GitHub do projeto para reportar problemas ou sugerir melhorias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Tormenta20 Hotbars</h4>
+                    <p>Chrome Extension para Roll20</p>
+                    <p>Desenvolvido com ❤️ para a comunidade Tormenta20</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <a href="https://github.com/DMBerlin/roll20-tormenta20-hotbars" target="_blank">GitHub</a>
+                    <a href="https://github.com/DMBerlin/roll20-tormenta20-hotbars/issues" target="_blank">Reportar Bug</a>
+                    <a href="https://github.com/DMBerlin/roll20-tormenta20-hotbars/blob/main/README.md" target="_blank">Documentação</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Autor</h4>
+                    <p>Daniel Marinho Goncalves</p>
+                    <p>Licença: ISC</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tormenta20 Hotbars. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
