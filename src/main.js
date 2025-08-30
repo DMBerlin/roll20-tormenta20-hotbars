@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.30914'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.23706'; // Última tag Git
 
     const logger = window.console;
 
@@ -1994,12 +1994,12 @@
             }
         });
 
-                // Atualizar barra de vida
+        // Atualizar barra de vida
         logger.log('🔍 Procurando healthBarContainer...');
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
         const infoContainer = characterInfo.children[1];
         logger.log('infoContainer encontrado:', infoContainer);
-        
+
         // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
         const healthBarContainer = infoContainer.children[1];
         logger.log('healthBarContainer encontrado:', healthBarContainer);
@@ -2009,11 +2009,22 @@
             healthBarContainer.childNodes.forEach((child, index) => {
                 if (child.nodeType === Node.ELEMENT_NODE) {
                     logger.log(`  ${index}:`, child.tagName, child.style.cssText);
+                    
+                    // Se for um div, mostrar seus filhos também
+                    if (child.tagName === 'DIV') {
+                        logger.log(`     Filhos do ${index}:`);
+                        child.childNodes.forEach((grandChild, grandIndex) => {
+                            if (grandChild.nodeType === Node.ELEMENT_NODE) {
+                                logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.style.cssText);
+                            }
+                        });
+                    }
                 }
             });
 
-            const healthFill = healthBarContainer.querySelector('div[style*="height: 100%"]');
-            const healthText = healthBarContainer.querySelector('div[style*="color: #ecf0f1"]');
+            // Buscar elementos de forma mais específica
+            const healthFill = healthBarContainer.children[0]?.children[0]; // Primeiro filho do primeiro filho
+            const healthText = healthBarContainer.children[1]; // Segundo filho
 
             logger.log('healthFill encontrado:', healthFill);
             logger.log('healthText encontrado:', healthText);
@@ -2054,11 +2065,22 @@
             manaBarContainer.childNodes.forEach((child, index) => {
                 if (child.nodeType === Node.ELEMENT_NODE) {
                     logger.log(`  ${index}:`, child.tagName, child.style.cssText);
+                    
+                    // Se for um div, mostrar seus filhos também
+                    if (child.tagName === 'DIV') {
+                        logger.log(`     Filhos do ${index}:`);
+                        child.childNodes.forEach((grandChild, grandIndex) => {
+                            if (grandChild.nodeType === Node.ELEMENT_NODE) {
+                                logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.style.cssText);
+                            }
+                        });
+                    }
                 }
             });
 
-            const manaFill = manaBarContainer.querySelector('div[style*="height: 100%"]');
-            const manaText = manaBarContainer.querySelector('div[style*="color: #6ec6ff"]');
+            // Buscar elementos de forma mais específica
+            const manaFill = manaBarContainer.children[0]?.children[0]; // Primeiro filho do primeiro filho
+            const manaText = manaBarContainer.children[1]; // Segundo filho
 
             logger.log('manaFill encontrado:', manaFill);
             logger.log('manaText encontrado:', manaText);
