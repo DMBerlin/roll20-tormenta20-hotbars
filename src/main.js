@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.69505'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.44128'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1949,39 +1949,72 @@
 
     // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
+        // Debug: mostrar valores atuais no console
+        console.log('=== DEBUG: Atualizando Barras de Vida e Mana ===');
+        console.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-hp-current'));
+        console.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-hp-total'));
+        console.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-mp-current'));
+        console.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-mp-total'));
+        console.log('===============================================');
+
+        // Buscar elementos de forma mais robusta
+        const characterInfo = document.querySelector('#character-avatar')?.parentNode?.parentNode;
+        if (!characterInfo) {
+            console.log('❌ Não foi possível encontrar characterInfo');
+            return;
+        }
+
         // Atualizar barra de vida
-        const healthFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #ff4444"], div[style*="background: #4caf50"], div[style*="background: #ff9800"], div[style*="background: #f44336"]');
-        const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
+        const healthBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
+        if (healthBarContainer) {
+            const healthFill = healthBarContainer.querySelector('div[style*="height: 100%"]');
+            const healthText = healthBarContainer.querySelector('div[style*="color: #ecf0f1"]');
 
-        if (healthFill && healthText) {
-            const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
-            const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '1');
-            const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
+            if (healthFill && healthText) {
+                const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
+                const maxHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '1');
+                const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
 
-            healthFill.style.width = `${healthPercentage}%`;
-            healthText.textContent = `${currentHP}/${maxHP}`;
+                healthFill.style.width = `${healthPercentage}%`;
+                healthText.textContent = `${currentHP}/${maxHP}`;
 
-            // Ajustar cor baseada na porcentagem
-            if (healthPercentage > 50) {
-                healthFill.style.background = '#4caf50';
-            } else if (healthPercentage > 25) {
-                healthFill.style.background = '#ff9800';
+                // Ajustar cor baseada na porcentagem
+                if (healthPercentage > 50) {
+                    healthFill.style.background = '#4caf50';
+                } else if (healthPercentage > 25) {
+                    healthFill.style.background = '#ff9800';
+                } else {
+                    healthFill.style.background = '#f44336';
+                }
+
+                console.log(`✅ Barra de vida atualizada: ${currentHP}/${maxHP} (${healthPercentage}%)`);
             } else {
-                healthFill.style.background = '#f44336';
+                console.log('❌ Não foi possível encontrar elementos da barra de vida');
             }
+        } else {
+            console.log('❌ Não foi possível encontrar healthBarContainer');
         }
 
         // Atualizar barra de mana
-        const manaFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #2196f3"]');
-        const manaText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #6ec6ff"]');
+        const manaBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
+        if (manaBarContainer) {
+            const manaFill = manaBarContainer.querySelector('div[style*="height: 100%"]');
+            const manaText = manaBarContainer.querySelector('div[style*="color: #6ec6ff"]');
 
-        if (manaFill && manaText) {
-            const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
-            const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '1');
-            const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
+            if (manaFill && manaText) {
+                const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
+                const maxMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '1');
+                const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
 
-            manaFill.style.width = `${manaPercentage}%`;
-            manaText.textContent = `${currentMP}/${maxMP}`;
+                manaFill.style.width = `${manaPercentage}%`;
+                manaText.textContent = `${currentMP}/${maxMP}`;
+
+                console.log(`✅ Barra de mana atualizada: ${currentMP}/${maxMP} (${manaPercentage}%)`);
+            } else {
+                console.log('❌ Não foi possível encontrar elementos da barra de mana');
+            }
+        } else {
+            console.log('❌ Não foi possível encontrar manaBarContainer');
         }
     }
 
@@ -9809,31 +9842,13 @@
         editIcon.style.opacity = '0';
         editIcon.style.transition = 'all 0.2s';
 
-        // Ícone da classe Caçador
-        const classIcon = document.createElement('div');
-        classIcon.innerHTML = '🏹';
-        classIcon.style.position = 'absolute';
-        classIcon.style.top = '-2px';
-        classIcon.style.left = '-2px';
-        classIcon.style.background = '#8B4513';
-        classIcon.style.borderRadius = '50%';
-        classIcon.style.width = '18px';
-        classIcon.style.height = '18px';
-        classIcon.style.display = 'flex';
-        classIcon.style.alignItems = 'center';
-        classIcon.style.justifyContent = 'center';
-        classIcon.style.fontSize = '10px';
-        classIcon.style.border = '2px solid rgba(30,30,40,0.92)';
-        classIcon.style.transition = 'all 0.2s';
-        classIcon.title = 'Caçador';
-
-        // Ícone de nível no canto inferior esquerdo
+        // Ícone de nível no canto superior esquerdo (antiga posição do ícone do arco)
         const levelIcon = document.createElement('div');
         levelIcon.textContent = getCharLevel();
         levelIcon.style.position = 'absolute';
-        levelIcon.style.bottom = '-2px';
+        levelIcon.style.top = '-2px';
         levelIcon.style.left = '-2px';
-        levelIcon.style.background = '#6ec6ff';
+        levelIcon.style.background = 'rgba(26,26,46,0.8)';
         levelIcon.style.borderRadius = '50%';
         levelIcon.style.width = '18px';
         levelIcon.style.height = '18px';
@@ -9869,7 +9884,6 @@
 
         avatarContainer.appendChild(avatar);
         avatarContainer.appendChild(editIcon);
-        avatarContainer.appendChild(classIcon);
         avatarContainer.appendChild(levelIcon);
         avatarContainer.appendChild(defenseIcon);
 
@@ -9877,14 +9891,12 @@
         avatarContainer.onmouseover = () => {
             avatar.style.transform = 'scale(1.05)';
             editIcon.style.opacity = '1';
-            classIcon.style.transform = 'scale(1.1)';
             levelIcon.style.transform = 'scale(1.1)';
             defenseIcon.style.transform = 'scale(1.1)';
         };
         avatarContainer.onmouseout = () => {
             avatar.style.transform = 'scale(1)';
             editIcon.style.opacity = '0';
-            classIcon.style.transform = 'scale(1)';
             levelIcon.style.transform = 'scale(1)';
             defenseIcon.style.transform = 'scale(1)';
         };
