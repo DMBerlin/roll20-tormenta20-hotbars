@@ -1947,7 +1947,7 @@
         console.log('UI da hotbar atualizada com dados sincronizados');
     }
 
-        // Função para atualizar barras de vida e mana
+    // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
         // Debug: mostrar valores atuais no console
         console.log('=== DEBUG: Valores Sincronizados ===');
@@ -1962,12 +1962,12 @@
         // Atualizar barra de vida
         const healthFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #ff4444"], div[style*="background: #4caf50"], div[style*="background: #ff9800"], div[style*="background: #f44336"]');
         const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
-        
+
         if (healthFill && healthText) {
             const currentHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-current') || '0');
             const maxHP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-hp-total') || '1');
             const healthPercentage = maxHP > 0 ? Math.max(0, Math.min(100, (currentHP / maxHP) * 100)) : 0;
-            
+
             healthFill.style.width = `${healthPercentage}%`;
             healthText.textContent = `${currentHP}/${maxHP}`;
 
@@ -1984,12 +1984,12 @@
         // Atualizar barra de mana
         const manaFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #2196f3"]');
         const manaText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #6ec6ff"]');
-        
+
         if (manaFill && manaText) {
             const currentMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-current') || '0');
             const maxMP = parseInt(localStorage.getItem('roll20-hotbar-sync-char-mp-total') || '1');
             const manaPercentage = maxMP > 0 ? Math.max(0, Math.min(100, (currentMP / maxMP) * 100)) : 0;
-            
+
             manaFill.style.width = `${manaPercentage}%`;
             manaText.textContent = `${currentMP}/${maxMP}`;
         }
@@ -2526,10 +2526,13 @@
             const checkForMessage = () => {
                 // Procura por mensagens no chat que contenham nossa chave
                 const chatMessages = document.querySelectorAll('#textchat .message');
+                console.log(`Procurando mensagem com chave: ${dataKey}`);
+                console.log(`Mensagens encontradas no chat: ${chatMessages.length}`);
 
                 for (let message of chatMessages) {
                     const messageText = message.textContent || message.innerText;
                     if (messageText.includes(dataKey)) {
+                        console.log('Mensagem encontrada:', messageText);
                         resolve(message);
                         return;
                     }
@@ -2539,6 +2542,7 @@
                 if (Date.now() - startTime < maxWaitTime) {
                     setTimeout(checkForMessage, 100);
                 } else {
+                    console.error('Timeout: Mensagem de dados não encontrada');
                     reject(new Error('Timeout: Mensagem de dados não encontrada'));
                 }
             };
@@ -2696,8 +2700,12 @@
             const jsonString = JSON.stringify(jsonData);
             const command = `${jsonString} [${dataKey}]`;
 
-            console.log('Comando de sincronização JSON enviado:', command);
+            console.log('=== DEBUG SINCRONIZAÇÃO ===');
+            console.log('Nome do personagem:', characterName);
             console.log('Atributos configurados:', attributes);
+            console.log('Objeto JSON criado:', jsonData);
+            console.log('Comando de sincronização JSON enviado:', command);
+            console.log('================================');
 
             sendToChat(command);
 
@@ -2714,7 +2722,7 @@
                 // 6. Salva os dados no localStorage com as chaves corretas
                 console.log('=== DADOS CAPTURADOS DA FICHA ===');
                 console.log('Dados brutos:', characterData);
-                
+
                 Object.keys(characterData).forEach(key => {
                     const value = characterData[key];
                     if (value !== undefined && value !== null) {
@@ -2724,7 +2732,7 @@
                         console.log(`Salvando ${syncKey}: ${value}`);
                     }
                 });
-                
+
                 console.log('=== FIM DOS DADOS CAPTURADOS ===');
 
                 // 7. Atualizar a UI da hotbar imediatamente
@@ -9921,10 +9929,6 @@
         characterName.style.whiteSpace = 'nowrap';
         characterName.style.cursor = 'default';
         characterName.title = 'Nome do personagem (sincronizado da ficha)';
-
-
-
-
 
         characterInfo.appendChild(characterName);
 
