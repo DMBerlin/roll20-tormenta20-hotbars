@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.44128'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.81336'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -2022,19 +2022,55 @@
     function setupLocalStorageObserver() {
         // Armazenar valores iniciais
         const initialValues = {
-            name: localStorage.getItem('tormenta-20-hotbars-char-name-attr'),
-            level: localStorage.getItem('tormenta-20-hotbars-char-level-attr')
+            name: localStorage.getItem('tormenta-20-hotbars-sync-name'),
+            level: localStorage.getItem('tormenta-20-hotbars-sync-level'),
+            hpCurrent: localStorage.getItem('tormenta-20-hotbars-sync-hp-current'),
+            hpTotal: localStorage.getItem('tormenta-20-hotbars-sync-hp-total'),
+            mpCurrent: localStorage.getItem('tormenta-20-hotbars-sync-mp-current'),
+            mpTotal: localStorage.getItem('tormenta-20-hotbars-sync-mp-total'),
+            ac: localStorage.getItem('tormenta-20-hotbars-sync-ac')
         };
 
         // Verificar mudanças periodicamente (mais eficiente)
         setInterval(() => {
             const currentName = localStorage.getItem('tormenta-20-hotbars-sync-name');
             const currentLevel = localStorage.getItem('tormenta-20-hotbars-sync-level');
+            const currentHpCurrent = localStorage.getItem('tormenta-20-hotbars-sync-hp-current');
+            const currentHpTotal = localStorage.getItem('tormenta-20-hotbars-sync-hp-total');
+            const currentMpCurrent = localStorage.getItem('tormenta-20-hotbars-sync-mp-current');
+            const currentMpTotal = localStorage.getItem('tormenta-20-hotbars-sync-mp-total');
+            const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
+
+            // Verificar se houve mudança em qualquer valor
+            const hasChanges = 
+                currentName !== initialValues.name ||
+                currentLevel !== initialValues.level ||
+                currentHpCurrent !== initialValues.hpCurrent ||
+                currentHpTotal !== initialValues.hpTotal ||
+                currentMpCurrent !== initialValues.mpCurrent ||
+                currentMpTotal !== initialValues.mpTotal ||
+                currentAc !== initialValues.ac;
 
             // Se houve mudança, atualizar UI
-            if (currentName !== initialValues.name || currentLevel !== initialValues.level) {
+            if (hasChanges) {
+                console.log('🔄 Mudanças detectadas no localStorage, atualizando UI...');
+                console.log('Nome:', initialValues.name, '->', currentName);
+                console.log('Nível:', initialValues.level, '->', currentLevel);
+                console.log('HP Atual:', initialValues.hpCurrent, '->', currentHpCurrent);
+                console.log('HP Total:', initialValues.hpTotal, '->', currentHpTotal);
+                console.log('MP Atual:', initialValues.mpCurrent, '->', currentMpCurrent);
+                console.log('MP Total:', initialValues.mpTotal, '->', currentMpTotal);
+                console.log('AC:', initialValues.ac, '->', currentAc);
+
+                // Atualizar valores iniciais
                 initialValues.name = currentName;
                 initialValues.level = currentLevel;
+                initialValues.hpCurrent = currentHpCurrent;
+                initialValues.hpTotal = currentHpTotal;
+                initialValues.mpCurrent = currentMpCurrent;
+                initialValues.mpTotal = currentMpTotal;
+                initialValues.ac = currentAc;
+
                 updateHotbarUI();
             }
         }, 500); // Verificar a cada meio segundo para resposta mais rápida
