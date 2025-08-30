@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.81336'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.43251'; // Última tag Git
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1964,11 +1964,32 @@
             return;
         }
 
+        console.log('✅ characterInfo encontrado:', characterInfo);
+        console.log('📋 Todos os elementos filhos de characterInfo:');
+        characterInfo.childNodes.forEach((child, index) => {
+            if (child.nodeType === Node.ELEMENT_NODE) {
+                console.log(`  ${index}:`, child.tagName, child.className || 'sem classe');
+            }
+        });
+
         // Atualizar barra de vida
+        console.log('🔍 Procurando healthBarContainer...');
         const healthBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
+        console.log('healthBarContainer encontrado:', healthBarContainer);
+        
         if (healthBarContainer) {
+            console.log('📋 Elementos dentro do healthBarContainer:');
+            healthBarContainer.childNodes.forEach((child, index) => {
+                if (child.nodeType === Node.ELEMENT_NODE) {
+                    console.log(`  ${index}:`, child.tagName, child.style.cssText);
+                }
+            });
+            
             const healthFill = healthBarContainer.querySelector('div[style*="height: 100%"]');
             const healthText = healthBarContainer.querySelector('div[style*="color: #ecf0f1"]');
+            
+            console.log('healthFill encontrado:', healthFill);
+            console.log('healthText encontrado:', healthText);
 
             if (healthFill && healthText) {
                 const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
@@ -1996,10 +2017,23 @@
         }
 
         // Atualizar barra de mana
+        console.log('🔍 Procurando manaBarContainer...');
         const manaBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
+        console.log('manaBarContainer encontrado:', manaBarContainer);
+        
         if (manaBarContainer) {
+            console.log('📋 Elementos dentro do manaBarContainer:');
+            manaBarContainer.childNodes.forEach((child, index) => {
+                if (child.nodeType === Node.ELEMENT_NODE) {
+                    console.log(`  ${index}:`, child.tagName, child.style.cssText);
+                }
+            });
+            
             const manaFill = manaBarContainer.querySelector('div[style*="height: 100%"]');
             const manaText = manaBarContainer.querySelector('div[style*="color: #6ec6ff"]');
+            
+            console.log('manaFill encontrado:', manaFill);
+            console.log('manaText encontrado:', manaText);
 
             if (manaFill && manaText) {
                 const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
@@ -2042,7 +2076,7 @@
             const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
 
             // Verificar se houve mudança em qualquer valor
-            const hasChanges = 
+            const hasChanges =
                 currentName !== initialValues.name ||
                 currentLevel !== initialValues.level ||
                 currentHpCurrent !== initialValues.hpCurrent ||
