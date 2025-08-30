@@ -27,7 +27,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.1796'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.55342'; // Última tag Git
 
     const logger = window.console;
 
@@ -813,7 +813,7 @@
             filteredConditions.forEach(condition => {
                 const conditionCard = window.Roll20Components.createFavoritableCardWithPreset('condition', {
                     title: condition.nome,
-                    summary: condition.descricao,
+                    summary: limitTextToWords(condition.descricao),
                     efeitos: condition.efeitos,
                     onClick: () => {
                         showConditionDetailsPopup(condition);
@@ -6878,22 +6878,26 @@
         document.body.appendChild(modal);
     }
 
+    // Função para limitar texto a 25 palavras
+    function limitTextToWords(text, maxWords = 25) {
+        if (!text) return '';
+        const words = text.trim().split(/\s+/);
+        if (words.length <= maxWords) return text;
+        return words.slice(0, maxWords).join(' ') + '...';
+    }
+
     // Template reutilizável para itens de lista usando o componente FavoritableCard
     function createListItemCard(item, itemType, onFavoriteToggle) {
         const preset = itemType === 'food' ? 'food' :
             itemType === 'drink' ? 'drink' :
                 itemType === 'potion' ? 'potion' : 'condition';
 
-        // Para poções, limitar o tamanho da descrição e adicionar chips informativos
-        let summary = item.descricao;
+        // Aplicar limitação de 25 palavras para todos os tipos de item
+        let summary = limitTextToWords(item.descricao);
         let additionalInfo = null;
 
+        // Para poções, apenas aplicar a regra de reticências (já aplicada acima)
         if (itemType === 'potion') {
-            // Limitar descrição a 120 caracteres
-            if (summary && summary.length > 120) {
-                summary = summary.substring(0, 120) + '...';
-            }
-
             // Criar chips informativos para poções
             const chips = [];
             if (item.preco) chips.push({ text: item.preco, color: '#ffb86c' });
@@ -17709,6 +17713,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 summary,
                 description,
                 chips = [],
+                bonus,
+                efeito,
+                efeitos,
+                additionalInfo,
                 onFavorite = null,
                 onUnfavorite = null,
                 onFavoriteToggle = null,
@@ -17754,6 +17762,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             titleElement.style.fontSize = '14px';
             titleElement.style.fontWeight = 'bold';
             titleElement.style.marginBottom = '4px';
+            card.appendChild(titleElement);
 
             // Descrição
             const descElement = document.createElement('div');
@@ -17762,6 +17771,54 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             descElement.style.fontSize = '12px';
             descElement.style.lineHeight = '1.3';
             descElement.style.marginBottom = '8px';
+            card.appendChild(descElement);
+
+            // Informações de efeitos (apenas para pratos, bebidas e condições)
+            if (preset !== 'potion') {
+                if (bonus) {
+                    const bonusElement = document.createElement('div');
+                    bonusElement.textContent = `Bônus: ${bonus}`;
+                    bonusElement.style.color = '#27ae60';
+                    bonusElement.style.fontSize = '11px';
+                    bonusElement.style.fontWeight = 'bold';
+                    bonusElement.style.marginBottom = '4px';
+                    card.appendChild(bonusElement);
+                }
+
+                if (efeito) {
+                    const efeitoElement = document.createElement('div');
+                    efeitoElement.textContent = `Efeito: ${efeito}`;
+                    efeitoElement.style.color = '#e67e22';
+                    efeitoElement.style.fontSize = '11px';
+                    efeitoElement.style.fontWeight = 'bold';
+                    efeitoElement.style.marginBottom = '4px';
+                    card.appendChild(efeitoElement);
+                }
+
+                if (efeitos) {
+                    if (Array.isArray(efeitos)) {
+                        // Se for um array, renderiza cada efeito separadamente
+                        efeitos.forEach(efeito => {
+                            const efeitoElement = document.createElement('div');
+                            efeitoElement.textContent = `${efeito}`;
+                            efeitoElement.style.color = '#9b59b6';
+                            efeitoElement.style.fontSize = '11px';
+                            efeitoElement.style.fontWeight = 'bold';
+                            efeitoElement.style.marginBottom = '2px';
+                            card.appendChild(efeitoElement);
+                        });
+                    } else if (typeof efeitos === 'string') {
+                        // Se for uma string, renderiza como um único efeito
+                        const efeitoElement = document.createElement('div');
+                        efeitoElement.textContent = `${efeitos}`;
+                        efeitoElement.style.color = '#9b59b6';
+                        efeitoElement.style.fontSize = '11px';
+                        efeitoElement.style.fontWeight = 'bold';
+                        efeitoElement.style.marginBottom = '2px';
+                        card.appendChild(efeitoElement);
+                    }
+                }
+            }
 
             // Chips
             const chipsContainer = document.createElement('div');
@@ -17769,6 +17826,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             chipsContainer.style.gap = '4px';
             chipsContainer.style.flexWrap = 'wrap';
 
+            // Chips padrão
             chips.forEach(chip => {
                 const chipElement = document.createElement('span');
                 chipElement.textContent = chip;
@@ -17780,6 +17838,21 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 chipElement.style.fontWeight = 'bold';
                 chipsContainer.appendChild(chipElement);
             });
+
+            // Additional info chips (para poções)
+            if (additionalInfo && Array.isArray(additionalInfo)) {
+                additionalInfo.forEach(info => {
+                    const chipElement = document.createElement('span');
+                    chipElement.textContent = info.text;
+                    chipElement.style.background = info.color || '#6ec6ff';
+                    chipElement.style.color = '#23243a';
+                    chipElement.style.fontSize = '10px';
+                    chipElement.style.padding = '2px 6px';
+                    chipElement.style.borderRadius = '10px';
+                    chipElement.style.fontWeight = 'bold';
+                    chipsContainer.appendChild(chipElement);
+                });
+            }
 
             // Botão de favorito
             const favoriteBtn = document.createElement('button');
