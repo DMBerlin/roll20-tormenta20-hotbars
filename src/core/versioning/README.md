@@ -5,7 +5,7 @@ Este diretório contém scripts para gerenciar versões e tags do projeto.
 ## Scripts Disponíveis
 
 ### 1. update-version.js
-Sincroniza a versão do `package.json` com o `main.js`.
+Atualiza a versão do script baseada na branch atual e última tag Git.
 
 **Uso:**
 ```bash
@@ -15,11 +15,28 @@ node src/core/versioning/update-version.js
 ```
 
 **Funcionalidades:**
+- Detecta a branch atual
+- Encontra a última tag Git
+- Na branch de desenvolvimento, adiciona timestamp após o patch (ex: 0.3.0.12345)
+- Na branch main/master, usa apenas a versão da tag
+- Atualiza `src/main.js` e `package.json`
+
+### 2. sync-version.js
+Sincroniza a versão do `package.json` com o `main.js` sem modificações.
+
+**Uso:**
+```bash
+pnpm sync-version
+# ou
+node src/core/versioning/sync-version.js
+```
+
+**Funcionalidades:**
 - Lê a versão definida manualmente no `package.json`
 - Sincroniza com a constante `SCRIPT_VERSION` no `main.js`
 - Não gera versões automáticas - você controla a versão manualmente
 
-### 2. create-tag.js
+### 3. create-tag.js
 Cria uma nova tag Git usando a versão atual do `package.json`.
 
 **Uso:**
@@ -54,6 +71,7 @@ pnpm create-tag -- --force
 
 ## Fluxo de Trabalho Recomendado
 
+### Para Desenvolvimento (branch develop):
 1. **Desenvolvimento:**
    ```bash
    # Fazer alterações no código
@@ -61,18 +79,25 @@ pnpm create-tag -- --force
    git commit -m "Nova funcionalidade"
    ```
 
-2. **Definir versão manualmente:**
+2. **Atualizar versão com timestamp:**
+   ```bash
+   pnpm update-version
+   # Gera versão como: 0.3.0.12345
+   ```
+
+### Para Release (branch main):
+1. **Definir versão manualmente:**
    ```bash
    # Editar package.json e definir a versão desejada
    # Exemplo: "version": "0.3.1"
    ```
 
-3. **Sincronizar versão:**
+2. **Sincronizar versão:**
    ```bash
-   pnpm update-version
+   pnpm sync-version
    ```
 
-4. **Criar tag de release:**
+3. **Criar tag de release:**
    ```bash
    pnpm create-tag -- --message="Release 0.3.1 - Novas funcionalidades"
    ```
