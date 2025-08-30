@@ -3,6 +3,7 @@
     // Sistema de favoritos para skills
     const FAVORITE_SKILLS_KEY = 'tormenta-20-hotbars-favorite-skills';
     const FAVORITE_SPELLS_KEY = 'tormenta-20-hotbars-favorite-spells';
+    const SPELL_CUSTOM_IMAGES_KEY = 'tormenta-20-hotbars-spell-custom-images';
     // Sistema de avatar do personagem
     const AVATAR_KEY = 'tormenta-20-hotbars-avatar';
     // Sistema de nome do personagem
@@ -27,7 +28,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.55342'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.8744'; // Última tag Git
 
     const logger = window.console;
 
@@ -2077,6 +2078,43 @@
         return favorites;
     }
 
+    // Funções para gerenciar imagens customizadas das magias
+    function getSpellCustomImages() {
+        try {
+            const images = localStorage.getItem(SPELL_CUSTOM_IMAGES_KEY);
+            return images ? JSON.parse(images) : {};
+        } catch (error) {
+            logger.log('Erro ao carregar imagens customizadas das magias:', error);
+            return {};
+        }
+    }
+
+    function saveSpellCustomImages(images) {
+        try {
+            localStorage.setItem(SPELL_CUSTOM_IMAGES_KEY, JSON.stringify(images));
+        } catch (error) {
+            logger.log('Erro ao salvar imagens customizadas das magias:', error);
+        }
+    }
+
+    function setSpellCustomImage(spellName, imageUrl) {
+        const images = getSpellCustomImages();
+        if (imageUrl && imageUrl.trim()) {
+            images[spellName] = imageUrl.trim();
+            showSuccessNotification(`Imagem customizada adicionada para "${spellName}"!`);
+        } else {
+            delete images[spellName];
+            showWarningNotification(`Imagem customizada removida de "${spellName}"!`);
+        }
+        saveSpellCustomImages(images);
+        return images;
+    }
+
+    function getSpellCustomImage(spellName) {
+        const images = getSpellCustomImages();
+        return images[spellName] || '';
+    }
+
     function getAvatarUrl() {
         try {
             return localStorage.getItem(AVATAR_KEY) || null;
@@ -3454,7 +3492,7 @@
 
 
     // Função para mostrar detalhes da magia (global)
-    function showSpellDetails(spell) {
+    function showSpellDetails(spell, source = 'grimoire') {
         // Overlay para fechar
         const spellDetailsOverlay = document.createElement('div');
         spellDetailsOverlay.style.position = 'fixed';
@@ -3833,14 +3871,120 @@
             detailsPopup.appendChild(aprimoramentosSection);
         }
 
+        // Verificar se a magia já foi aprendida (mover para antes da seção de imagem)
+        const isLearned = isSpellLearned(spell.name);
+
+        // Seção de Imagem Customizada (apenas para magias aprendidas acessadas da lista)
+        if (isLearned && source === 'learned-list') {
+            const customImageSection = document.createElement('div');
+            customImageSection.style.marginBottom = '20px';
+
+            const customImageTitle = document.createElement('h4');
+            customImageTitle.textContent = 'Imagem Customizada';
+            customImageTitle.style.color = '#9c27b0';
+            customImageTitle.style.fontSize = '18px';
+            customImageTitle.style.fontWeight = 'bold';
+            customImageTitle.style.marginBottom = '12px';
+            customImageTitle.style.borderBottom = '2px solid #9c27b0';
+            customImageTitle.style.paddingBottom = '8px';
+
+            customImageSection.appendChild(customImageTitle);
+
+            // Container para input e preview
+            const imageContainer = document.createElement('div');
+            imageContainer.style.background = 'rgba(35, 36, 58, 0.8)';
+            imageContainer.style.border = '2px solid #9c27b0';
+            imageContainer.style.borderRadius = '8px';
+            imageContainer.style.padding = '16px';
+
+            // Input para URL da imagem
+            const imageInput = document.createElement('input');
+            imageInput.type = 'url';
+            imageInput.placeholder = 'Cole aqui a URL da imagem ou GIF...';
+            imageInput.value = getSpellCustomImage(spell.name);
+            imageInput.style.width = '100%';
+            imageInput.style.padding = '8px 12px';
+            imageInput.style.border = '1px solid #9c27b0';
+            imageInput.style.borderRadius = '4px';
+            imageInput.style.background = '#23243a';
+            imageInput.style.color = '#fff';
+            imageInput.style.fontSize = '14px';
+            imageInput.style.marginBottom = '12px';
+            imageInput.style.boxSizing = 'border-box';
+
+            // Preview da imagem
+            const imagePreview = document.createElement('div');
+            imagePreview.style.marginTop = '12px';
+            imagePreview.style.textAlign = 'center';
+
+            const updatePreview = () => {
+                imagePreview.innerHTML = '';
+                const url = imageInput.value.trim();
+
+                if (url) {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '200px';
+                    img.style.borderRadius = '8px';
+                    img.style.border = '2px solid #9c27b0';
+                    img.onerror = () => {
+                        imagePreview.innerHTML = '<div style="color: #f44336; font-size: 12px;">❌ Erro ao carregar imagem</div>';
+                    };
+                    imagePreview.appendChild(img);
+                } else {
+                    imagePreview.innerHTML = '<div style="color: #666; font-size: 12px;">Nenhuma imagem definida</div>';
+                }
+            };
+
+            // Atualizar preview quando o input mudar
+            imageInput.addEventListener('input', updatePreview);
+            imageInput.addEventListener('blur', () => {
+                setSpellCustomImage(spell.name, imageInput.value);
+            });
+
+            // Botão para limpar imagem
+            const clearButton = document.createElement('button');
+            clearButton.textContent = 'Limpar Imagem';
+            clearButton.style.background = '#f44336';
+            clearButton.style.color = '#fff';
+            clearButton.style.border = 'none';
+            clearButton.style.borderRadius = '4px';
+            clearButton.style.padding = '8px 16px';
+            clearButton.style.fontSize = '12px';
+            clearButton.style.cursor = 'pointer';
+            clearButton.style.marginTop = '8px';
+            clearButton.style.transition = 'all 0.2s ease';
+
+            clearButton.onmouseover = () => {
+                clearButton.style.background = '#d32f2f';
+            };
+
+            clearButton.onmouseout = () => {
+                clearButton.style.background = '#f44336';
+            };
+
+            clearButton.onclick = () => {
+                imageInput.value = '';
+                setSpellCustomImage(spell.name, '');
+                updatePreview();
+            };
+
+            // Inicializar preview
+            updatePreview();
+
+            imageContainer.appendChild(imageInput);
+            imageContainer.appendChild(imagePreview);
+            imageContainer.appendChild(clearButton);
+            customImageSection.appendChild(imageContainer);
+            detailsPopup.appendChild(customImageSection);
+        }
+
         // Container para botões
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
         buttonContainer.style.gap = '10px';
         buttonContainer.style.marginTop = '20px';
-
-        // Verificar se a magia já foi aprendida
-        const isLearned = isSpellLearned(spell.name);
 
         // Botão Aprender/Esquecer
         const learnButton = document.createElement('button');
@@ -3906,8 +4050,7 @@
             logger.log('aprimoramentosSectionElement', aprimoramentosSectionElement);
             logger.log('selectedAprimoramentos', selectedAprimoramentos);
             shareSpellToChat(spell, selectedAprimoramentos);
-            // Fechar todos os popups abertos
-            closeAllPopups();
+            // closeAllPopups() é chamado dentro de shareSpellToChat() no bloco finally
         };
 
         buttonContainer.appendChild(learnButton);
@@ -3934,6 +4077,15 @@
 
             // Preparar descrição com aprimoramentos
             let description = spell.system?.description?.value || 'Descrição não disponível';
+
+            // Adicionar imagem customizada se existir (apenas para magias aprendidas)
+            const learnedSpells = getLearnedSpells();
+            const isLearned = learnedSpells.includes(spell.name);
+            const customImage = isLearned ? getSpellCustomImage(spell.name) : '';
+
+            if (customImage) {
+                description = `[Capa](${customImage}) %NEWLINE% ${description}`;
+            }
 
             // Adicionar informações dos aprimoramentos selecionados
             if (selectedAprimoramentos.length > 0) {
@@ -4663,10 +4815,19 @@
             const learnedSpellItems = learnedSpells.map(spellName => {
                 const fullSpell = spellsCache.find(spell => spell.name === spellName);
                 if (fullSpell) {
+                    // Verificar se há imagem customizada para esta magia
+                    const customImage = getSpellCustomImage(fullSpell.name);
+                    let description = fullSpell.system?.description?.value || 'Descrição não disponível';
+
+                    // Adicionar imagem customizada se existir
+                    if (customImage) {
+                        description = `[Cover](${customImage}) %NEWLINE% ${description}`;
+                    }
+
                     return {
                         nome: fullSpell.name,
-                        comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=${fullSpell.name}}}{{type=${fullSpell.tradition.charAt(0).toUpperCase() + fullSpell.tradition.slice(1)}}}{{execution=${fullSpell.execucao || 'Padrão'}}}{{duration=${fullSpell.system?.duracao || 'Cena'}}}{{range=${fullSpell.system?.alcance || 'Curto'}}}{{targetarea=${fullSpell.system?.alvo || '1 Alvo'}}}{{resistance=${fullSpell.system?.resistencia || 'Nenhuma'}}}{{description=${fullSpell.system?.description?.value || 'Descrição não disponível'}}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`,
-                        onClick: () => showSpellDetails(fullSpell)
+                        comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=${fullSpell.name}}}{{type=${fullSpell.tradition.charAt(0).toUpperCase() + fullSpell.tradition.slice(1)}}}{{execution=${fullSpell.execucao || 'Padrão'}}}{{duration=${fullSpell.system?.duracao || 'Cena'}}}{{range=${fullSpell.system?.alcance || 'Curto'}}}{{targetarea=${fullSpell.system?.alvo || '1 Alvo'}}}{{resistance=${fullSpell.system?.resistencia || 'Nenhuma'}}}{{description=${description}}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`,
+                        onClick: () => showSpellDetails(fullSpell, 'learned-list')
                     };
                 }
                 return null;
