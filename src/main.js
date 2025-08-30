@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.2717'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.64735'; // Última tag Git
 
     const logger = window.console;
 
@@ -2005,58 +2005,6 @@
             }
         }
     }
-
-    // Sistema de observação de mudanças no localStorage
-    function setupLocalStorageObserver() {
-        // Armazenar valores iniciais
-        const initialValues = {
-            name: localStorage.getItem('tormenta-20-hotbars-sync-name'),
-            level: localStorage.getItem('tormenta-20-hotbars-sync-level'),
-            hpCurrent: localStorage.getItem('tormenta-20-hotbars-sync-hp-current'),
-            hpTotal: localStorage.getItem('tormenta-20-hotbars-sync-hp-total'),
-            mpCurrent: localStorage.getItem('tormenta-20-hotbars-sync-mp-current'),
-            mpTotal: localStorage.getItem('tormenta-20-hotbars-sync-mp-total'),
-            ac: localStorage.getItem('tormenta-20-hotbars-sync-ac')
-        };
-
-        // Verificar mudanças periodicamente (mais eficiente)
-        setInterval(() => {
-            const currentName = localStorage.getItem('tormenta-20-hotbars-sync-name');
-            const currentLevel = localStorage.getItem('tormenta-20-hotbars-sync-level');
-            const currentHpCurrent = localStorage.getItem('tormenta-20-hotbars-sync-hp-current');
-            const currentHpTotal = localStorage.getItem('tormenta-20-hotbars-sync-hp-total');
-            const currentMpCurrent = localStorage.getItem('tormenta-20-hotbars-sync-mp-current');
-            const currentMpTotal = localStorage.getItem('tormenta-20-hotbars-sync-mp-total');
-            const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
-
-
-
-            // Verificar se houve mudança em qualquer valor
-            const hasChanges =
-                currentName !== initialValues.name ||
-                currentLevel !== initialValues.level ||
-                currentHpCurrent !== initialValues.hpCurrent ||
-                currentHpTotal !== initialValues.hpTotal ||
-                currentMpCurrent !== initialValues.mpCurrent ||
-                currentMpTotal !== initialValues.mpTotal ||
-                currentAc !== initialValues.ac;
-
-            // Se houve mudança, atualizar UI
-            if (hasChanges) {
-                // Atualizar valores iniciais
-                initialValues.name = currentName;
-                initialValues.level = currentLevel;
-                initialValues.hpCurrent = currentHpCurrent;
-                initialValues.hpTotal = currentHpTotal;
-                initialValues.mpCurrent = currentMpCurrent;
-                initialValues.mpTotal = currentMpTotal;
-                initialValues.ac = currentAc;
-
-                updateHotbarUI();
-            }
-        }, 500); // Verificar a cada meio segundo para resposta mais rápida
-    }
-
 
     function getFavorites() {
         try {
@@ -9763,7 +9711,7 @@
         classButton.style.textTransform = 'uppercase';
         classButton.style.letterSpacing = '1px';
         classButton.style.cursor = 'pointer';
-        classButton.style.padding = '8px 4px';
+        classButton.style.padding = '0px 4px';
         classButton.style.background = 'rgba(139, 69, 19, 0.2)';
         classButton.style.borderRadius = '8px';
         classButton.style.border = '1px solid rgba(139, 69, 19, 0.4)';
@@ -9800,10 +9748,11 @@
         characterSection.style.alignItems = 'center';
         characterSection.style.gap = '12px';
         characterSection.style.padding = '8px 12px';
-        characterSection.style.background = 'rgba(26,26,46,0.8)';
+        characterSection.style.background = 'rgba(26,26,46)';
         characterSection.style.borderRadius = '12px';
         characterSection.style.border = '1px solid rgba(110,198,255,0.3)';
         characterSection.style.minWidth = '200px';
+        characterSection.style.height = '64px';
 
         // Avatar do personagem
         const avatarContainer = document.createElement('div');
@@ -9813,14 +9762,14 @@
 
         const avatar = document.createElement('div');
         avatar.id = 'character-avatar';
-        avatar.style.width = '48px';
-        avatar.style.height = '48px';
+        avatar.style.width = '64px';
+        avatar.style.height = '64px';
         avatar.style.borderRadius = '50%';
         avatar.style.border = '2px solid #6ec6ff';
         avatar.style.display = 'flex';
         avatar.style.alignItems = 'center';
         avatar.style.justifyContent = 'center';
-        avatar.style.fontSize = '16px';
+        avatar.style.fontSize = '20px';
         avatar.style.fontWeight = 'bold';
         avatar.style.color = '#ecf0f1';
         avatar.style.background = '#23243a';
@@ -9833,23 +9782,23 @@
             avatar.style.background = `url(${avatarUrl}) center/cover`;
             avatar.textContent = '';
         } else {
-            avatar.textContent = 'EE';
+            avatar.textContent = 'IM';
         }
 
         // Ícone de edição no avatar
         const editIcon = document.createElement('div');
         editIcon.innerHTML = '✏️';
         editIcon.style.position = 'absolute';
-        editIcon.style.bottom = '-2px';
-        editIcon.style.right = '-2px';
+        editIcon.style.bottom = '-3px';
+        editIcon.style.right = '-3px';
         editIcon.style.background = '#6ec6ff';
         editIcon.style.borderRadius = '50%';
-        editIcon.style.width = '18px';
-        editIcon.style.height = '18px';
+        editIcon.style.width = '22px';
+        editIcon.style.height = '22px';
         editIcon.style.display = 'flex';
         editIcon.style.alignItems = 'center';
         editIcon.style.justifyContent = 'center';
-        editIcon.style.fontSize = '10px';
+        editIcon.style.fontSize = '12px';
         editIcon.style.border = '2px solid rgba(30,30,40,0.92)';
         editIcon.style.opacity = '0';
         editIcon.style.transition = 'all 0.2s';
@@ -9858,19 +9807,19 @@
         const levelIcon = document.createElement('div');
         levelIcon.textContent = getCharLevel();
         levelIcon.style.position = 'absolute';
-        levelIcon.style.top = '-2px';
-        levelIcon.style.left = '-2px';
-        levelIcon.style.background = 'rgba(26,26,46,0.8)';
+        levelIcon.style.top = '-3px';
+        levelIcon.style.left = '-3px';
+        levelIcon.style.background = 'rgba(26,26,46)';
         levelIcon.style.borderRadius = '50%';
-        levelIcon.style.width = '18px';
-        levelIcon.style.height = '18px';
+        levelIcon.style.width = '22px';
+        levelIcon.style.height = '22px';
         levelIcon.style.display = 'flex';
         levelIcon.style.alignItems = 'center';
         levelIcon.style.justifyContent = 'center';
-        levelIcon.style.fontSize = '10px';
+        levelIcon.style.fontSize = '12px';
         levelIcon.style.fontWeight = 'bold';
         levelIcon.style.color = '#fff';
-        levelIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        levelIcon.style.border = '2px solid #6ec6ff';
         levelIcon.style.transition = 'all 0.2s';
         levelIcon.title = 'Nível do herói';
 
@@ -9878,19 +9827,19 @@
         const defenseIcon = document.createElement('div');
         defenseIcon.textContent = localStorage.getItem('tormenta-20-hotbars-char-ac-attr') || '0';
         defenseIcon.style.position = 'absolute';
-        defenseIcon.style.bottom = '-2px';
-        defenseIcon.style.right = '-2px';
-        defenseIcon.style.background = '#4caf50';
+        defenseIcon.style.bottom = '-3px';
+        defenseIcon.style.right = '-3px';
+        defenseIcon.style.background = 'rgba(26,26,46)';
         defenseIcon.style.borderRadius = '50%';
-        defenseIcon.style.width = '18px';
-        defenseIcon.style.height = '18px';
+        defenseIcon.style.width = '24px';
+        defenseIcon.style.height = '26px';
         defenseIcon.style.display = 'flex';
         defenseIcon.style.alignItems = 'center';
         defenseIcon.style.justifyContent = 'center';
-        defenseIcon.style.fontSize = '9px';
+        defenseIcon.style.fontSize = '12px';
         defenseIcon.style.fontWeight = 'bold';
         defenseIcon.style.color = '#fff';
-        defenseIcon.style.border = '2px solid rgba(30,30,40,0.92)';
+        defenseIcon.style.border = '2px solid #6ec6ff';
         defenseIcon.style.transition = 'all 0.2s';
         defenseIcon.title = 'Defesa';
 
@@ -9904,7 +9853,7 @@
             avatar.style.transform = 'scale(1.05)';
             editIcon.style.opacity = '1';
             levelIcon.style.transform = 'scale(1.1)';
-            defenseIcon.style.transform = 'scale(1.1)';
+            defenseIcon.style.transform = 'scale(1.05)';
         };
         avatarContainer.onmouseout = () => {
             avatar.style.transform = 'scale(1)';
@@ -9918,7 +9867,9 @@
         const characterInfo = document.createElement('div');
         characterInfo.style.display = 'flex';
         characterInfo.style.flexDirection = 'column';
-        characterInfo.style.gap = '2px';
+        characterInfo.style.gap = '1px';
+        characterInfo.style.justifyContent = 'center';
+        characterInfo.style.height = '80px';
 
 
 
@@ -9942,7 +9893,7 @@
         healthBarContainer.style.display = 'flex';
         healthBarContainer.style.alignItems = 'center';
         healthBarContainer.style.gap = '8px';
-        healthBarContainer.style.marginTop = '4px';
+        healthBarContainer.style.marginTop = '2px';
 
         const healthBar = document.createElement('div');
         healthBar.style.width = '80px';
@@ -9989,7 +9940,7 @@
         manaBarContainer.style.display = 'flex';
         manaBarContainer.style.alignItems = 'center';
         manaBarContainer.style.gap = '8px';
-        manaBarContainer.style.marginTop = '2px';
+        manaBarContainer.style.marginTop = '1px';
 
         const manaBar = document.createElement('div');
         manaBar.style.width = '80px';
@@ -11342,9 +11293,6 @@
             }
 
             createHotbar();
-
-            // Inicializar observador de localStorage para atualização automática da UI
-            setupLocalStorageObserver();
 
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
