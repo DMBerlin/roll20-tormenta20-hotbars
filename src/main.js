@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.90407'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.25043'; // Última tag Git
 
     const logger = window.console;
 
@@ -7269,7 +7269,7 @@
                         currentValueLabel.style.color = '#888';
                     }
                 });
-                
+
                 createNotification('Sincronização concluída com sucesso!', 'success', 3000);
 
                 // Forçar atualização da UI da hotbar
@@ -9591,6 +9591,9 @@
         title.style.fontWeight = 'bold';
         title.style.cursor = 'grab';
         title.style.textAlign = 'center';
+        title.style.display = 'flex';
+        title.style.alignItems = 'center';
+        title.style.lineHeight = '1';
         header.appendChild(title);
 
         // Indicador de versão (tag Git)
