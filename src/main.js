@@ -1947,8 +1947,18 @@
         console.log('UI da hotbar atualizada com dados sincronizados');
     }
 
-    // Função para atualizar barras de vida e mana
+        // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
+        // Debug: mostrar valores atuais no console
+        console.log('=== DEBUG: Valores Sincronizados ===');
+        console.log('Nível:', localStorage.getItem('roll20-hotbar-sync-char-level'));
+        console.log('Defesa:', localStorage.getItem('roll20-hotbar-sync-char-ac'));
+        console.log('Vida Atual:', localStorage.getItem('roll20-hotbar-sync-char-hp-current'));
+        console.log('Vida Total:', localStorage.getItem('roll20-hotbar-sync-char-hp-total'));
+        console.log('Mana Atual:', localStorage.getItem('roll20-hotbar-sync-char-mp-current'));
+        console.log('Mana Total:', localStorage.getItem('roll20-hotbar-sync-char-mp-total'));
+        console.log('=====================================');
+
         // Atualizar barra de vida
         const healthFill = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="background: #ff4444"], div[style*="background: #4caf50"], div[style*="background: #ff9800"], div[style*="background: #f44336"]');
         const healthText = document.querySelector('#character-avatar').parentNode.parentNode.querySelector('div[style*="color: #ecf0f1"]');
@@ -2702,6 +2712,9 @@
                 removeMessageFromDOM(messageElement);
 
                 // 6. Salva os dados no localStorage com as chaves corretas
+                console.log('=== DADOS CAPTURADOS DA FICHA ===');
+                console.log('Dados brutos:', characterData);
+                
                 Object.keys(characterData).forEach(key => {
                     const value = characterData[key];
                     if (value !== undefined && value !== null) {
@@ -2711,6 +2724,8 @@
                         console.log(`Salvando ${syncKey}: ${value}`);
                     }
                 });
+                
+                console.log('=== FIM DOS DADOS CAPTURADOS ===');
 
                 // 7. Atualizar a UI da hotbar imediatamente
                 updateHotbarUI();
