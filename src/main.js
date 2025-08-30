@@ -26,7 +26,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.64735'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.90407'; // Última tag Git
 
     const logger = window.console;
 
@@ -39,6 +39,31 @@
 
         const style = window.getComputedStyle(notifierElement);
         return style.display !== 'none';
+    }
+
+    // Function to update TTM toggle visual state based on actual TTM status
+    function updateTTMToggleVisual(isTTMCurrentlyActive = isTTMActive()) {
+        const toggleSwitch = document.getElementById('ttm-toggle-switch');
+        const toggleKnob = document.getElementById('ttm-toggle-knob');
+        const toggleLabel = document.getElementById('ttm-toggle-label');
+
+        if (!toggleSwitch || !toggleKnob || !toggleLabel) {
+            return; // Elements not found, hotbar might not be created yet
+        }
+
+        if (isTTMCurrentlyActive) {
+            // Ativa o toggle visual
+            toggleSwitch.style.background = '#6ec6ff';
+            toggleSwitch.style.borderColor = '#6ec6ff';
+            toggleKnob.style.left = '13px';
+            toggleLabel.style.color = '#6ec6ff';
+        } else {
+            // Desativa o toggle visual
+            toggleSwitch.style.background = '#444';
+            toggleSwitch.style.borderColor = '#666';
+            toggleKnob.style.left = '1px';
+            toggleLabel.style.color = '#ecf0f1';
+        }
     }
 
     // Funções para gerenciamento de ícones com fallback
@@ -7213,6 +7238,12 @@
             syncButton.textContent = '⏳ Sincronizando...';
 
             try {
+                // Prevenir sincronização sem TTM
+                if (!isTTMActive()) {
+                    sendToChat('/talktomyself');
+                    setTimeout(() => updateTTMToggleVisual(), 500);
+                }
+
                 // Coletar atributos configurados
                 const attributes = {};
                 attributeFields.forEach(field => {
@@ -7238,16 +7269,20 @@
                         currentValueLabel.style.color = '#888';
                     }
                 });
-
+                
                 createNotification('Sincronização concluída com sucesso!', 'success', 3000);
 
                 // Forçar atualização da UI da hotbar
                 updateHotbarUI();
-
             } catch (error) {
                 console.error('Erro na sincronização:', error);
                 createNotification(`Erro na sincronização: ${error.message}`, 'error', 5000);
             } finally {
+                // Desligar TTM após sync
+                if (isTTMActive()) {
+                    sendToChat('/talktomyself');
+                    setTimeout(() => updateTTMToggleVisual(), 500);
+                }
                 // Restaurar botão
                 syncButton.disabled = false;
                 syncButton.style.opacity = '1';
@@ -9501,11 +9536,13 @@
         talkToggle.style.userSelect = 'none';
 
         const toggleLabel = document.createElement('span');
+        toggleLabel.id = 'ttm-toggle-label';
         toggleLabel.textContent = 'TTM';
         toggleLabel.style.fontSize = '10px';
         toggleLabel.style.fontWeight = 'bold';
 
         const toggleSwitch = document.createElement('div');
+        toggleSwitch.id = 'ttm-toggle-switch';
         toggleSwitch.style.width = '24px';
         toggleSwitch.style.height = '12px';
         toggleSwitch.style.background = '#444';
@@ -9515,6 +9552,7 @@
         toggleSwitch.style.border = '1px solid #666';
 
         const toggleKnob = document.createElement('div');
+        toggleKnob.id = 'ttm-toggle-knob';
         toggleKnob.style.width = '8px';
         toggleKnob.style.height = '8px';
         toggleKnob.style.background = '#fff';
@@ -9527,25 +9565,6 @@
         toggleSwitch.appendChild(toggleKnob);
         talkToggle.appendChild(toggleLabel);
         talkToggle.appendChild(toggleSwitch);
-
-        // Function to update TTM toggle visual state based on actual TTM status
-        function updateTTMToggleVisual() {
-            const isTTMCurrentlyActive = isTTMActive();
-
-            if (isTTMCurrentlyActive) {
-                // Ativa o toggle visual
-                toggleSwitch.style.background = '#6ec6ff';
-                toggleSwitch.style.borderColor = '#6ec6ff';
-                toggleKnob.style.left = '13px';
-                toggleLabel.style.color = '#6ec6ff';
-            } else {
-                // Desativa o toggle visual
-                toggleSwitch.style.background = '#444';
-                toggleSwitch.style.borderColor = '#666';
-                toggleKnob.style.left = '1px';
-                toggleLabel.style.color = '#ecf0f1';
-            }
-        }
 
         // Initialize toggle state based on current TTM status
         updateTTMToggleVisual();
@@ -11298,6 +11317,7 @@
             document.addEventListener('keydown', function (e) {
                 // Ctrl + '
                 if (e.ctrlKey && (e.key === "'" || e.key === '"')) {
+                    updateTTMToggleVisual();
                     const hotbar = document.getElementById('roll20-hotbar');
                     if (hotbar) {
                         if (hotbar.style.display === 'none') {
