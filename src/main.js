@@ -26,7 +26,9 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.0.89287'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.0.24132'; // Última tag Git
+
+    const logger = window.console;
 
     // TTM (Talking to Yourself) status check function
     function isTTMActive() {
@@ -1618,7 +1620,7 @@
             if (overflowY === 'auto' || overflowY === 'scroll' ||
                 overflow === 'auto' || overflow === 'scroll') {
 
-                window.console.log('Found scrollable element:', element.id || element.className, 'in popup:', popup.id);
+                logger.log('Found scrollable element:', element.id || element.className, 'in popup:', popup.id);
 
                 // Aplica estilos diretamente no elemento
                 element.style.setProperty('scrollbar-width', 'thin', 'important');
@@ -1665,7 +1667,7 @@
         // Também aplica no próprio popup se ele for scrollável
         const popupComputedStyle = window.getComputedStyle(popup);
         if (popupComputedStyle.overflowY === 'auto' || popupComputedStyle.overflowY === 'scroll') {
-            window.console.log('Popup itself is scrollable:', popup.id);
+            logger.log('Popup itself is scrollable:', popup.id);
 
             popup.style.setProperty('scrollbar-width', 'thin', 'important');
             popup.style.setProperty('scrollbar-color', `${colors.thumb} ${colors.track}`, 'important');
@@ -1921,21 +1923,21 @@
 
     // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
-        window.console.log('🔄 updateHotbarUI() chamada');
+        logger.log('🔄 updateHotbarUI() chamada');
 
         // Atualizar nome do personagem
         const characterNameElement = document.getElementById('character-name');
         if (characterNameElement) {
             const syncedName = getCharacterName();
             characterNameElement.textContent = syncedName;
-            window.console.log('✅ Nome atualizado:', syncedName);
+            logger.log('✅ Nome atualizado:', syncedName);
         }
 
         // Atualizar nível no ícone do avatar
         const levelIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Nível do herói"]');
         if (levelIcon) {
             levelIcon.textContent = getCharLevel();
-            window.console.log('✅ Nível atualizado:', getCharLevel());
+            logger.log('✅ Nível atualizado:', getCharLevel());
         }
 
         // Atualizar defesa no ícone do avatar
@@ -1943,49 +1945,49 @@
         if (defenseIcon) {
             const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
             defenseIcon.textContent = defenseValue;
-            window.console.log('✅ Defesa atualizada:', defenseValue);
+            logger.log('✅ Defesa atualizada:', defenseValue);
         }
 
         // Atualizar barras de vida e mana
-        window.console.log('🔄 Chamando updateHealthAndManaBars()...');
+        logger.log('🔄 Chamando updateHealthAndManaBars()...');
         updateHealthAndManaBars();
 
-        window.console.log('✅ UI da hotbar atualizada com dados sincronizados');
+        logger.log('✅ UI da hotbar atualizada com dados sincronizados');
     }
 
     // Função para atualizar barras de vida e mana
     function updateHealthAndManaBars() {
-        window.console.log('🔄 updateHealthAndManaBars() chamada');
+        logger.log('🔄 updateHealthAndManaBars() chamada');
 
         // Debug: mostrar valores atuais no console
-        window.console.log('=== DEBUG: Atualizando Barras de Vida e Mana ===');
-        window.console.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-hp-current'));
-        window.console.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-hp-total'));
-        window.console.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-mp-current'));
-        window.console.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-mp-total'));
-        window.console.log('===============================================');
+        logger.log('=== DEBUG: Atualizando Barras de Vida e Mana ===');
+        logger.log('Vida Atual:', localStorage.getItem('tormenta-20-hotbars-sync-hp-current'));
+        logger.log('Vida Total:', localStorage.getItem('tormenta-20-hotbars-sync-hp-total'));
+        logger.log('Mana Atual:', localStorage.getItem('tormenta-20-hotbars-sync-mp-current'));
+        logger.log('Mana Total:', localStorage.getItem('tormenta-20-hotbars-sync-mp-total'));
+        logger.log('===============================================');
 
         // Buscar elementos de forma mais robusta
         const characterInfo = document.querySelector('#character-avatar')?.parentNode?.parentNode;
         if (!characterInfo) {
-            window.console.log('❌ Não foi possível encontrar characterInfo');
+            logger.log('❌ Não foi possível encontrar characterInfo');
             return;
         }
 
-        window.console.log('✅ characterInfo encontrado:', characterInfo);
-        window.console.log('📋 Todos os elementos filhos de characterInfo:');
+        logger.log('✅ characterInfo encontrado:', characterInfo);
+        logger.log('📋 Todos os elementos filhos de characterInfo:');
         characterInfo.childNodes.forEach((child, index) => {
             if (child.nodeType === Node.ELEMENT_NODE) {
-                window.console.log(`  ${index}:`, child.tagName, child.className || 'sem classe');
-                window.console.log(`     Estilo:`, child.style.cssText);
-                
+                logger.log(`  ${index}:`, child.tagName, child.className || 'sem classe');
+                logger.log(`     Estilo:`, child.style.cssText);
+
                 // Se for um div, mostrar seus filhos também
                 if (child.tagName === 'DIV') {
-                    window.console.log(`     Filhos do ${index}:`);
+                    logger.log(`     Filhos do ${index}:`);
                     child.childNodes.forEach((grandChild, grandIndex) => {
                         if (grandChild.nodeType === Node.ELEMENT_NODE) {
-                            window.console.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.className || 'sem classe');
-                            window.console.log(`         Estilo:`, grandChild.style.cssText);
+                            logger.log(`       ${grandIndex}:`, grandChild.tagName, grandChild.className || 'sem classe');
+                            logger.log(`         Estilo:`, grandChild.style.cssText);
                         }
                     });
                 }
@@ -1993,23 +1995,27 @@
         });
 
         // Atualizar barra de vida
-        window.console.log('🔍 Procurando healthBarContainer...');
-        const healthBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
-        window.console.log('healthBarContainer encontrado:', healthBarContainer);
+        logger.log('🔍 Procurando healthBarContainer...');
+        // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
+        const infoContainer = characterInfo.children[1];
+        logger.log('infoContainer encontrado:', infoContainer);
+        
+        const healthBarContainer = infoContainer.querySelector('div[style*="gap: 8px"][style*="marginTop: 4px"]');
+        logger.log('healthBarContainer encontrado:', healthBarContainer);
 
         if (healthBarContainer) {
-            window.console.log('📋 Elementos dentro do healthBarContainer:');
+            logger.log('📋 Elementos dentro do healthBarContainer:');
             healthBarContainer.childNodes.forEach((child, index) => {
                 if (child.nodeType === Node.ELEMENT_NODE) {
-                    window.console.log(`  ${index}:`, child.tagName, child.style.cssText);
+                    logger.log(`  ${index}:`, child.tagName, child.style.cssText);
                 }
             });
 
             const healthFill = healthBarContainer.querySelector('div[style*="height: 100%"]');
             const healthText = healthBarContainer.querySelector('div[style*="color: #ecf0f1"]');
 
-            window.console.log('healthFill encontrado:', healthFill);
-            window.console.log('healthText encontrado:', healthText);
+            logger.log('healthFill encontrado:', healthFill);
+            logger.log('healthText encontrado:', healthText);
 
             if (healthFill && healthText) {
                 const currentHP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0');
@@ -2028,32 +2034,32 @@
                     healthFill.style.background = '#f44336';
                 }
 
-                window.console.log(`✅ Barra de vida atualizada: ${currentHP}/${maxHP} (${healthPercentage}%)`);
+                logger.log(`✅ Barra de vida atualizada: ${currentHP}/${maxHP} (${healthPercentage}%)`);
             } else {
-                window.console.log('❌ Não foi possível encontrar elementos da barra de vida');
+                logger.log('❌ Não foi possível encontrar elementos da barra de vida');
             }
         } else {
-            window.console.log('❌ Não foi possível encontrar healthBarContainer');
+            logger.log('❌ Não foi possível encontrar healthBarContainer');
         }
 
         // Atualizar barra de mana
-        window.console.log('🔍 Procurando manaBarContainer...');
-        const manaBarContainer = characterInfo.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
-        window.console.log('manaBarContainer encontrado:', manaBarContainer);
+        logger.log('🔍 Procurando manaBarContainer...');
+        const manaBarContainer = infoContainer.querySelector('div[style*="gap: 8px"][style*="marginTop: 2px"]');
+        logger.log('manaBarContainer encontrado:', manaBarContainer);
 
         if (manaBarContainer) {
-            window.console.log('📋 Elementos dentro do manaBarContainer:');
+            logger.log('📋 Elementos dentro do manaBarContainer:');
             manaBarContainer.childNodes.forEach((child, index) => {
                 if (child.nodeType === Node.ELEMENT_NODE) {
-                    window.console.log(`  ${index}:`, child.tagName, child.style.cssText);
+                    logger.log(`  ${index}:`, child.tagName, child.style.cssText);
                 }
             });
 
             const manaFill = manaBarContainer.querySelector('div[style*="height: 100%"]');
             const manaText = manaBarContainer.querySelector('div[style*="color: #6ec6ff"]');
 
-            window.console.log('manaFill encontrado:', manaFill);
-            window.console.log('manaText encontrado:', manaText);
+            logger.log('manaFill encontrado:', manaFill);
+            logger.log('manaText encontrado:', manaText);
 
             if (manaFill && manaText) {
                 const currentMP = parseInt(localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0');
@@ -2063,12 +2069,12 @@
                 manaFill.style.width = `${manaPercentage}%`;
                 manaText.textContent = `${currentMP}/${maxMP}`;
 
-                window.console.log(`✅ Barra de mana atualizada: ${currentMP}/${maxMP} (${manaPercentage}%)`);
+                logger.log(`✅ Barra de mana atualizada: ${currentMP}/${maxMP} (${manaPercentage}%)`);
             } else {
-                window.console.log('❌ Não foi possível encontrar elementos da barra de mana');
+                logger.log('❌ Não foi possível encontrar elementos da barra de mana');
             }
         } else {
-            window.console.log('❌ Não foi possível encontrar manaBarContainer');
+            logger.log('❌ Não foi possível encontrar manaBarContainer');
         }
     }
 
@@ -2096,7 +2102,7 @@
             const currentAc = localStorage.getItem('tormenta-20-hotbars-sync-ac');
 
             // Debug: mostrar valores atuais a cada verificação
-            window.console.log('🔍 Observer verificando valores:', {
+            logger.log('🔍 Observer verificando valores:', {
                 name: currentName,
                 level: currentLevel,
                 hpCurrent: currentHpCurrent,
@@ -2118,14 +2124,14 @@
 
             // Se houve mudança, atualizar UI
             if (hasChanges) {
-                window.console.log('🔄 Mudanças detectadas no localStorage, atualizando UI...');
-                window.console.log('Nome:', initialValues.name, '->', currentName);
-                window.console.log('Nível:', initialValues.level, '->', currentLevel);
-                window.console.log('HP Atual:', initialValues.hpCurrent, '->', currentHpCurrent);
-                window.console.log('HP Total:', initialValues.hpTotal, '->', currentHpTotal);
-                window.console.log('MP Atual:', initialValues.mpCurrent, '->', currentMpCurrent);
-                window.console.log('MP Total:', initialValues.mpTotal, '->', currentMpTotal);
-                window.console.log('AC:', initialValues.ac, '->', currentAc);
+                logger.log('🔄 Mudanças detectadas no localStorage, atualizando UI...');
+                logger.log('Nome:', initialValues.name, '->', currentName);
+                logger.log('Nível:', initialValues.level, '->', currentLevel);
+                logger.log('HP Atual:', initialValues.hpCurrent, '->', currentHpCurrent);
+                logger.log('HP Total:', initialValues.hpTotal, '->', currentHpTotal);
+                logger.log('MP Atual:', initialValues.mpCurrent, '->', currentMpCurrent);
+                logger.log('MP Total:', initialValues.mpTotal, '->', currentMpTotal);
+                logger.log('AC:', initialValues.ac, '->', currentAc);
 
                 // Atualizar valores iniciais
                 initialValues.name = currentName;
@@ -2147,7 +2153,7 @@
             const favorites = localStorage.getItem(FAVORITES_KEY);
             return favorites ? JSON.parse(favorites) : [];
         } catch (error) {
-            window.console.log('Erro ao carregar favoritos:', error);
+            logger.log('Erro ao carregar favoritos:', error);
             return [];
         }
     }
@@ -2156,7 +2162,7 @@
         try {
             localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
         } catch (error) {
-            window.console.log('Erro ao salvar favoritos:', error);
+            logger.log('Erro ao salvar favoritos:', error);
         }
     }
 
@@ -2164,7 +2170,7 @@
         try {
             return localStorage.getItem(AVATAR_KEY) || null;
         } catch (error) {
-            window.console.log('Erro ao carregar avatar:', error);
+            logger.log('Erro ao carregar avatar:', error);
             return null;
         }
     }
@@ -2173,7 +2179,7 @@
         try {
             localStorage.setItem(AVATAR_KEY, url);
         } catch (error) {
-            window.console.log('Erro ao salvar avatar:', error);
+            logger.log('Erro ao salvar avatar:', error);
         }
     }
 
@@ -2183,7 +2189,7 @@
             const abilities = localStorage.getItem(HUNTER_ABILITIES_KEY);
             return abilities ? JSON.parse(abilities) : [];
         } catch (error) {
-            window.console.log('Erro ao carregar habilidades aprendidas:', error);
+            logger.log('Erro ao carregar habilidades aprendidas:', error);
             return [];
         }
     }
@@ -2192,7 +2198,7 @@
         try {
             localStorage.setItem(HUNTER_ABILITIES_KEY, JSON.stringify(abilities));
         } catch (error) {
-            window.console.log('Erro ao salvar habilidades aprendidas:', error);
+            logger.log('Erro ao salvar habilidades aprendidas:', error);
         }
     }
 
@@ -2283,7 +2289,7 @@
             const spells = localStorage.getItem(LEARNED_SPELLS_KEY);
             return spells ? JSON.parse(spells) : [];
         } catch (error) {
-            window.console.log('Erro ao carregar magias aprendidas:', error);
+            logger.log('Erro ao carregar magias aprendidas:', error);
             return [];
         }
     }
@@ -2292,7 +2298,7 @@
         try {
             localStorage.setItem(LEARNED_SPELLS_KEY, JSON.stringify(spells));
         } catch (error) {
-            window.console.log('Erro ao salvar magias aprendidas:', error);
+            logger.log('Erro ao salvar magias aprendidas:', error);
         }
     }
 
@@ -2637,13 +2643,13 @@
             const checkForMessage = () => {
                 // Procura por mensagens no chat que contenham nossa chave
                 const chatMessages = document.querySelectorAll('#textchat .message');
-                window.console.log(`Procurando mensagem com chave: ${dataKey}`);
-                window.console.log(`Mensagens encontradas no chat: ${chatMessages.length}`);
+                logger.log(`Procurando mensagem com chave: ${dataKey}`);
+                logger.log(`Mensagens encontradas no chat: ${chatMessages.length}`);
 
                 for (let message of chatMessages) {
                     const messageText = message.textContent || message.innerText;
                     if (messageText.includes(dataKey)) {
-                        window.console.log('Mensagem encontrada:', messageText);
+                        logger.log('Mensagem encontrada:', messageText);
                         resolve(message);
                         return;
                     }
@@ -2668,15 +2674,15 @@
             const messageText = messageElement.textContent || messageElement.innerText;
 
             // Log da mensagem completa para debug
-            window.console.log('Mensagem JSON completa recebida:', messageText);
+            logger.log('Mensagem JSON completa recebida:', messageText);
 
             // Remove a chave da mensagem
             let cleanText = messageText.replace(`[${dataKey}]`, '').trim();
-            window.console.log('Texto JSON limpo (sem chave):', cleanText);
+            logger.log('Texto JSON limpo (sem chave):', cleanText);
 
             // Remove possíveis caracteres extras no início e fim
             cleanText = cleanText.replace(/^[^{[]*/, '').replace(/[^}\]]*$/, '');
-            window.console.log('Texto JSON limpo (sem caracteres extras):', cleanText);
+            logger.log('Texto JSON limpo (sem caracteres extras):', cleanText);
 
             // Tenta fazer parse do JSON
             let jsonData;
@@ -2684,14 +2690,14 @@
                 jsonData = JSON.parse(cleanText);
             } catch (parseError) {
                 console.error('Erro ao fazer parse do JSON:', parseError);
-                window.console.log('Texto que falhou no parse:', cleanText);
+                logger.log('Texto que falhou no parse:', cleanText);
 
                 // Tenta extrair dados manualmente se o JSON falhar
-                window.console.log('Tentando extração manual dos dados...');
+                logger.log('Tentando extração manual dos dados...');
                 return extractDataManually(cleanText);
             }
 
-            window.console.log('Dados JSON extraídos:', jsonData);
+            logger.log('Dados JSON extraídos:', jsonData);
 
             return jsonData;
         } catch (error) {
@@ -2703,7 +2709,7 @@
     // Função para extrair dados manualmente quando JSON falha
     function extractDataManually(text) {
         try {
-            window.console.log('Extraindo dados manualmente do texto:', text);
+            logger.log('Extraindo dados manualmente do texto:', text);
 
             // Tenta diferentes abordagens de limpeza
             let cleanedText = text;
@@ -2714,7 +2720,7 @@
             // Remove aspas duplas desnecessárias
             cleanedText = cleanedText.replace(/"/g, '');
 
-            window.console.log('Texto limpo:', cleanedText);
+            logger.log('Texto limpo:', cleanedText);
 
             // Divide por vírgulas e processa cada par chave-valor
             const pairs = cleanedText.split(',').map(pair => pair.trim());
@@ -2730,16 +2736,16 @@
                         // Remove possíveis caracteres especiais do valor
                         const cleanValue = value.replace(/^['"]|['"]$/g, '');
                         extractedData[key] = cleanValue;
-                        window.console.log(`Extraído: ${key} = ${cleanValue}`);
+                        logger.log(`Extraído: ${key} = ${cleanValue}`);
                     }
                 }
             });
 
-            window.console.log('Dados extraídos manualmente:', extractedData);
+            logger.log('Dados extraídos manualmente:', extractedData);
 
             // Se não conseguiu extrair dados, tenta uma abordagem mais agressiva
             if (Object.keys(extractedData).length === 0) {
-                window.console.log('Tentando extração agressiva...');
+                logger.log('Tentando extração agressiva...');
                 return extractDataAggressively(text);
             }
 
@@ -2753,11 +2759,11 @@
     // Função para extração agressiva de dados quando métodos normais falham
     function extractDataAggressively(text) {
         try {
-            window.console.log('Extração agressiva do texto:', text);
+            logger.log('Extração agressiva do texto:', text);
 
             // Remove tudo que não seja texto, números, vírgulas e dois pontos
             const cleanedText = text.replace(/[^\w\s,:]/g, '');
-            window.console.log('Texto limpo agressivamente:', cleanedText);
+            logger.log('Texto limpo agressivamente:', cleanedText);
 
             // Procura por padrões de chave:valor
             const keyValuePattern = /(\w+):\s*([^,]+)/g;
@@ -2769,11 +2775,11 @@
                 const value = match[2].trim();
                 if (key && value) {
                     extractedData[key] = value;
-                    window.console.log(`Extraído agressivamente: ${key} = ${value}`);
+                    logger.log(`Extraído agressivamente: ${key} = ${value}`);
                 }
             }
 
-            window.console.log('Dados extraídos agressivamente:', extractedData);
+            logger.log('Dados extraídos agressivamente:', extractedData);
             return extractedData;
         } catch (error) {
             console.error('Erro na extração agressiva:', error);
@@ -2809,12 +2815,12 @@
             const jsonString = JSON.stringify(jsonData);
             const command = `${jsonString} [${dataKey}]`;
 
-            window.console.log('=== DEBUG SINCRONIZAÇÃO ===');
-            window.console.log('Nome do personagem:', characterName);
-            window.console.log('Atributos configurados:', attributes);
-            window.console.log('Objeto JSON criado:', jsonData);
-            window.console.log('Comando de sincronização JSON enviado:', command);
-            window.console.log('================================');
+            logger.log('=== DEBUG SINCRONIZAÇÃO ===');
+            logger.log('Nome do personagem:', characterName);
+            logger.log('Atributos configurados:', attributes);
+            logger.log('Objeto JSON criado:', jsonData);
+            logger.log('Comando de sincronização JSON enviado:', command);
+            logger.log('================================');
 
             sendToChat(command);
 
@@ -2829,8 +2835,8 @@
                 removeMessageFromDOM(messageElement);
 
                 // 6. Salva os dados no localStorage com as chaves corretas
-                window.console.log('=== DADOS CAPTURADOS DA FICHA ===');
-                window.console.log('Dados brutos:', characterData);
+                logger.log('=== DADOS CAPTURADOS DA FICHA ===');
+                logger.log('Dados brutos:', characterData);
 
                 Object.keys(characterData).forEach(key => {
                     const value = characterData[key];
@@ -2838,11 +2844,11 @@
                         // Usar chaves específicas para valores capturados, não sobrescrever configurações
                         const syncKey = `tormenta-20-hotbars-sync-${key}`;
                         localStorage.setItem(syncKey, value);
-                        window.console.log(`Salvando ${syncKey}: ${value}`);
+                        logger.log(`Salvando ${syncKey}: ${value}`);
                     }
                 });
 
-                window.console.log('=== FIM DOS DADOS CAPTURADOS ===');
+                logger.log('=== FIM DOS DADOS CAPTURADOS ===');
 
                 // 7. Atualizar a UI da hotbar imediatamente
                 updateHotbarUI();
@@ -3531,7 +3537,7 @@
             }
         }
 
-        window.console.log(`Carregadas ${spells.length} magias do arquivo JSON`);
+        logger.log(`Carregadas ${spells.length} magias do arquivo JSON`);
         return spells;
     }
 
@@ -3971,7 +3977,7 @@
 
         // CARREGA AS MAGIAS AQUI - ADICIONAR ESTE BLOCO
         if (!window.grimorioSpellsCache) {
-            window.console.log('Carregando todas as magias...');
+            logger.log('Carregando todas as magias...');
 
             // Mostrar indicador de carregamento
             const loadingIndicator = document.createElement('div');
@@ -4001,7 +4007,7 @@
             try {
                 // Carregar magias diretamente usando fetch
                 window.grimorioSpellsCache = await loadSpellsDirectly();
-                window.console.log(`Carregadas ${window.grimorioSpellsCache.length} magias no total`);
+                logger.log(`Carregadas ${window.grimorioSpellsCache.length} magias no total`);
             } catch (error) {
                 console.error('Erro ao carregar magias:', error);
                 window.grimorioSpellsCache = [];
@@ -4315,7 +4321,7 @@
 
         // Função para atualizar o conteúdo da aba
         function updateTabContent(traditionId) {
-            window.console.log(`Atualizando conteúdo da aba: ${traditionId}`);
+            logger.log(`Atualizando conteúdo da aba: ${traditionId}`);
             const content = tabContent;
             content.innerHTML = '';
 
@@ -4359,10 +4365,10 @@
             let traditionSpells;
             if (traditionId === 'todas') {
                 traditionSpells = spellsCache;
-                window.console.log(`Encontradas ${traditionSpells.length} magias no total`);
+                logger.log(`Encontradas ${traditionSpells.length} magias no total`);
             } else {
                 traditionSpells = spellsCache.filter(spell => spell.tradition === traditionId);
-                window.console.log(`Encontradas ${traditionSpells.length} magias para tradição ${traditionId}`);
+                logger.log(`Encontradas ${traditionSpells.length} magias para tradição ${traditionId}`);
             }
 
             if (traditionSpells.length === 0) {
@@ -4428,13 +4434,13 @@
 
         // Função para recarregar o conteúdo do grimório
         function reloadGrimorioContent() {
-            window.console.log('🔄 Recarregando conteúdo do grimório...');
+            logger.log('🔄 Recarregando conteúdo do grimório...');
             updateTabContent(activeTab);
         }
 
         // Função para filtrar magias
         function filterSpells(searchTerm) {
-            window.console.log(`Filtrando magias por: ${searchTerm}`);
+            logger.log(`Filtrando magias por: ${searchTerm}`);
 
             // Filtrar magias localmente
             const spellsCache = window.grimorioSpellsCache || [];
@@ -7472,7 +7478,7 @@
         return noResultsMessage;
     }
     function createPratosEspeciaisPopup() {
-        window.console.log('Abrindo Pratos Especiais');
+        logger.log('Abrindo Pratos Especiais');
         try {
             // Remove popup existente se houver
             const existingPopup = document.getElementById('pratos-popup');
@@ -7631,7 +7637,7 @@
 
     // Função para criar popup de Bebidas Artonianas
     function createBebidasArtonianasPopup() {
-        window.console.log('Abrindo Bebidas Artonianas');
+        logger.log('Abrindo Bebidas Artonianas');
         try {
             // Remove popup existente se houver
             const existingPopup = document.getElementById('bebidas-popup');
@@ -7788,7 +7794,7 @@
 
     // Função para criar popup de Poções
     function createPocoesPopup() {
-        window.console.log('Abrindo Poções');
+        logger.log('Abrindo Poções');
         try {
             // Remove popup existente se houver
             const existingPopup = document.getElementById('pocoes-popup');
@@ -8048,7 +8054,7 @@
             audio.play();
 
         } catch (error) {
-            window.console.log('Erro ao criar áudio de cura:', error);
+            logger.log('Erro ao criar áudio de cura:', error);
             // Fallback: tenta tocar um beep simples
             playFallbackSound();
         }
@@ -8075,7 +8081,7 @@
             oscillator.stop(audioContext.currentTime + 0.5);
 
         } catch (error) {
-            window.console.log('Erro ao tocar som de fallback:', error);
+            logger.log('Erro ao tocar som de fallback:', error);
         }
     }
 
@@ -8087,7 +8093,7 @@
             audio.preload = 'auto';
             audio.play();
         } catch (e) {
-            window.console.log('Erro ao criar áudio de ataque:', e);
+            logger.log('Erro ao criar áudio de ataque:', e);
             // Fallback: tenta tocar um beep simples
             playFallbackSound();
         }
@@ -8824,7 +8830,7 @@
     function createSkillDetailModal(skillName) {
         const skillData = SKILLS_DATA[skillName];
         if (!skillData) {
-            window.console.log('Dados da skill não encontrados:', skillName);
+            logger.log('Dados da skill não encontrados:', skillName);
             return;
         }
 
@@ -11454,7 +11460,7 @@
                     e.stopPropagation();
                     createQuickSearchModal();
                 }
-                
+
                 // NOVO: Ctrl + G para abrir grimório
                 if (e.ctrlKey && e.key === 'g') {
                     e.preventDefault();
@@ -14038,7 +14044,7 @@
             const powers = localStorage.getItem(DESTINY_POWERS_KEY);
             return powers ? JSON.parse(powers) : [];
         } catch (error) {
-            window.console.log('Erro ao carregar poderes de destino aprendidos:', error);
+            logger.log('Erro ao carregar poderes de destino aprendidos:', error);
             return [];
         }
     }
@@ -14047,7 +14053,7 @@
         try {
             localStorage.setItem(DESTINY_POWERS_KEY, JSON.stringify(powers));
         } catch (error) {
-            window.console.log('Erro ao salvar poderes de destino aprendidos:', error);
+            logger.log('Erro ao salvar poderes de destino aprendidos:', error);
         }
     }
 
@@ -14111,7 +14117,7 @@
         try {
             return localStorage.getItem(SELECTED_RACE_KEY) || null;
         } catch (error) {
-            window.console.log('Erro ao carregar raça selecionada:', error);
+            logger.log('Erro ao carregar raça selecionada:', error);
             return null;
         }
     }
@@ -14120,7 +14126,7 @@
         try {
             localStorage.setItem(SELECTED_RACE_KEY, raceName);
         } catch (error) {
-            window.console.log('Erro ao salvar raça selecionada:', error);
+            logger.log('Erro ao salvar raça selecionada:', error);
         }
     }
 
@@ -14128,7 +14134,7 @@
         try {
             return localStorage.getItem(SELECTED_RACE_TYPE_KEY) || null;
         } catch (error) {
-            window.console.log('Erro ao carregar tipo de raça selecionado:', error);
+            logger.log('Erro ao carregar tipo de raça selecionado:', error);
             return null;
         }
     }
@@ -14137,7 +14143,7 @@
         try {
             localStorage.setItem(SELECTED_RACE_TYPE_KEY, raceType);
         } catch (error) {
-            window.console.log('Erro ao salvar tipo de raça selecionado:', error);
+            logger.log('Erro ao salvar tipo de raça selecionado:', error);
         }
     }
 
@@ -15565,7 +15571,7 @@
     function updateEffectsBadge() {
         const effectsButton = document.querySelector('#roll20-hotbar button[data-label="Efeitos"]');
         if (!effectsButton) {
-            window.console.log('Botão de efeitos não encontrado');
+            logger.log('Botão de efeitos não encontrado');
             return;
         }
 
@@ -15579,8 +15585,8 @@
         const activeEffects = getActiveEffects();
         const activeSelectableCards = getActiveSelectableCards();
         const totalActiveEffects = activeEffects.length + activeSelectableCards.length;
-        window.console.log('Efeitos ativos:', activeEffects);
-        window.console.log('Selectable cards ativos:', activeSelectableCards);
+        logger.log('Efeitos ativos:', activeEffects);
+        logger.log('Selectable cards ativos:', activeSelectableCards);
 
         // Cria novo badge se há efeitos ativos
         if (totalActiveEffects > 0) {
@@ -15603,9 +15609,9 @@
             badge.style.zIndex = '1000';
             badge.textContent = totalActiveEffects;
             effectsButton.appendChild(badge);
-            window.console.log('Badge criado com valor:', totalActiveEffects);
+            logger.log('Badge criado com valor:', totalActiveEffects);
         } else {
-            window.console.log('Nenhum efeito ativo, badge não criado');
+            logger.log('Nenhum efeito ativo, badge não criado');
         }
     }
     // NOVO: Sistema de Cache de Imagens
@@ -15619,7 +15625,7 @@
 
             // Verifica se a versão do cache é compatível
             if (parsedCache.version !== IMAGE_CACHE_VERSION) {
-                window.console.log('Versão do cache de imagens desatualizada, limpando...');
+                logger.log('Versão do cache de imagens desatualizada, limpando...');
                 clearImageCache();
                 return { version: IMAGE_CACHE_VERSION, images: {} };
             }
@@ -15822,7 +15828,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     function clearImageCache() {
         try {
             localStorage.removeItem(IMAGE_CACHE_KEY);
-            window.console.log('Cache de imagens limpo');
+            logger.log('Cache de imagens limpo');
         } catch (error) {
             console.error('Erro ao limpar cache de imagens:', error);
         }
@@ -15835,13 +15841,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
             // Verifica se a imagem está no cache
             if (cache.images && cache.images[url]) {
-                window.console.log(`Imagem carregada do cache: ${url}`);
+                logger.log(`Imagem carregada do cache: ${url}`);
                 resolve(cache.images[url]);
                 return;
             }
 
             // Se não está no cache, carrega e cacheia
-            window.console.log(`Carregando e cacheando imagem: ${url}`);
+            logger.log(`Carregando e cacheando imagem: ${url}`);
 
             // Cria um canvas para converter a imagem para base64
             const img = new Image();
@@ -15867,7 +15873,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                     cache.images[url] = dataUrl;
                     saveImageCache(cache);
 
-                    window.console.log(`Imagem cacheada com sucesso: ${url}`);
+                    logger.log(`Imagem cacheada com sucesso: ${url}`);
                     resolve(dataUrl);
                 } catch (error) {
                     console.error(`Erro ao cachear imagem ${url}:`, error);
@@ -15887,7 +15893,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
     // Função para pré-carregar todas as imagens conhecidas
     async function preloadKnownImages() {
-        window.console.log('Iniciando pré-carregamento de imagens...');
+        logger.log('Iniciando pré-carregamento de imagens...');
 
         // Lista de todas as URLs de imagens conhecidas
         const knownImageUrls = [
@@ -15968,7 +15974,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             }
         }
 
-        window.console.log(`Pré-carregamento concluído: ${loadedCount} novas imagens carregadas, ${cachedCount} já estavam no cache`);
+        logger.log(`Pré-carregamento concluído: ${loadedCount} novas imagens carregadas, ${cachedCount} já estavam no cache`);
     }
     // Função para criar elemento de imagem com cache
     function createCachedImageElement(url, alt, fallbackEmoji = '🍽️', options = {}) {
@@ -16076,7 +16082,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const effectsContainer = document.getElementById('effects-icons-container');
 
         if (!effectsSection || !effectsContainer) {
-            window.console.log('Seção de indicadores de efeitos não encontrada');
+            logger.log('Seção de indicadores de efeitos não encontrada');
             return;
         }
 
