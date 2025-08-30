@@ -21,3 +21,6 @@ preview:
 	make lint
 	make build
 	make dev
+
+publish:
+	pnpm create-tag

@@ -54,16 +54,24 @@ function createGitTag(version, message) {
             }
             console.log('🔄 Removendo tag existente...');
             execSync(`git tag -d ${version}`, { stdio: 'inherit' });
+
+            // Tentar remover a tag remota também
+            try {
+                execSync(`git push origin --delete ${version}`, { stdio: 'pipe' });
+                console.log('🗑️  Tag remota removida');
+            } catch (remoteError) {
+                console.log('ℹ️  Tag remota não encontrada ou não pode ser removida');
+            }
         }
 
         // Criar a nova tag
         console.log(`🏷️  Criando tag: ${version}`);
         execSync(`git tag -a ${version} -m "${message}"`, { stdio: 'inherit' });
-        
+
         // Fazer push da tag para o repositório remoto
         console.log('📤 Fazendo push da tag...');
         execSync(`git push origin ${version}`, { stdio: 'inherit' });
-        
+
         return true;
     } catch (error) {
         console.error('❌ Erro ao criar tag:', error.message);
@@ -94,7 +102,7 @@ function main() {
             console.log('⚠️  Existem mudanças não commitadas:');
             console.log(status);
             console.log('\n💡 Recomenda-se fazer commit das mudanças antes de criar a tag');
-            
+
             const force = process.argv.includes('--force');
             if (!force) {
                 console.log('💡 Use --force para continuar mesmo com mudanças não commitadas');
@@ -108,8 +116,8 @@ function main() {
 
     // Gerar mensagem da tag
     const customMessage = process.argv.find(arg => arg.startsWith('--message='));
-    const message = customMessage 
-        ? customMessage.split('=')[1] 
+    const message = customMessage
+        ? customMessage.split('=')[1]
         : `Release ${version} - ${new Date().toISOString().split('T')[0]}`;
 
     console.log(`📝 Mensagem da tag: ${message}\n`);
