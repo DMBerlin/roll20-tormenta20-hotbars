@@ -1,0 +1,26 @@
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (se houver)
+node_modules/
+
+# Arquivos de build temporários
+build/
+dist/
+
+# Arquivos de cache
+.cache/
