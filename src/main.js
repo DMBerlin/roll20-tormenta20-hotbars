@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.97587'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.57306'; // Última tag Git
 
     const logger = window.console;
 
@@ -6324,7 +6324,7 @@
             efeitoSection.style.borderRadius = '8px';
 
             const efeitoTitle = document.createElement('h3');
-            efeitoTitle.textContent = '🎯 Efeito Principal';
+            efeitoTitle.textContent = 'Efeito Principal';
             efeitoTitle.style.color = '#ffb86c';
             efeitoTitle.style.fontSize = '16px';
             efeitoTitle.style.margin = '0 0 10px 0';
@@ -6366,7 +6366,7 @@
             const descSection = document.createElement('div');
             descSection.style.marginBottom = '20px';
             const descTitle = document.createElement('h3');
-            descTitle.textContent = '📖 Descrição';
+            descTitle.textContent = 'Descrição';
             descTitle.style.color = '#6ec6ff';
             descTitle.style.fontSize = '16px';
             descTitle.style.margin = '0 0 10px 0';
@@ -6411,7 +6411,7 @@
             const techSection = document.createElement('div');
             techSection.style.marginBottom = '20px';
             const techTitle = document.createElement('h3');
-            techTitle.textContent = '⚙️ Informações Técnicas';
+            techTitle.textContent = 'Informações Técnicas';
             techTitle.style.color = '#6ec6ff';
             techTitle.style.fontSize = '16px';
             techTitle.style.margin = '0 0 10px 0';
@@ -6459,7 +6459,7 @@
 
         // Botão Compartilhar
         const shareBtn = document.createElement('button');
-        shareBtn.textContent = '📤 Compartilhar';
+        shareBtn.textContent = 'Compartilhar';
         shareBtn.style.flex = '1';
         shareBtn.style.padding = '12px 15px';
         shareBtn.style.background = '#2c3e50';
@@ -6480,7 +6480,7 @@
 
         // Botão Usar
         const useBtn = document.createElement('button');
-        useBtn.textContent = '🧪 Usar Poção';
+        useBtn.textContent = 'Usar Poção';
         useBtn.style.flex = '1';
         useBtn.style.padding = '12px 15px';
         useBtn.style.background = '#27ae60';
@@ -6896,7 +6896,7 @@
             descSection.style.borderRadius = '8px';
 
             const descTitle = document.createElement('h3');
-            descTitle.textContent = '📖 Descrição Completa';
+            descTitle.textContent = 'Descrição Completa';
             descTitle.style.color = '#ffb86c';
             descTitle.style.fontSize = '16px';
             descTitle.style.margin = '0 0 10px 0';
@@ -6944,7 +6944,7 @@
             const techSection = document.createElement('div');
             techSection.style.marginBottom = '20px';
             const techTitle = document.createElement('h3');
-            techTitle.textContent = '⚙️ Informações Técnicas';
+            techTitle.textContent = 'Informações Técnicas';
             techTitle.style.color = '#6ec6ff';
             techTitle.style.fontSize = '16px';
             techTitle.style.margin = '0 0 10px 0';
@@ -7129,7 +7129,7 @@
         header.style.borderBottom = '1px solid rgba(255,184,108,0.3)';
 
         const title = document.createElement('h2');
-        title.textContent = '⚙️ Configurações';
+        title.textContent = 'Configurações';
         title.style.color = '#ffb86c';
         title.style.margin = '0';
         title.style.fontSize = '20px';
@@ -11140,7 +11140,7 @@
             descriptionSection.style.padding = '12px';
 
             const descriptionTitle = document.createElement('h3');
-            descriptionTitle.textContent = '📖 Descrição Completa';
+            descriptionTitle.textContent = 'Descrição Completa';
             descriptionTitle.style.color = '#9C27B0';
             descriptionTitle.style.margin = '0 0 8px 0';
             descriptionTitle.style.fontSize = '16px';
