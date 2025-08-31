@@ -30,7 +30,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.36631'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.53706'; // Última tag Git
 
     const logger = window.console;
 
@@ -1942,6 +1942,14 @@
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
+    // Função para obter a classe do personagem
+    function getCharClass() {
+        // Primeiro tenta buscar valor sincronizado, depois valor padrão
+        const syncedClass = localStorage.getItem('tormenta-20-hotbars-sync-class');
+        if (syncedClass) return syncedClass.toUpperCase();
+        return 'CLASSE';
+    }
+
     // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
         // Atualizar nome do personagem
@@ -1962,6 +1970,12 @@
         if (defenseIcon) {
             const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
             defenseIcon.textContent = defenseValue;
+        }
+
+        // Atualizar classe no botão da classe
+        const classButton = document.getElementById('character-class-button');
+        if (classButton) {
+            classButton.textContent = getCharClass();
         }
 
         // Atualizar barras de vida e mana
@@ -10832,10 +10846,11 @@
         mainContent.style.padding = '14px 24px 14px 24px';
         mainContent.style.alignItems = 'center';
 
-        // Botão da classe Caçador (vertical, à esquerda)
+        // Botão da classe (vertical, à esquerda)
         const classButton = document.createElement('div');
-        classButton.textContent = 'CAÇADOR';
-        classButton.style.color = '#8B4513';
+        classButton.id = 'character-class-button';
+        classButton.textContent = getCharClass();
+        classButton.style.color = '#6ec6ff';
         classButton.style.fontSize = '10px';
         classButton.style.fontWeight = 'bold';
         classButton.style.fontStyle = 'italic';
@@ -10843,9 +10858,9 @@
         classButton.style.letterSpacing = '1px';
         classButton.style.cursor = 'pointer';
         classButton.style.padding = '0px 4px';
-        classButton.style.background = 'rgba(139, 69, 19, 0.2)';
+        classButton.style.background = 'rgba(26,26,46,0.9)';
         classButton.style.borderRadius = '8px';
-        classButton.style.border = '1px solid rgba(139, 69, 19, 0.4)';
+        classButton.style.border = '1px solid rgba(110,198,255,0.4)';
         classButton.style.transition = 'all 0.2s';
         classButton.style.display = 'flex';
         classButton.style.alignItems = 'center';
@@ -10860,13 +10875,13 @@
 
         // Hover effects para o botão da classe
         classButton.onmouseover = () => {
-            classButton.style.background = 'rgba(139, 69, 19, 0.3)';
-            classButton.style.borderColor = 'rgba(139, 69, 19, 0.6)';
+            classButton.style.background = 'rgba(26,26,46,1)';
+            classButton.style.borderColor = 'rgba(110,198,255,0.8)';
             classButton.style.transform = 'rotate(180deg) scale(1.05)';
         };
         classButton.onmouseout = () => {
-            classButton.style.background = 'rgba(139, 69, 19, 0.2)';
-            classButton.style.borderColor = 'rgba(139, 69, 19, 0.4)';
+            classButton.style.background = 'rgba(26,26,46,0.9)';
+            classButton.style.borderColor = 'rgba(110,198,255,0.4)';
             classButton.style.transform = 'rotate(180deg) scale(1)';
         };
         classButton.onclick = () => {
@@ -11027,7 +11042,7 @@
         healthBarContainer.style.marginTop = '2px';
 
         const healthBar = document.createElement('div');
-        healthBar.style.width = '100%';
+        healthBar.style.width = '80px';
         healthBar.style.height = '8px';
         healthBar.style.background = 'rgba(255, 0, 0, 0.3)';
         healthBar.style.borderRadius = '4px';
@@ -11074,7 +11089,7 @@
         manaBarContainer.style.marginTop = '1px';
 
         const manaBar = document.createElement('div');
-        manaBar.style.width = '100%';
+        manaBar.style.width = '80px';
         manaBar.style.height = '8px';
         manaBar.style.background = 'rgba(0, 0, 255, 0.3)';
         manaBar.style.borderRadius = '4px';
