@@ -1,0 +1,69 @@
+_id: MNEVQYE0HphQb5Hi
+name: Aventureiro Ávido
+type: poder
+img: systems/tormenta20/icons/classes/bucaneiro.webp
+effects: []
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Uma vez por rodada, voc&ecirc; pode gastar 5 PM para realizar uma
+      a&ccedil;&atilde;o padr&atilde;o ou de movimento adicional. Se possuir o
+      poder Surto Heroico, em vez disso seu custo diminui em &ndash;2 PM.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 47
+  ativacao:
+    execucao: ''
+    custo: 5
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717048
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!MNEVQYE0HphQb5Hi'
+

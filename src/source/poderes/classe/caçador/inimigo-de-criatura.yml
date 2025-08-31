@@ -1,0 +1,128 @@
+_id: UJ0rRgYVAT2tdFQH
+name: Inimigo de (Criatura)
+type: poder
+img: systems/tormenta20/icons/classes/cacador.webp
+effects:
+  - _id: 97epjFA6hxb3RZob
+    flags:
+      tormenta20:
+        onuse: true
+        attack: false
+        self: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: Marca da Presa
+    changes:
+      - key: efeito.dano
+        mode: 1
+        value: '2'
+        priority: 0
+      - key: criticoM
+        mode: 1
+        value: '2'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.hJRRIkgySoQfqO7F
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Marca da Presa Inimigo
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!UJ0rRgYVAT2tdFQH.97epjFA6hxb3RZob'
+folder: iT3rUBmGhu5hbNic
+sort: 1800000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Escolha um tipo de criatura entre animal, construto, esp&iacute;rito,
+      monstro ou morto-vivo, ou duas ra&ccedil;as humanoides (por exemplo, orcs
+      e gnolls, ou elfos e qareen). Quando voc&ecirc; usa a habilidade Marca da
+      Presa contra uma criatura do tipo ou da ra&ccedil;a escolhida, dobra os
+      dados de b&ocirc;nus no dano. O nome desta habilidade varia de acordo com
+      o tipo de criatura escolhida (Inimigo de Monstros, Inimigo de Mortos-Vivos
+      etc.). Voc&ecirc; pode escolher este poder outras vezes para inimigos
+      diferentes.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 51
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Caçador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717061
+  modifiedTime: 1684630426990
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!UJ0rRgYVAT2tdFQH'
+

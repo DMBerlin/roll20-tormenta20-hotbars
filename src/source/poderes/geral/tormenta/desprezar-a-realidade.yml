@@ -1,0 +1,83 @@
+name: Desprezar a Realidade
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects: []
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar 2 PM para ficar no limiar da realidade
+      at&eacute; o in&iacute;cio de seu pr&oacute;ximo turno. Nesse estado,
+      voc&ecirc; ignora terreno dif&iacute;cil e causa 20% de chance de falha em
+      efeitos usados contra voc&ecirc; (n&atilde;o apenas ataques). Para cada
+      dois outros poderes de Tormenta que voc&ecirc; possuir, essa chance
+      aumenta em 5% (m&aacute;ximo de 50%).</p>
+
+      <p><em>Pr&eacute;-requisito: </em>quatro outros poderes da Tormenta.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Chance de Falha
+      key: formula0
+      type: formula
+      parts:
+        - - 1d100cs<(min(20+(@Tormenta2*5),50))
+          - ''
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  origin: ''
+  tags:
+    - Tormenta
+  chatGif: ''
+  rolltags:
+    - Tormenta
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183808
+  modifiedTime: 1684803321743
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: JddVAjOsUi74UQef
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+ownership:
+  default: 0
+_key: '!items!JddVAjOsUi74UQef'
+

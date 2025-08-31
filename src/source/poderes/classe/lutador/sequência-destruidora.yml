@@ -1,0 +1,76 @@
+_id: xea4aBVNfrhKqyx0
+name: Sequência Destruidora
+type: poder
+img: systems/tormenta20/icons/classes/lutador.webp
+effects: []
+folder: csRpG81AedPycko0
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No in&iacute;cio do seu turno, voc&ecirc; pode gastar 2 PM para dizer
+      um n&uacute;mero (no m&iacute;nimo 2). Se fizer e acertar uma quantidade
+      de ataques igual ao n&uacute;mero dito, o &uacute;ltimo recebe um
+      b&ocirc;nus cumulativo de +4 na rolagem de dano por ataque feito. Por
+      exemplo, se voc&ecirc; falar &ldquo;tr&ecirc;s&rdquo; e fizer e acertar
+      tr&ecirc;s ataques, o &uacute;ltimo ataque (o terceiro) receber&aacute;
+      +12 na rolagem de dano.</p>
+
+      <p>Pr&eacute;-requisitos: Troca&ccedil;&atilde;o, 12&ordm; n&iacute;vel de
+      lutador.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 77
+  ativacao:
+    execucao: free
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Lutador
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185702
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!xea4aBVNfrhKqyx0'
+

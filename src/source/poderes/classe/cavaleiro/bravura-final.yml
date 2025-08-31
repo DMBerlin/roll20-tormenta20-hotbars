@@ -1,0 +1,71 @@
+_id: 5bBcVLtoh86nEYuS
+name: Bravura Final
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/bravura-final.webp
+effects: []
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 20&ordm; n&iacute;vel, sua virtude vence a morte. Se for reduzido a
+      0 ou menos PV, pode gastar 3 PM para continuar consciente e de p&eacute;.
+      Esta habilidade tem dura&ccedil;&atilde;o sustentada. Quando se encerra,
+      voc&ecirc; sofre os efeitos de seus PV atuais, podendo cair inconsciente
+      ou mesmo morrer.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 55
+  ativacao:
+    execucao: ''
+    custo: 5
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Cavaleiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183316
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!5bBcVLtoh86nEYuS'
+

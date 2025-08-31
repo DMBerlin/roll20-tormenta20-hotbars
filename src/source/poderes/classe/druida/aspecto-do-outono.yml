@@ -1,0 +1,111 @@
+_id: uWxaz68WwhmAkcB2
+name: Aspecto do Outono
+type: poder
+img: systems/tormenta20/icons/classes/druida.webp
+effects:
+  - _id: 8EUYQa5o1IiTF3h5
+    changes:
+      - key: system.modificadores.pericias.resistencia
+        mode: 2
+        value: '-2'
+        priority: null
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uDmWmhrfqnzPWiTb
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aspecto do Outono
+    img: systems/tormenta20/icons/classes/druida.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!uWxaz68WwhmAkcB2.8EUYQa5o1IiTF3h5'
+folder: 8LraP5E2KHsZTAz8
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; aprende e pode lan&ccedil;ar uma magia de necromancia,
+      arcana ou divina, de qualquer c&iacute;rculo que possa lan&ccedil;ar.
+      Al&eacute;m disso, pode gastar 1 PM para impor uma penalidade de &ndash;2
+      nos testes de resist&ecirc;ncia de todos os inimigos em alcance curto
+      at&eacute; o in&iacute;cio do seu pr&oacute;ximo turno.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 61
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: medium
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Druida
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185652
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!uWxaz68WwhmAkcB2'
+

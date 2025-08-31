@@ -1,0 +1,74 @@
+_id: ke8sDLo2AVzmq7kT
+name: Companheiro Animal Aprimorado
+type: poder
+img: systems/tormenta20/icons/classes/druida.webp
+effects: []
+folder: 8LraP5E2KHsZTAz8
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Escolha um de seus companheiros animais. Ele recebe um segundo tipo,
+      ganhando os b&ocirc;nus de seu n&iacute;vel. Por exemplo, se voc&ecirc;
+      tiver um companheiro guardi&atilde;o veterano, pode adicionar o tipo
+      fort&atilde;o a ele, tornando-o um guardi&atilde;o fort&atilde;o veterano
+      que concede +3 na Defesa e +1d12 nas rolagens de dano corpo a corpo.</p>
+
+      <p><em>Pr&eacute;-requisitos: </em>Companheiro Animal, 6&ordm;
+      n&iacute;vel de druida.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 62
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Druida
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185137
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ke8sDLo2AVzmq7kT'
+

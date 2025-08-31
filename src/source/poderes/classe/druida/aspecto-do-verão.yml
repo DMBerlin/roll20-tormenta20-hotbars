@@ -1,0 +1,114 @@
+_id: slVx01Ph3o6bkeoY
+name: Aspecto do Verão
+type: poder
+img: systems/tormenta20/icons/classes/druida.webp
+effects:
+  - origin: Item.slVx01Ph3o6bkeoY
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: qfFltEDnaZ27CLzp
+    changes:
+      - key: system.modificadores.dano.cac
+        mode: 2
+        value: 1d6
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aspecto do Verão
+    img: systems/tormenta20/icons/classes/druida.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!slVx01Ph3o6bkeoY.qfFltEDnaZ27CLzp'
+folder: 8LraP5E2KHsZTAz8
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; aprende e pode lan&ccedil;ar uma magia de
+      transmuta&ccedil;&atilde;o, arcana ou divina, de<br>qualquer
+      c&iacute;rculo que possa lan&ccedil;ar. Al&eacute;m disso, pode gastar 1
+      PM para cobrir uma de suas armas com chamas at&eacute; o fim da cena. A
+      arma causa +1d6 pontos de dano de fogo. Sempre que voc&ecirc; acertar um
+      ataque com ela, recebe 1 PM tempor&aacute;rio. Voc&ecirc; pode ganhar um
+      m&aacute;ximo de PM tempor&aacute;rios por cena igual ao seu n&iacute;vel
+      e eles desaparecem no final da cena.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 61
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Druida
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185648
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!slVx01Ph3o6bkeoY'
+

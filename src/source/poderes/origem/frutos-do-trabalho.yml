@@ -1,0 +1,70 @@
+_id: bMv6aGYlFsvJv0kE
+name: Frutos do Trabalho
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects: []
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No in&iacute;cio de cada aventura, voc&ecirc; recebe at&eacute; 5 itens
+      gerais que possa fabricar num valor total de at&eacute; T$ 50. Esse valor
+      aumenta para T$ 100 no patamar aventureiro (5&ordm;), T$ 300 no heroico
+      (11&ordm;) e T$ 500 no lenda (17&ordm;).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 86
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Artesão
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184739
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!bMv6aGYlFsvJv0kE'
+

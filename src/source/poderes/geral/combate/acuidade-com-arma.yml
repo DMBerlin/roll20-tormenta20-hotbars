@@ -1,0 +1,122 @@
+_id: ma3p9pqGlGsneo2Q
+name: Acuidade com Arma
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - name: Acuidade com Arma
+    img: systems/tormenta20/icons/poderes/combate.webp
+    origin: Compendium.tormenta20.poderes.Item.ma3p9pqGlGsneo2Q
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 6cuBDkun2A8mtSlh
+    type: base
+    system: {}
+    changes:
+      - key: flags.tormenta20.acuidade
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747191278344
+      modifiedTime: 1747192301438
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!ma3p9pqGlGsneo2Q.6cuBDkun2A8mtSlh'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando usa uma arma leve de corpo a corpo ou uma arma de arremesso,
+      voc&ecirc; pode usar sua Destreza em vez de For&ccedil;a nos testes de
+      ataque e rolagens de dano.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Des 1</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 124
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306185147
+  modifiedTime: 1747191313069
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ma3p9pqGlGsneo2Q'
+

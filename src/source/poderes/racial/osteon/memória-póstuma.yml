@@ -1,0 +1,71 @@
+_id: Wj1J9EBK9tOe2hkz
+name: Memória Póstuma
+type: poder
+img: systems/tormenta20/icons/racas/osteon.webp
+effects: []
+folder: voEJdcAKDfYsKoTC
+sort: 200000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você se torna treinado em uma perícia (não precisa ser da sua classe)
+      ou recebe um poder geral a sua escolha. Como alternativa, você pode ser um
+      osteon de outra raça humanoide que não humano. Neste caso, você ganha uma
+      habilidade dessa raça a sua escolha. Se a raça era de tamanho diferente de
+      Médio, você também possui sua categoria de tamanho.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 29
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Osteon
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.341'
+  createdTime: 1664306184723
+  modifiedTime: 1746636168835
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Wj1J9EBK9tOe2hkz'
+

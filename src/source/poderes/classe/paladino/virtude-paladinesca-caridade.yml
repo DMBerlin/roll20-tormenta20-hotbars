@@ -1,0 +1,135 @@
+_id: Z1106bJYCesw99Dk
+name: 'Virtude Paladinesca: Caridade'
+type: poder
+img: systems/tormenta20/icons/classes/paladino.webp
+effects:
+  - origin: Item.Z1106bJYCesw99Dk
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '-1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: CFgjRu6V2CO1xLFS
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'V. Paladinesca: Caridade.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Z1106bJYCesw99Dk.CFgjRu6V2CO1xLFS'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>O custo de suas habilidades de paladino que tenham um aliado como alvo
+      &eacute; reduzido em -1 PM.</p>
+
+
+
+      <p><strong>Virtudes Paladinescas</strong></p>
+
+      <p>Este conjunto de poderes representa obedi&ecirc;ncia veemente a um
+      comportamento espec&iacute;fico. Voc&ecirc; recebe um b&ocirc;nus
+      progressivo em seu total de pontos de mana de acordo com a quantidade de
+      poderes desse tipo que possui: +1 PM para uma Virtude, +3 PM para duas, +6
+      PM para tr&ecirc;s, +10 PM para quatro e +15 PM para cinco Virtudes.</p>
+
+      <p>Virtudes Paladinescas s&atilde;o poderosas, mas possuem uma
+      contrapartida &mdash; voc&ecirc; deve se comportar de acordo com quaisquer
+      Virtudes que possuir. Um paladino caridoso, por exemplo, deve sempre
+      ajudar os necessitados, enquanto um casto nunca pode cair em
+      tenta&ccedil;&atilde;o. N&atilde;o seguir uma Virtude Paladinesca que
+      voc&ecirc; possua conta como uma viola&ccedil;&atilde;o do C&oacute;digo
+      do Her&oacute;i.</p>
+
+      <p>O mestre tem a palavra final sobre o que exatamente constitui uma
+      viola&ccedil;&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 83
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Paladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184732
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Z1106bJYCesw99Dk'
+

@@ -1,0 +1,69 @@
+_id: VTzVqjsiOsECTkM1
+name: Durão
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/durao.webp
+effects: []
+folder: LJQ1SKk2Y0QmZI03
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A partir do 3&ordf; n&iacute;vel, sua rijeza muscular permite que
+      voc&ecirc; absorva ferimentos. Sempre que sofre dano, voc&ecirc; pode
+      gastar 3 PM para reduzir esse dano &agrave; metade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 66
+  ativacao:
+    execucao: ''
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Guerreiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184715
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!VTzVqjsiOsECTkM1'
+

@@ -1,0 +1,122 @@
+_id: CMsmsKiFKpZTgQtB
+name: Redução de Dano
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/resistencia-dano.webp
+effects:
+  - origin: Item.CMsmsKiFKpZTgQtB
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: XbsFbC7qjVcrI7pR
+    changes:
+      - key: system.tracos.resistencias.dano.bonus
+        mode: 2
+        value: floor((@nvl.barbaro - 5)/3) * 2 + 2
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1747112650839
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Redução de Dano
+    img: systems/tormenta20/icons/poderes/classes/combatentes/resistencia-dano.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!CMsmsKiFKpZTgQtB.XbsFbC7qjVcrI7pR'
+folder: UhsYJ0BvPTkMyG53
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>A partir do 5&ordm; n&iacute;vel, gra&ccedil;as a seu vigor e
+      for&ccedil;a de vontade, voc&ecirc; ignora parte de seus ferimentos.
+      Voc&ecirc; recebe resist&ecirc;ncia a dano 2 (todo dano que sofre &eacute;
+      reduzido em 2). A cada tr&ecirc;s n&iacute;veis, sua RD aumenta em 2,
+      at&eacute; um m&aacute;ximo de RD 10 no 17&ordm; n&iacute;vel.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 42
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bárbaro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1658361716908
+  modifiedTime: 1747112510610
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!CMsmsKiFKpZTgQtB'
+

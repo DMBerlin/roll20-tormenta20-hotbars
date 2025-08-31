@@ -1,0 +1,122 @@
+_id: EZXppKxpmpemOlbT
+name: Arremesso Potente
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - name: Arremesso Potente
+    img: systems/tormenta20/icons/poderes/combate.webp
+    origin: Compendium.tormenta20.poderes.Item.EZXppKxpmpemOlbT
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: vOgwvvwY1016m0ib
+    type: base
+    system: {}
+    changes:
+      - key: flags.tormenta20.arremessoPotente
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747190990307
+      modifiedTime: 1747191016983
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!EZXppKxpmpemOlbT.vOgwvvwY1016m0ib'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando usa uma arma de arremesso, voc&ecirc; pode usar sua For&ccedil;a
+      em vez de Destreza nos testes de ataque. Se voc&ecirc; possuir o poder
+      Ataque Poderoso, poder&aacute; us&aacute;-lo com armas de arremesso.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> For 1, Estilo de Arremesso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 124
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306183830
+  modifiedTime: 1747191018675
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!EZXppKxpmpemOlbT'
+

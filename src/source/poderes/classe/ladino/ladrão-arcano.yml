@@ -1,0 +1,76 @@
+_id: O7K0ddxG1yMiutaF
+name: Ladrão Arcano
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects: []
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando causa dano com um ataque furtivo em uma criatura capaz de
+      lan&ccedil;ar magias, voc&ecirc; pode &ldquo;roubar&rdquo; uma magia que
+      j&aacute; a tenha visto lan&ccedil;ar. Voc&ecirc; precisa pagar 1 PM por
+      c&iacute;rculo da magia e pode roubar magias de at&eacute; 4&ordm;
+      c&iacute;rculo. At&eacute; o fim da cena, voc&ecirc; pode lan&ccedil;ar a
+      magia roubada (atributo-chave Intelig&ecirc;ncia).</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Roubo de Mana, 13&ordm; n&iacute;vel de
+      ladino.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: reaction
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: scene
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  tags:
+    - magico
+  origin: ''
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184254
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!O7K0ddxG1yMiutaF'
+

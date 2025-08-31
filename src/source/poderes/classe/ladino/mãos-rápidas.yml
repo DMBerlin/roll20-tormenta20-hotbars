@@ -1,0 +1,123 @@
+_id: 512ZtmpMoFsTtwuR
+name: Mãos Rápidas
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - _id: SwQci36SUryriaia
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.L8wmpNqZJ72wc6fj
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        skill: true
+        self: false
+        attack: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '1'
+        durationScene: false
+        items: Ladinagem
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Mãos Rápidas
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!512ZtmpMoFsTtwuR.SwQci36SUryriaia'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Uma vez por rodada, ao fazer um teste de <a class="content-link"
+      draggable="true"
+      data-uuid="Compendium.tormenta20.pericias.lcgrJelGuEGZ96C0"
+      data-id="lcgrJelGuEGZ96C0" data-type="JournalEntry"
+      data-pack="tormenta20.pericias" data-tooltip="Registro de
+      Di&aacute;rio">Ladinagem</a><span style="white-space: nowrap;
+      background-color: rgb(221, 221, 221);"> </span>para abrir fechaduras,
+      ocultar item, punga ou sabotar, voc&ecirc; pode pagar 1 PM para
+      faz&ecirc;-lo como uma a&ccedil;&atilde;o livre.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Des 2, treinado em Ladinagem.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: free
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183312
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!512ZtmpMoFsTtwuR'
+

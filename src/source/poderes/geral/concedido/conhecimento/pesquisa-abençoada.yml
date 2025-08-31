@@ -1,0 +1,172 @@
+name: Pesquisa Abençoada
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos.webp
+effects:
+  - origin: Item.5528bIwydLqg1PhQ
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: true
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: hKjFOOlPwlMpwD4o
+    changes:
+      - key: roll
+        mode: 2
+        value: '2'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Pesquisa Abençoada: +2.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!5528bIwydLqg1PhQ.hKjFOOlPwlMpwD4o'
+  - origin: Item.5528bIwydLqg1PhQ
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: true
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: yLutr4xJxBklK266
+    changes:
+      - key: roll
+        mode: 2
+        value: '5'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Pesquisa Abençoada: +5.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!5528bIwydLqg1PhQ.yLutr4xJxBklK266'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se passar uma hora pesquisando seus livros e anota&ccedil;&otilde;es,
+      voc&ecirc; pode rolar novamente um teste de per&iacute;cia baseada em
+      Intelig&ecirc;ncia ou Sabedoria que tenha feito desde a &uacute;ltima
+      cena. Se tiver acesso a mais livros, voc&ecirc; recebe um b&ocirc;nus no
+      teste: +2 para uma cole&ccedil;&atilde;o particular ou biblioteca pequena
+      e +5 para a biblioteca de um templo ou universidade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 134
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Conhecimento
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184252
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 5528bIwydLqg1PhQ
+folder: 1IwfK0tzrOPpjXTW
+sort: 0
+ownership:
+  default: 0
+_key: '!items!5528bIwydLqg1PhQ'
+

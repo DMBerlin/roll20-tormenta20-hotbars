@@ -1,0 +1,123 @@
+name: Desarmar Aprimorado
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - _id: 9BWBCqRZgO7RdAKJ
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+    changes:
+      - key: ataque
+        value: '2'
+        mode: 2
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.DxS1ZZUGwiWnmqzC
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Derrubar Aprimorado
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!2UwM27fjP8Hjl67M.9BWBCqRZgO7RdAKJ'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em testes de ataque para desarmar. Quando desarma
+      uma criatura, pode gastar 1 PM para arremessar a arma dela para longe.
+      Para definir onde a arma cai, role 1d8 para a dire&ccedil;&atilde;o (sendo
+      "1" diretamente &agrave; sua frente, "2" &agrave; frente e &agrave;
+      direita e assim por diante) e 1d6 para a dist&acirc;ncia (medida em
+      quadrados de 1,5m a partir da criatura desarmada).</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Combate Defensivo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 125
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183837
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 2UwM27fjP8Hjl67M
+folder: Rgbah8U70jOKi5DF
+sort: 0
+ownership:
+  default: 0
+_key: '!items!2UwM27fjP8Hjl67M'
+

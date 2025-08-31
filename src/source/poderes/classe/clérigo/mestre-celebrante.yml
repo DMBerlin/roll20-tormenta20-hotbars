@@ -1,0 +1,71 @@
+_id: 4wtFyPKPD50oWTrD
+name: Mestre Celebrante
+type: poder
+img: systems/tormenta20/icons/classes/clerigo.webp
+effects: []
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>O n&uacute;mero de pessoas que voc&ecirc; afeta com uma missa aumenta
+      em dez vezes e os benef&iacute;cios que elas recebem dobram.</p>
+
+      <p>Pr&eacute;-requisitos: qualquer poder de Missa, 12&ordm; n&iacute;vel
+      de cl&eacute;rigo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 58
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Clérigo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183311
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!4wtFyPKPD50oWTrD'
+

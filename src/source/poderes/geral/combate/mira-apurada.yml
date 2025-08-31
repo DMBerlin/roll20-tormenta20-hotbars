@@ -1,0 +1,125 @@
+_id: U4K0kvB5kultmltV
+name: Mira Apurada
+type: poder
+img: systems/tormenta20/icons/poderes/combate.webp
+effects:
+  - _id: 2uvbnCG6kbtxNMpr
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+    changes:
+      - key: ataque
+        mode: 2
+        value: '2'
+        priority: 0
+      - key: criticoM
+        mode: 2
+        value: '-2'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.sRcoIuUJBcI4X9Ly
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Mira Apurada
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!U4K0kvB5kultmltV.2uvbnCG6kbtxNMpr'
+folder: Rgbah8U70jOKi5DF
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando usa a a&ccedil;&atilde;o mirar, voc&ecirc; recebe +2 em testes
+      de ataque e na margem de amea&ccedil;a com ataques &agrave;
+      dist&acirc;ncia at&eacute; o fim do turno.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Sab 1, Disparo Preciso.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 128
+  ativacao:
+    execucao: move
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Combate
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184314
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!U4K0kvB5kultmltV'
+

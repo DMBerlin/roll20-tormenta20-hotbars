@@ -1,0 +1,120 @@
+_id: VsEuBNPeIgSYTWeS
+name: Melodia Restauradora
+type: poder
+img: systems/tormenta20/icons/classes/bardo.webp
+effects:
+  - origin: Item.d47WesRRIAZN7EDk
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: true
+        spell: false
+        consumable: false
+        items: Melodia Curativa
+        aumenta: false
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: e4OTVgoTuKVRkl7Y
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Melodia Restauradora
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!VsEuBNPeIgSYTWeS.e4OTVgoTuKVRkl7Y'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando voc&ecirc; usa M&uacute;sica: Melodia Curativa, pode gastar +2
+      PM. Se fizer isso, escolha uma das condi&ccedil;&otilde;es a seguir:
+      abalado, alquebrado, apavorado, atordoado, cego, confuso,
+      enfeiti&ccedil;ado, esmorecido, exausto, fatigado, frustrado, pasmo ou
+      surdo. Voc&ecirc; remove a condi&ccedil;&atilde;o escolhida das criaturas
+      afetadas pela m&uacute;sica.</p>
+
+      <p>Pr&eacute;-requisito: M&uacute;sica: Melodia Curativa.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 45
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717171
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!VsEuBNPeIgSYTWeS'
+

@@ -1,0 +1,116 @@
+name: Couraceiro
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects:
+  - origin: Item.XbndSZpX3PC0tiWv
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 7th2Z9Rheq6XuBUb
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '@int'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Couraceiro
+    img: icons/commodities/tech/cog-brass.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!XbndSZpX3PC0tiWv.7th2Z9Rheq6XuBUb'
+flags:
+  scene-packer:
+    sourceId: Item.GZ7cWm67y0usx8dL
+    defaultPermission: 3
+    hash: 368f30ffe894755f715f580be6a8be736485c4bb
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe profici&ecirc;ncia com armaduras pesadas e escudos.
+      Quando usa armadura, pode usar sua Intelig&ecirc;ncia em vez de Destreza
+      na Defesa (mas continua n&atilde;o podendo somar um atributo na Defesa
+      quando usa armadura pesada).</p>
+
+      <p><em>Pr&eacute;-requisito:</em> treinado em Of&iacute;cio (armeiro).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051643907
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: XbndSZpX3PC0tiWv
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!XbndSZpX3PC0tiWv'
+

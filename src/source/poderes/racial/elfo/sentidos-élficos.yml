@@ -1,0 +1,110 @@
+_id: PEn3CaxnaMEIAXUR
+name: Sentidos Élficos
+type: poder
+img: systems/tormenta20/icons/racas/elfo.webp
+effects:
+  - origin: Item.PEn3CaxnaMEIAXUR
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: WoYZYSubI5fTCYrg
+    changes:
+      - key: system.pericias.mist.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.perc.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sentidos Élficos
+    img: systems/tormenta20/icons/racas/elfo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!PEn3CaxnaMEIAXUR.WoYZYSubI5fTCYrg'
+folder: sP6NJ3uhryFkjai6
+sort: 0
+flags: {}
+system:
+  description:
+    value: <p>Você recebe visão na penumbra e +2 em Misticismo e Percepção.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 22
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Elfo
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306184258
+  modifiedTime: 1746814137433
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!PEn3CaxnaMEIAXUR'
+

@@ -1,0 +1,178 @@
+_id: GOlzi3jTSSbwVWy4
+name: Abençoar Arma
+type: poder
+img: systems/tormenta20/icons/classes/clerigo.webp
+effects:
+  - _id: Oqj1mb0ameQI6q74
+    changes:
+      - key: passos
+        mode: 0
+        value: '1'
+        priority: 0
+      - key: atributoAtq
+        mode: 5
+        value: sab
+        priority: 0
+      - key: atributoDano
+        mode: 5
+        value: sab
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.F031U5d4fmZX84Bl
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Abençoar Arma
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!GOlzi3jTSSbwVWy4.Oqj1mb0ameQI6q74'
+  - _id: obKbYYOTN2MVB5wG
+    changes: []
+    disabled: false
+    duration:
+      rounds: 99
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.F031U5d4fmZX84Bl
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Abençoar Arma
+    img: systems/tormenta20/icons/classes/clerigo.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!GOlzi3jTSSbwVWy4.obKbYYOTN2MVB5wG'
+folder: RDLTxoI4mIyfR6dr
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; se torna proficiente na arma preferida de sua divindade. Se
+      estiver empunhando essa arma, pode gastar uma a&ccedil;&atilde;o de
+      movimento e 3 PM para infundi-la com poder divino. At&eacute; o final da
+      cena, a arma &eacute; considerada m&aacute;gica e emite luz dourada ou
+      p&uacute;rpura (como uma tocha). Al&eacute;m disso, o dano da arma aumenta
+      em um passo e voc&ecirc; pode usar sua Sabedoria em testes de ataque e
+      rolagens de dano com ela, em vez do atributo padr&atilde;o (n&atilde;o
+      cumulativo com efeitos que somam este atributo).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 57
+  ativacao:
+    execucao: move
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Clérigo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183897
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!GOlzi3jTSSbwVWy4'
+

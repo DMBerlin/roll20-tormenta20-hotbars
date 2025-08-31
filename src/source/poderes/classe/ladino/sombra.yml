@@ -1,0 +1,116 @@
+_id: 85VYFnsUNdUTjYtp
+name: Sombra
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - _id: eQLkWDLqPthuXdML
+    changes:
+      - key: system.pericias.furt.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.Sc713NLhozPmCYAg
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sombra
+    img: systems/tormenta20/icons/classes/ladino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!85VYFnsUNdUTjYtp.eQLkWDLqPthuXdML'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.pericias.u2FeyQUF5rSu9ec3"
+      data-id="u2FeyQUF5rSu9ec3" data-type="JournalEntry"
+      data-pack="tormenta20.pericias" data-tooltip="Registro de
+      Di&aacute;rio">Furtividade</a>, n&atilde;o sofre penalidade em testes de
+      Furtividade por se mover no seu deslocamento normal e reduz a penalidade
+      por atacar e fazer outras a&ccedil;&otilde;es chamativas para
+      &ndash;10.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> treinado em Furtividade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183331
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!85VYFnsUNdUTjYtp'
+

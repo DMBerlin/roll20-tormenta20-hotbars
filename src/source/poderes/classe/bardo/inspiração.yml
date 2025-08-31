@@ -1,0 +1,179 @@
+_id: Uv6GW8R54wUtv3sm
+name: Inspiração
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/inspiracao.webp
+effects:
+  - _id: zu05LDvZp2oOnZMJ
+    flags:
+      ActiveAuras:
+        isAura: false
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: None
+        radius: null
+      tormenta20:
+        onuse: false
+        durationScene: true
+    changes:
+      - key: system.modificadores.pericias.geral
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.modificadores.dano.geral
+        mode: 2
+        value: '0'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      rounds: 999
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.wZLmEMGDL4Qxli5r
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Inspiração
+    img: systems/tormenta20/icons/poderes/classes/conjuradores/inspiracao.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Uv6GW8R54wUtv3sm.zu05LDvZp2oOnZMJ'
+  - _id: gpuEqXYdlZr1nrNK
+    flags:
+      ActiveAuras:
+        isAura: false
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: None
+        radius: null
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '2'
+        durationScene: false
+        items: ''
+    changes:
+      - key: system.modificadores.pericias.geral
+        mode: 2
+        value: '1'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.wZLmEMGDL4Qxli5r
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: aumenta o bônus em +1.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Uv6GW8R54wUtv3sm.gpuEqXYdlZr1nrNK'
+folder: vXRLLa3BIKBZdiua
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o padr&atilde;o e 2 PM para
+      inspirar as pessoas com sua arte. Voc&ecirc; e todos os seus aliados em
+      alcance curto ganham +1 em testes de per&iacute;cia at&eacute; o fim da
+      cena. A cada quatro n&iacute;veis, pode gastar +2 PM para aumentar o
+      b&ocirc;nus em +1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 44
+  ativacao:
+    execucao: action
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: short
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bardo
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717063
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Uv6GW8R54wUtv3sm'
+

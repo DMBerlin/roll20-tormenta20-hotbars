@@ -1,0 +1,125 @@
+name: Alquimista de Batalha
+type: poder
+img: systems/tormenta20/icons/classes/inventor.webp
+effects:
+  - _id: RxIKyHHa5FVdk2Uf
+    changes:
+      - key: dano
+        mode: 2
+        value: '@int'
+        priority: 0
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.Sae0HU2rLnUfjp0a
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        consumable: true
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Alquimista de Batalha
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!wLYyRXlwbQMBy2dI.RxIKyHHa5FVdk2Uf'
+flags:
+  scene-packer:
+    sourceId: Item.Sae0HU2rLnUfjp0a
+    defaultPermission: 3
+    hash: e1aad2efacccf30e9c1a9a29bb3fbe06a2b445ea
+system:
+  description:
+    value: >-
+      <p>Quando usa um preparado alqu&iacute;mico ou po&ccedil;&atilde;o que
+      cause dano, voc&ecirc; soma<br>sua Intelig&ecirc;ncia na rolagem de
+      dano.</p>
+
+      <p><em>Pr&eacute;-requisito: </em>Alquimista Iniciado.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 68
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051642186
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: wLYyRXlwbQMBy2dI
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!wLYyRXlwbQMBy2dI'
+

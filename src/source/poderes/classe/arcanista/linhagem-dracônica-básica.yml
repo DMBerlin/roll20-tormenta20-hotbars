@@ -1,0 +1,132 @@
+name: Linhagem Dracônica Básica
+type: poder
+img: systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp
+effects:
+  - origin: Item.zN0rhkCdrNYDXb0d
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: SkxNZ7zAwytIgSY8
+    changes:
+      - key: system.tracos.resistencias.???.bonus
+        mode: 2
+        value: '5'
+        priority: null
+      - key: system.attributes.pv.atributos.car
+        mode: 5
+        value: 'true'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1747120306221
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Linhagem Dracônica Básica
+    img: >-
+      systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!zN0rhkCdrNYDXb0d.SkxNZ7zAwytIgSY8'
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+flags: {}
+_id: zN0rhkCdrNYDXb0d
+system:
+  description:
+    value: >-
+      <p>Um de seus antepassados foi um majestoso drag&atilde;o. Escolha um tipo
+      de dano entre &aacute;cido, eletricidade, fogo ou frio.</p>
+
+      <ul>
+
+      <li>B&aacute;sica. Voc&ecirc; soma seu Carisma em seus pontos de vida
+      iniciais e recebe resist&ecirc;ncia 5 ao tipo de dano escolhido.</li>
+
+      </ul>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 39
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Arcanista
+  tags:
+    - Arcanista
+  origin: ''
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306185706
+  modifiedTime: 1747120311275
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!zN0rhkCdrNYDXb0d'
+

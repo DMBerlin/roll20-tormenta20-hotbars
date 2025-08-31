@@ -1,0 +1,110 @@
+_id: pCXbUTE2qivVEe37
+name: Insolência
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/insolencia.webp
+effects:
+  - _id: NyHxPzqyy6vT5pwg
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: (min(@nivel,@car))
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.Qa92jnBAScJ3ewA7
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Insolência
+    img: systems/tormenta20/icons/poderes/classes/especialistas/insolencia.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!pCXbUTE2qivVEe37.NyHxPzqyy6vT5pwg'
+folder: 86kIqRb842xHRnBV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; soma seu Carisma na Defesa, limitado pelo seu n&iacute;vel.
+      Esta habilidade exige liberdade de movimentos; voc&ecirc; n&atilde;o pode
+      us&aacute;-la se estiver de armadura pesada ou na condi&ccedil;&atilde;o
+      im&oacute;vel.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 47
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Bucaneiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717651
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!pCXbUTE2qivVEe37'
+

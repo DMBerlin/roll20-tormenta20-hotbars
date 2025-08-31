@@ -1,0 +1,171 @@
+_id: KCcnANguX0TehmNR
+name: Marca da Presa
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/marca-presa.webp
+effects:
+  - origin: Item.xhRCRXeSjY0avzCK
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: true
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: G06vcvbjO0EM04y5
+    changes:
+      - key: dano
+        mode: 2
+        value: 1d4
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Marca da Presa (Dano)
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!KCcnANguX0TehmNR.G06vcvbjO0EM04y5'
+  - origin: Item.xhRCRXeSjY0avzCK
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: '1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: XPXweXqgvWZY5KCo
+    changes:
+      - key: efeito.dano
+        mode: 5
+        value: ':1d8;1d12;2d8;2d10'
+        priority: 0
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aumenta o Dano
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!KCcnANguX0TehmNR.XPXweXqgvWZY5KCo'
+folder: iT3rUBmGhu5hbNic
+sort: 1500000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de movimento e 1 PM para
+      analisar uma criatura em alcance curto. At&eacute; o fim da cena,
+      voc&ecirc; recebe +1d4 nas rolagens de dano contra essa criatura. A cada
+      quatro n&iacute;veis, voc&ecirc; pode gastar +1 PM para aumentar o
+      b&ocirc;nus de dano (veja a tabela da classe).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 50
+  ativacao:
+    execucao: move
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Caçador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716929
+  modifiedTime: 1684630426990
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!KCcnANguX0TehmNR'
+

@@ -1,0 +1,73 @@
+_id: HI7ORqJRA79m9gZB
+name: Truque de Mágica
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects: []
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode lan&ccedil;ar
+      @UUID[Compendium.tormenta20.magias.PXR8dRhDk8Z0mtck]{Explos&atilde;o de
+      Chamas}, @UUID[Compendium.tormenta20.magias.N1xVfw9A8TiYeLae]{Hipnotismo}
+      e @UUID[Compendium.tormenta20.magias.9A5LyhPsCrdowfcL]{Queda Suave}, mas
+      apenas com o aprimoramento Truque. Esta n&atilde;o &eacute; uma habilidade
+      m&aacute;gica &mdash; os efeitos prov&ecirc;m de
+      prestidigita&ccedil;&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 89
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Circense
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183902
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!HI7ORqJRA79m9gZB'
+

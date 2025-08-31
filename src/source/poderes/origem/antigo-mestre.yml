@@ -1,0 +1,94 @@
+_id: 0EHJjnDT0P0iZGeR
+name: Antigo Mestre
+type: poder
+img: systems/tormenta20/icons/poderes/origem.webp
+effects: []
+folder: O7XebEr47qNV8g6X
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; ainda mant&eacute;m contato com o her&oacute;i que costumava
+      servir. Uma vez por aventura, ele surge para ajud&aacute;-lo por uma cena.
+      Ele &eacute; um parceiro mestre de um tipo a sua escolha (definido ao
+      obter este poder) que n&atilde;o conta em seu limite de aliados.</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.WP0roXCa40nveA4L]{Adepto}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.ROdJSxDCkvamfzX7]{Ajudante}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.BNhavlxkPCr8P4Vi]{Assassino}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.OvBibhyfED5HKbsz]{Atirador}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.nNpGA5SWMj7rtUQR]{Combatente}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.FIJfKOIU8dzbvSDG]{Destruidor}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.YAcnW6C7ok7xjdg6]{Fort&atilde;o}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.Un1h4jcM8qtf4F8L]{Guardi&atilde;o}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.EBDU8TfXg0iVLvCT]{Magivocador}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.rntcrujiIc63hKOp]{M&eacute;dico}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.0MvC3jJCv0311Ysr]{Perseguidor}</p>
+
+      <p>@UUID[Compendium.tormenta20.parceiros.DpTB2ElpvJ9mK0Bn]{Vigilante}</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 94
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: origem
+  subtipo: Seguidor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183279
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!0EHJjnDT0P0iZGeR'
+

@@ -1,0 +1,109 @@
+_id: K1VJOHGSdTNpVm9X
+name: 'Bênção da Justiça: Montaria Sagrada'
+type: poder
+img: >-
+  systems/tormenta20/icons/poderes/classes/combatentes/bencao-justica-montaria.webp
+effects: []
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>No 5&ordm; n&iacute;vel, escolha entre &eacute;gide sagrada e montaria
+      sagrada. Uma vez feita, esta escolha n&atilde;o pode ser mudada.</p>
+
+
+
+      <p>Montaria Sagrada - Voc&ecirc; pode gastar uma a&ccedil;&atilde;o de
+      movimento e 2 PM para invocar uma montaria sagrada. Veja o quadro para
+      mais detalhes.</p>
+
+
+
+      <h3><strong>Montaria Sagrada</strong></h3>
+
+      <p data-pm-slice="0 0 []">Um paladino de 5&ordm; n&iacute;vel pode receber
+      uma montaria sagrada, designada pelos deuses. Este animal vai atuar como
+      um fiel companheiro de batalhas. Normalmente ser&aacute; um cavalo de
+      guerra para paladinos de tamanho M&eacute;dio ou um p&ocirc;nei para
+      Pequenos, mas suplementos futuros trar&atilde;o outras
+      op&ccedil;&otilde;es de montarias.</p>
+
+      <p>Para invocar sua montaria voc&ecirc; gasta uma a&ccedil;&atilde;o de
+      movimento e 2 PM. Ela aparece com um brilho de luz dourada ao seu lado e
+      fica at&eacute; o fim da cena, quando desaparece de volta para o mundo
+      divino de onde veio.</p>
+
+      <p>Como op&ccedil;&atilde;o para campanhas mais realistas, a montaria
+      sagrada pode ser um animal mundano, em vez de invocado. Neste caso,
+      voc&ecirc; nunca precisa gastar uma a&ccedil;&atilde;o ou PM para ter a
+      montaria &mdash; que j&aacute; estar&aacute; com voc&ecirc;. Por outro
+      lado, o animal pode n&atilde;o ser capaz de acompanh&aacute;-lo em todos
+      os lugares (um cavalo, por exemplo, n&atilde;o conseguir&aacute; entrar
+      num t&uacute;nel apertado ou escalar uma montanha).</p>
+
+      <p>Voc&ecirc; e sua montaria t&ecirc;m um v&iacute;nculo mental, sendo
+      sempre capazes de entender um ao outro (n&atilde;o &eacute; preciso fazer
+      testes de Adestramento). Ela fornece os benef&iacute;cios de um parceiro
+      veterano de seu tipo. No 11&ordm; n&iacute;vel, passa a fornecer os
+      benef&iacute;cios de um parceiro mestre. Veja a lista de parceiros na
+      p&aacute;gina 260. Uma montaria cumpre qualquer ordem sua, mesmo que
+      signifique arriscar a vida. Se a montaria sagrada morrer, voc&ecirc; fica
+      atordoado por uma rodada. Voc&ecirc; pode invocar uma nova montaria
+      ap&oacute;s um dia de prece e medita&ccedil;&atilde;o.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 84
+  ativacao:
+    execucao: move
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Paladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183912
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!K1VJOHGSdTNpVm9X'
+

@@ -1,0 +1,82 @@
+name: Fome de Mana
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects: []
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando passa em um teste de resist&ecirc;ncia para resistir a uma
+      habilidade m&aacute;gica, voc&ecirc; recebe 1 PM tempor&aacute;rio
+      cumulativo. Voc&ecirc; pode ganhar um m&aacute;ximo de PM
+      tempor&aacute;rio por cena desta forma igual ao n&uacute;mero de poderes
+      de Tormenta que possui.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: PM Temporário
+      key: dano0
+      type: dano
+      parts:
+        - - '@Tormenta'
+          - curatpm
+          - ''
+      versatil: ''
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  origin: ''
+  tags:
+    - Tormenta
+  chatGif: ''
+  rolltags:
+    - Tormenta
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306183282
+  modifiedTime: 1748407093876
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: IEcXYz6VZ1rg7MAG
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+ownership:
+  default: 0
+_key: '!items!IEcXYz6VZ1rg7MAG'
+

@@ -1,0 +1,132 @@
+_id: bUpkBBRfeWClqOP6
+name: Sarado
+type: poder
+img: systems/tormenta20/icons/classes/lutador.webp
+effects:
+  - _id: oWbeoWWh7mMVZxlG
+    changes:
+      - key: system.attributes.pv.atributos.for
+        mode: 5
+        value: 'true'
+        priority: null
+      - key: system.pericias.fort.bonus
+        mode: 2
+        value: '@for'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.kOpfz9aYK3gPmfKW
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1747120594684
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sarado
+    img: systems/tormenta20/icons/classes/lutador.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!bUpkBBRfeWClqOP6.oWbeoWWh7mMVZxlG'
+folder: csRpG81AedPycko0
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; soma sua For&ccedil;a no seu total de pontos de vida e em
+      Fortitude. Voc&ecirc; pode usar For&ccedil;a em vez de Carisma em testes
+      de <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.pericias.u3bLZxqLhvqQjlfz"
+      data-id="u3bLZxqLhvqQjlfz" data-type="JournalEntry"
+      data-pack="tormenta20.pericias" data-tooltip="Registro de
+      Di&aacute;rio">Diplomacia</a><span style="white-space: nowrap;
+      background-color: rgb(221, 221, 221);"> </span>com pessoas que se atraiam
+      por f&iacute;sicos bem definidos.</p>
+
+      <p>Pr&eacute;-requisito: For 3.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 77
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Lutador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184740
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!bUpkBBRfeWClqOP6'
+

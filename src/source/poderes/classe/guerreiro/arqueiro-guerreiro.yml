@@ -1,0 +1,111 @@
+_id: s57dhYAywAnuIat8
+name: Arqueiro (Guerreiro)
+type: poder
+img: systems/tormenta20/icons/classes/guerreiro.webp
+effects:
+  - _id: dsncKx4SGBoTdMaq
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.modificadores.dano.ad
+        mode: 2
+        value: (min(@sab, @nvl.guerreiro))
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.7tj1wGlzlBnKZ0mJ
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Arqueiro
+    img: systems/tormenta20/icons/classes/guerreiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!s57dhYAywAnuIat8.dsncKx4SGBoTdMaq'
+folder: LJQ1SKk2Y0QmZI03
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se estiver usando uma arma de ataque &agrave; dist&acirc;ncia,
+      voc&ecirc; soma seu b&ocirc;nus de Sabedoria em rolagens de dano (limitado
+      pelo seu n&iacute;vel).</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Sab 1.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 65
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Guerreiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306185645
+  modifiedTime: 1747120533688
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!s57dhYAywAnuIat8'
+

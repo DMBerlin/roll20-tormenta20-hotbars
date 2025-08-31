@@ -1,0 +1,171 @@
+_id: PxKl5SUGcUONYet4
+name: 'Postura de Combate: Muralha Intransponível'
+type: poder
+img: systems/tormenta20/icons/classes/cavaleiro.webp
+effects:
+  - origin: Item.PxKl5SUGcUONYet4
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: jB4gGBIl3szgqjy0
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '1'
+        priority: 0
+      - key: system.pericias.refl.bonus
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Aumenta o bônus em defesa e reflexos em +1.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!PxKl5SUGcUONYet4.jB4gGBIl3szgqjy0'
+  - origin: Item.PxKl5SUGcUONYet4
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: cUmVp93D6cctDJOl
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.pericias.refl.bonus
+        mode: 2
+        value: '1'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Postura de Combate: Muralha Intransponível'
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!PxKl5SUGcUONYet4.cUmVp93D6cctDJOl'
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p data-pm-slice="0 0 []">Para assumir esta postura voc&ecirc; precisa
+      estar empunhando um escudo. Voc&ecirc; recebe +1 na Defesa e em Reflexos.
+      Al&eacute;m disso, quando sofre um efeito que permite um teste de Reflexos
+      para reduzir o dano &agrave; metade, n&atilde;o sofre nenhum dano se
+      passar. Para cada 2 PM adicionais que gastar quando assumir a postura,
+      aumente esse b&ocirc;nus em +1. Por fim, enquanto mantiver esta postura,
+      seu deslocamento &eacute; reduzido para 3m.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 54
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: Reflexos
+  rolls: []
+  tipo: classe
+  subtipo: Cavaleiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184260
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!PxKl5SUGcUONYet4'
+

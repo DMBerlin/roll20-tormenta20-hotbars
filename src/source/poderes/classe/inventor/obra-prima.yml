@@ -1,0 +1,79 @@
+name: Obra-Prima
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/obra-prima.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.Gnh6NxJP57Wrnb5v
+    defaultPermission: 3
+    hash: 071e1860941a7ada91dce86dafc16bdbd7668a9e
+system:
+  description:
+    value: >-
+      <p>No 20&ordm; n&iacute;vel, voc&ecirc; fabrica sua obra-prima, aquela
+      pela qual seu nome ser&aacute; lembrado em eras futuras. Voc&ecirc;
+      &eacute; livre para criar as regras do item, mas ele deve ser aprovado
+      pelo mestre.</p>
+
+      <p>Como linha geral, ele pode ter benef&iacute;cios equivalentes a de um
+      item com cinco melhorias e quatro encantos. Considera-se que voc&ecirc;
+      estava trabalhando no item e voc&ecirc; n&atilde;o gasta dinheiro, tempo
+      ou PM nele.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 70
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051646148
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: QwVGkwCRe33OTz2v
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!QwVGkwCRe33OTz2v'
+

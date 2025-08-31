@@ -1,0 +1,85 @@
+_id: rkB6e5IamctEGp9J
+name: Imobilização
+type: poder
+img: systems/tormenta20/icons/classes/lutador.webp
+effects: []
+folder: csRpG81AedPycko0
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Se estiver agarrando uma criatura, voc&ecirc; pode gastar uma
+      a&ccedil;&atilde;o completa para imobiliz&aacute;-la. Fa&ccedil;a um teste
+      de manobra contra ela. Se voc&ecirc; passar, imobiliza a criatura, ela
+      fica <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.condicoes.lNc0QRNCvTGa7t2P"
+      data-id="lNc0QRNCvTGa7t2P" data-type="JournalEntry"
+      data-pack="tormenta20.condicoes" data-tooltip="Registro de
+      Di&aacute;rio">Indefeso</a> e n&atilde;o pode realizar nenhuma
+      a&ccedil;&atilde;o, exceto tentar se soltar (o que exige um teste de
+      manobra). Se a criatura se soltar da imobiliza&ccedil;&atilde;o, ainda
+      fica agarrada. Enquanto estiver imobilizando uma criatura, voc&ecirc;
+      sofre as penalidades de <a class="content-link" draggable="true"
+      data-uuid="Compendium.tormenta20.condicoes.ccb4uKWSDPEocIRu"
+      data-id="ccb4uKWSDPEocIRu" data-type="JournalEntry"
+      data-pack="tormenta20.condicoes" data-tooltip="Registro de
+      Di&aacute;rio">Agarrado</a>.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Chave, 8&ordm; n&iacute;vel de
+      lutador.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 77
+  ativacao:
+    execucao: full
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Lutador
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185644
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!rkB6e5IamctEGp9J'
+

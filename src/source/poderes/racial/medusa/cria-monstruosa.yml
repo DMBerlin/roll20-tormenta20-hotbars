@@ -1,0 +1,117 @@
+_id: dGMrbRgfwB3mDK7a
+name: Cria Monstruosa
+type: poder
+img: systems/tormenta20/icons/racas/medusa.webp
+effects:
+  - name: Cria Monstruosa
+    img: systems/tormenta20/icons/racas/medusa.webp
+    origin: Compendium.tormenta20.poderes.Item.dGMrbRgfwB3mDK7a
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: fRmXlL7LB2L3RJOF
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.sentidos.value
+        mode: 2
+        value: escuro
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1746815129671
+      modifiedTime: 1746815139959
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!dGMrbRgfwB3mDK7a.fRmXlL7LB2L3RJOF'
+folder: WBW7mJa7n0MHwWe7
+sort: -100000
+flags: {}
+system:
+  description:
+    value: <p>Você é uma criatura do tipo monstro e recebe visão no escuro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 29
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Medusa
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306184744
+  modifiedTime: 1746815160267
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!dGMrbRgfwB3mDK7a'
+

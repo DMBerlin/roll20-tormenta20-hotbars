@@ -15956,6 +15956,18 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         }
     }
 
+    // Função para obter lista completa de poderes
+    function getPowersList() {
+        // Use generated powers data if available, otherwise fall back to hardcoded data
+        try {
+            const powersData = require('./generated-powers-data.js');
+            return powersData;
+        } catch {
+            console.warn('Generated powers data not available, using hardcoded data');
+            return {};
+        }
+    }
+
     // Função para salvar o cache de imagens
     function saveImageCache(cache) {
         try {

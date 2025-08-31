@@ -1,0 +1,132 @@
+name: Mente Aberrante
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects:
+  - origin: Item.tZ3HdOHk3UE7W50R
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: true
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: Vontade
+        aumenta: false
+        custo: ''
+        equipment: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: q0WucblRyEIPynJf
+    changes:
+      - key: roll
+        mode: 2
+        value: 1+(@Tormenta2)
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Mente Aberrante: Resistência a Efeitos mentais.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!tZ3HdOHk3UE7W50R.q0WucblRyEIPynJf'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe resist&ecirc;ncia a efeitos mentais +1. Al&eacute;m
+      disso, sempre que precisa fazer um teste de Vontade para resistir a uma
+      habilidade, a criatura que usou essa habilidade sofre 1d6 pontos de dano
+      ps&iacute;quico. Para cada dois outros poderes da Tormenta que voc&ecirc;
+      possui o b&ocirc;nus em testes de resist&ecirc;ncia aumenta em +1 e o dano
+      aumenta em +1d6.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: passive
+    custo: null
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Dano
+      key: dano0
+      type: dano
+      parts:
+        - - (1+(@Tormenta2))d6
+          - psiquico
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  origin: ''
+  tags:
+    - Tormenta
+  chatGif: ''
+  rolltags:
+    - Tormenta
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306184717
+  modifiedTime: 1748407201966
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: tZ3HdOHk3UE7W50R
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+ownership:
+  default: 0
+_key: '!items!tZ3HdOHk3UE7W50R'
+

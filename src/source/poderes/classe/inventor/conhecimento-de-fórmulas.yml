@@ -1,0 +1,75 @@
+name: Conhecimento de Fórmulas
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.OgY2GWqbepGfzgw0
+    defaultPermission: 3
+    hash: 576f8ea5d61c22f3a96bb0a2298fbefc69608999
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; aprende tr&ecirc;s f&oacute;rmulas de quaisquer
+      c&iacute;rculos que possa aprender. Voc&ecirc; pode escolher este poder
+      quantas vezes quiser.</p>
+
+      <p><em>Pr&eacute;-requisito:</em> Alquimista Iniciado.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051643790
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: mprXzYrw00U56v4t
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mprXzYrw00U56v4t'
+

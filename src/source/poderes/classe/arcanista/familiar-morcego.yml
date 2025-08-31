@@ -1,0 +1,81 @@
+name: Familiar Morcego
+type: poder
+img: systems/tormenta20/icons/classes/arcanista.webp
+effects: []
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Um familiar &eacute; uma criatura m&aacute;gica. Em termos de jogo,
+      &eacute; um parceiro especial com o qual voc&ecirc; pode se comunicar
+      telepaticamente em alcance longo. Ele obedece a suas ordens, mas ainda
+      est&aacute; limitado ao que uma criatura de sua esp&eacute;cie pode fazer.
+      Se ele morrer, voc&ecirc; fica atordoado por uma rodada. Voc&ecirc; pode
+      invocar um novo familiar com um ritual que exige um dia e T$ 100 em
+      ingredientes.</p>
+
+      <ul>
+
+      <li>Morcego. Voc&ecirc; adquire percep&ccedil;&atilde;o &agrave;s cegas em
+      alcance curto.</li>
+
+      </ul>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 38
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Arcanista
+  origin: ''
+  chatFlavor: ''
+  tags:
+    - Arcanista
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183824
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: zNmegW5BQUyy8d9L
+folder: dB8yQeNYIsAMdhNN
+sort: 0
+ownership:
+  default: 0
+_key: '!items!zNmegW5BQUyy8d9L'
+

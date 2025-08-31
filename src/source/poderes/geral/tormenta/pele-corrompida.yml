@@ -1,0 +1,144 @@
+_id: nSwvwdDROADv0fXW
+name: Pele Corrompida
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects:
+  - _id: ufd1BF04V4iKII4f
+    changes:
+      - key: system.tracos.resistencias.acido.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+      - key: system.tracos.resistencias.eletricidade.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+      - key: system.tracos.resistencias.fogo.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+      - key: system.tracos.resistencias.frio.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+      - key: system.tracos.resistencias.luz.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+      - key: system.tracos.resistencias.trevas.bonus
+        mode: 2
+        value: 2+(@Tormenta2 * 2)
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.nOaeRF9GvYPwwpge
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.344'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: null
+      modifiedTime: 1748406378428
+      lastModifiedBy: t20builder000000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Pele Corrompida
+    img: systems/tormenta20/icons/poderes/tormenta.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!nSwvwdDROADv0fXW.ufd1BF04V4iKII4f'
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Sua carne foi mesclada &agrave; mat&eacute;ria vermelha. Voc&ecirc;
+      recebe redu&ccedil;&atilde;o a &aacute;cido, eletricidade, fogo, frio, luz
+      e trevas 2. Esta RD aumenta em +2 para cada dois outros poderes da
+      Tormenta que voc&ecirc; possui. [[/r 2+(@Tormenta2*2)]]{RD}</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  tags:
+    - Tormenta
+  origin: ''
+  chatGif: ''
+  rolltags:
+    - Tormenta
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.344'
+  createdTime: 1664306185153
+  modifiedTime: 1748406381305
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!nSwvwdDROADv0fXW'
+

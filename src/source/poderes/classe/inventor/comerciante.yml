@@ -1,0 +1,72 @@
+name: Comerciante
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/comerciante.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.Mh7xqsRcDPg2EHVH
+    defaultPermission: 3
+    hash: 4c9803ee462c8bce4b725112552d12fb37eaa084
+system:
+  description:
+    value: >-
+      <p>No 3&ordm; n&iacute;vel, voc&ecirc; pode vender itens 10% mais caro
+      (n&atilde;o cumulativo com barganha).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051643669
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: PTc85fan1L3fbGlM
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!PTc85fan1L3fbGlM'
+

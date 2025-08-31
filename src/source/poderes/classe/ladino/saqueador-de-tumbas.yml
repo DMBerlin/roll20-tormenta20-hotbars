@@ -1,0 +1,126 @@
+_id: WPzGTcCS2SVX2m1h
+name: Saqueador de Tumbas
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - origin: Item.WPzGTcCS2SVX2m1h
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: true
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: Investigação;Fortitude;Reflexos;Vontade
+        aumenta: false
+        custo: ''
+        equipment: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: Te4WtpWdIUd89D0U
+    changes:
+      - key: roll
+        mode: 2
+        value: '5'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      Saqueador de Tumbas: +5 em investigação para encontrar armadilhas e em
+      testes de resistência contra elas.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!WPzGTcCS2SVX2m1h.Te4WtpWdIUd89D0U'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +5 em testes de
+      @UUID[Compendium.tormenta20.pericias.ZAS0zJaPRJWg15ib]{Investiga&ccedil;&atilde;o}<span
+      style="white-space: nowrap; background-color: rgb(221, 221, 221);">
+      </span>para encontrar armadilhas e em testes de resist&ecirc;ncia contra
+      elas. Al&eacute;m disso, gasta uma a&ccedil;&atilde;o padr&atilde;o para
+      desabilitar mecanismos, em vez de 1d4 rodadas (veja a per&iacute;cia
+      @UUID[Compendium.tormenta20.pericias.lcgrJelGuEGZ96C0]{Ladinagem}).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: special
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: Passivo, Padrão
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184720
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!WPzGTcCS2SVX2m1h'
+

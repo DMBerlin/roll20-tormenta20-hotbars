@@ -1,0 +1,121 @@
+_id: IUNGyJZZyiwAevJ6
+name: Escudeiro
+type: poder
+img: systems/tormenta20/icons/classes/cavaleiro.webp
+effects:
+  - origin: Item.IUNGyJZZyiwAevJ6
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: mLZJ8cLwZwEX85OA
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.modificadores.dano.cac
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.modificadores.dano.ad
+        mode: 2
+        value: '1'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Escudeiro
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!IUNGyJZZyiwAevJ6.mLZJ8cLwZwEX85OA'
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você recebe os serviços de um escudeiro, um aliado especial que cuida
+      de seu equipamento. Suas armas recebem um bônus de +1 em rolagens de dano
+      e sua armadura concede +1 em Defesa. Além disso, você pode pagar 1 PM para
+      receber ajuda do escudeiro em combate. Você recebe uma ação de movimento
+      que pode usar para se levantar, sacar um item ou trazer sua montaria. O
+      escudeiro não conta em seu limite de aliados. Caso ele morra, você pode
+      treinar outro com um mês de trabalho.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 54
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Cavaleiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183907
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!IUNGyJZZyiwAevJ6'
+

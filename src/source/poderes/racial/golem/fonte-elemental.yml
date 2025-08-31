@@ -1,0 +1,74 @@
+_id: 1rcfZtZarZwGs5JH
+name: Fonte Elemental
+type: poder
+img: systems/tormenta20/icons/racas/golem.webp
+effects: []
+folder: JbWoTw5WRQStJu6M
+sort: 100000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; possui um esp&iacute;rito elemental preso em seu corpo.
+      Escolha entre agua (frio), ar(eletricidade), fogo (fogo) e terra
+      (&aacute;cido). Voc&ecirc; &eacute; imune a dano desse tipo. Se fosse
+      sofrer dano m&aacute;gico desse tipo, em vez disso cura PV em quantidade
+      igual &agrave; metade do dano. Por exemplo, se um golem com
+      esp&iacute;rito elemental de fogo &eacute; atingido por uma<em>Bola de
+      Fogo</em>que causa 30 pontos de dano, em vez de sofrer esse dano, ele
+      recupera 15 PV.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 27
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Golem
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183297
+  modifiedTime: 1746812830528
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!1rcfZtZarZwGs5JH'
+

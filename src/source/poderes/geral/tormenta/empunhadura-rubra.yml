@@ -1,0 +1,112 @@
+_id: 0YGqk8QwGj7by1Ia
+name: Empunhadura Rubra
+type: poder
+img: systems/tormenta20/icons/poderes/tormenta.webp
+effects:
+  - _id: WoqD7tbCo0JIqx29
+    changes:
+      - key: system.pericias.luta.bonus
+        mode: 2
+        value: 1+(@Tormenta2)
+        priority: null
+    disabled: false
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.3H9oepkJ60kdDbx2
+    transfer: false
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Empunhadura Rubra
+    img: systems/tormenta20/icons/poderes/tormenta.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!0YGqk8QwGj7by1Ia.WoqD7tbCo0JIqx29'
+folder: m6ny7g3VciUkKZ3t
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você pode gastar 1 PM para cobrir suas mãos com uma carapaça rubra. Até
+      o final da cena, você recebe +1 em Luta. Este bônus aumenta em +1 para
+      cada dois outros poderes da Tormenta que você possui.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 137
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: geral
+  subtipo: Tormenta
+  chatFlavor: ''
+  tags:
+    - Tormenta
+  origin: ''
+  chatGif: ''
+  rolltags:
+    - Tormenta
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183282
+  modifiedTime: 1684803316469
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!0YGqk8QwGj7by1Ia'
+

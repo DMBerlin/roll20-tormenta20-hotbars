@@ -1,0 +1,124 @@
+_id: JHMYXJvZDara8JwN
+name: Valentão (Guerreiro)
+type: poder
+img: systems/tormenta20/icons/classes/guerreiro.webp
+effects:
+  - _id: 51Woz7yAZPtBOcJY
+    changes:
+      - key: ataque
+        mode: 2
+        value: '2'
+        priority: 0
+      - key: dano
+        mode: 2
+        value: '2'
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.8NrSx3P2d4SkZYj2
+    transfer: true
+    flags:
+      tormenta20:
+        onuse: true
+        attack: true
+        self: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: ''
+        durationScene: false
+        items: ''
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: >-
+      Valentão: +2 Ataque e dano oponentes caídos, desprevenidos, flanqueados ou
+      indefesos.
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!JHMYXJvZDara8JwN.51Woz7yAZPtBOcJY'
+folder: LJQ1SKk2Y0QmZI03
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Você recebe +2 em testes de ataque e rolagens de dano contra oponentes
+      caídos, desprevenidos, flanqueados ou indefesos.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 66
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Guerreiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183909
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!JHMYXJvZDara8JwN'
+

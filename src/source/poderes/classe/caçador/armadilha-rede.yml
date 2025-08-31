@@ -1,0 +1,149 @@
+_id: eAkd6IRhQP3clu0D
+name: 'Armadilha: Rede'
+type: poder
+img: systems/tormenta20/icons/classes/cacador.webp
+effects:
+  - duration:
+      rounds: 999
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    flags:
+      core:
+        statusId: enredado
+      tormenta20:
+        condition: true
+        durationScene: true
+        childEffect:
+          - lento
+          - vulneravel
+        category: movimento
+    changes:
+      - key: system.pericias.luta.condi
+        mode: 3
+        value: '-2'
+        priority: null
+      - key: system.pericias.pont.condi
+        mode: 3
+        value: '-2'
+        priority: null
+    transfer: false
+    _id: dPv1b0Jb3U9DmmL2
+    disabled: false
+    origin: null
+    tint: '#ffffff'
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Enredado
+    img: systems/tormenta20/icons/conditions/enredado.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!eAkd6IRhQP3clu0D.dPv1b0Jb3U9DmmL2'
+folder: iT3rUBmGhu5hbNic
+sort: 2100000
+flags: {}
+system:
+  description:
+    value: >-
+      <p data-pm-slice="0 0 []">Todas as criaturas na &aacute;rea ficam
+      enredadas e n&atilde;o podem sair da &aacute;rea. Uma v&iacute;tima pode
+      se libertar com uma a&ccedil;&atilde;o padr&atilde;o e um teste de
+      For&ccedil;a ou Acrobacia (CD 25). Al&eacute;m disso, a &aacute;rea
+      ocupada pela rede &eacute; considerada terreno dif&iacute;cil. Nesta
+      armadilha voc&ecirc; escolhe quantas criaturas precisam estar na
+      &aacute;rea para ativ&aacute;-la.</p>
+
+
+
+      <p><strong>Armadilhas</strong><br>Esses poderes compartilham as seguintes
+      regras.</p>
+
+      <p>&bull; Preparar uma armadilha gasta uma a&ccedil;&atilde;o completa e 3
+      PM.</p>
+
+      <p>&bull; Uma armadilha afeta uma &aacute;rea de 3m de lado adjacente a
+      voc&ecirc; e &eacute; acionada pela primeira criatura que entrar na
+      &aacute;rea.</p>
+
+      <p>&bull; Uma criatura que o veja preparando a armadilha saber&aacute; que
+      ela est&aacute; l&aacute;. Uma criatura que n&atilde;o o veja preparando a
+      armadilha pode encontr&aacute;-la se gastar uma a&ccedil;&atilde;o
+      padr&atilde;o procurando e passar em um teste de
+      Investiga&ccedil;&atilde;o (CD Sab).</p>
+
+      <p>&bull; &Eacute; poss&iacute;vel aplicar veneno a uma armadilha, como se
+      ela fosse uma arma.</p>
+
+      <p>Voc&ecirc; n&atilde;o precisa de nenhum item para criar a armadilha,
+      pois usa materiais naturais, como galhos e cip&oacute;s. Por&eacute;m,
+      precisa estar em um ambiente prop&iacute;cio, como uma floresta, um beco
+      repleto de entulhos etc.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 50
+  ativacao:
+    execucao: full
+    custo: 3
+    qtd: ''
+    condicao: criatura entra na área
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: quadrado 3m
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Caçador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361717187
+  modifiedTime: 1684630426990
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!eAkd6IRhQP3clu0D'
+

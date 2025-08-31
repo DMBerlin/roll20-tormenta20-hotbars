@@ -1,0 +1,79 @@
+_id: 06DG5FvoJF2vIKsW
+name: Servos do Dragão
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-dragoes.webp
+effects: []
+folder: t8DbsNWc3FwYHBH9
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o completa e 2 PM para
+      invocar 2d4+1 kobolds capangas
+      (@UUID[Compendium.tormenta20.convocacoes.fRdEKyc1N2BhBZR9]{Servo do
+      Drag&atilde;o}) em espa&ccedil;os desocupados em alcance curto. Voc&ecirc;
+      pode gastar uma a&ccedil;&atilde;o de movimento para fazer os kobolds
+      andarem (eles t&ecirc;m deslocamento 9m) ou uma a&ccedil;&atilde;o
+      padr&atilde;o para faz&ecirc;-los causar dano a criaturas adjacentes
+      (1d6&ndash;1 pontos de dano de perfura&ccedil;&atilde;o cada). Os kobolds
+      t&ecirc;m For &ndash;1, Des 1, Defesa 12, 1 PV e falham automaticamente em
+      qualquer teste de resist&ecirc;ncia ou oposto. Eles desaparecem quando
+      morrem ou no fim da cena. Os kobolds n&atilde;o agem sem receber uma
+      ordem. Usos criativos para capangas fora de combate ficam a
+      crit&eacute;rio do mestre.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 135
+  ativacao:
+    execucao: full
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Dragões
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183278
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!06DG5FvoJF2vIKsW'
+

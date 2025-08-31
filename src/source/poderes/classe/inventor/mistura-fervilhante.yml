@@ -1,0 +1,121 @@
+name: Mistura Fervilhante
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects:
+  - origin: Item.021OKvOIiyIsq5cr
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: true
+        items: ''
+        aumenta: false
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: HzWwaOjf7NB4mGRd
+    changes: []
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Mistura Fervilhante: dobra a área de efeito de itens alquímicos e poções.'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!021OKvOIiyIsq5cr.HzWwaOjf7NB4mGRd'
+flags:
+  scene-packer:
+    sourceId: Item.IPLIjmMzuzoRLR4s
+    defaultPermission: 3
+    hash: 417c5244ef1339d2638a5c1b782897c79a1f4540
+system:
+  description:
+    value: >-
+      <p>Quando usa um item alqu&iacute;mico ou po&ccedil;&atilde;o, voc&ecirc;
+      pode gastar 2 PM para dobrara &aacute;rea de efeito dele.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Alquimista Iniciado, 5&ordm;
+      n&iacute;vel de inventor.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051646028
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: 021OKvOIiyIsq5cr
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!021OKvOIiyIsq5cr'
+

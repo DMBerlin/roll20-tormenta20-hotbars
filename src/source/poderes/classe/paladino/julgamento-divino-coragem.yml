@@ -1,0 +1,127 @@
+_id: Yc7FmnrnPx2bI5NT
+name: 'Julgamento Divino: Coragem'
+type: poder
+img: systems/tormenta20/icons/classes/paladino.webp
+effects:
+  - origin: Item.Yc7FmnrnPx2bI5NT
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: K0neel18MUgoJQFE
+    changes:
+      - key: system.modificadores.ataque.geral
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Julgamento Divino: Coragem'
+    img: systems/tormenta20/icons/classes/paladino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!Yc7FmnrnPx2bI5NT.K0neel18MUgoJQFE'
+folder: VwM7ZxttHPFuX6M4
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar 2 PM para inspirar coragem em uma criatura em
+      alcance curto, incluindo voc&ecirc; mesmo. A criatura fica imune a efeitos
+      de medo e ganha +2 em testes de ataque contra o inimigo de maior ND da
+      cena.</p>
+
+
+
+      <p><strong>Julgamentos Divinos</strong></p>
+
+      <p>Alguns poderes do paladino s&atilde;o Julgamentos Divinos. Esses
+      poderes compartilham as seguintes regras.</p>
+
+      <p>&bull; Proferir um julgamento gasta uma a&ccedil;&atilde;o de
+      movimento, a menos que a descri&ccedil;&atilde;o diga o
+      contr&aacute;rio.</p>
+
+      <p>&bull; Julgamentos que n&atilde;o t&ecirc;m um efeito instant&acirc;neo
+      duram at&eacute; o fim da cena.</p>
+
+      <p>&bull; Uma mesma criatura pode ser alvo de v&aacute;rios julgamentos
+      diferentes, mas efeitos do mesmo julgamento n&atilde;o se acumulam.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 83
+  ativacao:
+    execucao: ''
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Paladino
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184731
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Yc7FmnrnPx2bI5NT'
+

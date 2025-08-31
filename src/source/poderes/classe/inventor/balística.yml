@@ -1,0 +1,78 @@
+name: Balística
+type: poder
+img: icons/commodities/tech/cog-brass.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.01y4JqX4qjEq5qUF
+    defaultPermission: 3
+    hash: 44d7e0478198b120df148f14857cc40b8f768aeb
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe profici&ecirc;ncia com armas marciais de ataque
+      &agrave; dist&acirc;ncia ou com armas de fogo. Quando usa uma arma de
+      ataque &agrave; dist&acirc;ncia, pode usar sua Intelig&ecirc;ncia em vez
+      de Destreza nos testes de ataque (e, caso possua o poder Estilo de
+      Disparo, nas rolagens de dano).</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> treinado em Pontaria e Of&iacute;cio
+      (armeiro).</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051643027
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: i5EbR8SrD8UcA7Gz
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!i5EbR8SrD8UcA7Gz'
+

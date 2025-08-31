@@ -5,6 +5,7 @@ const { execSync } = require('child_process');
 const { generateSpellsData } = require('./generate-spells-data.js');
 const { generatePotionsData } = require('./generate-potions-data.js');
 const { generateConditionsData } = require('./generate-conditions-data.js');
+const { generatePowersData } = require('./generate-powers-data.js');
 const { generateIcons } = require('./icon-generator.js');
 
 async function build() {
@@ -19,6 +20,9 @@ async function build() {
 
     // Generate conditions data from YAML files
     generateConditionsData();
+
+    // Generate powers data from YAML files
+    generatePowersData();
 
     // Detectar branch atual
     let currentBranch = 'unknown';
@@ -98,6 +102,20 @@ async function build() {
       console.log('⚡ Dados de condições integrados ao build');
     } else {
       console.log('⚠️ Arquivo de dados de condições não encontrado, usando require original');
+    }
+
+    // Inline the generated powers data into the main.js content
+    const generatedPowersDataPath = path.join(__dirname, '..', '..', 'modules', 'powers', 'generated-powers-data.js');
+    if (fs.existsSync(generatedPowersDataPath)) {
+      const powersDataContent = fs.readFileSync(generatedPowersDataPath, 'utf8');
+      // Replace the require statement with the actual powers data
+      finalCombinedContent = finalCombinedContent.replace(
+        /const powersData = require\('\.\/generated-powers-data\.js'\);/,
+        powersDataContent.replace('module.exports = powersData;', '')
+      );
+      console.log('⚡ Dados de poderes integrados ao build');
+    } else {
+      console.log('⚠️ Arquivo de dados de poderes não encontrado, usando require original');
     }
 
     // Minificar o código

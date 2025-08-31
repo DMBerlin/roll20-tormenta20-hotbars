@@ -1,0 +1,190 @@
+name: Engenhoqueiro
+type: poder
+img: systems/tormenta20/icons/poderes/classes/especialistas/engenhoca.webp
+effects: []
+flags:
+  scene-packer:
+    sourceId: Item.v05qSBchUvQbGngy
+    defaultPermission: 3
+    hash: baae1d18a76b89c3c01b6c5aa6b10dc7fffeb431
+system:
+  description:
+    value: >-
+      <hr>
+
+      <p>Voc&ecirc; pode fabricar engenhocas. Veja as regras para isso na
+      p&aacute;gina 70 do Livro B&aacute;sico.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> Int 3, treinado em Of&iacute;cio
+      (engenhoqueiro).</p>
+
+      <div></div>
+
+      <h1><span>Engenhocas</span></h1>
+
+      <div>Uma engenhoca &eacute; uma inven&ccedil;&atilde;o que simula o efeito
+      de uma magia. Exemplos incluem um canh&atilde;o (simula o efeito da magia
+      <em>Bola de Fogo</em>), uma arma de raios (<em>Rel&acirc;mpago</em>), um
+      casaco blindado (<em>Armadura Arcana</em>), um emplastro curativo
+      (<em>Curar Ferimentos</em>), um guarda-costas mec&acirc;nico (<em>Conjurar
+      Monstro</em>), um projetor de imagens (<em>Criar Ilus&atilde;o</em>), um
+      ve&iacute;culo a vapor (<em>Montaria Arcana</em>) etc.</div>
+
+      <div></div>
+
+      <div>Uma engenhoca &eacute; um item mundano Min&uacute;sculo que ocupa 1
+      espa&ccedil;o e possui Defesa 15, pontos de vida iguais &agrave; metade
+      dos PV de seu fabricante e RD 5. Quando &eacute; fabricada, escolha se ela
+      ser&aacute; empunhada (precisa estar na sua m&atilde;o para ser ativada)
+      ou vestida (precisa estar vestida para ser ativada, conta para seu limite
+      de itens vestidos). Ao ser ativada, uma engenhoca pode assumir outra
+      forma. Por exemplo, uma engenhoca que simula Montaria Arcana pode ser uma
+      caixinha de engrenagens que se desdobra na forma de uma moto de madeira.
+      Suas estat&iacute;sticas n&atilde;o mudam.</div>
+
+      <div></div>
+
+      <h2>Fabrica&ccedil;&atilde;o</h2>
+
+      <div>Para fabricar uma engenhoca, escolha uma magia arcana ou divina de
+      1&ordm; c&iacute;rculo. Essa ser&aacute; a magia que a engenhoca
+      ir&aacute; simular. A partir do 6&ordm; n&iacute;vel, voc&ecirc; pode
+      criar engenhocas com magias de 2&ordm; c&iacute;rculo e, a cada quatro
+      n&iacute;veis, pode criar engenhocas de um c&iacute;rculo maior.</div>
+
+      <div></div>
+
+      <div>
+
+      <div>O <strong>custo da engenhoca</strong> &eacute; T$ 100 x o custo em PM
+      da magia que ela simula. A CD para fabric&aacute;-la &eacute; 20 +<br>o
+      custo em PM da magia. Assim, para fabricar uma engenhoca que simula o
+      efeito de uma magia de 2&ordm; c&iacute;rculo (3 PM) voc&ecirc; precisa
+      gastar T$ 300 e passar em um teste de Of&iacute;cio (engenhoqueiro) contra
+      CD 23.</div>
+
+      <div></div>
+
+      <h3><strong>Limite de Engenhocas</strong></h3>
+
+      <div>Engenhocas s&atilde;o itens complexos e delicados, que exigem
+      manuten&ccedil;&atilde;o constante. O m&aacute;ximo de engenhocas que
+      voc&ecirc; pode ter ao mesmo tempo &eacute; igual a sua
+      Intelig&ecirc;ncia.</div>
+
+      <div></div>
+
+      <h2>Ativa&ccedil;&atilde;o</h2>
+
+      <div>Ativar uma engenhoca exige uma m&atilde;o livre, uma
+      a&ccedil;&atilde;o padr&atilde;o (ou a execu&ccedil;&atilde;o da magia, o
+      que for maior) e um teste de Of&iacute;cio (engenhoqueiro) contra CD 15 +
+      custo em PM da magia. Se voc&ecirc; passar, a engenhoca gera o efeito da
+      magia (atributo- chave Int). Se falhar, ela engui&ccedil;a e n&atilde;o
+      pode ser utilizada at&eacute; ser consertada, o que exige uma hora de
+      trabalho. Cada nova ativa&ccedil;&atilde;o da engenhoca no mesmo dia
+      aumenta a CD do teste de Of&iacute;cio em +5.</div>
+
+      <div></div>
+
+      <div>Quando ativa uma engenhoca, voc&ecirc; pode usar quaisquer
+      aprimoramentos da magia que ela simula, at&eacute; um custo igual a sua
+      Intelig&ecirc;ncia. A CD para ativar a engenhoca aumenta em +1 por PM e
+      voc&ecirc; paga o custo em PM dos aprimoramentos.</div>
+
+      <div></div>
+
+      <div>Se a engenhoca simula o efeito de uma magia com custos especiais,
+      esse custo deve ser pago a cada ativa&ccedil;&atilde;o. Para outros custos
+      e limita&ccedil;&otilde;es, o efeito gerado pela engenhoca funciona como
+      uma magia. Por exemplo, para manter um efeito com dura&ccedil;&atilde;o
+      sustentada que tenha sido gerado por uma engenhoca, o inventor deve pagar
+      1 PM no in&iacute;cio de cada um de seus turnos. Da mesma forma, s&oacute;
+      pode manter um efeito sustentado de engenhoca por vez. Se a magia simulada
+      exigir um teste de Misticismo, use Of&iacute;cio (engenhoqueiro) em seu
+      lugar.</div>
+
+      <div></div>
+
+      <h3>Efeito Mundano</h3>
+
+      <p>O efeito de uma engenhoca n&atilde;o &eacute; m&aacute;gico e
+      n&atilde;o est&aacute; sujeito &agrave;s limita&ccedil;&otilde;es de
+      magias (n&atilde;o pode ser dissipado, funciona em &aacute;reas de
+      antimagia etc.).</p>
+
+      <h3>Penalidade de Armadura.</h3>
+
+      <p>Voc&ecirc; pode ativar engenhocas que geram magias arcanas enquanto usa
+      armadura sem precisar fazer testes de Misticismo. Por&eacute;m, a
+      ativa&ccedil;&atilde;o de uma engenhoca exige movimentos r&aacute;pidos e
+      precisos. Por isso, o teste de Of&iacute;cio (engenhoqueiro) para ativar
+      engenhocas sofre penalidade de armadura. Essa penalidade se aplica a todas
+      as engenhocas, n&atilde;o apenas aquelas que geram magias arcanas.</p>
+
+      <h3>Efeitos que Impedem Conjura&ccedil;&atilde;o.</h3>
+
+      <p>Um efeito que especificamente impe&ccedil;a um personagem de
+      lan&ccedil;ar magias (como a F&uacute;ria de um b&aacute;rbaro ou a magia
+      Transforma&ccedil;&atilde;o de Guerra) tamb&eacute;m impede um inventor de
+      ativar engenhocas.</p>
+
+      </div>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 69 e 70
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: ''
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Inventor
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1663051644154
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: ZlmaW3J9X2RMhDo1
+folder: iHjbUWZ9cRzIVZ3E
+sort: 0
+ownership:
+  default: 0
+_key: '!items!ZlmaW3J9X2RMhDo1'
+

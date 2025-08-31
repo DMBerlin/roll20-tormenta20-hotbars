@@ -1,0 +1,292 @@
+_id: B7Bn9sW2pPs3xc77
+name: Baluarte
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/baluarte.webp
+effects:
+  - _id: 1RTmOQ99ffIsGXcL
+    flags:
+      ActiveAuras:
+        isAura: false
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: Allies
+        radius: null
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '+2'
+        priority: null
+      - key: system.modificadores.pericias.resistencia
+        mode: 2
+        value: '+2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      rounds: 1
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uuy9DsTEMaw5bhrt
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Baluarte
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!B7Bn9sW2pPs3xc77.1RTmOQ99ffIsGXcL'
+  - _id: 0FT2N2hCjatjlKcH
+    flags:
+      ActiveAuras:
+        isAura: false
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: None
+        radius: null
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '1'
+        durationScene: false
+    changes:
+      - key: system.attributes.defesa.bonus
+        mode: 2
+        value: '+2'
+        priority: null
+      - key: system.modificadores.pericias.resistencia
+        mode: 2
+        value: '+2'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uuy9DsTEMaw5bhrt
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: aumenta o bônus em +2
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!B7Bn9sW2pPs3xc77.0FT2N2hCjatjlKcH'
+  - _id: 40Pc5JDB4T1zCIv8
+    flags:
+      ActiveAuras:
+        isAura: true
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: Allies
+        radius: 1
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '2'
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uuy9DsTEMaw5bhrt
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: afeta aliados adjacentes
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!B7Bn9sW2pPs3xc77.40Pc5JDB4T1zCIv8'
+  - _id: rvLpAaFruriXc4bn
+    flags:
+      ActiveAuras:
+        isAura: true
+        ignoreSelf: false
+        hidden: false
+        height: false
+        aura: Allies
+        radius: 9
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: false
+        custo: '5'
+        durationScene: false
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.uuy9DsTEMaw5bhrt
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: afeta aliados em alcance curto
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!B7Bn9sW2pPs3xc77.rvLpAaFruriXc4bn'
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Quando sofre um ataque ou faz um teste de resist&ecirc;ncia, voc&ecirc;
+      pode gastar 1 PM para receber +2 na Defesa e nos testes de
+      resist&ecirc;ncia at&eacute; o in&iacute;cio do seu pr&oacute;ximo turno.
+      a cada quatro n&iacute;veis pode gastar +1 PM para aumentar o b&ocirc;nus
+      em +2.<br>A partir do 7&ordm; n&iacute;vel, quando usar esta habilidade,
+      voc&ecirc; pode gastar 2 PM adicionais para fornecer o mesmo b&ocirc;nus a
+      todos os aliados adjacentes. Por exemplo, pode gastar 4PM ao todo para
+      receber +4 na Defesa e nos testes de resist&ecirc;ncia e fornecer este
+      mesmo b&ocirc;nus aos outros. A partir do 15&ordm; n&iacute;vel,
+      voc&ecirc; pode gastar 5PM adicinais para fornecer o b&ocirc;nus a todos
+      os aliados em alcance curto.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 53
+  ativacao:
+    execucao: ''
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Cavaleiro
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183809
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!B7Bn9sW2pPs3xc77'
+

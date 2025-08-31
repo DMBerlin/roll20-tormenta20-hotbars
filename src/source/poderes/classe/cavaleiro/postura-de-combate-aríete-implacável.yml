@@ -1,0 +1,178 @@
+_id: faabBo3I07EmxSIz
+name: 'Postura de Combate: Aríete Implacável'
+type: poder
+img: systems/tormenta20/icons/classes/cavaleiro.webp
+effects:
+  - origin: Item.faabBo3I07EmxSIz
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: true
+        custo: '2'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: ARgVsiWxGxyDABcS
+    changes:
+      - key: system.modificadores.ataque.cac
+        mode: 2
+        value: '1'
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Aríete Implacável: Aumenta o bônus de ataque em investida em +1'
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!faabBo3I07EmxSIz.ARgVsiWxGxyDABcS'
+  - origin: Item.faabBo3I07EmxSIz
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: true
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 9IHzTGBnCr2Bz4IK
+    changes:
+      - key: system.modificadores.ataque.cac
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.modificadores.dano.cac
+        mode: 2
+        value: 2d8
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: 'Postura de Combate: Aríete Implacável'
+    img: systems/tormenta20/icons/classes/cavaleiro.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!faabBo3I07EmxSIz.9IHzTGBnCr2Bz4IK'
+folder: FOdOQA7oDXTWqj5Z
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Ao assumir esta postura, voc&ecirc; aumenta o b&ocirc;nus de ataque em
+      investidas em +2. Para cada 2 PM adicionais que gastar quando assumir a
+      postura, aumenta o b&ocirc;nus de ataque em +1. Al&eacute;m disso, se
+      fizer uma investida contra um construto ou objeto, causa +2d8 de dano.
+      Voc&ecirc; precisa se deslocar todos os turnos para manter esta postura
+      ativa.</p>
+
+      <p><strong>Posturas de Combate</strong></p>
+
+      <p>Posturas de Combate compartilham as seguintes regras.</p>
+
+      <p>&bull; Assumir uma postura gasta uma a&ccedil;&atilde;o de movimento e
+      2 PM.</p>
+
+      <p>&bull; Os efeitos de uma postura duram at&eacute; o final da cena, a
+      menos que sua descri&ccedil;&atilde;o diga o contr&aacute;rio.</p>
+
+      <p>&bull; Voc&ecirc; s&oacute; pode manter uma postura por vez.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta 20 Básico - Edição do Ano, p. 54
+  ativacao:
+    execucao: move
+    custo: 2
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Cavaleiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184751
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!faabBo3I07EmxSIz'
+

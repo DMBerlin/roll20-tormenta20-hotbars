@@ -1,0 +1,179 @@
+_id: 1XQgufPl8uPaV4Li
+name: Ervas Curativas
+type: poder
+img: systems/tormenta20/icons/classes/cacador.webp
+effects:
+  - _id: JkH3J3ao04sP39Ak
+    flags:
+      tormenta20:
+        onuse: true
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        aumenta: true
+        custo: '1'
+        durationScene: false
+        items: ''
+    changes:
+      - key: dano
+        mode: 0
+        value: 2d6
+        priority: 0
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.q96Rsgo3xopXncQ9
+    tint: '#ffffff'
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: aumenta a cura +2d6 PV
+    img: icons/svg/aura.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!1XQgufPl8uPaV4Li.JkH3J3ao04sP39Ak'
+  - origin: Item.kq8zZmq5r6H9LXn6
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: true
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 1iqZjIykU8XrWXrZ
+    changes:
+      - key: dano
+        mode: 5
+        value: ''
+        priority: null
+    transfer: false
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Remove Veneno
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!1XQgufPl8uPaV4Li.1iqZjIykU8XrWXrZ'
+folder: iT3rUBmGhu5hbNic
+sort: 200000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o completa e uma quantidade
+      de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que
+      curam ou desintoxicam em voc&ecirc; ou num aliado adjacente. Para cada PM
+      que gastar, cura 2d6 PV ou remove uma condi&ccedil;&atilde;o envenenado
+      afetando o alvo.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 51
+  ativacao:
+    execucao: full
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: touch
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Cura
+      key: dano0
+      type: dano
+      parts:
+        - - 2d6
+          - curapv
+          - ''
+      versatil: ''
+  tipo: classe
+  subtipo: Caçador
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1658361716777
+  modifiedTime: 1684630426990
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!1XQgufPl8uPaV4Li'
+

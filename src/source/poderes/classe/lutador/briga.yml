@@ -1,0 +1,73 @@
+_id: 1gvsbH8ljOuhBdKM
+name: Briga
+type: poder
+img: systems/tormenta20/icons/poderes/classes/combatentes/briga.webp
+effects: []
+folder: csRpG81AedPycko0
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Seus ataques desarmados causam 1d6 pontos de dano e podem causar dano
+      letal ou n&atilde;o letal (sem penalidades). A cada quatro n&iacute;veis,
+      seu dano desarmado aumenta, conforme a tabela.</p>
+
+      <p>O dano na tabela &eacute; para criaturas Pequenas e M&eacute;dias.
+      Criaturas Min&uacute;sculas diminuem esse dano em um passo, Grandes e
+      Enormes aumentam em um passo e Colossais aumentam em dois passos.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 76
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: ability
+  subtipo: Lutador
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306183296
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!1gvsbH8ljOuhBdKM'
+

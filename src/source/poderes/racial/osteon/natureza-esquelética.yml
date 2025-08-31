@@ -1,0 +1,160 @@
+_id: GYlYSYLGcK89eelM
+name: Natureza Esquelética
+type: poder
+img: systems/tormenta20/icons/racas/osteon.webp
+effects:
+  - name: Natureza Esquelética
+    img: systems/tormenta20/icons/racas/osteon.webp
+    origin: Compendium.tormenta20.poderes.Item.GYlYSYLGcK89eelM
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: ERR981go5h4kQB3s
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.sentidos.value
+        mode: 2
+        value: escuro
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: cansaco
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: exausto
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: fatigado
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: metabolismo
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: doente
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: enjoado
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: sangrando
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: envenenado
+        priority: null
+      - key: system.tracos.ic.value
+        mode: 2
+        value: trevas
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1746815354163
+      modifiedTime: 1746815464980
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!GYlYSYLGcK89eelM.ERR981go5h4kQB3s'
+folder: voEJdcAKDfYsKoTC
+sort: 100000
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; &eacute; uma criatura do tipo morto-vivo. Recebe
+      vis&atilde;o no escuro e imunidade a efeitos de cansa&ccedil;o,
+      metab&oacute;licos, de trevas e de veneno. Al&eacute;m disso, n&atilde;o
+      precisa respirar, alimentar-se ou dormir. Por fim, efeitos m&aacute;gicos
+      de cura de luz causam dano a voc&ecirc; e voc&ecirc; n&atilde;o se
+      beneficia de itens da categoria alimenta&ccedil;&atilde;o, mas dano de
+      trevas recupera seus PV.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 29
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: racial
+  subtipo: Osteon
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306183899
+  modifiedTime: 1746815349976
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!GYlYSYLGcK89eelM'
+

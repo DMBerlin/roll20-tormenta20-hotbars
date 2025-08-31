@@ -1,0 +1,74 @@
+_id: f1wsMyoaUc84zuqx
+name: Dom da Ressurreição
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-ressurreicao.webp
+effects: []
+folder: He9KfwGwASRyosMP
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; pode gastar uma a&ccedil;&atilde;o completa e todos os PM
+      que possui (m&iacute;nimo 1 PM) para tocar o corpo de uma criatura morta
+      h&aacute; menos de um ano e ressuscit&aacute;-la. A criatura volta
+      &agrave; vida com 1 PV e 0 PM, e perde 1 ponto de
+      Constitui&ccedil;&atilde;o permanentemente. Este poder s&oacute; pode ser
+      usado uma vez em cada criatura. Apenas cl&eacute;rigos podem escolher este
+      poder. Um personagem pode ter Dom da Imortalidade ou Dom da
+      Ressurrei&ccedil;&atilde;o, mas n&atilde;o ambos.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 133
+  ativacao:
+    execucao: full
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Ressurreição
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184749
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!f1wsMyoaUc84zuqx'
+

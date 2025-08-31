@@ -1,0 +1,116 @@
+_id: UOzqz9v3jx4Hc7Mb
+name: Mente Vazia
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-samurai.webp
+effects:
+  - origin: Item.UOzqz9v3jx4Hc7Mb
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 25YEj3Z92B9vRt9F
+    changes:
+      - key: system.pericias.inic.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.perc.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.pericias.vont.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Mente Vazia
+    img: systems/tormenta20/icons/poderes/concedidos-samurai.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!UOzqz9v3jx4Hc7Mb.25YEj3Z92B9vRt9F'
+folder: V5hYfhWEZtO9YVsO
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em Iniciativa, Percep&ccedil;&atilde;o e
+      Vontade.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 134
+  ativacao:
+    execucao: ''
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Honra
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184316
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!UOzqz9v3jx4Hc7Mb'
+

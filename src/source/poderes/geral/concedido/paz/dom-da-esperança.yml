@@ -1,0 +1,120 @@
+name: Dom da Esperança
+type: poder
+img: systems/tormenta20/icons/poderes/concedidos-paz.webp
+effects:
+  - name: Dom da Esperança
+    img: systems/tormenta20/icons/poderes/concedidos-paz.webp
+    origin: Compendium.tormenta20.poderes.Item.bTocosYd9lw0Vil8
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: SiOpIxFlWr3t6yEe
+    type: base
+    system: {}
+    changes:
+      - key: flags.tormenta20.substituirCon
+        mode: 5
+        value: sab
+        priority: null
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1747120788453
+      modifiedTime: 1747159948277
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!bTocosYd9lw0Vil8.SiOpIxFlWr3t6yEe'
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; soma sua Sabedoria em seus PV em vez de
+      Constitui&ccedil;&atilde;o, e se torna imune &agrave;s
+      condi&ccedil;&otilde;es alquebrado, esmorecido e frustrado.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 133
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: concedido
+  subtipo: Paz
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.214
+  coreVersion: '13.342'
+  createdTime: 1664306185652
+  modifiedTime: 1747120933796
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_id: bTocosYd9lw0Vil8
+folder: 3ZaDMvQAI4O8pybK
+sort: 0
+ownership:
+  default: 0
+_key: '!items!bTocosYd9lw0Vil8'
+

@@ -1,0 +1,73 @@
+_id: hy0i3RPT09jEFIs4
+name: Planejamento Marcial
+type: poder
+img: systems/tormenta20/icons/classes/guerreiro.webp
+effects: []
+folder: LJQ1SKk2Y0QmZI03
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Uma vez por dia, voc&ecirc; pode gastar uma hora e 3 PM para escolher
+      um poder de guerreiro ou de combate cujos pr&eacute;-requisitos cumpra.
+      Voc&ecirc; recebe os benef&iacute;cios desse poder at&eacute; o
+      pr&oacute;ximo dia.</p>
+
+      <p><em>Pr&eacute;-requisitos:</em> treinado em Guerra, 10&ordm;
+      n&iacute;vel de guerreiro.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 66
+  ativacao:
+    execucao: ''
+    custo: 3
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Guerreiro
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306185121
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!hy0i3RPT09jEFIs4'
+

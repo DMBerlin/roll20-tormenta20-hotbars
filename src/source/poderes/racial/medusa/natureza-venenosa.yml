@@ -1,0 +1,229 @@
+_id: HSB1rlovnC4GjdgV
+name: Natureza Venenosa
+type: poder
+img: systems/tormenta20/icons/racas/medusa.webp
+effects:
+  - origin: Item.HSB1rlovnC4GjdgV
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: false
+        skill: true
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: Fortitude;Reflexos;Vontade
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 6WrgfWDzw5m4hjpr
+    changes:
+      - key: roll
+        mode: 2
+        value: '5'
+        priority: 0
+    transfer: true
+    name: Natureza Venenosa
+    description: ''
+    statuses: []
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    img: systems/tormenta20/icons/racas/medusa.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!HSB1rlovnC4GjdgV.6WrgfWDzw5m4hjpr'
+  - origin: Item.HSB1rlovnC4GjdgV
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: true
+        durationScene: false
+        self: false
+        attack: true
+        skill: false
+        ability: false
+        power: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: '1'
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 4QsRr4WpeeVxWznX
+    changes:
+      - key: dano
+        mode: 2
+        value: 1d12
+        priority: 0
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Natureza Venenosa
+    img: icons/svg/upgrade.svg
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!HSB1rlovnC4GjdgV.4QsRr4WpeeVxWznX'
+  - name: Natureza Venenosa
+    img: systems/tormenta20/icons/racas/medusa.webp
+    origin: Compendium.tormenta20.poderes.Item.HSB1rlovnC4GjdgV
+    tint: '#ffffff'
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+        self: false
+        attack: false
+        skill: false
+        ability: false
+        power: false
+        equipment: false
+        spell: false
+        consumable: false
+        items: ''
+        aumenta: false
+        custo: ''
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: bPnPA6QZb0jaoyOb
+    type: base
+    system: {}
+    changes:
+      - key: ''
+        value: ''
+        mode: 2
+    description: ''
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.342'
+      systemId: tormenta20
+      systemVersion: 1.4.214
+      createdTime: 1746815205958
+      modifiedTime: 1746815209031
+      lastModifiedBy: t20builder000000
+    _key: '!items.effects!HSB1rlovnC4GjdgV.bPnPA6QZb0jaoyOb'
+folder: WBW7mJa7n0MHwWe7
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe resist&ecirc;ncia a veneno +5 e pode gastar uma
+      a&ccedil;&atilde;o de movimento e 1 PM para envenenar uma arma que esteja
+      usando. A arma causa perda de 1d12 pontos de vida. O veneno dura
+      at&eacute; voc&ecirc; acertar um ataque ou at&eacute; o fim da cena (o que
+      acontecer primeiro). <em>Veneno</em></p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 29
+  ativacao:
+    execucao: move
+    custo: 1
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls:
+    - name: Perda de Pontos de Vida
+      key: dano0
+      type: dano
+      parts:
+        - - 1d12
+          - perda
+          - ''
+  tipo: racial
+  subtipo: Medusa
+  origin: ''
+  tags: []
+  chatFlavor: ''
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.203
+  coreVersion: '13.342'
+  createdTime: 1664306183903
+  modifiedTime: 1704130139208
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!HSB1rlovnC4GjdgV'
+

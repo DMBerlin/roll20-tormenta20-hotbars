@@ -1,0 +1,112 @@
+_id: V4HrTCXG4kL2Awo3
+name: Gatuno
+type: poder
+img: systems/tormenta20/icons/classes/ladino.webp
+effects:
+  - _id: s632JbbPN3aKghJE
+    flags:
+      tormenta20:
+        onuse: false
+        durationScene: false
+    changes:
+      - key: system.pericias.atle.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.suf16u0HRD2Or6ga
+    tint: '#ffffff'
+    transfer: true
+    _stats:
+      coreVersion: '13.342'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Gatuno
+    img: systems/tormenta20/icons/classes/ladino.webp
+    type: base
+    system: {}
+    description: ''
+    statuses: []
+    sort: 0
+    _key: '!items.effects!V4HrTCXG4kL2Awo3.s632JbbPN3aKghJE'
+folder: E9EyD0Wrr8C91ZpV
+sort: 0
+flags: {}
+system:
+  description:
+    value: >-
+      <p>Voc&ecirc; recebe +2 em
+      @UUID[Compendium.tormenta20.pericias.ZMXVeEARJHe4WsWx]{Atletismo}. Quando
+      escala, n&atilde;o fica
+      @UUID[Compendium.tormenta20.condicoes.QBpAB16MIn9BVLNw]{Desprevenido}<span
+      style="white-space: nowrap; background-color: rgb(221, 221, 221);">
+      </span>e avan&ccedil;a seu deslocamento normal, em vez de metade dele.</p>
+    chat: ''
+    unidentified: ''
+  source: Tormenta20 — Edição Jogo do Ano, p. 74
+  ativacao:
+    execucao: passive
+    custo: 0
+    qtd: ''
+    condicao: ''
+    special: ''
+  duracao:
+    value: 0
+    units: ''
+    special: ''
+  target:
+    value: null
+    width: null
+    units: ''
+    type: ''
+  range:
+    value: null
+    units: ''
+  consume:
+    type: ''
+    target: ''
+    amount: null
+    mpMultiplier: false
+  efeito: ''
+  alcance: none
+  alvo: ''
+  area: ''
+  resistencia:
+    pericia: ''
+    atributo: sab
+    bonus: 0
+    txt: ''
+  rolls: []
+  tipo: classe
+  subtipo: Ladino
+  chatFlavor: ''
+  origin: ''
+  tags: []
+  chatGif: ''
+ownership:
+  default: 0
+_stats:
+  systemId: tormenta20
+  systemVersion: 1.4.116
+  coreVersion: '13.342'
+  createdTime: 1664306184319
+  modifiedTime: 1684630371462
+  lastModifiedBy: t20builder000000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!V4HrTCXG4kL2Awo3'
+
