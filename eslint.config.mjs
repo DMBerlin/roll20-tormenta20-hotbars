@@ -6,11 +6,17 @@ import { defineConfig } from "eslint/config";
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs}"],
-    ignores: ["dist/**/*", "node_modules/**/*", "landing-page/**/*"],
+    ignores: [
+      "dist/**/*",
+      "node_modules/**/*",
+      "*.min.js",
+      "*.bundle.js",
+      "landing-page/package/**/*"
+    ],
     ...js.configs.recommended
   },
   {
-    files: ["src/main.js", "dist/**/*.js"],
+    files: ["src/main.js"],
     languageOptions: {
       sourceType: "script",
       globals: {
@@ -41,6 +47,30 @@ export default defineConfig([
         __dirname: "readonly",
         module: "writable",
         require: "readonly"
+      }
+    }
+  },
+  {
+    files: ["landing-page/update-landing-page.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        __dirname: "readonly",
+        module: "writable",
+        require: "readonly",
+        process: "readonly",
+        console: "readonly"
+      }
+    }
+  },
+  {
+    files: ["landing-page/script.js"],
+    languageOptions: {
+      sourceType: "script",
+      globals: {
+        ...globals.browser,
+        ...globals.es2021
       }
     }
   },

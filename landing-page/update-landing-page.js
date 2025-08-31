@@ -18,14 +18,14 @@ function getMainVersion() {
     try {
         // Fazer checkout para a branch main
         execSync('git checkout main', { stdio: 'pipe' });
-        
+
         // Ler a versão do package.json
         const packageJsonPath = path.join(process.cwd(), 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-        
+
         // Voltar para a branch original
         execSync('git checkout -', { stdio: 'pipe' });
-        
+
         return packageJson.version;
     } catch (error) {
         console.error('❌ Erro ao obter versão da branch main:', error.message);
@@ -54,26 +54,26 @@ function updateHTML(version, fileSize) {
     try {
         const htmlPath = path.join(process.cwd(), 'landing-page', 'index.html');
         let htmlContent = fs.readFileSync(htmlPath, 'utf8');
-        
+
         // Atualizar versão
         htmlContent = htmlContent.replace(
             /<span id="current-version">[^<]+<\/span>/g,
             `<span id="current-version">${version}</span>`
         );
-        
+
         // Atualizar tamanho do arquivo
         htmlContent = htmlContent.replace(
             /<span id="file-size">[^<]+<\/span>/g,
             `<span id="file-size">${fileSize} KB</span>`
         );
-        
+
         // Atualizar data da última atualização
         const today = new Date().toLocaleDateString('pt-BR');
         htmlContent = htmlContent.replace(
             /<span id="last-update">[^<]+<\/span>/g,
             `<span id="last-update">${today}</span>`
         );
-        
+
         fs.writeFileSync(htmlPath, htmlContent, 'utf8');
         console.log(`✅ HTML atualizado com versão ${version} e tamanho ${fileSize} KB`);
         return true;
@@ -89,16 +89,16 @@ function copyAssets() {
         // Copiar ícones
         const iconSource = path.join(process.cwd(), 'dist', 'package', 'icon128.png');
         const iconDest = path.join(process.cwd(), 'landing-page', 'assets', 'icon-128.png');
-        
+
         if (fs.existsSync(iconSource)) {
             fs.copyFileSync(iconSource, iconDest);
             console.log('✅ Ícone copiado para landing-page/assets/');
         }
-        
+
         // Copiar arquivo da extensão para download
         const extensionSource = path.join(process.cwd(), 'dist', 'package');
         const extensionDest = path.join(process.cwd(), 'landing-page', 'package');
-        
+
         if (fs.existsSync(extensionSource)) {
             if (fs.existsSync(extensionDest)) {
                 fs.rmSync(extensionDest, { recursive: true, force: true });
@@ -106,7 +106,7 @@ function copyAssets() {
             fs.cpSync(extensionSource, extensionDest, { recursive: true });
             console.log('✅ Arquivos da extensão copiados para landing-page/package/');
         }
-        
+
         return true;
     } catch (error) {
         console.error('❌ Erro ao copiar assets:', error.message);
@@ -163,14 +163,14 @@ function createGitHubPagesConfig() {
                 }
             }
         };
-        
+
         const configPath = path.join(process.cwd(), '.github', 'workflows', 'deploy.yml');
         const configDir = path.dirname(configPath);
-        
+
         if (!fs.existsSync(configDir)) {
             fs.mkdirSync(configDir, { recursive: true });
         }
-        
+
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
         console.log('✅ Configuração do GitHub Actions criada');
         return true;
@@ -184,24 +184,24 @@ function createGitHubPagesConfig() {
 function main() {
     console.log('🚀 Atualizando landing page para GitHub Pages');
     console.log('============================================\n');
-    
+
     // Obter versão da branch main
     const version = getMainVersion();
     console.log(`📦 Versão da branch main: ${version}`);
-    
+
     // Obter informações do build
     const fileSize = getBuildInfo();
     console.log(`📁 Tamanho do arquivo: ${fileSize} KB`);
-    
+
     // Atualizar HTML
     const htmlUpdated = updateHTML(version, fileSize);
-    
+
     // Copiar assets
     const assetsCopied = copyAssets();
-    
+
     // Criar configuração do GitHub Actions (opcional)
-    const configCreated = createGitHubPagesConfig();
-    
+    createGitHubPagesConfig();
+
     if (htmlUpdated && assetsCopied) {
         console.log('\n🎉 Landing page atualizada com sucesso!');
         console.log(`📝 Versão: ${version}`);

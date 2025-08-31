@@ -43,6 +43,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 

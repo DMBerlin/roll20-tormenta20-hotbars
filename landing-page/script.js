@@ -1,18 +1,18 @@
 // Script para a landing page do Tormenta20 Hotbars
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Smooth scrolling para links de navegação
     const navLinks = document.querySelectorAll('a[href^="#"]');
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
                 const targetPosition = targetSection.offsetTop - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Atualizar informações dinâmicas
     updateDynamicInfo();
-    
+
     // Adicionar efeitos de scroll
     addScrollEffects();
-    
+
     // Adicionar funcionalidade de download
     setupDownloadButton();
 });
@@ -73,7 +73,7 @@ function addScrollEffects() {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
@@ -96,7 +96,7 @@ function addScrollEffects() {
 function setupDownloadButton() {
     const downloadButton = document.querySelector('.btn-download');
     if (downloadButton) {
-        downloadButton.addEventListener('click', function(e) {
+        downloadButton.addEventListener('click', function () {
             // Adicionar efeito de clique
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -187,12 +187,12 @@ function detectBrowser() {
     // Atualizar informações do navegador na página
     const browserIconElement = document.querySelector('.browser-icon');
     const browserNameElement = document.querySelector('.card-header h3');
-    
+
     if (browserIconElement) {
         browserIconElement.src = browserIcon;
         browserIconElement.alt = browser;
     }
-    
+
     if (browserNameElement) {
         browserNameElement.textContent = browser;
     }
@@ -200,18 +200,18 @@ function detectBrowser() {
     return browser;
 }
 
-// Função para adicionar contador de downloads
-function incrementDownloadCount() {
-    const downloadCountElement = document.getElementById('download-count');
-    if (downloadCountElement) {
-        const currentCount = parseInt(downloadCountElement.textContent.replace(/[^\d]/g, ''));
-        const newCount = currentCount + 1;
-        downloadCountElement.textContent = newCount.toLocaleString('pt-BR');
-        
-        // Salvar no localStorage para persistência
-        localStorage.setItem('downloadCount', newCount.toString());
-    }
-}
+// Função para adicionar contador de downloads (não utilizada atualmente)
+// function incrementDownloadCount() {
+//     const downloadCountElement = document.getElementById('download-count');
+//     if (downloadCountElement) {
+//         const currentCount = parseInt(downloadCountElement.textContent.replace(/[^\d]/g, ''));
+//         const newCount = currentCount + 1;
+//         downloadCountElement.textContent = newCount.toLocaleString('pt-BR');
+//         
+//         // Salvar no localStorage para persistência
+//         localStorage.setItem('downloadCount', newCount.toString());
+//     }
+// }
 
 // Função para inicializar contador de downloads
 function initializeDownloadCount() {
@@ -228,11 +228,11 @@ function initializeDownloadCount() {
 function addHoverEffects() {
     const cards = document.querySelectorAll('.feature-card, .download-card');
     cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
@@ -243,9 +243,9 @@ function addHeaderScrollEffect() {
     const header = document.querySelector('.header');
     let lastScrollTop = 0;
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
+
         if (scrollTop > lastScrollTop && scrollTop > 100) {
             // Scroll para baixo - esconder header
             header.style.transform = 'translateY(-100%)';
@@ -253,18 +253,18 @@ function addHeaderScrollEffect() {
             // Scroll para cima - mostrar header
             header.style.transform = 'translateY(0)';
         }
-        
+
         lastScrollTop = scrollTop;
     });
 }
 
 // Inicializar todas as funcionalidades
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     detectBrowser();
     initializeDownloadCount();
     addHoverEffects();
     addHeaderScrollEffect();
-    
+
     // Adicionar transição ao header
     const header = document.querySelector('.header');
     if (header) {
@@ -272,37 +272,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Função para copiar link do GitHub
-function copyGitHubLink() {
-    const githubUrl = 'https://github.com/DMBerlin/roll20-tormenta20-hotbars';
-    navigator.clipboard.writeText(githubUrl).then(() => {
-        showNotification('Link do GitHub copiado para a área de transferência!', 'success');
-    }).catch(() => {
-        showNotification('Erro ao copiar link', 'error');
-    });
-}
+// Função para copiar link do GitHub (não utilizada atualmente)
+// function copyGitHubLink() {
+//     const githubUrl = 'https://github.com/DMBerlin/roll20-tormenta20-hotbars';
+//     navigator.clipboard.writeText(githubUrl).then(() => {
+//         showNotification('Link do GitHub copiado para a área de transferência!', 'success');
+//     }).catch(() => {
+//         showNotification('Erro ao copiar link', 'error');
+//     });
+// }
 
-// Função para compartilhar nas redes sociais
-function shareOnSocial(platform) {
-    const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent('Tormenta20 Hotbars - Chrome Extension');
-    const description = encodeURIComponent('Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano');
-    
-    let shareUrl = '';
-    
-    switch (platform) {
-        case 'twitter':
-            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}&via=dmberlin`;
-            break;
-        case 'facebook':
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-            break;
-        case 'linkedin':
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-            break;
-    }
-    
-    if (shareUrl) {
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-    }
-}
+// Função para compartilhar nas redes sociais (não utilizada atualmente)
+// function shareOnSocial(platform) {
+//     const url = encodeURIComponent(window.location.href);
+//     const title = encodeURIComponent('Tormenta20 Hotbars - Chrome Extension');
+//     const description = encodeURIComponent('Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano');
+//
+//     let shareUrl = '';
+//
+//     switch (platform) {
+//         case 'twitter':
+//             shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}&via=dmberlin`;
+//             break;
+//         case 'facebook':
+//             shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+//             break;
+//         case 'linkedin':
+//             shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+//             break;
+//     }
+//
+//     if (shareUrl) {
+//         window.open(shareUrl, '_blank', 'width=600,height=400');
+//     }
+// }
