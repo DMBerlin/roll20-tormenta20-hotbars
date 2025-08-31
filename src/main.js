@@ -8,14 +8,6 @@
     const AVATAR_KEY = 'tormenta-20-hotbars-avatar';
     // Sistema de nome do personagem
     const CHAR_NAME_KEY = 'tormenta-20-hotbars-charname';
-    // Sistema de habilidades aprendidas do Caçador
-
-    // Sistema de poderes de destino aprendidos
-    const DESTINY_POWERS_KEY = 'tormenta-20-hotbars-destiny-powers';
-    // Sistema de raça selecionada
-    const SELECTED_RACE_KEY = 'tormenta-20-hotbars-selected-race';
-    // Sistema de tipo de raça selecionado (para raças com subtipos)
-    const SELECTED_RACE_TYPE_KEY = 'tormenta-20-hotbars-selected-race-type';
     // Sistema de magias aprendidas
     const LEARNED_SPELLS_KEY = 'tormenta-20-hotbars-learned-spells';
     // Sistema de poderes aprendidos
@@ -30,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.53706'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.97587'; // Última tag Git
 
     const logger = window.console;
 
@@ -1187,63 +1179,6 @@
         }
     }
 
-    // Função para criar ícone indicador de efeito de item
-    function createItemEffectIndicatorIcon(itemEffectData) {
-        const effectsContainer = document.getElementById('effects-icons-container');
-        if (!effectsContainer) return;
-
-        // Container principal do indicador
-        const indicator = document.createElement('div');
-        indicator.className = 'item-effect-indicator';
-        indicator.style.position = 'relative';
-        indicator.style.width = '32px';
-        indicator.style.height = '32px';
-        indicator.style.borderRadius = '6px';
-        indicator.style.border = '2px solid #9c27b0'; // Borda roxa para itens
-        indicator.style.background = '#23243a';
-        indicator.style.cursor = 'pointer';
-        indicator.style.transition = 'all 0.2s';
-        indicator.style.overflow = 'hidden';
-
-        // Efeitos de hover
-        indicator.onmouseover = () => {
-            indicator.style.transform = 'scale(1.1)';
-            indicator.style.borderColor = '#ba68c8'; // Roxo mais claro no hover
-            createEffectHoverTooltip(indicator, itemEffectData, 'item');
-        };
-
-        indicator.onmouseout = () => {
-            indicator.style.transform = 'scale(1)';
-            indicator.style.borderColor = '#9c27b0'; // Volta para roxo normal
-            hideEffectTooltip();
-        };
-
-        // Click handler para remover o efeito
-        indicator.onclick = () => {
-            hideEffectTooltip();
-            toggleEffect(itemEffectData.effectKey, true); // Modo silencioso
-            removeEffectFromOrder(itemEffectData.effectKey, 'item');
-        };
-
-        // Usa o sistema de cache para carregar a imagem
-        const iconUrl = itemEffectData.iconeUrl || 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg';
-
-        const cachedImageElement = createCachedImageElement(
-            iconUrl,
-            itemEffectData.name,
-            itemEffectData.icone || '⚔️',
-            {
-                width: '100%',
-                height: '100%',
-                borderRadius: '4px',
-                objectFit: 'cover',
-                showSkeleton: true
-            }
-        );
-
-        indicator.appendChild(cachedImageElement);
-        effectsContainer.appendChild(indicator);
-    }
     // Sistema de scrollbars customizadas
     function createCustomScrollbarStyles() {
         const style = document.createElement('style');
@@ -1942,13 +1877,7 @@
         return localStorage.getItem(CHAR_LEVEL_KEY) || '1';
     }
 
-    // Função para obter a classe do personagem
-    function getCharClass() {
-        // Primeiro tenta buscar valor sincronizado, depois valor padrão
-        const syncedClass = localStorage.getItem('tormenta-20-hotbars-sync-class');
-        if (syncedClass) return syncedClass.toUpperCase();
-        return 'CLASSE';
-    }
+    // getCharClass function removed - class system will be refactored in future version
 
     // Função para atualizar a UI da hotbar com dados sincronizados
     function updateHotbarUI() {
@@ -1972,11 +1901,7 @@
             defenseIcon.textContent = defenseValue;
         }
 
-        // Atualizar classe no botão da classe
-        const classButton = document.getElementById('character-class-button');
-        if (classButton) {
-            classButton.textContent = getCharClass();
-        }
+        // Class button update removed - class system will be refactored in future version
 
         // Atualizar barras de vida e mana
         updateHealthAndManaBars();
@@ -2148,98 +2073,6 @@
         }
     }
 
-
-
-
-
-    function toggleLearnedPower(powerName) {
-        const learnedPowers = getLearnedPowers();
-        const index = learnedPowers.findIndex(p => p.nome === powerName);
-
-        if (index > -1) {
-            learnedPowers.splice(index, 1);
-            showWarningNotification(`Poder "${powerName}" removido da lista de aprendidos.`);
-        } else {
-            // Adicionar poder básico se não existir
-            const basicPower = {
-                nome: powerName,
-                descricao: 'Poder aprendido do sistema de poderes gerais.',
-                categoria: 'Geral',
-                subtipo: 'Poder Aprendido'
-            };
-            learnedPowers.push(basicPower);
-            showSuccessNotification(`Poder "${powerName}" adicionado à lista de aprendidos!`);
-        }
-
-        saveLearnedPowers(learnedPowers);
-        return learnedPowers;
-    }
-
-    // Função para obter poderes automáticos (sempre possuídos)
-    function getAutomaticPowers() {
-        return [];
-    }
-    // Função para obter poderes disponíveis baseado no nível
-    function getAvailablePowersByLevel(level) {
-        const powersByLevel = {
-            2: 1,   // 2º nível: 1 poder
-            3: 2,   // 3º nível: 2 poderes (Explorador + 1 poder)
-            4: 3,   // 4º nível: 3 poderes
-            5: 4,   // 5º nível: 4 poderes (Caminho do Explorador + 3 poderes)
-            6: 5,   // 6º nível: 5 poderes
-            7: 6,   // 7º nível: 6 poderes (Explorador + 5 poderes)
-            8: 7,   // 8º nível: 7 poderes
-            9: 8,   // 9º nível: 8 poderes
-            10: 9,  // 10º nível: 9 poderes
-            11: 10, // 11º nível: 10 poderes (Explorador + 9 poderes)
-            12: 11, // 12º nível: 11 poderes
-            13: 12, // 13º nível: 12 poderes
-            14: 13, // 14º nível: 13 poderes
-            15: 14, // 15º nível: 14 poderes (Explorador + 13 poderes)
-            16: 15, // 16º nível: 15 poderes
-            17: 16, // 17º nível: 16 poderes
-            18: 17, // 18º nível: 17 poderes
-            19: 18, // 19º nível: 18 poderes (Explorador + 17 poderes)
-            20: 19  // 20º nível: 19 poderes (Mestre Caçador + 18 poderes)
-        };
-
-        return powersByLevel[level] || 0;
-    }
-
-    // Função para obter poderes especiais por nível
-    function getSpecialPowersByLevel(level) {
-        const specialPowers = [];
-
-        if (level >= 3) specialPowers.push('Explorador');
-        if (level >= 5) specialPowers.push('Caminho do Explorador');
-        if (level >= 20) specialPowers.push('Mestre Caçador');
-
-        return specialPowers;
-    }
-    // Função para verificar se um poder está disponível no nível atual
-    function isPowerAvailableAtLevel(powerName, level) {
-        // Poderes automáticos sempre disponíveis
-        if (getAutomaticPowers().includes(powerName)) {
-            return true;
-        }
-
-        // Poderes especiais baseados no nível
-        if (getSpecialPowersByLevel(level).includes(powerName)) {
-            return true;
-        }
-
-        // Poderes de Caçador - verifica se o jogador já escolheu poderes suficientes
-        const learnedPowers = getLearnedPowers();
-        const availablePowers = getAvailablePowersByLevel(level);
-        const learnedHunterPowers = learnedPowers.filter(power =>
-            !getAutomaticPowers().includes(power.nome) &&
-            !getSpecialPowersByLevel(level).includes(power.nome)
-        ).length;
-
-        // Se ainda há poderes disponíveis para escolher
-        return learnedHunterPowers < availablePowers;
-    }
-
     // Funções para gerenciar magias aprendidas
     function getLearnedSpells() {
         try {
@@ -2383,39 +2216,7 @@
     // Função utilitária para verificar se o personagem possui um poder
     function hasPower(powerName) {
         const learnedPowers = getLearnedPowers();
-        const automaticPowers = getAutomaticPowers();
-
-        // Poderes automáticos sempre possuídos
-        if (automaticPowers.includes(powerName)) {
-            return true;
-        }
-
         return learnedPowers.some(power => power.nome === powerName);
-    }
-
-    // Função para inicializar poderes automáticos (chamada uma vez)
-    function initializeAutomaticPowers() {
-        const learnedPowers = getLearnedPowers();
-        const automaticPowers = getAutomaticPowers();
-
-        // Adiciona poderes automáticos se não existirem
-        let updated = false;
-        automaticPowers.forEach(powerName => {
-            if (!learnedPowers.some(power => power.nome === powerName)) {
-                const basicPower = {
-                    nome: powerName,
-                    descricao: 'Poder automático do Caçador.',
-                    categoria: 'Classe',
-                    subtipo: 'Caçador'
-                };
-                learnedPowers.push(basicPower);
-                updated = true;
-            }
-        });
-
-        if (updated) {
-            saveLearnedPowers(learnedPowers);
-        }
     }
 
     function toggleFavorite(skillName) {
@@ -3265,16 +3066,6 @@
         applyDirectScrollbarStyles(popup, 'blue');
     }
 
-    // Templates reutilizáveis para Spells
-    const spellTemplates = {
-        createSpell: (spellData) => {
-            return {
-                nome: spellData.nome,
-                comando: spellData.comando,
-                onClick: () => createSpellCastPopup(spellData.nome, spellData.nome, spellData.comando)
-            };
-        }
-    };
     // Função para criar popup de Miscelâneos
     function createMiscPopup() {
         // Remove popup existente se houver
@@ -4134,59 +3925,18 @@
         buttonContainer.style.gap = '10px';
         buttonContainer.style.marginTop = '20px';
 
-        // Botão Aprender/Esquecer
-        const learnButton = document.createElement('button');
-        learnButton.textContent = isLearned ? 'Esquecer' : 'Aprender';
-        learnButton.style.background = isLearned ? '#f44336' : '#2196f3';
-        learnButton.style.color = '#fff';
-        learnButton.style.border = 'none';
-        learnButton.style.borderRadius = '8px';
-        learnButton.style.padding = '12px 20px';
-        learnButton.style.fontSize = '14px';
-        learnButton.style.fontWeight = 'bold';
-        learnButton.style.cursor = 'pointer';
-        learnButton.style.flex = '1';
-        learnButton.style.transition = 'all 0.2s ease';
-
-        learnButton.onmouseover = () => {
-            learnButton.style.background = isLearned ? '#d32f2f' : '#1976d2';
-            learnButton.style.transform = 'translateY(-1px)';
-        };
-
-        learnButton.onmouseout = () => {
-            learnButton.style.background = isLearned ? '#f44336' : '#2196f3';
-            learnButton.style.transform = 'translateY(0)';
-        };
-
-        learnButton.onclick = () => {
-            toggleLearnedSpell(spell.name);
-            closePopup(); // Fechar o popup de detalhes
-        };
-
-        // Botão de compartilhar
+        // Botão Compartilhar
         const shareButton = document.createElement('button');
         shareButton.textContent = 'Compartilhar';
-        shareButton.style.background = '#4caf50';
-        shareButton.style.color = '#fff';
-        shareButton.style.border = 'none';
-        shareButton.style.borderRadius = '8px';
-        shareButton.style.padding = '12px 20px';
+        shareButton.style.flex = '1';
+        shareButton.style.padding = '12px 15px';
+        shareButton.style.background = '#2c3e50';
+        shareButton.style.border = '1px solid #34495e';
+        shareButton.style.borderRadius = '6px';
+        shareButton.style.color = '#ecf0f1';
+        shareButton.style.cursor = 'pointer';
         shareButton.style.fontSize = '14px';
         shareButton.style.fontWeight = 'bold';
-        shareButton.style.cursor = 'pointer';
-        shareButton.style.flex = '1';
-        shareButton.style.transition = 'all 0.2s ease';
-
-        shareButton.onmouseover = () => {
-            shareButton.style.background = '#45a049';
-            shareButton.style.transform = 'translateY(-1px)';
-        };
-
-        shareButton.onmouseout = () => {
-            shareButton.style.background = '#4caf50';
-            shareButton.style.transform = 'translateY(0)';
-        };
-
         shareButton.onclick = () => {
             // Obter aprimoramentos selecionados se existirem
             let selectedAprimoramentos = [];
@@ -4201,8 +3951,35 @@
             // closeAllPopups() é chamado dentro de shareSpellToChat() no bloco finally
         };
 
-        buttonContainer.appendChild(learnButton);
+        // Botão Aprender/Esquecer
+        const learnButton = document.createElement('button');
+        if (isLearned) {
+            learnButton.textContent = 'Esquecer';
+            learnButton.style.background = '#e74c3c';
+            learnButton.style.border = '1px solid #c0392b';
+            learnButton.onclick = () => {
+                toggleLearnedSpell(spell.name);
+                closePopup(); // Fechar o popup de detalhes
+            };
+        } else {
+            learnButton.textContent = 'Aprender';
+            learnButton.style.background = '#27ae60';
+            learnButton.style.border = '1px solid #2ecc71';
+            learnButton.onclick = () => {
+                toggleLearnedSpell(spell.name);
+                closePopup(); // Fechar o popup de detalhes
+            };
+        }
+        learnButton.style.flex = '1';
+        learnButton.style.padding = '12px 15px';
+        learnButton.style.borderRadius = '6px';
+        learnButton.style.color = '#ecf0f1';
+        learnButton.style.cursor = 'pointer';
+        learnButton.style.fontSize = '14px';
+        learnButton.style.fontWeight = 'bold';
+
         buttonContainer.appendChild(shareButton);
+        buttonContainer.appendChild(learnButton);
         detailsPopup.appendChild(buttonContainer);
 
         // Configurar overlay para fechar ao clicar
@@ -4826,6 +4603,14 @@
         overlay.style.background = 'rgba(0,0,0,0.5)';
         overlay.style.zIndex = '10000';
         overlay.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             overlay.remove();
             popup.remove();
         };
@@ -4865,6 +4650,14 @@
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
+                // Remove todos os tooltips antes de fechar
+                const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+                existingTooltips.forEach(tooltip => {
+                    if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                        tooltip.remove();
+                    }
+                });
+
                 popup.remove();
                 const overlay = document.getElementById('spells-overlay');
                 if (overlay) overlay.remove();
@@ -4897,40 +4690,6 @@
         const spellTip = createCtrlTipMessage('spell');
         popup.appendChild(spellTip);
 
-        // Lista de spells (nome, comando)
-        const spells = [
-            spellTemplates.createSpell({
-                nome: 'Sombras Profanas',
-                comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Sombras Profanas}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.
-
-    +1 PM: aumenta a área da escuridão em +1,5m de raio.
-
-    +2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
-
-    +2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
-
-    +3 PM: muda a duração para um dia.
-
-    +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.
-
-    JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
-            }),
-            spellTemplates.createSpell({
-                nome: 'Luz Sagrada',
-                comando: `&{template:spell}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{spellname=Luz Sagrada}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.
-
-    +1 PM: aumenta a área iluminada em +3m de raio.
-
-    +2 PM: muda a duração para um dia.
-    +2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
-    +0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
-    +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
-    +2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
-    +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.
-    JdA:193}}{{cd=[[@{${getCharacterNameForMacro()}|cdtotal}+0]]}}`
-            })
-        ];
-
         // Lista visual
         const spellList = document.createElement('div');
         spellList.id = 'spells-list';
@@ -4941,6 +4700,14 @@
         popup.appendChild(spellList);
 
         async function updateSpellList() {
+            // Remove todos os tooltips existentes antes de atualizar a lista
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             const filter = searchComponent.getValue().trim().toLowerCase();
             spellList.innerHTML = '';
 
@@ -4981,23 +4748,8 @@
                 return null;
             }).filter(item => item !== null);
 
-            // Filtra spells baseado na raça selecionada
-            const raceSpells = spells.filter(spell => {
-                // Mostra Sombras Profanas apenas se for Suraggel Sulfure
-                if (spell.nome === 'Sombras Profanas') {
-                    return hasRacePower('Sombras Profanas');
-                }
-
-                // Mostra Luz Sagrada apenas se for Suraggel Aggelus
-                if (spell.nome === 'Luz Sagrada') {
-                    return hasRacePower('Luz Sagrada');
-                }
-
-                return false;
-            });
-
             // Combinar magias de raça e magias aprendidas
-            const allSpells = [...raceSpells, ...learnedSpellItems];
+            const allSpells = [...learnedSpellItems];
 
             // Ordenar magias: favoritas primeiro, depois alfabeticamente
             const favoriteSpells = getFavoriteSpells();
@@ -5026,25 +4778,12 @@
                     spellList.appendChild(noResultsMessage);
                     return;
                 } else {
-                    // Mensagem quando não há magias disponíveis
-                    const selectedRace = getSelectedRace();
-                    const selectedRaceType = getSelectedRaceType();
-
                     noSpellsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
                     noSpellsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
                     noSpellsMessage.style.borderRadius = '8px';
                     noSpellsMessage.style.marginTop = '10px';
                     noSpellsMessage.style.color = '#6ec6ff';
-
-                    if (!selectedRace && learnedSpells.length === 0) {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Selecione uma raça para obter magias especiais ou aprenda magias no grimório</small>';
-                    } else if (!selectedRaceType && learnedSpells.length === 0) {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Defina o tipo da sua raça para obter magias especiais ou aprenda magias no grimório</small>';
-                    } else if (learnedSpells.length === 0) {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Use o grimório para aprender magias</small>';
-                    } else {
-                        noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Esta raça não possui magias especiais</small>';
-                    }
+                    noSpellsMessage.innerHTML = '🔮<br/>Nenhuma magia disponível<br><small>Use o grimório para aprender magias</small>';
                 }
 
                 spellList.appendChild(noSpellsMessage);
@@ -5091,6 +4830,58 @@
                 btn.style.fontWeight = 'bold';
                 btn.style.cursor = 'pointer';
                 btn.style.transition = 'all 0.2s';
+                // Adiciona hover com tooltip detalhado da magia
+                let tooltipInstance = null;
+                let tooltipTimeout = null;
+
+                btn.onmouseenter = () => {
+                    // Buscar dados da magia no cache
+                    const spellData = spellsCache.find(s => s.name === spell.nome);
+                    if (!spellData || !spellData.system?.description?.value) return;
+
+                    // Remove tooltip existente
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
+                    }
+
+                    // Limpa timeout existente
+                    if (tooltipTimeout) {
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = null;
+                    }
+
+                    // Prepara dados para o tooltip
+                    const description = spellData.system.description.value;
+                    const tradition = spellData.tradition || 'Universal';
+                    const execution = spellData.execucao || 'Padrão';
+                    const duration = spellData.system?.duracao || 'Cena';
+                    const range = spellData.system?.alcance || 'Curto';
+                    const target = spellData.system?.alvo || '1 Alvo';
+                    const resistance = spellData.system?.resistencia || 'Nenhuma';
+
+                    const tooltipConfig = {
+                        title: spell.nome,
+                        description: `${description}\n\n**Execução:** ${execution}\n**Duração:** ${duration}\n**Alcance:** ${range}\n**Alvo:** ${target}\n**Resistência:** ${resistance}`,
+                        theme: 'blue',
+                        tags: [
+                            { text: 'Magia', bgColor: '#6ec6ff', color: '#23243a' },
+                            { text: tradition.charAt(0).toUpperCase() + tradition.slice(1), bgColor: '#9c27b0', color: '#fff' }
+                        ]
+                    };
+
+                    // Cria o tooltip usando o componente
+                    tooltipInstance = createTooltip(tooltipConfig);
+                    tooltipInstance.show(btn);
+                };
+
+                btn.onmouseleave = () => {
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
+                    }
+                };
+
                 btn.onmouseover = () => {
                     btn.style.background = '#6ec6ff';
                     btn.style.color = '#23243a';
@@ -5101,6 +4892,12 @@
                 };
 
                 btn.onclick = (e) => {
+                    // Remove tooltip se existir
+                    if (tooltipInstance) {
+                        tooltipInstance.hide();
+                        tooltipInstance = null;
+                    }
+
                     if (e.ctrlKey) {
                         // Se CTRL estiver pressionado, abrir modal de detalhamento
                         spell.onClick();
@@ -5150,486 +4947,6 @@
             });
         }
         updateSpellList();
-
-        document.body.appendChild(popup);
-
-        // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'blue');
-    }
-
-    // Função para obter dados das magias
-    function getSpellData(spellName) {
-        const spellDatabase = {
-            'Luz Sagrada': {
-                tipo: 'Divina',
-                ciclo: 1,
-                escola: 'Evocação'
-            },
-            'Sombras Profanas': {
-                tipo: 'Universal',
-                ciclo: 1,
-                escola: 'Necromancia'
-            },
-            'Cura Ferimentos Leves': {
-                tipo: 'Divina',
-                ciclo: 1,
-                escola: 'Cura'
-            },
-            'Proteção Divina': {
-                tipo: 'Divina',
-                ciclo: 1,
-                escola: 'Abjuração'
-            },
-            'Bênção': {
-                tipo: 'Divina',
-                ciclo: 1,
-                escola: 'Encantamento'
-            },
-            'Raio de Energia': {
-                tipo: 'Arcana',
-                ciclo: 1,
-                escola: 'Evocação'
-            },
-            'Escudo Mágico': {
-                tipo: 'Arcana',
-                ciclo: 1,
-                escola: 'Abjuração'
-            },
-            'Disfarce Ilusório': {
-                tipo: 'Arcana',
-                ciclo: 1,
-                escola: 'Ilusão'
-            },
-            'Detectar Magia': {
-                tipo: 'Universal',
-                ciclo: 1,
-                escola: 'Adivinhação'
-            },
-            'Compreender Idiomas': {
-                tipo: 'Universal',
-                ciclo: 1,
-                escola: 'Adivinhação'
-            },
-            'Cura Ferimentos Moderados': {
-                tipo: 'Divina',
-                ciclo: 2,
-                escola: 'Cura'
-            },
-            'Silêncio': {
-                tipo: 'Divina',
-                ciclo: 2,
-                escola: 'Ilusão'
-            },
-            'Bola de Fogo': {
-                tipo: 'Arcana',
-                ciclo: 3,
-                escola: 'Evocação'
-            },
-            'Relâmpago': {
-                tipo: 'Arcana',
-                ciclo: 3,
-                escola: 'Evocação'
-            },
-            'Invisibilidade': {
-                tipo: 'Arcana',
-                ciclo: 2,
-                escola: 'Ilusão'
-            },
-            'Sugestão': {
-                tipo: 'Arcana',
-                ciclo: 2,
-                escola: 'Encantamento'
-            },
-            'Dissipar Magia': {
-                tipo: 'Universal',
-                ciclo: 3,
-                escola: 'Abjuração'
-            },
-            'Voo': {
-                tipo: 'Arcana',
-                ciclo: 3,
-                escola: 'Transmutação'
-            },
-            'Teleporte': {
-                tipo: 'Arcana',
-                ciclo: 4,
-                escola: 'Conjuração'
-            },
-            'Ressurreição': {
-                tipo: 'Divina',
-                ciclo: 5,
-                escola: 'Cura'
-            },
-            'Meteoro': {
-                tipo: 'Arcana',
-                ciclo: 6,
-                escola: 'Evocação'
-            }
-        };
-
-        return spellDatabase[spellName] || {};
-    }
-    // Função para criar popup de detalhes de spell
-    function createSpellCastPopup(spellName, spellDisplayName) {
-        // Remove popup existente se houver
-        const existingPopup = document.getElementById('spell-cast-popup');
-        if (existingPopup) existingPopup.remove();
-        const existingOverlay = document.getElementById('spell-cast-overlay');
-        if (existingOverlay) existingOverlay.remove();
-
-        // Overlay para fechar ao clicar fora
-        const overlay = document.createElement('div');
-        overlay.id = 'spell-cast-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10002';
-        overlay.onclick = () => {
-            overlay.remove();
-            popup.remove();
-        };
-        document.body.appendChild(overlay);
-
-        // Popup principal
-        const popup = document.createElement('div');
-        popup.id = 'spell-cast-popup';
-        popup.className = 'roll20-modal roll20-popup-purple';
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = 'rgba(30,30,40,0.98)';
-        popup.style.border = '2px solid #6ec6ff';
-        popup.style.borderRadius = '12px';
-        popup.style.padding = '20px';
-        popup.style.zIndex = '10003';
-        popup.style.maxWidth = '500px';
-        popup.style.maxHeight = '600px';
-        popup.style.overflowY = 'auto';
-        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-
-        // Cabeçalho
-        const header = document.createElement('div');
-        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.marginBottom = '15px';
-        header.style.width = '100%';
-
-        const titleContainer = document.createElement('div');
-        titleContainer.style.display = 'flex';
-        titleContainer.style.flexDirection = 'column';
-        titleContainer.style.alignItems = 'flex-start';
-        titleContainer.style.gap = '2px';
-
-        const title = document.createElement('h3');
-        title.textContent = spellDisplayName;
-        title.style.color = '#ecf0f1';
-        title.style.margin = '0';
-        title.style.fontSize = '18px';
-        title.style.fontWeight = 'bold';
-        titleContainer.appendChild(title);
-
-        // Container para chips
-        const chipsContainer = document.createElement('div');
-        chipsContainer.style.display = 'flex';
-        chipsContainer.style.flexWrap = 'wrap';
-        chipsContainer.style.gap = '6px';
-        chipsContainer.style.marginTop = '8px';
-
-        // Função para criar chip
-        function createChip(text, color, bgColor) {
-            const chip = document.createElement('span');
-            chip.textContent = text;
-            chip.style.background = bgColor;
-            chip.style.color = color;
-            chip.style.fontSize = '11px';
-            chip.style.fontWeight = 'bold';
-            chip.style.borderRadius = '12px';
-            chip.style.padding = '3px 8px';
-            chip.style.display = 'inline-block';
-            chip.style.letterSpacing = '0.3px';
-            chip.style.boxShadow = '0 1px 3px rgba(0,0,0,0.2)';
-            chip.style.border = '1px solid rgba(255,255,255,0.1)';
-            return chip;
-        }
-
-        // Dados das magias
-        const spellData = getSpellData(spellName);
-
-        // Chip de Tipo (Arcana/Divina)
-        if (spellData.tipo) {
-            const tipoChip = createChip(
-                spellData.tipo,
-                '#23243a',
-                spellData.tipo === 'Arcana' ? '#9c27b0' : '#ff9800'
-            );
-            chipsContainer.appendChild(tipoChip);
-        }
-
-        // Chip de Ciclo
-        if (spellData.ciclo) {
-            const cicloChip = createChip(
-                `${spellData.ciclo}º Círculo`,
-                '#23243a',
-                '#2196f3'
-            );
-            chipsContainer.appendChild(cicloChip);
-        }
-
-        // Chip de Escola
-        if (spellData.escola) {
-            const escolaChip = createChip(
-                spellData.escola,
-                '#23243a',
-                '#4caf50'
-            );
-            chipsContainer.appendChild(escolaChip);
-        }
-
-        // Tag de origem (mantida para compatibilidade)
-        if (spellName === 'Luz Sagrada') {
-            const originTag = createChip('Aggelus', '#23243a', '#6ec6ff');
-            chipsContainer.appendChild(originTag);
-        } else if (spellName === 'Sombras Profanas') {
-            const originTag = createChip('Sulfure', '#23243a', '#6ec6ff');
-            chipsContainer.appendChild(originTag);
-        }
-
-        titleContainer.appendChild(chipsContainer);
-
-        header.appendChild(titleContainer);        // Botão de fechar
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('spell-cast-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
-        header.appendChild(closeBtn.render());
-        popup.appendChild(header);
-
-        // Características da spell
-        const characteristicsContainer = document.createElement('div');
-        characteristicsContainer.style.background = '#1a1a2e';
-        characteristicsContainer.style.border = '1px solid #6ec6ff';
-        characteristicsContainer.style.borderRadius = '8px';
-        characteristicsContainer.style.padding = '12px';
-        characteristicsContainer.style.marginBottom = '15px';
-        characteristicsContainer.style.display = 'grid';
-        characteristicsContainer.style.gridTemplateColumns = '1fr 1fr';
-        characteristicsContainer.style.gap = '8px';
-
-        const characteristics = [
-            { label: 'Tipo', value: 'Universal' },
-            { label: 'Execução', value: 'Padrão' },
-            { label: 'Duração', value: 'Cena' },
-            { label: 'Alcance', value: 'Curto' },
-            { label: 'Área/Alvo', value: '1 Objeto' },
-            { label: 'Resistência', value: 'Vontade' }
-        ];
-
-        characteristics.forEach(char => {
-            const charItem = document.createElement('div');
-            charItem.style.display = 'flex';
-            charItem.style.flexDirection = 'column';
-            charItem.style.gap = '2px';
-
-            const charLabel = document.createElement('span');
-            charLabel.textContent = char.label;
-            charLabel.style.color = '#6ec6ff';
-            charLabel.style.fontSize = '11px';
-            charLabel.style.fontWeight = 'bold';
-            charLabel.style.textTransform = 'uppercase';
-
-            const charValue = document.createElement('span');
-            charValue.textContent = char.value;
-            charValue.style.color = '#ecf0f1';
-            charValue.style.fontSize = '13px';
-            charValue.style.fontWeight = 'bold';
-
-            charItem.appendChild(charLabel);
-            charItem.appendChild(charValue);
-            characteristicsContainer.appendChild(charItem);
-        });
-
-        popup.appendChild(characteristicsContainer);
-
-        // Descrição da spell em uma box
-        const descBox = document.createElement('div');
-        descBox.style.background = '#1a1a2e';
-        descBox.style.border = '1px solid #6ec6ff';
-        descBox.style.borderRadius = '8px';
-        descBox.style.padding = '12px';
-        descBox.style.marginBottom = '15px';
-        descBox.style.display = 'flex';
-        descBox.style.flexDirection = 'column';
-        descBox.style.gap = '6px';
-
-        const descHeader = document.createElement('div');
-        descHeader.textContent = 'Descrição';
-        descHeader.style.color = '#6ec6ff';
-        descHeader.style.fontSize = '13px';
-        descHeader.style.fontWeight = 'bold';
-        descHeader.style.marginBottom = '2px';
-        descBox.appendChild(descHeader);
-
-        const description = document.createElement('div');
-        description.style.color = '#ecf0f1';
-        description.style.fontSize = '14px';
-        description.style.lineHeight = '1.4';
-
-        if (spellName === 'Luz Sagrada') {
-            description.textContent = 'O alvo emite luz (mas não produz calor) em uma área com 6m de raio. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a luz, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Luz anula Escuridão.';
-        } else if (spellName === 'Sombras Profanas') {
-            description.textContent = 'O alvo emana sombras em uma área com 6m de raio. Criaturas dentro da área recebem camuflagem leve por escuridão leve. As sombras não podem ser iluminadas por nenhuma fonte de luz natural. O objeto pode ser guardado (em um bolso, por exemplo) para interromper a escuridão, que voltará a funcionar caso o objeto seja revelado. Se lançar a magia num objeto de uma criatura involuntária, ela tem direito a um teste de Vontade para anulá-la. Escuridão anula Luz.';
-        }
-
-        descBox.appendChild(description);
-
-        // Aprimoramentos
-        let upgrades = [];
-        if (spellName === 'Luz Sagrada') {
-            upgrades = [
-                { label: '+1 PM: aumenta a área iluminada em +3m de raio.', cost: 1 },
-                { label: '+2 PM: muda a duração para um dia.', cost: 2 },
-                { label: '+2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.', cost: 2 },
-                { label: '+0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.', cost: 0 },
-                { label: '+2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.', cost: 2 },
-                { label: '+2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.', cost: 2 },
-                { label: '+5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.', cost: 5 }
-            ];
-        } else if (spellName === 'Sombras Profanas') {
-            upgrades = [
-                { label: '+1 PM: aumenta a área da escuridão em +1,5m de raio.', cost: 1 },
-                { label: '+2 PM: camuflagem total por escuridão total.', cost: 2 },
-                { label: '+2 PM: alvo 1 criatura, resistência Fortitude parcial, cego pela cena (requer 2º círculo).', cost: 2 },
-                { label: '+3 PM: duração de um dia.', cost: 3 },
-                { label: '+5 PM: alcance pessoal, alvo você, +10 Furtividade/camuflagem (requer 2º círculo).', cost: 5 }
-            ];
-        }
-        const upgradesHeader = document.createElement('div');
-        upgradesHeader.textContent = 'Aprimoramentos:';
-        upgradesHeader.style.color = '#6ec6ff';
-        upgradesHeader.style.fontSize = '13px';
-        upgradesHeader.style.fontWeight = 'bold';
-        upgradesHeader.style.margin = '10px 0 4px 0';
-        descBox.appendChild(upgradesHeader);
-        const upgradesList = document.createElement('div');
-        upgradesList.style.display = 'flex';
-        upgradesList.style.flexDirection = 'column';
-        upgradesList.style.gap = '4px';
-        const upgradeCheckboxes = [];
-        upgrades.forEach((upg, idx) => {
-            const upgDiv = document.createElement('label');
-            upgDiv.style.display = 'flex';
-            upgDiv.style.alignItems = 'center';
-            upgDiv.style.gap = '8px';
-            const cb = document.createElement('input');
-            cb.type = 'checkbox';
-            cb.value = idx;
-            upgradeCheckboxes.push(cb);
-            upgDiv.appendChild(cb);
-            const span = document.createElement('span');
-            span.textContent = upg.label;
-            span.style.color = '#ecf0f1';
-            span.style.fontSize = '13px';
-            upgDiv.appendChild(span);
-            upgradesList.appendChild(upgDiv);
-        });
-        descBox.appendChild(upgradesList);
-
-        // Custo total
-        const costDiv = document.createElement('div');
-        costDiv.style.color = '#6ec6ff';
-        costDiv.style.fontWeight = 'bold';
-        costDiv.style.marginTop = '10px';
-        function updateTotalCost() {
-            let total = 1;
-            upgradeCheckboxes.forEach((cb, idx) => {
-                if (cb.checked) total += upgrades[idx].cost;
-            });
-            costDiv.textContent = `Custo total: ${total} PM`;
-        }
-        upgradeCheckboxes.forEach(cb => {
-            cb.onchange = updateTotalCost;
-        });
-        updateTotalCost();
-        descBox.appendChild(costDiv);
-
-        // Botão compartilhar dentro da box
-        const shareBtn = document.createElement('button');
-        shareBtn.textContent = 'Compartilhar';
-        shareBtn.style.background = 'none';
-        shareBtn.style.border = '1px solid #6ec6ff';
-        shareBtn.style.color = '#6ec6ff';
-        shareBtn.style.fontSize = '14px';
-        shareBtn.style.fontWeight = 'bold';
-        shareBtn.style.borderRadius = '6px';
-        shareBtn.style.padding = '8px 0';
-        shareBtn.style.marginTop = '10px';
-        shareBtn.style.width = '100%';
-        shareBtn.style.cursor = 'pointer';
-        shareBtn.style.transition = 'all 0.2s';
-        shareBtn.onmouseover = () => {
-            shareBtn.style.background = '#6ec6ff';
-            shareBtn.style.color = '#23243a';
-        };
-        shareBtn.onmouseout = () => {
-            shareBtn.style.background = 'none';
-            shareBtn.style.color = '#6ec6ff';
-        };
-        shareBtn.onclick = () => {
-            const charName = getCharacterName();
-            let spellDescription = '';
-
-            if (spellName === 'Luz Sagrada') {
-                spellDescription = `${description.textContent}
-
-    +1 PM: aumenta a área iluminada em +3m de raio.
-
-    +2 PM: muda a duração para um dia.
-
-    +2 PM: muda a duração para permanente e adiciona componente material (pó de rubi no valor de T$ 50). Não pode ser usado em conjunto com outros aprimoramentos. Requer 2º círculo.
-
-    +0 PM (Apenas Arcanos): muda o alvo para 1 criatura. Você lança a magia nos olhos do alvo, que fica ofuscado pela cena. Não afeta criaturas cegas.
-
-    +2 PM (Apenas Arcanos): muda o alcance para longo e o efeito para cria 4 pequenos globos flutuantes de pura luz. Você pode posicionar os globos onde quiser dentro do alcance. Uma vez por rodada, você pode mover os globos com uma ação livre. Cada um ilumina como uma tocha, mas não produz calor. Se um globo ocupar o espaço de uma criatura, ela fica ofuscada e sua silhueta pode ser vista claramente (ela não recebe camuflagem por escuridão ou invisibilidade). Requer 2º círculo.
-
-    +2 PM (Apenas Divinos): a luz é cálida como a do sol. Criaturas que sofrem penalidades e dano pela luz solar sofrem seus efeitos como se estivessem expostas à luz solar real. Seus aliados na área estabilizam automaticamente e ficam imunes à condição sangrando, e seus inimigos ficam ofuscados. Requer 2º círculo.
-
-    +5 PM (Apenas Divinos): muda o alcance para toque e o alvo para 1 criatura. Em vez do normal, o alvo é envolto por um halo de luz, recebendo +10 em testes de Diplomacia e redução de trevas 10. Requer 2º círculo.`;
-            } else if (spellName === 'Sombras Profanas') {
-                spellDescription = `${description.textContent}
-
-    +1 PM: aumenta a área da escuridão em +1,5m de raio.
-
-    +2 PM: muda o efeito para fornecer camuflagem total por escuridão total. As sombras bloqueiam a visão na área e através dela.
-
-    +2 PM: muda o alvo para 1 criatura e a resistência para Fortitude parcial. Você lança a magia nos olhos do alvo, que fica cego pela cena. Se passar na resistência, fica cego por 1 rodada. Requer 2º círculo.
-
-    +3 PM: muda a duração para um dia.
-
-    +5 PM: muda o alcance para pessoal e o alvo para você. Em vez do normal, você é coberto por sombras, recebendo +10 em testes de Furtividade e camuflagem leve. Requer 2º círculo.`;
-            }
-
-            const msg = `&{template:spell}{{character=@{${charName}|character_name}}}{{spellname=${spellName}}}{{type=Universal}}{{execution=Padrão}}{{duration=Cena}}{{range=Curto}}{{targetarea=1 Objeto}}{{resistance=Vontade}}{{description=${spellDescription}
-    JdA:193}}{{cd=[[@{${charName}|cdtotal}+0]]}}`;
-            sendToChat(msg);
-        };
-        descBox.appendChild(shareBtn);
-        popup.appendChild(descBox);
 
         document.body.appendChild(popup);
 
@@ -10846,47 +10163,7 @@
         mainContent.style.padding = '14px 24px 14px 24px';
         mainContent.style.alignItems = 'center';
 
-        // Botão da classe (vertical, à esquerda)
-        const classButton = document.createElement('div');
-        classButton.id = 'character-class-button';
-        classButton.textContent = getCharClass();
-        classButton.style.color = '#6ec6ff';
-        classButton.style.fontSize = '10px';
-        classButton.style.fontWeight = 'bold';
-        classButton.style.fontStyle = 'italic';
-        classButton.style.textTransform = 'uppercase';
-        classButton.style.letterSpacing = '1px';
-        classButton.style.cursor = 'pointer';
-        classButton.style.padding = '0px 4px';
-        classButton.style.background = 'rgba(26,26,46,0.9)';
-        classButton.style.borderRadius = '8px';
-        classButton.style.border = '1px solid rgba(110,198,255,0.4)';
-        classButton.style.transition = 'all 0.2s';
-        classButton.style.display = 'flex';
-        classButton.style.alignItems = 'center';
-        classButton.style.justifyContent = 'center';
-        classButton.style.width = '20px';
-        classButton.style.height = '80px';
-        classButton.style.position = 'relative';
-        classButton.style.title = 'Clique para ver informações da classe';
-        classButton.style.writingMode = 'vertical-rl';
-        classButton.style.textOrientation = 'mixed';
-        classButton.style.transform = 'rotate(180deg)';
-
-        // Hover effects para o botão da classe
-        classButton.onmouseover = () => {
-            classButton.style.background = 'rgba(26,26,46,1)';
-            classButton.style.borderColor = 'rgba(110,198,255,0.8)';
-            classButton.style.transform = 'rotate(180deg) scale(1.05)';
-        };
-        classButton.onmouseout = () => {
-            classButton.style.background = 'rgba(26,26,46,0.9)';
-            classButton.style.borderColor = 'rgba(110,198,255,0.4)';
-            classButton.style.transform = 'rotate(180deg) scale(1)';
-        };
-        classButton.onclick = () => {
-            createHunterClassModal();
-        };
+        // Class button removed - class system will be refactored in future version
 
         // Seção 1: Avatar do personagem (lado esquerdo)
         const characterSection = document.createElement('div');
@@ -12369,7 +11646,7 @@
         });
 
         // Adiciona as seções ao conteúdo principal
-        mainContent.appendChild(classButton);
+        // Class button append removed - class system will be refactored in future version
         mainContent.appendChild(characterSection);
         mainContent.appendChild(separator1);
         mainContent.appendChild(combatSection);
@@ -12419,9 +11696,6 @@
     // Inicializa quando a página carregar
     waitForElement('#textchat-input').then(() => {
         setTimeout(() => {
-            // Inicializa habilidades automáticas
-            initializeAutomaticPowers();
-
             // Adiciona estilos de scrollbar customizada
             createCustomScrollbarStyles();
 
@@ -12475,2697 +11749,7 @@
             });
         }, 1000);
     });
-    // Função para criar modal da classe Caçador
-    function createHunterClassModal() {
-        // Remove popup existente se houver
-        const existingPopup = document.getElementById('hunter-class-modal');
-        if (existingPopup) existingPopup.remove();
-        const existingOverlay = document.getElementById('hunter-class-overlay');
-        if (existingOverlay) existingOverlay.remove();
 
-        // Definição do array de poderes de combate (combatPowers)
-        const combatPowers = [
-            {
-                name: 'Acuidade com Arma',
-                description: 'Quando usa uma arma corpo a corpo leve ou uma arma de arremesso, você pode usar sua Destreza em vez de Força nos testes de ataque e rolagens de dano.',
-                prereq: 'Des 1'
-            },
-            {
-                name: 'Arma Secundária Grande',
-                description: 'Você pode empunhar duas armas de uma mão com o poder Estilo de Duas Armas.',
-                prereq: 'Estilo de Duas Armas'
-            },
-            {
-                name: 'Arremesso Potente',
-                description: 'Quando usa uma arma de arremesso, você pode usar sua Força em vez de Destreza nos testes de ataque. Se você possuir o poder Ataque Poderoso, poderá usá-lo com armas de arremesso.',
-                prereq: 'For 1, Estilo de Arremesso'
-            },
-            {
-                name: 'Arremesso Múltiplo',
-                description: 'Uma vez por rodada, quando faz um ataque com uma arma de arremesso, você pode gastar 1 PM para fazer um ataque adicional contra o mesmo alvo, arremessando outra arma de arremesso.',
-                prereq: 'Des 1, Estilo de Arremesso'
-            },
-            {
-                name: 'Ataque com Escudo',
-                description: 'Uma vez por rodada, se estiver empunhando um escudo e fizer a ação agredir, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com o escudo. Este ataque não faz você perder o bônus do escudo na Defesa.',
-                prereq: 'Estilo de Arma e Escudo'
-            },
-            {
-                name: 'Ataque Pesado',
-                description: 'Quando faz um ataque corpo a corpo com uma arma de duas mãos, você pode pagar 1 PM. Se fizer isso e acertar o ataque, além do dano você faz uma manobra derrubar ou empurrar contra o alvo como uma ação livre (use o resultado do ataque como o teste de manobra).',
-                prereq: 'Estilo de Duas Mãos'
-            },
-            {
-                name: 'Ataque Poderoso',
-                description: 'Sempre que faz um ataque corpo a corpo, você pode sofrer –2 no teste de ataque para receber +5 na rolagem de dano.',
-                prereq: 'For 1'
-            },
-            {
-                name: 'Ataque Preciso',
-                description: 'Se estiver empunhando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na margem de ameaça e +1 no multiplicador de crítico com ela.',
-                prereq: 'Estilo de Uma Arma'
-            },
-            {
-                name: 'Bloqueio com Escudo',
-                description: 'Quando sofre dano, você pode gastar 1 PM para receber redução de dano igual ao bônus na Defesa que seu escudo fornece contra este dano. Você só pode usar este poder se estiver usando um escudo.',
-                prereq: 'Estilo de Arma e Escudo'
-            },
-            {
-                name: 'Carga de Cavalaria',
-                description: 'Quando faz uma investida montada, você causa +2d8 pontos de dano. Além disso, pode continuar se movendo depois do ataque. Você deve se mover em linha reta e seu movimento máximo ainda é o dobro do seu deslocamento.',
-                prereq: 'Ginete'
-            },
-            {
-                name: 'Combate Defensivo',
-                description: 'Quando usa a ação agredir, você pode usar este poder. Se fizer isso, até seu próximo turno, sofre –2 em todos os testes de ataque, mas recebe +5 na Defesa.',
-                prereq: 'Int 1'
-            },
-            {
-                name: 'Derrubar Aprimorado',
-                description: 'Você recebe +2 em testes de ataque para derrubar. Quando derruba uma criatura com essa manobra, pode gastar 1 PM para fazer um ataque extra contra ela.',
-                prereq: 'Combate Defensivo'
-            },
-            {
-                name: 'Desarmar Aprimorado',
-                description: 'Você recebe +2 em testes de ataque para desarmar. Quando desarma uma criatura, pode gastar 1 PM para arremessar a arma dela para longe. Para definir onde a arma cai, role 1d8 para a direção (sendo "1" diretamente à sua frente, "2" à frente e à direita e assim por diante) e 1d6 para a distância (medida em quadrados de 1,5m a partir da criatura desarmada).',
-                prereq: 'Combate Defensivo'
-            },
-            {
-                name: 'Disparo Preciso',
-                description: 'Você pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade de –5 no teste de ataque.',
-                prereq: 'Estilo de Disparo ou Estilo de Arremesso'
-            },
-            {
-                name: 'Disparo Rápido',
-                description: 'Se estiver empunhando uma arma de disparo que possa recarregar como ação livre e gastar uma ação completa para agredir, pode fazer um ataque adicional com ela. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno.',
-                prereq: 'Des 1, Estilo de Disparo'
-            },
-            {
-                name: 'Empunhadura Poderosa',
-                description: 'Ao usar uma arma feita para uma categoria de tamanho maior que a sua, a penalidade que você sofre nos testes de ataque diminui para –2 (normalmente, usar uma arma de uma categoria de tamanho maior impõe –5 nos testes de ataque).',
-                prereq: 'For 3'
-            },
-            {
-                name: 'Encouraçado',
-                description: 'Se estiver usando uma armadura pesada, você recebe +2 na Defesa. Esse bônus aumenta em +2 para cada outro poder que você possua que tenha Encouraçado como pré-requisito.',
-                prereq: 'proficiência com armaduras pesadas'
-            },
-            {
-                name: 'Esquiva',
-                description: 'Você recebe +2 na Defesa e Reflexos.',
-                prereq: 'Des 1'
-            },
-            {
-                name: 'Estilo de Arma e Escudo',
-                description: 'Se você estiver usando um escudo, o bônus na Defesa que ele fornece aumenta em +2.',
-                prereq: 'treinado em Luta, proficiência com escudos'
-            },
-            {
-                name: 'Estilo de Arma Longa',
-                description: 'Você recebe +2 em testes de ataque com armas alongadas e pode atacar alvos adjacentes com essas armas.',
-                prereq: 'For 1, treinado em Luta'
-            },
-            {
-                name: 'Estilo de Arremesso',
-                description: 'Você pode sacar armas de arremesso como uma ação livre e recebe +2 nas rolagens de dano com elas. Se também possuir o poder Saque Rápido, também recebe +2 nos testes de ataque com essas armas.',
-                prereq: 'treinado em Pontaria'
-            },
-            {
-                name: 'Estilo de Disparo',
-                description: 'Se estiver usando uma arma de disparo, você soma sua Destreza nas rolagens de dano.',
-                prereq: 'treinado em Pontaria'
-            },
-            {
-                name: 'Estilo de Duas Armas',
-                description: 'Se estiver empunhando duas armas (e pelo menos uma delas for leve) e fizer a ação agredir, você pode fazer dois ataques, um com cada arma. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno. Se possuir Ambidestria, em vez disso não sofre penalidade para usá-lo.',
-                prereq: 'Des 2, treinado em Luta'
-            },
-            {
-                name: 'Estilo de Duas Mãos',
-                description: 'Se estiver usando uma arma corpo a corpo com as duas mãos, você recebe +5 nas rolagens de dano. Este poder não pode ser usado com armas leves.',
-                prereq: 'For 2, Treinado em Luta'
-            },
-            {
-                name: 'Estilo de Uma Arma',
-                description: 'Se estiver usando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na Defesa e nos testes de ataque com essa arma (exceto ataques desarmados).',
-                prereq: 'treinado em Luta'
-            },
-            {
-                name: 'Estilo Desarmado',
-                description: 'Seus ataques desarmados causam 1d6 pontos de dano e podem causar dano letal ou não letal (sem penalidades).',
-                prereq: 'treinado em Luta'
-            },
-            {
-                name: 'Fanático',
-                description: 'Seu deslocamento não é reduzido por usar armaduras pesadas.',
-                prereq: '12º nível de personagem, Encouraçado'
-            },
-            {
-                name: 'Finta Aprimorada',
-                description: 'Você recebe +2 em testes de Enganação para fintar e pode fintar como uma ação de movimento.',
-                prereq: 'treinado em Enganação'
-            },
-            {
-                name: 'Foco em Arma',
-                description: 'Escolha uma arma. Você recebe +2 em testes de ataque com essa arma. Você pode escolher este poder outras vezes para armas diferentes.',
-                prereq: 'proficiência com a arma'
-            },
-            {
-                name: 'Ginete',
-                description: 'Você passa automaticamente em testes de Cavalgar para não cair da montaria quando sofre dano. Além disso, não sofre penalidades para atacar à distância ou lançar magias quando montado.',
-                prereq: 'treinado em Cavalgar'
-            },
-            {
-                name: 'Inexpugnável',
-                description: 'Se estiver usando uma armadura pesada, você recebe +2 em todos os testes de resistência.',
-                prereq: 'Encouraçado, 6º nível de personagem'
-            },
-            {
-                name: 'Mira Apurada',
-                description: 'Quando usa a ação mirar, você recebe +2 em testes de ataque e na margem de ameaça com ataques à distância até o fim do turno.',
-                prereq: 'Sab 1, Disparo Preciso'
-            },
-            {
-                name: 'Piqueiro',
-                description: 'Uma vez por rodada, se estiver empunhando uma arma alongada e um inimigo entrar voluntariamente em seu alcance corpo a corpo, você pode gastar 1 PM para fazer um ataque corpo a corpo contra este oponente com esta arma. Se o oponente tiver se aproximado fazendo uma investida, seu ataque causa dois dados de dano extra do mesmo tipo.',
-                prereq: 'Estilo de Arma Longa'
-            },
-            {
-                name: 'Presença Aterradora',
-                description: 'Você pode gastar uma ação padrão e 1 PM para assustar todas as criaturas a sua escolha em alcance curto. Veja a perícia Intimidação para as regras de assustar.',
-                prereq: 'treinado em Intimidação'
-            },
-            {
-                name: 'Proficiência',
-                description: 'Escolha uma proficiência: armas marciais, armas de fogo, armaduras pesadas ou escudos (se for proficiente em armas marciais, você também pode escolher armas exóticas). Você recebe essa proficiência. Você pode escolher este poder outras vezes para proficiências diferentes.'
-            },
-            {
-                name: 'Quebrar Aprimorado',
-                description: 'Você recebe +2 em testes de ataque para quebrar. Quando reduz os PV de uma arma para 0 ou menos, você pode gastar 1 PM para realizar um ataque extra contra o usuário dela. O ataque adicional usa os mesmos valores de ataque e dano, mas os dados devem ser rolados novamente.',
-                prereq: 'Ataque Poderoso'
-            },
-            {
-                name: 'Reflexos de Combate',
-                description: 'Você ganha uma ação de movimento extra no seu primeiro turno de cada combate.',
-                prereq: 'Des 1'
-            },
-            {
-                name: 'Saque Rápido',
-                description: 'Você recebe +2 em Iniciativa e pode sacar ou guardar itens como uma ação livre (em vez de ação de movimento). Além disso, a ação que você gasta para recarregar armas de disparo diminui em uma categoria (ação completa para padrão, padrão para movimento, movimento para livre).',
-                prereq: 'treinado em Iniciativa'
-            },
-            {
-                name: 'Trespassar',
-                description: 'Quando você faz um ataque corpo a corpo e reduz os pontos de vida do alvo para 0 ou menos, pode gastar 1 PM para fazer um ataque adicional contra outra criatura dentro do seu alcance.',
-                prereq: 'Ataque Poderoso'
-            },
-            {
-                name: 'Vitalidade',
-                description: 'Você recebe +1 PV por nível de personagem e +2 em Fortitude.',
-                prereq: 'Con 1'
-            }
-        ];
-
-        // Popup principal
-        const popup = document.createElement('div');
-        popup.id = 'hunter-class-modal';
-        popup.className = 'roll20-modal roll20-popup-green';
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = 'rgba(30,30,40,0.98)';
-        popup.style.border = '2px solid #8B4513';
-        popup.style.borderRadius = '12px';
-        popup.style.zIndex = '10001';
-        popup.style.maxWidth = '900px';
-        popup.style.maxHeight = '85vh';
-        popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.alignItems = 'stretch';
-        popup.style.overflow = 'hidden'; // Remove overflow do container principal
-
-        // Overlay para fechar ao clicar fora
-        const overlay = document.createElement('div');
-        overlay.id = 'hunter-class-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10000';
-        // Evento só é definido depois do popup existir
-
-        document.body.appendChild(overlay);
-        // NÃO adicionar o popup aqui!
-        // Adicione o popup ao DOM só no final, após todo o conteúdo ser adicionado
-
-        // Listener para atualizar spells quando raça for alterada
-        document.addEventListener('race-selection-changed', () => {
-            // Atualiza a lista de spells se o popup estiver aberto
-            const spellsPopup = document.getElementById('spells-popup');
-            if (spellsPopup) {
-                // Recria o popup de spells para atualizar a lista
-                spellsPopup.remove();
-                const overlay = document.getElementById('spells-overlay');
-                if (overlay) overlay.remove();
-                createSpellsPopup();
-            }
-        });
-
-        // Cabeçalho fixo
-        const header = document.createElement('div');
-        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.style.width = '100%';
-        header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-        header.style.padding = '15px 20px';
-        header.style.background = 'rgba(30,30,40,0.98)';
-        header.style.borderRadius = '12px 12px 0 0';
-        header.style.flexShrink = '0'; // Impede que o header encolha
-        header.style.minHeight = '60px'; // Altura mínima para garantir espaço
-        header.style.boxSizing = 'border-box'; // Garante que padding não afete o tamanho
-
-        const title = document.createElement('h2');
-        title.innerHTML = '🏹 Caçador';
-        title.style.color = '#8B4513';
-        title.style.margin = '0';
-        title.style.fontSize = '22px';
-        title.style.fontWeight = 'bold';
-        title.style.flex = '1'; // Ocupa o espaço disponível
-        title.style.minWidth = '0'; // Permite que o texto seja cortado se necessário
-
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('hunter-class-overlay');
-                if (overlay) overlay.remove();
-            }
-        }); header.appendChild(title);
-        header.appendChild(closeBtn.render());
-        popup.appendChild(header);
-
-        // Sistema de Abas fixo
-        const tabContainer = document.createElement('div');
-        tabContainer.style.padding = '15px 20px 0 20px';
-        tabContainer.style.background = 'rgba(30,30,40,0.98)';
-        tabContainer.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-        tabContainer.style.flexShrink = '0'; // Impede que as abas encolham
-
-        const tabButtons = document.createElement('div');
-        tabButtons.style.display = 'flex';
-        tabButtons.style.gap = '5px';
-        tabButtons.style.marginBottom = '15px';
-
-        const tabContents = document.createElement('div');
-        tabContents.style.minHeight = '400px';
-        tabContents.style.overflowY = 'auto'; // Torna o conteúdo scrollable
-        tabContents.style.padding = '20px';
-        tabContents.style.flex = '1'; // Ocupa o espaço restante
-        tabContents.style.maxHeight = 'calc(85vh - 180px)'; // Altura máxima ajustada para o novo header
-        tabContents.style.boxSizing = 'border-box'; // Garante que o padding não afete o tamanho total
-
-        // Aba 1: Características da Classe
-        const tab1Btn = document.createElement('button');
-        tab1Btn.textContent = 'Características da Classe';
-        tab1Btn.style.padding = '10px 15px';
-        tab1Btn.style.background = '#8B4513';
-        tab1Btn.style.color = '#fff';
-        tab1Btn.style.border = 'none';
-        tab1Btn.style.borderRadius = '8px 8px 0 0';
-        tab1Btn.style.fontSize = '14px';
-        tab1Btn.style.fontWeight = 'bold';
-        tab1Btn.style.cursor = 'pointer';
-        tab1Btn.style.transition = 'all 0.2s';
-
-        const tab1Content = document.createElement('div');
-        tab1Content.id = 'tab1-content';
-        tab1Content.style.display = 'block';
-
-        // Conteúdo da Aba 1 (Características)
-        const characteristics = [
-            { label: 'Pontos de Vida', value: 'Um caçador começa com 16 pontos de vida + Constituição e ganha 4 PV + Constituição por nível.' },
-            { label: 'Pontos de Mana', value: '4 PM por nível.' },
-            { label: 'Perícias', value: 'Luta (For) ou Pontaria (Des), Sobrevivência (Sab), mais 6 a sua escolha entre Adestramento (Car), Atletismo (For), Cavalgar (Des), Cura (Sab), Fortitude (Con), Furtividade (Des), Iniciativa (Des), Investigação (Int), Luta (For), Ofício (Int), Percepção (Sab), Pontaria (Des) e Reflexos (Des).' },
-            { label: 'Proficiências', value: 'Armas marciais e escudos.' }
-        ];
-
-        characteristics.forEach(char => {
-            const charContainer = document.createElement('div');
-            charContainer.style.marginBottom = '12px';
-            charContainer.style.padding = '10px';
-            charContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-            charContainer.style.borderRadius = '8px';
-            charContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-            const charLabel = document.createElement('div');
-            charLabel.textContent = char.label;
-            charLabel.style.color = '#8B4513';
-            charLabel.style.fontSize = '14px';
-            charLabel.style.fontWeight = 'bold';
-            charLabel.style.marginBottom = '5px';
-
-            const charValue = document.createElement('div');
-            charValue.textContent = char.value;
-            charValue.style.color = '#ecf0f1';
-            charValue.style.fontSize = '13px';
-            charValue.style.lineHeight = '1.4';
-
-            charContainer.appendChild(charLabel);
-            charContainer.appendChild(charValue);
-            tab1Content.appendChild(charContainer);
-        });
-
-        // Aba 2: Habilidades da Classe
-        const tab2Btn = document.createElement('button');
-        tab2Btn.textContent = 'Habilidades da Classe';
-        tab2Btn.style.padding = '10px 15px';
-        tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-        tab2Btn.style.color = '#ecf0f1';
-        tab2Btn.style.border = 'none';
-        tab2Btn.style.borderRadius = '8px 8px 0 0';
-        tab2Btn.style.fontSize = '14px';
-        tab2Btn.style.fontWeight = 'bold';
-        tab2Btn.style.cursor = 'pointer';
-        tab2Btn.style.transition = 'all 0.2s';
-
-        const tab2Content = document.createElement('div');
-        tab2Content.id = 'tab2-content';
-        tab2Content.style.display = 'none';
-
-        // Aba 3: Poderes de Combate
-        const tab3Btn = document.createElement('button');
-        tab3Btn.textContent = 'Poderes de Combate';
-        tab3Btn.style.padding = '10px 15px';
-        tab3Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-        tab3Btn.style.color = '#ecf0f1';
-        tab3Btn.style.border = 'none';
-        tab3Btn.style.borderRadius = '8px 8px 0 0';
-        tab3Btn.style.fontSize = '14px';
-        tab3Btn.style.fontWeight = 'bold';
-        tab3Btn.style.cursor = 'pointer';
-        tab3Btn.style.transition = 'all 0.2s';
-        tab3Btn.style.cursor = 'pointer';
-
-        const tab3Content = document.createElement('div');
-        tab3Content.id = 'tab3-content';
-        tab3Content.style.display = 'none';
-
-        // Aba 4: Divindade
-        const tab4Btn = document.createElement('button');
-        tab4Btn.textContent = 'Divindade';
-        tab4Btn.style.padding = '10px 15px';
-        tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-        tab4Btn.style.color = '#ecf0f1';
-        tab4Btn.style.border = 'none';
-        tab4Btn.style.borderRadius = '8px 8px 0 0';
-        tab4Btn.style.fontSize = '14px';
-        tab4Btn.style.fontWeight = 'bold';
-        tab4Btn.style.cursor = 'pointer';
-        tab4Btn.style.transition = 'all 0.2s';
-
-        const tab4Content = document.createElement('div');
-        tab4Content.id = 'tab4-content';
-        tab4Content.style.display = 'none';
-
-        // Aba 5: Raça
-        const tab5Btn = document.createElement('button');
-        tab5Btn.textContent = 'Raça';
-        tab5Btn.style.padding = '10px 15px';
-        tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-        tab5Btn.style.color = '#ecf0f1';
-        tab5Btn.style.border = 'none';
-        tab5Btn.style.borderRadius = '8px 8px 0 0';
-        tab5Btn.style.fontSize = '14px';
-        tab5Btn.style.fontWeight = 'bold';
-        tab5Btn.style.cursor = 'pointer';
-        tab5Btn.style.transition = 'all 0.2s';
-
-        const tab5Content = document.createElement('div');
-        tab5Content.id = 'tab5-content';
-        tab5Content.style.display = 'none';
-
-        // === NOVO: Barra de pesquisa e filtros para Poderes de Combate ===
-        const powerFilterContainer = document.createElement('div');
-        powerFilterContainer.style.marginBottom = '15px';
-        powerFilterContainer.style.padding = '12px';
-        powerFilterContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-        powerFilterContainer.style.borderRadius = '8px';
-        powerFilterContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-        // Filtro de texto
-        const powerTextFilterContainer = document.createElement('div');
-        powerTextFilterContainer.style.position = 'relative';
-        powerTextFilterContainer.style.marginBottom = '10px';
-
-        const powerTextFilterInput = document.createElement('input');
-        powerTextFilterInput.type = 'text';
-        powerTextFilterInput.placeholder = 'Filtrar pratos...';
-        powerTextFilterInput.style.width = '100%';
-        powerTextFilterInput.style.padding = '10px 12px';
-        powerTextFilterInput.style.borderRadius = '8px';
-        powerTextFilterInput.style.border = '1px solid #ffb86c';
-        powerTextFilterInput.style.background = '#23243a';
-        powerTextFilterInput.style.color = '#fff';
-        powerTextFilterInput.style.fontSize = '14px';
-        powerTextFilterInput.style.outline = 'none';
-        powerTextFilterInput.style.boxSizing = 'border-box';
-        powerTextFilterInput.style.fontSize = '15px';
-
-        const powerClearTextBtn = document.createElement('span');
-        powerClearTextBtn.textContent = '×';
-        powerClearTextBtn.style.position = 'absolute';
-        powerClearTextBtn.style.right = '8px';
-        powerClearTextBtn.style.top = '50%';
-        powerClearTextBtn.style.transform = 'translateY(-50%)';
-        powerClearTextBtn.style.cursor = 'pointer';
-        powerClearTextBtn.style.color = '#ffb86c';
-        powerClearTextBtn.style.fontSize = '18px';
-        powerClearTextBtn.style.display = 'none';
-
-        powerClearTextBtn.onclick = () => {
-            powerTextFilterInput.value = '';
-            powerTextFilterInput.dispatchEvent(new Event('input'));
-            powerTextFilterInput.focus();
-        };
-
-        powerTextFilterInput.oninput = () => {
-            if (powerTextFilterInput.value.length > 0) {
-                powerClearTextBtn.style.display = 'block';
-            } else {
-                powerClearTextBtn.style.display = 'none';
-            }
-            updateCombatPowerList();
-        };
-        powerTextFilterContainer.appendChild(powerTextFilterInput);
-        powerTextFilterContainer.appendChild(powerClearTextBtn);
-        // Filtros de status
-        const powerStatusFiltersContainer = document.createElement('div');
-        powerStatusFiltersContainer.style.display = 'flex';
-        powerStatusFiltersContainer.style.gap = '10px';
-        powerStatusFiltersContainer.style.flexWrap = 'wrap';
-        const showAllPowersBtn = document.createElement('button');
-        showAllPowersBtn.textContent = 'Todas';
-        showAllPowersBtn.style.padding = '6px 12px';
-        showAllPowersBtn.style.background = '#8B4513';
-        showAllPowersBtn.style.color = '#fff';
-        showAllPowersBtn.style.border = 'none';
-        showAllPowersBtn.style.borderRadius = '6px';
-        showAllPowersBtn.style.fontSize = '12px';
-        showAllPowersBtn.style.fontWeight = 'bold';
-        showAllPowersBtn.style.cursor = 'pointer';
-        showAllPowersBtn.style.transition = 'all 0.2s';
-
-        const showLearnedPowersBtn = document.createElement('button');
-        showLearnedPowersBtn.textContent = 'Aprendidos';
-        showLearnedPowersBtn.style.padding = '6px 12px';
-        showLearnedPowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-        showLearnedPowersBtn.style.color = '#ecf0f1';
-        showLearnedPowersBtn.style.border = 'none';
-        showLearnedPowersBtn.style.borderRadius = '6px';
-        showLearnedPowersBtn.style.fontSize = '12px';
-        showLearnedPowersBtn.style.fontWeight = 'bold';
-        showLearnedPowersBtn.style.cursor = 'pointer';
-        showLearnedPowersBtn.style.transition = 'all 0.2s';
-
-        const showAvailablePowersBtn = document.createElement('button');
-        showAvailablePowersBtn.textContent = 'Disponíveis';
-        showAvailablePowersBtn.style.padding = '6px 12px';
-        showAvailablePowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-        showAvailablePowersBtn.style.color = '#ecf0f1';
-        showAvailablePowersBtn.style.border = 'none';
-        showAvailablePowersBtn.style.borderRadius = '6px';
-        showAvailablePowersBtn.style.fontSize = '12px';
-        showAvailablePowersBtn.style.fontWeight = 'bold';
-        showAvailablePowersBtn.style.cursor = 'pointer';
-        showAvailablePowersBtn.style.transition = 'all 0.2s';
-
-        powerStatusFiltersContainer.appendChild(showAllPowersBtn);
-        powerStatusFiltersContainer.appendChild(showLearnedPowersBtn);
-        powerStatusFiltersContainer.appendChild(showAvailablePowersBtn);
-
-        powerFilterContainer.appendChild(powerTextFilterContainer);
-        powerFilterContainer.appendChild(powerStatusFiltersContainer);
-        tab3Content.appendChild(powerFilterContainer);
-
-        // Container para a lista de poderes
-        const combatPowersListContainer = document.createElement('div');
-        combatPowersListContainer.id = 'combat-powers-list-container';
-        tab3Content.appendChild(combatPowersListContainer);
-        // Variáveis de filtro
-        let currentPowerStatusFilter = 'all'; // 'all', 'learned', 'available'
-        // Função para atualizar a lista de poderes de combate
-        function updateCombatPowerList() {
-            combatPowersListContainer.innerHTML = '';
-            const filteredPowers = combatPowers.filter(power => {
-                // Filtro de texto
-                const matchesText = power.name.toLowerCase().includes(powerTextFilterInput.value.toLowerCase()) ||
-                    power.description.toLowerCase().includes(powerTextFilterInput.value.toLowerCase());
-                // Filtro de status
-                let matchesStatus = true;
-                if (currentPowerStatusFilter === 'learned') {
-                    matchesStatus = hasDestinyPower(power.name);
-                } else if (currentPowerStatusFilter === 'available') {
-                    matchesStatus = !hasDestinyPower(power.name);
-                }
-                return matchesText && matchesStatus;
-            });
-
-            // Se não há poderes filtrados, mostra mensagem
-            if (filteredPowers.length === 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#8B4513';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.style.background = 'rgba(139, 69, 19, 0.1)';
-                noResultsMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                noResultsMessage.style.borderRadius = '8px';
-                noResultsMessage.style.marginTop = '10px';
-
-                const filterText = powerTextFilterInput.value.trim();
-                if (filterText) {
-                    noResultsMessage.innerHTML = `
-                            <div style="margin-bottom: 8px;">🔍</div>
-                            <div>Nenhum poder encontrado para "<strong style="color: #8B4513;">${filterText}</strong>"</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Tente um termo diferente ou limpe o filtro</div>
-                        `;
-                } else {
-                    noResultsMessage.innerHTML = `
-                            <div style="margin-bottom: 8px;">⚔️</div>
-                            <div>Nenhum poder disponível</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Selecione uma classe para obter poderes de combate</div>
-                        `;
-                }
-
-                combatPowersListContainer.appendChild(noResultsMessage);
-                return;
-            }
-
-            filteredPowers.forEach(power => {
-                const isLearned = hasDestinyPower(power.name);
-                // Define cores baseadas no status
-                let backgroundColor, borderColor, textColor;
-                if (isLearned) {
-                    backgroundColor = 'rgba(76, 175, 80, 0.1)';
-                    borderColor = 'rgba(76, 175, 80, 0.3)';
-                    textColor = '#4CAF50';
-                } else {
-                    backgroundColor = 'rgba(139, 69, 19, 0.1)';
-                    borderColor = 'rgba(139, 69, 19, 0.2)';
-                    textColor = '#8B4513';
-                }
-                const powerContainer = document.createElement('div');
-                powerContainer.style.marginBottom = '15px';
-                powerContainer.style.padding = '12px';
-                powerContainer.style.background = backgroundColor;
-                powerContainer.style.borderRadius = '8px';
-                powerContainer.style.border = `1px solid ${borderColor}`;
-                powerContainer.style.transition = 'all 0.2s';
-
-                const powerHeader = document.createElement('div');
-                powerHeader.style.display = 'flex';
-                powerHeader.style.justifyContent = 'space-between';
-                powerHeader.style.alignItems = 'flex-start';
-                powerHeader.style.marginBottom = '8px';
-                powerHeader.style.flexWrap = 'wrap';
-                powerHeader.style.gap = '10px';
-
-                const powerNameContainer = document.createElement('div');
-                powerNameContainer.style.display = 'flex';
-                powerNameContainer.style.alignItems = 'center';
-                powerNameContainer.style.gap = '8px';
-                powerNameContainer.style.flex = '1';
-
-                // Checkbox para marcar como aprendido
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = isLearned;
-                checkbox.style.width = '16px';
-                checkbox.style.height = '16px';
-                checkbox.style.accentColor = '#8B4513';
-                checkbox.style.cursor = 'pointer';
-                checkbox.onchange = () => {
-                    toggleLearnedDestinyPower(power.name);
-                    updateCombatPowerList();
-                };
-                powerNameContainer.appendChild(checkbox);
-
-                const powerName = document.createElement('div');
-                powerName.textContent = power.name;
-                powerName.style.color = textColor;
-                powerName.style.fontSize = '15px';
-                powerName.style.fontWeight = 'bold';
-                powerNameContainer.appendChild(powerName);
-
-                powerHeader.appendChild(powerNameContainer);
-
-                const powerDescription = document.createElement('div');
-                powerDescription.textContent = power.description;
-                powerDescription.style.color = '#ecf0f1';
-                powerDescription.style.fontSize = '13px';
-                powerDescription.style.lineHeight = '1.4';
-                powerDescription.style.marginBottom = '5px';
-
-                powerContainer.appendChild(powerHeader);
-                powerContainer.appendChild(powerDescription);
-
-                if (power.prereq) {
-                    const prereqDiv = document.createElement('div');
-                    prereqDiv.textContent = `Pré-requisito: ${power.prereq}`;
-                    prereqDiv.style.color = '#ffa726';
-                    prereqDiv.style.fontSize = '11px';
-                    prereqDiv.style.fontStyle = 'italic';
-                    prereqDiv.style.fontWeight = 'bold';
-                    powerContainer.appendChild(prereqDiv);
-                }
-
-                // Indicadores visuais
-                const indicatorsContainer = document.createElement('div');
-                indicatorsContainer.style.marginTop = '5px';
-                indicatorsContainer.style.display = 'flex';
-                indicatorsContainer.style.gap = '8px';
-                indicatorsContainer.style.flexWrap = 'wrap';
-
-                if (isLearned) {
-                    const learnedIndicator = document.createElement('div');
-                    learnedIndicator.innerHTML = '✓ Aprendido';
-                    learnedIndicator.style.color = '#4CAF50';
-                    learnedIndicator.style.fontSize = '11px';
-                    learnedIndicator.style.fontWeight = 'bold';
-                    learnedIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(learnedIndicator);
-                } else {
-                    const availableIndicator = document.createElement('div');
-                    availableIndicator.innerHTML = '📋 Disponível';
-                    availableIndicator.style.color = '#8B4513';
-                    availableIndicator.style.fontSize = '11px';
-                    availableIndicator.style.fontWeight = 'bold';
-                    availableIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(availableIndicator);
-                }
-
-                if (indicatorsContainer.children.length > 0) {
-                    powerContainer.appendChild(indicatorsContainer);
-                }
-
-                combatPowersListContainer.appendChild(powerContainer);
-            });
-
-            // Estatísticas
-            const statsContainer = document.createElement('div');
-            statsContainer.style.marginTop = '15px';
-            statsContainer.style.padding = '10px';
-            statsContainer.style.background = 'rgba(26,26,46,0.8)';
-            statsContainer.style.borderRadius = '8px';
-            statsContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-            statsContainer.style.textAlign = 'center';
-
-            const learnedPowersCount = getLearnedDestinyPowers().length;
-            const totalPowers = combatPowers.length;
-            const progress = Math.round((learnedPowersCount / totalPowers) * 100);
-
-            const statsText = document.createElement('div');
-            statsText.innerHTML = `<strong>Poderes Aprendidos:</strong> ${learnedPowersCount}/${totalPowers} (${progress}%)`;
-            statsText.style.color = '#8B4513';
-            statsText.style.fontSize = '14px';
-            statsText.style.fontWeight = 'bold';
-
-            statsContainer.appendChild(statsText);
-            combatPowersListContainer.appendChild(statsContainer);
-        }
-        // Event listeners para os filtros
-        showAllPowersBtn.onclick = () => {
-            currentPowerStatusFilter = 'all';
-            showAllPowersBtn.style.background = '#8B4513';
-            showAllPowersBtn.style.color = '#fff';
-            showLearnedPowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showLearnedPowersBtn.style.color = '#ecf0f1';
-            showAvailablePowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAvailablePowersBtn.style.color = '#ecf0f1';
-            updateCombatPowerList();
-        };
-        showLearnedPowersBtn.onclick = () => {
-            currentPowerStatusFilter = 'learned';
-            showAllPowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAllPowersBtn.style.color = '#ecf0f1';
-            showLearnedPowersBtn.style.background = '#8B4513';
-            showLearnedPowersBtn.style.color = '#fff';
-            showAvailablePowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAvailablePowersBtn.style.color = '#ecf0f1';
-            updateCombatPowerList();
-        };
-        showAvailablePowersBtn.onclick = () => {
-            currentPowerStatusFilter = 'available';
-            showAllPowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAllPowersBtn.style.color = '#ecf0f1';
-            showLearnedPowersBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showLearnedPowersBtn.style.color = '#ecf0f1';
-            showAvailablePowersBtn.style.background = '#8B4513';
-            showAvailablePowersBtn.style.color = '#fff';
-            updateCombatPowerList();
-        };
-
-        // Inicializa a lista de poderes de combate
-        updateCombatPowerList();
-
-        tab3Content.appendChild(combatPowersListContainer);
-
-        // Conteúdo da Aba 4 (Divindade)
-        const divinities = [
-            {
-                name: 'Azgher',
-                title: 'Deus-Sol',
-                shortDescription: 'Deus da luz e do calor, venerado por viajantes e combatentes das trevas.',
-                description: 'Venerado pelos povos do Deserto da Perdição, o Deus-Sol é também cultuado por viajantes, mercadores honestos e todos aqueles que combatem as trevas. É um deus generoso; sua jornada diária derrama calor e conforto sobre Arton. Azgher é como um pai severo: responsável, provedor, mas que também exige respeito de seus filhos. Como um olho sempre vigilante nos céus, nada acontece à luz do dia sem que Azgher perceba.',
-                beliefs: 'Praticar a gratidão pela proteção e generosidade do sol. Promover a honestidade, expor embustes e mentiras. Praticar a caridade e o altruísmo. Proteger os necessitados. Oferecer clemência, perdão e redenção. Combater o mal.',
-                symbol: 'Um sol dourado',
-                energy: 'Positiva',
-                weapon: 'Cimitarra',
-                devotees: 'Aggelus, qareen, arcanistas, bárbaros, caçadores, cavaleiros, guerreiros, nobres, paladinos',
-                powers: [
-                    {
-                        name: 'Espada Solar',
-                        description: 'Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhada causar +1d6 de dano por fogo até o fim da cena.'
-                    },
-                    {
-                        name: 'Fulgor Solar',
-                        description: 'Você recebe redução de frio e trevas 5. Além disso, quando é alvo de um ataque você pode gastar 1 PM para emitir um clarão solar que deixa o atacante ofuscado por uma rodada.'
-                    },
-                    {
-                        name: 'Habitante do Deserto',
-                        description: 'Você recebe redução de fogo 10 e pode pagar 1 PM para criar água pura e potável suficiente para um odre (ou outro recipiente pequeno).'
-                    },
-                    {
-                        name: 'Inimigo de Tenebra',
-                        description: 'Seus ataques e habilidades causam +1d6 pontos de dano contra mortos-vivos. Quando você usa um efeito que gera luz, o alcance da iluminação dobra.'
-                    }
-                ],
-                obligations: 'O devoto de Azgher deve manter o rosto sempre coberto (com uma máscara, capuz ou trapos). Sua face pode ser revelada apenas ao sumo-sacerdote ou em seu funeral. Devotos do Sol também devem doar para a igreja de Azgher 20% de qualquer tesouro obtido. Essa doação deve ser feita em ouro, seja na forma de moedas ou itens.'
-            }
-        ];
-
-        // Lista resumida de divindades
-        const divinitiesList = document.createElement('div');
-        divinitiesList.style.display = 'flex';
-        divinitiesList.style.flexDirection = 'column';
-        divinitiesList.style.gap = '15px';
-
-        divinities.forEach(divinity => {
-            const isSelected = getSelectedDivinity() === divinity.name;
-
-            const divinityContainer = document.createElement('div');
-            divinityContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
-            divinityContainer.style.border = `2px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
-            divinityContainer.style.borderRadius = '8px';
-            divinityContainer.style.padding = '10px';
-            divinityContainer.style.cursor = 'pointer';
-            divinityContainer.style.transition = 'all 0.3s';
-            divinityContainer.style.width = '100%';
-            divinityContainer.style.boxSizing = 'border-box';
-
-            divinityContainer.onmouseover = () => {
-                if (!isSelected) {
-                    divinityContainer.style.background = '#2a2b4a';
-                }
-            };
-
-            divinityContainer.onmouseout = () => {
-                if (!isSelected) {
-                    divinityContainer.style.background = '#23243a';
-                }
-            };
-
-            divinityContainer.onclick = () => {
-                createDivinityDetailModal(divinity);
-            };
-
-            // Cabeçalho da divindade
-            const divinityHeader = document.createElement('div');
-            divinityHeader.style.display = 'flex';
-            divinityHeader.style.justifyContent = 'space-between';
-            divinityHeader.style.alignItems = 'center';
-            divinityHeader.style.marginBottom = '8px';
-
-            const divinityTitle = document.createElement('div');
-            divinityTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 15px;">${divinity.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${divinity.title}</em>`;
-
-            const statusIndicator = document.createElement('div');
-            statusIndicator.textContent = isSelected ? '✓ Selecionada' : 'Clique para ver detalhes';
-            statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-            statusIndicator.style.fontSize = '11px';
-            statusIndicator.style.fontWeight = 'bold';
-            statusIndicator.style.fontStyle = 'italic';
-
-            divinityHeader.appendChild(divinityTitle);
-            divinityHeader.appendChild(statusIndicator);
-            divinityContainer.appendChild(divinityHeader);
-
-            // Descrição resumida
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.textContent = divinity.shortDescription;
-            descriptionDiv.style.color = '#ecf0f1';
-            descriptionDiv.style.fontSize = '11px';
-            descriptionDiv.style.lineHeight = '1.4';
-            divinityContainer.appendChild(descriptionDiv);
-
-            divinitiesList.appendChild(divinityContainer);
-        });
-
-        tab4Content.appendChild(divinitiesList);
-
-        // Conteúdo da Aba 5 (Raça)
-        const races = [
-            {
-                name: 'Suraggel',
-                title: 'Descendentes de Extraplanares Divinos',
-                shortDescription: 'Seres com traços angelicais ou demoníacos, ligados às forças opostas da luz e trevas.',
-                description: 'Descendentes de extraplanares divinos, esta raça é formada por seres com traços angelicais ou demoníacos — ou ambos. Por serem ligados às forças opostas da luz e trevas, suraggel têm traços diferentes quando orientados para seu lado celestial, sendo então conhecidos como aggelus; ou para o lado abissal, assim sendo chamados sulfure. Sua natureza em geral combina com a ascendência, lembrando habitantes dos Mundos dos Deuses, mas eles também podem ser surpreendentes e contraditórios: não se espante muito ao conhecer um aggelus ladino ou um sulfure paladino.',
-                attributes: 'Sabedoria +2, Carisma +1 (Aggelus); Destreza +2, Inteligência +1 (Sulfure)',
-                heritage: 'Herança Divina. Você é uma criatura do tipo espírito e recebe visão no escuro.',
-                types: [
-                    {
-                        name: 'Aggelus',
-                        title: 'Lado Celestial',
-                        description: 'Você recebe +2 em Diplomacia e Intuição. Além disso, pode lançar Luz (como uma magia divina; atributo-chave Carisma). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.',
-                        power: 'Luz Sagrada'
-                    },
-                    {
-                        name: 'Sulfure',
-                        title: 'Lado Abissal',
-                        description: 'Você recebe +2 em Enganação e Furtividade. Além disso, pode lançar Escuridão (como uma magia divina; atributo-chave Inteligência). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.',
-                        power: 'Sombras Profanas'
-                    }
-                ]
-            }
-        ];
-
-        // Lista resumida de raças
-        const racesList = document.createElement('div');
-        racesList.style.display = 'flex';
-        racesList.style.flexDirection = 'column';
-        racesList.style.gap = '15px';
-
-        races.forEach(race => {
-            const isSelected = getSelectedRace() === race.name;
-            const selectedType = getSelectedRaceType();
-
-            const raceContainer = document.createElement('div');
-            raceContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
-            raceContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
-            raceContainer.style.borderRadius = '8px';
-            raceContainer.style.padding = '10px';
-            raceContainer.style.cursor = 'pointer';
-            raceContainer.style.transition = 'all 0.2s';
-            raceContainer.style.width = '100%';
-            raceContainer.style.boxSizing = 'border-box';
-
-            raceContainer.onclick = () => {
-                if (isSelected) {
-                    // Se já está selecionada, abre o modal de detalhes
-                    createRaceDetailModal(race);
-                } else {
-                    // Se não está selecionada, seleciona e abre o modal
-                    saveSelectedRace(race.name);
-                    createRaceDetailModal(race);
-                    // Atualiza a lista para mostrar a seleção
-                    setTimeout(() => {
-                        const event = new Event('race-selection-changed');
-                        document.dispatchEvent(event);
-                    }, 100);
-                }
-            };
-
-            raceContainer.onmouseover = () => {
-                if (!isSelected) {
-                    raceContainer.style.background = 'rgba(139, 69, 19, 0.2)';
-                    raceContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
-                }
-            };
-
-            raceContainer.onmouseout = () => {
-                if (!isSelected) {
-                    raceContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-                    raceContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                }
-            };
-
-            // Cabeçalho da raça
-            const raceHeader = document.createElement('div');
-            raceHeader.style.display = 'flex';
-            raceHeader.style.justifyContent = 'space-between';
-            raceHeader.style.alignItems = 'flex-start';
-            raceHeader.style.marginBottom = '8px';
-
-            const raceTitle = document.createElement('div');
-            raceTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 15px;">${race.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${race.title}</em>`;
-
-            const statusIndicator = document.createElement('div');
-            if (isSelected) {
-                if (selectedType) {
-                    statusIndicator.innerHTML = `✓ Selecionada<br><small style="color: #4caf50;">${selectedType}</small>`;
-                } else {
-                    statusIndicator.innerHTML = `✓ Selecionada<br><small style="color: #ffa726;">Tipo não definido</small>`;
-                }
-            } else {
-                statusIndicator.textContent = 'Clique para ver detalhes';
-            }
-            statusIndicator.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-            statusIndicator.style.fontSize = '11px';
-            statusIndicator.style.fontWeight = 'bold';
-            statusIndicator.style.fontStyle = 'italic';
-            statusIndicator.style.textAlign = 'right';
-
-            raceHeader.appendChild(raceTitle);
-            raceHeader.appendChild(statusIndicator);
-            raceContainer.appendChild(raceHeader);
-
-            // Descrição resumida
-            const descriptionDiv = document.createElement('div');
-            descriptionDiv.textContent = race.shortDescription;
-            descriptionDiv.style.color = '#ecf0f1';
-            descriptionDiv.style.fontSize = '11px';
-            descriptionDiv.style.lineHeight = '1.4';
-            raceContainer.appendChild(descriptionDiv);
-
-            racesList.appendChild(raceContainer);
-        });
-        tab5Content.appendChild(racesList);
-        // Função para criar modal detalhado da raça
-        function createRaceDetailModal(race) {
-            // Remove modal existente se houver
-            const existingModal = document.getElementById('race-detail-modal');
-            if (existingModal) existingModal.remove();
-            const existingOverlay = document.getElementById('race-detail-overlay');
-            if (existingOverlay) existingOverlay.remove();
-
-            // Overlay para fechar ao clicar fora
-            const overlay = document.createElement('div');
-            overlay.id = 'race-detail-overlay';
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'rgba(0,0,0,0.5)';
-            overlay.style.zIndex = '10002';
-            overlay.onclick = () => {
-                overlay.remove();
-                modal.remove();
-            };
-            document.body.appendChild(overlay);
-
-            // Modal principal
-            const modal = document.createElement('div');
-            modal.id = 'race-detail-modal';
-            modal.style.position = 'fixed';
-            modal.style.top = '50%';
-            modal.style.left = '50%';
-            modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.background = 'rgba(30,30,40,0.98)';
-            modal.style.border = '2px solid #8B4513';
-            modal.style.borderRadius = '12px';
-            modal.style.padding = '20px';
-            modal.style.zIndex = '10003';
-            modal.style.maxWidth = '800px';
-            modal.style.maxHeight = '85vh';
-            modal.style.overflowY = 'auto';
-            modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-            modal.style.display = 'flex';
-            modal.style.flexDirection = 'column';
-            modal.style.alignItems = 'stretch';
-
-            // Cabeçalho
-            const header = document.createElement('div');
-            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '20px';
-            header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-            header.style.paddingBottom = '15px';
-
-            const title = document.createElement('h2');
-            title.innerHTML = `👥 ${race.name} - ${race.title}`;
-            title.style.color = '#8B4513';
-            title.style.margin = '0';
-            title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold'; const closeBtn = window.Roll20Components.createCloseButton({
-                text: '×',
-                fontSize: '24px',
-                width: '32px',
-                height: '32px',
-                padding: '0',
-                color: '#ecf0f1',
-                onClick: () => {
-                    modal.remove();
-                    overlay.remove();
-                }
-            }); header.appendChild(title);
-            header.appendChild(closeBtn.render());
-            modal.appendChild(header);
-
-            // Descrição
-            const descriptionSection = document.createElement('div');
-            descriptionSection.style.marginBottom = '20px';
-            descriptionSection.style.padding = '15px';
-            descriptionSection.style.background = 'rgba(139, 69, 19, 0.1)';
-            descriptionSection.style.borderRadius = '8px';
-            descriptionSection.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-            const descriptionTitle = document.createElement('h3');
-            descriptionTitle.textContent = 'Descrição';
-            descriptionTitle.style.color = '#8B4513';
-            descriptionTitle.style.fontSize = '16px';
-            descriptionTitle.style.fontWeight = 'bold';
-            descriptionTitle.style.marginBottom = '10px';
-
-            const descriptionText = document.createElement('div');
-            descriptionText.textContent = race.description;
-            descriptionText.style.color = '#ecf0f1';
-            descriptionText.style.fontSize = '14px';
-            descriptionText.style.lineHeight = '1.6';
-
-            descriptionSection.appendChild(descriptionTitle);
-            descriptionSection.appendChild(descriptionText);
-            modal.appendChild(descriptionSection);
-
-            // Informações básicas
-            const infoSection = document.createElement('div');
-            infoSection.style.marginBottom = '20px';
-
-            const infoTitle = document.createElement('h3');
-            infoTitle.textContent = 'Características da Raça';
-            infoTitle.style.color = '#8B4513';
-            infoTitle.style.fontSize = '16px';
-            infoTitle.style.fontWeight = 'bold';
-            infoTitle.style.marginBottom = '15px';
-            infoTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
-            infoTitle.style.paddingBottom = '8px';
-            infoSection.appendChild(infoTitle);
-
-            const infoGrid = document.createElement('div');
-            infoGrid.style.display = 'grid';
-            infoGrid.style.gridTemplateColumns = '1fr 1fr';
-            infoGrid.style.gap = '12px';
-
-            const infoItems = [
-                { label: 'Atributos', value: race.attributes },
-                { label: 'Herança', value: race.heritage }
-            ];
-
-            infoItems.forEach(item => {
-                const infoItem = document.createElement('div');
-                infoItem.style.background = 'rgba(139, 69, 19, 0.1)';
-                infoItem.style.padding = '12px';
-                infoItem.style.borderRadius = '8px';
-                infoItem.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-                const label = document.createElement('div');
-                label.textContent = item.label;
-                label.style.color = '#8B4513';
-                label.style.fontSize = '12px';
-                label.style.fontWeight = 'bold';
-                label.style.marginBottom = '5px';
-
-                const value = document.createElement('div');
-                value.textContent = item.value;
-                value.style.color = '#ecf0f1';
-                value.style.fontSize = '13px';
-                value.style.lineHeight = '1.4';
-
-                infoItem.appendChild(label);
-                infoItem.appendChild(value);
-                infoGrid.appendChild(infoItem);
-            });
-
-            infoSection.appendChild(infoGrid);
-            modal.appendChild(infoSection);
-
-            // Tipos de raça
-            const typesSection = document.createElement('div');
-            typesSection.style.marginBottom = '20px';
-
-            const typesTitle = document.createElement('h3');
-            typesTitle.textContent = 'Tipos de Raça';
-            typesTitle.style.color = '#8B4513';
-            typesTitle.style.fontSize = '16px';
-            typesTitle.style.fontWeight = 'bold';
-            typesTitle.style.marginBottom = '15px';
-            typesTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
-            typesTitle.style.paddingBottom = '8px';
-            typesSection.appendChild(typesTitle);
-
-            const typesContainer = document.createElement('div');
-            typesContainer.style.display = 'flex';
-            typesContainer.style.flexDirection = 'column';
-            typesContainer.style.gap = '15px';
-
-            // Se não há tipos de raça, mostra mensagem
-            if (!race.types || race.types.length === 0) {
-                const noTypesMessage = document.createElement('div');
-                noTypesMessage.style.textAlign = 'center';
-                noTypesMessage.style.padding = '20px';
-                noTypesMessage.style.color = '#8B4513';
-                noTypesMessage.style.fontSize = '14px';
-                noTypesMessage.style.fontStyle = 'italic';
-                noTypesMessage.style.background = 'rgba(139, 69, 19, 0.1)';
-                noTypesMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                noTypesMessage.style.borderRadius = '8px';
-                noTypesMessage.style.marginTop = '10px';
-                noTypesMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">👥</div>
-                    <div>Nenhum tipo de raça disponível</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Esta raça não possui subtipos especiais</div>
-                `;
-                typesContainer.appendChild(noTypesMessage);
-            } else {
-                race.types.forEach(type => {
-                    const isSelected = getSelectedRace() === race.name && getSelectedRaceType() === type.name;
-
-                    const typeContainer = document.createElement('div');
-                    typeContainer.style.background = isSelected ? 'rgba(76, 175, 80, 0.1)' : 'rgba(139, 69, 19, 0.1)';
-                    typeContainer.style.border = isSelected ? '2px solid #4caf50' : '1px solid rgba(139, 69, 19, 0.3)';
-                    typeContainer.style.borderRadius = '10px';
-                    typeContainer.style.padding = '15px';
-                    typeContainer.style.cursor = 'pointer';
-                    typeContainer.style.transition = 'all 0.2s';
-
-                    typeContainer.onclick = () => {
-                        saveSelectedRace(race.name);
-                        saveSelectedRaceType(type.name);
-
-                        // Atualiza a interface
-                        modal.remove();
-                        overlay.remove();
-
-                        // Recria o modal para mostrar a seleção
-                        setTimeout(() => {
-                            createRaceDetailModal(race);
-                        }, 100);
-                    };
-
-                    typeContainer.onmouseover = () => {
-                        if (!isSelected) {
-                            typeContainer.style.background = 'rgba(139, 69, 19, 0.2)';
-                            typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.5)';
-                        }
-                    };
-
-                    typeContainer.onmouseout = () => {
-                        if (!isSelected) {
-                            typeContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-                            typeContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                        }
-                    };
-
-                    // Cabeçalho do tipo
-                    const typeHeader = document.createElement('div');
-                    typeHeader.style.display = 'flex';
-                    typeHeader.style.justifyContent = 'space-between';
-                    typeHeader.style.alignItems = 'center';
-                    typeHeader.style.marginBottom = '10px';
-
-                    const typeTitle = document.createElement('div');
-                    typeTitle.innerHTML = `<strong style="color: ${isSelected ? '#4caf50' : '#6ec6ff'}; font-size: 16px;">${type.name}</strong><br><em style="color: #ecf0f1; font-size: 12px;">${type.title}</em>`;
-
-                    const typeStatus = document.createElement('div');
-                    if (isSelected) {
-                        typeStatus.innerHTML = '✓ Selecionado';
-                        typeStatus.style.color = '#4caf50';
-                    } else {
-                        typeStatus.innerHTML = 'Clique para selecionar';
-                        typeStatus.style.color = '#6ec6ff';
-                    }
-                    typeStatus.style.fontSize = '12px';
-                    typeStatus.style.fontWeight = 'bold';
-                    typeStatus.style.fontStyle = 'italic';
-
-                    typeHeader.appendChild(typeTitle);
-                    typeHeader.appendChild(typeStatus);
-                    typeContainer.appendChild(typeHeader);
-
-                    // Descrição do tipo
-                    const typeDescription = document.createElement('div');
-                    typeDescription.textContent = type.description;
-                    typeDescription.style.color = '#ecf0f1';
-                    typeDescription.style.fontSize = '13px';
-                    typeDescription.style.lineHeight = '1.4';
-                    typeContainer.appendChild(typeDescription);
-
-                    typesContainer.appendChild(typeContainer);
-                });
-            }
-
-            typesSection.appendChild(typesContainer);
-            modal.appendChild(typesSection);
-
-            // Botões de ação
-            const actionButtons = document.createElement('div');
-            actionButtons.style.display = 'flex';
-            actionButtons.style.gap = '12px';
-            actionButtons.style.justifyContent = 'center';
-            actionButtons.style.marginTop = '20px';
-
-            const isCurrentlySelected = getSelectedRace() === race.name;
-            const buttonText = isCurrentlySelected ? 'Remover Raça' : 'Definir como Raça Atual';
-            const buttonColor = isCurrentlySelected ? '#f44336' : '#4caf50';
-
-            const actionButton = document.createElement('button');
-            actionButton.textContent = buttonText;
-            actionButton.style.padding = '12px 24px';
-            actionButton.style.background = buttonColor;
-            actionButton.style.color = '#fff';
-            actionButton.style.border = 'none';
-            actionButton.style.borderRadius = '8px';
-            actionButton.style.fontSize = '14px';
-            actionButton.style.fontWeight = 'bold';
-            actionButton.style.cursor = 'pointer';
-            actionButton.style.transition = 'all 0.2s';
-
-            actionButton.onmouseover = () => {
-                actionButton.style.opacity = '0.8';
-            };
-
-            actionButton.onmouseout = () => {
-                actionButton.style.opacity = '1';
-            };
-
-            actionButton.onclick = () => {
-                if (isCurrentlySelected) {
-                    // Remove a raça atual
-                    saveSelectedRace(null);
-                    saveSelectedRaceType(null);
-                } else {
-                    // Define nova raça
-                    saveSelectedRace(race.name);
-                    // O tipo será definido quando o usuário clicar em um tipo específico
-                }
-
-                // Fecha o modal
-                modal.remove();
-                overlay.remove();
-
-                // Atualiza a interface principal
-                createHunterClassModal();
-            };
-
-            actionButtons.appendChild(actionButton);
-            modal.appendChild(actionButtons);
-
-            document.body.appendChild(modal);
-
-            // Aplica scrollbars customizadas
-            applyDirectScrollbarStyles(modal, 'brown');
-        }
-        // Função para criar modal detalhado da divindade
-        function createDivinityDetailModal(divinity) {
-            // Remove modal existente se houver
-            const existingModal = document.getElementById('divinity-detail-modal');
-            if (existingModal) existingModal.remove();
-            const existingOverlay = document.getElementById('divinity-detail-overlay');
-            if (existingOverlay) existingOverlay.remove();
-
-            // Overlay para fechar ao clicar fora
-            const overlay = document.createElement('div');
-            overlay.id = 'divinity-detail-overlay';
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'rgba(0,0,0,0.5)';
-            overlay.style.zIndex = '10002';
-            overlay.onclick = () => {
-                overlay.remove();
-                modal.remove();
-            };
-            document.body.appendChild(overlay);
-
-            // Modal principal
-            const modal = document.createElement('div');
-            modal.id = 'divinity-detail-modal';
-            modal.style.position = 'fixed';
-            modal.style.top = '50%';
-            modal.style.left = '50%';
-            modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.background = 'rgba(30,30,40,0.98)';
-            modal.style.border = '2px solid #8B4513';
-            modal.style.borderRadius = '12px';
-            modal.style.padding = '20px';
-            modal.style.zIndex = '10003';
-            modal.style.maxWidth = '800px';
-            modal.style.maxHeight = '85vh';
-            modal.style.overflowY = 'auto';
-            modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-            modal.style.display = 'flex';
-            modal.style.flexDirection = 'column';
-            modal.style.alignItems = 'stretch';
-
-            // Cabeçalho
-            const header = document.createElement('div');
-            header.style.display = 'flex'; header.style.justifyContent = 'space-between';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '20px';
-            header.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-            header.style.paddingBottom = '15px';
-
-            const title = document.createElement('h2');
-            title.innerHTML = `☀️ ${divinity.name} - ${divinity.title}`;
-            title.style.color = '#8B4513';
-            title.style.margin = '0';
-            title.style.fontSize = '24px';
-            title.style.fontWeight = 'bold'; const closeBtn = window.Roll20Components.createCloseButton({
-                text: '×',
-                fontSize: '24px',
-                width: '32px',
-                height: '32px',
-                padding: '0',
-                color: '#ecf0f1',
-                onClick: () => {
-                    modal.remove();
-                    overlay.remove();
-                }
-            }); header.appendChild(title);
-            header.appendChild(closeBtn.render());
-            modal.appendChild(header);
-
-            // Descrição
-            const descriptionSection = document.createElement('div');
-            descriptionSection.style.marginBottom = '20px';
-            descriptionSection.style.padding = '15px';
-            descriptionSection.style.background = 'rgba(139, 69, 19, 0.1)';
-            descriptionSection.style.borderRadius = '8px';
-            descriptionSection.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-            const descriptionTitle = document.createElement('h3');
-            descriptionTitle.textContent = 'Descrição';
-            descriptionTitle.style.color = '#8B4513';
-            descriptionTitle.style.fontSize = '16px';
-            descriptionTitle.style.fontWeight = 'bold';
-            descriptionTitle.style.marginBottom = '10px';
-
-            const descriptionText = document.createElement('div');
-            descriptionText.textContent = divinity.description;
-            descriptionText.style.color = '#ecf0f1';
-            descriptionText.style.fontSize = '14px';
-            descriptionText.style.lineHeight = '1.6';
-
-            descriptionSection.appendChild(descriptionTitle);
-            descriptionSection.appendChild(descriptionText);
-            modal.appendChild(descriptionSection);
-
-            // Informações básicas
-            const infoSection = document.createElement('div');
-            infoSection.style.marginBottom = '20px';
-
-            const infoTitle = document.createElement('h3');
-            infoTitle.textContent = 'Informações da Divindade';
-            infoTitle.style.color = '#8B4513';
-            infoTitle.style.fontSize = '16px';
-            infoTitle.style.fontWeight = 'bold';
-            infoTitle.style.marginBottom = '15px';
-            infoTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
-            infoTitle.style.paddingBottom = '8px';
-            infoSection.appendChild(infoTitle);
-
-            const infoGrid = document.createElement('div');
-            infoGrid.style.display = 'grid';
-            infoGrid.style.gridTemplateColumns = '1fr 1fr';
-            infoGrid.style.gap = '12px';
-
-            const infoItems = [
-                { label: 'Crenças e Objetivos', value: divinity.beliefs },
-                { label: 'Símbolo Sagrado', value: divinity.symbol },
-                { label: 'Canalizar Energia', value: divinity.energy },
-                { label: 'Arma Preferida', value: divinity.weapon },
-                { label: 'Devotos', value: divinity.devotees }
-            ];
-
-            infoItems.forEach(item => {
-                const infoItem = document.createElement('div');
-                infoItem.style.background = 'rgba(139, 69, 19, 0.1)';
-                infoItem.style.padding = '12px';
-                infoItem.style.borderRadius = '8px';
-                infoItem.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-
-                const label = document.createElement('div');
-                label.textContent = item.label;
-                label.style.color = '#8B4513';
-                label.style.fontSize = '12px';
-                label.style.fontWeight = 'bold';
-                label.style.marginBottom = '5px';
-
-                const value = document.createElement('div');
-                value.textContent = item.value;
-                value.style.color = '#ecf0f1';
-                value.style.fontSize = '13px';
-                value.style.lineHeight = '1.4';
-
-                infoItem.appendChild(label);
-                infoItem.appendChild(value);
-                infoGrid.appendChild(infoItem);
-            });
-
-            infoSection.appendChild(infoGrid);
-            modal.appendChild(infoSection);
-
-            // Obrigações
-            const obligationsSection = document.createElement('div');
-            obligationsSection.style.marginBottom = '20px';
-            obligationsSection.style.padding = '15px';
-            obligationsSection.style.background = 'rgba(255, 167, 38, 0.1)';
-            obligationsSection.style.borderRadius = '8px';
-            obligationsSection.style.border = '1px solid rgba(255, 167, 38, 0.3)';
-
-            const obligationsTitle = document.createElement('h3');
-            obligationsTitle.textContent = 'Obrigações & Restrições';
-            obligationsTitle.style.color = '#ffa726';
-            obligationsTitle.style.fontSize = '16px';
-            obligationsTitle.style.fontWeight = 'bold';
-            obligationsTitle.style.marginBottom = '10px';
-
-            const obligationsText = document.createElement('div');
-            obligationsText.textContent = divinity.obligations;
-            obligationsText.style.color = '#ecf0f1';
-            obligationsText.style.fontSize = '14px';
-            obligationsText.style.lineHeight = '1.6';
-
-            obligationsSection.appendChild(obligationsTitle);
-            obligationsSection.appendChild(obligationsText);
-            modal.appendChild(obligationsSection);
-
-            // Poderes Concedidos
-            const powersSection = document.createElement('div');
-            powersSection.style.marginBottom = '20px';
-
-            const powersTitle = document.createElement('h3');
-            powersTitle.textContent = 'Poderes Concedidos';
-            powersTitle.style.color = '#8B4513';
-            powersTitle.style.fontSize = '16px';
-            powersTitle.style.fontWeight = 'bold';
-            powersTitle.style.marginBottom = '15px';
-            powersTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
-            powersTitle.style.paddingBottom = '8px';
-            powersSection.appendChild(powersTitle);
-
-            const powersList = document.createElement('div');
-            powersList.style.display = 'flex';
-            powersList.style.flexDirection = 'column';
-            powersList.style.gap = '10px';
-
-            let selectedPower = getSelectedDivinityPower();
-
-            // Se não há poderes concedidos, mostra mensagem
-            if (!divinity.powers || divinity.powers.length === 0) {
-                const noPowersMessage = document.createElement('div');
-                noPowersMessage.style.textAlign = 'center';
-                noPowersMessage.style.padding = '20px';
-                noPowersMessage.style.color = '#8B4513';
-                noPowersMessage.style.fontSize = '14px';
-                noPowersMessage.style.fontStyle = 'italic';
-                noPowersMessage.style.background = 'rgba(139, 69, 19, 0.1)';
-                noPowersMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                noPowersMessage.style.borderRadius = '8px';
-                noPowersMessage.style.marginTop = '10px';
-                noPowersMessage.innerHTML = `
-                    <div style="margin-bottom: 8px;">🙏</div>
-                    <div>Nenhum poder concedido disponível</div>
-                    <div style="margin-top: 8px; font-size: 12px;">Esta divindade não possui poderes especiais</div>
-                `;
-                powersList.appendChild(noPowersMessage);
-            } else {
-                divinity.powers.forEach(power => {
-                    const isSelected = selectedPower === power.name;
-
-                    const powerContainer = document.createElement('div');
-                    powerContainer.style.background = isSelected ? '#2d4a3e' : '#23243a';
-                    powerContainer.style.border = `1px solid ${isSelected ? '#4caf50' : '#6ec6ff'}`;
-                    powerContainer.style.borderRadius = '8px';
-                    powerContainer.style.padding = '12px';
-                    powerContainer.style.cursor = 'pointer';
-                    powerContainer.style.transition = 'all 0.2s';
-
-                    powerContainer.onmouseover = () => {
-                        if (!isSelected) {
-                            powerContainer.style.background = '#2a2b4a';
-                        }
-                    };
-
-                    powerContainer.onmouseout = () => {
-                        if (!isSelected) {
-                            powerContainer.style.background = '#23243a';
-                        }
-                    };
-
-                    powerContainer.onclick = () => {
-                        // Remove seleção anterior
-                        const previousSelected = powersList.querySelector('.selected-power');
-                        if (previousSelected) {
-                            previousSelected.classList.remove('selected-power');
-                            previousSelected.style.background = '#23243a';
-                            previousSelected.style.border = '1px solid #6ec6ff';
-                        }
-
-                        // Seleciona novo poder
-                        powerContainer.classList.add('selected-power');
-                        powerContainer.style.background = '#2d4a3e';
-                        powerContainer.style.border = '1px solid #4caf50';
-
-                        selectedPower = power.name;
-                    };
-
-                    // Cabeçalho do poder
-                    const powerHeader = document.createElement('div');
-                    powerHeader.style.display = 'flex';
-                    powerHeader.style.justifyContent = 'flex-start';
-                    powerHeader.style.alignItems = 'center';
-                    powerHeader.style.marginBottom = '6px';
-
-                    const powerName = document.createElement('div');
-                    powerName.textContent = power.name;
-                    powerName.style.color = isSelected ? '#4caf50' : '#6ec6ff';
-                    powerName.style.fontSize = '14px';
-                    powerName.style.fontWeight = 'bold';
-
-                    powerHeader.appendChild(powerName);
-                    powerContainer.appendChild(powerHeader);
-
-                    // Descrição do poder
-                    const powerDesc = document.createElement('div');
-                    powerDesc.textContent = power.description;
-                    powerDesc.style.color = '#ecf0f1';
-                    powerDesc.style.fontSize = '12px';
-                    powerDesc.style.lineHeight = '1.4';
-                    powerContainer.appendChild(powerDesc);
-
-                    powersList.appendChild(powerContainer);
-                });
-            }
-
-            powersSection.appendChild(powersList);
-            modal.appendChild(powersSection);
-
-            // Botões de ação
-            const actionButtons = document.createElement('div');
-            actionButtons.style.display = 'flex';
-            actionButtons.style.gap = '12px';
-            actionButtons.style.justifyContent = 'center';
-            actionButtons.style.marginTop = '20px';
-
-            const isCurrentlySelected = getSelectedDivinity() === divinity.name;
-            const buttonText = isCurrentlySelected ? 'Remover Divindade' : 'Definir como Divindade Atual';
-            const buttonColor = isCurrentlySelected ? '#f44336' : '#4caf50';
-
-            const actionButton = document.createElement('button');
-            actionButton.textContent = buttonText;
-            actionButton.style.padding = '12px 24px';
-            actionButton.style.background = buttonColor;
-            actionButton.style.color = '#fff';
-            actionButton.style.border = 'none';
-            actionButton.style.borderRadius = '8px';
-            actionButton.style.fontSize = '14px';
-            actionButton.style.fontWeight = 'bold';
-            actionButton.style.cursor = 'pointer';
-            actionButton.style.transition = 'all 0.2s';
-
-            actionButton.onmouseover = () => {
-                actionButton.style.opacity = '0.8';
-            };
-
-            actionButton.onmouseout = () => {
-                actionButton.style.opacity = '1';
-            };
-
-            actionButton.onclick = () => {
-                if (isCurrentlySelected) {
-                    // Remove a divindade atual
-                    saveSelectedDivinity(null);
-                    saveSelectedDivinityPower(null);
-                } else {
-                    // Define nova divindade
-                    saveSelectedDivinity(divinity.name);
-                    if (selectedPower) {
-                        saveSelectedDivinityPower(selectedPower);
-                    }
-                }
-
-                // Fecha o modal
-                modal.remove();
-                overlay.remove();
-
-                // Atualiza a interface principal
-                createHunterClassModal();
-            };
-
-            actionButtons.appendChild(actionButton);
-            modal.appendChild(actionButtons);
-
-            document.body.appendChild(modal);
-
-            // Aplica scrollbars customizadas
-            applyDirectScrollbarStyles(modal, 'brown');
-        }
-
-        // Conteúdo da Aba 2 (Habilidades)
-        const abilities = [
-            {
-                name: 'Marca da Presa',
-                description: 'Você pode gastar uma ação de movimento e 1 PM para analisar uma criatura em alcance curto. Até o fim da cena, você recebe +1d4 nas rolagens de dano contra essa criatura. A cada quatro níveis, você pode gastar +1 PM para aumentar o bônus de dano (veja a tabela da classe).',
-                level: '1º nível'
-            },
-            {
-                name: 'Rastreador',
-                description: 'Você recebe +2 em Sobrevivência. Além disso, pode se mover com seu deslocamento normal enquanto rastreia sem sofrer penalidades no teste de Sobrevivência.',
-                level: '1º nível'
-            },
-            {
-                name: 'Ambidestria',
-                description: 'Se estiver empunhando duas armas (e pelo menos uma delas for leve) e fizer a ação agredir, você pode fazer dois ataques, um com cada arma. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno.',
-                level: 'Poder de Caçador',
-                prereq: 'Des 2'
-            },
-            {
-                name: 'Armadilha: Arataca',
-                description: 'A vítima sofre 2d6 pontos de dano de perfuração e fica agarrada. Uma criatura agarrada pode escapar com uma ação padrão e um teste de Força ou Acrobacia (CD Sab).',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Armadilha: Espinhos',
-                description: 'A vítima sofre 6d6 pontos de dano de perfuração. Um teste de Reflexos (CD Sab) reduz o dano à metade.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Armadilha: Laço',
-                description: 'A vítima deve fazer um teste de Reflexos (CD Sab). Se passar, fica caída. Se falhar, fica agarrada. Uma criatura agarrada pode se soltar com uma ação padrão e um teste de Força ou Acrobacia (CD Sab).',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Armadilha: Rede',
-                description: 'Todas as criaturas na área ficam enredadas e não podem sair da área. Uma vítima pode se libertar com uma ação padrão e um teste de Força ou Acrobacia (CD 25). Além disso, a área ocupada pela rede é considerada terreno difícil. Nesta armadilha você escolhe quantas criaturas precisam estar na área para ativá-la.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Armadilheiro',
-                description: 'Você soma sua Sabedoria no dano e na CD de suas armadilhas (cumulativo).',
-                level: 'Poder de Caçador',
-                prereq: 'um poder de armadilha, 5º nível de caçador'
-            },
-            {
-                name: 'Arqueiro',
-                description: 'Se estiver usando uma arma de ataque à distância, você soma sua Sabedoria nas rolagens de dano (limitado pelo seu nível).',
-                level: 'Poder de Caçador',
-                prereq: 'Sab 1'
-            },
-            {
-                name: 'Aumento de Atributo',
-                description: 'Você recebe +1 em um atributo. Você pode escolher este poder várias vezes, mas apenas uma vez por patamar para um mesmo atributo.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Bote',
-                description: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária.',
-                level: 'Poder de Caçador',
-                prereq: 'Ambidestria, 6º nível de caçador'
-            },
-            {
-                name: 'Camuflagem',
-                description: 'Você pode gastar 2 PM para se esconder mesmo sem camuflagem ou cobertura disponível.',
-                level: 'Poder de Caçador',
-                prereq: '6º nível de caçador'
-            },
-            {
-                name: 'Chuva de Lâminas',
-                description: 'Uma vez por rodada, quando usa Ambidestria, você pode pagar 2 PM para fazer um ataque adicional com sua arma primária.',
-                level: 'Poder de Caçador',
-                prereq: 'Des 4, Ambidestria, 12º nível de caçador'
-            },
-            {
-                name: 'Companheiro Animal',
-                description: 'Você recebe um companheiro animal. Veja o quadro na página 62.',
-                level: 'Poder de Caçador',
-                prereq: 'Car 1, treinado em Adestramento'
-            },
-            {
-                name: 'Elo com a Natureza',
-                description: 'Você soma sua Sabedoria em seu total de pontos de mana e aprende e pode lançar Caminhos da Natureza (atributo-chave Sabedoria).',
-                level: 'Poder de Caçador',
-                prereq: 'Sab 1, 3º nível de caçador'
-            },
-            {
-                name: 'Emboscar',
-                description: 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate.',
-                level: 'Poder de Caçador',
-                prereq: 'treinado em Furtividade'
-            },
-            {
-                name: 'Empatia Selvagem',
-                description: 'Você pode se comunicar com animais por meio de linguagem corporal e vocalizações. Você pode usar Adestramento com animais para mudar atitude e persuasão (veja Diplomacia, na página 118).',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Escaramuça',
-                description: 'Quando se move 6m ou mais, você recebe +2 na Defesa e Reflexos e +1d8 nas rolagens de dano de ataques corpo a corpo e à distância em alcance curto até o início de seu próximo turno. Você não pode usar esta habilidade se estiver vestindo armadura pesada.',
-                level: 'Poder de Caçador',
-                prereq: 'Des 2, 6º nível de caçador'
-            },
-            {
-                name: 'Escaramuça Superior',
-                description: 'Quando usa Escaramuça, seus bônus aumentam para +5 na Defesa e Reflexos e +1d12 em rolagens de dano.',
-                level: 'Poder de Caçador',
-                prereq: 'Escaramuça, 12º nível de caçador'
-            },
-            {
-                name: 'Espreitar',
-                description: 'Quando usa a habilidade Marca da Presa, você recebe um bônus de +1 em testes de perícia contra a criatura marcada. Esse bônus aumenta em +1 para cada PM adicional gasto na habilidade e também dobra com a habilidade Inimigo.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Ervas Curativas',
-                description: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Ímpeto',
-                description: 'Você pode gastar 1 PM para aumentar seu deslocamento em +6m por uma rodada.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Inimigo de (Criatura)',
-                description: 'Escolha um tipo de criatura entre animal, construto, espírito, monstro ou morto-vivo, ou duas raças humanoides (por exemplo, orcs e gnolls, ou elfos e qareen). Quando você usa a habilidade Marca da Presa contra uma criatura do tipo ou da raça escolhida, dobra os dados de bônus no dano. O nome desta habilidade varia de acordo com o tipo de criatura escolhida (Inimigo de Monstros, Inimigo de Mortos-Vivos etc.). Você pode escolher este poder outras vezes para inimigos diferentes.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Olho do Falcão',
-                description: 'Você pode usar a habilidade Marca da Presa em criaturas em alcance longo.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Ponto Fraco',
-                description: 'Quando usa a habilidade Marca da Presa, seus ataques contra a criatura marcada recebem +2 na margem de ameaça. Esse bônus dobra com a habilidade Inimigo.',
-                level: 'Poder de Caçador'
-            },
-            {
-                name: 'Explorador',
-                description: 'No 3º nível, escolha um tipo de terreno entre aquático, ártico, colina, deserto, floresta, montanha, pântano, planície, subterrâneo ou urbano. A partir do 11º nível, você também pode escolher área de Tormenta. Quando estiver no tipo de terreno escolhido, você soma sua Sabedoria (mínimo +1) na Defesa e nos testes de Acrobacia, Atletismo, Furtividade, Percepção e Sobrevivência. A cada quatro níveis, escolha outro tipo de terreno para receber o bônus ou aumente o bônus em um tipo de terreno já escolhido em +2.',
-                level: '3º nível'
-            },
-            {
-                name: 'Caminho do Explorador',
-                description: 'No 5º nível, você pode atravessar terrenos difíceis sem sofrer redução em seu deslocamento e a CD para rastrear você aumenta em +10. Esta habilidade só funciona em terrenos nos quais você tenha a habilidade Explorador.',
-                level: '5º nível'
-            },
-            {
-                name: 'Mestre Caçador',
-                description: 'No 20º nível, você pode usar a habilidade Marca da Presa como uma ação livre. Além disso, quando usa a habilidade, pode pagar 5 PM para aumentar sua margem de ameaça contra a criatura em +2. Se você reduz uma criatura contra a qual usou Marca da Presa a 0 pontos de vida, recupera 5 PM.',
-                level: '20º nível'
-            }
-        ];
-        // Barra de filtros e controles
-        const filterContainer = document.createElement('div');
-        filterContainer.style.marginBottom = '15px';
-        filterContainer.style.padding = '12px';
-        filterContainer.style.background = 'rgba(139, 69, 19, 0.1)';
-        filterContainer.style.borderRadius = '8px';
-        filterContainer.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-        // Filtro de texto
-        const textFilterContainer = document.createElement('div');
-        textFilterContainer.style.position = 'relative';
-        textFilterContainer.style.marginBottom = '10px';
-        const textFilterInput = document.createElement('input');
-        textFilterInput.type = 'text';
-        textFilterInput.placeholder = 'Filtrar poderes...';
-        textFilterInput.style.width = '100%';
-        textFilterInput.style.padding = '10px 28px 10px 12px';
-        textFilterInput.style.borderRadius = '8px';
-        textFilterInput.style.border = '1px solid #6ec6ff';
-        textFilterInput.style.background = '#23243a';
-        textFilterInput.style.color = '#fff';
-        textFilterInput.style.fontSize = '14px';
-        textFilterInput.style.outline = 'none';
-        textFilterInput.style.boxSizing = 'border-box';
-
-        const clearTextBtn = document.createElement('span');
-        clearTextBtn.textContent = '×';
-        clearTextBtn.style.position = 'absolute';
-        clearTextBtn.style.right = '8px';
-        clearTextBtn.style.top = '50%';
-        clearTextBtn.style.transform = 'translateY(-50%)';
-        clearTextBtn.style.cursor = 'pointer';
-        clearTextBtn.style.color = '#6ec6ff';
-        clearTextBtn.style.fontSize = '18px';
-        clearTextBtn.style.display = 'none';
-
-        clearTextBtn.onclick = () => {
-            textFilterInput.value = '';
-            textFilterInput.dispatchEvent(new Event('input'));
-            textFilterInput.focus();
-        };
-
-        textFilterInput.oninput = () => {
-            currentTextFilter = textFilterInput.value;
-            if (textFilterInput.value.length > 0) {
-                clearTextBtn.style.display = 'block';
-            } else {
-                clearTextBtn.style.display = 'none';
-            }
-            updateAbilityList();
-        };
-
-        textFilterContainer.appendChild(textFilterInput);
-        textFilterContainer.appendChild(clearTextBtn);
-
-        // Filtros de status
-        const statusFiltersContainer = document.createElement('div');
-        statusFiltersContainer.style.display = 'flex';
-        statusFiltersContainer.style.gap = '10px';
-        statusFiltersContainer.style.flexWrap = 'wrap';
-
-        const showAllBtn = document.createElement('button');
-        showAllBtn.textContent = 'Todas';
-        showAllBtn.style.padding = '6px 12px';
-        showAllBtn.style.background = '#8B4513';
-        showAllBtn.style.color = '#fff';
-        showAllBtn.style.border = 'none';
-        showAllBtn.style.borderRadius = '6px';
-        showAllBtn.style.fontSize = '12px';
-        showAllBtn.style.fontWeight = 'bold';
-        showAllBtn.style.cursor = 'pointer';
-        showAllBtn.style.transition = 'all 0.2s';
-
-        const showLearnedBtn = document.createElement('button');
-        showLearnedBtn.textContent = 'Aprendidas';
-        showLearnedBtn.style.padding = '6px 12px';
-        showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-        showLearnedBtn.style.color = '#ecf0f1';
-        showLearnedBtn.style.border = 'none';
-        showLearnedBtn.style.borderRadius = '6px';
-        showLearnedBtn.style.fontSize = '12px';
-        showLearnedBtn.style.fontWeight = 'bold';
-        showLearnedBtn.style.cursor = 'pointer';
-        showLearnedBtn.style.transition = 'all 0.2s';
-
-        const showAvailableBtn = document.createElement('button');
-        showAvailableBtn.textContent = 'Disponíveis';
-        showAvailableBtn.style.padding = '6px 12px';
-        showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-        showAvailableBtn.style.color = '#ecf0f1';
-        showAvailableBtn.style.border = 'none';
-        showAvailableBtn.style.borderRadius = '6px';
-        showAvailableBtn.style.fontSize = '12px';
-        showAvailableBtn.style.fontWeight = 'bold';
-        showAvailableBtn.style.cursor = 'pointer';
-        showAvailableBtn.style.transition = 'all 0.2s';
-
-        statusFiltersContainer.appendChild(showAllBtn);
-        statusFiltersContainer.appendChild(showLearnedBtn);
-        statusFiltersContainer.appendChild(showAvailableBtn);
-        filterContainer.appendChild(textFilterContainer);
-        filterContainer.appendChild(statusFiltersContainer);
-        tab2Content.appendChild(filterContainer);
-        // Container para a lista de habilidades
-        const abilitiesListContainer = document.createElement('div');
-        abilitiesListContainer.id = 'abilities-list-container';
-        tab2Content.appendChild(abilitiesListContainer);
-        // Variáveis de filtro
-        let currentTextFilter = '';
-        let currentStatusFilter = 'all'; // 'all', 'learned', 'available'
-        // Função para atualizar a lista de poderes
-        function updateAbilityList() {
-            const automaticPowers = getAutomaticPowers();
-            const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-            const specialPowers = getSpecialPowersByLevel(charLevel);
-
-            abilitiesListContainer.innerHTML = '';
-
-            const filteredAbilities = abilities.filter(ability => {
-                // Filtro de texto
-                const matchesText = ability.name.toLowerCase().includes(currentTextFilter.toLowerCase()) ||
-                    ability.description.toLowerCase().includes(currentTextFilter.toLowerCase());
-
-                // Filtro de status
-                let matchesStatus = true;
-                if (currentStatusFilter === 'learned') {
-                    matchesStatus = hasPower(ability.name);
-                } else if (currentStatusFilter === 'available') {
-                    matchesStatus = !hasPower(ability.name) && isPowerAvailableAtLevel(ability.name, charLevel);
-                }
-
-                return matchesText && matchesStatus;
-            });
-
-            // Se não há habilidades filtradas, mostra mensagem
-            if (filteredAbilities.length === 0) {
-                const noResultsMessage = document.createElement('div');
-                noResultsMessage.style.textAlign = 'center';
-                noResultsMessage.style.padding = '20px';
-                noResultsMessage.style.color = '#8B4513';
-                noResultsMessage.style.fontSize = '14px';
-                noResultsMessage.style.fontStyle = 'italic';
-                noResultsMessage.style.background = 'rgba(139, 69, 19, 0.1)';
-                noResultsMessage.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-                noResultsMessage.style.borderRadius = '8px';
-                noResultsMessage.style.marginTop = '10px';
-
-                if (currentTextFilter) {
-                    const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'brown');
-                    abilitiesListContainer.appendChild(noResultsMessage);
-                    return;
-                } else {
-                    noResultsMessage.innerHTML = `
-                            <div style="margin-bottom: 8px;">🏹</div>
-                            <div>Nenhuma habilidade disponível</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Selecione uma classe para obter habilidades especiais</div>
-                        `;
-                }
-
-                abilitiesListContainer.appendChild(noResultsMessage);
-                return;
-            }
-
-            filteredAbilities.forEach(ability => {
-                const abilityContainer = document.createElement('div');
-                const isAutomatic = automaticPowers.includes(ability.name);
-                const isSpecial = specialPowers.includes(ability.name);
-                const isLearned = hasPower(ability.name);
-                const isAvailable = isPowerAvailableAtLevel(ability.name, charLevel);
-
-                // Define cores baseadas no tipo de habilidade
-                let backgroundColor, borderColor, textColor;
-
-                if (isAutomatic) {
-                    backgroundColor = 'rgba(76, 175, 80, 0.15)';
-                    borderColor = 'rgba(76, 175, 80, 0.4)';
-                    textColor = '#4CAF50';
-                } else if (isSpecial) {
-                    backgroundColor = 'rgba(156, 39, 176, 0.15)';
-                    borderColor = 'rgba(156, 39, 176, 0.4)';
-                    textColor = '#9C27B0';
-                } else if (isLearned) {
-                    backgroundColor = 'rgba(76, 175, 80, 0.1)';
-                    borderColor = 'rgba(76, 175, 80, 0.3)';
-                    textColor = '#4CAF50';
-                } else {
-                    backgroundColor = 'rgba(139, 69, 19, 0.1)';
-                    borderColor = 'rgba(139, 69, 19, 0.2)';
-                    textColor = '#8B4513';
-                }
-
-                abilityContainer.style.marginBottom = '15px';
-                abilityContainer.style.padding = '12px';
-                abilityContainer.style.background = backgroundColor;
-                abilityContainer.style.borderRadius = '8px';
-                abilityContainer.style.border = `1px solid ${borderColor}`;
-                abilityContainer.style.transition = 'all 0.2s';
-
-                const abilityHeader = document.createElement('div');
-                abilityHeader.style.display = 'flex';
-                abilityHeader.style.justifyContent = 'space-between';
-                abilityHeader.style.alignItems = 'flex-start';
-                abilityHeader.style.marginBottom = '8px';
-                abilityHeader.style.flexWrap = 'wrap';
-                abilityHeader.style.gap = '10px';
-
-                const abilityNameContainer = document.createElement('div');
-                abilityNameContainer.style.display = 'flex';
-                abilityNameContainer.style.alignItems = 'center';
-                abilityNameContainer.style.gap = '8px';
-                abilityNameContainer.style.flex = '1';
-
-                // Checkbox para habilidades aprendidas (apenas para poderes de caçador)
-                if (!isAutomatic && !isSpecial) {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.checked = isLearned;
-                    checkbox.style.width = '16px';
-                    checkbox.style.height = '16px';
-                    checkbox.style.accentColor = '#8B4513';
-                    checkbox.style.cursor = 'pointer';
-
-                    if (ability.name === 'Companheiro Animal') {
-                        checkbox.onchange = () => {
-                            toggleLearnedPower(ability.name);
-                            if (checkbox.checked) {
-                                // Cria modal para selecionar tipo do companheiro animal
-                                const existingModal = document.getElementById('animal-companion-modal');
-                                if (existingModal) existingModal.remove();
-                                const existingOverlay = document.getElementById('animal-companion-overlay');
-                                if (existingOverlay) existingOverlay.remove();
-
-                                // Overlay
-                                const overlay = document.createElement('div');
-                                overlay.id = 'animal-companion-overlay';
-                                overlay.style.position = 'fixed';
-                                overlay.style.top = '0';
-                                overlay.style.left = '0';
-                                overlay.style.width = '100%';
-                                overlay.style.height = '100%';
-                                overlay.style.background = 'rgba(0,0,0,0.5)';
-                                overlay.style.zIndex = '10000';
-                                overlay.onclick = () => {
-                                    overlay.remove();
-                                    modal.remove();
-                                };
-                                document.body.appendChild(overlay);
-
-                                // Modal
-                                const modal = document.createElement('div');
-                                modal.id = 'animal-companion-modal';
-                                modal.style.position = 'fixed';
-                                modal.style.top = '50%';
-                                modal.style.left = '50%';
-                                modal.style.transform = 'translate(-50%, -50%)';
-                                modal.style.background = 'rgba(30,30,40,0.98)';
-                                modal.style.border = '2px solid #6ec6ff';
-                                modal.style.borderRadius = '12px';
-                                modal.style.padding = '24px 28px';
-                                modal.style.zIndex = '10001';
-                                modal.style.maxWidth = '340px';
-                                modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
-                                modal.style.display = 'flex';
-                                modal.style.flexDirection = 'column';
-                                modal.style.alignItems = 'stretch';
-                                // Título
-                                const title = document.createElement('h3');
-                                title.textContent = 'Tipo de Companheiro Animal';
-                                title.style.color = '#ecf0f1';
-                                title.style.margin = '0 0 18px 0';
-                                title.style.fontSize = '17px';
-                                title.style.fontWeight = 'bold';
-                                modal.appendChild(title);
-                                // Opção única: Assassino
-                                const option = document.createElement('button');
-                                option.textContent = 'Assassino';
-                                option.style.background = '#6ec6ff';
-                                option.style.color = '#23243a';
-                                option.style.border = 'none';
-                                option.style.borderRadius = '8px';
-                                option.style.fontSize = '15px';
-                                option.style.fontWeight = 'bold';
-                                option.style.padding = '12px 0';
-                                option.style.cursor = 'pointer';
-                                option.style.marginBottom = '10px';
-                                option.onmouseover = () => {
-                                    option.style.background = '#5bb8ff';
-                                };
-                                option.onmouseout = () => {
-                                    option.style.background = '#6ec6ff';
-                                };
-                                option.onclick = () => {
-                                    setAnimalCompanionType('assassino');
-                                    overlay.remove();
-                                    modal.remove();
-                                    updateAbilityList();
-                                };
-                                modal.appendChild(option);
-                                // Fechar usando componente
-                                const closeBtn = window.Roll20Components.createCloseButton({
-                                    customStyles: 'position: absolute; top: 8px; right: 12px;',
-                                    onClick: () => {
-                                        overlay.remove();
-                                        modal.remove();
-                                    }
-                                });
-                                modal.appendChild(closeBtn.render());
-                                document.body.appendChild(modal);
-                            } else {
-                                setAnimalCompanionType('');
-                            }
-                            updateAbilityList();
-                        };
-                    } else {
-                        checkbox.onchange = () => {
-                            toggleLearnedPower(ability.name);
-                            updateAbilityList(); // Atualiza a lista para refletir as mudanças
-                        };
-                    }
-
-                    abilityNameContainer.appendChild(checkbox);
-                }
-
-                const abilityName = document.createElement('div');
-                abilityName.textContent = ability.name;
-                abilityName.style.color = textColor;
-                abilityName.style.fontSize = '15px';
-                abilityName.style.fontWeight = 'bold';
-
-                // CHIP DO COMPANHEIRO ANIMAL
-                if (ability.name === 'Companheiro Animal' && isLearned && getAnimalCompanionType() === 'assassino') {
-                    const chip = document.createElement('span');
-                    chip.textContent = 'Assassino';
-                    chip.style.background = '#6ec6ff';
-                    chip.style.color = '#23243a';
-                    chip.style.borderRadius = '8px';
-                    chip.style.padding = '2px 10px';
-                    chip.style.fontSize = '12px';
-                    chip.style.fontWeight = 'bold';
-                    chip.style.marginLeft = '8px';
-                    chip.style.display = 'inline-block';
-                    chip.style.letterSpacing = '0.5px';
-                    chip.style.boxShadow = '0 1px 4px rgba(0,0,0,0.08)';
-                    abilityName.appendChild(chip);
-                }
-
-                abilityNameContainer.appendChild(abilityName);
-
-                const abilityLevel = document.createElement('div');
-                abilityLevel.textContent = ability.level;
-                abilityLevel.style.color = '#6ec6ff';
-                abilityLevel.style.fontSize = '12px';
-                abilityLevel.style.fontWeight = 'bold';
-                abilityLevel.style.fontStyle = 'italic';
-
-                abilityHeader.appendChild(abilityNameContainer);
-                abilityHeader.appendChild(abilityLevel);
-
-                const abilityDescription = document.createElement('div');
-                abilityDescription.textContent = ability.description;
-                abilityDescription.style.color = '#ecf0f1';
-                abilityDescription.style.fontSize = '13px';
-                abilityDescription.style.lineHeight = '1.4';
-                abilityDescription.style.marginBottom = '5px';
-
-                abilityContainer.appendChild(abilityHeader);
-                abilityContainer.appendChild(abilityDescription);
-
-                if (ability.prereq) {
-                    const prereqDiv = document.createElement('div');
-                    prereqDiv.textContent = `Pré-requisito: ${ability.prereq}`;
-                    prereqDiv.style.color = '#ffa726';
-                    prereqDiv.style.fontSize = '11px';
-                    prereqDiv.style.fontStyle = 'italic';
-                    prereqDiv.style.fontWeight = 'bold';
-                    abilityContainer.appendChild(prereqDiv);
-                }
-
-                // Indicadores visuais
-                const indicatorsContainer = document.createElement('div');
-                indicatorsContainer.style.marginTop = '5px';
-                indicatorsContainer.style.display = 'flex';
-                indicatorsContainer.style.gap = '8px';
-                indicatorsContainer.style.flexWrap = 'wrap';
-
-                if (isAutomatic) {
-                    const automaticIndicator = document.createElement('div');
-                    automaticIndicator.innerHTML = '🔄 Automática';
-                    automaticIndicator.style.color = '#4CAF50';
-                    automaticIndicator.style.fontSize = '11px';
-                    automaticIndicator.style.fontWeight = 'bold';
-                    automaticIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(automaticIndicator);
-                } else if (isSpecial) {
-                    const specialIndicator = document.createElement('div');
-                    specialIndicator.innerHTML = '⭐ Especial';
-                    specialIndicator.style.color = '#9C27B0';
-                    specialIndicator.style.fontSize = '11px';
-                    specialIndicator.style.fontWeight = 'bold';
-                    specialIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(specialIndicator);
-                } else if (isLearned) {
-                    const learnedIndicator = document.createElement('div');
-                    learnedIndicator.innerHTML = '✓ Aprendida';
-                    learnedIndicator.style.color = '#4CAF50';
-                    learnedIndicator.style.fontSize = '11px';
-                    learnedIndicator.style.fontWeight = 'bold';
-                    learnedIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(learnedIndicator);
-                } else if (isAvailable) {
-                    const availableIndicator = document.createElement('div');
-                    availableIndicator.innerHTML = '📋 Disponível';
-                    availableIndicator.style.color = '#8B4513';
-                    availableIndicator.style.fontSize = '11px';
-                    availableIndicator.style.fontWeight = 'bold';
-                    availableIndicator.style.fontStyle = 'italic';
-                    indicatorsContainer.appendChild(availableIndicator);
-                }
-
-                if (indicatorsContainer.children.length > 0) {
-                    abilityContainer.appendChild(indicatorsContainer);
-                }
-
-                abilitiesListContainer.appendChild(abilityContainer);
-            });
-
-            // Verifica se não há habilidades encontradas durante a filtragem
-            if (filteredAbilities.length === 0 && currentTextFilter.length > 0) {
-                const noResultsMessage = createNoResultsMessage(currentTextFilter, 'habilidade', 'blue');
-                abilitiesListContainer.appendChild(noResultsMessage);
-            }
-
-            // Estatísticas
-            const statsContainer = document.createElement('div');
-            statsContainer.style.marginTop = '15px';
-            statsContainer.style.padding = '10px';
-            statsContainer.style.background = 'rgba(26,26,46,0.8)';
-            statsContainer.style.borderRadius = '8px';
-            statsContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-            statsContainer.style.textAlign = 'center';
-
-            const learnedPowers = getLearnedPowers();
-            const learnedAbilitiesCount = learnedPowers.length;
-            const totalAbilities = abilities.length;
-            const progress = Math.round((learnedAbilitiesCount / totalAbilities) * 100);
-
-            const statsText = document.createElement('div');
-            statsText.innerHTML = `<strong>Habilidades Aprendidas:</strong> ${learnedAbilitiesCount}/${totalAbilities} (${progress}%)`;
-            statsText.style.color = '#8B4513';
-            statsText.style.fontSize = '14px';
-            statsText.style.fontWeight = 'bold';
-
-            statsContainer.appendChild(statsText);
-            abilitiesListContainer.appendChild(statsContainer);
-        }
-
-        // Event listeners para os filtros
-        showAllBtn.onclick = () => {
-            currentStatusFilter = 'all';
-            showAllBtn.style.background = '#8B4513';
-            showAllBtn.style.color = '#fff';
-            showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showLearnedBtn.style.color = '#ecf0f1';
-            showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAvailableBtn.style.color = '#ecf0f1';
-            updateAbilityList();
-        };
-
-        showLearnedBtn.onclick = () => {
-            currentStatusFilter = 'learned';
-            showAllBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAllBtn.style.color = '#ecf0f1';
-            showLearnedBtn.style.background = '#8B4513';
-            showLearnedBtn.style.color = '#fff';
-            showAvailableBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAvailableBtn.style.color = '#ecf0f1';
-            updateAbilityList();
-        };
-
-        showAvailableBtn.onclick = () => {
-            currentStatusFilter = 'available';
-            showAllBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showAllBtn.style.color = '#ecf0f1';
-            showLearnedBtn.style.background = 'rgba(139, 69, 19, 0.3)';
-            showLearnedBtn.style.color = '#ecf0f1';
-            showAvailableBtn.style.background = '#8B4513';
-            showAvailableBtn.style.color = '#fff';
-            updateAbilityList();
-        };
-        // Inicializa a lista de habilidades
-        updateAbilityList();
-        // Função para alternar entre abas
-        function switchTab(tabNumber) {
-            // Esconde todos os conteúdos
-            tab1Content.style.display = 'none';
-            tab2Content.style.display = 'none';
-            tab3Content.style.display = 'none';
-            tab4Content.style.display = 'none';
-            tab5Content.style.display = 'none';
-
-            // Remove estilo ativo de todos os botões
-            tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            tab1Btn.style.color = '#ecf0f1';
-            tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            tab2Btn.style.color = '#ecf0f1';
-            tab3Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            tab3Btn.style.color = '#ecf0f1';
-            tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            tab4Btn.style.color = '#ecf0f1';
-            tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            tab5Btn.style.color = '#ecf0f1';
-
-            // Mostra o conteúdo da aba selecionada
-            if (tabNumber === 1) {
-                tab1Content.style.display = 'block';
-                tab1Btn.style.background = '#8B4513';
-                tab1Btn.style.color = '#fff';
-            } else if (tabNumber === 2) {
-                tab2Content.style.display = 'block';
-                tab2Btn.style.background = '#8B4513';
-                tab2Btn.style.color = '#fff';
-            } else if (tabNumber === 3) {
-                tab3Content.style.display = 'block';
-                tab3Btn.style.background = '#8B4513';
-                tab3Btn.style.color = '#fff';
-            } else if (tabNumber === 4) {
-                tab4Content.style.display = 'block';
-                tab4Btn.style.background = '#8B4513';
-                tab4Btn.style.color = '#fff';
-            } else if (tabNumber === 5) {
-                tab5Content.style.display = 'block';
-                tab5Btn.style.background = '#8B4513';
-                tab5Btn.style.color = '#fff';
-            }
-        }
-
-        // Event listeners para os botões das abas
-        tab1Btn.onclick = () => switchTab(1);
-        tab2Btn.onclick = () => switchTab(2);
-        tab3Btn.onclick = () => switchTab(3);
-        tab4Btn.onclick = () => switchTab(4);
-        tab5Btn.onclick = () => switchTab(5);
-
-        tab1Btn.onmouseover = () => {
-            if (tab1Content.style.display === 'none') {
-                tab1Btn.style.background = 'rgba(139, 69, 19, 0.5)';
-            }
-        };
-        tab1Btn.onmouseout = () => {
-            if (tab1Content.style.display === 'none') {
-                tab1Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            }
-        };
-
-        tab2Btn.onmouseover = () => {
-            if (tab2Content.style.display === 'none') {
-                tab2Btn.style.background = 'rgba(139, 69, 19, 0.5)';
-            }
-        };
-        tab2Btn.onmouseout = () => {
-            if (tab2Content.style.display === 'none') {
-                tab2Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            }
-        };
-
-        tab3Btn.onmouseover = () => {
-            if (tab3Content.style.display === 'none') {
-                tab3Btn.style.background = 'rgba(139, 69, 19, 0.5)';
-            }
-        };
-        tab3Btn.onmouseout = () => {
-            if (tab3Content.style.display === 'none') {
-                tab3Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            }
-        };
-
-        tab4Btn.onmouseover = () => {
-            if (tab4Content.style.display === 'none') {
-                tab4Btn.style.background = 'rgba(139, 69, 19, 0.5)';
-            }
-        };
-        tab4Btn.onmouseout = () => {
-            if (tab4Content.style.display === 'none') {
-                tab4Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            }
-        };
-
-        tab5Btn.onmouseover = () => {
-            if (tab5Content.style.display === 'none') {
-                tab5Btn.style.background = 'rgba(139, 69, 19, 0.5)';
-            }
-        };
-        tab5Btn.onmouseout = () => {
-            if (tab5Content.style.display === 'none') {
-                tab5Btn.style.background = 'rgba(139, 69, 19, 0.3)';
-            }
-        };
-
-        // Adiciona os botões das abas
-        tabButtons.appendChild(tab1Btn);
-        tabButtons.appendChild(tab2Btn);
-        tabButtons.appendChild(tab3Btn);
-        tabButtons.appendChild(tab4Btn);
-        tabButtons.appendChild(tab5Btn);
-
-        // Adiciona os conteúdos das abas
-        tabContents.appendChild(tab1Content);
-        tabContents.appendChild(tab2Content);
-        tabContents.appendChild(tab3Content);
-        tabContents.appendChild(tab4Content);
-        tabContents.appendChild(tab5Content);
-
-        tabContainer.appendChild(tabButtons);
-        popup.appendChild(tabContainer);
-
-        // Container para conteúdo scrollable
-        const contentContainer = document.createElement('div');
-        contentContainer.style.flex = '1';
-        contentContainer.style.overflow = 'hidden';
-        contentContainer.appendChild(tabContents);
-        popup.appendChild(contentContainer);
-
-        // Tabela de Progressão (mantida na primeira aba)
-        const progressionSection = document.createElement('div');
-        progressionSection.style.marginBottom = '20px';
-
-        const progressionTitle = document.createElement('h3');
-        progressionTitle.textContent = 'Tabela de Progressão';
-        progressionTitle.style.color = '#8B4513';
-        progressionTitle.style.fontSize = '18px';
-        progressionTitle.style.fontWeight = 'bold';
-        progressionTitle.style.marginBottom = '15px';
-        progressionTitle.style.borderBottom = '2px solid rgba(139, 69, 19, 0.3)';
-        progressionTitle.style.paddingBottom = '8px';
-        progressionSection.appendChild(progressionTitle);
-
-        const progressionTable = document.createElement('div');
-        progressionTable.style.background = 'rgba(26,26,46,0.8)';
-        progressionTable.style.border = '1px solid rgba(139, 69, 19, 0.3)';
-        progressionTable.style.borderRadius = '8px';
-        progressionTable.style.overflow = 'hidden';
-
-        // Cabeçalho da tabela
-        const tableHeader = document.createElement('div');
-        tableHeader.style.display = 'grid';
-        tableHeader.style.gridTemplateColumns = '80px 1fr';
-        tableHeader.style.background = 'rgba(139, 69, 19, 0.2)';
-        tableHeader.style.padding = '12px 15px';
-        tableHeader.style.borderBottom = '1px solid rgba(139, 69, 19, 0.3)';
-
-        const levelHeader = document.createElement('div');
-        levelHeader.textContent = 'Nível';
-        levelHeader.style.color = '#8B4513';
-        levelHeader.style.fontWeight = 'bold';
-        levelHeader.style.fontSize = '14px';
-
-        const abilitiesHeader = document.createElement('div');
-        abilitiesHeader.textContent = 'Habilidades de Classe';
-        abilitiesHeader.style.color = '#8B4513';
-        abilitiesHeader.style.fontWeight = 'bold';
-        abilitiesHeader.style.fontSize = '14px';
-
-        tableHeader.appendChild(levelHeader);
-        tableHeader.appendChild(abilitiesHeader);
-        progressionTable.appendChild(tableHeader);
-
-        // Dados da tabela
-        const progressionData = [
-            { level: '1º', abilities: 'Marca da presa +1d4, rastreador' },
-            { level: '2º', abilities: 'Poder de caçador' },
-            { level: '3º', abilities: 'Explorador, poder de caçador' },
-            { level: '4º', abilities: 'Poder de caçador' },
-            { level: '5º', abilities: 'Caminho do explorador, marca da presa +1d8, poder de caçador' },
-            { level: '6º', abilities: 'Poder de caçador' },
-            { level: '7º', abilities: 'Explorador, poder de caçador' },
-            { level: '8º', abilities: 'Poder de caçador' },
-            { level: '9º', abilities: 'Marca da presa +1d12, poder de caçador' },
-            { level: '10º', abilities: 'Poder de caçador' },
-            { level: '11º', abilities: 'Explorador, poder de caçador' },
-            { level: '12º', abilities: 'Poder de caçador' },
-            { level: '13º', abilities: 'Marca da presa +2d8, poder de caçador' },
-            { level: '14º', abilities: 'Poder de caçador' },
-            { level: '15º', abilities: 'Explorador, poder de caçador' },
-            { level: '16º', abilities: 'Poder de caçador' },
-            { level: '17º', abilities: 'Marca da presa +2d10, poder de caçador' },
-            { level: '18º', abilities: 'Poder de caçador' },
-            { level: '19º', abilities: 'Explorador, poder de caçador' },
-            { level: '20º', abilities: 'Mestre caçador, poder de caçador' }
-        ];
-
-        progressionData.forEach((row, index) => {
-            const tableRow = document.createElement('div');
-            tableRow.style.display = 'grid';
-            tableRow.style.gridTemplateColumns = '80px 1fr';
-            tableRow.style.padding = '10px 15px';
-            tableRow.style.borderBottom = index < progressionData.length - 1 ? '1px solid rgba(139, 69, 19, 0.1)' : 'none';
-            tableRow.style.transition = 'background 0.2s';
-
-            tableRow.onmouseover = () => {
-                tableRow.style.background = 'rgba(139, 69, 19, 0.1)';
-            };
-            tableRow.onmouseout = () => {
-                tableRow.style.background = 'transparent';
-            };
-
-            const levelCell = document.createElement('div');
-            levelCell.textContent = row.level;
-            levelCell.style.color = '#8B4513';
-            levelCell.style.fontWeight = 'bold';
-            levelCell.style.fontSize = '13px';
-
-            const abilitiesCell = document.createElement('div');
-            abilitiesCell.textContent = row.abilities;
-            abilitiesCell.style.color = '#ecf0f1';
-            abilitiesCell.style.fontSize = '13px';
-            abilitiesCell.style.lineHeight = '1.3';
-
-            tableRow.appendChild(levelCell);
-            tableRow.appendChild(abilitiesCell);
-            progressionTable.appendChild(tableRow);
-        });
-
-        progressionSection.appendChild(progressionTable);
-        tab1Content.appendChild(progressionSection);
-
-        // Nota sobre o livro
-        const bookNote = document.createElement('div');
-        bookNote.style.textAlign = 'center';
-        bookNote.style.padding = '15px';
-        bookNote.style.background = 'rgba(139, 69, 19, 0.1)';
-        bookNote.style.borderRadius = '8px';
-        bookNote.style.border = '1px solid rgba(139, 69, 19, 0.2)';
-        bookNote.style.marginTop = '15px';
-
-        const noteText = document.createElement('div');
-        noteText.textContent = '📖 Informações baseadas no Livro do Jogador - Tormenta 20';
-        noteText.style.color = '#8B4513';
-        noteText.style.fontSize = '12px';
-        noteText.style.fontStyle = 'italic';
-        noteText.style.fontWeight = 'bold';
-
-        bookNote.appendChild(noteText);
-        tab1Content.appendChild(bookNote);
-
-        // Só agora adiciona o popup ao DOM
-        document.body.appendChild(popup);
-
-        // Aplica scrollbars customizadas
-        applyDirectScrollbarStyles(popup, 'brown');
-
-        overlay.onclick = () => {
-            overlay.remove();
-            popup.remove();
-        };
-    }
-
-    // Funções para gerenciar poderes de destino aprendidos
-    function getLearnedDestinyPowers() {
-        try {
-            const powers = localStorage.getItem(DESTINY_POWERS_KEY);
-            return powers ? JSON.parse(powers) : [];
-        } catch (error) {
-            logger.log('Erro ao carregar poderes de destino aprendidos:', error);
-            return [];
-        }
-    }
-
-    function saveLearnedDestinyPowers(powers) {
-        try {
-            localStorage.setItem(DESTINY_POWERS_KEY, JSON.stringify(powers));
-        } catch (error) {
-            logger.log('Erro ao salvar poderes de destino aprendidos:', error);
-        }
-    }
-
-    function hasDestinyPower(powerName) {
-        const learnedPowers = getLearnedDestinyPowers();
-        return learnedPowers.includes(powerName);
-    }
-
-    function toggleLearnedDestinyPower(powerName) {
-        const learnedPowers = getLearnedDestinyPowers();
-        const index = learnedPowers.indexOf(powerName);
-
-        if (index > -1) {
-            learnedPowers.splice(index, 1);
-            showWarningNotification(`Poder de Destino "${powerName}" removido da lista de aprendidos.`);
-        } else {
-            learnedPowers.push(powerName);
-            showSuccessNotification(`Poder de Destino "${powerName}" adicionado à lista de aprendidos!`);
-        }
-
-        saveLearnedDestinyPowers(learnedPowers);
-        return learnedPowers;
-    }
-
-    // === NOVO: utilitários para Companheiro Animal ===
-    const ANIMAL_COMPANION_TYPE_KEY = 'tormenta-20-hotbars-animal-companion-type';
-    function getAnimalCompanionType() {
-        return localStorage.getItem(ANIMAL_COMPANION_TYPE_KEY) || '';
-    }
-    function setAnimalCompanionType(type) {
-        localStorage.setItem(ANIMAL_COMPANION_TYPE_KEY, type);
-    }
-
-    // === NOVO: Funções para gerenciar divindades e poderes concedidos ===
-    const SELECTED_DIVINITY_KEY = 'tormenta-20-hotbars-selected-divinity';
-    const SELECTED_DIVINITY_POWER_KEY = 'tormenta-20-hotbars-selected-divinity-power';
-
-    function getSelectedDivinity() {
-        return localStorage.getItem(SELECTED_DIVINITY_KEY) || null;
-    }
-
-    function saveSelectedDivinity(divinityName) {
-        localStorage.setItem(SELECTED_DIVINITY_KEY, divinityName);
-    }
-
-    function getSelectedDivinityPower() {
-        return localStorage.getItem(SELECTED_DIVINITY_POWER_KEY) || null;
-    }
-
-    function saveSelectedDivinityPower(powerName) {
-        localStorage.setItem(SELECTED_DIVINITY_POWER_KEY, powerName);
-    }
-
-    function hasDivinityPower(powerName) {
-        const selectedPower = getSelectedDivinityPower();
-        return selectedPower === powerName;
-    }
-
-    // Funções para gerenciar raça selecionada
-    function getSelectedRace() {
-        try {
-            return localStorage.getItem(SELECTED_RACE_KEY) || null;
-        } catch (error) {
-            logger.log('Erro ao carregar raça selecionada:', error);
-            return null;
-        }
-    }
-
-    function saveSelectedRace(raceName) {
-        try {
-            localStorage.setItem(SELECTED_RACE_KEY, raceName);
-        } catch (error) {
-            logger.log('Erro ao salvar raça selecionada:', error);
-        }
-    }
-
-    function getSelectedRaceType() {
-        try {
-            return localStorage.getItem(SELECTED_RACE_TYPE_KEY) || null;
-        } catch (error) {
-            logger.log('Erro ao carregar tipo de raça selecionado:', error);
-            return null;
-        }
-    }
-
-    function saveSelectedRaceType(raceType) {
-        try {
-            localStorage.setItem(SELECTED_RACE_TYPE_KEY, raceType);
-        } catch (error) {
-            logger.log('Erro ao salvar tipo de raça selecionado:', error);
-        }
-    }
-
-    function hasRacePower(powerName) {
-        const selectedRace = getSelectedRace();
-        const selectedRaceType = getSelectedRaceType();
-
-        if (selectedRace === 'Suraggel') {
-            if (selectedRaceType === 'Aggelus' && powerName === 'Luz Sagrada') {
-                return true;
-            }
-            if (selectedRaceType === 'Sulfure' && powerName === 'Sombras Profanas') {
-                return true;
-            }
-        }
-        return false;
-    }
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
@@ -15370,27 +11954,6 @@
             origin: 'Condição de Combate'
         });
 
-        // Espada Solar (Poder de Divindade)
-        if (hasDivinityPower('Espada Solar')) {
-            effects.push({
-                label: 'Espada Solar (+1d6 dano)',
-                value: 'espada_solar',
-                dice: '1d6',
-                desc: '*+ Espada Solar*',
-                origin: 'Divindade: Azgher'
-            });
-        }
-
-        // Inimigo de Tenebra (Poder de Divindade)
-        if (hasDivinityPower('Inimigo de Tenebra')) {
-            effects.push({
-                label: 'Inimigo de Tenebra (+1d6 vs mortos-vivos)',
-                value: 'inimigo_tenebra',
-                dice: '1d6',
-                desc: '*+ Inimigo de Tenebra*',
-                origin: 'Divindade: Azgher'
-            });
-        }
         // Escaramuça
         if (hasPower('Escaramuça')) {
             effects.push({
@@ -15446,34 +12009,6 @@
                 origin: 'Habilidade de Caçador'
             });
         }
-        // Ataque Furtivo (Companheiro Animal do tipo Assassino)
-        if (hasPower('Companheiro Animal') && getAnimalCompanionType() === 'assassino') {
-            // Dano dependente do nível (sem bônus de acerto)
-            let dice = '1d6';
-            let desc = '*+ Ataque Furtivo*';
-            const charLevelNum = parseInt(charLevel, 10) || 1;
-            if (charLevelNum >= 15) {
-                dice = '2d6';
-            }
-            effects.push({
-                label: `Ataque Furtivo (+${dice} dano)`,
-                value: 'ataque_furtivo',
-                dice,
-                desc,
-                origin: 'Companheiro Animal: Assassino'
-            });
-        }
-
-        // Cachecol Sombrio (Efeito de Item)
-        if (isEffectActive('cachecol_sombrio')) {
-            effects.push({
-                label: 'Ataque Sombrio (+1d6 dano furtivo)',
-                value: 'ataque_sombrio',
-                dice: '1d6',
-                desc: '*+ Ataque Sombrio*',
-                origin: 'Item: Cachecol Sombrio'
-            });
-        }
 
         // Ordena os efeitos por prioridade (efeitos com priority: 1 ficam no topo)
         effects.sort((a, b) => {
@@ -15514,6 +12049,14 @@
         overlay.style.background = 'rgba(0,0,0,0.5)';
         overlay.style.zIndex = '10000';
         overlay.onclick = () => {
+            // Remove todos os tooltips antes de fechar
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             overlay.remove();
             popup.remove();
         };
@@ -15552,6 +12095,14 @@
             padding: '0',
             color: '#ecf0f1',
             onClick: () => {
+                // Remove todos os tooltips antes de fechar
+                const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+                existingTooltips.forEach(tooltip => {
+                    if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                        tooltip.remove();
+                    }
+                });
+
                 popup.remove();
                 const overlay = document.getElementById('abilities-overlay');
                 if (overlay) overlay.remove();
@@ -15631,6 +12182,14 @@
         popup.appendChild(abilityList);
 
         function updateAbilityList() {
+            // Remove todos os tooltips existentes antes de atualizar a lista
+            const existingTooltips = document.querySelectorAll('[style*="z-index: 10002"]');
+            existingTooltips.forEach(tooltip => {
+                if (tooltip.style.position === 'fixed' && tooltip.style.background.includes('rgba(0, 0, 0, 0.9)')) {
+                    tooltip.remove();
+                }
+            });
+
             const filter = filterInput.value.trim().toLowerCase();
             abilityList.innerHTML = '';
             // Lista dinâmica de habilidades disponíveis
@@ -15675,26 +12234,26 @@
             // Filtrar pelo texto
             const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
             if (filteredAbilities.length === 0) {
-                const emptyMsg = document.createElement('div');
-                emptyMsg.style.textAlign = 'center';
-                emptyMsg.style.padding = '20px';
-                emptyMsg.style.color = '#999';
-                emptyMsg.style.fontSize = '14px';
-                emptyMsg.style.fontStyle = 'italic';
-
                 if (filter.length > 0) {
                     const noResultsMessage = createNoResultsMessage(filter, 'habilidade', 'blue');
                     abilityList.appendChild(noResultsMessage);
                     return;
                 } else {
-                    emptyMsg.innerHTML = `
-                            <div style="margin-bottom: 8px;">✨</div>
-                            <div>Nenhuma habilidade disponível</div>
-                            <div style="margin-top: 8px; font-size: 12px;">Aprenda habilidades no modal da classe para vê-las aqui</div>
-                        `;
-                }
+                    const emptyMsg = document.createElement('div');
+                    emptyMsg.style.textAlign = 'center';
+                    emptyMsg.style.padding = '20px';
+                    emptyMsg.style.color = '#6ec6ff';
+                    emptyMsg.style.fontSize = '14px';
+                    emptyMsg.style.fontStyle = 'italic';
+                    emptyMsg.style.background = 'rgba(110, 198, 255, 0.1)';
+                    emptyMsg.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+                    emptyMsg.style.borderRadius = '8px';
+                    emptyMsg.style.marginTop = '10px';
+                    emptyMsg.innerHTML = '⚔️<br/>Nenhum poder disponível<br><small>Aprenda poderes no sistema de poderes para vê-los aqui</small>';
 
-                abilityList.appendChild(emptyMsg);
+                    abilityList.appendChild(emptyMsg);
+                    return;
+                }
             } else {
                 filteredAbilities.forEach(ability => {
                     // Verificar se o poder é favorito
@@ -15738,6 +12297,47 @@
                     btn.style.fontWeight = 'bold';
                     btn.style.cursor = 'pointer';
                     btn.style.transition = 'all 0.2s';
+                    // Adiciona hover com tooltip detalhado do poder
+                    let tooltipInstance = null;
+                    let tooltipTimeout = null;
+
+                    btn.onmouseenter = () => {
+                        // Verifica se existe descrição para este poder
+                        if (!ability.descricao) return;
+
+                        // Remove tooltip existente
+                        if (tooltipInstance) {
+                            tooltipInstance.hide();
+                            tooltipInstance = null;
+                        }
+
+                        // Limpa timeout existente
+                        if (tooltipTimeout) {
+                            clearTimeout(tooltipTimeout);
+                            tooltipTimeout = null;
+                        }
+
+                        const tooltipConfig = {
+                            title: ability.nome,
+                            description: ability.descricao,
+                            theme: 'blue',
+                            tags: [
+                                { text: 'Poder', bgColor: '#6ec6ff', color: '#23243a' }
+                            ]
+                        };
+
+                        // Cria o tooltip usando o componente
+                        tooltipInstance = createTooltip(tooltipConfig);
+                        tooltipInstance.show(btn);
+                    };
+
+                    btn.onmouseleave = () => {
+                        if (tooltipInstance) {
+                            tooltipInstance.hide();
+                            tooltipInstance = null;
+                        }
+                    };
+
                     btn.onmouseover = () => {
                         btn.style.background = '#6ec6ff';
                         btn.style.color = '#23243a';
@@ -15748,6 +12348,12 @@
                     };
 
                     btn.onclick = (e) => {
+                        // Remove tooltip se existir
+                        if (tooltipInstance) {
+                            tooltipInstance.hide();
+                            tooltipInstance = null;
+                        }
+
                         if (e.ctrlKey) {
                             // Se CTRL estiver pressionado, abrir modal de detalhamento
                             showPowerDetails(ability.nome);
@@ -16604,34 +13210,15 @@
     function toggleEffect(effectName, silent = false) {
         const activeEffects = getActiveEffects();
         const index = activeEffects.indexOf(effectName);
-
         if (index > -1) {
             // Remove o efeito
             activeEffects.splice(index, 1);
-
-            // Remove da ordem
-            const itemEffectData = getItemEffectData(effectName);
-            if (itemEffectData) {
-                removeEffectFromOrder(effectName, 'item');
-            } else {
-                removeEffectFromOrder(effectName, 'food');
-            }
-
             if (!silent) {
                 showWarningNotification(`Efeito "${effectName}" desativado.`);
             }
         } else {
             // Adiciona o efeito
             activeEffects.push(effectName);
-
-            // Adiciona à ordem
-            const itemEffectData = getItemEffectData(effectName);
-            if (itemEffectData) {
-                addEffectToOrder(effectName, 'item');
-            } else {
-                addEffectToOrder(effectName, 'food');
-            }
-
             if (!silent) {
                 showSuccessNotification(`Efeito "${effectName}" ativado!`);
             }
@@ -16779,26 +13366,6 @@
 ${conditionData.efeitos || conditionData.descricao}}}`;
 
         sendToChat(template);
-    }
-
-    // Função para obter dados de um efeito de item
-    function getItemEffectData(effectKey) {
-        const itemEffects = getItemEffectsList();
-        return itemEffects.find(effect => effect.effectKey === effectKey);
-    }
-
-    // Função para obter lista de efeitos de item
-    function getItemEffectsList() {
-        return [
-            {
-                name: 'Cachecol Sombrio',
-                description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
-                type: 'Item',
-                effectKey: 'cachecol_sombrio',
-                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/ability_ambush.jpg',
-                icone: '⚔️'
-            }
-        ];
     }
 
     // Sistema de ordem dos efeitos
@@ -17214,12 +13781,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const conditionData = getConditionData(orderedEffect.effectKey);
                 if (conditionData) {
                     createConditionIndicatorIcon(conditionData);
-                }
-            } else if (orderedEffect.effectType === 'item') {
-                // Busca os dados do efeito de item
-                const itemEffectData = getItemEffectData(orderedEffect.effectKey);
-                if (itemEffectData) {
-                    createItemEffectIndicatorIcon(itemEffectData);
                 }
             } else if (orderedEffect.effectType === 'drink') {
                 // Busca os dados do efeito de bebida
@@ -17798,19 +14359,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
-
-
-        // Lista de efeitos disponíveis (convertidos para selectable-cards)
-        const effects = [
-            {
-                title: 'Cachecol Sombrio',
-                description: 'Efeito de Dano: Todos os ataques melee recebem +1d6 de dano furtivo. Efeito acumulativo com outros ataques furtivos.',
-                chips: ['+1d6', 'Furtivo', 'Melee'],
-                type: 'Item',
-                effectKey: 'cachecol_sombrio'
-            }
-        ];
-
         // Lista de selectable-cards vazia (removidos os itens estáticos)
         const selectableCards = [];
 
@@ -17918,7 +14466,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Junta efeitos normais, de comida, bebida, poção, condições e selectable-cards
-        const allEffects = [...effects, ...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...selectableCards];
+        const allEffects = [...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...selectableCards];
 
         // Lista visual
         const effectsList = document.createElement('div');
@@ -17930,6 +14478,24 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         function updateEffectsList() {
             effectsList.innerHTML = '';
+
+            // Verifica se não há efeitos para mostrar
+            if (allEffects.length === 0) {
+                const noEffectsMessage = document.createElement('div');
+                noEffectsMessage.style.textAlign = 'center';
+                noEffectsMessage.style.padding = '20px';
+                noEffectsMessage.style.color = '#6ec6ff';
+                noEffectsMessage.style.fontSize = '14px';
+                noEffectsMessage.style.fontStyle = 'italic';
+                noEffectsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
+                noEffectsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+                noEffectsMessage.style.borderRadius = '8px';
+                noEffectsMessage.style.marginTop = '10px';
+                noEffectsMessage.innerHTML = '⚡<br/>Nenhum efeito disponível<br><small>Adicione efeitos de comida, bebida, poção ou condições</small>';
+
+                effectsList.appendChild(noEffectsMessage);
+                return;
+            }
 
             allEffects.forEach(effect => {
                 const isActive = isEffectActive(effect.effectKey);
@@ -18354,6 +14920,111 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             });
         }
 
+        // Função para criar índice de busca
+        function createSearchIndex() {
+            const searchIndex = [];
+
+            // Adiciona pratos
+            const pratos = getPratosCompletos();
+            pratos.forEach(prato => {
+                searchIndex.push({
+                    name: prato.nome,
+                    category: 'Prato',
+                    description: prato.descricao,
+                    effects: prato.bonus,
+                    icon: prato.icone || '🍽️',
+                    type: 'prato',
+                    data: prato
+                });
+            });
+
+            // Adiciona bebidas
+            const bebidas = getBebidasCompletas();
+            bebidas.forEach(bebida => {
+                searchIndex.push({
+                    name: bebida.nome,
+                    category: 'Bebida',
+                    description: bebida.descricao,
+                    effects: bebida.efeito,
+                    icon: bebida.icone || '🥤',
+                    type: 'bebida',
+                    data: bebida
+                });
+            });
+
+            // Adiciona poções
+            const pocoes = getPocoesCompletas();
+            pocoes.forEach(pocao => {
+                searchIndex.push({
+                    name: pocao.nome,
+                    category: 'Poção',
+                    description: pocao.descricao,
+                    effects: pocao.efeito,
+                    icon: pocao.icone || '🧪',
+                    type: 'pocao',
+                    data: pocao
+                });
+            });
+
+            // Adiciona condições
+            const conditions = getConditionsList();
+            conditions.forEach(condition => {
+                searchIndex.push({
+                    name: condition.nome,
+                    category: 'Condição',
+                    description: condition.descricao,
+                    effects: condition.efeitos,
+                    icon: condition.icone || '⚡',
+                    type: 'condition',
+                    data: condition
+                });
+            });
+
+            // Adiciona skills
+            const skills = Object.keys(SKILLS_DATA);
+            skills.forEach(skill => {
+                const skillData = SKILLS_DATA[skill];
+                searchIndex.push({
+                    name: skill,
+                    category: 'Perícia',
+                    description: skillData.descricao,
+                    effects: skillData.usos ? skillData.usos.map(u => u.titulo).join(', ') : '',
+                    icon: '🎯',
+                    type: 'skill',
+                    data: skillData
+                });
+            });
+
+            // Adiciona magias do grimório
+            const spellsCache = window.grimorioSpellsCache || [];
+            if (spellsCache && spellsCache.length > 0) {
+                spellsCache.forEach(spell => {
+                    const traditionName = spell.tradition === 'arcana' ? 'Arcana' :
+                        spell.tradition === 'divina' ? 'Divina' :
+                            spell.tradition === 'universal' ? 'Universal' : spell.tradition;
+
+                    const description = spell.system?.description?.value || '';
+
+                    searchIndex.push({
+                        name: spell.name,
+                        category: 'Magia',
+                        description: `${traditionName} - ${spell.circuloDisplay} - ${spell.escola}`,
+                        effects: description,
+                        icon: '✨',
+                        type: 'spell',
+                        data: {
+                            ...spell,
+                            tradition: traditionName,
+                            circle: spell.circulo,
+                            school: spell.escola
+                        }
+                    });
+                });
+            }
+
+            return searchIndex;
+        }
+
         // Listener para input
         searchInput.addEventListener('input', async (e) => {
             const query = e.target.value.trim();
@@ -18391,233 +15062,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         placeholder.style.textAlign = 'center';
         placeholder.style.padding = '20px';
         resultsContainer.appendChild(placeholder);
-    }
-
-    // Função para criar índice de busca
-    function createSearchIndex() {
-        const searchIndex = [];
-
-        // Adiciona pratos
-        const pratos = getPratosCompletos();
-        pratos.forEach(prato => {
-            searchIndex.push({
-                name: prato.nome,
-                category: 'Prato',
-                description: prato.descricao,
-                effects: prato.bonus,
-                icon: prato.icone || '🍽️',
-                type: 'prato',
-                data: prato
-            });
-        });
-
-        // Adiciona bebidas
-        const bebidas = getBebidasCompletas();
-        bebidas.forEach(bebida => {
-            searchIndex.push({
-                name: bebida.nome,
-                category: 'Bebida',
-                description: bebida.descricao,
-                effects: bebida.efeito,
-                icon: bebida.icone || '🥤',
-                type: 'bebida',
-                data: bebida
-            });
-        });
-
-        // Adiciona poções
-        const pocoes = getPocoesCompletas();
-        pocoes.forEach(pocao => {
-            searchIndex.push({
-                name: pocao.nome,
-                category: 'Poção',
-                description: pocao.descricao,
-                effects: pocao.efeito,
-                icon: pocao.icone || '🧪',
-                type: 'pocao',
-                data: pocao
-            });
-        });
-
-        // Adiciona condições
-        const conditions = getConditionsList();
-        conditions.forEach(condition => {
-            searchIndex.push({
-                name: condition.nome,
-                category: 'Condição',
-                description: condition.descricao,
-                effects: condition.efeitos,
-                icon: condition.icone || '⚡',
-                type: 'condition',
-                data: condition
-            });
-        });
-
-        // Adiciona skills
-        const skills = Object.keys(SKILLS_DATA);
-        skills.forEach(skill => {
-            const skillData = SKILLS_DATA[skill];
-            searchIndex.push({
-                name: skill,
-                category: 'Perícia',
-                description: skillData.descricao,
-                effects: skillData.usos ? skillData.usos.map(u => u.titulo).join(', ') : '',
-                icon: '🎯',
-                type: 'skill',
-                data: skillData
-            });
-        });
-
-        // Adiciona magias do grimório
-        const spellsCache = window.grimorioSpellsCache || [];
-        if (spellsCache && spellsCache.length > 0) {
-            spellsCache.forEach(spell => {
-                const traditionName = spell.tradition === 'arcana' ? 'Arcana' :
-                    spell.tradition === 'divina' ? 'Divina' :
-                        spell.tradition === 'universal' ? 'Universal' : spell.tradition;
-
-                const description = spell.system?.description?.value || '';
-
-                searchIndex.push({
-                    name: spell.name,
-                    category: 'Magia',
-                    description: `${traditionName} - ${spell.circuloDisplay} - ${spell.escola}`,
-                    effects: description,
-                    icon: '✨',
-                    type: 'spell',
-                    data: {
-                        ...spell,
-                        tradition: traditionName,
-                        circle: spell.circulo,
-                        school: spell.escola
-                    }
-                });
-            });
-        } else {
-            // Fallback para magias básicas se o cache não estiver disponível
-            const basicSpells = [
-                { name: 'Luz Sagrada', tradition: 'Divina', circle: 1, school: 'Evocação' },
-                { name: 'Bola de Fogo', tradition: 'Arcana', circle: 3, school: 'Evocação' },
-                { name: 'Cura Ferimentos Leves', tradition: 'Divina', circle: 1, school: 'Necromancia' },
-                { name: 'Detectar Magia', tradition: 'Universal', circle: 1, school: 'Adivinhação' }
-            ];
-
-            basicSpells.forEach(spell => {
-                searchIndex.push({
-                    name: spell.name,
-                    category: 'Magia',
-                    description: `${spell.tradition} - ${spell.circle}º Círculo - ${spell.school}`,
-                    effects: '',
-                    icon: '✨',
-                    type: 'spell',
-                    data: spell
-                });
-            });
-        }
-
-        // Adiciona poderes de combate
-        const combatPowers = [
-            { name: 'Acuidade com Arma', description: 'Quando usa uma arma corpo a corpo leve ou uma arma de arremesso, você pode usar sua Destreza em vez de Força nos testes de ataque e rolagens de dano.' },
-            { name: 'Arma Secundária Grande', description: 'Você pode empunhar duas armas de uma mão com o poder Estilo de Duas Armas.' },
-            { name: 'Arremesso Potente', description: 'Quando usa uma arma de arremesso, você pode usar sua Força em vez de Destreza nos testes de ataque.' },
-            { name: 'Ataque Poderoso', description: 'Sempre que faz um ataque corpo a corpo, você pode sofrer –2 no teste de ataque para receber +5 na rolagem de dano.' },
-            { name: 'Bloqueio com Escudo', description: 'Quando sofre dano, você pode gastar 1 PM para receber redução de dano igual ao bônus na Defesa que seu escudo fornece contra este dano.' }
-        ];
-
-        combatPowers.forEach(power => {
-            searchIndex.push({
-                name: power.name,
-                category: 'Poder de Combate',
-                description: power.description,
-                effects: '',
-                icon: '⚔️',
-                type: 'combat_power',
-                data: power
-            });
-        });
-
-        // Adiciona divindades
-        const divinities = [
-            { name: 'Azgher', title: 'Deus-Sol', description: 'Deus da luz e do calor, venerado por viajantes e combatentes das trevas.' },
-            { name: 'Kallyadranoch', title: 'Deus-Dragão', description: 'Deus da sabedoria e conhecimento, venerado por magos e sábios.' },
-            { name: 'Megalokk', title: 'Deus da Guerra', description: 'Deus da guerra e da força, venerado por guerreiros e bárbaros.' }
-        ];
-
-        divinities.forEach(divinity => {
-            searchIndex.push({
-                name: `${divinity.name} - ${divinity.title}`,
-                category: 'Divindade',
-                description: divinity.description,
-                effects: '',
-                icon: '🙏',
-                type: 'divinity',
-                data: divinity
-            });
-        });
-
-        // Adiciona habilidades dinâmicas (aprendidas e automáticas)
-        const learnedPowers = getLearnedPowers();
-        const automaticPowers = getAutomaticPowers();
-        const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-        const specialPowers = getSpecialPowersByLevel(charLevel);
-
-        // Adiciona habilidades automáticas
-        automaticPowers.forEach(abilityName => {
-            searchIndex.push({
-                name: abilityName,
-                category: 'Habilidade',
-                description: 'Habilidade automática do Caçador',
-                effects: 'Sempre disponível',
-                icon: '🎯',
-                type: 'ability',
-                data: { nome: abilityName, tipo: 'automática' }
-            });
-        });
-
-        // Adiciona habilidades especiais por nível
-        specialPowers.forEach(abilityName => {
-            searchIndex.push({
-                name: abilityName,
-                category: 'Habilidade',
-                description: `Habilidade especial disponível no nível ${charLevel}`,
-                effects: 'Habilidade de classe',
-                icon: '🌟',
-                type: 'ability',
-                data: { nome: abilityName, tipo: 'especial' }
-            });
-        });
-
-        // Adiciona habilidades aprendidas
-        learnedPowers.forEach(power => {
-            const abilityName = power.nome;
-            if (!automaticPowers.includes(abilityName) && !specialPowers.includes(abilityName)) {
-                searchIndex.push({
-                    name: abilityName,
-                    category: 'Habilidade',
-                    description: 'Habilidade aprendida pelo Caçador',
-                    effects: 'Habilidade escolhida',
-                    icon: '🎯',
-                    type: 'ability',
-                    data: { nome: abilityName, tipo: 'aprendida' }
-                });
-            }
-        });
-
-        // Adiciona poderes de destino aprendidos
-        const learnedDestinyPowers = getLearnedDestinyPowers();
-        learnedDestinyPowers.forEach(powerName => {
-            searchIndex.push({
-                name: powerName,
-                category: 'Poder de Destino',
-                description: 'Poder de destino aprendido pelo personagem',
-                effects: 'Poder de destino',
-                icon: '⭐',
-                type: 'destiny_power',
-                data: { nome: powerName, tipo: 'destino' }
-            });
-        });
-
-        return searchIndex;
     }
 
     // Função para lidar com clique em item da busca
