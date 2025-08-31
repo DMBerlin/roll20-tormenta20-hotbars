@@ -9,7 +9,7 @@
     // Sistema de nome do personagem
     const CHAR_NAME_KEY = 'tormenta-20-hotbars-charname';
     // Sistema de habilidades aprendidas do Caçador
-    const HUNTER_ABILITIES_KEY = 'tormenta-20-hotbars-hunter-abilities';
+
     // Sistema de poderes de destino aprendidos
     const DESTINY_POWERS_KEY = 'tormenta-20-hotbars-destiny-powers';
     // Sistema de raça selecionada
@@ -30,7 +30,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.17911'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.36631'; // Última tag Git
 
     const logger = window.console;
 
@@ -2134,44 +2134,36 @@
         }
     }
 
-    // Funções para gerenciar habilidades aprendidas
-    function getLearnedAbilities() {
-        try {
-            const abilities = localStorage.getItem(HUNTER_ABILITIES_KEY);
-            return abilities ? JSON.parse(abilities) : [];
-        } catch (error) {
-            logger.log('Erro ao carregar habilidades aprendidas:', error);
-            return [];
-        }
-    }
 
-    function saveLearnedAbilities(abilities) {
-        try {
-            localStorage.setItem(HUNTER_ABILITIES_KEY, JSON.stringify(abilities));
-        } catch (error) {
-            logger.log('Erro ao salvar habilidades aprendidas:', error);
-        }
-    }
 
-    function toggleLearnedAbility(abilityName) {
-        const learnedAbilities = getLearnedAbilities();
-        const index = learnedAbilities.indexOf(abilityName);
+
+
+    function toggleLearnedPower(powerName) {
+        const learnedPowers = getLearnedPowers();
+        const index = learnedPowers.findIndex(p => p.nome === powerName);
 
         if (index > -1) {
-            learnedAbilities.splice(index, 1);
-            showWarningNotification(`Habilidade "${abilityName}" removida da lista de aprendidas.`);
+            learnedPowers.splice(index, 1);
+            showWarningNotification(`Poder "${powerName}" removido da lista de aprendidos.`);
         } else {
-            learnedAbilities.push(abilityName);
-            showSuccessNotification(`Habilidade "${abilityName}" adicionada à lista de aprendidas!`);
+            // Adicionar poder básico se não existir
+            const basicPower = {
+                nome: powerName,
+                descricao: 'Poder aprendido do sistema de poderes gerais.',
+                categoria: 'Geral',
+                subtipo: 'Poder Aprendido'
+            };
+            learnedPowers.push(basicPower);
+            showSuccessNotification(`Poder "${powerName}" adicionado à lista de aprendidos!`);
         }
 
-        saveLearnedAbilities(learnedAbilities);
-        return learnedAbilities;
+        saveLearnedPowers(learnedPowers);
+        return learnedPowers;
     }
 
-    // Função para obter habilidades automáticas (sempre possuídas)
-    function getAutomaticAbilities() {
-        return ['Marca da Presa', 'Rastreador'];
+    // Função para obter poderes automáticos (sempre possuídos)
+    function getAutomaticPowers() {
+        return [];
     }
     // Função para obter poderes disponíveis baseado no nível
     function getAvailablePowersByLevel(level) {
@@ -2200,38 +2192,38 @@
         return powersByLevel[level] || 0;
     }
 
-    // Função para obter habilidades especiais por nível
-    function getSpecialAbilitiesByLevel(level) {
-        const specialAbilities = [];
+    // Função para obter poderes especiais por nível
+    function getSpecialPowersByLevel(level) {
+        const specialPowers = [];
 
-        if (level >= 3) specialAbilities.push('Explorador');
-        if (level >= 5) specialAbilities.push('Caminho do Explorador');
-        if (level >= 20) specialAbilities.push('Mestre Caçador');
+        if (level >= 3) specialPowers.push('Explorador');
+        if (level >= 5) specialPowers.push('Caminho do Explorador');
+        if (level >= 20) specialPowers.push('Mestre Caçador');
 
-        return specialAbilities;
+        return specialPowers;
     }
-    // Função para verificar se uma habilidade está disponível no nível atual
-    function isAbilityAvailableAtLevel(abilityName, level) {
-        // Habilidades automáticas sempre disponíveis
-        if (getAutomaticAbilities().includes(abilityName)) {
+    // Função para verificar se um poder está disponível no nível atual
+    function isPowerAvailableAtLevel(powerName, level) {
+        // Poderes automáticos sempre disponíveis
+        if (getAutomaticPowers().includes(powerName)) {
             return true;
         }
 
-        // Habilidades especiais baseadas no nível
-        if (getSpecialAbilitiesByLevel(level).includes(abilityName)) {
+        // Poderes especiais baseados no nível
+        if (getSpecialPowersByLevel(level).includes(powerName)) {
             return true;
         }
 
         // Poderes de Caçador - verifica se o jogador já escolheu poderes suficientes
-        const learnedAbilities = getLearnedAbilities();
+        const learnedPowers = getLearnedPowers();
         const availablePowers = getAvailablePowersByLevel(level);
-        const learnedPowers = learnedAbilities.filter(ability =>
-            !getAutomaticAbilities().includes(ability) &&
-            !getSpecialAbilitiesByLevel(level).includes(ability)
+        const learnedHunterPowers = learnedPowers.filter(power =>
+            !getAutomaticPowers().includes(power.nome) &&
+            !getSpecialPowersByLevel(level).includes(power.nome)
         ).length;
 
         // Se ainda há poderes disponíveis para escolher
-        return learnedPowers < availablePowers;
+        return learnedHunterPowers < availablePowers;
     }
 
     // Funções para gerenciar magias aprendidas
@@ -2374,35 +2366,41 @@
         }
     }
 
-    // Função utilitária para verificar se o personagem possui uma habilidade
-    function hasAbility(abilityName) {
-        const learnedAbilities = getLearnedAbilities();
-        const automaticAbilities = getAutomaticAbilities();
+    // Função utilitária para verificar se o personagem possui um poder
+    function hasPower(powerName) {
+        const learnedPowers = getLearnedPowers();
+        const automaticPowers = getAutomaticPowers();
 
-        // Habilidades automáticas sempre possuídas
-        if (automaticAbilities.includes(abilityName)) {
+        // Poderes automáticos sempre possuídos
+        if (automaticPowers.includes(powerName)) {
             return true;
         }
 
-        return learnedAbilities.includes(abilityName);
+        return learnedPowers.some(power => power.nome === powerName);
     }
 
-    // Função para inicializar habilidades automáticas (chamada uma vez)
-    function initializeAutomaticAbilities() {
-        const learnedAbilities = getLearnedAbilities();
-        const automaticAbilities = getAutomaticAbilities();
+    // Função para inicializar poderes automáticos (chamada uma vez)
+    function initializeAutomaticPowers() {
+        const learnedPowers = getLearnedPowers();
+        const automaticPowers = getAutomaticPowers();
 
-        // Adiciona habilidades automáticas se não existirem
+        // Adiciona poderes automáticos se não existirem
         let updated = false;
-        automaticAbilities.forEach(ability => {
-            if (!learnedAbilities.includes(ability)) {
-                learnedAbilities.push(ability);
+        automaticPowers.forEach(powerName => {
+            if (!learnedPowers.some(power => power.nome === powerName)) {
+                const basicPower = {
+                    nome: powerName,
+                    descricao: 'Poder automático do Caçador.',
+                    categoria: 'Classe',
+                    subtipo: 'Caçador'
+                };
+                learnedPowers.push(basicPower);
                 updated = true;
             }
         });
 
         if (updated) {
-            saveLearnedAbilities(learnedAbilities);
+            saveLearnedPowers(learnedPowers);
         }
     }
 
@@ -11029,7 +11027,7 @@
         healthBarContainer.style.marginTop = '2px';
 
         const healthBar = document.createElement('div');
-        healthBar.style.width = '80px';
+        healthBar.style.width = '100%';
         healthBar.style.height = '8px';
         healthBar.style.background = 'rgba(255, 0, 0, 0.3)';
         healthBar.style.borderRadius = '4px';
@@ -11076,7 +11074,7 @@
         manaBarContainer.style.marginTop = '1px';
 
         const manaBar = document.createElement('div');
-        manaBar.style.width = '80px';
+        manaBar.style.width = '100%';
         manaBar.style.height = '8px';
         manaBar.style.background = 'rgba(0, 0, 255, 0.3)';
         manaBar.style.borderRadius = '4px';
@@ -12407,7 +12405,7 @@
     waitForElement('#textchat-input').then(() => {
         setTimeout(() => {
             // Inicializa habilidades automáticas
-            initializeAutomaticAbilities();
+            initializeAutomaticPowers();
 
             // Adiciona estilos de scrollbar customizada
             createCustomScrollbarStyles();
@@ -14384,12 +14382,11 @@
         // Variáveis de filtro
         let currentTextFilter = '';
         let currentStatusFilter = 'all'; // 'all', 'learned', 'available'
-        // Função para atualizar a lista de habilidades
+        // Função para atualizar a lista de poderes
         function updateAbilityList() {
-            const learnedAbilities = getLearnedAbilities();
-            const automaticAbilities = getAutomaticAbilities();
+            const automaticPowers = getAutomaticPowers();
             const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-            const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
+            const specialPowers = getSpecialPowersByLevel(charLevel);
 
             abilitiesListContainer.innerHTML = '';
 
@@ -14401,9 +14398,9 @@
                 // Filtro de status
                 let matchesStatus = true;
                 if (currentStatusFilter === 'learned') {
-                    matchesStatus = hasAbility(ability.name);
+                    matchesStatus = hasPower(ability.name);
                 } else if (currentStatusFilter === 'available') {
-                    matchesStatus = !hasAbility(ability.name) && isAbilityAvailableAtLevel(ability.name, charLevel);
+                    matchesStatus = !hasPower(ability.name) && isPowerAvailableAtLevel(ability.name, charLevel);
                 }
 
                 return matchesText && matchesStatus;
@@ -14440,10 +14437,10 @@
 
             filteredAbilities.forEach(ability => {
                 const abilityContainer = document.createElement('div');
-                const isAutomatic = automaticAbilities.includes(ability.name);
-                const isSpecial = specialAbilities.includes(ability.name);
-                const isLearned = hasAbility(ability.name);
-                const isAvailable = isAbilityAvailableAtLevel(ability.name, charLevel);
+                const isAutomatic = automaticPowers.includes(ability.name);
+                const isSpecial = specialPowers.includes(ability.name);
+                const isLearned = hasPower(ability.name);
+                const isAvailable = isPowerAvailableAtLevel(ability.name, charLevel);
 
                 // Define cores baseadas no tipo de habilidade
                 let backgroundColor, borderColor, textColor;
@@ -14499,7 +14496,7 @@
 
                     if (ability.name === 'Companheiro Animal') {
                         checkbox.onchange = () => {
-                            toggleLearnedAbility(ability.name);
+                            toggleLearnedPower(ability.name);
                             if (checkbox.checked) {
                                 // Cria modal para selecionar tipo do companheiro animal
                                 const existingModal = document.getElementById('animal-companion-modal');
@@ -14590,7 +14587,7 @@
                         };
                     } else {
                         checkbox.onchange = () => {
-                            toggleLearnedAbility(ability.name);
+                            toggleLearnedPower(ability.name);
                             updateAbilityList(); // Atualiza a lista para refletir as mudanças
                         };
                     }
@@ -14716,7 +14713,8 @@
             statsContainer.style.border = '1px solid rgba(139, 69, 19, 0.3)';
             statsContainer.style.textAlign = 'center';
 
-            const learnedAbilitiesCount = learnedAbilities.length;
+            const learnedPowers = getLearnedPowers();
+            const learnedAbilitiesCount = learnedPowers.length;
             const totalAbilities = abilities.length;
             const progress = Math.round((learnedAbilitiesCount / totalAbilities) * 100);
 
@@ -15379,7 +15377,7 @@
             });
         }
         // Escaramuça
-        if (hasAbility('Escaramuça')) {
+        if (hasPower('Escaramuça')) {
             effects.push({
                 label: 'Escaramuça (+1d8 dano)',
                 value: 'escaramurca',
@@ -15389,7 +15387,7 @@
             });
         }
         // Marca da Presa
-        if (hasAbility('Marca da Presa')) {
+        if (hasPower('Marca da Presa')) {
             let marcaPresaAttackMod = 0;
             let marcaPresaDice = '';
             let marcaPresaDesc = '';
@@ -15425,7 +15423,7 @@
             });
         }
         // Inimigo
-        if (hasAbility('Inimigo de (Criatura)')) {
+        if (hasPower('Inimigo de (Criatura)')) {
             effects.push({
                 label: 'Inimigo (dobra margem de crítico)',
                 value: 'inimigo',
@@ -15434,7 +15432,7 @@
             });
         }
         // Ataque Furtivo (Companheiro Animal do tipo Assassino)
-        if (hasAbility('Companheiro Animal') && getAnimalCompanionType() === 'assassino') {
+        if (hasPower('Companheiro Animal') && getAnimalCompanionType() === 'assassino') {
             // Dano dependente do nível (sem bônus de acerto)
             let dice = '1d6';
             let desc = '*+ Ataque Furtivo*';
@@ -15641,19 +15639,19 @@
             });
 
             // Adicionar habilidades específicas da classe
-            if (hasAbility('Ervas Curativas')) {
+            if (hasPower('Ervas Curativas')) {
                 dynamicAbilities.push(abilityTemplates.createAbility({
                     nome: 'Ervas Curativas',
                     descricao: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)'
                 }));
             }
-            if (hasAbility('Bote')) {
+            if (hasPower('Bote')) {
                 dynamicAbilities.push(abilityTemplates.createAbility({
                     nome: 'Bote',
                     descricao: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária. Pré-requisito: Ambidestria, 6º nível de caçador.'
                 }));
             }
-            if (hasAbility('Emboscar')) {
+            if (hasPower('Emboscar')) {
                 dynamicAbilities.push(abilityTemplates.createAbility({
                     nome: 'Emboscar',
                     descricao: 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate. Pré-requisito: treinado em Furtividade.'
@@ -18543,13 +18541,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Adiciona habilidades dinâmicas (aprendidas e automáticas)
-        const learnedAbilities = getLearnedAbilities();
-        const automaticAbilities = getAutomaticAbilities();
+        const learnedPowers = getLearnedPowers();
+        const automaticPowers = getAutomaticPowers();
         const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-        const specialAbilities = getSpecialAbilitiesByLevel(charLevel);
+        const specialPowers = getSpecialPowersByLevel(charLevel);
 
         // Adiciona habilidades automáticas
-        automaticAbilities.forEach(abilityName => {
+        automaticPowers.forEach(abilityName => {
             searchIndex.push({
                 name: abilityName,
                 category: 'Habilidade',
@@ -18562,7 +18560,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Adiciona habilidades especiais por nível
-        specialAbilities.forEach(abilityName => {
+        specialPowers.forEach(abilityName => {
             searchIndex.push({
                 name: abilityName,
                 category: 'Habilidade',
@@ -18575,8 +18573,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Adiciona habilidades aprendidas
-        learnedAbilities.forEach(abilityName => {
-            if (!automaticAbilities.includes(abilityName) && !specialAbilities.includes(abilityName)) {
+        learnedPowers.forEach(power => {
+            const abilityName = power.nome;
+            if (!automaticPowers.includes(abilityName) && !specialPowers.includes(abilityName)) {
                 searchIndex.push({
                     name: abilityName,
                     category: 'Habilidade',
