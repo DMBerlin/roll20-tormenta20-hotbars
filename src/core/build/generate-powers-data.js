@@ -61,24 +61,39 @@ function decodeHtmlEntitiesRecursive(obj) {
 }
 
 /**
- * Extract text content from HTML string
+ * Extract text content from HTML string and remove FoundryVTT tags
  */
 function extractTextFromHtml(htmlContent) {
   if (!htmlContent) return '';
 
   return htmlContent
+    // Remove HTML tags
     .replace(/<p[^>]*>/g, '')
     .replace(/<\/p>/g, '\n')
     .replace(/<em[^>]*>/g, '')
     .replace(/<\/em>/g, '')
     .replace(/<[^>]*>/g, '')
+
+    // Remove FoundryVTT UUID references
+    .replace(/@UUID\[[^\]]+\]\{[^}]+\}/g, '')
+
+    // Remove FoundryVTT roll formulas
+    .replace(/\[\[[^\]]+\]\]/g, '')
+
+    // Remove FoundryVTT attribute references
+    .replace(/@(car|for|des|con|int|sab|nvl\.[a-z]+|nivel|treino|Tormenta[0-9]*)/g, '')
+
+    // Remove HTML entities
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
+
+    // Clean up extra whitespace and newlines
     .replace(/\n\s*\n/g, '\n')
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -384,7 +399,6 @@ function generatePowersData() {
 
     if (processedPower) {
       const categoria = processedPower.categoria;
-      const subtipo = processedPower.subtipo;
 
       // Initialize category if it doesn't exist
       if (!powersData[categoria]) {
@@ -392,13 +406,13 @@ function generatePowersData() {
       }
 
       // Initialize subtype if it doesn't exist
-      if (!powersData[categoria][subtipo]) {
-        powersData[categoria][subtipo] = {};
+      if (!powersData[categoria][processedPower.subtipo]) {
+        powersData[categoria][processedPower.subtipo] = {};
       }
 
       // Add power to the appropriate category and subtype
       const powerKey = processedPower.nome.toLowerCase().replace(/[^a-z0-9]/g, '-');
-      powersData[categoria][subtipo][powerKey] = processedPower;
+      powersData[categoria][processedPower.subtipo][powerKey] = processedPower;
 
       processedCount++;
     } else {
@@ -439,7 +453,7 @@ module.exports = powersData;
   // Count total powers by category
   for (const [categoria, subtipos] of Object.entries(decodedPowersData)) {
     let categoriaCount = 0;
-    for (const [subtipo, poderes] of Object.entries(subtipos)) {
+    for (const [, poderes] of Object.entries(subtipos)) {
       categoriaCount += Object.keys(poderes).length;
     }
     console.log(`  📊 ${categoria}: ${categoriaCount} poderes`);

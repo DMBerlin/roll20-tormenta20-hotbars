@@ -17,7 +17,7 @@ update-version:
 	pnpm update-version
 
 preview:
-	make update-version
-	make lint
-	make build
-	make dev
+	pnpm update-version
+	pnpm lint
+	pnpm build
+	pnpm dev

@@ -18,6 +18,8 @@
     const SELECTED_RACE_TYPE_KEY = 'tormenta-20-hotbars-selected-race-type';
     // Sistema de magias aprendidas
     const LEARNED_SPELLS_KEY = 'tormenta-20-hotbars-learned-spells';
+    // Sistema de poderes aprendidos
+    const LEARNED_POWERS_KEY = 'tormenta-20-hotbars-learned-powers';
 
     // NOVO: Sistema de cache de imagens
     const IMAGE_CACHE_KEY = 'tormenta-20-hotbars-image-cache';
@@ -28,7 +30,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.8744'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.17911'; // Última tag Git
 
     const logger = window.console;
 
@@ -2272,6 +2274,106 @@
         return learnedSpells.includes(spellName);
     }
 
+    // Funções para gerenciar poderes aprendidos
+    function getLearnedPowers() {
+        try {
+            const powers = localStorage.getItem(LEARNED_POWERS_KEY);
+            const result = powers ? JSON.parse(powers) : [];
+            return result;
+        } catch (error) {
+            console.error('❌ Erro ao carregar poderes aprendidos:', error);
+            return [];
+        }
+    }
+
+    function saveLearnedPowers(powers) {
+        try {
+            localStorage.setItem(LEARNED_POWERS_KEY, JSON.stringify(powers));
+        } catch (error) {
+            console.error('❌ Erro ao salvar poderes aprendidos:', error);
+        }
+    }
+
+    function addLearnedPower(power) {
+        const learnedPowers = getLearnedPowers();
+        const powerName = power.nome;
+
+        // Verifica se o poder já está na lista
+        const existingIndex = learnedPowers.findIndex(p => p.nome === powerName);
+
+        if (existingIndex > -1) {
+            showWarningNotification(`Poder "${powerName}" já está na lista de aprendidos.`);
+            return;
+        }
+
+        // Adiciona o poder à lista
+        learnedPowers.push(power);
+        saveLearnedPowers(learnedPowers);
+
+        // Atualiza a lista de poderes aprendidos na hotbar
+        updateLearnedPowersList();
+    }
+
+    function removeLearnedPower(powerName) {
+        const learnedPowers = getLearnedPowers();
+        const index = learnedPowers.findIndex(p => p.nome === powerName);
+
+        if (index > -1) {
+            learnedPowers.splice(index, 1);
+            saveLearnedPowers(learnedPowers);
+            showWarningNotification(`Poder "${powerName}" removido da lista de aprendidos.`);
+
+            // Atualiza a lista de poderes aprendidos na hotbar
+            updateLearnedPowersList();
+        }
+    }
+
+    function isPowerLearned(powerName) {
+        const learnedPowers = getLearnedPowers();
+        return learnedPowers.some(p => p.nome === powerName);
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    function togglePowerFavorite(powerName) {
+        const learnedPowers = getLearnedPowers();
+        const power = learnedPowers.find(p => p.nome === powerName);
+
+        if (power) {
+            power.favorite = !power.favorite;
+            saveLearnedPowers(learnedPowers);
+
+            if (power.favorite) {
+                showSuccessNotification(`Poder "${powerName}" fixado no topo!`);
+            } else {
+                showWarningNotification(`Poder "${powerName}" removido dos fixados.`);
+            }
+
+            // Atualiza a lista de poderes aprendidos na hotbar
+            updateLearnedPowersList();
+        }
+    }
+
+    function updateLearnedPowersList() {
+        const learnedPowers = getLearnedPowers();
+
+        // Ordena: favoritos primeiro, depois alfabeticamente
+        learnedPowers.sort((a, b) => {
+            if (a.favorite && !b.favorite) return -1;
+            if (!a.favorite && b.favorite) return 1;
+            return a.nome.localeCompare(b.nome);
+        });
+
+        // Atualiza a lista na hotbar se o popup de poderes estiver aberto
+        const abilitiesPopup = document.getElementById('abilities-popup');
+        if (abilitiesPopup) {
+            // Re-executa a função de atualização da lista se ela existir
+            const filterInput = abilitiesPopup.querySelector('input[placeholder="Filtrar poderes..."]');
+            if (filterInput) {
+                filterInput.dispatchEvent(new Event('input'));
+            }
+        }
+    }
+
     // Função utilitária para verificar se o personagem possui uma habilidade
     function hasAbility(abilityName) {
         const learnedAbilities = getLearnedAbilities();
@@ -3379,6 +3481,40 @@
         potionsDesc.style.fontSize = '13px';
         potionsCard.appendChild(potionsDesc);
         modulesList.appendChild(potionsCard);
+
+        // Card: Poderes Gerais
+        const powersCard = document.createElement('div');
+        powersCard.style.background = '#23243a';
+        powersCard.style.border = '1.5px solid #ffb86c';
+        powersCard.style.borderRadius = '8px';
+        powersCard.style.padding = '16px';
+        powersCard.style.cursor = 'pointer';
+        powersCard.style.transition = 'all 0.2s';
+        powersCard.onmouseover = () => {
+            powersCard.style.background = '#2d2e4a';
+        };
+        powersCard.onmouseout = () => {
+            powersCard.style.background = '#23243a';
+        };
+        powersCard.onclick = () => {
+            popup.remove();
+            const overlay = document.getElementById('misc-overlay');
+            if (overlay) overlay.remove();
+            createPoderesGeraisPopup();
+        };
+        const powersTitle = document.createElement('div');
+        powersTitle.textContent = 'Poderes Gerais';
+        powersTitle.style.color = '#ffb86c';
+        powersTitle.style.fontSize = '16px';
+        powersTitle.style.fontWeight = 'bold';
+        powersTitle.style.marginBottom = '6px';
+        powersCard.appendChild(powersTitle);
+        const powersDesc = document.createElement('div');
+        powersDesc.textContent = 'Poderes gerais podem ser escolhidos por qualquer personagem, independentemente de sua classe.';
+        powersDesc.style.color = '#ecf0f1';
+        powersDesc.style.fontSize = '13px';
+        powersCard.appendChild(powersDesc);
+        modulesList.appendChild(powersCard);
 
         // Card: Grimório de Magias
         const grimorioCard = document.createElement('div');
@@ -5570,6 +5706,33 @@
         return favoritas.includes(nomePocao);
     }
 
+    // Funções auxiliares para poderes
+    function getPowersFavoritos() {
+        return JSON.parse(localStorage.getItem('tormenta-20-hotbars-powers-favoritos') || '[]');
+    }
+
+    function savePowersFavoritos(favoritos) {
+        localStorage.setItem('tormenta-20-hotbars-powers-favoritos', JSON.stringify(favoritos));
+    }
+
+    function togglePowerFavorito(nomePower) {
+        let favoritos = getPowersFavoritos();
+        const index = favoritos.indexOf(nomePower);
+        if (index > -1) {
+            favoritos.splice(index, 1);
+            showWarningNotification(`Poder "${nomePower}" removido dos favoritos.`);
+        } else {
+            favoritos.push(nomePower);
+            showSuccessNotification(`Poder "${nomePower}" adicionado aos favoritos!`);
+        }
+        savePowersFavoritos(favoritos);
+    }
+
+    function isPowerFavorito(nomePower) {
+        const favoritos = getPowersFavoritos();
+        return favoritos.includes(nomePower);
+    }
+
     // Dados completos dos pratos baseados no arquivo MD
     function getPratosCompletos() {
         return [
@@ -7107,6 +7270,483 @@
 
         return card.render();
     }
+
+    // Template para cards de poderes
+    function createPowerCard(power, onFavoriteToggle) {
+        const card = document.createElement('div');
+        card.style.background = '#23243a';
+        card.style.border = '1.5px solid #ffb86c';
+        card.style.borderRadius = '8px';
+        card.style.padding = '16px';
+        card.style.cursor = 'pointer';
+        card.style.transition = 'all 0.2s';
+        card.style.position = 'relative';
+
+        card.onmouseover = () => {
+            card.style.background = '#2d2e4a';
+        };
+        card.onmouseout = () => {
+            card.style.background = '#23243a';
+        };
+
+        // Título e botão de favorito
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'flex-start';
+        header.style.marginBottom = '8px';
+
+        const title = document.createElement('div');
+        title.textContent = power.nome;
+        title.style.color = '#ffb86c';
+        title.style.fontSize = '16px';
+        title.style.fontWeight = 'bold';
+        title.style.flex = '1';
+        header.appendChild(title);
+
+        // Botão de favorito
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.innerHTML = isPowerFavorito(power.nome) ? '★' : '☆';
+        favoriteBtn.style.background = 'none';
+        favoriteBtn.style.border = 'none';
+        favoriteBtn.style.color = isPowerFavorito(power.nome) ? '#ffb86c' : '#666';
+        favoriteBtn.style.fontSize = '18px';
+        favoriteBtn.style.cursor = 'pointer';
+        favoriteBtn.style.padding = '0';
+        favoriteBtn.style.marginLeft = '8px';
+        favoriteBtn.onclick = (e) => {
+            e.stopPropagation();
+            togglePowerFavorito(power.nome);
+            favoriteBtn.innerHTML = isPowerFavorito(power.nome) ? '★' : '☆';
+            favoriteBtn.style.color = isPowerFavorito(power.nome) ? '#ffb86c' : '#666';
+            if (onFavoriteToggle) onFavoriteToggle();
+        };
+        header.appendChild(favoriteBtn);
+        card.appendChild(header);
+
+        // Descrição
+        const description = document.createElement('div');
+        description.textContent = power.descricao;
+        description.style.color = '#ecf0f1';
+        description.style.fontSize = '13px';
+        description.style.marginBottom = '10px';
+        description.style.lineHeight = '1.4';
+        card.appendChild(description);
+
+        // Chips informativos
+        const chipsContainer = document.createElement('div');
+        chipsContainer.style.display = 'flex';
+        chipsContainer.style.flexWrap = 'wrap';
+        chipsContainer.style.gap = '6px';
+        chipsContainer.style.marginBottom = '8px';
+
+        // Chip de categoria
+        const categoriaChip = document.createElement('span');
+        categoriaChip.textContent = power.categoria;
+        categoriaChip.style.background = '#ffb86c';
+        categoriaChip.style.color = '#1e1e28';
+        categoriaChip.style.padding = '4px 8px';
+        categoriaChip.style.borderRadius = '12px';
+        categoriaChip.style.fontSize = '11px';
+        categoriaChip.style.fontWeight = 'bold';
+        categoriaChip.style.textTransform = 'capitalize';
+        chipsContainer.appendChild(categoriaChip);
+
+        // Chip de subtipo
+        const subtipoChip = document.createElement('span');
+        subtipoChip.textContent = power.subtipo;
+        subtipoChip.style.background = '#6ec6ff';
+        subtipoChip.style.color = '#1e1e28';
+        subtipoChip.style.padding = '4px 8px';
+        subtipoChip.style.borderRadius = '12px';
+        subtipoChip.style.fontSize = '11px';
+        subtipoChip.style.fontWeight = 'bold';
+        subtipoChip.style.textTransform = 'capitalize';
+        chipsContainer.appendChild(subtipoChip);
+
+        // Chip de tipo de ativação
+        const ativacaoChip = document.createElement('span');
+        ativacaoChip.textContent = power.tipoAtivacao;
+        ativacaoChip.style.background = '#27ae60';
+        ativacaoChip.style.color = '#fff';
+        ativacaoChip.style.padding = '4px 8px';
+        ativacaoChip.style.borderRadius = '12px';
+        ativacaoChip.style.fontSize = '11px';
+        ativacaoChip.style.fontWeight = 'bold';
+        ativacaoChip.style.textTransform = 'capitalize';
+        chipsContainer.appendChild(ativacaoChip);
+
+        card.appendChild(chipsContainer);
+
+        // Click para abrir modal de detalhes
+        card.onclick = () => {
+            createPowerDetailModal(power, true); // true = fechar apenas o modal, manter popup de poderes gerais
+        };
+
+        return card;
+    }
+
+    // Função para criar modal de detalhes do poder
+    function createPowerDetailModal(power, closeOnlyModal = false) {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('power-detail-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('power-detail-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'power-detail-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'power-detail-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #ffb86c';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '600px';
+        modal.style.maxHeight = '85vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho com ícone, nome e tipo
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'flex-start';
+        header.style.marginBottom = '20px';
+
+        // Container do ícone e informações do poder
+        const powerInfo = document.createElement('div');
+        powerInfo.style.display = 'flex';
+        powerInfo.style.alignItems = 'center';
+        powerInfo.style.gap = '12px';
+        powerInfo.style.flex = '1';
+
+        // Ícone do poder com borda (usando cache)
+        if (power.img) {
+            const iconeContainer = document.createElement('div');
+            iconeContainer.style.position = 'relative';
+            iconeContainer.style.width = '3rem';
+            iconeContainer.style.height = '3rem';
+            iconeContainer.style.display = 'flex';
+            iconeContainer.style.alignItems = 'center';
+            iconeContainer.style.justifyContent = 'center';
+            iconeContainer.style.border = '2px solid #ffb86c';
+            iconeContainer.style.borderRadius = '8px';
+            iconeContainer.style.padding = '2px';
+            iconeContainer.style.backgroundColor = '#23243a';
+
+            // Usa o sistema de cache para carregar a imagem
+            const cachedImageElement = createCachedImageElement(
+                power.img,
+                power.nome,
+                '⚡',
+                {
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '6px',
+                    objectFit: 'cover',
+                    showSkeleton: true
+                }
+            );
+
+            iconeContainer.appendChild(cachedImageElement);
+            powerInfo.appendChild(iconeContainer);
+        }
+
+        // Container do nome e tipo
+        const nomeTipo = document.createElement('div');
+        nomeTipo.style.display = 'flex';
+        nomeTipo.style.flexDirection = 'column';
+        nomeTipo.style.gap = '4px';
+
+        // Nome do poder
+        const powerTitle = document.createElement('div');
+        powerTitle.textContent = power.nome;
+        powerTitle.style.color = '#ffb86c';
+        powerTitle.style.fontSize = '18px';
+        powerTitle.style.fontWeight = 'bold';
+        nomeTipo.appendChild(powerTitle);
+
+        // Tipo
+        const tipo = document.createElement('div');
+        tipo.textContent = `Tipo: ${power.categoria} - ${power.subtipo}`;
+        tipo.style.color = '#6ec6ff';
+        tipo.style.fontSize = '14px';
+        nomeTipo.appendChild(tipo);
+
+        powerInfo.appendChild(nomeTipo);
+        header.appendChild(powerInfo);
+
+        // Botão de fechar
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#ecf0f1',
+            onClick: () => {
+                modal.remove();
+                overlay.remove();
+            }
+        });
+        header.appendChild(closeBtn.render());
+        modal.appendChild(header);
+
+        // Chips informativos
+        const chipsContainer = document.createElement('div');
+        chipsContainer.style.display = 'flex';
+        chipsContainer.style.flexWrap = 'wrap';
+        chipsContainer.style.gap = '8px';
+        chipsContainer.style.marginBottom = '20px';
+
+        // Função para criar chip
+        const createChip = (text, color, bgColor) => {
+            const chip = document.createElement('div');
+            chip.textContent = text;
+            chip.style.padding = '4px 8px';
+            chip.style.borderRadius = '12px';
+            chip.style.fontSize = '12px';
+            chip.style.fontWeight = 'bold';
+            chip.style.color = color;
+            chip.style.backgroundColor = bgColor;
+            chip.style.border = `1px solid ${color}`;
+            return chip;
+        };
+
+        // Chips baseados nas informações disponíveis
+        if (power.tipoAtivacao) {
+            chipsContainer.appendChild(createChip(`Ativação: ${power.tipoAtivacao}`, '#ffb86c', 'rgba(255,184,108,0.1)'));
+        }
+        if (power.custo && power.custo > 0) {
+            chipsContainer.appendChild(createChip(`Custo: ${power.custo} PM`, '#e74c3c', 'rgba(231,76,60,0.1)'));
+        }
+        if (power.alcance) {
+            chipsContainer.appendChild(createChip(`Alcance: ${power.alcance}`, '#6ec6ff', 'rgba(110,198,255,0.1)'));
+        }
+        if (power.alvo) {
+            chipsContainer.appendChild(createChip(`Alvo: ${power.alvo}`, '#a78bfa', 'rgba(167,139,250,0.1)'));
+        }
+        if (power.duracao && power.duracao.valor) {
+            const duracaoText = power.duracao.especial || `${power.duracao.valor} ${power.duracao.unidade}`;
+            chipsContainer.appendChild(createChip(`Duração: ${duracaoText}`, '#27ae60', 'rgba(39,174,96,0.1)'));
+        }
+        if (power.resistencia && power.resistencia.texto) {
+            chipsContainer.appendChild(createChip(`Resistência: ${power.resistencia.texto}`, '#f39c12', 'rgba(243,156,18,0.1)'));
+        }
+
+        modal.appendChild(chipsContainer);
+
+        // Descrição Completa (destaque)
+        if (power.descricaoCompleta) {
+            const descSection = document.createElement('div');
+            descSection.style.marginBottom = '20px';
+            descSection.style.padding = '15px';
+            descSection.style.background = 'rgba(255,184,108,0.05)';
+            descSection.style.border = '1px solid rgba(255,184,108,0.2)';
+            descSection.style.borderRadius = '8px';
+
+            const descTitle = document.createElement('h3');
+            descTitle.textContent = '📖 Descrição Completa';
+            descTitle.style.color = '#ffb86c';
+            descTitle.style.fontSize = '16px';
+            descTitle.style.margin = '0 0 10px 0';
+            descTitle.style.fontWeight = 'bold';
+            descSection.appendChild(descTitle);
+
+            const descText = document.createElement('div');
+            // Convert newlines to proper HTML structure
+            const formattedDescription = power.descricaoCompleta
+                .split('\n\n') // Split by double newlines to get paragraphs
+                .map(paragraph => {
+                    // Handle bullet points within paragraphs
+                    const formattedParagraph = paragraph
+                        .replace(/\n/g, '<br>') // Convert single newlines to line breaks
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Handle italics
+                    return `<p>${formattedParagraph}</p>`;
+                })
+                .join('');
+
+            descText.innerHTML = formattedDescription;
+            descText.style.color = '#ecf0f1';
+            descText.style.fontSize = '15px';
+            descText.style.lineHeight = '1.4';
+
+            // Style paragraphs within the description
+            const paragraphs = descText.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.style.margin = '0 0 8px 0';
+                p.style.padding = '0';
+            });
+
+            descSection.appendChild(descText);
+            modal.appendChild(descSection);
+        }
+
+
+
+        // Informações Técnicas (se disponíveis)
+        const technicalInfo = [];
+        if (power.source) technicalInfo.push({ label: 'Fonte', value: power.source });
+        if (power.execucao) technicalInfo.push({ label: 'Execução', value: power.execucao });
+        if (power.area) technicalInfo.push({ label: 'Área', value: power.area });
+
+        if (technicalInfo.length > 0) {
+            const techSection = document.createElement('div');
+            techSection.style.marginBottom = '20px';
+            const techTitle = document.createElement('h3');
+            techTitle.textContent = '⚙️ Informações Técnicas';
+            techTitle.style.color = '#6ec6ff';
+            techTitle.style.fontSize = '16px';
+            techTitle.style.margin = '0 0 10px 0';
+            techTitle.style.fontWeight = 'bold';
+            techSection.appendChild(techTitle);
+
+            const techGrid = document.createElement('div');
+            techGrid.style.display = 'grid';
+            techGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(150px, 1fr))';
+            techGrid.style.gap = '10px';
+
+            technicalInfo.forEach(item => {
+                const infoItem = document.createElement('div');
+                infoItem.style.background = '#23243a';
+                infoItem.style.padding = '8px 12px';
+                infoItem.style.borderRadius = '6px';
+                infoItem.style.border = '1px solid #444';
+
+                const label = document.createElement('div');
+                label.textContent = item.label;
+                label.style.color = '#888';
+                label.style.fontSize = '12px';
+                label.style.marginBottom = '2px';
+                infoItem.appendChild(label);
+
+                const value = document.createElement('div');
+                value.textContent = item.value;
+                value.style.color = '#ecf0f1';
+                value.style.fontSize = '13px';
+                value.style.fontWeight = 'bold';
+                infoItem.appendChild(value);
+
+                techGrid.appendChild(infoItem);
+            });
+
+            techSection.appendChild(techGrid);
+            modal.appendChild(techSection);
+        }
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.display = 'flex';
+        buttonsContainer.style.gap = '10px';
+        buttonsContainer.style.marginTop = '20px';
+
+        // Botão Compartilhar
+        const shareBtn = document.createElement('button');
+        shareBtn.textContent = 'Compartilhar';
+        shareBtn.style.flex = '1';
+        shareBtn.style.padding = '12px 15px';
+        shareBtn.style.background = '#2c3e50';
+        shareBtn.style.border = '1px solid #34495e';
+        shareBtn.style.borderRadius = '6px';
+        shareBtn.style.color = '#ecf0f1';
+        shareBtn.style.cursor = 'pointer';
+        shareBtn.style.fontSize = '14px';
+        shareBtn.style.fontWeight = 'bold';
+        shareBtn.onclick = () => {
+            const template = `&{template:t20-info}{{infoname=${power.nome}}}{{description=${power.descricaoCompleta}}}`;
+            sendToChat(template);
+            showSuccessNotification(`Poder "${power.nome}" compartilhado no chat!`);
+            // Fechar seletivamente baseado no contexto
+            if (closeOnlyModal) {
+                // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
+                const modal = document.getElementById('power-detail-modal');
+                const overlay = document.getElementById('power-detail-overlay');
+                if (modal) modal.remove();
+                if (overlay) overlay.remove();
+            } else {
+                // Fechar todos os popups
+                closeAllPopups();
+            }
+        };
+        buttonsContainer.appendChild(shareBtn);
+
+        // Verificar se o poder já foi aprendido
+        const powerIsLearned = isPowerLearned(power.nome);
+
+        // Botão Aprender/Esquecer
+        const actionBtn = document.createElement('button');
+        if (powerIsLearned) {
+            actionBtn.textContent = 'Esquecer';
+            actionBtn.style.background = '#e74c3c';
+            actionBtn.style.border = '1px solid #c0392b';
+            actionBtn.onclick = () => {
+                removeLearnedPower(power.nome);
+                showSuccessNotification(`Poder "${power.nome}" esquecido!`);
+                // Fechar seletivamente baseado no contexto
+                if (closeOnlyModal) {
+                    // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
+                    const modal = document.getElementById('power-detail-modal');
+                    const overlay = document.getElementById('power-detail-overlay');
+                    if (modal) modal.remove();
+                    if (overlay) overlay.remove();
+                } else {
+                    // Fechar todos os popups
+                    closeAllPopups();
+                }
+            };
+        } else {
+            actionBtn.textContent = 'Aprender';
+            actionBtn.style.background = '#27ae60';
+            actionBtn.style.border = '1px solid #2ecc71';
+            actionBtn.onclick = () => {
+                addLearnedPower(power);
+                showSuccessNotification(`Poder "${power.nome}" aprendido!`);
+                // Fechar seletivamente baseado no contexto
+                if (closeOnlyModal) {
+                    // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
+                    const modal = document.getElementById('power-detail-modal');
+                    const overlay = document.getElementById('power-detail-overlay');
+                    if (modal) modal.remove();
+                    if (overlay) overlay.remove();
+                } else {
+                    // Fechar todos os popups
+                    closeAllPopups();
+                }
+            };
+        }
+        actionBtn.style.flex = '1';
+        actionBtn.style.padding = '12px 15px';
+        actionBtn.style.borderRadius = '6px';
+        actionBtn.style.color = '#ecf0f1';
+        actionBtn.style.cursor = 'pointer';
+        actionBtn.style.fontSize = '14px';
+        actionBtn.style.fontWeight = 'bold';
+        buttonsContainer.appendChild(actionBtn);
+
+        modal.appendChild(buttonsContainer);
+        document.body.appendChild(modal);
+    }
     // Função para criar modal de configurações
     function createConfigModal() {
         // Remove modal existente se houver
@@ -8095,6 +8735,217 @@
         } catch (e) {
             console.error('Erro ao abrir Poções:', e);
             alert('Erro ao abrir Poções. Veja o console para detalhes.');
+        }
+    }
+
+    // Função para criar popup de Poderes Gerais
+    function createPoderesGeraisPopup() {
+        logger.log('Abrindo Poderes Gerais');
+        try {
+            // Remove popup existente se houver
+            const existingPopup = document.getElementById('poderes-popup');
+            if (existingPopup) existingPopup.remove();
+            const existingOverlay = document.getElementById('poderes-overlay');
+            if (existingOverlay) existingOverlay.remove();
+
+            // Overlay para fechar ao clicar fora
+            const overlay = document.createElement('div');
+            overlay.id = 'poderes-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0,0,0,0.5)';
+            overlay.style.zIndex = '10000';
+            overlay.onclick = () => {
+                overlay.remove();
+                popup.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Popup principal
+            const popup = document.createElement('div');
+            popup.id = 'poderes-popup';
+            popup.className = 'roll20-popup roll20-popup-orange';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(30,30,40,0.98)';
+            popup.style.border = '2px solid #ffb86c';
+            popup.style.borderRadius = '12px';
+            popup.style.padding = '18px 20px 16px 20px';
+            popup.style.zIndex = '10001';
+            popup.style.maxWidth = '600px';
+            popup.style.maxHeight = '700px';
+            popup.style.overflowY = 'auto';
+            popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
+            popup.style.display = 'flex';
+            popup.style.flexDirection = 'column';
+            popup.style.alignItems = 'stretch';
+
+            // Cabeçalho
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.width = '100%';
+
+            const closeBtn = window.Roll20Components.createCloseButton({
+                text: '×',
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                padding: '0',
+                color: '#ffb86c',
+                onClick: () => {
+                    popup.remove();
+                    const overlay = document.getElementById('poderes-overlay');
+                    if (overlay) overlay.remove();
+                }
+            });
+
+            const title = document.createElement('h3');
+            title.textContent = 'Poderes Gerais';
+            title.style.color = '#ffb86c';
+            title.style.margin = '0';
+            title.style.fontSize = '17px';
+            title.style.fontWeight = 'bold';
+            header.appendChild(title);
+            header.appendChild(closeBtn.render());
+            popup.appendChild(header);
+
+            // Campo de filtro
+            const filterContainer = document.createElement('div');
+            filterContainer.style.position = 'relative';
+            filterContainer.style.marginBottom = '10px';
+            const filterInput = document.createElement('input');
+            filterInput.type = 'text';
+            filterInput.placeholder = 'Filtrar poderes...';
+            filterInput.style.width = '100%';
+            filterInput.style.padding = '10px 12px';
+            filterInput.style.paddingRight = '40px';
+            filterInput.style.borderRadius = '8px';
+            filterInput.style.border = '1px solid #ffb86c';
+            filterInput.style.background = '#23243a';
+            filterInput.style.color = '#fff';
+            filterInput.style.fontSize = '14px';
+            filterInput.style.outline = 'none';
+            filterInput.style.boxSizing = 'border-box';
+            filterContainer.appendChild(filterInput);
+            popup.appendChild(filterContainer);
+
+            // Abas
+            const tabsContainer = document.createElement('div');
+            tabsContainer.style.display = 'flex';
+            tabsContainer.style.marginBottom = '15px';
+            tabsContainer.style.borderBottom = '1px solid #ffb86c';
+            tabsContainer.style.gap = '0';
+            popup.appendChild(tabsContainer);
+
+            const tabs = ['Geral', 'Origem', 'Classe', 'Racial'];
+            let activeTab = 'Geral';
+
+            tabs.forEach(tab => {
+                const tabButton = document.createElement('button');
+                tabButton.textContent = tab;
+                tabButton.style.flex = '1';
+                tabButton.style.padding = '10px 8px';
+                tabButton.style.border = 'none';
+                tabButton.style.background = activeTab === tab ? '#ffb86c' : 'transparent';
+                tabButton.style.color = activeTab === tab ? '#1e1e28' : '#ffb86c';
+                tabButton.style.fontSize = '14px';
+                tabButton.style.fontWeight = 'bold';
+                tabButton.style.cursor = 'pointer';
+                tabButton.style.transition = 'all 0.2s';
+                tabButton.style.borderRadius = '6px 6px 0 0';
+                tabButton.style.marginBottom = '-1px';
+
+                tabButton.onclick = () => {
+                    activeTab = tab;
+                    tabs.forEach((t, index) => {
+                        const btn = tabsContainer.children[index];
+                        btn.style.background = t === activeTab ? '#ffb86c' : 'transparent';
+                        btn.style.color = t === activeTab ? '#1e1e28' : '#ffb86c';
+                    });
+                    renderPowersList(filterInput.value);
+                };
+
+                tabsContainer.appendChild(tabButton);
+            });
+
+            // Lista de poderes
+            const powersList = document.createElement('div');
+            powersList.style.display = 'flex';
+            powersList.style.flexDirection = 'column';
+            powersList.style.gap = '14px';
+            powersList.style.marginTop = '10px';
+            popup.appendChild(powersList);
+
+            // Dados dos poderes
+            const powersData = getPowersList();
+
+            function renderPowersList(filterText = '') {
+                powersList.innerHTML = '';
+
+                let powers = [];
+                const categoria = activeTab.toLowerCase();
+
+                if (powersData[categoria]) {
+                    Object.values(powersData[categoria]).forEach(subtipo => {
+                        Object.values(subtipo).forEach(power => {
+                            powers.push(power);
+                        });
+                    });
+                }
+
+                const filtered = powers.filter(power =>
+                    power.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+                    power.descricao.toLowerCase().includes(filterText.toLowerCase()) ||
+                    power.descricaoCompleta.toLowerCase().includes(filterText.toLowerCase()) ||
+                    power.subtipo.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                // Ordena favoritos primeiro
+                const favoritos = getPowersFavoritos();
+                filtered.sort((a, b) => {
+                    const aFavorito = favoritos.includes(a.nome);
+                    const bFavorito = favoritos.includes(b.nome);
+                    if (aFavorito && !bFavorito) return -1;
+                    if (!aFavorito && bFavorito) return 1;
+                    return a.nome.localeCompare(b.nome);
+                });
+
+                filtered.forEach(power => {
+                    const card = createPowerCard(power, () => renderPowersList(filterInput.value));
+                    powersList.appendChild(card);
+                });
+
+                // Verifica se não há poderes encontrados durante a filtragem
+                if (filtered.length === 0 && filterText.length > 0) {
+                    const noResultsMessage = createNoResultsMessage(filterText, 'poder', 'orange');
+                    powersList.appendChild(noResultsMessage);
+                }
+            }
+
+            // Atualiza a lista ao digitar
+            filterInput.addEventListener('input', () => {
+                renderPowersList(filterInput.value);
+            });
+
+            // Render inicial
+            renderPowersList();
+
+            // Adiciona o popup ao body
+            document.body.appendChild(popup);
+
+            // Aplica scrollbars customizadas
+            applyDirectScrollbarStyles(popup, 'orange');
+        } catch (e) {
+            console.error('Erro ao abrir Poderes Gerais:', e);
+            alert('Erro ao abrir Poderes Gerais. Veja o console para detalhes.');
         }
     }
 
@@ -14748,7 +15599,14 @@
         popup.appendChild(filterContainer);
 
         // Dica sobre o sistema de CTRL
-        const abilityTip = createCtrlTipMessage('power');
+        const abilityTip = document.createElement('div');
+        abilityTip.textContent = '💡 Clique para lançar poder • CTRL + Clique para ver detalhes';
+        abilityTip.style.fontSize = '11px';
+        abilityTip.style.color = '#6ec6ff';
+        abilityTip.style.marginBottom = '10px';
+        abilityTip.style.fontStyle = 'italic';
+        abilityTip.style.textAlign = 'center';
+        abilityTip.style.width = '100%';
         popup.appendChild(abilityTip);
 
         // Lista visual
@@ -14764,6 +15622,25 @@
             abilityList.innerHTML = '';
             // Lista dinâmica de habilidades disponíveis
             const dynamicAbilities = [];
+
+            // Adicionar poderes aprendidos do sistema de poderes gerais
+            const learnedPowers = getLearnedPowers();
+
+            // Ordenar poderes: favoritos primeiro, depois alfabeticamente
+            learnedPowers.sort((a, b) => {
+                if (a.favorite && !b.favorite) return -1;
+                if (!a.favorite && b.favorite) return 1;
+                return a.nome.localeCompare(b.nome);
+            });
+
+            learnedPowers.forEach(power => {
+                dynamicAbilities.push(abilityTemplates.createAbility({
+                    nome: power.nome,
+                    descricao: power.descricao || power.desc || 'Poder aprendido do sistema de poderes gerais.'
+                }));
+            });
+
+            // Adicionar habilidades específicas da classe
             if (hasAbility('Ervas Curativas')) {
                 dynamicAbilities.push(abilityTemplates.createAbility({
                     nome: 'Ervas Curativas',
@@ -14807,134 +15684,109 @@
                 abilityList.appendChild(emptyMsg);
             } else {
                 filteredAbilities.forEach(ability => {
+                    // Verificar se o poder é favorito
+                    const learnedPowers = getLearnedPowers();
+                    const powerData = learnedPowers.find(p => p.nome === ability.nome);
+                    const isFavorite = powerData ? powerData.favorite || false : false;
+
+                    const powerContainer = document.createElement('div');
+                    powerContainer.style.display = 'flex';
+                    powerContainer.style.alignItems = 'center';
+                    powerContainer.style.gap = '8px';
+                    powerContainer.style.background = isFavorite ? 'rgba(110, 198, 255, 0.1)' : 'transparent';
+                    powerContainer.style.borderRadius = '6px';
+                    powerContainer.style.padding = '2px';
+
+                    // Botão principal do poder
                     const btn = document.createElement('button');
-                    btn.textContent = ability.nome;
-                    btn.style.width = '100%';
+
+                    // Cria o conteúdo do botão centralizado
+                    const btnContent = document.createElement('div');
+                    btnContent.style.display = 'flex';
+                    btnContent.style.alignItems = 'center';
+                    btnContent.style.justifyContent = 'center';
+                    btnContent.style.width = '100%';
+                    btnContent.style.padding = '0 8px';
+
+                    const powerName = document.createElement('span');
+                    powerName.textContent = ability.nome;
+                    powerName.style.textAlign = 'center';
+                    powerName.style.fontWeight = 'bold';
+                    btnContent.appendChild(powerName);
+
+                    btn.appendChild(btnContent);
+                    btn.style.flex = '1';
                     btn.style.background = '#23243a';
                     btn.style.color = '#fff';
                     btn.style.border = '1px solid #6ec6ff';
                     btn.style.borderRadius = '6px';
-                    btn.style.padding = '10px 0';
+                    btn.style.padding = '8px 0';
                     btn.style.fontSize = '15px';
                     btn.style.fontWeight = 'bold';
                     btn.style.cursor = 'pointer';
                     btn.style.transition = 'all 0.2s';
-                    btn.style.position = 'relative';
-
-                    // Tooltip container
-                    let tooltip = null;
-                    let tooltipTimeout = null;
-
                     btn.onmouseover = () => {
                         btn.style.background = '#6ec6ff';
                         btn.style.color = '#23243a';
-
-                        // Criar tooltip após um pequeno delay
-                        tooltipTimeout = setTimeout(() => {
-                            // Remover tooltip existente se houver
-                            if (tooltip) tooltip.remove();
-
-                            tooltip = document.createElement('div');
-                            tooltip.style.position = 'fixed';
-                            tooltip.style.background = 'rgba(20,20,30,0.98)';
-                            tooltip.style.border = '2px solid #6ec6ff';
-                            tooltip.style.borderRadius = '8px';
-                            tooltip.style.padding = '12px';
-                            tooltip.style.minWidth = '280px';
-                            tooltip.style.maxWidth = '320px';
-                            tooltip.style.zIndex = '10004';
-                            tooltip.style.boxShadow = '0 4px 16px rgba(0,0,0,0.8)';
-                            tooltip.style.pointerEvents = 'none';
-
-                            // Calcular posição baseada na posição do botão
-                            const btnRect = btn.getBoundingClientRect();
-                            tooltip.style.left = (btnRect.right + 10) + 'px';
-                            tooltip.style.top = btnRect.top + 'px';
-
-                            // Conteúdo do tooltip
-                            const tooltipContent = document.createElement('div');
-                            tooltipContent.style.display = 'flex';
-                            tooltipContent.style.flexDirection = 'column';
-                            tooltipContent.style.gap = '8px';
-
-                            // Título da habilidade
-                            const tooltipTitle = document.createElement('div');
-                            tooltipTitle.textContent = ability.nome;
-                            tooltipTitle.style.color = '#6ec6ff';
-                            tooltipTitle.style.fontSize = '16px';
-                            tooltipTitle.style.fontWeight = 'bold';
-                            tooltipTitle.style.marginBottom = '4px';
-                            tooltipContent.appendChild(tooltipTitle);
-
-                            // Tag de classificação
-                            const classificationTag = document.createElement('div');
-                            classificationTag.textContent = 'Habilidade de Classe';
-                            classificationTag.style.background = '#6ec6ff';
-                            classificationTag.style.color = '#23243a';
-                            classificationTag.style.fontSize = '11px';
-                            classificationTag.style.fontWeight = 'bold';
-                            classificationTag.style.borderRadius = '4px';
-                            classificationTag.style.padding = '2px 8px';
-                            classificationTag.style.display = 'inline-block';
-                            classificationTag.style.width = 'fit-content';
-                            tooltipContent.appendChild(classificationTag);
-
-                            // Tag de tipo
-                            const typeTag = document.createElement('div');
-                            if (ability.nome === 'Bote' || ability.nome === 'Emboscar') {
-                                typeTag.textContent = 'Ação Livre';
-                                typeTag.style.background = '#ff6e6e';
-                            } else {
-                                typeTag.textContent = 'Poder de Caçador';
-                                typeTag.style.background = '#4a90e2';
-                            }
-                            typeTag.style.color = '#fff';
-                            typeTag.style.fontSize = '11px';
-                            typeTag.style.fontWeight = 'bold';
-                            typeTag.style.borderRadius = '4px';
-                            typeTag.style.padding = '2px 8px';
-                            typeTag.style.display = 'inline-block';
-                            typeTag.style.width = 'fit-content';
-                            typeTag.style.marginTop = '2px';
-                            tooltipContent.appendChild(typeTag);
-
-                            // Descrição resumida
-                            const tooltipDesc = document.createElement('div');
-                            if (ability.nome === 'Ervas Curativas') {
-                                tooltipDesc.textContent = 'Ação completa: Gaste PM para curar 2d6 PV por PM ou remover condição envenenado de você ou aliado adjacente.';
-                            } else if (ability.nome === 'Bote') {
-                                tooltipDesc.textContent = 'Ação livre: Pague 1 PM para fazer um ataque adicional com arma secundária durante uma investida.';
-                            } else if (ability.nome === 'Emboscar') {
-                                tooltipDesc.textContent = 'Ação livre: Pague 2 PM para realizar uma ação padrão adicional na primeira rodada de combate.';
-                            }
-                            tooltipDesc.style.color = '#ecf0f1';
-                            tooltipDesc.style.fontSize = '13px';
-                            tooltipDesc.style.lineHeight = '1.4';
-                            tooltipDesc.style.marginTop = '6px';
-                            tooltipContent.appendChild(tooltipDesc);
-
-                            tooltip.appendChild(tooltipContent);
-                            document.body.appendChild(tooltip);
-                        }, 300); // Delay de 300ms antes de mostrar o tooltip
                     };
-
                     btn.onmouseout = () => {
                         btn.style.background = '#23243a';
                         btn.style.color = '#fff';
+                    };
 
-                        // Limpar timeout e remover tooltip
-                        if (tooltipTimeout) {
-                            clearTimeout(tooltipTimeout);
-                            tooltipTimeout = null;
-                        }
-                        if (tooltip) {
-                            tooltip.remove();
-                            tooltip = null;
+                    btn.onclick = (e) => {
+                        if (e.ctrlKey) {
+                            // Se CTRL estiver pressionado, abrir modal de detalhamento
+                            showPowerDetails(ability.nome);
+                        } else {
+                            // Se não estiver pressionado CTRL, executar o comando do poder
+                            castPower(ability.nome);
                         }
                     };
 
-                    btn.onclick = ability.onClick;
-                    abilityList.appendChild(btn);
+                    // Botão de pin/favorito
+                    const pinBtn = document.createElement('button');
+                    pinBtn.innerHTML = isFavorite ? '📌' : '📍';
+                    pinBtn.style.background = 'none';
+                    pinBtn.style.border = 'none';
+                    pinBtn.style.color = isFavorite ? '#6ec6ff' : '#666';
+                    pinBtn.style.fontSize = '14px';
+                    pinBtn.style.cursor = 'pointer';
+                    pinBtn.style.padding = '4px';
+                    pinBtn.style.borderRadius = '4px';
+                    pinBtn.style.transition = 'all 0.2s';
+                    pinBtn.style.minWidth = '24px';
+                    pinBtn.style.height = '24px';
+                    pinBtn.style.display = 'flex';
+                    pinBtn.style.alignItems = 'center';
+                    pinBtn.style.justifyContent = 'center';
+                    pinBtn.title = isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+
+                    pinBtn.onmouseover = () => {
+                        pinBtn.style.background = 'rgba(110, 198, 255, 0.2)';
+                        pinBtn.style.color = '#6ec6ff';
+                    };
+                    pinBtn.onmouseout = () => {
+                        pinBtn.style.background = 'none';
+                        pinBtn.style.color = isFavorite ? '#6ec6ff' : '#666';
+                    };
+                    pinBtn.onclick = (e) => {
+                        e.stopPropagation(); // Previne que o botão principal seja clicado
+                        if (powerData) {
+                            powerData.favorite = !powerData.favorite;
+                            saveLearnedPowers(learnedPowers);
+                            if (powerData.favorite) {
+                                showSuccessNotification(`Poder "${ability.nome}" fixado no topo!`);
+                            } else {
+                                showWarningNotification(`Poder "${ability.nome}" removido dos fixados.`);
+                            }
+                            updateAbilityList(); // Atualiza a lista para refletir as mudanças
+                        }
+                    };
+
+                    powerContainer.appendChild(btn);
+                    powerContainer.appendChild(pinBtn);
+                    abilityList.appendChild(powerContainer);
                 });
             }
         }
@@ -14945,6 +15797,76 @@
         // Aplica scrollbars customizadas
         applyDirectScrollbarStyles(popup, 'blue');
     }
+    // Função para lançar poder no chat
+    function castPower(powerName) {
+        // Buscar o poder nos dados de poderes
+        const powersData = getPowersList();
+        let power = null;
+
+        // Procurar o poder em todas as categorias
+        for (const categoria of Object.values(powersData)) {
+            for (const subtipo of Object.values(categoria)) {
+                for (const powerKey of Object.keys(subtipo)) {
+                    if (subtipo[powerKey].nome === powerName) {
+                        power = subtipo[powerKey];
+                        break;
+                    }
+                }
+                if (power) break;
+            }
+            if (power) break;
+        }
+
+        if (power) {
+            // Enviar poder para o chat
+            const template = `&{template:t20-info}{{infoname=${power.nome}}}{{description=${power.descricaoCompleta || power.descricao}}}`;
+            sendToChat(template);
+            showSuccessNotification(`Poder "${power.nome}" lançado no chat!`);
+        } else {
+            // Se não encontrar o poder, enviar uma mensagem simples
+            const template = `&{template:t20-info}{{infoname=${powerName}}}{{description=Poder aprendido do sistema de poderes gerais.}}`;
+            sendToChat(template);
+            showSuccessNotification(`Poder "${powerName}" lançado no chat!`);
+        }
+
+        // Fechar todos os popups após lançar o poder
+        closeAllPopups();
+    }
+
+    // Função para mostrar detalhes do poder
+    function showPowerDetails(powerName, closeOnlyModal = false) {
+        // Buscar o poder nos dados de poderes
+        const powersData = getPowersList();
+        let power = null;
+
+        // Procurar o poder em todas as categorias
+        for (const categoria of Object.values(powersData)) {
+            for (const subtipo of Object.values(categoria)) {
+                for (const powerKey of Object.keys(subtipo)) {
+                    if (subtipo[powerKey].nome === powerName) {
+                        power = subtipo[powerKey];
+                        break;
+                    }
+                }
+                if (power) break;
+            }
+            if (power) break;
+        }
+
+        if (power) {
+            createPowerDetailModal(power, closeOnlyModal);
+        } else {
+            // Se não encontrar o poder, criar um modal básico
+            const basicPower = {
+                nome: powerName,
+                descricaoCompleta: 'Poder aprendido do sistema de poderes gerais.',
+                categoria: 'Geral',
+                subtipo: 'Poder Aprendido'
+            };
+            createPowerDetailModal(basicPower, closeOnlyModal);
+        }
+    }
+
     // Função para criar popup de conjuração de habilidade
     function createAbilityCastPopup(abilityName, abilityDisplayName) {
         // Modal para Bote
