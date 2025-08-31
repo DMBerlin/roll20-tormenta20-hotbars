@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "K2VH0rr4Qw6OqQjA",
   "name": "Enxame Rubro",

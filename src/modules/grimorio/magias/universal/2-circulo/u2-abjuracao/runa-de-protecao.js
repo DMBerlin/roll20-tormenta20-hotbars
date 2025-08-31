@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "Sbf50YYcbKCXA3CI",
   "name": "Runa de Proteção",
@@ -149,7 +152,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "como o aprimoramento anterior, mas você pode escolher magias de 2º círculo. Requer 3º\ncírculo.",
+      "name": "como o aprimoramento anterior, mas você pode escolher magias de 2º círculo. Requer 3º\n\ncírculo.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},

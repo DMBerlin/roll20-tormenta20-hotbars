@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "CaQDFJoEehP9jYQs",
   "name": "Premonição",
@@ -17,7 +20,7 @@ module.exports = {
       "changes": [
         {
           "key": "execução",
-          "value": "reação",
+          "value": "reacao",
           "mode": 5,
           "priority": null
         },

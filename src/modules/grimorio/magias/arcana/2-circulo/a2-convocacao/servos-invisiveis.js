@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "wwMqDi0m8o2Jnhw5",
   "name": "Servos Invisíveis",

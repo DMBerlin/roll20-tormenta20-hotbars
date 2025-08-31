@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "L3m9nPlKK8xe3u7a",
   "name": "Muralha de Ossos",

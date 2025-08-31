@@ -3108,7 +3108,7 @@ const spellsData = {
           "aprimoramentos": [
             {
               "custo": 2,
-              "descricao": "adiciona alvo (1 criatura). Você cria uma semiplano labiríntico e expulsa o alvo para ele. A cada rodada, a vítima tem direito a um teste de Investigação ou Sobrevivência (CD da magia), com bônus cumulativo de +1 para cada teste já realizado, para escapar do labirinto. Quando o alvo escapa, a magia termina e o alvo reaparece no plano material no mesmo local onde estava quando a magia foi lançada. Magias como Salto Dimensional e\nTeletransporte não ajudam a escapar do\nlabirinto, mas Viagem Planar, sim.",
+              "descricao": "adiciona alvo (1 criatura). Você cria uma semiplano labiríntico e expulsa o alvo para ele. A cada rodada, a vítima tem direito a um teste de Investigação ou Sobrevivência (CD da magia), com bônus cumulativo de +1 para cada teste já realizado, para escapar do labirinto. Quando o alvo escapa, a magia termina e o alvo reaparece no plano material no mesmo local onde estava quando a magia foi lançada. Magias como Salto Dimensional e\n\nTeletransporte não ajudam a escapar do\n\nlabirinto, mas Viagem Planar, sim.",
               "aumenta": false
             },
             {
@@ -3609,7 +3609,7 @@ const spellsData = {
           "aprimoramentos": [
             {
               "custo": 2,
-              "descricao": "muda a duração para cena. Em vez do normal, escolha um atributo. Sempre que o alvo fizer um teste de perícia baseado no atributo escolhido, pode rolar dois dados e ficar com o melhor resultado. Não se aplica a testes de ataque ou resistência.\nRequer 2º círculo.",
+              "descricao": "muda a duração para cena. Em vez do normal, escolha um atributo. Sempre que o alvo fizer um teste de perícia baseado no atributo escolhido, pode rolar dois dados e ficar com o melhor resultado. Não se aplica a testes de ataque ou resistência.\n\nRequer 2º círculo.",
               "aumenta": false
             },
             {
@@ -5306,7 +5306,7 @@ const spellsData = {
           "aprimoramentos": [
             {
               "custo": 2,
-              "descricao": "muda o alcance para toque, a\nduração para permanente e adiciona\npenalidade de -1 PM. Em vez do normal,\nvocê inscreve uma marca (como uma tatuagem) na pele do alvo e escolhe um tipo de ação que ativará a marca. Normalmente, será cometer um crime (roubar, matar...) ou outra coisa contrária às Obrigações & Restrições de sua divindade. Sempre que a marca é ativada, o alvo recebe uma penalidade cumulativa de -2 em todos os testes. Muitas vezes, portar essa marca é um estigma por si só, já que esta magia normalmente é lançada em criminosos ou traidores. Uma magia que dissipe outras suprime a marca e suas penalidades por um dia; elas só podem ser totalmente removidas pelo conjurador original ou pela magia Purificação.",
+              "descricao": "muda o alcance para toque, a\n\nduração para permanente e adiciona\n\npenalidade de -1 PM. Em vez do normal,\n\nvocê inscreve uma marca (como uma tatuagem) na pele do alvo e escolhe um tipo de ação que ativará a marca. Normalmente, será cometer um crime (roubar, matar...) ou outra coisa contrária às Obrigações & Restrições de sua divindade. Sempre que a marca é ativada, o alvo recebe uma penalidade cumulativa de -2 em todos os testes. Muitas vezes, portar essa marca é um estigma por si só, já que esta magia normalmente é lançada em criminosos ou traidores. Uma magia que dissipe outras suprime a marca e suas penalidades por um dia; elas só podem ser totalmente removidas pelo conjurador original ou pela magia Purificação.",
               "aumenta": false
             },
             {
@@ -6674,7 +6674,7 @@ const spellsData = {
           "aprimoramentos": [
             {
               "custo": 12,
-              "descricao": "muda a área para esfera com 9m de raio. Em vez do normal, cria um\nefeito de disjunção. Todas as magias na área são automaticamente dissipadas e todos os itens mágicos na área, exceto aqueles que você estiver carregando, viram itens mundanos por uma cena (com direito a um teste de Vontade para evitar esse efeito). Requer 5º círculo.",
+              "descricao": "muda a área para esfera com 9m de raio. Em vez do normal, cria um\n\nefeito de disjunção. Todas as magias na área são automaticamente dissipadas e todos os itens mágicos na área, exceto aqueles que você estiver carregando, viram itens mundanos por uma cena (com direito a um teste de Vontade para evitar esse efeito). Requer 5º círculo.",
               "aumenta": false
             }
           ]

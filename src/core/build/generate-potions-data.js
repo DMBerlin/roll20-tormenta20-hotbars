@@ -2,12 +2,190 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-// Import the normalization functions
-const { processPotionFile } = require('./normalize-potion-properties');
+// Mapeamento de chaves (remover caracteres especiais)
+const keyNormalization = {
+  'execução': 'execucao',
+  'duração': 'duracao',
+  'resistência': 'resistencia'
+};
 
+// Mapeamento de valores para camelCase em português do Tormenta 20
+const valueNormalization = {
+  // Execução/Ativação
+  'ação': 'acao',
+  'full': 'completa',
+  'livre': 'livre',
+  'movimento': 'movimento',
+  'reação': 'reacao',
 
+  // Duração/Units
+  'day': 'dia',
+  'hour': 'hora',
+  'minute': 'minuto',
+  'round': 'rodada',
+  'inst': 'instantanea',
+  'cena': 'cena',
+  'special': 'especial',
 
+  // Alcance
+  'short': 'curto',
+  'medium': 'medio',
+  'long': 'longo',
+  'touch': 'toque',
+  'personal': 'pessoal',
+  'spec': 'especial',
 
+  // Tipo de poção
+  'potion': 'pocao',
+  'consumivel': 'consumivel',
+
+  // Resistência
+  'Vontade desacredita': 'Vontade desacredita',
+  'Vontade anula': 'Vontade anula',
+  'Nenhuma': 'Nenhuma'
+};
+
+// Função para normalizar uma chave (remover caracteres especiais)
+function normalizeKey(key) {
+  return keyNormalization[key] || key;
+}
+
+// Função para normalizar um valor (camelCase português)
+function normalizeValue(value) {
+  if (typeof value !== 'string') return value;
+  return valueNormalization[value] || value;
+}
+
+/**
+ * Extract text content from HTML string with preserved paragraph breaks
+ * @param {string} text - Text containing HTML tags
+ * @returns {string} - Text with HTML tags removed but paragraph breaks preserved
+ */
+function removeHtmlTags(text) {
+  if (typeof text !== 'string') return text;
+
+  // First, let's preserve paragraph and list structure
+  let processedContent = text
+    // Replace paragraph tags with double newlines to preserve paragraph breaks
+    .replace(/<\/p>\s*<p[^>]*>/g, '\n\n')
+    .replace(/<p[^>]*>/g, '')
+    .replace(/<\/p>/g, '\n')
+    // Handle list items
+    .replace(/<\/li>\s*<li[^>]*>/g, '\n• ')
+    .replace(/<li[^>]*>/g, '• ')
+    .replace(/<\/li>/g, '\n')
+    // Handle list containers
+    .replace(/<ul[^>]*>/g, '\n')
+    .replace(/<\/ul>/g, '\n')
+    // Handle other block elements
+    .replace(/<\/div>/g, '\n')
+    // Remove UUID references but preserve the text inside
+    .replace(/@UUID\[[^\]]+\]\{([^}]+)\}/g, '$1')
+    // Remove other HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Decode HTML entities
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    // Clean up excessive whitespace while preserving paragraph breaks
+    .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove excessive newlines
+    .replace(/[ \t]+/g, ' ') // Replace multiple spaces/tabs with single space
+    .trim();
+
+  // Split into lines and process
+  const lines = processedContent.split('\n');
+  const processedLines = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    // Skip empty lines
+    if (!line) continue;
+
+    // Skip decorative elements
+    if (line === '_' || line === '•') {
+      continue;
+    }
+
+    processedLines.push(line);
+  }
+
+  return processedLines.join('\n\n');
+}
+
+/**
+ * Normalize an object recursively
+ * @param {any} obj - Object to normalize
+ * @returns {any} - Normalized object
+ */
+function normalizeObject(obj) {
+  if (typeof obj === 'string') {
+    return removeHtmlTags(obj);
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => normalizeObject(item));
+  }
+
+  if (obj && typeof obj === 'object') {
+    const normalized = {};
+    for (const [key, value] of Object.entries(obj)) {
+      const normalizedKey = normalizeKey(key);
+      const normalizedValue = normalizeObject(value);
+
+      // Apply value normalization for specific keys
+      if (typeof normalizedValue === 'string') {
+        normalized[normalizedKey] = normalizeValue(normalizedValue);
+      } else {
+        normalized[normalizedKey] = normalizedValue;
+      }
+    }
+    return normalized;
+  }
+
+  return obj;
+}
+
+/**
+ * Process a single potion YAML file and normalize its properties
+ * @param {string} filePath - Path to the potion file
+ * @returns {boolean} - True if file was updated, false otherwise
+ */
+function processPotionFile(filePath) {
+  try {
+    // Read the YAML file
+    const yamlContent = fs.readFileSync(filePath, 'utf8');
+    const potionData = yaml.load(yamlContent);
+
+    if (!potionData) {
+      console.warn(`⚠️ Arquivo inválido: ${filePath}`);
+      return false;
+    }
+
+    // Normalize the potion data
+    const normalizedData = normalizeObject(potionData);
+
+    // Convert back to YAML
+    const normalizedYaml = yaml.dump(normalizedData, {
+      indent: 2,
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false
+    });
+
+    // Write the normalized content back to the file
+    fs.writeFileSync(filePath, normalizedYaml, 'utf8');
+
+    return true;
+
+  } catch (error) {
+    console.error(`❌ Erro ao processar arquivo ${filePath}:`, error.message);
+    return false;
+  }
+}
 
 /**
  * Decode HTML entities to their corresponding characters

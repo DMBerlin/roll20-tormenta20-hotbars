@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "BmiLj15LQW7f76j8",
   "name": "Campo de Força",
@@ -27,7 +30,7 @@ module.exports = {
         {
           "key": "execução",
           "mode": 5,
-          "value": "reação",
+          "value": "reacao",
           "priority": 0
         },
         {

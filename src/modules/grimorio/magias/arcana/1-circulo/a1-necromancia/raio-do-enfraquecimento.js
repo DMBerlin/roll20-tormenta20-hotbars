@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "hikpz9g3jwJoTcRZ",
   "name": "Raio do Enfraquecimento",

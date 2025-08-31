@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "IYB0YK1zLune1fs0",
   "name": "Tentáculos de Trevas",

@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "vAC1umkrWgM6aRPI",
   "name": "Controlar a Gravidade",

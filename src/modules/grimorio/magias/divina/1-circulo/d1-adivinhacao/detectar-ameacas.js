@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "H7tJCAL2UNJ8QLPN",
   "name": "Detectar Ameaças",
@@ -54,7 +57,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "você descobre também a raça ou espécie e o poder da criatura detectada (determinado pela aura dela). Criaturas de 1º a 6º nível geram aura tênue, criaturas de 7º a 12º nível geram aura moderada e criaturas de 13º ao 20º nível geram aura poderosa.\nCriaturas acima do 20º nível geram aura avassaladora.",
+      "name": "você descobre também a raça ou espécie e o poder da criatura detectada (determinado pela aura dela). Criaturas de 1º a 6º nível geram aura tênue, criaturas de 7º a 12º nível geram aura moderada e criaturas de 13º ao 20º nível geram aura poderosa.\n\nCriaturas acima do 20º nível geram aura avassaladora.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},

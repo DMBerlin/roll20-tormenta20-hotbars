@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "FxAlmaFR7sYRJD5z",
   "name": "Salto Dimensional",
@@ -137,7 +140,7 @@ module.exports = {
         {
           "key": "execução",
           "mode": 5,
-          "value": "reação",
+          "value": "reacao",
           "priority": 0
         }
       ],

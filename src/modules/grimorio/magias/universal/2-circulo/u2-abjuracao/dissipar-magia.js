@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "rfTGYwrXLjcIAIP5",
   "name": "Dissipar Magia",
@@ -44,7 +47,7 @@ module.exports = {
       "origin": "Compendium.tormenta20.magias.rfTGYwrXLjcIAIP5",
       "transfer": false,
       "tint": "#ffffff",
-      "name": "muda a área para esfera com 9m de raio. Em vez do normal, cria um\nefeito de disjunção. Todas as magias na área são automaticamente dissipadas e todos os itens mágicos na área, exceto aqueles que você estiver carregando, viram itens mundanos por uma cena (com direito a um teste de Vontade para evitar esse efeito). Requer 5º círculo.",
+      "name": "muda a área para esfera com 9m de raio. Em vez do normal, cria um\n\nefeito de disjunção. Todas as magias na área são automaticamente dissipadas e todos os itens mágicos na área, exceto aqueles que você estiver carregando, viram itens mundanos por uma cena (com direito a um teste de Vontade para evitar esse efeito). Requer 5º círculo.",
       "description": "",
       "statuses": [],
       "_stats": {

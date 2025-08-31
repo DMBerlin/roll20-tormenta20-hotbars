@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "8YsQpGGbp1JVXx99",
   "name": "Assassino Fantasmagórico",

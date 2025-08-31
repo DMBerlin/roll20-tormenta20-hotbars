@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "xfYTGGsdd81Pa0AN",
   "name": "Adaga Mental",
@@ -46,7 +49,7 @@ module.exports = {
         "duplicateSource": null,
         "exportSource": null
       },
-      "name": "você lança a magia sem gesticular ou\npronunciar palavras (o que permite lançar essa magia de armadura) e a adaga se torna invisível. Se o alvo falhar no teste de resistência, não percebe que você lançou uma magia\ncontra ele.",
+      "name": "você lança a magia sem gesticular ou\n\npronunciar palavras (o que permite lançar essa magia de armadura) e a adaga se torna invisível. Se o alvo falhar no teste de resistência, não percebe que você lançou uma magia\n\ncontra ele.",
       "img": "icons/svg/upgrade.svg",
       "type": "base",
       "system": {},

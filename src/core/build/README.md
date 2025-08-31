@@ -6,14 +6,11 @@ Este diretório contém os scripts de build e geração de dados para o projeto 
 
 ### Geração de Dados
 
-- **`generate-spells-data.js`** - Gera dados consolidados das magias a partir dos arquivos individuais
-- **`generate-potions-data.js`** - Gera dados consolidados das poções a partir dos arquivos YAML
+- **`generate-spells-data.js`** - Gera dados consolidados das magias a partir dos arquivos individuais (inclui normalização de propriedades)
+- **`generate-potions-data.js`** - Gera dados consolidados das poções a partir dos arquivos YAML (inclui normalização de propriedades)
+- **`generate-powers-data.js`** - Gera dados consolidados dos poderes a partir dos arquivos YAML
+- **`generate-conditions-data.js`** - Gera dados consolidados das condições a partir do arquivo YAML
 - **`build.js`** - Script principal de build que combina todos os dados e gera o arquivo final
-
-### Normalização de Propriedades
-
-- **`normalize-spell-properties.js`** - Normaliza propriedades das magias (remove acentos, padroniza valores)
-- **`normalize-potion-properties.js`** - Normaliza propriedades das poções (remove acentos, padroniza valores)
 
 ## Workflow de Desenvolvimento
 
@@ -23,13 +20,23 @@ Este diretório contém os scripts de build e geração de dados para o projeto 
 3. Execute `pnpm build` para integrar ao build final
 
 ### Para Poções:
-1. Adicione novos arquivos YAML de poção em `src/assets/pocoes/`
+1. Adicione novos arquivos YAML de poção em `src/source/pocoes/`
 2. Execute `pnpm generate-potions-data` para normalizar propriedades e gerar dados consolidados
+3. Execute `pnpm build` para integrar ao build final
+
+### Para Poderes:
+1. Adicione novos arquivos YAML de poder em `src/source/poderes/`
+2. Execute `pnpm generate-powers-data` para gerar dados consolidados
+3. Execute `pnpm build` para integrar ao build final
+
+### Para Condições:
+1. Atualize o arquivo `src/source/general/condições.yml`
+2. Execute `pnpm generate-conditions-data` para gerar dados consolidados
 3. Execute `pnpm build` para integrar ao build final
 
 ### Workflow Completo:
 ```bash
-make dev  # Executa lint + spells + potions + build + dev server
+make dev  # Executa lint + spells + potions + powers + conditions + build + dev server
 ```
 
 ## Normalização de Propriedades
@@ -70,11 +77,23 @@ src/modules/grimorio/magias/
 
 ### Poções:
 ```
-src/assets/pocoes/
+src/source/pocoes/
 ├── poção-de-curar-ferimentos-2d8-2-pv.yml
 ├── óleo-de-arma-mágica.yml
 ├── granada-de-bola-de-fogo.yml
 └── ...
+```
+
+### Poderes:
+```
+src/source/poderes/
+├── classe/
+│   ├── arcanista/
+│   ├── bárbaro/
+│   └── ...
+├── racial/
+├── origem/
+└── geral/
 ```
 
 ## Comandos Úteis
@@ -85,6 +104,12 @@ pnpm generate-spells-data
 
 # Gerar dados de poções (inclui normalização)
 pnpm generate-potions-data
+
+# Gerar dados de poderes
+pnpm generate-powers-data
+
+# Gerar dados de condições
+pnpm generate-conditions-data
 
 # Build completo
 pnpm build

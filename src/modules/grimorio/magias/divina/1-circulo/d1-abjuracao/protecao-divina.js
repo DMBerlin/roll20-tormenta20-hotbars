@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "zfFIZLWoyI32pMfl",
   "name": "Proteção Divina",
@@ -97,7 +100,7 @@ module.exports = {
         {
           "key": "execução",
           "mode": 5,
-          "value": "reação",
+          "value": "reacao",
           "priority": 0
         },
         {

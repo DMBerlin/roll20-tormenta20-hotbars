@@ -1,3 +1,6 @@
+// Auto-generated spell data - Generated at build time
+// Do not edit manually - Run 'pnpm build' to regenerate
+
 module.exports = {
   "_id": "fQ3D9t4VPsVjLbz1",
   "name": "Camuflagem Ilusória",
