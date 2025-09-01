@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.17647'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.60126'; // Última tag Git
 
     const logger = window.console;
 
@@ -37,7 +37,7 @@
         return style.display !== 'none';
     }
 
-    // Function to update TTM toggle visual state based on actual TTM status
+    // Function to update TTM toggle visual states based on actual TTM status
     function updateTTMToggleVisual(isTTMCurrentlyActive = isTTMActive()) {
         const toggleSwitch = document.getElementById('ttm-toggle-switch');
         const toggleKnob = document.getElementById('ttm-toggle-knob');
@@ -10006,7 +10006,7 @@
         talkToggle.appendChild(toggleLabel);
         talkToggle.appendChild(toggleSwitch);
 
-        // Initialize toggle state based on current TTM status
+        // Initialize toggle states based on current TTM status
         updateTTMToggleVisual();
 
         talkToggle.onclick = (e) => {
@@ -10015,7 +10015,7 @@
             // Toggle TTM command
             sendToChat('/talktomyself');
 
-            // Update visual state after a short delay to allow Roll20 to process the command
+            // Update visual states after a short delay to allow Roll20 to process the command
             setTimeout(() => {
                 updateTTMToggleVisual();
             }, 100);

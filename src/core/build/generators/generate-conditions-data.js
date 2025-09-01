@@ -252,7 +252,7 @@ function generateConditionsData() {
 
   const conditionsData = [];
 
-  const conditionsPath = path.join(__dirname, '..', '..', 'source', 'general', 'condições.yml');
+  const conditionsPath = path.join(__dirname, '..', '..', '..', 'source', 'general', 'condições.yml');
 
   if (!fs.existsSync(conditionsPath)) {
     console.log(`⚠️ Arquivo de condições não encontrado: ${conditionsPath}`);
@@ -324,7 +324,7 @@ module.exports = conditionsData;
 `;
 
     // Write the generated file
-    const outputPath = path.join(__dirname, '..', '..', 'modules', 'conditions', 'generated-conditions-data.js');
+    const outputPath = path.join(__dirname, '..', '..', '..', 'modules', 'conditions', 'generated-conditions-data.js');
 
     // Ensure the conditions directory exists
     const conditionsDir = path.dirname(outputPath);

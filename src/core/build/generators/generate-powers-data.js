@@ -5,7 +5,7 @@ const yaml = require('js-yaml');
 // Import power icons mapping
 let getPowerIcon;
 try {
-  const powerIconUtils = require('../../powerIconUtils.js');
+  const powerIconUtils = require('../utils/power-icon-utils.js');
   getPowerIcon = powerIconUtils.getPowerIcon;
 } catch {
 
@@ -399,7 +399,7 @@ function generatePowersData() {
     geral: {}
   };
 
-  const powersPath = path.join(__dirname, '..', '..', 'source', 'poderes');
+  const powersPath = path.join(__dirname, '..', '..', '..', 'source', 'poderes');
 
   if (!fs.existsSync(powersPath)) {
     console.log(`⚠️ Diretório de poderes não encontrado: ${powersPath}`);
@@ -451,7 +451,7 @@ module.exports = powersData;
 `;
 
   // Write the generated file
-  const outputPath = path.join(__dirname, '..', '..', 'modules', 'powers', 'generated-powers-data.js');
+  const outputPath = path.join(__dirname, '..', '..', '..', 'modules', 'powers', 'generated-powers-data.js');
 
   // Ensure the powers directory exists
   const powersDir = path.dirname(outputPath);

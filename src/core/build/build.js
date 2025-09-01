@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { minify } = require('terser');
 const { execSync } = require('child_process');
-const { generateSpellsData } = require('./generate-spells-data.js');
-const { generatePotionsData } = require('./generate-potions-data.js');
-const { generateConditionsData } = require('./generate-conditions-data.js');
-const { generatePowersData } = require('./generate-powers-data.js');
-const { generateIcons } = require('./icon-generator.js');
+const { generateSpellsData } = require('./generators/generate-spells-data.js');
+const { generatePotionsData } = require('./generators/generate-potions-data.js');
+const { generateConditionsData } = require('./generators/generate-conditions-data.js');
+const { generatePowersData } = require('./generators/generate-powers-data.js');
+const { generateIcons } = require('./generators/icon-generator.js');
 
 async function build() {
   try {

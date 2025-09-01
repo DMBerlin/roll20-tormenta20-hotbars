@@ -1,5 +1,5 @@
 // Utility functions for power icons
-const powerIcons = require('./powerIcons.js');
+const powerIcons = require('../states/power-icons.js');
 
 // Debug: Check if powerIcons is loaded correctly
 

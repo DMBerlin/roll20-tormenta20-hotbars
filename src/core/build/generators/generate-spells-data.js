@@ -297,7 +297,7 @@ function generateSpellsData() {
     universal: {}
   };
 
-  const magiasPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'magias');
+  const magiasPath = path.join(__dirname, '..', '..', '..', 'modules', 'grimorio', 'magias');
 
   // Process each tradition (arcana, divina, universal)
   const traditions = ['arcana', 'divina', 'universal'];
@@ -426,7 +426,7 @@ module.exports = spellsData;
 `;
 
   // Write the generated file
-  const outputPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'generated-spells-data.js');
+  const outputPath = path.join(__dirname, '..', '..', '..', 'modules', 'grimorio', 'generated-spells-data.js');
   fs.writeFileSync(outputPath, spellsDataCode, 'utf8');
 
   console.log(`✅ Dados de magias gerados: ${outputPath}`);
@@ -448,7 +448,7 @@ module.exports = spellsData;
 
 // Function to normalize all spell files
 function normalizeAllSpells() {
-  const magiasPath = path.join(__dirname, '..', '..', 'modules', 'grimorio', 'magias');
+  const magiasPath = path.join(__dirname, '..', '..', '..', 'modules', 'grimorio', 'magias');
 
   if (!fs.existsSync(magiasPath)) {
     console.log(`⚠️ Diretório de magias não encontrado: ${magiasPath}`);
