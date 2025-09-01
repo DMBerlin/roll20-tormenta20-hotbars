@@ -19,7 +19,7 @@ O sistema utiliza o chat do Roll20 como interface para coletar dados:
 ### 🚀 Como Usar
 
 1. **Configure o nome do personagem** na hotbar (clique no nome para editar)
-2. **Pressione Ctrl + '** para mostrar a hotbar
+2. **Pressione Ctrl + '** (Windows) ou **Cmd + J** (Mac) para mostrar a hotbar
 3. **Aguarde** o processo de coleta automática (acontece em background)
 4. **Verifique** se os dados foram atualizados na hotbar
 
@@ -186,7 +186,7 @@ Penalidades de armadura (penalidades_armadura): -3
 
 ### 📝 Notas Técnicas
 
-- **Coleta automática**: Dados são coletados automaticamente quando a hotbar é mostrada (Ctrl + ')
+- **Coleta automática**: Dados são coletados automaticamente quando a hotbar é mostrada (Ctrl + ' / Cmd + J)
 - **Coleta silenciosa**: Não mostra notificações durante a coleta automática
 - O sistema usa `Talk to Myself` para não poluir o chat da sessão
 - **Detecção inteligente de TTM**: Verifica se TTM já está ativo antes de ativá-lo

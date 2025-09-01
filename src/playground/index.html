@@ -335,7 +335,8 @@
 
   <div class="footer">
     <p>Simulador para desenvolvimento do script content.js (Chrome extension)</p>
-    <p>Pressione <kbd>Ctrl + '</kbd> para mostrar/ocultar a hotbar (quando carregada)</p>
+    <p>Pressione <kbd>Ctrl + '</kbd> (Windows) ou <kbd>Cmd + J</kbd> (Mac) para mostrar/ocultar a hotbar (quando
+      carregada)</p>
   </div>
 
   <script>
@@ -523,8 +524,9 @@
 
     // Adicionar listener para teclas de atalho
     document.addEventListener('keydown', function (e) {
-      if (e.ctrlKey && (e.key === "'" || e.key === '"')) {
-        addLog("⌨️ Atalho Ctrl+' pressionado", 'info');
+      if ((e.ctrlKey && (e.key === "'" || e.key === '"')) ||
+        (e.metaKey && e.key === 'j')) {
+        addLog("⌨️ Atalho Ctrl+' (Windows) ou Cmd+J (Mac) pressionado", 'info');
         e.preventDefault();
       }
 

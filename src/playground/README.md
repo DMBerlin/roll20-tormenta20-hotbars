@@ -45,7 +45,7 @@
 
 ### 4. Atalhos Úteis
 
-- `Ctrl + '` - Mostrar/ocultar hotbar (atalho original do script)
+- `Ctrl + '` (Windows) / `Cmd + J` (Mac) - Mostrar/ocultar hotbar (mesmo atalho do VS Code para terminal)
 - `Ctrl + F5` - Reload manual do script
 - `Enter` - Enviar mensagem no chat simulado
 - `Shift + Enter` - Nova linha no chat

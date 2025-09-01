@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.96315'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.21372'; // Última tag Git
 
     const logger = window.console;
 
@@ -4184,7 +4184,7 @@
         title.style.margin = '0';
         title.style.fontSize = '20px';
         title.style.fontWeight = 'bold';
-        title.title = 'Atalho: Ctrl + G';
+
 
 
 
@@ -4194,14 +4194,7 @@
         titleContainer.style.flexDirection = 'column';
         titleContainer.style.alignItems = 'flex-start';
 
-        const shortcutText = document.createElement('div');
-        shortcutText.textContent = 'Atalho: Ctrl + G';
-        shortcutText.style.color = '#666';
-        shortcutText.style.fontSize = '12px';
-        shortcutText.style.marginTop = '2px';
-
         titleContainer.appendChild(title);
-        titleContainer.appendChild(shortcutText);
 
         header.appendChild(titleContainer);
         header.appendChild(closeBtn.render());
@@ -11716,8 +11709,9 @@
 
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
-                // Ctrl + '
-                if (e.ctrlKey && (e.key === "'" || e.key === '"')) {
+                // Ctrl + ' (Windows) ou Cmd + J (Mac) - mesmo atalho do VS Code para terminal
+                if ((e.ctrlKey && (e.key === "'" || e.key === '"')) ||
+                    (e.metaKey && e.key === 'j')) {
                     updateTTMToggleVisual();
                     const hotbar = document.getElementById('roll20-hotbar');
                     if (hotbar) {
@@ -11740,12 +11734,7 @@
                     createQuickSearchModal();
                 }
 
-                // NOVO: Ctrl + G para abrir grimório
-                if (e.ctrlKey && e.key === 'g') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    createGrimorioPopup();
-                }
+
             });
         }, 1000);
     });
