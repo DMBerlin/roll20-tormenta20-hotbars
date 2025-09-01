@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.21372'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.92428'; // Última tag Git
 
     const logger = window.console;
 
@@ -11686,6 +11686,89 @@
         }, 1000);
     }
 
+    // Variáveis para controlar cooldown da sincronização
+    let syncCooldown = false;
+    let lastSyncTime = 0;
+
+    // Função para sincronização rápida via atalho
+    async function quickSyncData() {
+        // Verificar se a hotbar está visível
+        const hotbar = document.getElementById('roll20-hotbar');
+        if (!hotbar || hotbar.style.display === 'none') {
+            // Hotbar não está visível, não fazer nada
+            return;
+        }
+
+        // Verificar se a chave de identificação do personagem está definida
+        const charIdentificationKey = localStorage.getItem('tormenta-20-hotbars-char-identification-key');
+        if (!charIdentificationKey) {
+            createNotification('Defina a chave de identificação do personagem nas configurações da hotbar', 'warning', 3000);
+            return;
+        }
+
+        // Verificar cooldown (2 segundos)
+        const now = Date.now();
+        if (syncCooldown && (now - lastSyncTime) < 2000) {
+            const remainingTime = Math.ceil((2000 - (now - lastSyncTime)) / 100);
+            createNotification(`Aguarde ${remainingTime / 10}s para sincronizar novamente`, 'warning', 2000);
+            return;
+        }
+
+        // Ativar cooldown
+        syncCooldown = true;
+        lastSyncTime = now;
+
+        try {
+            // Prevenir sincronização sem TTM
+            if (!isTTMActive()) {
+                sendToChat('/talktomyself');
+                setTimeout(() => updateTTMToggleVisual(), 500);
+            }
+
+            // Coletar atributos configurados
+            const attributes = {};
+            const attributeFields = [
+                { key: 'tormenta-20-hotbars-char-name-attr', defaultValue: 'menace_name' },
+                { key: 'tormenta-20-hotbars-char-race-attr', defaultValue: 'trace' },
+                { key: 'tormenta-20-hotbars-char-class-attr', defaultValue: 'tlevel' },
+                { key: 'tormenta-20-hotbars-char-level-attr', defaultValue: 'charnivel' },
+                { key: 'tormenta-20-hotbars-char-hp-total-attr', defaultValue: 'vidatotal' },
+                { key: 'tormenta-20-hotbars-char-hp-current-attr', defaultValue: 'vida' },
+                { key: 'tormenta-20-hotbars-char-mp-total-attr', defaultValue: 'manatotal' },
+                { key: 'tormenta-20-hotbars-char-mp-current-attr', defaultValue: 'mana' },
+                { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'defesatotal' }
+            ];
+
+            attributeFields.forEach(field => {
+                const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
+                const value = localStorage.getItem(field.key) || field.defaultValue;
+                attributes[attrName] = value;
+            });
+
+            // Executar sincronização
+            await syncCharacterData(attributes);
+
+            createNotification('Sincronização rápida concluída!', 'success', 2000);
+
+            // Forçar atualização da UI da hotbar
+            updateHotbarUI();
+        } catch (error) {
+            console.error('Erro na sincronização rápida:', error);
+            createNotification(`Erro na sincronização: ${error.message}`, 'error', 3000);
+        } finally {
+            // Desligar TTM após sync
+            if (isTTMActive()) {
+                sendToChat('/talktomyself');
+                setTimeout(() => updateTTMToggleVisual(), 500);
+            }
+
+            // Resetar cooldown após 2 segundos
+            setTimeout(() => {
+                syncCooldown = false;
+            }, 2000);
+        }
+    }
+
     // Inicializa quando a página carregar
     waitForElement('#textchat-input').then(() => {
         setTimeout(() => {
@@ -11732,6 +11815,13 @@
                     e.preventDefault();
                     e.stopPropagation();
                     createQuickSearchModal();
+                }
+
+                // NOVO: Ctrl + U (Windows) ou Cmd + U (Mac) para sincronização rápida
+                if ((e.ctrlKey && e.key === 'u') || (e.metaKey && e.key === 'u')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    quickSyncData();
                 }
 
 
