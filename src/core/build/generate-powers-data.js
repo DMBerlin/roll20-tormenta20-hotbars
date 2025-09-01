@@ -2,6 +2,18 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
+// Import power icons mapping
+let getPowerIcon;
+try {
+  const powerIconUtils = require('../../powerIconUtils.js');
+  getPowerIcon = powerIconUtils.getPowerIcon;
+} catch {
+
+  console.warn('⚠️ Power icon utilities not found, using fallback icon mapping');
+  // Fallback function that returns null (will use original img)
+  getPowerIcon = () => null;
+}
+
 /**
  * Decode HTML entities to their corresponding characters
  * @param {string} text - Text containing HTML entities
@@ -238,7 +250,15 @@ function processPowerFile(filePath) {
     // Extract basic information
     const powerName = powerData.name;
     const powerId = powerData._id || '';
-    const img = powerData.img || '';
+
+    // Extract filename for icon mapping
+    const filename = path.basename(filePath, path.extname(filePath));
+
+    // Get WoWHead icon URL using our mapping
+    const wowheadIcon = getPowerIcon(filename);
+
+    // Use WoWHead icon if available, otherwise fall back to original img
+    const img = wowheadIcon || powerData.img || '';
 
     // Extract description
     const fullDescription = extractTextFromHtml(powerData.system?.description?.value || '');
@@ -398,21 +418,19 @@ function generatePowersData() {
     const processedPower = processPowerFile(filePath);
 
     if (processedPower) {
-      const categoria = processedPower.categoria;
-
       // Initialize category if it doesn't exist
-      if (!powersData[categoria]) {
-        powersData[categoria] = {};
+      if (!powersData[processedPower.categoria]) {
+        powersData[processedPower.categoria] = {};
       }
 
       // Initialize subtype if it doesn't exist
-      if (!powersData[categoria][processedPower.subtipo]) {
-        powersData[categoria][processedPower.subtipo] = {};
+      if (!powersData[processedPower.categoria][processedPower.subtipo]) {
+        powersData[processedPower.categoria][processedPower.subtipo] = {};
       }
 
       // Add power to the appropriate category and subtype
       const powerKey = processedPower.nome.toLowerCase().replace(/[^a-z0-9]/g, '-');
-      powersData[categoria][processedPower.subtipo][powerKey] = processedPower;
+      powersData[processedPower.categoria][processedPower.subtipo][powerKey] = processedPower;
 
       processedCount++;
     } else {
@@ -456,6 +474,7 @@ module.exports = powersData;
     for (const [, poderes] of Object.entries(subtipos)) {
       categoriaCount += Object.keys(poderes).length;
     }
+
     console.log(`  📊 ${categoria}: ${categoriaCount} poderes`);
   }
 

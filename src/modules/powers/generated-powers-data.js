@@ -25,7 +25,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/alta-arcana.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanepotency.jpg"
       },
       "arcano-de-batalha": {
         "id": "zujBVkCUtU7KDXgt",
@@ -48,7 +48,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "caldeir-o-do-bruxo": {
         "id": "Rh1Mhh26puA6zGPT",
@@ -71,7 +71,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_cauldron_01.jpg"
       },
       "caminho-do-arcanista--bruxo": {
         "id": "cfV8GthtoVPbREG6",
@@ -95,7 +95,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 37",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-bruxo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_metamorphosis.jpg"
       },
       "caminho-do-arcanista--feiticeiro": {
         "id": "QwCmKz13eeecU8te",
@@ -117,7 +117,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 37",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-feiticeiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
       },
       "caminho-do-arcanista--mago": {
         "id": "7l8QfEV23EubxDfx",
@@ -141,7 +141,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 37",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/caminho-arcanista-mago.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_teleportstormwind.jpg"
       },
       "conhecimento-m-gico--arcanista-": {
         "id": "H8IjqnHpKro9p3cm",
@@ -164,7 +164,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneresilience.jpg"
       },
       "contram-gica-aprimorada": {
         "id": "MiqSr5g6ij4h9d17",
@@ -188,7 +188,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcane01.jpg"
       },
       "envolto-em-mist-rio": {
         "id": "uXk6rhfWY8K5lrx1",
@@ -224,7 +224,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanepresence.jpg"
       },
       "escriba-arcano": {
         "id": "UL4WiqliZxpHFHzr",
@@ -247,7 +247,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_inscription_inkpurple01.jpg"
       },
       "especialista-em-escola": {
         "id": "xicIWimbloEfiB1r",
@@ -270,7 +270,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanetorrent.jpg"
       },
       "familiar-borboleta": {
         "id": "wy59756oAHeyE3hu",
@@ -306,7 +306,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_legion_butterfly.jpg"
       },
       "familiar-cobra": {
         "id": "BhpzjqRfeArgcTqO",
@@ -342,7 +342,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_guardianward.jpg"
       },
       "familiar-coruja": {
         "id": "2NPUa3FYTbc5YlLH",
@@ -371,7 +371,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_owl.jpg"
       },
       "familiar-corvo": {
         "id": "j4pu8gttduL150Pp",
@@ -407,7 +407,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "familiar-falc-o": {
         "id": "E9UJ2GL1fXCivn4K",
@@ -430,7 +430,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_eyeofthestorm.jpg"
       },
       "familiar-gato": {
         "id": "qYT3kMN051taWPY2",
@@ -453,7 +453,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_cat.jpg"
       },
       "familiar-lagarto": {
         "id": "cGc0tE4nCPNyJ1bj",
@@ -489,7 +489,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_guardianward.jpg"
       },
       "familiar-morcego": {
         "id": "zNmegW5BQUyy8d9L",
@@ -512,7 +512,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_guardianward.jpg"
       },
       "familiar-rato": {
         "id": "GrfGrpdLGyqAjQrf",
@@ -548,7 +548,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_guardianward.jpg"
       },
       "familiar-sapo": {
         "id": "DdyVJEaZpWm4OFdX",
@@ -572,7 +572,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_guardianward.jpg"
       },
       "familiar": {
         "id": "Di5nXfWPAjk9Fpuw",
@@ -595,7 +595,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "fluxo-de-mana": {
         "id": "TXja4zA1sQRnE65j",
@@ -624,7 +624,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_manatap.jpg"
       },
       "foco-vital": {
         "id": "B5N9964miT36sElY",
@@ -647,7 +647,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneresilience.jpg"
       },
       "fortalecimento-arcano": {
         "id": "KhQoVoaIZ8huXnPY",
@@ -683,7 +683,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanepotency.jpg"
       },
       "heran-a-aprimorada": {
         "id": "VZOptWdzr9UgnfOW",
@@ -706,7 +706,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneresilience.jpg"
       },
       "heran-a-superior": {
         "id": "qJYdfaIjdFIE1Wf5",
@@ -729,7 +729,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanepotency.jpg"
       },
       "linhagem-drac-nica-aprimorada": {
         "id": "Pqq7sz8D1n9QMBwl",
@@ -770,7 +770,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg"
       },
       "linhagem-drac-nica-b-sica": {
         "id": "zN0rhkCdrNYDXb0d",
@@ -794,7 +794,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "linhagem-drac-nica-superior": {
         "id": "WfXsE12QuL31ns3S",
@@ -817,7 +817,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg"
       },
       "linhagem-drac-nica": {
         "id": "w48gktCMFpuvvHoO",
@@ -840,7 +840,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-draconica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "linhagem-fe-rica-aprimorada": {
         "id": "uZCYSnv0rUzrSo8D",
@@ -876,7 +876,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-feerica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightningovercharge.jpg"
       },
       "linhagem-fe-rica-b-sica": {
         "id": "oMsR6mOGj5yQjQU3",
@@ -899,7 +899,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-feerica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
       },
       "linhagem-fe-rica-superior": {
         "id": "BDwaFhE2OBfqMYZC",
@@ -920,7 +920,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-feerica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightningovercharge.jpg"
       },
       "linhagem-fe-rica": {
         "id": "UB3sYP3377eAPcN2",
@@ -943,7 +943,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-feerica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
       },
       "linhagem-rubra-aprimorada": {
         "id": "jHphQ7PhkkBsDTR8",
@@ -972,7 +972,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-rubra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg"
       },
       "linhagem-rubra-b-sica": {
         "id": "j7UGNfhrx5OonTZb",
@@ -995,7 +995,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-rubra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "linhagem-rubra-superior": {
         "id": "B7NtJu97UJyyN0xi",
@@ -1018,7 +1018,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta 20 Básico - Edição do Ano, p. 39.",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-rubra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball02.jpg"
       },
       "linhagem-rubra": {
         "id": "mxfiUS6qhgYrQdtT",
@@ -1041,7 +1041,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/linhagem-rubra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "magia-pungente": {
         "id": "bqHFUy21nlVSAPxA",
@@ -1064,7 +1064,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magias--arcanista-": {
         "id": "h9AyRa8MIyNyhBen",
@@ -1087,7 +1087,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 37",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/magias-a.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_teleportstormwind.jpg"
       },
       "mestre-em-escola": {
         "id": "LMYbVqQ5dthk1yMO",
@@ -1116,7 +1116,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanetorrent.jpg"
       },
       "poder-m-gico": {
         "id": "H69cIFxpZQhNwsYP",
@@ -1140,7 +1140,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 38",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanepotency.jpg"
       },
       "raio-arcano": {
         "id": "mlzUTxfA4loIefuG",
@@ -1164,7 +1164,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "raio-elemental": {
         "id": "F3UgmqiSFFFEnrPr",
@@ -1241,7 +1241,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
       },
       "raio-poderoso": {
         "id": "OpmkKWhRdkKrWRdR",
@@ -1277,7 +1277,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "tinta-do-mago": {
         "id": "jHboLitRyPZwDAF0",
@@ -1300,7 +1300,7 @@ const powersData = {
           "Arcanista"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 39",
-        "img": "systems/tormenta20/icons/classes/arcanista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_inscription_inkpurple01.jpg"
       }
     },
     "bardo": {
@@ -1341,7 +1341,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "artista-completo": {
         "id": "6BsXApytiJlmZBxV",
@@ -1362,7 +1362,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/artista-completo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumentar-repert-rio": {
         "id": "Px6VVJBKqPSQE3wq",
@@ -1383,7 +1383,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dan-a-das-l-minas": {
         "id": "wR7FRYpevwklaDRZ",
@@ -1404,7 +1404,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ecl-tico": {
         "id": "3EgQ8dXJNByFCZI6",
@@ -1425,7 +1425,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/ecletico.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esgrima-m-gica": {
         "id": "7pVeIeJX6mRBoZ21",
@@ -1459,7 +1459,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "estrelato": {
         "id": "xaqGqmp2mlAFvRma",
@@ -1480,7 +1480,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fascinar-em-massa": {
         "id": "JP8YgI43eDcQrjyc",
@@ -1501,7 +1501,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-elemental": {
         "id": "h1TMOvejmrtb8CJv",
@@ -1583,7 +1583,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-m-gico": {
         "id": "RiDuyDbH3AI66X4U",
@@ -1604,7 +1604,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inspira--o-marcial": {
         "id": "HK0MNc7j4rjDDbA9",
@@ -1625,7 +1625,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "inspira--o": {
         "id": "Uv6GW8R54wUtv3sm",
@@ -1660,7 +1660,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/inspiracao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "lendas-e-hist-rias": {
         "id": "pa9O0ay5tYiQrRjE",
@@ -1687,7 +1687,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "magias--bardo-": {
         "id": "5i2hWzYKWOjGtnyA",
@@ -1709,7 +1709,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 44",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/magias-b.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "manipular-em-massa": {
         "id": "aAgmPyab0OPw7jPy",
@@ -1730,7 +1730,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "manipular": {
         "id": "FVHZhJWnlLlRbXL1",
@@ -1751,7 +1751,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "melodia-restauradora": {
         "id": "VsEuBNPeIgSYTWeS",
@@ -1772,7 +1772,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-dos-sussurros": {
         "id": "Iy451ypKTxXIu337",
@@ -1793,7 +1793,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-sica--balada-fascinante": {
         "id": "0Z5tVTqKW0krtE24",
@@ -1826,7 +1826,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-sica--can--o-assustadora": {
         "id": "HpIuN3MzFmb56Qn5",
@@ -1854,7 +1854,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-sica--melodia-curativa": {
         "id": "zeUv5BxKHLn0NgbF",
@@ -1889,7 +1889,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "par-dia": {
         "id": "IIy602hn9xOvk4sG",
@@ -1910,7 +1910,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "prestidigita--o": {
         "id": "n1HSzJRpGrDDkz2O",
@@ -1931,7 +1931,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 45",
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "versatilidade": {
         "id": "gNEm9epTikpKnYU4",
@@ -1950,7 +1950,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/classes/bardo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "bucaneiro": {
@@ -1973,7 +1973,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "amigos-no-porto": {
         "id": "jHQ74ZZTuFIL7AyE",
@@ -1994,7 +1994,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aparar": {
         "id": "1FpTY9nu7uixqwgV",
@@ -2015,7 +2015,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "apostador": {
         "id": "vq7bhI62RQhjMTnX",
@@ -2036,7 +2036,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ataque-acrob-tico": {
         "id": "hCngtWKB9x1FX0F1",
@@ -2057,7 +2057,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "aud-cia": {
         "id": "YmeB9GgmcJ54D9WU",
@@ -2078,7 +2078,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/audacia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aventureiro--vido": {
         "id": "MNEVQYE0HphQb5Hi",
@@ -2099,7 +2099,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "bravata-audaz": {
         "id": "70rQg3VypKnVzh63",
@@ -2120,7 +2120,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "bravata-imprudente": {
         "id": "oU0RdA4q0ZNytRvX",
@@ -2141,7 +2141,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "en-garde": {
         "id": "IqJ3GFdasl7Q9h59",
@@ -2163,7 +2163,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esgrimista--bucaneiro-": {
         "id": "RhzORvHf916ajwbI",
@@ -2197,7 +2197,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "esquiva-sagaz": {
         "id": "i98ipNXoK3Uw17HX",
@@ -2219,7 +2219,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/esquiva-sagaz.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "evas-o-aprimorada--bucaneiro-": {
         "id": "SDSlkLynTwwAZkjR",
@@ -2240,7 +2240,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/evasao-aprimorada.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "evas-o--bucaneiro-": {
         "id": "1aHAxGnkuTaaBJDx",
@@ -2261,7 +2261,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/evasao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "flagelo-dos-mares": {
         "id": "4Uwm4gBdl8CIGGbX",
@@ -2282,7 +2282,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "foli-o": {
         "id": "VQejbgKNGVTmwxUK",
@@ -2303,7 +2303,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "grudar-o-cano": {
         "id": "8rQKDsKUYMM2aRwk",
@@ -2324,7 +2324,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "insol-ncia": {
         "id": "pCXbUTE2qivVEe37",
@@ -2345,7 +2345,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 47",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/insolencia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "panache": {
         "id": "as8J99HTbAAOFVNA",
@@ -2366,7 +2366,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/panache.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pernas-do-mar": {
         "id": "QUqBvHLdSXPrVWQ0",
@@ -2387,7 +2387,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pistoleiro": {
         "id": "EMramxpu1YogEN9u",
@@ -2408,7 +2408,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "presen-a-paralisante": {
         "id": "eZhKIkei9QrytRYn",
@@ -2429,7 +2429,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ripostar": {
         "id": "FcWJu2hcuEvBxKCF",
@@ -2450,7 +2450,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sorte-do-louco": {
         "id": "S1Rj3QDTfM8qytad",
@@ -2471,7 +2471,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/sorte-louco.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "touch-": {
         "id": "21SxkshTwQ9L3XPH",
@@ -2492,7 +2492,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 48",
-        "img": "systems/tormenta20/icons/classes/bucaneiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "bárbaro": {
@@ -2515,7 +2515,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "brado-assustador": {
         "id": "sQFi9Zy0fsP0ePmZ",
@@ -2544,7 +2544,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cr-tico-brutal": {
         "id": "JvXL1zJ3QfWUyuIr",
@@ -2565,7 +2565,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "destruidor--b-rbaro-": {
         "id": "aJa8qNTitp4dBVWh",
@@ -2599,7 +2599,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "esp-rito-inquebr-vel": {
         "id": "0kbswkDa63WInqEV",
@@ -2620,7 +2620,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esquiva-sobrenatural--b-rbaro-": {
         "id": "anzKvSnuIPDih6Zz",
@@ -2641,7 +2641,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "for-a-indom-vel": {
         "id": "CU24TXe3xbZSOOHt",
@@ -2663,7 +2663,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "frenesi": {
         "id": "UBODw5GLhxnthegH",
@@ -2684,7 +2684,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "f-ria-da-savana": {
         "id": "SLzX7RCThmZEtTvG",
@@ -2705,7 +2705,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "f-ria-raivosa": {
         "id": "WlwBBa1mvr6etx24",
@@ -2726,7 +2726,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "f-ria-tit-nica": {
         "id": "fuzKiQyprFslFK41",
@@ -2747,7 +2747,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/furia-titanica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "f-ria": {
         "id": "5WrlYKOHYLWpI9jD",
@@ -2792,7 +2792,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 41 (JdA",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/furia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "golpe-poderoso": {
         "id": "SekagDeEfmmyIKM1",
@@ -2813,7 +2813,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "instinto-selvagem": {
         "id": "U6Op7yMmr16WMRRY",
@@ -2835,7 +2835,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/instinto-selvagem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "investida-imprudente": {
         "id": "F1NR4OMUI5MO4Pq4",
@@ -2856,7 +2856,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_charge.jpg"
       },
       "pele-de-a-o": {
         "id": "1WIJH1LhIqUxQPfQ",
@@ -2877,7 +2877,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pele-de-ferro": {
         "id": "mEWpEEjrXP2q7sxI",
@@ -2898,7 +2898,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "redu--o-de-dano": {
         "id": "CMsmsKiFKpZTgQtB",
@@ -2920,7 +2920,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/resistencia-dano.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-dos-inimigos": {
         "id": "WTGqC0KRSbkCXMCQ",
@@ -2941,7 +2941,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "supersti--o": {
         "id": "XkbIltVM9ECVbfwb",
@@ -2975,7 +2975,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "totem-espiritual": {
         "id": "SEeY3Ed8beYBsM5C",
@@ -2997,7 +2997,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vigor-primal": {
         "id": "iMK2BbJcZSxHXLyr",
@@ -3032,7 +3032,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "-mpeto--b-rbaro-": {
         "id": "CQUJv0Bjcw5nxKTS",
@@ -3054,7 +3054,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 42",
-        "img": "systems/tormenta20/icons/classes/barbaro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       }
     },
     "cavaleiro": {
@@ -3077,7 +3077,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 53",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "autoridade-feudal--cavaleiro-": {
         "id": "6F61e1LUHJx0uenc",
@@ -3099,7 +3099,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "baluarte": {
         "id": "B7Bn9sW2pPs3xc77",
@@ -3149,7 +3149,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 53",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/baluarte.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "bravura-final": {
         "id": "5bBcVLtoh86nEYuS",
@@ -3170,7 +3170,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/bravura-final.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "caminho-do-cavaleiro--basti-o": {
         "id": "dMLzhf29eCS01FV1",
@@ -3191,7 +3191,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/caminho-cavaleiro-bastiao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofprotection.jpg"
       },
       "caminho-do-cavaleiro--montaria": {
         "id": "Zf5XwGOsuz4hNuC7",
@@ -3212,7 +3212,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/caminho-cavaleiro-montaria.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_mount_ridinghorse.jpg"
       },
       "c-digo-de-honra": {
         "id": "kVmOn7TQXvedO40o",
@@ -3233,7 +3233,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 53",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/codigo-honra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "desprezar-os-covardes": {
         "id": "yn5FJNpTc7dqKopI",
@@ -3254,7 +3254,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "duelo": {
         "id": "oEVsmhWuBhpcXALl",
@@ -3294,7 +3294,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 53",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/duelo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escudeiro": {
         "id": "IUNGyJZZyiwAevJ6",
@@ -3315,7 +3315,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "especializa--o-em-armadura--cavaleiro-": {
         "id": "KPN2DuNAQZ7ncCnb",
@@ -3349,7 +3349,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofprotection.jpg"
       },
       "estandarte": {
         "id": "oORNocLguIQvaDqL",
@@ -3370,7 +3370,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "etiqueta": {
         "id": "jk2rvo8wHDXhDuEm",
@@ -3416,7 +3416,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "investida-destruidora": {
         "id": "6HHb3ozkEi3nHyMx",
@@ -3437,7 +3437,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "montaria-corajosa": {
         "id": "84B6ijPdmLw9Rdsl",
@@ -3458,7 +3458,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_mount_ridinghorse.jpg"
       },
       "pajem": {
         "id": "LDuskMAanfOU4xNN",
@@ -3479,7 +3479,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "postura-de-combate--ar-ete-implac-vel": {
         "id": "faabBo3I07EmxSIz",
@@ -3514,7 +3514,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta 20 Básico - Edição do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "postura-de-combate--castigo-de-ferro": {
         "id": "RwGSoAH1Ho9HSODx",
@@ -3536,7 +3536,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "postura-de-combate--foco-de-batalha": {
         "id": "lRU3pcPPxMFOU58V",
@@ -3558,7 +3558,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "postura-de-combate--muralha-intranspon-vel": {
         "id": "PxKl5SUGcUONYet4",
@@ -3598,7 +3598,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "postura-de-combate--provoca--o-petulante": {
         "id": "fMPpoRJLmsV6ZADR",
@@ -3620,7 +3620,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 54",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "postura-de-combate--torre-inabal-vel": {
         "id": "O14KnlJpQSxJP8CB",
@@ -3660,7 +3660,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "resoluto": {
         "id": "PANeuipqdolT72aq",
@@ -3694,7 +3694,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/resoluto.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "solidez--cavaleiro-": {
         "id": "GUEIcmOtBHif587v",
@@ -3715,7 +3715,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofprotection.jpg"
       },
       "torre-armada": {
         "id": "46fvRVVjupGSdpkV",
@@ -3755,7 +3755,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "t-tulo--cavaleiro-": {
         "id": "PsVnAFV2PP41CHCm",
@@ -3776,7 +3776,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 55",
-        "img": "systems/tormenta20/icons/classes/cavaleiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofprotection.jpg"
       }
     },
     "caçador": {
@@ -3812,7 +3812,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "armadilha--arataca": {
         "id": "ZWxY8C3xyLMXf3GH",
@@ -3841,7 +3841,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armadilha--espinhos": {
         "id": "trBGcYqkld7y3QMF",
@@ -3864,7 +3864,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armadilha--la-o": {
         "id": "5OwzZq1hHYmyZRbu",
@@ -3887,7 +3887,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armadilha--rede": {
         "id": "eAkd6IRhQP3clu0D",
@@ -3929,7 +3929,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armadilheiro": {
         "id": "BbyD7D88aPwW46E0",
@@ -3944,7 +3944,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "icons/weapons/bows/shortbow-recurve-yellow.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arqueiro--ca-ador-": {
         "id": "WD3KDLiAqH4nlr6Z",
@@ -3978,7 +3978,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "bote": {
         "id": "zNBMPW0dWTXMVdjF",
@@ -3999,7 +3999,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "caminho-do-explorador": {
         "id": "5tqYhzofvjgcBHGj",
@@ -4020,7 +4020,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/caminho-explorador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "camuflagem": {
         "id": "fhovFktP3UcW4OJJ",
@@ -4041,7 +4041,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "chuva-de-l-minas": {
         "id": "87fClj7Z0iUzFx8x",
@@ -4062,7 +4062,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "companheiro-animal--ca-ador-": {
         "id": "0xohsRvcjmB8p041",
@@ -4083,7 +4083,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "elo-com-a-natureza": {
         "id": "ysNQeQE4GRsjobs2",
@@ -4105,7 +4105,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "emboscar--ca-ador-": {
         "id": "AmeuhUOkSViBMCpZ",
@@ -4126,7 +4126,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "empatia-selvagem--ca-ador-": {
         "id": "1eiDShrQvlAUvrd5",
@@ -4147,7 +4147,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "ervas-curativas": {
         "id": "1XQgufPl8uPaV4Li",
@@ -4194,7 +4194,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escaramu-a-superior": {
         "id": "KOH9FfI4JjFQ2Qjb",
@@ -4240,7 +4240,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escaramu-a": {
         "id": "29020onqtdmtOG3B",
@@ -4274,7 +4274,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "espreitar": {
         "id": "FbjWsk7pPFSivupR",
@@ -4295,7 +4295,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "explorador": {
         "id": "756GKQn2ux8mAugb",
@@ -4316,7 +4316,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/explorador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inimigo-de--criatura-": {
         "id": "UJ0rRgYVAT2tdFQH",
@@ -4356,7 +4356,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "marca-da-presa": {
         "id": "KCcnANguX0TehmNR",
@@ -4403,7 +4403,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/marca-presa.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-ca-ador": {
         "id": "fhHEWWNgKxS4xUal",
@@ -4424,7 +4424,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/mestre-cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "olho-do-falc-o": {
         "id": "ML0Mo0p4vuG9PLao",
@@ -4445,7 +4445,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ponto-fraco": {
         "id": "FMARatZUFe4vthFx",
@@ -4466,7 +4466,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rastreador": {
         "id": "DRmhP15LqKyO9c4u",
@@ -4487,7 +4487,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 50",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/rastreador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "-mpeto--ca-ador-": {
         "id": "wDYjoXiXnWRepQqg",
@@ -4508,7 +4508,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 51",
-        "img": "systems/tormenta20/icons/classes/cacador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       }
     },
     "clérigo": {
@@ -4532,7 +4532,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 57",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofstrength.jpg"
       },
       "autoridade-eclesi-stica": {
         "id": "AdSrW4Y9GnJqOPMm",
@@ -4553,7 +4553,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 57",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "canalizar-amplo": {
         "id": "phoD0x4cY06pfHmV",
@@ -4580,7 +4580,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "canalizar-energia-positiva-negativa": {
         "id": "JHUiFSmHes17a9F1",
@@ -4616,7 +4616,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 57",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "comunh-o-vital": {
         "id": "IWrNsBsQcnZhb4Hy",
@@ -4637,7 +4637,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "conhecimento-m-gico--cl-rigo-": {
         "id": "MAE5l1QMEjp9acBl",
@@ -4658,7 +4658,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "devoto-fiel--cl-rigo-": {
         "id": "VPqDSTuhkXo58XzA",
@@ -4679,7 +4679,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 57",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/devoto-c.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "expulsar-comandar-mortos-vivos": {
         "id": "nuSBip4f2Ytz3on6",
@@ -4700,7 +4700,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_turnundead.jpg"
       },
       "liturgia-m-gica": {
         "id": "XGtuslv5pO3SRJbr",
@@ -4722,7 +4722,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "magia-sagrada-profana": {
         "id": "LP0qBb4I92k2cpdK",
@@ -4743,7 +4743,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "magias--cl-rigo-": {
         "id": "cgYwUcWVGrsAqVWF",
@@ -4764,7 +4764,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/magias-c.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "mestre-celebrante": {
         "id": "4wtFyPKPD50oWTrD",
@@ -4785,7 +4785,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "missa--b-n--o-da-vida": {
         "id": "43OxhX7uIOWhnj0c",
@@ -4811,7 +4811,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "missa--chamado--s-armas": {
         "id": "l20AJzxzQrw6pWfW",
@@ -4856,7 +4856,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofstrength.jpg"
       },
       "missa--eleva--o-do-esp-rito": {
         "id": "gdKMXVsQQfhlqUHm",
@@ -4882,7 +4882,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "missa--escudo-divino": {
         "id": "LoQZqFTWlSlfkCej",
@@ -4908,7 +4908,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofprotection.jpg"
       },
       "missa--superar-as-limita--es": {
         "id": "TVNNn8Os4bGc8mOb",
@@ -4934,7 +4934,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "m-o-da-divindade": {
         "id": "zIcI0vQGjAj1uCm0",
@@ -4956,7 +4956,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/mao-divindade.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "prece-de-combate": {
         "id": "Q4tDGE0Ig0UY8xR2",
@@ -4977,7 +4977,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofstrength.jpg"
       },
       "s-mbolo-sagrado-energizado": {
         "id": "HWbsAWfEts46FMVR",
@@ -5006,7 +5006,7 @@ const powersData = {
           "Magica"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 58",
-        "img": "systems/tormenta20/icons/classes/clerigo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       }
     },
     "druida": {
@@ -5035,7 +5035,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aspecto-do-inverno": {
         "id": "MkDEOHheMy0AUmOe",
@@ -5069,7 +5069,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aspecto-do-outono": {
         "id": "uWxaz68WwhmAkcB2",
@@ -5090,7 +5090,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aspecto-do-ver-o": {
         "id": "slVx01Ph3o6bkeoY",
@@ -5111,7 +5111,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "caminho-dos-ermos": {
         "id": "lItROoF5BIshKjat",
@@ -5132,7 +5132,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 63",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/caminhos-ermos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "companheiro-animal-aprimorado": {
         "id": "ke8sDLo2AVzmq7kT",
@@ -5153,7 +5153,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "companheiro-animal--druida-": {
         "id": "K25mVu65RhOOQUNO",
@@ -5174,7 +5174,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61 e 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "companheiro-animal-lend-rio": {
         "id": "5vf1Q9EuSdQgLFEt",
@@ -5195,7 +5195,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "companheiro-animal-m-gico": {
         "id": "URbCCHqDGD1ybMiB",
@@ -5216,7 +5216,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beasttaming.jpg"
       },
       "cora--o-da-selva": {
         "id": "2pPEzPSySI3EpsPS",
@@ -5250,7 +5250,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "devoto-fiel--druida-": {
         "id": "a2c1cG5wrgJDHoKr",
@@ -5271,7 +5271,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/devoto-d.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "empatia-selvagem--druida-": {
         "id": "vOXQtd4cC7bbh6u4",
@@ -5292,7 +5292,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/empatia-selvagem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "esp-rito-dos-equin-cios": {
         "id": "e7wxI2LiyckI1zJo",
@@ -5313,7 +5313,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esp-rito-dos-solst-cios": {
         "id": "MY4mNaut2sUIJ1mr",
@@ -5340,7 +5340,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "forma-primal": {
         "id": "J5cNl2LJmnD9O0AX",
@@ -5361,7 +5361,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "forma-selvagem-aprimorada": {
         "id": "zSJu72QRtptlg4jx",
@@ -5479,7 +5479,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62 e 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "forma-selvagem-superior": {
         "id": "YIGCiUvEGskBIfGd",
@@ -5609,7 +5609,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62 e 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "forma-selvagem": {
         "id": "vfR7gweTOfgnna8G",
@@ -5715,7 +5715,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62 e 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "for-a-da-natureza": {
         "id": "PmIU9RUwNQRtI4UU",
@@ -5749,7 +5749,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 63",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/forca-natureza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "for-a-dos-penhascos": {
         "id": "K8Wy8fozgA2sA5se",
@@ -5777,7 +5777,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "liberdade-da-pradaria": {
         "id": "HQn4xgqf7YRiLwyo",
@@ -5804,7 +5804,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "magia-natural": {
         "id": "a2bg3aC6wi9OXFGB",
@@ -5825,7 +5825,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 62",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magias--druida-": {
         "id": "EIM4Ph8h4v1WdLT4",
@@ -5847,7 +5847,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 61",
-        "img": "systems/tormenta20/icons/poderes/classes/conjuradores/magias-d.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
       },
       "presas-afiadas": {
         "id": "fogM3iyIIrVopYlJ",
@@ -5868,7 +5868,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "segredos-da-natureza": {
         "id": "z4yuEi87sze92iGh",
@@ -5889,7 +5889,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "tranquilidade-dos-lagos": {
         "id": "cprocYwfU9OSXgL1",
@@ -5910,7 +5910,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 63",
-        "img": "systems/tormenta20/icons/classes/druida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "geral": {
@@ -5945,7 +5945,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo--constitui--o-": {
         "id": "4HdbtBRKRs32aYY9",
@@ -5978,7 +5978,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo--destreza-": {
         "id": "cr6POqphFdzTMdAk",
@@ -6011,7 +6011,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo--for-a-": {
         "id": "RKcCBGyvCDq5EPIZ",
@@ -6044,7 +6044,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo--intelig-ncia-": {
         "id": "OrpbURX7AtUgiLr0",
@@ -6077,7 +6077,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo--sabedoria-": {
         "id": "oen0soFiqviygSEW",
@@ -6110,7 +6110,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aumento-de-atributo": {
         "id": "QrsQzzdGDWjgXNF5",
@@ -6130,7 +6130,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "guerreiro": {
@@ -6166,7 +6166,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_dualwield.jpg"
       },
       "arqueiro--guerreiro-": {
         "id": "s57dhYAywAnuIat8",
@@ -6201,7 +6201,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_marksmanship.jpg"
       },
       "ataque-especial": {
         "id": "pO3Qh76K5lm9ukXH",
@@ -6265,7 +6265,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/ataque-especial.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "ataque-extra": {
         "id": "fhV9WO6UwhpmOgBS",
@@ -6286,7 +6286,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/ataque-extra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "ataque-reflexo": {
         "id": "0FIg8Rm3vJmVA5Ld",
@@ -6308,7 +6308,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "bater-e-correr": {
         "id": "UvPLbfwoHIZbw7Va",
@@ -6335,7 +6335,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_charge.jpg"
       },
       "campe-o": {
         "id": "j9JP0cwZtKXHek0D",
@@ -6369,7 +6369,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/campeao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_challange.jpg"
       },
       "destruidor--guerreiro-": {
         "id": "tJ3oBwonUaC9sSXR",
@@ -6403,7 +6403,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "dur-o": {
         "id": "VTzVqjsiOsECTkM1",
@@ -6424,7 +6424,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/durao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_defensivestance.jpg"
       },
       "esgrimista--guerreiro-": {
         "id": "4kjvx9DHlb04ImrO",
@@ -6458,7 +6458,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "especializa--o-em-arma": {
         "id": "CaGE3aysp30cMvVw",
@@ -6492,7 +6492,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_weaponmastery.jpg"
       },
       "especializa--o-em-armadura--guerreiro-": {
         "id": "KFGQMJDKyccD7Fie",
@@ -6526,7 +6526,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_defensivestance.jpg"
       },
       "golpe-de-rasp-o": {
         "id": "xpqcwyDLc1U7Zyug",
@@ -6547,7 +6547,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "golpe-demolidor": {
         "id": "yK3hZq3ldaiEbRUz",
@@ -6568,7 +6568,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "golpe-pessoal": {
         "id": "F5be8aBTo5kRKKWu",
@@ -6589,7 +6589,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 65 e 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "mestre-em-arma": {
         "id": "2FCpzXeeNeRsDmxP",
@@ -6610,7 +6610,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_weaponmastery.jpg"
       },
       "planejamento-marcial": {
         "id": "hy0i3RPT09jEFIs4",
@@ -6631,7 +6631,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "romper-resist-ncias": {
         "id": "EW5fZ2cxNfdIYE82",
@@ -6658,7 +6658,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "solidez--guerreiro-": {
         "id": "FF34akm8n2QgrdFH",
@@ -6679,7 +6679,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_defensivestance.jpg"
       },
       "tornado-de-dor": {
         "id": "AnoinpFQbn1XO4jz",
@@ -6701,7 +6701,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "valent-o--guerreiro-": {
         "id": "JHMYXJvZDara8JwN",
@@ -6741,7 +6741,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "-mpeto--guerreiro-": {
         "id": "veDt5Sfsc7Cue7xL",
@@ -6762,7 +6762,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 66",
-        "img": "systems/tormenta20/icons/classes/guerreiro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_charge.jpg"
       }
     },
     "inventor": {
@@ -6804,7 +6804,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ajuste-de-mira": {
         "id": "AXrNhUoxQF0LswWD",
@@ -6833,7 +6833,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "alquimista-de-batalha": {
         "id": "wLYyRXlwbQMBy2dI",
@@ -6848,7 +6848,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "alquimista-iniciado": {
         "id": "jQZPCBxLtJxntynq",
@@ -6863,7 +6863,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armeiro": {
         "id": "hLBSifFJA7jAu7zg",
@@ -6878,7 +6878,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ativa--o-r-pida": {
         "id": "6acyRMGwUv0BCbXR",
@@ -6899,7 +6899,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aut-mato-prototipado": {
         "id": "igQaqKf0NM0GYz7d",
@@ -6915,7 +6915,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aut-mato": {
         "id": "ptPx5rxZdlUfsM9t",
@@ -6930,7 +6930,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "bal-stica": {
         "id": "i5EbR8SrD8UcA7Gz",
@@ -6945,7 +6945,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "blindagem": {
         "id": "IWpWSfSXeQbEPw4Z",
@@ -6960,7 +6960,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cano-raiado": {
         "id": "lRC7qIWmIKjFjXNV",
@@ -6975,7 +6975,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "catalizador-inst-vel": {
         "id": "e4j577dYux3DcLzL",
@@ -6991,7 +6991,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "chutes-e-palavr-es": {
         "id": "NXOAFVhHVEI7VqVg",
@@ -7007,7 +7007,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "comerciante": {
         "id": "PTc85fan1L3fbGlM",
@@ -7022,7 +7022,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/comerciante.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "conhecimento-de-f-rmulas": {
         "id": "mprXzYrw00U56v4t",
@@ -7037,7 +7037,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "couraceiro": {
         "id": "XbndSZpX3PC0tiWv",
@@ -7052,7 +7052,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "encontrar-fraqueza": {
         "id": "SW7dLug114XX3Mer",
@@ -7068,7 +7068,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/encontrar-fraqueza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "engenhoqueiro": {
         "id": "ZlmaW3J9X2RMhDo1",
@@ -7083,7 +7083,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69 e 70",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/engenhoca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "engenhosidade--inventor-": {
         "id": "P29KKQdQdwTCVuTj",
@@ -7111,7 +7111,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/engenhosidade.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg"
       },
       "fabricar-item-m-gico": {
         "id": "ezYAnyUMkw6hf8iD",
@@ -7126,7 +7126,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/fabricar-item-magico.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fabricar-item-superior": {
         "id": "Aj3ZiNCirzOhyOcG",
@@ -7141,7 +7141,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/fabricar-item-superior.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "farmac-utico": {
         "id": "nmKozCiHGK9cTPga",
@@ -7193,7 +7193,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ferreiro": {
         "id": "4FWvcrP6aXQIH4L8",
@@ -7208,7 +7208,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "granadeiro": {
         "id": "uYxG1qSZfjnVw904",
@@ -7223,7 +7223,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "hom-nculo": {
         "id": "hT8faKFcx31ReX1e",
@@ -7244,7 +7244,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inven--o-potente": {
         "id": "siUgo1SjC1CbAAPr",
@@ -7272,7 +7272,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "maestria-em-pericia": {
         "id": "ymJZ5W60c8iBO8ua",
@@ -7287,7 +7287,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "manuten--o-eficiente": {
         "id": "houHK39zXtWwR310",
@@ -7302,7 +7302,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-alquimista": {
         "id": "anGFgBM64UpxWdiL",
@@ -7317,7 +7317,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-cuca": {
         "id": "a1iGcFVdiWzPPVoD",
@@ -7332,7 +7332,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mistura-fervilhante": {
         "id": "021OKvOIiyIsq5cr",
@@ -7353,7 +7353,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 69",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "obra-prima": {
         "id": "QwVGkwCRe33OTz2v",
@@ -7368,7 +7368,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/obra-prima.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "oficina-de-campo": {
         "id": "BwcAOABGJj95Tw4o",
@@ -7408,7 +7408,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "olho-de-drag-o": {
         "id": "dehNb66kOtwgAiB5",
@@ -7424,7 +7424,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/olho-do-dragao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pedra-de-amolar": {
         "id": "X5UQTPgnv92Km0KI",
@@ -7452,7 +7452,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "systems/tormenta20/icons/classes/inventor.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "prot-tipo": {
         "id": "mu98bcBwZDZbWNcC",
@@ -7467,7 +7467,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 68",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/prototipo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "s-ntese-r-pida": {
         "id": "oTpjKYDPuRqirI9j",
@@ -7482,7 +7482,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 70",
-        "img": "icons/commodities/tech/cog-brass.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "ladino": {
@@ -7506,7 +7506,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/pessoa-certa-para-trabalho.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "assassinar": {
         "id": "lLl9k9aibbKKzgf5",
@@ -7528,7 +7528,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ataque-furtivo": {
         "id": "sE4mWoW3zqLZaCYC",
@@ -7550,7 +7550,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/ataque-furtivo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_ambush.jpg"
       },
       "contatos-no-submundo": {
         "id": "KoXk0jYVJbuxjEi0",
@@ -7566,7 +7566,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "emboscar--ladino-": {
         "id": "dCth4JoJnrj1jE2q",
@@ -7588,7 +7588,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_stealth.jpg"
       },
       "escapista": {
         "id": "cJLuqfIkqjtSjcpA",
@@ -7610,7 +7610,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "especialista": {
         "id": "08Or2dxtMBSLKVHW",
@@ -7669,7 +7669,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/especialista.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcanetorrent.jpg"
       },
       "esquiva-sobrenatural--ladino-": {
         "id": "iK1tC8jN9AnZI3Bo",
@@ -7685,7 +7685,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/esquiva-sobrenatural.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_stealth.jpg"
       },
       "evas-o-aprimorada--ladino-": {
         "id": "feeuIYbp7Pv7E8Db",
@@ -7701,7 +7701,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/evasao-aprimorada.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "evas-o--ladino-": {
         "id": "HGh7ECxVmjfrdd8u",
@@ -7717,7 +7717,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/evasao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "fuga-formid-vel": {
         "id": "9YhaQMZRmwP5X4GI",
@@ -7744,7 +7744,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 73",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "gatuno": {
         "id": "V4HrTCXG4kL2Awo3",
@@ -7766,7 +7766,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ladr-o-arcano": {
         "id": "O7K0ddxG1yMiutaF",
@@ -7795,7 +7795,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mente-criminosa": {
         "id": "X0dXRDh4ZYaV36xt",
@@ -7830,7 +7830,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-o-na-boca": {
         "id": "2HjePMK0BVCLJocq",
@@ -7865,7 +7865,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-os-r-pidas": {
         "id": "512ZtmpMoFsTtwuR",
@@ -7887,7 +7887,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "olhos-nas-costas": {
         "id": "v3Vruwa4uFKSL0UJ",
@@ -7909,7 +7909,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/olhos-costas.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "oportunismo": {
         "id": "qAwrR5hdSn9WHrQf",
@@ -7931,7 +7931,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rolamento-defensivo": {
         "id": "4B7V1Vr5EXSFKTTw",
@@ -7953,7 +7953,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "roubo-de-mana": {
         "id": "HeZ9473tDmbdLCRR",
@@ -7977,7 +7977,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "saqueador-de-tumbas": {
         "id": "WPzGTcCS2SVX2m1h",
@@ -8012,7 +8012,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sombra": {
         "id": "85VYFnsUNdUTjYtp",
@@ -8034,7 +8034,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_stealth.jpg"
       },
       "truque-m-gico": {
         "id": "LJ5XHh4FYEgJgUwz",
@@ -8058,7 +8058,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "velocidade-ladina": {
         "id": "2mSk8f6h3s8ufvM9",
@@ -8080,7 +8080,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "veneno-persistente": {
         "id": "vqzi5GiQN8tXM9dP",
@@ -8102,7 +8102,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "veneno-potente": {
         "id": "Ue9TQbWuCwnvO3WV",
@@ -8137,7 +8137,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 74",
-        "img": "systems/tormenta20/icons/classes/ladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "lutador": {
@@ -8161,7 +8161,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "at--acertar": {
         "id": "l1sxTDhlFIItdE6s",
@@ -8207,7 +8207,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "bra-os-calejados": {
         "id": "iKlZxO8G4GFO5HlO",
@@ -8229,7 +8229,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "briga": {
         "id": "1gvsbH8ljOuhBdKM",
@@ -8251,7 +8251,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/briga.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cabe-ada": {
         "id": "6KpYDSIPOvoO8yiK",
@@ -8273,7 +8273,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "casca-grossa": {
         "id": "ONGux7IwKSsKy383",
@@ -8295,7 +8295,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/casca-grossa.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "chave": {
         "id": "mg4tz9sa5stXR76g",
@@ -8317,7 +8317,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "confian-a-dos-ringues": {
         "id": "nDkqzNPJ5yOcLOOp",
@@ -8339,7 +8339,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "convencido": {
         "id": "YuWiVUsSuWLkJvhr",
@@ -8361,7 +8361,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dono-da-rua": {
         "id": "SfRiFzM5mEcxWtew",
@@ -8383,7 +8383,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/dono-rua.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-baixo": {
         "id": "G91iXnXU3zZoX4sJ",
@@ -8405,7 +8405,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-cruel": {
         "id": "fVPH9kywOoQ7eluT",
@@ -8427,7 +8427,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/golpe-cruel.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-imprudente": {
         "id": "98JZ0I9y2YrRQB7e",
@@ -8449,7 +8449,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-rel-mpago": {
         "id": "tf5KggNQBbBIeXUs",
@@ -8471,7 +8471,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 76",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/golpe-relampago.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-violento": {
         "id": "lMQD3zWlwjng6Fty",
@@ -8493,7 +8493,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/golpe-violento.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "imobiliza--o": {
         "id": "rkB6e5IamctEGp9J",
@@ -8515,7 +8515,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "lutador-de-ch-o": {
         "id": "hEO0bSVI5nHadvDq",
@@ -8555,7 +8555,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "l-ngua-dos-becos": {
         "id": "sQ29WtVKV5YOxIuT",
@@ -8577,7 +8577,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "nome-na-arena": {
         "id": "blqTFW9pH3uDbeiL",
@@ -8599,7 +8599,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "punhos-de-adamante": {
         "id": "a0EOYAygF4UMRl2O",
@@ -8621,7 +8621,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rasteira": {
         "id": "fQC8JocFY32KETMM",
@@ -8643,7 +8643,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sarado": {
         "id": "bUpkBBRfeWClqOP6",
@@ -8665,7 +8665,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sequ-ncia-destruidora": {
         "id": "xea4aBVNfrhKqyx0",
@@ -8687,7 +8687,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "trincado": {
         "id": "QGrIxgErNXRuUsZe",
@@ -8709,7 +8709,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "troca--o-tumultuosa": {
         "id": "oInPEvobbtz7Us88",
@@ -8737,7 +8737,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "troca--o": {
         "id": "Wbqg0zXWV8Xhweo6",
@@ -8759,7 +8759,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "valent-o--lutador-": {
         "id": "t0v9j9yqXWssODlV",
@@ -8794,7 +8794,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "voadora": {
         "id": "0PPKBaYtiiMsKj0g",
@@ -8829,7 +8829,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 77",
-        "img": "systems/tormenta20/icons/classes/lutador.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "nobre": {
@@ -8852,7 +8852,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "autoconfian-a": {
         "id": "eGw7yqknnodmR6fW",
@@ -8873,7 +8873,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/autoconfianca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "autoridade-feudal--nobre-": {
         "id": "Z1P81i88kzFZDZnr",
@@ -8894,7 +8894,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "educa--o-privilegiada": {
         "id": "QXK4T9fN4SGYyRph",
@@ -8915,7 +8915,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esp-lio": {
         "id": "r3KvyjKj0U2or4BC",
@@ -8936,7 +8936,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/espolio.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estrategista": {
         "id": "T7sOwg4vPRv8wWrg",
@@ -8964,7 +8964,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "favor": {
         "id": "VeSEifB3u1jZlzSK",
@@ -8985,7 +8985,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "general": {
         "id": "IsiEW9wrimHYgrAB",
@@ -9006,7 +9006,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "gritar-ordens": {
         "id": "HhO0oqwrgIBaUq8K",
@@ -9028,7 +9028,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/gritar-ordens.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "grito-tir-nico": {
         "id": "63cvTJKHSE7qLH8c",
@@ -9050,7 +9050,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inspirar-confian-a": {
         "id": "18c4KV5OaDXL175p",
@@ -9071,7 +9071,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inspirar-gl-ria": {
         "id": "j5i0waPbVtZY6yTW",
@@ -9092,7 +9092,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "jogo-da-corte": {
         "id": "VqLFjT6U68PTL8yq",
@@ -9113,7 +9113,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "liderar-pelo-exemplo": {
         "id": "me2utFcHVX2UsXyN",
@@ -9141,7 +9141,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "l-ngua-de-ouro": {
         "id": "vkEMHB8LOif8TNlr",
@@ -9163,7 +9163,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "l-ngua-de-prata": {
         "id": "yO1HlgA3ChYEtRMr",
@@ -9184,7 +9184,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "l-ngua-r-pida": {
         "id": "pDs1v9D3coQINHsN",
@@ -9205,7 +9205,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "orgulho": {
         "id": "NUezHHlKivTJ6lAd",
@@ -9227,7 +9227,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 79",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/orgulho.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "palavras-afiadas": {
         "id": "zcqfqdZfcQiOM5Sv",
@@ -9268,7 +9268,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "presen-a-aristocr-tica": {
         "id": "OuuBxkiipKEs4ycx",
@@ -9290,7 +9290,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "presen-a-majestosa": {
         "id": "awFA3yTlIpj82lLb",
@@ -9311,7 +9311,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "realeza": {
         "id": "893W9N6002rbwgy9",
@@ -9332,7 +9332,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/realeza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "riqueza": {
         "id": "skgFrh3jknl2xCMJ",
@@ -9353,7 +9353,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/poderes/classes/especialistas/riqueza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "t-tulo--nobre-": {
         "id": "Y1BBgKUYCS4zFyKW",
@@ -9374,7 +9374,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 80",
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "voz-poderosa": {
         "id": "YQXzEMcFe43oRUQT",
@@ -9395,7 +9395,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/classes/nobre.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "paladino": {
@@ -9419,7 +9419,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/abencoado.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arma-sagrada": {
         "id": "d5oh4raZ5joNKqS7",
@@ -9442,7 +9442,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-antimagia": {
         "id": "qlYruPKHnlOLhkZa",
@@ -9469,7 +9469,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "aura-ardente": {
         "id": "CsTu9cMRXHv90a2I",
@@ -9493,7 +9493,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-de-cura": {
         "id": "qU4mVeJXUW73owvT",
@@ -9514,7 +9514,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-de-invencibilidade": {
         "id": "2IgYxeYjSZTa0b3z",
@@ -9541,7 +9541,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-poderosa": {
         "id": "T9EwQsElTej9RIT8",
@@ -9568,7 +9568,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-sagrada": {
         "id": "VPLIpFxeBH3BYY2t",
@@ -9594,7 +9594,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 84",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/aura-sagrada.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "b-n--o-da-justi-a--montaria-sagrada": {
         "id": "K1VJOHGSdTNpVm9X",
@@ -9616,7 +9616,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 84",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/bencao-justica-montaria.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_mount_ridinghorse.jpg"
       },
       "b-n--o-da-justi-a---gide-sagrada": {
         "id": "ADxFgOnsvGnXmPVS",
@@ -9651,7 +9651,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 84",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/bencao-justica-egide.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "cura-pelas-m-os": {
         "id": "ROo7BuZfbxA21iz0",
@@ -9693,7 +9693,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/cura-pelas-maos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "c-digo-do-her-i": {
         "id": "49W6ulVKcMAyd47P",
@@ -9715,7 +9715,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/codigo-heroi.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fulgor-divino": {
         "id": "zbL2TOmlYaZzkQyi",
@@ -9742,7 +9742,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpe-divino": {
         "id": "FXGduQkI6D6rGEA9",
@@ -9779,7 +9779,7 @@ const powersData = {
           "magico"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 82",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/golpe-divino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--arrependimento": {
         "id": "VzNI92MYocB4rJrE",
@@ -9807,7 +9807,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--autoridade": {
         "id": "OfUvQm8UFO32kTfk",
@@ -9828,7 +9828,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "julgamento-divino--coragem": {
         "id": "Yc7FmnrnPx2bI5NT",
@@ -9849,7 +9849,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--ilumina--o": {
         "id": "UuwjX4I2rq301rxu",
@@ -9877,7 +9877,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--justi-a": {
         "id": "dyQ0t1RSQmmtxc4S",
@@ -9903,7 +9903,7 @@ const powersData = {
           }
         ],
         "tags": [],
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--liberta--o": {
         "id": "fU5l6LHauPYnUqbb",
@@ -9924,7 +9924,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--salva--o": {
         "id": "KOtpZlpJyAjmvGMC",
@@ -9951,7 +9951,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--vindica--o": {
         "id": "hzUeT5gDd8pM9oqW",
@@ -10002,7 +10002,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "julgamento-divino--zelo": {
         "id": "tNuIJrmXypr1IVOh",
@@ -10029,7 +10029,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "orar": {
         "id": "dCTNIO8RLsx5mLLi",
@@ -10050,7 +10050,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vingador-sagrado": {
         "id": "fdHDY8tcvrhNY5r7",
@@ -10085,7 +10085,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 84",
-        "img": "systems/tormenta20/icons/poderes/classes/combatentes/vingador-sagrado.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "virtude-paladinesca--caridade": {
         "id": "Z1106bJYCesw99Dk",
@@ -10112,7 +10112,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "virtude-paladinesca--castidade": {
         "id": "BTVkDNy8ZRf6ZVY7",
@@ -10146,7 +10146,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "virtude-paladinesca--compaix-o": {
         "id": "5YQf7z7VdEbTW65Q",
@@ -10181,7 +10181,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "virtude-paladinesca--humildade": {
         "id": "fW5dFUBE4UbCAtv3",
@@ -10203,7 +10203,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 83",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "virtude-paladinesca--temperan-a": {
         "id": "4r76cAzqdVogBmEQ",
@@ -10224,7 +10224,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 84",
-        "img": "systems/tormenta20/icons/classes/paladino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     }
   },
@@ -10249,7 +10249,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 20",
-        "img": "systems/tormenta20/icons/racas/anao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "devagar-e-sempre": {
         "id": "SEoIE7cAzTVXn00n",
@@ -10270,7 +10270,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 20",
-        "img": "systems/tormenta20/icons/racas/anao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "duro-como-pedra": {
         "id": "xWWtgcHqV6PvElXX",
@@ -10292,7 +10292,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 20",
-        "img": "systems/tormenta20/icons/racas/anao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "tradi--o": {
         "id": "ZfvrgyuDZB7CAptc",
@@ -10326,7 +10326,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 20",
-        "img": "systems/tormenta20/icons/racas/anao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "dahllan": {
@@ -10349,7 +10349,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 21",
-        "img": "systems/tormenta20/icons/racas/dahllan.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armadura-da-natureza": {
         "id": "azlQPwLSPLE0hm04",
@@ -10371,7 +10371,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 21",
-        "img": "systems/tormenta20/icons/racas/dahllan.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "empatia-selvagem--dahllan-": {
         "id": "CqQidKBaMloCcYbp",
@@ -10406,7 +10406,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 21",
-        "img": "systems/tormenta20/icons/racas/dahllan.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       }
     },
     "elfo": {
@@ -10429,7 +10429,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 22",
-        "img": "systems/tormenta20/icons/racas/elfo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-m-gico": {
         "id": "AopKlk0yieqqhmAj",
@@ -10451,7 +10451,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 22",
-        "img": "systems/tormenta20/icons/racas/elfo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sentidos--lficos": {
         "id": "PEn3CaxnaMEIAXUR",
@@ -10473,7 +10473,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 22",
-        "img": "systems/tormenta20/icons/racas/elfo.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "goblin": {
@@ -10509,7 +10509,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 23",
-        "img": "systems/tormenta20/icons/racas/goblin.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "espelunqueiro": {
         "id": "5ivkiwe1Yqts7ZVl",
@@ -10531,7 +10531,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 23",
-        "img": "systems/tormenta20/icons/racas/goblin.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "peste-esguia": {
         "id": "y0onvqs27lHcbJK5",
@@ -10552,7 +10552,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 23",
-        "img": "systems/tormenta20/icons/racas/goblin.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rato-das-ruas": {
         "id": "GNVgBn75WlpTDva0",
@@ -10573,7 +10573,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 23",
-        "img": "systems/tormenta20/icons/racas/goblin.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "golem": {
@@ -10597,7 +10597,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 27",
-        "img": "systems/tormenta20/icons/racas/golem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "criatura-artificial": {
         "id": "RKDbmILZjjIbjCmo",
@@ -10619,7 +10619,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 27",
-        "img": "systems/tormenta20/icons/racas/golem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fonte-elemental": {
         "id": "1rcfZtZarZwGs5JH",
@@ -10640,7 +10640,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 27",
-        "img": "systems/tormenta20/icons/racas/golem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "prop-sito-de-cria--o": {
         "id": "DuYQHabcHMZHQvRk",
@@ -10661,7 +10661,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 27",
-        "img": "systems/tormenta20/icons/racas/golem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "humano": {
@@ -10684,7 +10684,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 19",
-        "img": "systems/tormenta20/icons/racas/humano.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "hynne": {
@@ -10707,7 +10707,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/hynne.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pequeno-e-rechonchudo": {
         "id": "fLezjAZcNHYRx7rV",
@@ -10729,7 +10729,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/hynne.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sorte-salvadora": {
         "id": "r0Z6aNlMEhPBUeVt",
@@ -10750,7 +10750,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/hynne.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       }
     },
     "kliren": {
@@ -10786,7 +10786,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/kliren.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneresilience.jpg"
       },
       "h-brido": {
         "id": "9LjWgSEYKGmd0ix9",
@@ -10807,7 +10807,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/kliren.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ossos-fr-geis": {
         "id": "YlgdiUlZOAsflTvN",
@@ -10828,7 +10828,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/kliren.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vanguardista": {
         "id": "kV4orwvtjHg0Ao2M",
@@ -10849,7 +10849,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 28",
-        "img": "systems/tormenta20/icons/racas/kliren.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "lefou": {
@@ -10872,7 +10872,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 24",
-        "img": "systems/tormenta20/icons/racas/lefou.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "deformidade": {
         "id": "rdSgc3d7XIJhnovH",
@@ -10906,7 +10906,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 24",
-        "img": "systems/tormenta20/icons/racas/lefou.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "medusa": {
@@ -10930,7 +10930,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/medusa.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "natureza-venenosa": {
         "id": "HSB1rlovnC4GjdgV",
@@ -10952,7 +10952,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/medusa.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "olhar-atordoante": {
         "id": "gzTi2g0xClcXNUA6",
@@ -10980,7 +10980,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/medusa.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "minotauro": {
@@ -11003,7 +11003,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 25",
-        "img": "systems/tormenta20/icons/racas/minotauro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "couro-r-gido": {
         "id": "R4mqRNcLHRzrqLly",
@@ -11024,7 +11024,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 25",
-        "img": "systems/tormenta20/icons/racas/minotauro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "faro": {
         "id": "KuNWTgJXHsg6tfzy",
@@ -11046,7 +11046,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 25",
-        "img": "systems/tormenta20/icons/racas/minotauro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "medo-de-altura": {
         "id": "xn9RfAp79NWrXSYI",
@@ -11067,7 +11067,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 25",
-        "img": "systems/tormenta20/icons/racas/minotauro.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "osteon": {
@@ -11090,7 +11090,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/racas/osteon.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mem-ria-p-stuma": {
         "id": "Wj1J9EBK9tOe2hkz",
@@ -11111,7 +11111,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/osteon.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "natureza-esquel-tica": {
         "id": "GYlYSYLGcK89eelM",
@@ -11133,7 +11133,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/osteon.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "pre-o-da-n-o-vida": {
         "id": "jmQolgYJTzN0MIBs",
@@ -11154,7 +11154,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 29",
-        "img": "systems/tormenta20/icons/racas/osteon.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "qareen": {
@@ -11183,7 +11183,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 26",
-        "img": "systems/tormenta20/icons/racas/qareen.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "resist-ncia-elemental": {
         "id": "hpb7TnXraUY1qevb",
@@ -11204,7 +11204,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 26",
-        "img": "systems/tormenta20/icons/racas/qareen.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "tatuagem-m-stica": {
         "id": "0xjrY8gMCz8uLT2M",
@@ -11225,7 +11225,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 26",
-        "img": "systems/tormenta20/icons/racas/qareen.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "sereia-tritão": {
@@ -11248,7 +11248,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/sereia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-do-tridente": {
         "id": "FHVUcdvlv8Omr6qv",
@@ -11269,7 +11269,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/sereia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "transforma--o-anf-bia": {
         "id": "lQuRjelAvkrV6nVY",
@@ -11290,7 +11290,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/sereia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "suraggel": {
@@ -11314,7 +11314,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/suraggel.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "suraggel-aggelus": {
@@ -11337,7 +11337,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/suraggel.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "suraggel-sulfure": {
@@ -11360,7 +11360,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/suraggel.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_stealth.jpg"
       }
     },
     "sílfide": {
@@ -11384,7 +11384,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/silfide.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esp-rito-da-natureza": {
         "id": "aDrkOCr1kZqByOyw",
@@ -11406,7 +11406,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/silfide.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "magia-das-fadas": {
         "id": "OmUsJFNXPRl8g4xj",
@@ -11427,7 +11427,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 30",
-        "img": "systems/tormenta20/icons/racas/silfide.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       }
     },
     "trog": {
@@ -11451,7 +11451,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/trog.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mordida": {
         "id": "2z58hpmL9p4VNyPW",
@@ -11473,7 +11473,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/trog.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "reptiliano": {
         "id": "3AyZ8AOGrzH0rHMw",
@@ -11508,7 +11508,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/trog.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-frio": {
         "id": "0uPMzPcd5TJqZ0GD",
@@ -11530,7 +11530,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 31",
-        "img": "systems/tormenta20/icons/racas/trog.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     }
   },
@@ -11554,7 +11554,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 89",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "amigo-especial": {
         "id": "ow7ELtuGr37MtO5A",
@@ -11574,7 +11574,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 85",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "antigo-mestre": {
         "id": "0EHJjnDT0P0iZGeR",
@@ -11594,7 +11594,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 94",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "busca-interior": {
         "id": "3VjKAe6oPOjqeA6K",
@@ -11614,7 +11614,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 89",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "confiss-o": {
         "id": "jyYBVpG2SCZ75st9",
@@ -11634,7 +11634,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 88",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cora--o-heroico": {
         "id": "p7dIr74C74XUbfr4",
@@ -11655,7 +11655,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 92",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cultura-ex-tica": {
         "id": "M1brJAJBNptnmcSe",
@@ -11675,7 +11675,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 90",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "desejo-de-liberdade": {
         "id": "1GKFOwZTHwrMVq3z",
@@ -11695,7 +11695,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 90",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "detetive": {
         "id": "DM5mVhPPtsguw7NV",
@@ -11715,7 +11715,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 91",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-art-stico": {
         "id": "mNeLncOZHhKVE5Zc",
@@ -11735,7 +11735,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 87",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escavador": {
         "id": "p4KZ2EwgXEdrLKGp",
@@ -11755,7 +11755,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 93",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esfor-ado": {
         "id": "SooBC7lZw8kXFzEq",
@@ -11775,7 +11775,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 95",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esse-cheiro---": {
         "id": "MfqDUMq8Oqr7xMEc",
@@ -11796,7 +11796,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 88",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estoico": {
         "id": "ZBsQwPh48dhm4CGt",
@@ -11816,7 +11816,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 94",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "frutos-do-trabalho": {
         "id": "bMv6aGYlFsvJv0kE",
@@ -11836,7 +11836,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 86",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "gororoba": {
         "id": "VweL3eGjdeSFVA4x",
@@ -11856,7 +11856,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 95",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "heran-a": {
         "id": "GoeNF1Tp5FRicwau",
@@ -11876,7 +11876,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 91",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneresilience.jpg"
       },
       "influ-ncia-militar": {
         "id": "LC7Zj48ZrAV0Ta6e",
@@ -11896,7 +11896,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 94",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "lembran-as-graduais": {
         "id": "2H9Pt66jRvNBOO4F",
@@ -11916,7 +11916,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 86",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "membro-da-igreja": {
         "id": "QX1mfKNFzGMfbYLG",
@@ -11936,7 +11936,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 85",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mochileiro": {
         "id": "4vn79PMyfSXYVGnl",
@@ -11956,7 +11956,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 93",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-dico-de-campo": {
         "id": "ShzXxMr4B8jOlMnV",
@@ -11976,7 +11976,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 89",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "negocia--o": {
         "id": "QafEpkmPPxAbqOOr",
@@ -11996,7 +11996,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 93",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "palpite-fundamentado": {
         "id": "wyn9z5L1MDDsuDvq",
@@ -12016,7 +12016,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 90",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "passagem-de-navio": {
         "id": "q9kEETjXJROCaWNt",
@@ -12036,7 +12036,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 92",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "punguista": {
         "id": "AdtKhdDbNfEfC9bd",
@@ -12056,7 +12056,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 89",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "p-o-e-circo": {
         "id": "k4kKX4hcWhrum67F",
@@ -12076,7 +12076,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 91",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "quebra-galho": {
         "id": "Q2LEsFutm0QGG8tr",
@@ -12096,7 +12096,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 93",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rede-de-contatos": {
         "id": "4HDe54InDUrAw30B",
@@ -12116,7 +12116,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 92",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-azul": {
         "id": "4R8EP1vHPKrXkney",
@@ -12136,7 +12136,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 86",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "truque-de-m-gica": {
         "id": "HI7ORqJRA79m9gZB",
@@ -12156,7 +12156,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 89",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vendedor-de-carca-as": {
         "id": "GzCUpZohTh1j6BBX",
@@ -12176,7 +12176,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 92",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vida-r-stica": {
         "id": "eAZIoBypQUPTvqA2",
@@ -12196,7 +12196,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 94",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "--prova-de-tudo": {
         "id": "oNrI37ebj6fRFifd",
@@ -12216,7 +12216,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 88",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "-gua-no-feij-o": {
         "id": "1Upw4jLE5wXjSaaX",
@@ -12236,7 +12236,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 90",
-        "img": "systems/tormenta20/icons/poderes/origem.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     }
   },
@@ -12262,7 +12262,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arma-secund-ria-grande": {
         "id": "BdmNL98w2J5dVzlp",
@@ -12283,7 +12283,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arremesso-m-ltiplo": {
         "id": "a6EdDujyuOXROY2K",
@@ -12304,7 +12304,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arremesso-potente": {
         "id": "EZXppKxpmpemOlbT",
@@ -12326,7 +12326,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ataque-com-escudo": {
         "id": "B6p4S3J65bFuq91w",
@@ -12347,7 +12347,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "ataque-pesado": {
         "id": "r32ztAcvXnq3LFMp",
@@ -12368,7 +12368,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "ataque-poderoso": {
         "id": "H3XFozZPWLh3lGE0",
@@ -12408,7 +12408,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "ataque-preciso": {
         "id": "jbrgzDjAbJGdOEux",
@@ -12429,7 +12429,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "bloqueio-com-escudo": {
         "id": "suFpHfckhlVgiVSw",
@@ -12450,7 +12450,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "carga-de-cavalaria": {
         "id": "DZsqNyevug2cslNj",
@@ -12471,7 +12471,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 124",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "combate-defensivo": {
         "id": "KhhkTTvottzdiQ4b",
@@ -12492,7 +12492,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "derrubar-aprimorado": {
         "id": "Fm42qXLskwRTg4sK",
@@ -12519,7 +12519,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "desarmar-aprimorado": {
         "id": "2UwM27fjP8Hjl67M",
@@ -12553,7 +12553,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "disparo-preciso": {
         "id": "SKQ0qQsrNjSTjKXJ",
@@ -12574,7 +12574,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "disparo-r-pido": {
         "id": "VXLq2BMz6sDSotBa",
@@ -12595,7 +12595,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "empunhadura-poderosa": {
         "id": "xoZDMj610oaZzBrd",
@@ -12616,7 +12616,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "encoura-ado": {
         "id": "VQMc6Kc7AwsT2ab7",
@@ -12637,7 +12637,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "esquiva": {
         "id": "3EiA3eznoTFyi0pP",
@@ -12658,7 +12658,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-arma-e-escudo": {
         "id": "jnejEG7oaQrHKlCG",
@@ -12679,7 +12679,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-arma-longa": {
         "id": "7TCow8poq1WBeYiT",
@@ -12694,7 +12694,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-arremesso": {
         "id": "JgDHsBOoa6ZaVHXO",
@@ -12728,7 +12728,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-disparo": {
         "id": "sRuSasAfCGydYSnj",
@@ -12749,7 +12749,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-duas-armas": {
         "id": "lPqt8AGiMZtVAqAQ",
@@ -12770,7 +12770,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 125",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-duas-m-os": {
         "id": "aeXR1kOB1PZt2sUL",
@@ -12791,7 +12791,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-de-uma-arma": {
         "id": "1exB4BFKdPWFOZwV",
@@ -12825,7 +12825,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "estilo-desarmado": {
         "id": "DNLooQ6SGKf2hqEc",
@@ -12846,7 +12846,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "fan-tico": {
         "id": "lno7NNNEUJJhhMZO",
@@ -12880,7 +12880,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "finta-aprimorada": {
         "id": "kHd2xZgJlv2f0UMD",
@@ -12901,7 +12901,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "foco-em-arma": {
         "id": "kbFH3l2FZkG5JymG",
@@ -12922,7 +12922,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ginete": {
         "id": "k2f9RHm5zbpkKjMa",
@@ -12943,7 +12943,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inexpugn-vel": {
         "id": "5Ti6oLK8wRgjLWcM",
@@ -12964,7 +12964,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mira-apurada": {
         "id": "U4K0kvB5kultmltV",
@@ -12986,7 +12986,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "piqueiro": {
         "id": "G44FbFJiXoeHW5Z6",
@@ -13008,7 +13008,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "presen-a-aterradora": {
         "id": "7DU7ZlX5OiX257HF",
@@ -13030,7 +13030,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 128",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "profici-ncia": {
         "id": "AD22Tx3t0ur2lL2e",
@@ -13051,7 +13051,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "quebrar-aprimorado": {
         "id": "0tfJ1wT2LbC6YcJN",
@@ -13072,7 +13072,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "reflexos-de-combate": {
         "id": "hVjq1HcXtfBxUmKg",
@@ -13093,7 +13093,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "saque-r-pido": {
         "id": "xfgWUlAbj4PwvuPf",
@@ -13114,7 +13114,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "trespassar": {
         "id": "XJq0YiMjgtbCNDzk",
@@ -13135,7 +13135,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vitalidade": {
         "id": "vcYz5xdAi4RluSoM",
@@ -13157,7 +13157,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/combate.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "concedido": {
@@ -13180,7 +13180,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-ambicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "liberdade-divina": {
         "id": "mFp7Seto2Uo8YxD1",
@@ -13202,7 +13202,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-ambicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "almejar-o-imposs-vel": {
         "id": "07Lj0txt3V5tfos6",
@@ -13218,7 +13218,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "poder-oculto": {
         "id": "CaydxkHRMO6NuZyj",
@@ -13277,7 +13277,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-sorte.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sorte-dos-loucos": {
         "id": "bNv2Rufni0aDDnbI",
@@ -13297,7 +13297,7 @@ const powersData = {
         },
         "efeitos": [],
         "tags": [],
-        "img": "systems/tormenta20/icons/poderes/concedidos-sorte.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "transmiss-o-da-loucura": {
         "id": "EwDapR826hz2edl3",
@@ -13318,7 +13318,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-sorte.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "-xtase-da-loucura": {
         "id": "omKfBFC5vH1zujMJ",
@@ -13339,7 +13339,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "conhecimento-enciclop-dico": {
         "id": "jjQgutXSxMtBrMWA",
@@ -13360,7 +13360,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mente-anal-tica": {
         "id": "Mqyj3NlGuv9rhQpH",
@@ -13381,7 +13381,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pesquisa-aben-oada": {
         "id": "5528bIwydLqg1PhQ",
@@ -13427,7 +13427,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "voz-da-civiliza--o": {
         "id": "snaGhwLNB4h2Y9rJ",
@@ -13448,7 +13448,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-de-medo": {
         "id": "KCaPgkZ86O1Jp2GH",
@@ -13469,7 +13469,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-dragoes.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escamas-drac-nicas": {
         "id": "r0a9VM16j4AsNZbk",
@@ -13490,7 +13490,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-dragoes.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "servos-do-drag-o": {
         "id": "06DG5FvoJF2vIKsW",
@@ -13512,7 +13512,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-dragoes.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "presas-primordiais": {
         "id": "f3a4wgr41V6oIqRD",
@@ -13533,7 +13533,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "f-ria-divina": {
         "id": "cfHF0uul45eLC3KX",
@@ -13554,7 +13554,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-goblinoides.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg"
       },
       "tropas-goblin-ides": {
         "id": "fjNvBQ33DmjPwGyV",
@@ -13576,7 +13576,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-goblinoides.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_escapeartist.jpg"
       },
       "olhar-amedrontador": {
         "id": "PihxJtRqlqDzFaVk",
@@ -13597,7 +13597,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "conjurar-arma": {
         "id": "Dwbr8XnZGv9XlIYX",
@@ -13660,7 +13660,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-guerra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "f--guerreira": {
         "id": "kyPHPi4M03FnThps",
@@ -13686,7 +13686,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-guerra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-de-ferro": {
         "id": "HUdNN0VdkkDWVpmQ",
@@ -13707,7 +13707,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-guerra.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "coragem-total": {
         "id": "Y5wVBhEisEUVjIBz",
@@ -13728,7 +13728,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "kiai-divino": {
         "id": "3f0ZGFYYeDHh0hjQ",
@@ -13749,7 +13749,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-samurai.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mente-vazia": {
         "id": "UOzqz9v3jx4Hc7Mb",
@@ -13770,7 +13770,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-samurai.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "tradi--o-de-samurai": {
         "id": "MQVfA5kgyBGEqz3D",
@@ -13791,7 +13791,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-samurai.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-da-verdade": {
         "id": "NUxqUQUhiByDPK6Z",
@@ -13812,7 +13812,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-justica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "espada-justiceira": {
         "id": "EJChqrSZJIXgcuxD",
@@ -13833,7 +13833,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-justica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "reparar-injusti-a": {
         "id": "enc2pWpBKqJcbjre",
@@ -13855,7 +13855,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-justica.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "liberdade-irrestrita": {
         "id": "PUiaAuvbt0NDLBR0",
@@ -13876,7 +13876,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Guia de NPCs, p. 16 (1.1)",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "anf-bio": {
         "id": "FQwvH2mRTntQKq2h",
@@ -13898,7 +13898,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-mares.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "arsenal-das-profundezas": {
         "id": "7tTutIetS7XoKEXp",
@@ -13920,7 +13920,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-mares.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mestre-dos-mares": {
         "id": "mekjIF9AY4N966pb",
@@ -13941,7 +13941,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-mares.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sopro-do-mar": {
         "id": "5bEzzIEEFqOgc10k",
@@ -13964,7 +13964,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-mares.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "urro-divino": {
         "id": "bGVNLGaJ5FQzVgUG",
@@ -13985,7 +13985,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos-monstros.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "voz-dos-monstros": {
         "id": "YTvSa0Ts5LHe6212",
@@ -14006,7 +14006,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos-monstros.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "compreender-os-ermos": {
         "id": "wRvYCrpwaWALmLPg",
@@ -14027,7 +14027,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-natureza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dedo-verde": {
         "id": "u6EhXGRfH5zuRgtR",
@@ -14048,7 +14048,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-natureza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "descanso-natural": {
         "id": "V4smKsew63Rwl2TD",
@@ -14069,7 +14069,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-natureza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "voz-da-natureza": {
         "id": "Y9MfowI3KydAdgND",
@@ -14090,7 +14090,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos-natureza.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "aura-de-paz": {
         "id": "2Ez0hINMBDSMC3YW",
@@ -14116,7 +14116,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-paz.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-da-esperan-a": {
         "id": "bTocosYd9lw0Vil8",
@@ -14138,7 +14138,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-paz.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "palavras-de-bondade": {
         "id": "KZBYNBs2jj4D0jfn",
@@ -14159,7 +14159,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-paz.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "talento-art-stico": {
         "id": "uWXyA5uVOcqIYbRi",
@@ -14180,7 +14180,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-paz.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-da-imortalidade": {
         "id": "pTCZidM8hUslgx4u",
@@ -14201,7 +14201,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-ressurreicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-da-profecia": {
         "id": "ER3qYUu8vpKPM1zU",
@@ -14235,7 +14235,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-ressurreicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dom-da-ressurrei--o": {
         "id": "f1wsMyoaUc84zuqx",
@@ -14257,7 +14257,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-ressurreicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ataque-piedoso": {
         "id": "whJFemzRCrz6gvtp",
@@ -14279,7 +14279,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_cleave.jpg"
       },
       "espada-solar": {
         "id": "seHht1EYivTWatKh",
@@ -14300,7 +14300,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-deus-sol.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fulgor-solar": {
         "id": "m6zYuRBPDXvCFDOK",
@@ -14321,7 +14321,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-deus-sol.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "habitante-do-deserto": {
         "id": "AVx9eTYu8gnVuHwy",
@@ -14342,7 +14342,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-deus-sol.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "inimigo-das-trevas": {
         "id": "q2bsVtoBG4izYF2l",
@@ -14363,7 +14363,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-deus-sol.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "afinidade-com-a-tormenta": {
         "id": "WHe196oPItMogDSE",
@@ -14385,7 +14385,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg"
       },
       "percep--o-temporal": {
         "id": "CqZXnDBiP5Vj9oFv",
@@ -14406,7 +14406,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "rejei--o-divina": {
         "id": "959wpT3zgDErAGpY",
@@ -14427,7 +14427,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "ast-cia-da-serpente": {
         "id": "RDZ4Iieg7ffqmjLE",
@@ -14449,7 +14449,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-traicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "familiar-of-dico": {
         "id": "ZlgkzfCdGZKlhFsJ",
@@ -14471,7 +14471,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-traicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg"
       },
       "presas-venenosas": {
         "id": "59z8asrLz1R0a6RL",
@@ -14493,7 +14493,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-traicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue-of-dico": {
         "id": "tkixzUzqKytmZJW0",
@@ -14514,7 +14514,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-traicao.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "apostar-com-o-trapaceiro": {
         "id": "zeEpAhQcqAHA0qsn",
@@ -14530,7 +14530,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trapaca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "farsa-do-fingidor": {
         "id": "6HsKF5U5mfbWZlwV",
@@ -14551,7 +14551,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trapaca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "forma-de-macaco": {
         "id": "x5UBiKNadzbvh5Df",
@@ -14586,7 +14586,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trapaca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "golpista-divino": {
         "id": "qrtL3ZLIlK4r1jz4",
@@ -14607,7 +14607,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trapaca.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "car-cia-sombria": {
         "id": "OfBZl1NhiMQ4oYN3",
@@ -14629,7 +14629,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trevas.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "manto-da-penumbra": {
         "id": "H44C0wAQby5qnVrx",
@@ -14650,7 +14650,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 134",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trevas.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vis-o-nas-trevas": {
         "id": "YNcTUUQeH2S5d0LA",
@@ -14671,7 +14671,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trevas.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "zumbificar": {
         "id": "pT9MEJaQAKcNRfFF",
@@ -14693,7 +14693,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/concedidos-trevas.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "aura-restauradora": {
         "id": "J3wBeeUlf8m2WjSk",
@@ -14714,7 +14714,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-vida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cura-gentil": {
         "id": "3Hr5IHsISX8a4cRS",
@@ -14735,7 +14735,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-vida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "curandeira-perfeita": {
         "id": "Ecesw31b7jMDRBbt",
@@ -14756,7 +14756,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-vida.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "destino": {
@@ -14779,7 +14779,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_feint.jpg"
       },
       "ao-sabor-do-destino": {
         "id": "SRvf9NbvHRu0NNvN",
@@ -14800,7 +14800,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 129 e 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_blessingofwisdom.jpg"
       },
       "apar-ncia-inofensiva": {
         "id": "8lUie2yAnlqjfZdc",
@@ -14821,7 +14821,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "atl-tico": {
         "id": "3xj6PavO9eazdqRx",
@@ -14842,7 +14842,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "atraente": {
         "id": "2TvrxZ8tW7KSPOE6",
@@ -14863,7 +14863,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "comandar": {
         "id": "u9TgbL6zCLQADGZg",
@@ -14885,7 +14885,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_turnundead.jpg"
       },
       "costas-largas": {
         "id": "P2Vm2S4PlF4jajv2",
@@ -14907,7 +14907,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "foco-em-per-cia": {
         "id": "2cbFrAuQY6dmk8eS",
@@ -14928,7 +14928,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "invent-rio-organizado": {
         "id": "4JUP8DbkCkOZguQb",
@@ -14949,7 +14949,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "investigador": {
         "id": "wcpALlTnf92pBYXT",
@@ -14970,7 +14970,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "lobo-solit-rio": {
         "id": "2LxEtm7P7roK2dCt",
@@ -14991,7 +14991,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "medicina": {
         "id": "0sanox342d7LHPhb",
@@ -15026,7 +15026,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "parceiro": {
         "id": "3dwyffREutYxTU7O",
@@ -15047,7 +15047,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sentidos-agu-ados": {
         "id": "QEkw59wKjXEN2IMZ",
@@ -15068,7 +15068,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 130",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sortudo": {
         "id": "9ufcM7yTLDVvJVP2",
@@ -15089,7 +15089,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "surto-heroico": {
         "id": "pGwlyl63wgYeqwrQ",
@@ -15110,7 +15110,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "torcida": {
         "id": "xZz3ZMJ47L2pzPmG",
@@ -15131,7 +15131,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "treinamento-em-per-cia": {
         "id": "Vt6W9YWlxtGrZlUH",
@@ -15152,7 +15152,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "venef-cio": {
         "id": "xXBwgDlKVLB94WuT",
@@ -15173,7 +15173,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "vontade-de-ferro": {
         "id": "JqIyfIszukoGImxz",
@@ -15195,7 +15195,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/destino.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_defensivestance.jpg"
       }
     },
     "magia": {
@@ -15219,7 +15219,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_heal.jpg"
       },
       "celebrar-ritual": {
         "id": "7O3ruVYVDawkPdPz",
@@ -15240,7 +15240,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "centelha-m-gica": {
         "id": "RVcn4COzkbMzDcTp",
@@ -15261,7 +15261,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 132",
-        "img": "systems/tormenta20/icons/poderes/concedidos-magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escrever-pergaminho": {
         "id": "HHvwLN3CaB6N1PnI",
@@ -15282,7 +15282,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "escudo-m-gico": {
         "id": "On6DFwWTValJhmHm",
@@ -15316,7 +15316,7 @@ const powersData = {
         ],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 133",
-        "img": "systems/tormenta20/icons/poderes/concedidos-magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "foco-em-magia": {
         "id": "PUmtfrv3G5zTn46A",
@@ -15337,7 +15337,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magia-acelerada": {
         "id": "IEJy49pSweeiokI8",
@@ -15359,7 +15359,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magia-ampliada": {
         "id": "B1vQTUXRBiqhcmmH",
@@ -15380,7 +15380,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magia-discreta": {
         "id": "a7FEhf1T8KVwr0iA",
@@ -15401,7 +15401,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "magia-ilimitada": {
         "id": "XUqiN7ayNAdm5oSx",
@@ -15422,7 +15422,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/spell_arcane_arcaneblast.jpg"
       },
       "preparar-po--o": {
         "id": "BsiLXAHZg7Ef5MER",
@@ -15443,7 +15443,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 131",
-        "img": "systems/tormenta20/icons/poderes/magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "teurgista-m-stico": {
         "id": "Esp2Su5Fyg0g52TM",
@@ -15464,7 +15464,7 @@ const powersData = {
         "efeitos": [],
         "tags": [],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 135",
-        "img": "systems/tormenta20/icons/poderes/concedidos-magia.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     },
     "tormenta": {
@@ -15490,7 +15490,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "antenas": {
         "id": "DsJr9ypEbr6LPJHY",
@@ -15514,7 +15514,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "armamento-aberrante": {
         "id": "pS2CX9symlHOrucD",
@@ -15538,7 +15538,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "articula--es-flex-veis": {
         "id": "rzegU1eVmG1WJ1Jf",
@@ -15562,7 +15562,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "asas-insetoides": {
         "id": "WaBjVDfXypUeiddz",
@@ -15585,7 +15585,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "carapa-a": {
         "id": "sNlQ744psb8AiY8a",
@@ -15609,7 +15609,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "corpo-aberrante": {
         "id": "Ut37gpEkubtQ00yl",
@@ -15632,7 +15632,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "cuspir-enxame": {
         "id": "awyqwoOl4sVaWbZ2",
@@ -15669,7 +15669,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 136",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "dentes-afiados": {
         "id": "B5ZxXy5za4VMn4k3",
@@ -15692,7 +15692,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "desprezar-a-realidade": {
         "id": "JddVAjOsUi74UQef",
@@ -15715,7 +15715,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "empunhadura-rubra": {
         "id": "0YGqk8QwGj7by1Ia",
@@ -15738,7 +15738,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "fome-de-mana": {
         "id": "IEcXYz6VZ1rg7MAG",
@@ -15762,7 +15762,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "larva-explosiva": {
         "id": "d4FusbG68oIQjAmg",
@@ -15785,7 +15785,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "legi-o-aberrante": {
         "id": "zz44eIs8no6rFKrP",
@@ -15809,7 +15809,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "membros-estendidos": {
         "id": "vN3GIx3e8OWhwpa2",
@@ -15832,7 +15832,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "membros-extras": {
         "id": "VnuxGTlMtobB52pg",
@@ -15855,7 +15855,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "mente-aberrante": {
         "id": "tZ3HdOHk3UE7W50R",
@@ -15892,7 +15892,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "m-os-membranosas": {
         "id": "bWD6dc5zO5itYMQa",
@@ -15916,7 +15916,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "olhos-vermelhos": {
         "id": "TkaYPJLuESGIEH1q",
@@ -15940,7 +15940,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "pele-corrompida": {
         "id": "nSwvwdDROADv0fXW",
@@ -15964,7 +15964,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "sangue--cido": {
         "id": "kMvzx9IANeCmhM2c",
@@ -15988,7 +15988,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       },
       "visco-rubro": {
         "id": "Mce6xvlRf48rWmMf",
@@ -16012,7 +16012,7 @@ const powersData = {
           "Tormenta"
         ],
         "source": "Tormenta20 — Edição Jogo do Ano, p. 137",
-        "img": "systems/tormenta20/icons/poderes/tormenta.webp"
+        "img": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg"
       }
     }
   }

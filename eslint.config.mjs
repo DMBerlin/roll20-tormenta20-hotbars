@@ -51,6 +51,18 @@ export default defineConfig([
     }
   },
   {
+    files: ["src/*.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        module: "writable",
+        require: "readonly",
+        console: "readonly"
+      }
+    }
+  },
+  {
     files: ["landing-page/update-landing-page.js"],
     languageOptions: {
       sourceType: "commonjs",
