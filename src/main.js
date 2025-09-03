@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.77133'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.20465'; // Última tag Git
 
     const logger = window.console;
 
@@ -7290,6 +7290,14 @@
             { key: 'tormenta-20-hotbars-char-sab-attr', label: 'Sabedoria', defaultValue: 'menace_sab' },
             { key: 'tormenta-20-hotbars-char-car-attr', label: 'Carisma', defaultValue: 'menace_car' },
 
+            // Atributos Fake (modificadores temporários)
+            { key: 'tormenta-20-hotbars-char-fakefor-attr', label: 'Força (Fake)', defaultValue: 'fakefor' },
+            { key: 'tormenta-20-hotbars-char-fakedes-attr', label: 'Destreza (Fake)', defaultValue: 'fakedes' },
+            { key: 'tormenta-20-hotbars-char-fakecon-attr', label: 'Constituição (Fake)', defaultValue: 'fakecon' },
+            { key: 'tormenta-20-hotbars-char-fakeint-attr', label: 'Inteligência (Fake)', defaultValue: 'fakeint' },
+            { key: 'tormenta-20-hotbars-char-fakesab-attr', label: 'Sabedoria (Fake)', defaultValue: 'fakesab' },
+            { key: 'tormenta-20-hotbars-char-fakecar-attr', label: 'Carisma (Fake)', defaultValue: 'fakecar' },
+
             // Equipamentos
             { key: 'tormenta-20-hotbars-char-treasure-attr', label: 'Equipamentos/Tesouro', defaultValue: 'menace_treasure' }
         ];
@@ -11785,6 +11793,14 @@
                 { key: 'tormenta-20-hotbars-char-sab-attr', defaultValue: 'menace_sab' },
                 { key: 'tormenta-20-hotbars-char-car-attr', defaultValue: 'menace_car' },
 
+                // Atributos Fake (modificadores temporários)
+                { key: 'tormenta-20-hotbars-char-fakefor-attr', defaultValue: 'fakefor' },
+                { key: 'tormenta-20-hotbars-char-fakedes-attr', defaultValue: 'fakedes' },
+                { key: 'tormenta-20-hotbars-char-fakecon-attr', defaultValue: 'fakecon' },
+                { key: 'tormenta-20-hotbars-char-fakeint-attr', defaultValue: 'fakeint' },
+                { key: 'tormenta-20-hotbars-char-fakesab-attr', defaultValue: 'fakesab' },
+                { key: 'tormenta-20-hotbars-char-fakecar-attr', defaultValue: 'fakecar' },
+
                 // Equipamentos
                 { key: 'tormenta-20-hotbars-char-treasure-attr', defaultValue: 'menace_treasure' }
             ];
@@ -15585,6 +15601,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Abre o modal da ficha de personagem
      */
     function openCharacterSheet() {
+        // Verificar se a hotbar está sincronizada
+        const lastSyncData = localStorage.getItem('tormenta-20-hotbars-sync-name');
+        if (!lastSyncData) {
+            createNotification('Sincronize a hotbar primeiro (Ctrl + \') para visualizar a ficha de personagem', 'warning', 4000);
+            return;
+        }
+
         // Verificar se o modal já existe e removê-lo se necessário
         const existingModal = document.getElementById('character-sheet-modal');
         if (existingModal) {
@@ -15638,6 +15661,51 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             border: 2px solid rgba(110, 198, 255, 0.3);
             position: relative;
         `;
+
+        // Adicionar estilos customizados para scrollbar
+        const scrollbarStyle = document.createElement('style');
+        scrollbarStyle.textContent = `
+            #character-sheet-modal .container::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            #character-sheet-modal .container::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+            }
+            
+            #character-sheet-modal .container::-webkit-scrollbar-thumb {
+                background: rgba(110, 198, 255, 0.6);
+                border-radius: 4px;
+                transition: background 0.2s ease;
+            }
+            
+            #character-sheet-modal .container::-webkit-scrollbar-thumb:hover {
+                background: rgba(110, 198, 255, 0.8);
+            }
+            
+            #character-sheet-modal div::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            #character-sheet-modal div::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+            }
+            
+            #character-sheet-modal div::-webkit-scrollbar-thumb {
+                background: rgba(110, 198, 255, 0.6);
+                border-radius: 4px;
+                transition: background 0.2s ease;
+            }
+            
+            #character-sheet-modal div::-webkit-scrollbar-thumb:hover {
+                background: rgba(110, 198, 255, 0.8);
+            }
+        `;
+
+        sheetContainer.appendChild(scrollbarStyle);
+        sheetContainer.className = 'container';
 
         // Botão de fechar
         const closeButton = document.createElement('button');
@@ -15898,7 +15966,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         attributes.forEach(attr => {
             const attrValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.key}`) || '10';
             const attrMod = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.modKey}`) || '0';
-            const modSign = parseInt(attrMod) >= 0 ? '+' : '';
+            const fakeValue = localStorage.getItem(`tormenta-20-hotbars-sync-fake${attr.key}`) || '0';
+
+            // Se há um valor fake, usar ele; senão usar o modificador normal
+            const displayMod = parseInt(fakeValue) !== 0 ? fakeValue : attrMod;
 
             const attrCard = document.createElement('div');
             attrCard.style.cssText = `
@@ -15907,23 +15978,34 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 border-radius: 12px;
                 padding: 15px;
                 text-align: center;
-                transition: transform 0.2s ease;
+                transition: all 0.2s ease;
+                cursor: pointer;
             `;
 
             attrCard.onmouseover = () => {
                 attrCard.style.transform = 'translateY(-2px)';
                 attrCard.style.boxShadow = '0 8px 25px rgba(110, 198, 255, 0.2)';
+                attrCard.style.background = 'linear-gradient(135deg, rgba(110, 198, 255, 0.2), rgba(110, 198, 255, 0.1))';
             };
 
             attrCard.onmouseout = () => {
                 attrCard.style.transform = 'translateY(0)';
                 attrCard.style.boxShadow = 'none';
+                attrCard.style.background = 'linear-gradient(135deg, rgba(110, 198, 255, 0.1), rgba(110, 198, 255, 0.05))';
+            };
+
+            // Adicionar click handler para rolagem de dados
+            attrCard.onclick = () => {
+                const characterName = getCharacterNameForMacro();
+                const rollCommand = `&{template:t20}{{character=@{${characterName}|character_name}}}{{rollname=${attr.label}}}{{theroll=[[1d20+@{${characterName}|${attr.modKey}}]]}}`;
+                sendToChat(rollCommand);
+                createNotification(`Rolando ${attr.label}...`, 'info', 2000);
             };
 
             attrCard.innerHTML = `
                 <div style="font-size: 14px; color: #b0bec5; margin-bottom: 5px; font-weight: bold;">${attr.name}</div>
                 <div style="font-size: 24px; color: #ecf0f1; font-weight: bold; margin-bottom: 5px;">${attrValue}</div>
-                <div style="font-size: 14px; color: #6ec6ff; font-weight: bold;">${modSign}${attrMod}</div>
+                <div style="font-size: 14px; color: #6ec6ff; font-weight: bold;">${displayMod}</div>
                 <div style="font-size: 10px; color: #90a4ae; margin-top: 5px;">${attr.label}</div>
             `;
 
@@ -16090,7 +16172,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             { name: 'Cabeça', icon: '🎩', id: 'head' },
             { name: 'Pescoço', icon: '📿', id: 'neck' },
             { name: 'Ombros', icon: '🦴', id: 'shoulders' },
-            { name: 'Peito', icon: '🛡️', id: 'chest' },
+            { name: 'Peito', icon: '👕', id: 'chest' },
             { name: 'Costas', icon: '🎒', id: 'back' },
             { name: 'Braçadeiras', icon: '⚡', id: 'bracers' },
             { name: 'Mão Principal', icon: '⚔️', id: 'main_hand' },
@@ -16178,42 +16260,42 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Seção de itens equipados atualmente (se houver)
-        const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-treasure') || '';
-        if (currentEquipment.trim()) {
-            const currentEquipmentDiv = document.createElement('div');
-            currentEquipmentDiv.style.cssText = `
-                margin-top: 25px;
-                padding: 20px;
-                background: rgba(76, 175, 80, 0.1);
-                border: 1px solid rgba(76, 175, 80, 0.3);
-                border-radius: 12px;
-            `;
+        // const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-treasure') || '';
+        // if (currentEquipment.trim()) {
+        //     const currentEquipmentDiv = document.createElement('div');
+        //     currentEquipmentDiv.style.cssText = `
+        //         margin-top: 25px;
+        //         padding: 20px;
+        //         background: rgba(76, 175, 80, 0.1);
+        //         border: 1px solid rgba(76, 175, 80, 0.3);
+        //         border-radius: 12px;
+        //     `;
 
-            const equipmentTitle = document.createElement('h4');
-            equipmentTitle.textContent = '🎒 Itens Carregados';
-            equipmentTitle.style.cssText = `
-                margin: 0 0 15px 0;
-                color: #4caf50;
-                font-size: 16px;
-                font-weight: bold;
-            `;
+        //     const equipmentTitle = document.createElement('h4');
+        //     equipmentTitle.textContent = '🎒 Itens Carregados';
+        //     equipmentTitle.style.cssText = `
+        //         margin: 0 0 15px 0;
+        //         color: #4caf50;
+        //         font-size: 16px;
+        //         font-weight: bold;
+        //     `;
 
-            const equipmentList = document.createElement('div');
-            equipmentList.textContent = currentEquipment;
-            equipmentList.style.cssText = `
-                color: #ecf0f1;
-                font-size: 14px;
-                line-height: 1.5;
-                background: rgba(0, 0, 0, 0.2);
-                padding: 15px;
-                border-radius: 8px;
-                border-left: 4px solid #4caf50;
-            `;
+        //     const equipmentList = document.createElement('div');
+        //     equipmentList.textContent = currentEquipment;
+        //     equipmentList.style.cssText = `
+        //         color: #ecf0f1;
+        //         font-size: 14px;
+        //         line-height: 1.5;
+        //         background: rgba(0, 0, 0, 0.2);
+        //         padding: 15px;
+        //         border-radius: 8px;
+        //         border-left: 4px solid #4caf50;
+        //     `;
 
-            currentEquipmentDiv.appendChild(equipmentTitle);
-            currentEquipmentDiv.appendChild(equipmentList);
-            section.appendChild(currentEquipmentDiv);
-        }
+        //     currentEquipmentDiv.appendChild(equipmentTitle);
+        //     currentEquipmentDiv.appendChild(equipmentList);
+        //     section.appendChild(currentEquipmentDiv);
+        // }
 
         section.appendChild(title);
         section.appendChild(equipmentGrid);
