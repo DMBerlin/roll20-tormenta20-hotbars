@@ -16259,44 +16259,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             equipmentGrid.appendChild(slotCard);
         });
 
-        // Seção de itens equipados atualmente (se houver)
-        // const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-treasure') || '';
-        // if (currentEquipment.trim()) {
-        //     const currentEquipmentDiv = document.createElement('div');
-        //     currentEquipmentDiv.style.cssText = `
-        //         margin-top: 25px;
-        //         padding: 20px;
-        //         background: rgba(76, 175, 80, 0.1);
-        //         border: 1px solid rgba(76, 175, 80, 0.3);
-        //         border-radius: 12px;
-        //     `;
-
-        //     const equipmentTitle = document.createElement('h4');
-        //     equipmentTitle.textContent = '🎒 Itens Carregados';
-        //     equipmentTitle.style.cssText = `
-        //         margin: 0 0 15px 0;
-        //         color: #4caf50;
-        //         font-size: 16px;
-        //         font-weight: bold;
-        //     `;
-
-        //     const equipmentList = document.createElement('div');
-        //     equipmentList.textContent = currentEquipment;
-        //     equipmentList.style.cssText = `
-        //         color: #ecf0f1;
-        //         font-size: 14px;
-        //         line-height: 1.5;
-        //         background: rgba(0, 0, 0, 0.2);
-        //         padding: 15px;
-        //         border-radius: 8px;
-        //         border-left: 4px solid #4caf50;
-        //     `;
-
-        //     currentEquipmentDiv.appendChild(equipmentTitle);
-        //     currentEquipmentDiv.appendChild(equipmentList);
-        //     section.appendChild(currentEquipmentDiv);
-        // }
-
         section.appendChild(title);
         section.appendChild(equipmentGrid);
 
