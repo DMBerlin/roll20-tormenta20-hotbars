@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.99725'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.77133'; // Última tag Git
 
     const logger = window.console;
 
@@ -2252,7 +2252,7 @@
         overlay.style.width = '100%';
         overlay.style.height = '100%';
         overlay.style.background = 'rgba(0,0,0,0.5)';
-        overlay.style.zIndex = '10000';
+        overlay.style.zIndex = '100000';
         overlay.onclick = () => {
             overlay.remove();
             popup.remove();
@@ -2271,7 +2271,7 @@
         popup.style.border = '2px solid #6ec6ff';
         popup.style.borderRadius = '12px';
         popup.style.padding = '20px';
-        popup.style.zIndex = '10001';
+        popup.style.zIndex = '100001';
         popup.style.maxWidth = '400px';
         popup.style.boxShadow = '0 8px 32px rgba(0,0,0,0.7)';
         popup.style.display = 'flex';
@@ -2395,6 +2395,8 @@
                 saveAvatarUrl(url);
                 // Atualiza o avatar na hotbar
                 updateCharacterAvatar();
+                // Atualiza o avatar na ficha de personagem se estiver aberta
+                updateCharacterSheetAvatar();
                 showSuccessNotification('Avatar do personagem atualizado!');
             }
             popup.remove();
@@ -2424,7 +2426,10 @@
 
         clearBtn.onclick = () => {
             saveAvatarUrl('');
+            // Atualiza o avatar na hotbar
             updateCharacterAvatar();
+            // Atualiza o avatar na ficha de personagem se estiver aberta
+            updateCharacterSheetAvatar();
             showWarningNotification('Avatar do personagem removido.');
             popup.remove();
             const overlay = document.getElementById('avatar-overlay');
@@ -7258,15 +7263,35 @@
 
         // Campos de configuração dos atributos
         const attributeFields = [
+            // Informações básicas
             { key: 'tormenta-20-hotbars-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
             { key: 'tormenta-20-hotbars-char-race-attr', label: 'Raça', defaultValue: 'trace' },
             { key: 'tormenta-20-hotbars-char-class-attr', label: 'Classe', defaultValue: 'tlevel' },
-            { key: 'tormenta-20-hotbars-char-level-attr', label: 'Nível', defaultValue: 'charnivel' },
+            { key: 'tormenta-20-hotbars-char-level-attr', label: 'Nível', defaultValue: 'menace_nd' },
+            { key: 'tormenta-20-hotbars-char-divindade-attr', label: 'Divindade', defaultValue: 'divindade' },
+
+            // Recursos
             { key: 'tormenta-20-hotbars-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal' },
             { key: 'tormenta-20-hotbars-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida' },
             { key: 'tormenta-20-hotbars-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
             { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
-            { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Armadura', defaultValue: 'defesatotal' }
+
+            // Defesas
+            { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
+            { key: 'tormenta-20-hotbars-char-fortitude-attr', label: 'Fortitude', defaultValue: 'menace_fortitude' },
+            { key: 'tormenta-20-hotbars-char-reflex-attr', label: 'Reflexos', defaultValue: 'menace_reflex' },
+            { key: 'tormenta-20-hotbars-char-will-attr', label: 'Vontade', defaultValue: 'menace_will' },
+
+            // Atributos
+            { key: 'tormenta-20-hotbars-char-for-attr', label: 'Força', defaultValue: 'menace_for' },
+            { key: 'tormenta-20-hotbars-char-des-attr', label: 'Destreza', defaultValue: 'menace_des' },
+            { key: 'tormenta-20-hotbars-char-con-attr', label: 'Constituição', defaultValue: 'menace_con' },
+            { key: 'tormenta-20-hotbars-char-int-attr', label: 'Inteligência', defaultValue: 'menace_int' },
+            { key: 'tormenta-20-hotbars-char-sab-attr', label: 'Sabedoria', defaultValue: 'menace_sab' },
+            { key: 'tormenta-20-hotbars-char-car-attr', label: 'Carisma', defaultValue: 'menace_car' },
+
+            // Equipamentos
+            { key: 'tormenta-20-hotbars-char-treasure-attr', label: 'Equipamentos/Tesouro', defaultValue: 'menace_treasure' }
         ];
 
         const fieldsContainer = document.createElement('div');
@@ -10218,13 +10243,7 @@
         editIcon.style.border = '2px solid rgba(30,30,40,0.92)';
         editIcon.style.opacity = '0';
 
-        // Adicionar click handler para abrir ficha do personagem
-        avatar.addEventListener('click', (e) => {
-            // Prevenir que o clique no avatar dispare a edição
-            if (!e.target.closest('.edit-icon')) {
-                openCharacterSheet();
-            }
-        });
+        // Click handler removido - agora está no avatarContainer
         editIcon.style.transition = 'all 0.2s';
 
         // Ícone de nível no canto superior esquerdo (antiga posição do ícone do arco)
@@ -10285,7 +10304,10 @@
             levelIcon.style.transform = 'scale(1)';
             defenseIcon.style.transform = 'scale(1)';
         };
-        avatarContainer.onclick = createAvatarPopup;
+        // Click handler para abrir a ficha de personagem
+        avatarContainer.onclick = () => {
+            openCharacterSheet();
+        };
 
         // Informações do personagem
         const characterInfo = document.createElement('div');
@@ -11736,15 +11758,35 @@
             // Coletar atributos configurados
             const attributes = {};
             const attributeFields = [
+                // Informações básicas
                 { key: 'tormenta-20-hotbars-char-name-attr', defaultValue: 'menace_name' },
                 { key: 'tormenta-20-hotbars-char-race-attr', defaultValue: 'trace' },
                 { key: 'tormenta-20-hotbars-char-class-attr', defaultValue: 'tlevel' },
-                { key: 'tormenta-20-hotbars-char-level-attr', defaultValue: 'charnivel' },
+                { key: 'tormenta-20-hotbars-char-level-attr', defaultValue: 'menace_nd' },
+                { key: 'tormenta-20-hotbars-char-divindade-attr', defaultValue: 'divindade' },
+
+                // Recursos
                 { key: 'tormenta-20-hotbars-char-hp-total-attr', defaultValue: 'vidatotal' },
                 { key: 'tormenta-20-hotbars-char-hp-current-attr', defaultValue: 'vida' },
                 { key: 'tormenta-20-hotbars-char-mp-total-attr', defaultValue: 'manatotal' },
                 { key: 'tormenta-20-hotbars-char-mp-current-attr', defaultValue: 'mana' },
-                { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'defesatotal' }
+
+                // Defesas
+                { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'menace_defense' },
+                { key: 'tormenta-20-hotbars-char-fortitude-attr', defaultValue: 'menace_fortitude' },
+                { key: 'tormenta-20-hotbars-char-reflex-attr', defaultValue: 'menace_reflex' },
+                { key: 'tormenta-20-hotbars-char-will-attr', defaultValue: 'menace_will' },
+
+                // Atributos
+                { key: 'tormenta-20-hotbars-char-for-attr', defaultValue: 'menace_for' },
+                { key: 'tormenta-20-hotbars-char-des-attr', defaultValue: 'menace_des' },
+                { key: 'tormenta-20-hotbars-char-con-attr', defaultValue: 'menace_con' },
+                { key: 'tormenta-20-hotbars-char-int-attr', defaultValue: 'menace_int' },
+                { key: 'tormenta-20-hotbars-char-sab-attr', defaultValue: 'menace_sab' },
+                { key: 'tormenta-20-hotbars-char-car-attr', defaultValue: 'menace_car' },
+
+                // Equipamentos
+                { key: 'tormenta-20-hotbars-char-treasure-attr', defaultValue: 'menace_treasure' }
             ];
 
             attributeFields.forEach(field => {
@@ -15543,14 +15585,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Abre o modal da ficha de personagem
      */
     function openCharacterSheet() {
-        // Verificar se o modal já existe
+        // Verificar se o modal já existe e removê-lo se necessário
         const existingModal = document.getElementById('character-sheet-modal');
         if (existingModal) {
-            existingModal.style.display = 'flex';
-            return;
+            existingModal.remove();
         }
 
-        // Criar o modal
+        // Sempre criar um novo modal
         const modal = createCharacterSheetModal();
         document.body.appendChild(modal);
 
@@ -15578,7 +15619,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
+            z-index: 99999;
             opacity: 0;
             transition: opacity 0.3s ease;
             backdrop-filter: blur(5px);
@@ -15633,7 +15674,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         closeButton.onclick = () => {
             modal.style.opacity = '0';
             setTimeout(() => {
-                modal.style.display = 'none';
+                modal.remove(); // Remove completamente do DOM
             }, 300);
         };
 
@@ -15656,6 +15697,22 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             }
         };
 
+        // Fechar com tecla ESC
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                closeButton.click();
+                document.removeEventListener('keydown', handleKeyDown);
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+
+        // Remover listener quando o modal for removido
+        const originalRemove = modal.remove;
+        modal.remove = function () {
+            document.removeEventListener('keydown', handleKeyDown);
+            originalRemove.call(this);
+        };
+
         return modal;
     }
 
@@ -15673,7 +15730,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             gap: 25px;
         `;
 
-        // Avatar do personagem
+        // Avatar do personagem (clicável para editar)
+        const avatarContainer = document.createElement('div');
+        avatarContainer.style.cssText = `
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        `;
+
         const avatar = document.createElement('div');
         const avatarUrl = getAvatarUrl();
         avatar.style.cssText = `
@@ -15689,11 +15753,53 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             font-weight: bold;
             color: #ecf0f1;
             box-shadow: 0 8px 25px rgba(110, 198, 255, 0.3);
+            transition: all 0.3s ease;
         `;
 
         if (!avatarUrl) {
             avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
+
+        // Ícone de edição (sempre visível na ficha)
+        const editIcon = document.createElement('div');
+        editIcon.innerHTML = '✏️';
+        editIcon.style.cssText = `
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: #6ec6ff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 2px solid #1a1a2e;
+            transition: all 0.2s ease;
+        `;
+
+        // Efeitos hover
+        avatarContainer.onmouseover = () => {
+            avatar.style.transform = 'scale(1.05)';
+            editIcon.style.transform = 'scale(1.1)';
+            avatarContainer.style.filter = 'brightness(1.1)';
+        };
+
+        avatarContainer.onmouseout = () => {
+            avatar.style.transform = 'scale(1)';
+            editIcon.style.transform = 'scale(1)';
+            avatarContainer.style.filter = 'brightness(1)';
+        };
+
+        // Click handler para abrir popup de edição do avatar
+        avatarContainer.onclick = (e) => {
+            e.stopPropagation(); // Prevenir que feche o modal da ficha
+            createAvatarPopup();
+        };
+
+        avatarContainer.appendChild(avatar);
+        avatarContainer.appendChild(editIcon);
 
         // Informações básicas
         const basicInfo = document.createElement('div');
@@ -15702,10 +15808,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             color: #ecf0f1;
         `;
 
-        const characterName = getCharacterName() || 'Nome do Personagem';
-        const characterLevel = getCharLevel() || '1';
-        const characterClass = localStorage.getItem('tormenta-20-hotbars-sync-tlevel') || 'Classe';
-        const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-trace') || 'Raça';
+        const characterName = localStorage.getItem('tormenta-20-hotbars-sync-name') || getCharacterName() || 'Nome do Personagem';
+        const characterLevel = localStorage.getItem('tormenta-20-hotbars-sync-level') || getCharLevel() || '1';
+        const characterClass = localStorage.getItem('tormenta-20-hotbars-sync-class') || 'Classe';
+        const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-race') || 'Raça';
 
         basicInfo.innerHTML = `
             <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; background: linear-gradient(45deg, #6ec6ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${characterName}</h1>
@@ -15713,7 +15819,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             <div style="font-size: 14px; color: #90a4ae;">${characterRace}</div>
         `;
 
-        header.appendChild(avatar);
+        header.appendChild(avatarContainer);
         header.appendChild(basicInfo);
 
         return header;
@@ -15855,8 +15961,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         // Vida
-        const currentHp = localStorage.getItem('tormenta-20-hotbars-sync-vida') || '0';
-        const maxHp = localStorage.getItem('tormenta-20-hotbars-sync-vidatotal') || '0';
+        const currentHp = localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0';
+        const maxHp = localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '0';
         const hpPercentage = maxHp > 0 ? (currentHp / maxHp) * 100 : 0;
 
         const healthCard = document.createElement('div');
@@ -15879,8 +15985,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         // Mana
-        const currentMp = localStorage.getItem('tormenta-20-hotbars-sync-mana') || '0';
-        const maxMp = localStorage.getItem('tormenta-20-hotbars-sync-manatotal') || '0';
+        const currentMp = localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0';
+        const maxMp = localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '0';
         const mpPercentage = maxMp > 0 ? (currentMp / maxMp) * 100 : 0;
 
         const manaCard = document.createElement('div');
@@ -15903,10 +16009,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         // Defesas
-        const defense = localStorage.getItem('tormenta-20-hotbars-sync-defesatotal') || '10';
-        const fortitude = localStorage.getItem('tormenta-20-hotbars-sync-menace_fortitude') || '+0';
-        const reflex = localStorage.getItem('tormenta-20-hotbars-sync-menace_reflex') || '+0';
-        const will = localStorage.getItem('tormenta-20-hotbars-sync-menace_will') || '+0';
+        const defense = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
+        const fortitude = localStorage.getItem('tormenta-20-hotbars-sync-fortitude') || '+0';
+        const reflex = localStorage.getItem('tormenta-20-hotbars-sync-reflex') || '+0';
+        const will = localStorage.getItem('tormenta-20-hotbars-sync-will') || '+0';
 
         const defensesCard = document.createElement('div');
         defensesCard.style.cssText = `
@@ -16072,7 +16178,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         });
 
         // Seção de itens equipados atualmente (se houver)
-        const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-menace_treasure') || '';
+        const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-treasure') || '';
         if (currentEquipment.trim()) {
             const currentEquipmentDiv = document.createElement('div');
             currentEquipmentDiv.style.cssText = `
@@ -16113,5 +16219,28 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         section.appendChild(equipmentGrid);
 
         return section;
+    }
+
+    /**
+     * Atualiza o avatar na ficha de personagem se ela estiver aberta
+     */
+    function updateCharacterSheetAvatar() {
+        const characterSheetModal = document.getElementById('character-sheet-modal');
+        if (!characterSheetModal || characterSheetModal.style.display === 'none') {
+            return; // Ficha não está aberta
+        }
+
+        // Encontrar o avatar na ficha
+        const sheetAvatar = characterSheetModal.querySelector('div[style*="width: 80px"][style*="height: 80px"]');
+        if (!sheetAvatar) return;
+
+        const avatarUrl = getAvatarUrl();
+        if (avatarUrl) {
+            sheetAvatar.style.background = `url(${avatarUrl}) center/cover`;
+            sheetAvatar.textContent = '';
+        } else {
+            sheetAvatar.style.background = '#23243a';
+            sheetAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
+        }
     }
 })();
