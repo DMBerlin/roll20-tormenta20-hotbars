@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.92428'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.99725'; // Última tag Git
 
     const logger = window.console;
 
@@ -10217,6 +10217,14 @@
         editIcon.style.fontSize = '12px';
         editIcon.style.border = '2px solid rgba(30,30,40,0.92)';
         editIcon.style.opacity = '0';
+
+        // Adicionar click handler para abrir ficha do personagem
+        avatar.addEventListener('click', (e) => {
+            // Prevenir que o clique no avatar dispare a edição
+            if (!e.target.closest('.edit-icon')) {
+                openCharacterSheet();
+            }
+        });
         editIcon.style.transition = 'all 0.2s';
 
         // Ícone de nível no canto superior esquerdo (antiga posição do ícone do arco)
@@ -15528,4 +15536,582 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             };
         }
     };
+
+    // ===== SISTEMA DE FICHA DE PERSONAGEM =====
+
+    /**
+     * Abre o modal da ficha de personagem
+     */
+    function openCharacterSheet() {
+        // Verificar se o modal já existe
+        const existingModal = document.getElementById('character-sheet-modal');
+        if (existingModal) {
+            existingModal.style.display = 'flex';
+            return;
+        }
+
+        // Criar o modal
+        const modal = createCharacterSheetModal();
+        document.body.appendChild(modal);
+
+        // Mostrar o modal com animação
+        requestAnimationFrame(() => {
+            modal.style.display = 'flex';
+            modal.style.opacity = '1';
+        });
+    }
+
+    /**
+     * Cria o modal da ficha de personagem
+     */
+    function createCharacterSheetModal() {
+        // Container principal do modal
+        const modal = document.createElement('div');
+        modal.id = 'character-sheet-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        `;
+
+        // Container da ficha
+        const sheetContainer = document.createElement('div');
+        sheetContainer.style.cssText = `
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            max-height: 90vh;
+            width: 90%;
+            overflow-y: auto;
+            border: 2px solid rgba(110, 198, 255, 0.3);
+            position: relative;
+        `;
+
+        // Botão de fechar
+        const closeButton = document.createElement('button');
+        closeButton.innerHTML = '×';
+        closeButton.style.cssText = `
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #ecf0f1;
+            cursor: pointer;
+            z-index: 1001;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        `;
+
+        closeButton.onmouseover = () => {
+            closeButton.style.background = 'rgba(255, 255, 255, 0.1)';
+            closeButton.style.transform = 'scale(1.1)';
+        };
+
+        closeButton.onmouseout = () => {
+            closeButton.style.background = 'none';
+            closeButton.style.transform = 'scale(1)';
+        };
+
+        closeButton.onclick = () => {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        };
+
+        // Header da ficha
+        const header = createCharacterSheetHeader();
+
+        // Conteúdo da ficha
+        const content = createCharacterSheetContent();
+
+        // Montar o modal
+        sheetContainer.appendChild(closeButton);
+        sheetContainer.appendChild(header);
+        sheetContainer.appendChild(content);
+        modal.appendChild(sheetContainer);
+
+        // Fechar ao clicar fora
+        modal.onclick = (e) => {
+            if (e.target === modal) {
+                closeButton.click();
+            }
+        };
+
+        return modal;
+    }
+
+    /**
+     * Cria o cabeçalho da ficha de personagem
+     */
+    function createCharacterSheetHeader() {
+        const header = document.createElement('div');
+        header.style.cssText = `
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(110, 198, 255, 0.1) 0%, rgba(110, 198, 255, 0.05) 100%);
+            border-bottom: 2px solid rgba(110, 198, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        `;
+
+        // Avatar do personagem
+        const avatar = document.createElement('div');
+        const avatarUrl = getAvatarUrl();
+        avatar.style.cssText = `
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #6ec6ff;
+            background: ${avatarUrl ? `url(${avatarUrl}) center/cover` : '#23243a'};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ecf0f1;
+            box-shadow: 0 8px 25px rgba(110, 198, 255, 0.3);
+        `;
+
+        if (!avatarUrl) {
+            avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
+        }
+
+        // Informações básicas
+        const basicInfo = document.createElement('div');
+        basicInfo.style.cssText = `
+            flex: 1;
+            color: #ecf0f1;
+        `;
+
+        const characterName = getCharacterName() || 'Nome do Personagem';
+        const characterLevel = getCharLevel() || '1';
+        const characterClass = localStorage.getItem('tormenta-20-hotbars-sync-tlevel') || 'Classe';
+        const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-trace') || 'Raça';
+
+        basicInfo.innerHTML = `
+            <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; background: linear-gradient(45deg, #6ec6ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${characterName}</h1>
+            <div style="font-size: 16px; color: #b0bec5; margin-bottom: 5px;">Nível ${characterLevel} ${characterClass}</div>
+            <div style="font-size: 14px; color: #90a4ae;">${characterRace}</div>
+        `;
+
+        header.appendChild(avatar);
+        header.appendChild(basicInfo);
+
+        return header;
+    }
+
+    /**
+     * Cria o conteúdo principal da ficha
+     */
+    function createCharacterSheetContent() {
+        const content = document.createElement('div');
+        content.style.cssText = `
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        `;
+
+        // Seção de atributos
+        const attributesSection = createAttributesSection();
+
+        // Seção de recursos (vida/mana)
+        const resourcesSection = createResourcesSection();
+
+        // Seção de equipamentos (ocupa toda a largura)
+        const equipmentSection = createEquipmentSection();
+        equipmentSection.style.gridColumn = '1 / -1';
+
+        content.appendChild(attributesSection);
+        content.appendChild(resourcesSection);
+        content.appendChild(equipmentSection);
+
+        return content;
+    }
+
+    /**
+     * Cria a seção de atributos básicos
+     */
+    function createAttributesSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Atributos';
+        title.style.cssText = `
+            margin: 0 0 20px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        const attributesGrid = document.createElement('div');
+        attributesGrid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        `;
+
+        // Atributos básicos
+        const attributes = [
+            { name: 'FOR', key: 'for', modKey: 'for_mod', label: 'Força' },
+            { name: 'DES', key: 'des', modKey: 'des_mod', label: 'Destreza' },
+            { name: 'CON', key: 'con', modKey: 'con_mod', label: 'Constituição' },
+            { name: 'INT', key: 'int', modKey: 'int_mod', label: 'Inteligência' },
+            { name: 'SAB', key: 'sab', modKey: 'sab_mod', label: 'Sabedoria' },
+            { name: 'CAR', key: 'car', modKey: 'car_mod', label: 'Carisma' }
+        ];
+
+        attributes.forEach(attr => {
+            const attrValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.key}`) || '10';
+            const attrMod = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.modKey}`) || '0';
+            const modSign = parseInt(attrMod) >= 0 ? '+' : '';
+
+            const attrCard = document.createElement('div');
+            attrCard.style.cssText = `
+                background: linear-gradient(135deg, rgba(110, 198, 255, 0.1), rgba(110, 198, 255, 0.05));
+                border: 1px solid rgba(110, 198, 255, 0.3);
+                border-radius: 12px;
+                padding: 15px;
+                text-align: center;
+                transition: transform 0.2s ease;
+            `;
+
+            attrCard.onmouseover = () => {
+                attrCard.style.transform = 'translateY(-2px)';
+                attrCard.style.boxShadow = '0 8px 25px rgba(110, 198, 255, 0.2)';
+            };
+
+            attrCard.onmouseout = () => {
+                attrCard.style.transform = 'translateY(0)';
+                attrCard.style.boxShadow = 'none';
+            };
+
+            attrCard.innerHTML = `
+                <div style="font-size: 14px; color: #b0bec5; margin-bottom: 5px; font-weight: bold;">${attr.name}</div>
+                <div style="font-size: 24px; color: #ecf0f1; font-weight: bold; margin-bottom: 5px;">${attrValue}</div>
+                <div style="font-size: 14px; color: #6ec6ff; font-weight: bold;">${modSign}${attrMod}</div>
+                <div style="font-size: 10px; color: #90a4ae; margin-top: 5px;">${attr.label}</div>
+            `;
+
+            attributesGrid.appendChild(attrCard);
+        });
+
+        section.appendChild(title);
+        section.appendChild(attributesGrid);
+
+        return section;
+    }
+
+    /**
+     * Cria a seção de recursos (vida e mana)
+     */
+    function createResourcesSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Recursos';
+        title.style.cssText = `
+            margin: 0 0 20px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        // Vida
+        const currentHp = localStorage.getItem('tormenta-20-hotbars-sync-vida') || '0';
+        const maxHp = localStorage.getItem('tormenta-20-hotbars-sync-vidatotal') || '0';
+        const hpPercentage = maxHp > 0 ? (currentHp / maxHp) * 100 : 0;
+
+        const healthCard = document.createElement('div');
+        healthCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 82, 82, 0.1), rgba(255, 82, 82, 0.05));
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        `;
+
+        healthCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="font-size: 18px; color: #ff5252; font-weight: bold;">❤️ Pontos de Vida</div>
+                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentHp} / ${maxHp}</div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden;">
+                <div style="background: linear-gradient(90deg, #ff5252, #ff8a80); height: 100%; width: ${hpPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+        `;
+
+        // Mana
+        const currentMp = localStorage.getItem('tormenta-20-hotbars-sync-mana') || '0';
+        const maxMp = localStorage.getItem('tormenta-20-hotbars-sync-manatotal') || '0';
+        const mpPercentage = maxMp > 0 ? (currentMp / maxMp) * 100 : 0;
+
+        const manaCard = document.createElement('div');
+        manaCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(63, 81, 181, 0.1), rgba(63, 81, 181, 0.05));
+            border: 1px solid rgba(63, 81, 181, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        `;
+
+        manaCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="font-size: 18px; color: #3f51b5; font-weight: bold;">🔮 Pontos de Mana</div>
+                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentMp} / ${maxMp}</div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden;">
+                <div style="background: linear-gradient(90deg, #3f51b5, #7986cb); height: 100%; width: ${mpPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+        `;
+
+        // Defesas
+        const defense = localStorage.getItem('tormenta-20-hotbars-sync-defesatotal') || '10';
+        const fortitude = localStorage.getItem('tormenta-20-hotbars-sync-menace_fortitude') || '+0';
+        const reflex = localStorage.getItem('tormenta-20-hotbars-sync-menace_reflex') || '+0';
+        const will = localStorage.getItem('tormenta-20-hotbars-sync-menace_will') || '+0';
+
+        const defensesCard = document.createElement('div');
+        defensesCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        `;
+
+        defensesCard.innerHTML = `
+            <div style="font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 15px; text-align: center;">🛡️ Defesas</div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #b0bec5;">Defesa</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${defense}</div>
+                </div>
+                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #b0bec5;">Fortitude</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
+                </div>
+                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #b0bec5;">Reflexos</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
+                </div>
+                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #b0bec5;">Vontade</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${will}</div>
+                </div>
+            </div>
+        `;
+
+        section.appendChild(title);
+        section.appendChild(healthCard);
+        section.appendChild(manaCard);
+        section.appendChild(defensesCard);
+
+        return section;
+    }
+
+    /**
+     * Cria a seção de equipamentos
+     */
+    function createEquipmentSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+            margin-top: 20px;
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Equipamentos';
+        title.style.cssText = `
+            margin: 0 0 25px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        // Grid de equipamentos
+        const equipmentGrid = document.createElement('div');
+        equipmentGrid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        `;
+
+        // Slots de equipamento
+        const equipmentSlots = [
+            { name: 'Cabeça', icon: '🎩', id: 'head' },
+            { name: 'Pescoço', icon: '📿', id: 'neck' },
+            { name: 'Ombros', icon: '🦴', id: 'shoulders' },
+            { name: 'Peito', icon: '🛡️', id: 'chest' },
+            { name: 'Costas', icon: '🎒', id: 'back' },
+            { name: 'Braçadeiras', icon: '⚡', id: 'bracers' },
+            { name: 'Mão Principal', icon: '⚔️', id: 'main_hand' },
+            { name: 'Mão Secundária', icon: '🛡️', id: 'off_hand' },
+            { name: 'Anel 1', icon: '💍', id: 'ring1' },
+            { name: 'Anel 2', icon: '💍', id: 'ring2' },
+            { name: 'Pernas', icon: '👖', id: 'legs' },
+            { name: 'Pés', icon: '👢', id: 'feet' }
+        ];
+
+        equipmentSlots.forEach(slot => {
+            const slotCard = document.createElement('div');
+            slotCard.style.cssText = `
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+                border: 2px dashed rgba(110, 198, 255, 0.3);
+                border-radius: 12px;
+                padding: 20px;
+                text-align: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: hidden;
+            `;
+
+            // Efeito hover
+            slotCard.onmouseover = () => {
+                slotCard.style.borderColor = '#6ec6ff';
+                slotCard.style.background = 'linear-gradient(135deg, rgba(110, 198, 255, 0.15), rgba(110, 198, 255, 0.08))';
+                slotCard.style.transform = 'translateY(-3px)';
+                slotCard.style.boxShadow = '0 10px 30px rgba(110, 198, 255, 0.2)';
+            };
+
+            slotCard.onmouseout = () => {
+                slotCard.style.borderColor = 'rgba(110, 198, 255, 0.3)';
+                slotCard.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))';
+                slotCard.style.transform = 'translateY(0)';
+                slotCard.style.boxShadow = 'none';
+            };
+
+            // Conteúdo do slot
+            const slotIcon = document.createElement('div');
+            slotIcon.textContent = slot.icon;
+            slotIcon.style.cssText = `
+                font-size: 32px;
+                margin-bottom: 10px;
+                opacity: 0.7;
+            `;
+
+            const slotName = document.createElement('div');
+            slotName.textContent = slot.name;
+            slotName.style.cssText = `
+                color: #b0bec5;
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 8px;
+            `;
+
+            const slotStatus = document.createElement('div');
+            slotStatus.textContent = 'Vazio';
+            slotStatus.style.cssText = `
+                color: #90a4ae;
+                font-size: 12px;
+                font-style: italic;
+            `;
+
+            // Adicionar tooltip
+            slotCard.title = `Clique para equipar item no slot: ${slot.name}`;
+
+            // Click handler (placeholder para futura implementação)
+            slotCard.onclick = () => {
+                // TODO: Implementar sistema de equipar/desequipar itens
+                console.log(`Clicou no slot: ${slot.name}`);
+            };
+
+            slotCard.appendChild(slotIcon);
+            slotCard.appendChild(slotName);
+            slotCard.appendChild(slotStatus);
+
+            equipmentGrid.appendChild(slotCard);
+        });
+
+        // Seção de itens equipados atualmente (se houver)
+        const currentEquipment = localStorage.getItem('tormenta-20-hotbars-sync-menace_treasure') || '';
+        if (currentEquipment.trim()) {
+            const currentEquipmentDiv = document.createElement('div');
+            currentEquipmentDiv.style.cssText = `
+                margin-top: 25px;
+                padding: 20px;
+                background: rgba(76, 175, 80, 0.1);
+                border: 1px solid rgba(76, 175, 80, 0.3);
+                border-radius: 12px;
+            `;
+
+            const equipmentTitle = document.createElement('h4');
+            equipmentTitle.textContent = '🎒 Itens Carregados';
+            equipmentTitle.style.cssText = `
+                margin: 0 0 15px 0;
+                color: #4caf50;
+                font-size: 16px;
+                font-weight: bold;
+            `;
+
+            const equipmentList = document.createElement('div');
+            equipmentList.textContent = currentEquipment;
+            equipmentList.style.cssText = `
+                color: #ecf0f1;
+                font-size: 14px;
+                line-height: 1.5;
+                background: rgba(0, 0, 0, 0.2);
+                padding: 15px;
+                border-radius: 8px;
+                border-left: 4px solid #4caf50;
+            `;
+
+            currentEquipmentDiv.appendChild(equipmentTitle);
+            currentEquipmentDiv.appendChild(equipmentList);
+            section.appendChild(currentEquipmentDiv);
+        }
+
+        section.appendChild(title);
+        section.appendChild(equipmentGrid);
+
+        return section;
+    }
 })();
