@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.71067'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.52221'; // Última tag Git
 
     const logger = window.console;
 
@@ -17117,9 +17117,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         };
 
         // Extrair nome do ataque
-        const nameMatch = macro.match(/\{\{attackname=([^}]+)\}\}/);
-        if (nameMatch) {
-            attackInfo.name = nameMatch[1];
+        const extractedName = extractAttackName(macro);
+        if (extractedName) {
+            attackInfo.name = extractedName;
         }
 
         // Extrair template usado
@@ -17284,8 +17284,14 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Extrai o nome do ataque do macro Roll20 (versão simplificada)
      */
     function extractAttackName(macro) {
-        const parsed = parseAttackMacro(macro);
-        return parsed.name;
+        // Procura especificamente por {{attackname=NOME}}
+        const nameMatch = macro.match(/\{\{attackname=([^}]+)\}\}/);
+        if (nameMatch && nameMatch[1].trim()) {
+            return nameMatch[1].trim();
+        }
+
+        // Se não encontrou attackname, retornar null para indicar erro
+        return null;
     }
 
     /**
@@ -17609,39 +17615,20 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             font-weight: bold;
         `;
 
-        // Label e input para nome
-        const nameLabel = document.createElement('label');
-        nameLabel.textContent = 'Nome do Ataque (opcional):';
-        nameLabel.style.cssText = `
-            color: #ecf0f1;
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        `;
-
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.placeholder = 'Ex: Espada Longa, Arco Élfico...';
-        nameInput.style.cssText = `
-            width: 100%;
-            padding: 12px;
-            border: 2px solid rgba(110, 198, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ecf0f1;
-            font-size: 14px;
+        // Texto explicativo
+        const explanation = document.createElement('div');
+        explanation.style.cssText = `
+            color: #90a4ae;
+            font-size: 13px;
             margin-bottom: 20px;
-            box-sizing: border-box;
-            transition: border-color 0.2s ease;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #6ec6ff;
         `;
-
-        nameInput.onfocus = () => {
-            nameInput.style.borderColor = '#6ec6ff';
-        };
-
-        nameInput.onblur = () => {
-            nameInput.style.borderColor = 'rgba(110, 198, 255, 0.3)';
-        };
+        explanation.innerHTML = `
+            <strong style="color: #6ec6ff;">💡 Dica:</strong> O nome do ataque será extraído automaticamente do macro através do campo <code style="background: rgba(0,0,0,0.3); padding: 2px 4px; border-radius: 3px;">{{attackname=NomeDoAtaque}}</code>
+        `;
 
         // Label e textarea para macro
         const macroLabel = document.createElement('label');
@@ -17654,8 +17641,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         const macroInput = document.createElement('textarea');
-        macroInput.placeholder = 'Cole aqui seu macro do Roll20...\n\nExemplo:\n&{template:t20-attack}{{character=@{Personagem|character_name}}}{{attackname=Espada}}...';
-        macroInput.rows = 6;
+        macroInput.placeholder = 'Cole aqui seu macro do Roll20...\n\nExemplo:\n&{template:t20-attack}{{character=@{Personagem|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>20+...]]}}{{damageroll=[[1d8+...]]}}...';
+        macroInput.rows = 8;
         macroInput.style.cssText = `
             width: 100%;
             padding: 12px;
@@ -17669,7 +17656,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             resize: vertical;
             box-sizing: border-box;
             transition: border-color 0.2s ease;
-            min-height: 120px;
+            min-height: 140px;
         `;
 
         macroInput.onfocus = () => {
@@ -17748,9 +17735,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 return;
             }
 
-            let attackName = nameInput.value.trim();
+            // Extrair nome automaticamente do macro
+            const attackName = extractAttackName(macro);
+
+            // Verificar se conseguiu extrair um nome válido
             if (!attackName) {
-                attackName = extractAttackName(macro);
+                createNotification('Macro inválido! O macro deve conter {{attackname=NomeDoAtaque}} para identificar o ataque.', 'error', 5000);
+                return;
             }
 
             addAttack(attackName, macro);
@@ -17774,8 +17765,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Montar modal
         modal.appendChild(title);
-        modal.appendChild(nameLabel);
-        modal.appendChild(nameInput);
+        modal.appendChild(explanation);
         modal.appendChild(macroLabel);
         modal.appendChild(macroInput);
         buttonsContainer.appendChild(cancelButton);
@@ -17785,8 +17775,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         document.body.appendChild(overlay);
 
-        // Focar no input de nome
-        setTimeout(() => nameInput.focus(), 100);
+        // Focar no textarea do macro
+        setTimeout(() => macroInput.focus(), 100);
     }
 
     /**
