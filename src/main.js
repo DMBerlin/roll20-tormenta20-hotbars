@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.52835'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.12404'; // Última tag Git
 
     const logger = window.console;
 
@@ -16623,23 +16623,44 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             min-height: 120px;
         `;
 
-        // Placeholder para quando não há ataques
-        const placeholder = document.createElement('div');
-        placeholder.style.cssText = `
-            color: #90a4ae;
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 14px;
+        // Lista de ataques (scrollable)
+        const attacksList = document.createElement('div');
+        attacksList.id = 'attacks-list';
+        attacksList.style.cssText = `
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            max-height: 250px;
+            padding-right: 5px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100px;
         `;
-        placeholder.textContent = 'Nenhum ataque registrado';
 
-        // Botão adicionar
+        // Estilo personalizado para scrollbar (Solasta-inspired)
+        const scrollbarStyle = document.createElement('style');
+        scrollbarStyle.textContent = `
+            #attacks-list::-webkit-scrollbar {
+                width: 8px;
+            }
+            #attacks-list::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+            }
+            #attacks-list::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #6ec6ff, #42a5f5);
+                border-radius: 4px;
+            }
+            #attacks-list::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #42a5f5, #1e88e5);
+            }
+        `;
+        document.head.appendChild(scrollbarStyle);
+
+        // Botão adicionar (sempre visível na parte inferior)
         const addButton = document.createElement('button');
         addButton.textContent = 'Adicionar';
         addButton.style.cssText = `
@@ -16653,6 +16674,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(110, 198, 255, 0.3);
+            flex-shrink: 0;
         `;
 
         addButton.onmouseover = () => {
@@ -16668,16 +16690,479 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         };
 
         addButton.onclick = () => {
-            createNotification('Funcionalidade de adicionar ataques será implementada em breve!', 'info', 3000);
+            openAddAttackModal();
         };
 
-        contentContainer.appendChild(placeholder);
+        // Linha separadora
+        const separator = document.createElement('div');
+        separator.style.cssText = `
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(110, 198, 255, 0.3), transparent);
+            margin: 15px 0;
+            flex-shrink: 0;
+        `;
+
+        contentContainer.appendChild(attacksList);
+        contentContainer.appendChild(separator);
         contentContainer.appendChild(addButton);
 
         section.appendChild(title);
         section.appendChild(contentContainer);
 
+        // Carregar e exibir ataques salvos após o DOM estar pronto
+        setTimeout(() => loadAndDisplayAttacks(), 0);
+
         return section;
+    }
+
+    /**
+     * Gerenciamento de ataques - localStorage
+     */
+    function getAttacks() {
+        const attacks = localStorage.getItem('tormenta-20-attacks');
+        return attacks ? JSON.parse(attacks) : [];
+    }
+
+    function saveAttacks(attacks) {
+        localStorage.setItem('tormenta-20-attacks', JSON.stringify(attacks));
+    }
+
+    function addAttack(name, macro) {
+        const attacks = getAttacks();
+        const newAttack = {
+            id: Date.now().toString(),
+            name: name.trim(),
+            macro: macro.trim(),
+            createdAt: new Date().toISOString()
+        };
+        attacks.push(newAttack);
+        saveAttacks(attacks);
+        console.log(`✅ Attack saved: ${newAttack.name}`, newAttack);
+        console.log(`💾 Total attacks in storage: ${attacks.length}`);
+        loadAndDisplayAttacks();
+    }
+
+    function removeAttack(attackId) {
+        const attacks = getAttacks();
+        const filteredAttacks = attacks.filter(attack => attack.id !== attackId);
+        saveAttacks(filteredAttacks);
+        loadAndDisplayAttacks();
+    }
+
+    function executeAttack(macro) {
+        sendToChat(macro);
+    }
+
+    /**
+     * Extrai o nome do ataque do macro Roll20
+     */
+    function extractAttackName(macro) {
+        // Procura por {{attackname=NOME}}
+        const nameMatch = macro.match(/\{\{attackname=([^}]+)\}\}/);
+        if (nameMatch) {
+            return nameMatch[1];
+        }
+
+        // Fallback: procura por nome comum em templates
+        const templateMatch = macro.match(/\{\{character=@\{([^|]+)\|/);
+        if (templateMatch) {
+            return 'Ataque';
+        }
+
+        return 'Ataque Personalizado';
+    }
+
+    /**
+     * Carrega e exibe a lista de ataques
+     */
+    function loadAndDisplayAttacks() {
+        const attacksList = document.getElementById('attacks-list');
+        if (!attacksList) {
+            console.log('⚠️ attacks-list element not found');
+            return;
+        }
+
+        const attacks = getAttacks();
+        console.log(`📋 Loading ${attacks.length} attacks`);
+        attacksList.innerHTML = '';
+
+        if (attacks.length === 0) {
+            // Placeholder quando não há ataques
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = `
+                color: #90a4ae;
+                font-style: italic;
+                text-align: center;
+                padding: 40px 20px;
+                font-size: 14px;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            placeholder.textContent = 'Nenhum ataque registrado';
+            attacksList.appendChild(placeholder);
+            console.log('📝 Empty placeholder added');
+            return;
+        }
+
+        attacks.forEach((attack) => {
+            const attackItem = createAttackItem(attack);
+            attacksList.appendChild(attackItem);
+            console.log(`⚔️ Added attack: ${attack.name}`);
+        });
+    }
+
+    /**
+     * Cria um item de ataque individual (Solasta-inspired)
+     */
+    function createAttackItem(attack) {
+        const item = document.createElement('div');
+        item.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        `;
+
+        // Efeito hover (Solasta-style)
+        item.onmouseover = () => {
+            item.style.transform = 'translateX(3px)';
+            item.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1))';
+            item.style.borderColor = 'rgba(255, 193, 7, 0.5)';
+            item.style.boxShadow = '0 4px 15px rgba(255, 193, 7, 0.2)';
+        };
+
+        item.onmouseout = () => {
+            item.style.transform = 'translateX(0)';
+            item.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05))';
+            item.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+            item.style.boxShadow = 'none';
+        };
+
+        // Conteúdo principal
+        const mainContent = document.createElement('div');
+        mainContent.style.cssText = `
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        `;
+
+        const attackName = document.createElement('div');
+        attackName.style.cssText = `
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 2px;
+        `;
+        attackName.textContent = attack.name;
+
+        const attackHint = document.createElement('div');
+        attackHint.style.cssText = `
+            color: #90a4ae;
+            font-size: 11px;
+            font-style: italic;
+        `;
+        attackHint.textContent = 'Clique para atacar';
+
+        mainContent.appendChild(attackName);
+        mainContent.appendChild(attackHint);
+
+        // Botão de deletar
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '🗑️';
+        deleteButton.style.cssText = `
+            background: rgba(244, 67, 54, 0.8);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            width: 28px;
+            height: 28px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+
+        deleteButton.onmouseover = () => {
+            deleteButton.style.background = 'rgba(244, 67, 54, 1)';
+            deleteButton.style.transform = 'scale(1.1)';
+        };
+
+        deleteButton.onmouseout = () => {
+            deleteButton.style.background = 'rgba(244, 67, 54, 0.8)';
+            deleteButton.style.transform = 'scale(1)';
+        };
+
+        deleteButton.onclick = (e) => {
+            e.stopPropagation();
+            if (confirm(`Deseja excluir o ataque "${attack.name}"?`)) {
+                removeAttack(attack.id);
+                createNotification(`Ataque "${attack.name}" removido!`, 'success', 2000);
+            }
+        };
+
+        // Click principal para executar ataque
+        item.onclick = () => {
+            executeAttack(attack.macro);
+            createNotification(`Executando ataque: ${attack.name}`, 'info', 2000);
+        };
+
+        item.appendChild(mainContent);
+        item.appendChild(deleteButton);
+
+        return item;
+    }
+
+    /**
+     * Abre modal para adicionar novo ataque
+     */
+    function openAddAttackModal() {
+        const attacks = getAttacks();
+        if (attacks.length >= 5) {
+            createNotification('Máximo de 5 ataques permitidos!', 'warning', 3000);
+            return;
+        }
+
+        // Criar overlay do modal
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        `;
+
+        // Criar modal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #6ec6ff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: modalSlideIn 0.3s ease;
+        `;
+
+        // Animação do modal
+        const modalAnimation = document.createElement('style');
+        modalAnimation.textContent = `
+            @keyframes modalSlideIn {
+                from { transform: scale(0.8) translateY(-50px); opacity: 0; }
+                to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(modalAnimation);
+
+        // Título
+        const title = document.createElement('h2');
+        title.textContent = 'Adicionar Ataque';
+        title.style.cssText = `
+            color: #6ec6ff;
+            text-align: center;
+            margin: 0 0 25px 0;
+            font-size: 24px;
+            font-weight: bold;
+        `;
+
+        // Label e input para nome
+        const nameLabel = document.createElement('label');
+        nameLabel.textContent = 'Nome do Ataque (opcional):';
+        nameLabel.style.cssText = `
+            color: #ecf0f1;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        `;
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'Ex: Espada Longa, Arco Élfico...';
+        nameInput.style.cssText = `
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(110, 198, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ecf0f1;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
+        `;
+
+        nameInput.onfocus = () => {
+            nameInput.style.borderColor = '#6ec6ff';
+        };
+
+        nameInput.onblur = () => {
+            nameInput.style.borderColor = 'rgba(110, 198, 255, 0.3)';
+        };
+
+        // Label e textarea para macro
+        const macroLabel = document.createElement('label');
+        macroLabel.textContent = 'Macro do Roll20:';
+        macroLabel.style.cssText = `
+            color: #ecf0f1;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        `;
+
+        const macroInput = document.createElement('textarea');
+        macroInput.placeholder = 'Cole aqui seu macro do Roll20...\n\nExemplo:\n&{template:t20-attack}{{character=@{Personagem|character_name}}}{{attackname=Espada}}...';
+        macroInput.rows = 6;
+        macroInput.style.cssText = `
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(110, 198, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ecf0f1;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 25px;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
+            min-height: 120px;
+        `;
+
+        macroInput.onfocus = () => {
+            macroInput.style.borderColor = '#6ec6ff';
+        };
+
+        macroInput.onblur = () => {
+            macroInput.style.borderColor = 'rgba(110, 198, 255, 0.3)';
+        };
+
+        // Botões
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.cssText = `
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        `;
+
+        const cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Cancelar';
+        cancelButton.style.cssText = `
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #ecf0f1;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        `;
+
+        cancelButton.onmouseover = () => {
+            cancelButton.style.background = 'rgba(255, 255, 255, 0.2)';
+        };
+
+        cancelButton.onmouseout = () => {
+            cancelButton.style.background = 'rgba(255, 255, 255, 0.1)';
+        };
+
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Salvar';
+        saveButton.style.cssText = `
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        `;
+
+        saveButton.onmouseover = () => {
+            saveButton.style.transform = 'translateY(-2px)';
+            saveButton.style.boxShadow = '0 6px 20px rgba(76, 175, 80, 0.4)';
+        };
+
+        saveButton.onmouseout = () => {
+            saveButton.style.transform = 'translateY(0)';
+            saveButton.style.boxShadow = '0 4px 15px rgba(76, 175, 80, 0.3)';
+        };
+
+        // Event listeners
+        cancelButton.onclick = () => {
+            document.body.removeChild(overlay);
+            document.head.removeChild(modalAnimation);
+        };
+
+        saveButton.onclick = () => {
+            const macro = macroInput.value.trim();
+            if (!macro) {
+                createNotification('Por favor, insira o macro do ataque!', 'error', 3000);
+                return;
+            }
+
+            let attackName = nameInput.value.trim();
+            if (!attackName) {
+                attackName = extractAttackName(macro);
+            }
+
+            addAttack(attackName, macro);
+            createNotification(`Ataque "${attackName}" adicionado!`, 'success', 3000);
+
+            // Força atualização da lista após um pequeno delay
+            setTimeout(() => {
+                loadAndDisplayAttacks();
+            }, 100);
+
+            document.body.removeChild(overlay);
+            document.head.removeChild(modalAnimation);
+        };
+
+        // Fechar modal ao clicar no overlay
+        overlay.onclick = (e) => {
+            if (e.target === overlay) {
+                cancelButton.click();
+            }
+        };
+
+        // Montar modal
+        modal.appendChild(title);
+        modal.appendChild(nameLabel);
+        modal.appendChild(nameInput);
+        modal.appendChild(macroLabel);
+        modal.appendChild(macroInput);
+        buttonsContainer.appendChild(cancelButton);
+        buttonsContainer.appendChild(saveButton);
+        modal.appendChild(buttonsContainer);
+        overlay.appendChild(modal);
+
+        document.body.appendChild(overlay);
+
+        // Focar no input de nome
+        setTimeout(() => nameInput.focus(), 100);
     }
 
     /**
