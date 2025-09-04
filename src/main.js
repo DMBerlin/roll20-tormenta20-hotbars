@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.94356'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.64512'; // Última tag Git
 
     const logger = window.console;
 
@@ -15970,6 +15970,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Container da ficha
         const sheetContainer = document.createElement('div');
+        sheetContainer.className = 'container';
         sheetContainer.style.cssText = `
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
             border-radius: 20px;
@@ -15980,6 +15981,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             overflow-y: auto;
             border: 2px solid rgba(110, 198, 255, 0.3);
             position: relative;
+            padding: 0;
         `;
 
         // Adicionar estilos customizados para scrollbar
@@ -16206,6 +16208,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             position: relative;
             margin-bottom: 20px;
             z-index: 10;
+            cursor: pointer;
         `;
 
         const avatar = document.createElement('div');
@@ -16359,7 +16362,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     function createCharacterSheetContent() {
         const content = document.createElement('div');
         content.style.cssText = `
-            padding: 30px;
+            padding: 30px 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto;
@@ -16373,6 +16376,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             flex-direction: column;
             gap: 30px;
             height: fit-content;
+            padding: 0 30px;
         `;
 
         const attributesSection = createAttributesSection();
@@ -16387,6 +16391,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             display: flex;
             flex-direction: column;
             height: 100%;
+            padding: 0 30px;
         `;
 
         const resourcesSection = createResourcesSection();
@@ -16402,6 +16407,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Seção de equipamentos (ocupa toda a largura inferior)
         const equipmentSection = createEquipmentSection();
         equipmentSection.style.gridColumn = '1 / -1';
+        equipmentSection.style.margin = '0 30px';
 
         content.appendChild(leftColumn);
         content.appendChild(rightColumn);
