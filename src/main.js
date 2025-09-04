@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.12404'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.83960'; // Última tag Git
 
     const logger = window.console;
 
@@ -11890,51 +11890,21 @@
             applyDirectScrollbarStyles(popup, 'blue');
         }
 
-        // Botões de combate
+        // Botões de combate - Sistema inteligente de ataques
         const attackButton = {
             label: 'Atacar', icon: '⚔️', onClick: (e) => {
                 if (e && e.ctrlKey) {
                     createAttackEffectsPopup();
+                } else if (e && e.shiftKey) {
+                    // Shift+Click: Abre seletor rápido de ataques
+                    openQuickAttackSelector();
+                } else if (e && (e.button === 2 || e.type === 'contextmenu')) {
+                    // Right-click: Abre menu contextual de ataques
+                    e.preventDefault();
+                    openAttackContextMenu(e);
                 } else {
-                    // Novo: aplicar bônus persistidos
-                    const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
-                    let savedAttackEffects = [];
-                    try {
-                        const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
-                        if (saved) savedAttackEffects = JSON.parse(saved);
-                    } catch (err) {
-                        console.error('Erro ao carregar seleção:', err);
-                        savedAttackEffects = [];
-                    }
-                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-                    const effects = getDynamicAttackEffects(charLevel);
-                    let extraDamage = '';
-                    let extraDescription = '';
-                    let critThreshold = 18;
-                    let attackBonus = 0;
-                    let marcaPresaActive = false;
-                    let inimigoActive = false;
-                    effects.forEach(effect => {
-                        if (savedAttackEffects.includes(effect.value)) {
-                            if (effect.dice) {
-                                extraDamage += `+${effect.dice}`;
-                            }
-                            if (effect.critMod) {
-                                critThreshold += effect.critMod;
-                            }
-                            if (effect.attackMod) {
-                                attackBonus += effect.attackMod;
-                            }
-                            extraDescription += '%NEWLINE% ' + effect.desc;
-                            if (effect.value === 'marca_presa') marcaPresaActive = true;
-                            if (effect.value === 'inimigo') inimigoActive = true;
-                        }
-                    });
-                    if (inimigoActive && marcaPresaActive) {
-                        if (critThreshold === 16) critThreshold = 14;
-                    }
-                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
-                    executeAttackWithBloodEffect(macro);
+                    // Click normal: Executa ataque ativo atual
+                    executeCurrentAttack();
                 }
             }
         };
@@ -11959,6 +11929,13 @@
             onClick: attackButton.onClick,
             theme: 'red'
         });
+
+        // Adicionar atributos especiais ao botão de ataque
+        attackBtn.setAttribute('data-hotbar-button', 'attack');
+        attackBtn.addEventListener('contextmenu', attackButton.onClick);
+
+        // Inicializar visual do botão
+        setTimeout(() => updateAttackButtonVisual(), 500);
         const maneuversBtn = createHotbarButton({
             icon: maneuversButton.icon,
             label: maneuversButton.label,
@@ -16740,6 +16717,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         console.log(`✅ Attack saved: ${newAttack.name}`, newAttack);
         console.log(`💾 Total attacks in storage: ${attacks.length}`);
         loadAndDisplayAttacks();
+
+        // Se é o primeiro ataque, definir como ativo
+        if (attacks.length === 1) {
+            setCurrentAttack(newAttack.id);
+        } else {
+            updateAttackButtonVisual();
+        }
     }
 
     function removeAttack(attackId) {
@@ -16747,6 +16731,19 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const filteredAttacks = attacks.filter(attack => attack.id !== attackId);
         saveAttacks(filteredAttacks);
         loadAndDisplayAttacks();
+
+        // Se o ataque removido era o ativo, definir novo ativo
+        const activeAttackId = localStorage.getItem('tormenta-20-active-attack');
+        if (activeAttackId === attackId) {
+            if (filteredAttacks.length > 0) {
+                setCurrentAttack(filteredAttacks[0].id);
+            } else {
+                localStorage.removeItem('tormenta-20-active-attack');
+                updateAttackButtonVisual();
+            }
+        } else {
+            updateAttackButtonVisual();
+        }
     }
 
     function executeAttack(macro) {
@@ -17163,6 +17160,389 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Focar no input de nome
         setTimeout(() => nameInput.focus(), 100);
+    }
+
+    /**
+     * Sistema inteligente de ataques para hotbar (inspirado em Baldur's Gate 3 e Solasta)
+     */
+
+    // Gerenciar ataque ativo atual
+    function getCurrentAttack() {
+        const attacks = getAttacks();
+        if (attacks.length === 0) return null;
+
+        const activeAttackId = localStorage.getItem('tormenta-20-active-attack');
+        if (activeAttackId) {
+            const activeAttack = attacks.find(attack => attack.id === activeAttackId);
+            if (activeAttack) return activeAttack;
+        }
+
+        // Se não há ataque ativo ou ele não existe mais, usar o primeiro
+        setCurrentAttack(attacks[0].id);
+        return attacks[0];
+    }
+
+    function setCurrentAttack(attackId) {
+        localStorage.setItem('tormenta-20-active-attack', attackId);
+        updateAttackButtonVisual();
+        createNotification(`Ataque ativo: ${getAttacks().find(a => a.id === attackId)?.name || 'Desconhecido'}`, 'info', 2000);
+    }
+
+    // Executar o ataque atual
+    function executeCurrentAttack() {
+        const currentAttack = getCurrentAttack();
+
+        if (!currentAttack) {
+            // Fallback: usar macro hardcoded original se não há ataques customizados
+            const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
+            let savedAttackEffects = [];
+            try {
+                const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                if (saved) savedAttackEffects = JSON.parse(saved);
+            } catch (err) {
+                console.error('Erro ao carregar seleção:', err);
+                savedAttackEffects = [];
+            }
+            const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
+            const effects = getDynamicAttackEffects(charLevel);
+            let extraDamage = '';
+            let extraDescription = '';
+            let critThreshold = 18;
+            let attackBonus = 0;
+            let marcaPresaActive = false;
+            let inimigoActive = false;
+            effects.forEach(effect => {
+                if (savedAttackEffects.includes(effect.value)) {
+                    if (effect.dice) {
+                        extraDamage += `+${effect.dice}`;
+                    }
+                    if (effect.critMod) {
+                        critThreshold += effect.critMod;
+                    }
+                    if (effect.attackMod) {
+                        attackBonus += effect.attackMod;
+                    }
+                    extraDescription += '%NEWLINE% ' + effect.desc;
+                    if (effect.value === 'marca_presa') marcaPresaActive = true;
+                    if (effect.value === 'inimigo') inimigoActive = true;
+                }
+            });
+            if (inimigoActive && marcaPresaActive) {
+                if (critThreshold === 16) critThreshold = 14;
+            }
+            const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
+            executeAttackWithBloodEffect(macro);
+            return;
+        }
+
+        // Executar ataque customizado
+        executeAttackWithBloodEffect(currentAttack.macro);
+        createNotification(`${currentAttack.name}`, 'success', 1500);
+    }
+
+    // Seletor rápido de ataques (Shift+Click - inspirado em Solasta)
+    function openQuickAttackSelector() {
+        const attacks = getAttacks();
+        if (attacks.length <= 1) {
+            createNotification('Adicione mais ataques na ficha de personagem!', 'info', 3000);
+            return;
+        }
+
+        // Criar overlay semi-transparente
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 50000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+
+        // Container do seletor
+        const selector = document.createElement('div');
+        selector.style.cssText = `
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #6ec6ff;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: quickSelectorSlideIn 0.2s ease;
+        `;
+
+        // Animação
+        const animation = document.createElement('style');
+        animation.textContent = `
+            @keyframes quickSelectorSlideIn {
+                from { transform: scale(0.8) translateY(-20px); opacity: 0; }
+                to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(animation);
+
+        const currentAttack = getCurrentAttack();
+
+        attacks.forEach((attack, index) => {
+            const attackBtn = document.createElement('button');
+            const isActive = currentAttack && currentAttack.id === attack.id;
+
+            attackBtn.style.cssText = `
+                background: ${isActive ? 'linear-gradient(135deg, #ffc107, #ff8f00)' : 'linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1))'};
+                border: 2px solid ${isActive ? '#ffc107' : 'rgba(255, 193, 7, 0.3)'};
+                border-radius: 10px;
+                color: ${isActive ? '#000' : '#ffc107'};
+                padding: 15px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                min-width: 120px;
+                text-align: center;
+                position: relative;
+            `;
+
+            attackBtn.innerHTML = `
+                <div style="font-size: 16px; margin-bottom: 5px;">${attack.name}</div>
+                <div style="font-size: 11px; opacity: 0.8;">${index + 1}</div>
+                ${isActive ? '<div style="position: absolute; top: -5px; right: -5px; background: #4caf50; color: white; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; display: flex; align-items: center; justify-content: center;">✓</div>' : ''}
+            `;
+
+            attackBtn.onmouseover = () => {
+                if (!isActive) {
+                    attackBtn.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 193, 7, 0.2))';
+                    attackBtn.style.borderColor = 'rgba(255, 193, 7, 0.5)';
+                    attackBtn.style.transform = 'translateY(-2px)';
+                }
+            };
+
+            attackBtn.onmouseout = () => {
+                if (!isActive) {
+                    attackBtn.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1))';
+                    attackBtn.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+                    attackBtn.style.transform = 'translateY(0)';
+                }
+            };
+
+            attackBtn.onclick = () => {
+                setCurrentAttack(attack.id);
+                document.body.removeChild(overlay);
+                document.head.removeChild(animation);
+            };
+
+            selector.appendChild(attackBtn);
+        });
+
+        // Fechar ao clicar fora
+        overlay.onclick = (e) => {
+            if (e.target === overlay) {
+                document.body.removeChild(overlay);
+                document.head.removeChild(animation);
+            }
+        };
+
+        // Atalhos de teclado (1-5)
+        const keyHandler = (e) => {
+            const num = parseInt(e.key);
+            if (num >= 1 && num <= attacks.length) {
+                setCurrentAttack(attacks[num - 1].id);
+                document.body.removeChild(overlay);
+                document.head.removeChild(animation);
+                document.removeEventListener('keydown', keyHandler);
+            } else if (e.key === 'Escape') {
+                document.body.removeChild(overlay);
+                document.head.removeChild(animation);
+                document.removeEventListener('keydown', keyHandler);
+            }
+        };
+        document.addEventListener('keydown', keyHandler);
+
+        overlay.appendChild(selector);
+        document.body.appendChild(overlay);
+    }
+
+    // Menu contextual (Right-click - inspirado em Baldur's Gate 3)
+    function openAttackContextMenu(event) {
+        const attacks = getAttacks();
+        if (attacks.length === 0) {
+            createNotification('Nenhum ataque disponível. Adicione ataques na ficha!', 'info', 3000);
+            return;
+        }
+
+        // Remover menu existente se houver
+        const existingMenu = document.getElementById('attack-context-menu');
+        if (existingMenu) existingMenu.remove();
+
+        const menu = document.createElement('div');
+        menu.id = 'attack-context-menu';
+        menu.style.cssText = `
+            position: fixed;
+            left: ${event.clientX}px;
+            top: ${event.clientY}px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #6ec6ff;
+            border-radius: 10px;
+            padding: 8px 0;
+            z-index: 100000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-width: 200px;
+            animation: contextMenuSlideIn 0.15s ease;
+        `;
+
+        // Animação
+        const animation = document.createElement('style');
+        animation.textContent = `
+            @keyframes contextMenuSlideIn {
+                from { transform: scale(0.9) translateY(-10px); opacity: 0; }
+                to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(animation);
+
+        const currentAttack = getCurrentAttack();
+
+        attacks.forEach((attack) => {
+            const item = document.createElement('div');
+            const isActive = currentAttack && currentAttack.id === attack.id;
+
+            item.style.cssText = `
+                padding: 10px 15px;
+                color: ${isActive ? '#ffc107' : '#ecf0f1'};
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-left: 3px solid ${isActive ? '#ffc107' : 'transparent'};
+                font-weight: ${isActive ? 'bold' : 'normal'};
+            `;
+
+            item.innerHTML = `
+                <span>${attack.name}</span>
+                ${isActive ? '<span style="color: #4caf50; font-size: 12px;">ATIVO</span>' : ''}
+            `;
+
+            item.onmouseover = () => {
+                item.style.background = 'rgba(110, 198, 255, 0.1)';
+            };
+
+            item.onmouseout = () => {
+                item.style.background = 'transparent';
+            };
+
+            item.onclick = () => {
+                setCurrentAttack(attack.id);
+                document.body.removeChild(menu);
+                document.head.removeChild(animation);
+            };
+
+            menu.appendChild(item);
+        });
+
+        // Separador
+        const separator = document.createElement('div');
+        separator.style.cssText = `
+            height: 1px;
+            background: rgba(110, 198, 255, 0.3);
+            margin: 5px 0;
+        `;
+        menu.appendChild(separator);
+
+        // Opção para abrir ficha
+        const openSheetItem = document.createElement('div');
+        openSheetItem.style.cssText = `
+            padding: 10px 15px;
+            color: #90a4ae;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-style: italic;
+            font-size: 12px;
+        `;
+        openSheetItem.textContent = 'Gerenciar Ataques...';
+        openSheetItem.onmouseover = () => {
+            openSheetItem.style.background = 'rgba(110, 198, 255, 0.1)';
+            openSheetItem.style.color = '#6ec6ff';
+        };
+        openSheetItem.onmouseout = () => {
+            openSheetItem.style.background = 'transparent';
+            openSheetItem.style.color = '#90a4ae';
+        };
+        openSheetItem.onclick = () => {
+            openCharacterSheet();
+            document.body.removeChild(menu);
+            document.head.removeChild(animation);
+        };
+        menu.appendChild(openSheetItem);
+
+        // Fechar ao clicar fora
+        const closeHandler = (e) => {
+            if (!menu.contains(e.target)) {
+                document.body.removeChild(menu);
+                document.head.removeChild(animation);
+                document.removeEventListener('click', closeHandler);
+            }
+        };
+        setTimeout(() => document.addEventListener('click', closeHandler), 100);
+
+        document.body.appendChild(menu);
+    }
+
+    // Atualizar visual do botão de ataque
+    function updateAttackButtonVisual() {
+        const attackBtn = document.querySelector('[data-hotbar-button="attack"]');
+        if (!attackBtn) return;
+
+        const currentAttack = getCurrentAttack();
+        const attackCount = getAttacks().length;
+
+        if (currentAttack && attackCount > 0) {
+            // Mostrar nome do ataque ativo
+            const label = attackBtn.querySelector('.hotbar-button-label');
+            if (label) {
+                label.textContent = currentAttack.name.length > 12
+                    ? currentAttack.name.substring(0, 12) + '...'
+                    : currentAttack.name;
+            }
+
+            // Adicionar indicador de múltiplos ataques
+            let indicator = attackBtn.querySelector('.attack-indicator');
+            if (!indicator && attackCount > 1) {
+                indicator = document.createElement('div');
+                indicator.className = 'attack-indicator';
+                indicator.style.cssText = `
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    background: #ffc107;
+                    color: #000;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 2px solid #1a1a2e;
+                `;
+                indicator.textContent = attackCount;
+                attackBtn.appendChild(indicator);
+            } else if (indicator) {
+                indicator.textContent = attackCount;
+            }
+        } else {
+            // Restaurar visual padrão
+            const label = attackBtn.querySelector('.hotbar-button-label');
+            if (label) label.textContent = 'Atacar';
+
+            const indicator = attackBtn.querySelector('.attack-indicator');
+            if (indicator) indicator.remove();
+        }
     }
 
     /**
