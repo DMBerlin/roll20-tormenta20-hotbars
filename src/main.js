@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.21078'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.94356'; // Última tag Git
 
     const logger = window.console;
 
@@ -2693,15 +2693,64 @@
 
         // Encontrar o avatar na ficha (120px)
         const sheetAvatar = characterSheetModal.querySelector('div[style*="width: 120px"][style*="height: 120px"]');
-        if (!sheetAvatar) return;
+        if (sheetAvatar) {
+            const avatarUrl = getAvatarUrl();
+            if (avatarUrl) {
+                sheetAvatar.style.background = `url(${avatarUrl}) center/cover`;
+                sheetAvatar.textContent = '';
+            } else {
+                sheetAvatar.style.background = '#23243a';
+                sheetAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
+            }
+        }
+
+        // Atualizar background do header da ficha
+        updateCharacterSheetHeaderBackground();
+    }
+
+    // Função para atualizar o background do header da ficha
+    function updateCharacterSheetHeaderBackground() {
+        const characterSheetModal = document.getElementById('character-sheet-modal');
+        if (!characterSheetModal || characterSheetModal.style.display === 'none') {
+            return;
+        }
+
+        // Encontrar o header da ficha
+        const sheetHeader = characterSheetModal.querySelector('div[style*="padding: 40px 30px 60px 30px"]');
+        if (!sheetHeader) return;
 
         const avatarUrl = getAvatarUrl();
+
+        // Remover overlay de blur existente se houver
+        const existingBlurOverlay = sheetHeader.querySelector('div[style*="filter: blur"]');
+        if (existingBlurOverlay) {
+            existingBlurOverlay.remove();
+        }
+
         if (avatarUrl) {
-            sheetAvatar.style.background = `url(${avatarUrl}) center/cover`;
-            sheetAvatar.textContent = '';
-        } else {
-            sheetAvatar.style.background = '#23243a';
-            sheetAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
+            // Criar nova camada de blur
+            const blurOverlay = document.createElement('div');
+            blurOverlay.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url(${avatarUrl});
+                background-size: cover;
+                background-position: center;
+                filter: blur(8px) brightness(0.3) contrast(0.8);
+                opacity: 0.4;
+                z-index: 1;
+            `;
+
+            // Inserir após o primeiro filho (contentOverlay)
+            const contentOverlay = sheetHeader.children[0];
+            if (contentOverlay) {
+                sheetHeader.insertBefore(blurOverlay, contentOverlay);
+            } else {
+                sheetHeader.appendChild(blurOverlay);
+            }
         }
     }
 
@@ -16060,14 +16109,33 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      */
     function createCharacterSheetHeader() {
         const header = document.createElement('div');
-        header.style.cssText = `
-            position: relative;
-            padding: 40px 30px 60px 30px;
+
+        // Verificar se há avatar configurado para usar como background
+        const avatarUrl = getAvatarUrl();
+        const backgroundStyle = avatarUrl ? `
+            background: 
+                linear-gradient(135deg, 
+                    rgba(30, 30, 50, 0.95) 0%, 
+                    rgba(45, 45, 70, 0.9) 50%, 
+                    rgba(60, 60, 90, 0.85) 100%
+                ),
+                url(${avatarUrl});
+            background-size: auto, cover;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: local, local;
+        ` : `
             background: linear-gradient(135deg, 
                 rgba(30, 30, 50, 0.95) 0%, 
                 rgba(45, 45, 70, 0.9) 50%, 
                 rgba(60, 60, 90, 0.85) 100%
             );
+        `;
+
+        header.style.cssText = `
+            position: relative;
+            padding: 40px 30px 60px 30px;
+            ${backgroundStyle}
             border-bottom: 3px solid rgba(110, 198, 255, 0.4);
             display: flex;
             flex-direction: column;
@@ -16075,6 +16143,41 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             justify-content: center;
             overflow: visible;
             box-shadow: inset 0 0 50px rgba(110, 198, 255, 0.1);
+        `;
+
+        // Adicionar camada de blur se há avatar
+        if (avatarUrl) {
+            const blurOverlay = document.createElement('div');
+            blurOverlay.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url(${avatarUrl});
+                background-size: cover;
+                background-position: center;
+                filter: blur(8px) brightness(0.3) contrast(0.8);
+                opacity: 0.4;
+                z-index: 1;
+            `;
+            header.appendChild(blurOverlay);
+        }
+
+        // Overlay para garantir legibilidade do conteúdo
+        const contentOverlay = document.createElement('div');
+        contentOverlay.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(30, 30, 50, 0.7) 0%, 
+                rgba(45, 45, 70, 0.6) 50%, 
+                rgba(60, 60, 90, 0.7) 100%
+            );
+            z-index: 2;
         `;
 
         // Efeito de borda decorativa
@@ -16092,7 +16195,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 rgba(110, 198, 255, 0.6) 80%, 
                 transparent 100%
             );
+            z-index: 5;
         `;
+
+        header.appendChild(contentOverlay);
 
         // Avatar em destaque (sobressaltando)
         const avatarContainer = document.createElement('div');
@@ -16103,13 +16209,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         const avatar = document.createElement('div');
-        const avatarUrl = getAvatarUrl();
+        const avatarImageUrl = getAvatarUrl();
         avatar.style.cssText = `
             width: 120px;
             height: 120px;
             border-radius: 50%;
             border: 4px solid #6ec6ff;
-            background: ${avatarUrl ? `url(${avatarUrl}) center/cover` : '#23243a'};
+            background: ${avatarImageUrl ? `url(${avatarImageUrl}) center/cover` : '#23243a'};
             display: flex;
             align-items: center;
             justify-content: center;
@@ -16144,7 +16250,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             animation: glow 3s ease-in-out infinite alternate;
         `;
 
-        if (!avatarUrl) {
+        if (!avatarImageUrl) {
             avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
 
@@ -16181,6 +16287,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         characterInfo.style.cssText = `
             text-align: center;
             color: #ecf0f1;
+            position: relative;
+            z-index: 10;
         `;
 
         // Nome do personagem
