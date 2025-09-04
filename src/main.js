@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.73973'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.40498'; // Última tag Git
 
     const logger = window.console;
 
@@ -1909,8 +1909,11 @@
         // Atualizar seção de defesas
         updateDefensesSection();
 
-        // Atualizar barra de carga
-        updateCargaBar();
+        // Atualizar seção de carga
+        updateCargaSection();
+
+        // Atualizar seção de riquezas
+        updateRiquezasSection();
     }
 
     // Função para atualizar seção de defesas
@@ -1959,9 +1962,9 @@
         `;
     }
 
-    // Função para atualizar barra de carga
-    function updateCargaBar() {
-        // Buscar a barra de carga na hotbar
+    // Função para atualizar seção de carga
+    function updateCargaSection() {
+        // Buscar a seção de carga na ficha
         const cargaCard = document.querySelector('[style*="rgba(255, 193, 7, 0.1)"]');
         if (!cargaCard) return;
 
@@ -2005,6 +2008,32 @@
                 <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
             </div>
             <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
+        `;
+    }
+
+    // Função para atualizar seção de riquezas
+    function updateRiquezasSection() {
+        // Buscar a seção de riquezas na ficha
+        const riquezasCard = document.querySelector('[style*="margin-top: 20px"][style*="rgba(255, 193, 7, 0.1)"]');
+        if (!riquezasCard) return;
+
+        // Obter valores sincronizados do localStorage
+        const tibar = localStorage.getItem('tormenta-20-hotbars-sync-tibar') || '0';
+        const tibarOuro = localStorage.getItem('tormenta-20-hotbars-sync-tibar-ouro') || '0';
+
+        // Atualizar o conteúdo da seção de riquezas
+        riquezasCard.innerHTML = `
+            <div style="font-size: 18px; color: #ffc107; font-weight: bold; margin-bottom: 15px; text-align: center;">💰 Riquezas</div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                <div style="text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #ffb74d; margin-bottom: 5px;">🪙 Tibar</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${tibar}</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #ffd700; margin-bottom: 5px;">🥇 Tibar de Ouro</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${tibarOuro}</div>
+                </div>
+            </div>
         `;
     }
 
@@ -2558,7 +2587,7 @@
             avatarElement.textContent = '';
         } else {
             avatarElement.style.background = '#23243a';
-            avatarElement.textContent = 'EE';
+            avatarElement.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
     }
 
@@ -7382,6 +7411,10 @@
             { key: 'tormenta-20-hotbars-char-carga-limite-attr', label: 'Carga Limite', defaultValue: 'limite' },
             { key: 'tormenta-20-hotbars-char-carga-maxima-attr', label: 'Carga Máxima', defaultValue: 'maxima' },
 
+            // Riquezas
+            { key: 'tormenta-20-hotbars-char-tibar-attr', label: 'Tibar', defaultValue: 'ts' },
+            { key: 'tormenta-20-hotbars-char-tibar-ouro-attr', label: 'Tibar de Ouro', defaultValue: 'to' },
+
             // Defesas
             { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init' },
             { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
@@ -10339,7 +10372,7 @@
             avatar.style.background = `url(${avatarUrl}) center/cover`;
             avatar.textContent = '';
         } else {
-            avatar.textContent = 'IM';
+            avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
 
         // Ícone de edição no avatar
@@ -11892,8 +11925,12 @@
                 { key: 'tormenta-20-hotbars-char-carga-limite-attr', defaultValue: 'limite' },
                 { key: 'tormenta-20-hotbars-char-carga-maxima-attr', defaultValue: 'maxima' },
 
+                // Riquezas
+                { key: 'tormenta-20-hotbars-char-tibar-attr', defaultValue: 'ts' },
+                { key: 'tormenta-20-hotbars-char-tibar-ouro-attr', defaultValue: 'to' },
+
                 // Defesas
-                { key: 'tormenta-20-hotbars-char-iniciativa-attr', defaultValue: 'iniciativatotal' },
+                { key: 'tormenta-20-hotbars-char-iniciativa-attr', defaultValue: 'menace_init' },
                 { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'menace_defense' },
                 { key: 'tormenta-20-hotbars-char-deslocamento-attr', defaultValue: 'menace_desloc' },
                 { key: 'tormenta-20-hotbars-char-fortitude-attr', defaultValue: 'menace_fortitude' },
@@ -16013,6 +16050,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         return header;
     }
 
+
     /**
      * Cria o conteúdo principal da ficha
      */
@@ -16022,21 +16060,49 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             padding: 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
             gap: 30px;
         `;
 
-        // Seção de atributos
+        // Coluna esquerda: Informações do personagem + Atributos + Limites de carga
+        const leftColumn = document.createElement('div');
+        leftColumn.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            height: fit-content;
+        `;
+
         const attributesSection = createAttributesSection();
+        const cargaSection = createCargaSection();
 
-        // Seção de recursos (vida/mana)
+        leftColumn.appendChild(attributesSection);
+        leftColumn.appendChild(cargaSection);
+
+        // Coluna direita: Recursos (com altura igual à coluna esquerda)
+        const rightColumn = document.createElement('div');
+        rightColumn.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        `;
+
         const resourcesSection = createResourcesSection();
+        resourcesSection.style.cssText += `
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        `;
 
-        // Seção de equipamentos (ocupa toda a largura)
+        rightColumn.appendChild(resourcesSection);
+
+        // Seção de equipamentos (ocupa toda a largura inferior)
         const equipmentSection = createEquipmentSection();
         equipmentSection.style.gridColumn = '1 / -1';
 
-        content.appendChild(attributesSection);
-        content.appendChild(resourcesSection);
+        content.appendChild(leftColumn);
+        content.appendChild(rightColumn);
         content.appendChild(equipmentSection);
 
         return content;
@@ -16069,7 +16135,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const attributesGrid = document.createElement('div');
         attributesGrid.style.cssText = `
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
         `;
 
@@ -16134,6 +16200,85 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         section.appendChild(title);
         section.appendChild(attributesGrid);
+
+        return section;
+    }
+
+    /**
+     * Cria a seção de limites de carga
+     */
+    function createCargaSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Limites de Carga';
+        title.style.cssText = `
+            margin: 0 0 20px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        // Carga
+        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
+        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
+        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
+
+        // Calcular porcentagens e cores baseadas nas regras do T20
+        const cargaNum = parseFloat(currentCarga) || 0;
+        const limiteNum = parseFloat(limiteCarga) || 10;
+        const maximaNum = parseFloat(maximaCarga) || 20;
+
+        // Determinar status da carga
+        let cargaColor = '#4caf50'; // Verde
+        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
+        let cargaText = 'Normal';
+
+        if (cargaNum > limiteNum) {
+            cargaColor = '#ff9800'; // Laranja
+            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
+            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
+        }
+
+        if (cargaNum > maximaNum) {
+            cargaColor = '#f44336'; // Vermelho
+            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
+            cargaText = 'Impossível carregar!';
+        }
+
+        // Calcular porcentagem para a barra (baseada no máximo)
+        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
+
+        const cargaCard = document.createElement('div');
+        cargaCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        `;
+
+        cargaCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
+                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
+                <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+            <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
+        `;
+
+        section.appendChild(title);
+        section.appendChild(cargaCard);
 
         return section;
     }
@@ -16208,57 +16353,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden;">
                 <div style="background: linear-gradient(90deg, #3f51b5, #7986cb); height: 100%; width: ${mpPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
             </div>
-        `;
-
-        // Carga
-        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
-        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
-        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
-
-        // Calcular porcentagens e cores baseadas nas regras do T20
-        const cargaNum = parseFloat(currentCarga) || 0;
-        const limiteNum = parseFloat(limiteCarga) || 10;
-        const maximaNum = parseFloat(maximaCarga) || 20;
-
-        // Determinar status da carga
-        let cargaColor = '#4caf50'; // Verde
-        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
-        let cargaText = 'Normal';
-
-        if (cargaNum > limiteNum) {
-            cargaColor = '#ff9800'; // Laranja
-            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
-            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
-        }
-
-        if (cargaNum > maximaNum) {
-            cargaColor = '#f44336'; // Vermelho
-            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
-            cargaText = 'Impossível carregar!';
-        }
-
-        // Calcular porcentagem para a barra (baseada no máximo)
-        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
-
-        const cargaCard = document.createElement('div');
-        cargaCard.style.cssText = `
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-        `;
-
-        cargaCard.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
-                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
-            </div>
-            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
-                <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
-            </div>
-            <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
-        `;
+                `;
 
         // Defesas
         const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
@@ -16306,11 +16401,38 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             </div>
         `;
 
+        // Riquezas
+        const tibar = localStorage.getItem('tormenta-20-hotbars-sync-tibar') || '0';
+        const tibarOuro = localStorage.getItem('tormenta-20-hotbars-sync-tibar-ouro') || '0';
+
+        const riquezasCard = document.createElement('div');
+        riquezasCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        `;
+
+        riquezasCard.innerHTML = `
+            <div style="font-size: 18px; color: #ffc107; font-weight: bold; margin-bottom: 15px; text-align: center;">💰 Riquezas</div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                <div style="text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #ffb74d; margin-bottom: 5px;">🪙 Tibar</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${tibar}</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 14px; color: #ffd700; margin-bottom: 5px;">🥇 Tibar de Ouro</div>
+                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${tibarOuro}</div>
+                </div>
+            </div>
+        `;
+
         section.appendChild(title);
         section.appendChild(healthCard);
         section.appendChild(manaCard);
-        section.appendChild(cargaCard);
         section.appendChild(defensesCard);
+        section.appendChild(riquezasCard);
 
         return section;
     }
