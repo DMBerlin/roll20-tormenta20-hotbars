@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.20465'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.24137'; // Última tag Git
 
     const logger = window.console;
 
@@ -7277,7 +7277,9 @@
             { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
 
             // Defesas
+            { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init' },
             { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
+            { key: 'tormenta-20-hotbars-char-deslocamento-attr', label: 'Deslocamento', defaultValue: 'menace_desloc' },
             { key: 'tormenta-20-hotbars-char-fortitude-attr', label: 'Fortitude', defaultValue: 'menace_fortitude' },
             { key: 'tormenta-20-hotbars-char-reflex-attr', label: 'Reflexos', defaultValue: 'menace_reflex' },
             { key: 'tormenta-20-hotbars-char-will-attr', label: 'Vontade', defaultValue: 'menace_will' },
@@ -11780,7 +11782,9 @@
                 { key: 'tormenta-20-hotbars-char-mp-current-attr', defaultValue: 'mana' },
 
                 // Defesas
+                { key: 'tormenta-20-hotbars-char-iniciativa-attr', defaultValue: 'iniciativatotal' },
                 { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'menace_defense' },
+                { key: 'tormenta-20-hotbars-char-deslocamento-attr', defaultValue: 'menace_desloc' },
                 { key: 'tormenta-20-hotbars-char-fortitude-attr', defaultValue: 'menace_fortitude' },
                 { key: 'tormenta-20-hotbars-char-reflex-attr', defaultValue: 'menace_reflex' },
                 { key: 'tormenta-20-hotbars-char-will-attr', defaultValue: 'menace_will' },
@@ -16091,7 +16095,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         `;
 
         // Defesas
+        const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
         const defense = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
+        const deslocamento = localStorage.getItem('tormenta-20-hotbars-sync-deslocamento') || '9m';
         const fortitude = localStorage.getItem('tormenta-20-hotbars-sync-fortitude') || '+0';
         const reflex = localStorage.getItem('tormenta-20-hotbars-sync-reflex') || '+0';
         const will = localStorage.getItem('tormenta-20-hotbars-sync-will') || '+0';
@@ -16106,22 +16112,30 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         defensesCard.innerHTML = `
             <div style="font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 15px; text-align: center;">🛡️ Defesas</div>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 14px; color: #b0bec5;">Defesa</div>
-                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${defense}</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Iniciativa</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${iniciativa}</div>
                 </div>
-                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 14px; color: #b0bec5;">Fortitude</div>
-                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Defesa</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${defense}</div>
                 </div>
-                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 14px; color: #b0bec5;">Reflexos</div>
-                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Fortitude</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
                 </div>
-                <div style="text-align: center; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 14px; color: #b0bec5;">Vontade</div>
-                    <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${will}</div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Deslocamento</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${deslocamento}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Reflexos</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Vontade</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${will}</div>
                 </div>
             </div>
         `;

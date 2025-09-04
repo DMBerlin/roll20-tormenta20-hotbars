@@ -62,15 +62,32 @@ O sistema está configurado para trabalhar com os campos padrão do Tormenta20:
 
 O sistema envia um comando com **todos os campos** do schema Tormenta20:
 ```
-@{Eira Egai|charnivel},@{Eira Egai|menace_name},@{Eira Egai|tlevel},@{Eira Egai|playername},@{Eira Egai|trace},@{Eira Egai|torigin},@{Eira Egai|divindade},@{Eira Egai|for_mod},@{Eira Egai|des_mod},@{Eira Egai|con_mod},@{Eira Egai|int_mod},@{Eira Egai|sab_mod},@{Eira Egai|car_mod},@{Eira Egai|for},@{Eira Egai|des},@{Eira Egai|con},@{Eira Egai|int},@{Eira Egai|sab},@{Eira Egai|car},@{Eira Egai|vidatotal},@{Eira Egai|vida},@{Eira Egai|manatotal},@{Eira Egai|mana},@{Eira Egai|defesatotal},@{Eira Egai|menace_defense},@{Eira Egai|menace_fortitude},@{Eira Egai|menace_reflex},@{Eira Egai|menace_will},@{Eira Egai|menace_nd},@{Eira Egai|menace_init},@{Eira Egai|menace_percep},@{Eira Egai|bonus_treino},@{Eira Egai|penalidades_armadura} [DATA_ABC123_xyz]
+@{NOME_DO_PERSONAGEM|charnivel},@{NOME_DO_PERSONAGEM|menace_name},@{NOME_DO_PERSONAGEM|tlevel},@{NOME_DO_PERSONAGEM|playername},@{NOME_DO_PERSONAGEM|trace},@{NOME_DO_PERSONAGEM|torigin},@{NOME_DO_PERSONAGEM|divindade},@{NOME_DO_PERSONAGEM|for_mod},@{NOME_DO_PERSONAGEM|des_mod},@{NOME_DO_PERSONAGEM|con_mod},@{NOME_DO_PERSONAGEM|int_mod},@{NOME_DO_PERSONAGEM|sab_mod},@{NOME_DO_PERSONAGEM|car_mod},@{NOME_DO_PERSONAGEM|for},@{NOME_DO_PERSONAGEM|des},@{NOME_DO_PERSONAGEM|con},@{NOME_DO_PERSONAGEM|int},@{NOME_DO_PERSONAGEM|sab},@{NOME_DO_PERSONAGEM|car},@{NOME_DO_PERSONAGEM|vidatotal},@{NOME_DO_PERSONAGEM|vida},@{NOME_DO_PERSONAGEM|manatotal},@{NOME_DO_PERSONAGEM|mana},@{NOME_DO_PERSONAGEM|defesatotal},@{NOME_DO_PERSONAGEM|menace_defense},@{NOME_DO_PERSONAGEM|menace_fortitude},@{NOME_DO_PERSONAGEM|menace_reflex},@{NOME_DO_PERSONAGEM|menace_will},@{NOME_DO_PERSONAGEM|menace_nd},@{NOME_DO_PERSONAGEM|menace_init},@{NOME_DO_PERSONAGEM|menace_percep},@{NOME_DO_PERSONAGEM|bonus_treino},@{NOME_DO_PERSONAGEM|penalidades_armadura} [DATA_ABC123_xyz]
 ```
 
 ## Resposta Esperada
 
 O Roll20 responde com todos os valores substituídos:
 ```
-11, Eira Egai, Caçador, Daniel, Suraggel (Sulfur) - LB, Capanga, Azgher, 0, 5, 2, 1, 3, 0, 0, 5, 2, 1, 3, 0, 58, 53, 44, 36, 23, 23, +7, +16, +8, 11, +14, +12, 4, -3 [DATA_ABC123_xyz]
+11, Aragorn, Ranger, João, Humano, Nobre, Tanna-Toh, 2, 4, 1, 0, 3, 1, 12, 18, 13, 10, 16, 12, 65, 58, 38, 30, 25, 25, +8, +15, +9, 11, +12, +10, 4, -2 [DATA_ABC123_xyz]
 ```
+
+### ⚙️ Configuração do Nome do Personagem
+
+**IMPORTANTE**: O sistema é agnóstico ao personagem! Você deve configurar o nome do seu personagem antes de usar.
+
+#### Como Configurar:
+1. **Abra as configurações** da hotbar (ícone de engrenagem)
+2. **Encontre a seção "🔑 Chave de Identificação do Personagem"**
+3. **Digite o nome exato** do seu personagem como aparece na ficha do Roll20
+4. **Salve as configurações**
+
+#### Exemplos de Configuração:
+- Se seu personagem se chama "Gandalf" → digite `Gandalf`
+- Se seu personagem se chama "Legolas Folha Verde" → digite `Legolas Folha Verde`
+- Se seu personagem se chama "Gimli, filho de Glóin" → digite `Gimli, filho de Glóin`
+
+**Nota**: O nome deve ser **exatamente igual** ao que aparece na ficha do Roll20, incluindo espaços, vírgulas e caracteres especiais.
 
 ### 🛠️ Personalização
 
@@ -85,6 +102,8 @@ function sendDataCollectionCommand(dataKey, fields) {
 ```
 
 E atualize a função `extractDataFromMessage` para processar os novos campos.
+
+**Nota**: A função `getCharacterNameForMacro()` automaticamente usa o nome configurado nas configurações da hotbar.
 
 ### 🐛 Solução de Problemas
 
@@ -117,72 +136,72 @@ O sistema gera logs detalhados no console do navegador:
 - `Desativando TTM...` / `TTM já está inativo, mantendo...` - Restauração do TTM
 
 #### **Comando e Resposta:**
-- `Comando enviado para coleta: @{Eira Egai|charnivel},@{Eira Egai|menace_name}...`
-- `Nome do personagem usado: Eira Egai`
+- `Comando enviado para coleta: @{NOME_DO_PERSONAGEM|charnivel},@{NOME_DO_PERSONAGEM|menace_name}...`
+- `Nome do personagem usado: [Nome configurado]`
 - `Schema de dados: {charnivel: "Nível do personagem", ...}`
-- `Mensagem completa recebida: 11, Eira Egai, Caçador, 16, 18...`
-- `Valores separados por vírgula: ["11", "Eira Egai", "Caçador", ...]`
+- `Mensagem completa recebida: 11, Aragorn, Ranger, 16, 18...`
+- `Valores separados por vírgula: ["11", "Aragorn", "Ranger", ...]`
 
 #### **Schema Completo:**
 ```
 === SCHEMA COMPLETO COM VALORES ===
 Nível do personagem (charnivel): 11
-Nome do personagem (menace_name): Eira Egai
-Classe do personagem (tlevel): Caçador
-Nome do jogador (playername): Daniel
-Raça (trace): Suraggel (Sulfur) - LB
-Origem (torigin): Capanga
-Divindade (divindade): Azgher
-Modificador de Força (for_mod): 0
-Modificador de Destreza (des_mod): 5
-Modificador de Constituição (con_mod): 2
-Modificador de Inteligência (int_mod): 1
+Nome do personagem (menace_name): Aragorn
+Classe do personagem (tlevel): Ranger
+Nome do jogador (playername): João
+Raça (trace): Humano
+Origem (torigin): Nobre
+Divindade (divindade): Tanna-Toh
+Modificador de Força (for_mod): 2
+Modificador de Destreza (des_mod): 4
+Modificador de Constituição (con_mod): 1
+Modificador de Inteligência (int_mod): 0
 Modificador de Sabedoria (sab_mod): 3
-Modificador de Carisma (car_mod): 0
-Força base (for): 0
-Destreza base (des): 5
-Constituição base (con): 2
-Inteligência base (int): 1
-Sabedoria base (sab): 3
-Carisma base (car): 0
-Vida máxima (vidatotal): 58
-Vida atual (vida): 53
-Mana máxima (manatotal): 44
-Mana atual (mana): 36
-Defesa total (defesatotal): 23
-Defesa (menace) (menace_defense): 23
-Fortitude (menace_fortitude): +7
-Reflexos (menace_reflex): +16
-Vontade (menace_will): +8
+Modificador de Carisma (car_mod): 1
+Força base (for): 12
+Destreza base (des): 18
+Constituição base (con): 13
+Inteligência base (int): 10
+Sabedoria base (sab): 16
+Carisma base (car): 12
+Vida máxima (vidatotal): 65
+Vida atual (vida): 58
+Mana máxima (manatotal): 38
+Mana atual (mana): 30
+Defesa total (defesatotal): 25
+Defesa (menace) (menace_defense): 25
+Fortitude (menace_fortitude): +8
+Reflexos (menace_reflex): +15
+Vontade (menace_will): +9
 Nível de Desafio (menace_nd): 11
-Iniciativa (menace_init): +14
-Percepção (menace_percep): +12
+Iniciativa (menace_init): +12
+Percepção (menace_percep): +10
 Bônus de treino (bonus_treino): 4
-Penalidades de armadura (penalidades_armadura): -3
+Penalidades de armadura (penalidades_armadura): -2
 ===================================
 ```
 
 #### **Atualizações:**
 - `Nível atualizado para: 11`
-- `Nome atualizado para: Eira Egai`
-- `Classe: Caçador`
-- `Raça: Suraggel (Sulfur) - LB`
-- `Origem: Capanga`
-- `Divindade: Azgher`
-- `Vida máxima: 58`
-- `Vida atual: 53`
-- `Mana máxima: 44`
-- `Mana atual: 36`
-- `Defesa total: 23`
-- `ND: 11`
-- `Iniciativa: +14`
-- `Percepção: +12`
-- `Força (mod): 0`
-- `Destreza (mod): 5`
-- `Constituição (mod): 2`
-- `Inteligência (mod): 1`
-- `Sabedoria (mod): 3`
-- `Carisma (mod): 0`
+- `Nome atualizado para: [Nome do personagem]`
+- `Classe: [Classe do personagem]`
+- `Raça: [Raça do personagem]`
+- `Origem: [Origem do personagem]`
+- `Divindade: [Divindade do personagem]`
+- `Vida máxima: [Valor da ficha]`
+- `Vida atual: [Valor da ficha]`
+- `Mana máxima: [Valor da ficha]`
+- `Mana atual: [Valor da ficha]`
+- `Defesa total: [Valor da ficha]`
+- `ND: [Valor da ficha]`
+- `Iniciativa: [Valor da ficha]`
+- `Percepção: [Valor da ficha]`
+- `Força (mod): [Valor da ficha]`
+- `Destreza (mod): [Valor da ficha]`
+- `Constituição (mod): [Valor da ficha]`
+- `Inteligência (mod): [Valor da ficha]`
+- `Sabedoria (mod): [Valor da ficha]`
+- `Carisma (mod): [Valor da ficha]`
 
 ### 📝 Notas Técnicas
 
