@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.24137'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.26927'; // Última tag Git
 
     const logger = window.console;
 
@@ -1897,7 +1897,7 @@
         // Atualizar defesa no ícone do avatar
         const defenseIcon = document.querySelector('#character-avatar').parentNode.querySelector('div[title="Defesa"]');
         if (defenseIcon) {
-            const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '0';
+            const defenseValue = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
             defenseIcon.textContent = defenseValue;
         }
 
@@ -1905,6 +1905,55 @@
 
         // Atualizar barras de vida e mana
         updateHealthAndManaBars();
+
+        // Atualizar seção de defesas
+        updateDefensesSection();
+    }
+
+    // Função para atualizar seção de defesas
+    function updateDefensesSection() {
+        // Buscar a seção de defesas na hotbar
+        const defensesCard = document.querySelector('[style*="rgba(76, 175, 80, 0.1)"]');
+        if (!defensesCard) return;
+
+        // Obter valores sincronizados do localStorage
+        const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
+        const defense = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
+        const deslocamento = localStorage.getItem('tormenta-20-hotbars-sync-deslocamento') || '9m';
+        const fortitude = localStorage.getItem('tormenta-20-hotbars-sync-fortitude') || '+0';
+        const reflex = localStorage.getItem('tormenta-20-hotbars-sync-reflex') || '+0';
+        const will = localStorage.getItem('tormenta-20-hotbars-sync-will') || '+0';
+
+        // Atualizar o conteúdo da seção de defesas
+        defensesCard.innerHTML = `
+            <div style="font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 15px; text-align: center;">🛡️ Defesas</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Iniciativa</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${iniciativa}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Defesa</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${defense}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Fortitude</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Deslocamento</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${deslocamento}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Reflexos</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
+                </div>
+                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                    <div style="font-size: 13px; color: #b0bec5;">Vontade</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${will}</div>
+                </div>
+            </div>
+        `;
     }
 
     // Função para atualizar barras de vida e mana
@@ -11859,6 +11908,11 @@
             }
 
             createHotbar();
+
+            // Atualizar UI com valores sincronizados após criar a hotbar
+            setTimeout(() => {
+                updateHotbarUI();
+            }, 100);
 
             // Adiciona listener de atalho para ocultar/mostrar a hotbar
             document.addEventListener('keydown', function (e) {
