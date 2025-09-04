@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.59245'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.21078'; // Última tag Git
 
     const logger = window.console;
 
@@ -2276,6 +2276,7 @@
         }
     }
 
+    // Função para salvar URL do avatar
     function saveAvatarUrl(url) {
         try {
             localStorage.setItem(AVATAR_KEY, url);
@@ -2491,32 +2492,49 @@
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
-
-        const closeBtn = window.Roll20Components.createCloseButton({
-            text: '×',
-            fontSize: '24px',
-            width: '32px',
-            height: '32px',
-            padding: '0',
-            color: '#ecf0f1',
-            onClick: () => {
-                popup.remove();
-                const overlay = document.getElementById('avatar-overlay');
-                if (overlay) overlay.remove();
-            }
-        });
 
         const title = document.createElement('h3');
         title.textContent = 'Configurar Avatar';
         title.style.color = '#ecf0f1';
         title.style.margin = '0';
         title.style.fontSize = '17px';
-        title.style.fontWeight = 'bold'; header.appendChild(title);
-        header.appendChild(closeBtn.render());
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.cssText = `
+            background: none;
+            border: none;
+            color: #ecf0f1;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        `;
+        closeBtn.onmouseover = () => {
+            closeBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        };
+        closeBtn.onmouseout = () => {
+            closeBtn.style.background = 'none';
+        };
+        closeBtn.onclick = () => {
+            popup.remove();
+            overlay.remove();
+        };
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
         popup.appendChild(header);
 
         // Preview do avatar atual
@@ -2544,7 +2562,7 @@
             previewAvatar.style.background = `url(${currentAvatarUrl}) center/cover`;
             previewAvatar.textContent = '';
         } else {
-            previewAvatar.textContent = 'EE';
+            previewAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
 
         previewContainer.appendChild(previewAvatar);
@@ -2604,15 +2622,12 @@
             const url = urlInput.value.trim();
             if (url) {
                 saveAvatarUrl(url);
-                // Atualiza o avatar na hotbar
                 updateCharacterAvatar();
-                // Atualiza o avatar na ficha de personagem se estiver aberta
                 updateCharacterSheetAvatar();
                 showSuccessNotification('Avatar do personagem atualizado!');
             }
             popup.remove();
-            const overlay = document.getElementById('avatar-overlay');
-            if (overlay) overlay.remove();
+            overlay.remove();
         };
 
         const clearBtn = document.createElement('button');
@@ -2637,14 +2652,11 @@
 
         clearBtn.onclick = () => {
             saveAvatarUrl('');
-            // Atualiza o avatar na hotbar
             updateCharacterAvatar();
-            // Atualiza o avatar na ficha de personagem se estiver aberta
             updateCharacterSheetAvatar();
             showWarningNotification('Avatar do personagem removido.');
             popup.remove();
-            const overlay = document.getElementById('avatar-overlay');
-            if (overlay) overlay.remove();
+            overlay.remove();
         };
 
         buttonContainer.appendChild(saveBtn);
@@ -2669,6 +2681,27 @@
         } else {
             avatarElement.style.background = '#23243a';
             avatarElement.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
+        }
+    }
+
+    // Função para atualizar o avatar na ficha de personagem
+    function updateCharacterSheetAvatar() {
+        const characterSheetModal = document.getElementById('character-sheet-modal');
+        if (!characterSheetModal || characterSheetModal.style.display === 'none') {
+            return; // Ficha não está aberta
+        }
+
+        // Encontrar o avatar na ficha (120px)
+        const sheetAvatar = characterSheetModal.querySelector('div[style*="width: 120px"][style*="height: 120px"]');
+        if (!sheetAvatar) return;
+
+        const avatarUrl = getAvatarUrl();
+        if (avatarUrl) {
+            sheetAvatar.style.background = `url(${avatarUrl}) center/cover`;
+            sheetAvatar.textContent = '';
+        } else {
+            sheetAvatar.style.background = '#23243a';
+            sheetAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
     }
 
@@ -16028,105 +16061,185 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     function createCharacterSheetHeader() {
         const header = document.createElement('div');
         header.style.cssText = `
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(110, 198, 255, 0.1) 0%, rgba(110, 198, 255, 0.05) 100%);
-            border-bottom: 2px solid rgba(110, 198, 255, 0.2);
+            position: relative;
+            padding: 40px 30px 60px 30px;
+            background: linear-gradient(135deg, 
+                rgba(30, 30, 50, 0.95) 0%, 
+                rgba(45, 45, 70, 0.9) 50%, 
+                rgba(60, 60, 90, 0.85) 100%
+            );
+            border-bottom: 3px solid rgba(110, 198, 255, 0.4);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 25px;
+            justify-content: center;
+            overflow: visible;
+            box-shadow: inset 0 0 50px rgba(110, 198, 255, 0.1);
         `;
 
-        // Avatar do personagem (clicável para editar)
+        // Efeito de borda decorativa
+        const decorativeBorder = document.createElement('div');
+        decorativeBorder.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(110, 198, 255, 0.6) 20%, 
+                rgba(255, 193, 7, 0.8) 50%, 
+                rgba(110, 198, 255, 0.6) 80%, 
+                transparent 100%
+            );
+        `;
+
+        // Avatar em destaque (sobressaltando)
         const avatarContainer = document.createElement('div');
         avatarContainer.style.cssText = `
             position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            z-index: 10;
         `;
 
         const avatar = document.createElement('div');
         const avatarUrl = getAvatarUrl();
         avatar.style.cssText = `
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 3px solid #6ec6ff;
+            border: 4px solid #6ec6ff;
             background: ${avatarUrl ? `url(${avatarUrl}) center/cover` : '#23243a'};
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
             color: #ecf0f1;
-            box-shadow: 0 8px 25px rgba(110, 198, 255, 0.3);
+            box-shadow: 
+                0 0 30px rgba(110, 198, 255, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(110, 198, 255, 0.1);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        `;
+
+        // Efeito de brilho no avatar
+        const avatarGlow = document.createElement('div');
+        avatarGlow.style.cssText = `
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                rgba(110, 198, 255, 0.3), 
+                rgba(255, 193, 7, 0.2), 
+                rgba(110, 198, 255, 0.3)
+            );
+            z-index: -1;
+            opacity: 0.7;
+            animation: glow 3s ease-in-out infinite alternate;
         `;
 
         if (!avatarUrl) {
             avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
         }
 
-        // Ícone de edição (sempre visível na ficha)
-        const editIcon = document.createElement('div');
-        editIcon.innerHTML = '✏️';
-        editIcon.style.cssText = `
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            background: #6ec6ff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border: 2px solid #1a1a2e;
-            transition: all 0.2s ease;
-        `;
-
-        // Efeitos hover
+        // Efeitos hover para o avatar
         avatarContainer.onmouseover = () => {
             avatar.style.transform = 'scale(1.05)';
-            editIcon.style.transform = 'scale(1.1)';
-            avatarContainer.style.filter = 'brightness(1.1)';
+            avatar.style.boxShadow = `
+                0 0 40px rgba(110, 198, 255, 0.6),
+                0 12px 35px rgba(0, 0, 0, 0.4),
+                inset 0 0 25px rgba(110, 198, 255, 0.2)
+            `;
         };
 
         avatarContainer.onmouseout = () => {
             avatar.style.transform = 'scale(1)';
-            editIcon.style.transform = 'scale(1)';
-            avatarContainer.style.filter = 'brightness(1)';
+            avatar.style.boxShadow = `
+                0 0 30px rgba(110, 198, 255, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(110, 198, 255, 0.1)
+            `;
         };
 
-        // Click handler para abrir popup de edição do avatar
+        // Click handler para abrir popup de configuração do avatar
         avatarContainer.onclick = (e) => {
             e.stopPropagation(); // Prevenir que feche o modal da ficha
             createAvatarPopup();
         };
 
+        avatarContainer.appendChild(avatarGlow);
         avatarContainer.appendChild(avatar);
-        avatarContainer.appendChild(editIcon);
 
-        // Informações básicas
-        const basicInfo = document.createElement('div');
-        basicInfo.style.cssText = `
-            flex: 1;
+        // Informações do personagem organizadas verticalmente
+        const characterInfo = document.createElement('div');
+        characterInfo.style.cssText = `
+            text-align: center;
             color: #ecf0f1;
         `;
 
+        // Nome do personagem
         const characterName = localStorage.getItem('tormenta-20-hotbars-sync-name') || getCharacterName() || 'Nome do Personagem';
-        const characterLevel = localStorage.getItem('tormenta-20-hotbars-sync-level') || getCharLevel() || '1';
-        const characterClass = localStorage.getItem('tormenta-20-hotbars-sync-class') || 'Classe';
-        const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-race') || 'Raça';
-
-        basicInfo.innerHTML = `
-            <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; background: linear-gradient(45deg, #6ec6ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${characterName}</h1>
-            <div style="font-size: 16px; color: #b0bec5; margin-bottom: 5px;">Nível ${characterLevel} ${characterClass}</div>
-            <div style="font-size: 14px; color: #90a4ae;">${characterRace}</div>
+        const nameElement = document.createElement('h1');
+        nameElement.textContent = characterName;
+        nameElement.style.cssText = `
+            margin: 0 0 12px 0;
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #6ec6ff, #4fc3f7, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(110, 198, 255, 0.3);
+            letter-spacing: 1px;
         `;
 
+        // Nível e classe
+        const characterLevel = localStorage.getItem('tormenta-20-hotbars-sync-level') || getCharLevel() || '1';
+        const characterClass = localStorage.getItem('tormenta-20-hotbars-sync-class') || 'Classe';
+        const levelClassElement = document.createElement('div');
+        levelClassElement.textContent = `Nível ${characterLevel} ${characterClass}`;
+        levelClassElement.style.cssText = `
+            font-size: 18px;
+            color: #b0bec5;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        `;
+
+        // Raça
+        const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-race') || 'Raça';
+        const raceElement = document.createElement('div');
+        raceElement.textContent = characterRace;
+        raceElement.style.cssText = `
+            font-size: 16px;
+            color: #90a4ae;
+            font-style: italic;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        `;
+
+        characterInfo.appendChild(nameElement);
+        characterInfo.appendChild(levelClassElement);
+        characterInfo.appendChild(raceElement);
+
+        // Adicionar animação de brilho
+        const glowAnimation = document.createElement('style');
+        glowAnimation.textContent = `
+            @keyframes glow {
+                0% { opacity: 0.5; }
+                100% { opacity: 0.8; }
+            }
+        `;
+        document.head.appendChild(glowAnimation);
+
+        header.appendChild(decorativeBorder);
         header.appendChild(avatarContainer);
-        header.appendChild(basicInfo);
+        header.appendChild(characterInfo);
 
         return header;
     }
@@ -16728,26 +16841,4 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         return section;
     }
 
-    /**
-     * Atualiza o avatar na ficha de personagem se ela estiver aberta
-     */
-    function updateCharacterSheetAvatar() {
-        const characterSheetModal = document.getElementById('character-sheet-modal');
-        if (!characterSheetModal || characterSheetModal.style.display === 'none') {
-            return; // Ficha não está aberta
-        }
-
-        // Encontrar o avatar na ficha
-        const sheetAvatar = characterSheetModal.querySelector('div[style*="width: 80px"][style*="height: 80px"]');
-        if (!sheetAvatar) return;
-
-        const avatarUrl = getAvatarUrl();
-        if (avatarUrl) {
-            sheetAvatar.style.background = `url(${avatarUrl}) center/cover`;
-            sheetAvatar.textContent = '';
-        } else {
-            sheetAvatar.style.background = '#23243a';
-            sheetAvatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
-        }
-    }
 })();
