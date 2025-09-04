@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.65497'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.77393'; // Última tag Git
 
     const logger = window.console;
 
@@ -2043,54 +2043,6 @@
         defensesCard.appendChild(defensesGrid);
     }
 
-    // Função para atualizar seção de carga
-    function updateCargaSection() {
-        // Buscar a seção de carga na ficha
-        const cargaCard = document.querySelector('[style*="rgba(255, 193, 7, 0.1)"]');
-        if (!cargaCard) return;
-
-        // Obter valores sincronizados do localStorage
-        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
-        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
-        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
-
-        // Calcular porcentagens e cores baseadas nas regras do T20
-        const cargaNum = parseFloat(currentCarga) || 0;
-        const limiteNum = parseFloat(limiteCarga) || 10;
-        const maximaNum = parseFloat(maximaCarga) || 20;
-
-        // Determinar status da carga
-        let cargaColor = '#4caf50'; // Verde
-        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
-        let cargaText = 'Normal';
-
-        if (cargaNum > limiteNum) {
-            cargaColor = '#ff9800'; // Laranja
-            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
-            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
-        }
-
-        if (cargaNum > maximaNum) {
-            cargaColor = '#f44336'; // Vermelho
-            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
-            cargaText = 'Impossível carregar!';
-        }
-
-        // Calcular porcentagem para a barra (baseada no máximo)
-        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
-
-        // Atualizar o conteúdo da barra de carga
-        cargaCard.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
-                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
-            </div>
-            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
-                <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
-            </div>
-            <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
-        `;
-    }
 
     // Função para atualizar seção de riquezas
     function updateRiquezasSection() {
@@ -15895,6 +15847,212 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     // ===== SISTEMA DE FICHA DE PERSONAGEM =====
 
     /**
+     * Sistema reativo para localStorage - monitora mudanças e atualiza a sheet automaticamente
+     */
+    let localStorageWatcher = null;
+    let sheetUpdateCallbacks = new Set();
+
+    function createLocalStorageWatcher() {
+        if (localStorageWatcher) return;
+
+        // Armazenar valores atuais para comparação
+        let lastValues = {};
+
+        // Capturar estado inicial
+        const captureCurrentState = () => {
+            const relevantKeys = Object.keys(localStorage).filter(key =>
+                key.startsWith('tormenta-20-hotbars-sync-') ||
+                key.startsWith('tormenta-20-attacks') ||
+                key.startsWith('tormenta-20-active-attack')
+            );
+
+            const currentState = {};
+            relevantKeys.forEach(key => {
+                currentState[key] = localStorage.getItem(key);
+            });
+            return currentState;
+        };
+
+        lastValues = captureCurrentState();
+
+        // Monitorar mudanças a cada 500ms
+        localStorageWatcher = setInterval(() => {
+            const currentValues = captureCurrentState();
+            const changedKeys = [];
+
+            // Verificar mudanças
+            Object.keys(currentValues).forEach(key => {
+                if (currentValues[key] !== lastValues[key]) {
+                    changedKeys.push(key);
+                }
+            });
+
+            // Verificar chaves removidas
+            Object.keys(lastValues).forEach(key => {
+                if (!(key in currentValues)) {
+                    changedKeys.push(key);
+                }
+            });
+
+            if (changedKeys.length > 0) {
+                console.log('📊 LocalStorage changes detected:', changedKeys);
+
+                // Notificar todos os callbacks registrados
+                sheetUpdateCallbacks.forEach(callback => {
+                    try {
+                        callback(changedKeys);
+                    } catch (error) {
+                        console.error('Error in sheet update callback:', error);
+                    }
+                });
+
+                lastValues = currentValues;
+            }
+        }, 500);
+
+        console.log('👁️ LocalStorage watcher started');
+    }
+
+    function stopLocalStorageWatcher() {
+        if (localStorageWatcher) {
+            clearInterval(localStorageWatcher);
+            localStorageWatcher = null;
+            console.log('👁️ LocalStorage watcher stopped');
+        }
+    }
+
+    function registerSheetUpdateCallback(callback) {
+        sheetUpdateCallbacks.add(callback);
+        return () => sheetUpdateCallbacks.delete(callback);
+    }
+
+    /**
+     * Atualiza seções específicas da sheet baseado nas chaves alteradas
+     */
+    function updateSheetSections(changedKeys) {
+        const modal = document.getElementById('character-sheet-modal');
+        if (!modal || modal.style.display === 'none') return;
+
+        console.log('🔄 Updating sheet sections for keys:', changedKeys);
+
+        // Determinar quais seções precisam ser atualizadas
+        const sectionsToUpdate = new Set();
+
+        changedKeys.forEach(key => {
+            if (key.includes('for_') || key.includes('des_') || key.includes('con_') ||
+                key.includes('int_') || key.includes('sab_') || key.includes('car_') ||
+                key.includes('fake')) {
+                sectionsToUpdate.add('attributes');
+            }
+
+            if (key.includes('hp-') || key.includes('mp-') || key.includes('ac') ||
+                key.includes('iniciativa') || key.includes('fortitude') ||
+                key.includes('reflex') || key.includes('will')) {
+                sectionsToUpdate.add('resources');
+            }
+
+            if (key.includes('carga')) {
+                sectionsToUpdate.add('carga');
+            }
+
+            if (key.includes('attacks') || key.includes('active-attack')) {
+                sectionsToUpdate.add('attacks');
+            }
+        });
+
+        // Atualizar seções necessárias
+        sectionsToUpdate.forEach(sectionName => {
+            updateSheetSection(sectionName);
+        });
+
+        // Feedback visual
+        if (sectionsToUpdate.size > 0) {
+            showDataUpdateFeedback();
+        }
+    }
+
+    /**
+     * Atualiza uma seção específica da sheet
+     */
+    function updateSheetSection(sectionName) {
+        console.log(`🔄 Updating section: ${sectionName}`);
+
+        switch (sectionName) {
+            case 'attributes':
+                updateAttributesSection();
+                break;
+            case 'resources':
+                updateResourcesSection();
+                break;
+            case 'carga':
+                updateCargaSection();
+                break;
+            case 'attacks':
+                loadAndDisplayAttacks();
+                updateAttackButtonVisual();
+                break;
+        }
+    }
+
+    /**
+     * Mostra feedback visual quando dados são atualizados
+     */
+    function showDataUpdateFeedback() {
+        const modal = document.getElementById('character-sheet-modal');
+        if (!modal) return;
+
+        // Criar indicador de atualização
+        let updateIndicator = document.getElementById('data-update-indicator');
+        if (!updateIndicator) {
+            updateIndicator = document.createElement('div');
+            updateIndicator.id = 'data-update-indicator';
+            updateIndicator.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #4caf50, #45a049);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: bold;
+                z-index: 100001;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+                animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
+            `;
+
+            // Adicionar animações
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            modal.appendChild(updateIndicator);
+        }
+
+        updateIndicator.innerHTML = '✨ Dados atualizados';
+        updateIndicator.style.animation = 'slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s';
+
+        // Remover após animação
+        setTimeout(() => {
+            if (updateIndicator && updateIndicator.parentNode) {
+                updateIndicator.parentNode.removeChild(updateIndicator);
+            }
+        }, 3000);
+    }
+
+    /**
      * Abre o modal da ficha de personagem
      */
     function openCharacterSheet() {
@@ -15914,6 +16072,12 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Sempre criar um novo modal
         const modal = createCharacterSheetModal();
         document.body.appendChild(modal);
+
+        // Iniciar sistema reativo
+        createLocalStorageWatcher();
+
+        // Registrar callback para atualizar seções
+        registerSheetUpdateCallback(updateSheetSections);
 
         // Mostrar o modal com animação
         requestAnimationFrame(() => {
@@ -16041,6 +16205,11 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         closeButton.onclick = () => {
             modal.style.opacity = '0';
             setTimeout(() => {
+                // Limpar sistema reativo
+                stopLocalStorageWatcher();
+                sheetUpdateCallbacks.clear();
+                console.log('🧹 Character sheet cleanup completed');
+
                 modal.remove(); // Remove completamente do DOM
             }, 300);
         };
@@ -16485,6 +16654,181 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         section.appendChild(attributesGrid);
 
         return section;
+    }
+
+    /**
+     * Atualiza a seção de atributos com dados atuais do localStorage
+     */
+    function updateAttributesSection() {
+        const attributesSection = document.querySelector('#character-sheet-modal .container').children[2].children[0].children[0];
+        if (!attributesSection) return;
+
+        const attributesGrid = attributesSection.querySelector('div:last-child');
+        if (!attributesGrid) return;
+
+        // Limpar grid atual
+        attributesGrid.innerHTML = '';
+
+        // Recriar cards de atributos com dados atuais
+        const attributes = [
+            { name: 'FOR', key: 'for', modKey: 'for_mod', label: 'Força' },
+            { name: 'DES', key: 'des', modKey: 'des_mod', label: 'Destreza' },
+            { name: 'CON', key: 'con', modKey: 'con_mod', label: 'Constituição' },
+            { name: 'INT', key: 'int', modKey: 'int_mod', label: 'Inteligência' },
+            { name: 'SAB', key: 'sab', modKey: 'sab_mod', label: 'Sabedoria' },
+            { name: 'CAR', key: 'car', modKey: 'car_mod', label: 'Carisma' }
+        ];
+
+        attributes.forEach(attr => {
+            const attrValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.key}`) || '10';
+            const attrMod = localStorage.getItem(`tormenta-20-hotbars-sync-${attr.modKey}`) || '0';
+            const fakeValue = localStorage.getItem(`tormenta-20-hotbars-sync-fake${attr.key}`) || '0';
+
+            // Se há um valor fake, usar ele; senão usar o modificador normal
+            const displayMod = parseInt(fakeValue) !== 0 ? fakeValue : attrMod;
+
+            const attrCard = document.createElement('div');
+            attrCard.style.cssText = `
+                background: linear-gradient(135deg, rgba(110, 198, 255, 0.1), rgba(110, 198, 255, 0.05));
+                border: 1px solid rgba(110, 198, 255, 0.3);
+                border-radius: 12px;
+                padding: 15px;
+                text-align: center;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            `;
+
+            attrCard.onmouseover = () => {
+                attrCard.style.transform = 'translateY(-2px)';
+                attrCard.style.boxShadow = '0 8px 25px rgba(110, 198, 255, 0.2)';
+                attrCard.style.background = 'linear-gradient(135deg, rgba(110, 198, 255, 0.2), rgba(110, 198, 255, 0.1))';
+            };
+
+            attrCard.onmouseout = () => {
+                attrCard.style.transform = 'translateY(0)';
+                attrCard.style.boxShadow = 'none';
+                attrCard.style.background = 'linear-gradient(135deg, rgba(110, 198, 255, 0.1), rgba(110, 198, 255, 0.05))';
+            };
+
+            // Adicionar click handler para rolagem de dados
+            attrCard.onclick = () => {
+                const characterName = getCharacterNameForMacro();
+                const rollCommand = `&{template:t20}{{character=@{${characterName}|character_name}}}{{rollname=${attr.label}}}{{theroll=[[1d20+@{${characterName}|${attr.modKey}}]]}}`;
+                sendToChat(rollCommand);
+                createNotification(`Rolando ${attr.label}...`, 'info', 2000);
+            };
+
+            attrCard.innerHTML = `
+                <div style="font-size: 14px; color: #b0bec5; margin-bottom: 5px; font-weight: bold;">${attr.name}</div>
+                <div style="font-size: 24px; color: #ecf0f1; font-weight: bold; margin-bottom: 5px;">${attrValue}</div>
+                <div style="font-size: 14px; color: #6ec6ff; font-weight: bold;">${displayMod}</div>
+                <div style="font-size: 10px; color: #90a4ae; margin-top: 5px;">${attr.label}</div>
+            `;
+
+            attributesGrid.appendChild(attrCard);
+        });
+
+        console.log('✅ Attributes section updated');
+    }
+
+    /**
+     * Atualiza a seção de recursos com dados atuais do localStorage
+     */
+    function updateResourcesSection() {
+        const resourcesSection = document.querySelector('#character-sheet-modal .container').children[2].children[1];
+        if (!resourcesSection) return;
+
+        // Atualizar vida
+        const currentHp = localStorage.getItem('tormenta-20-hotbars-sync-hp-current') || '0';
+        const maxHp = localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '0';
+        const hpPercentage = maxHp > 0 ? (currentHp / maxHp) * 100 : 0;
+
+        const healthCard = resourcesSection.children[1];
+        if (healthCard) {
+            healthCard.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="font-size: 18px; color: #ff5252; font-weight: bold;">❤️ Pontos de Vida</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentHp} / ${maxHp}</div>
+                </div>
+                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #ff5252, #ff8a80); height: 100%; width: ${hpPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+                </div>
+            `;
+        }
+
+        // Atualizar mana
+        const currentMp = localStorage.getItem('tormenta-20-hotbars-sync-mp-current') || '0';
+        const maxMp = localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '0';
+        const mpPercentage = maxMp > 0 ? (currentMp / maxMp) * 100 : 0;
+
+        const manaCard = resourcesSection.children[2];
+        if (manaCard) {
+            manaCard.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="font-size: 18px; color: #3f51b5; font-weight: bold;">🔮 Pontos de Mana</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentMp} / ${maxMp}</div>
+                </div>
+                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #3f51b5, #7986cb); height: 100%; width: ${mpPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+                </div>
+            `;
+        }
+
+        console.log('✅ Resources section updated');
+    }
+
+    /**
+     * Atualiza a seção de carga com dados atuais do localStorage
+     */
+    function updateCargaSection() {
+        const cargaSection = document.querySelector('#character-sheet-modal .container').children[2].children[1].children[2];
+        if (!cargaSection) return;
+
+        // Carga
+        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
+        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
+        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
+
+        // Calcular porcentagens e cores baseadas nas regras do T20
+        const cargaNum = parseFloat(currentCarga) || 0;
+        const limiteNum = parseFloat(limiteCarga) || 10;
+        const maximaNum = parseFloat(maximaCarga) || 20;
+
+        // Determinar status da carga
+        let cargaColor = '#4caf50'; // Verde
+        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
+        let cargaText = 'Normal';
+
+        if (cargaNum > limiteNum) {
+            cargaColor = '#ff9800'; // Laranja
+            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
+            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
+        }
+
+        if (cargaNum > maximaNum) {
+            cargaColor = '#f44336'; // Vermelho
+            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
+            cargaText = 'Impossível carregar!';
+        }
+
+        // Calcular porcentagem para a barra (baseada no máximo)
+        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
+
+        const cargaCard = cargaSection.children[1];
+        if (cargaCard) {
+            cargaCard.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
+                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
+                </div>
+                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+                </div>
+                <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
+            `;
+        }
+
+        console.log('✅ Carga section updated');
     }
 
     /**
