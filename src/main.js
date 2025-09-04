@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.77393'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.79450'; // Última tag Git
 
     const logger = window.console;
 
@@ -17345,29 +17345,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             align-items: center;
             justify-content: space-between;
             transition: all 0.2s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
             min-height: 60px;
         `;
 
-        // Efeito hover (Solasta-style)
-        item.onmouseover = () => {
-            item.style.transform = 'translateX(3px)';
-            item.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1))';
-            item.style.borderColor = 'rgba(255, 193, 7, 0.5)';
-            item.style.boxShadow = '0 4px 15px rgba(255, 193, 7, 0.2)';
-        };
-
-        item.onmouseout = () => {
-            item.style.transform = 'translateX(0)';
-            item.style.background = 'linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05))';
-            item.style.borderColor = 'rgba(255, 193, 7, 0.3)';
-            item.style.boxShadow = 'none';
-        };
-
-        // Ícone da arma
-        const weaponIconEl = document.createElement('div');
+        // Ícone da arma (botão clicável)
+        const weaponIconEl = document.createElement('button');
         weaponIconEl.style.cssText = `
             font-size: 24px;
             margin-right: 12px;
@@ -17377,10 +17361,34 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             width: 32px;
             height: 32px;
             background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.3);
             border-radius: 6px;
             flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: inherit;
         `;
         weaponIconEl.textContent = weaponIcon;
+
+        // Hover effects para o ícone
+        weaponIconEl.onmouseover = () => {
+            weaponIconEl.style.background = 'rgba(255, 193, 7, 0.4)';
+            weaponIconEl.style.borderColor = 'rgba(255, 193, 7, 0.6)';
+            weaponIconEl.style.transform = 'scale(1.1)';
+        };
+
+        weaponIconEl.onmouseout = () => {
+            weaponIconEl.style.background = 'rgba(255, 193, 7, 0.2)';
+            weaponIconEl.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+            weaponIconEl.style.transform = 'scale(1)';
+        };
+
+        // Click no ícone executa o ataque
+        weaponIconEl.onclick = (e) => {
+            e.stopPropagation();
+            executeAttack(attack.macro);
+            createNotification(`${weaponIcon} ${attackInfo.name}`, 'success', 1500);
+        };
 
         // Conteúdo principal
         const mainContent = document.createElement('div');
@@ -17460,19 +17468,8 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             damageRow.appendChild(rangeChip);
         }
 
-        // Hint de ação
-        const attackHint = document.createElement('div');
-        attackHint.style.cssText = `
-            color: #90a4ae;
-            font-size: 10px;
-            font-style: italic;
-            margin-top: 2px;
-        `;
-        attackHint.textContent = 'Clique para atacar';
-
         mainContent.appendChild(attackName);
         mainContent.appendChild(damageRow);
-        mainContent.appendChild(attackHint);
 
         // Container de ações (direita)
         const actionsContainer = document.createElement('div');
@@ -17538,11 +17535,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         actionsContainer.appendChild(deleteButton);
 
-        // Click principal para executar ataque
-        item.onclick = () => {
-            executeAttack(attack.macro);
-            createNotification(`${weaponIcon} ${attackInfo.name}`, 'success', 1500);
-        };
+        // Remover click principal do item - apenas o ícone será clicável
 
         item.appendChild(weaponIconEl);
         item.appendChild(mainContent);
