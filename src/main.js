@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.40498'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.59245'; // Última tag Git
 
     const logger = window.console;
 
@@ -1922,6 +1922,9 @@
         const defensesCard = document.querySelector('[style*="rgba(76, 175, 80, 0.1)"]');
         if (!defensesCard) return;
 
+        // Limpar conteúdo existente
+        defensesCard.innerHTML = '';
+
         // Obter valores sincronizados do localStorage
         const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
         const defense = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
@@ -1930,36 +1933,114 @@
         const reflex = localStorage.getItem('tormenta-20-hotbars-sync-reflex') || '+0';
         const will = localStorage.getItem('tormenta-20-hotbars-sync-will') || '+0';
 
-        // Atualizar o conteúdo da seção de defesas
-        defensesCard.innerHTML = `
-            <div style="font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 15px; text-align: center;">🛡️ Defesas</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Iniciativa</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${iniciativa}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Defesa</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${defense}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Fortitude</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Deslocamento</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${deslocamento}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Reflexos</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Vontade</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${will}</div>
-                </div>
-            </div>
+        // Título das defesas
+        const defensesTitle = document.createElement('div');
+        defensesTitle.style.cssText = `
+            font-size: 18px;
+            color: #4caf50;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
         `;
+        defensesTitle.textContent = '🛡️ Defesas';
+
+        // Grid das defesas
+        const defensesGrid = document.createElement('div');
+        defensesGrid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        `;
+
+        // Função para criar card de defesa
+        const createDefenseCard = (label, value, rollCommand) => {
+            const card = document.createElement('div');
+            card.style.cssText = `
+                text-align: center;
+                padding: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                cursor: ${rollCommand ? 'pointer' : 'default'};
+                transition: all 0.2s ease;
+            `;
+
+            if (rollCommand) {
+                card.onmouseover = () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.1)';
+                    card.style.transform = 'translateY(-1px)';
+                };
+                card.onmouseout = () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.05)';
+                    card.style.transform = 'translateY(0)';
+                };
+                card.onclick = () => {
+                    sendToChat(rollCommand);
+                };
+            }
+
+            const labelDiv = document.createElement('div');
+            labelDiv.style.cssText = `
+                font-size: 13px;
+                color: #b0bec5;
+            `;
+            labelDiv.textContent = label;
+
+            const valueDiv = document.createElement('div');
+            valueDiv.style.cssText = `
+                font-size: 18px;
+                color: #ecf0f1;
+                font-weight: bold;
+            `;
+            valueDiv.textContent = value;
+
+            card.appendChild(labelDiv);
+            card.appendChild(valueDiv);
+
+            return card;
+        };
+
+        // Criar cards de defesas com comandos
+        const caracterName = getCharacterNameForMacro();
+
+        const iniciativaCard = createDefenseCard(
+            'Iniciativa',
+            iniciativa,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${caracterName}|iniciativatotal}]] &{tracker}]]}}`
+        );
+
+        const defenseCard = createDefenseCard('Defesa', defense, null);
+
+        const fortitudeCard = createDefenseCard(
+            'Fortitude',
+            fortitude,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${caracterName}|fortitudetotal}]]]]}}`
+        );
+
+        const deslocamentoCard = createDefenseCard('Deslocamento', deslocamento, null);
+
+        const reflexCard = createDefenseCard(
+            'Reflexos',
+            reflex,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${caracterName}|reflexostotal}]]]]}}`
+        );
+
+        const willCard = createDefenseCard(
+            'Vontade',
+            will,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${caracterName}|vontadetotal}]]]]}}`
+        );
+
+        // Adicionar cards ao grid
+        defensesGrid.appendChild(iniciativaCard);
+        defensesGrid.appendChild(defenseCard);
+        defensesGrid.appendChild(fortitudeCard);
+        defensesGrid.appendChild(deslocamentoCard);
+        defensesGrid.appendChild(reflexCard);
+        defensesGrid.appendChild(willCard);
+
+        // Adicionar título e grid ao card
+        defensesCard.appendChild(defensesTitle);
+        defensesCard.appendChild(defensesGrid);
     }
 
     // Função para atualizar seção de carga
@@ -16135,7 +16216,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const attributesGrid = document.createElement('div');
         attributesGrid.style.cssText = `
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         `;
 
@@ -16371,35 +16452,114 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             padding: 20px;
         `;
 
-        defensesCard.innerHTML = `
-            <div style="font-size: 18px; color: #4caf50; font-weight: bold; margin-bottom: 15px; text-align: center;">🛡️ Defesas</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Iniciativa</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${iniciativa}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Defesa</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${defense}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Fortitude</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${fortitude}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Deslocamento</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${deslocamento}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Reflexos</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${reflex}</div>
-                </div>
-                <div style="text-align: center; padding: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                    <div style="font-size: 13px; color: #b0bec5;">Vontade</div>
-                    <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${will}</div>
-                </div>
-            </div>
+        // Título das defesas
+        const defensesTitle = document.createElement('div');
+        defensesTitle.style.cssText = `
+            font-size: 18px;
+            color: #4caf50;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
         `;
+        defensesTitle.textContent = '🛡️ Defesas';
+
+        // Grid das defesas
+        const defensesGrid = document.createElement('div');
+        defensesGrid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        `;
+
+        // Função para criar card de defesa
+        const createDefenseCard = (label, value, rollCommand) => {
+            const card = document.createElement('div');
+            card.style.cssText = `
+                text-align: center;
+                padding: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                cursor: ${rollCommand ? 'pointer' : 'default'};
+                transition: all 0.2s ease;
+            `;
+
+            if (rollCommand) {
+                card.onmouseover = () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.1)';
+                    card.style.transform = 'translateY(-1px)';
+                };
+                card.onmouseout = () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.05)';
+                    card.style.transform = 'translateY(0)';
+                };
+                card.onclick = () => {
+                    sendToChat(rollCommand);
+                };
+            }
+
+            const labelDiv = document.createElement('div');
+            labelDiv.style.cssText = `
+                font-size: 13px;
+                color: #b0bec5;
+            `;
+            labelDiv.textContent = label;
+
+            const valueDiv = document.createElement('div');
+            valueDiv.style.cssText = `
+                font-size: 18px;
+                color: #ecf0f1;
+                font-weight: bold;
+            `;
+            valueDiv.textContent = value;
+
+            card.appendChild(labelDiv);
+            card.appendChild(valueDiv);
+
+            return card;
+        };
+
+        // Criar cards de defesas com comandos
+        const caracterName = getCharacterNameForMacro();
+
+        const iniciativaCard = createDefenseCard(
+            'Iniciativa',
+            iniciativa,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Iniciativa}}{{theroll=[[1d20+[[@{${caracterName}|iniciativatotal}]] &{tracker}]]}}`
+        );
+
+        const defenseCard = createDefenseCard('Defesa', defense, null);
+
+        const fortitudeCard = createDefenseCard(
+            'Fortitude',
+            fortitude,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Fortitude}}{{theroll=[[1d20+[[@{${caracterName}|fortitudetotal}]]]]}}`
+        );
+
+        const deslocamentoCard = createDefenseCard('Deslocamento', deslocamento, null);
+
+        const reflexCard = createDefenseCard(
+            'Reflexos',
+            reflex,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Reflexos}}{{theroll=[[1d20+[[@{${caracterName}|reflexostotal}]]]]}}`
+        );
+
+        const willCard = createDefenseCard(
+            'Vontade',
+            will,
+            `&{template:t20}{{character=@{${caracterName}|character_name}}}{{rollname=Vontade}}{{theroll=[[1d20+[[@{${caracterName}|vontadetotal}]]]]}}`
+        );
+
+        // Adicionar cards ao grid
+        defensesGrid.appendChild(iniciativaCard);
+        defensesGrid.appendChild(defenseCard);
+        defensesGrid.appendChild(fortitudeCard);
+        defensesGrid.appendChild(deslocamentoCard);
+        defensesGrid.appendChild(reflexCard);
+        defensesGrid.appendChild(willCard);
+
+        // Adicionar título e grid ao card
+        defensesCard.appendChild(defensesTitle);
+        defensesCard.appendChild(defensesGrid);
 
         // Riquezas
         const tibar = localStorage.getItem('tormenta-20-hotbars-sync-tibar') || '0';
