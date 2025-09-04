@@ -1911,6 +1911,9 @@
 
         // Atualizar barra de carga
         updateCargaBar();
+
+        // Atualizar seção de informações do personagem
+        updateCharacterInfoSection();
     }
 
     // Função para atualizar seção de defesas
@@ -2006,6 +2009,12 @@
             </div>
             <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
         `;
+    }
+
+    // Função para atualizar seção de informações do personagem
+    function updateCharacterInfoSection() {
+        // Esta função atualizará a seção de informações quando implementada na ficha
+        // Por enquanto, não há necessidade de atualização pois a seção só existe na ficha modal
     }
 
     // Função para atualizar barras de vida e mana
@@ -7383,12 +7392,15 @@
             { key: 'tormenta-20-hotbars-char-carga-maxima-attr', label: 'Carga Máxima', defaultValue: 'maxima' },
 
             // Defesas
-            { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init' },
+            { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'iniciativatotal' },
             { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
             { key: 'tormenta-20-hotbars-char-deslocamento-attr', label: 'Deslocamento', defaultValue: 'menace_desloc' },
             { key: 'tormenta-20-hotbars-char-fortitude-attr', label: 'Fortitude', defaultValue: 'menace_fortitude' },
             { key: 'tormenta-20-hotbars-char-reflex-attr', label: 'Reflexos', defaultValue: 'menace_reflex' },
             { key: 'tormenta-20-hotbars-char-will-attr', label: 'Vontade', defaultValue: 'menace_will' },
+
+            // Perícias importantes
+            { key: 'tormenta-20-hotbars-char-percepcao-attr', label: 'Percepção', defaultValue: 'menace_percepcaototal' },
 
             // Atributos
             { key: 'tormenta-20-hotbars-char-for-attr', label: 'Força', defaultValue: 'menace_for' },
@@ -11900,6 +11912,9 @@
                 { key: 'tormenta-20-hotbars-char-reflex-attr', defaultValue: 'menace_reflex' },
                 { key: 'tormenta-20-hotbars-char-will-attr', defaultValue: 'menace_will' },
 
+                // Perícias importantes
+                { key: 'tormenta-20-hotbars-char-percepcao-attr', defaultValue: 'menace_percepcaototal' },
+
                 // Atributos
                 { key: 'tormenta-20-hotbars-char-for-attr', defaultValue: 'menace_for' },
                 { key: 'tormenta-20-hotbars-char-des-attr', defaultValue: 'menace_des' },
@@ -15910,84 +15925,129 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     function createCharacterSheetHeader() {
         const header = document.createElement('div');
         header.style.cssText = `
-            padding: 30px;
+            padding: 25px 30px;
             background: linear-gradient(135deg, rgba(110, 198, 255, 0.1) 0%, rgba(110, 198, 255, 0.05) 100%);
             border-bottom: 2px solid rgba(110, 198, 255, 0.2);
             display: flex;
             align-items: center;
-            gap: 25px;
+            justify-content: center;
         `;
 
-        // Avatar do personagem (clicável para editar)
+        // Título centralizado
+        const title = document.createElement('h1');
+        title.textContent = 'Ficha do Personagem';
+        title.style.cssText = `
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #6ec6ff, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        `;
+
+        header.appendChild(title);
+
+        return header;
+    }
+
+    /**
+     * Cria o conteúdo principal da ficha
+     */
+    function createCharacterSheetContent() {
+        const content = document.createElement('div');
+        content.style.cssText = `
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+        `;
+
+        // Seção de informações do personagem (esquerda superior)
+        const characterInfoSection = createCharacterInfoSection();
+
+        // Seção de atributos (esquerda inferior)
+        const attributesSection = createAttributesSection();
+
+        // Seção de recursos (direita, ocupa 2 linhas)
+        const resourcesSection = createResourcesSection();
+        resourcesSection.style.gridColumn = '3';
+        resourcesSection.style.gridRow = '1 / -1';
+
+        // Seção de equipamentos (ocupa toda a largura inferior)
+        const equipmentSection = createEquipmentSection();
+        equipmentSection.style.gridColumn = '1 / -1';
+
+        content.appendChild(characterInfoSection);
+        content.appendChild(attributesSection);
+        content.appendChild(resourcesSection);
+        content.appendChild(equipmentSection);
+
+        return content;
+    }
+
+    /**
+     * Cria a seção de informações do personagem
+     */
+    function createCharacterInfoSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Informações do Personagem';
+        title.style.cssText = `
+            margin: 0 0 20px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        // Container do avatar e informações básicas
         const avatarContainer = document.createElement('div');
         avatarContainer.style.cssText = `
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(110, 198, 255, 0.1), rgba(110, 198, 255, 0.05));
+            border: 1px solid rgba(110, 198, 255, 0.3);
+            border-radius: 12px;
         `;
 
+        // Avatar
         const avatar = document.createElement('div');
-        const avatarUrl = getAvatarUrl();
+        const avatarUrl = localStorage.getItem('tormenta-20-hotbars-avatar') || '';
         avatar.style.cssText = `
             width: 80px;
             height: 80px;
             border-radius: 50%;
+            background: ${avatarUrl ? `url(${avatarUrl})` : 'linear-gradient(135deg, #6ec6ff, #4fc3f7)'};
+            background-size: cover;
+            background-position: center;
             border: 3px solid #6ec6ff;
-            background: ${avatarUrl ? `url(${avatarUrl}) center/cover` : '#23243a'};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ecf0f1;
-            box-shadow: 0 8px 25px rgba(110, 198, 255, 0.3);
-            transition: all 0.3s ease;
-        `;
-
-        if (!avatarUrl) {
-            avatar.textContent = (getCharacterName() || 'Herói').substring(0, 2).toUpperCase();
-        }
-
-        // Ícone de edição (sempre visível na ficha)
-        const editIcon = document.createElement('div');
-        editIcon.innerHTML = '✏️';
-        editIcon.style.cssText = `
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            background: #6ec6ff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border: 2px solid #1a1a2e;
+            flex-shrink: 0;
+            cursor: pointer;
             transition: all 0.2s ease;
         `;
 
-        // Efeitos hover
-        avatarContainer.onmouseover = () => {
-            avatar.style.transform = 'scale(1.05)';
-            editIcon.style.transform = 'scale(1.1)';
-            avatarContainer.style.filter = 'brightness(1.1)';
-        };
-
-        avatarContainer.onmouseout = () => {
-            avatar.style.transform = 'scale(1)';
-            editIcon.style.transform = 'scale(1)';
-            avatarContainer.style.filter = 'brightness(1)';
-        };
-
-        // Click handler para abrir popup de edição do avatar
-        avatarContainer.onclick = (e) => {
-            e.stopPropagation(); // Prevenir que feche o modal da ficha
-            createAvatarPopup();
-        };
-
-        avatarContainer.appendChild(avatar);
-        avatarContainer.appendChild(editIcon);
+        if (!avatarUrl) {
+            avatar.innerHTML = `
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                    👤
+                </div>
+            `;
+        }
 
         // Informações básicas
         const basicInfo = document.createElement('div');
@@ -16002,44 +16062,66 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const characterRace = localStorage.getItem('tormenta-20-hotbars-sync-race') || 'Raça';
 
         basicInfo.innerHTML = `
-            <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; background: linear-gradient(45deg, #6ec6ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${characterName}</h1>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: bold; background: linear-gradient(45deg, #6ec6ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${characterName}</h2>
             <div style="font-size: 16px; color: #b0bec5; margin-bottom: 5px;">Nível ${characterLevel} ${characterClass}</div>
             <div style="font-size: 14px; color: #90a4ae;">${characterRace}</div>
         `;
 
-        header.appendChild(avatarContainer);
-        header.appendChild(basicInfo);
+        avatarContainer.appendChild(avatar);
+        avatarContainer.appendChild(basicInfo);
 
-        return header;
-    }
-
-    /**
-     * Cria o conteúdo principal da ficha
-     */
-    function createCharacterSheetContent() {
-        const content = document.createElement('div');
-        content.style.cssText = `
-            padding: 30px;
+        // Informações adicionais em grid
+        const additionalInfo = document.createElement('div');
+        additionalInfo.style.cssText = `
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         `;
 
-        // Seção de atributos
-        const attributesSection = createAttributesSection();
+        // Percepção
+        const percepcao = localStorage.getItem('tormenta-20-hotbars-sync-percepcao') || '+0';
+        const percepcaoCard = document.createElement('div');
+        percepcaoCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        `;
 
-        // Seção de recursos (vida/mana)
-        const resourcesSection = createResourcesSection();
+        percepcaoCard.innerHTML = `
+            <div style="font-size: 14px; color: #81c784; margin-bottom: 5px;">👁️ Percepção</div>
+            <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${percepcao}</div>
+        `;
 
-        // Seção de equipamentos (ocupa toda a largura)
-        const equipmentSection = createEquipmentSection();
-        equipmentSection.style.gridColumn = '1 / -1';
+        // Iniciativa
+        const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
+        const iniciativaCard = document.createElement('div');
+        iniciativaCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        `;
 
-        content.appendChild(attributesSection);
-        content.appendChild(resourcesSection);
-        content.appendChild(equipmentSection);
+        iniciativaCard.innerHTML = `
+            <div style="font-size: 14px; color: #ffb74d; margin-bottom: 5px;">⚡ Iniciativa</div>
+            <div style="font-size: 20px; color: #ecf0f1; font-weight: bold;">${iniciativa}</div>
+        `;
 
-        return content;
+        additionalInfo.appendChild(percepcaoCard);
+        additionalInfo.appendChild(iniciativaCard);
+
+        section.appendChild(title);
+        section.appendChild(avatarContainer);
+        section.appendChild(additionalInfo);
+
+        return section;
     }
 
     /**
