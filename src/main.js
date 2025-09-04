@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.79450'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.71067'; // Última tag Git
 
     const logger = window.console;
 
@@ -11888,6 +11888,11 @@
 
         // Inicializar visual do botão
         setTimeout(() => updateAttackButtonVisual(), 500);
+
+        // Atualizar visual sempre que a hotbar for mostrada
+        setTimeout(() => {
+            updateAttackButtonVisual();
+        }, 1000);
         const maneuversBtn = createHotbarButton({
             icon: maneuversButton.icon,
             label: maneuversButton.label,
@@ -17813,47 +17818,11 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     // Executar o ataque atual
     function executeCurrentAttack() {
         const currentAttack = getCurrentAttack();
+        const attacks = getAttacks();
 
-        if (!currentAttack) {
-            // Fallback: usar macro hardcoded original se não há ataques customizados
-            const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
-            let savedAttackEffects = [];
-            try {
-                const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
-                if (saved) savedAttackEffects = JSON.parse(saved);
-            } catch (err) {
-                console.error('Erro ao carregar seleção:', err);
-                savedAttackEffects = [];
-            }
-            const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-            const effects = getDynamicAttackEffects(charLevel);
-            let extraDamage = '';
-            let extraDescription = '';
-            let critThreshold = 18;
-            let attackBonus = 0;
-            let marcaPresaActive = false;
-            let inimigoActive = false;
-            effects.forEach(effect => {
-                if (savedAttackEffects.includes(effect.value)) {
-                    if (effect.dice) {
-                        extraDamage += `+${effect.dice}`;
-                    }
-                    if (effect.critMod) {
-                        critThreshold += effect.critMod;
-                    }
-                    if (effect.attackMod) {
-                        attackBonus += effect.attackMod;
-                    }
-                    extraDescription += '%NEWLINE% ' + effect.desc;
-                    if (effect.value === 'marca_presa') marcaPresaActive = true;
-                    if (effect.value === 'inimigo') inimigoActive = true;
-                }
-            });
-            if (inimigoActive && marcaPresaActive) {
-                if (critThreshold === 16) critThreshold = 14;
-            }
-            const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
-            executeAttackWithBloodEffect(macro);
+        if (!currentAttack || attacks.length === 0) {
+            // Sem ataques disponíveis - mostrar notificação
+            createNotification('Nenhum ataque configurado! Adicione ataques na ficha de personagem primeiro.', 'warning', 4000);
             return;
         }
 
@@ -17865,8 +17834,12 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     // Seletor rápido de ataques (Shift+Click - inspirado em Solasta)
     function openQuickAttackSelector() {
         const attacks = getAttacks();
+        if (attacks.length === 0) {
+            createNotification('Nenhum ataque configurado! Adicione ataques na ficha de personagem primeiro.', 'warning', 4000);
+            return;
+        }
         if (attacks.length <= 1) {
-            createNotification('Adicione mais ataques na ficha de personagem!', 'info', 3000);
+            createNotification('Adicione mais ataques na ficha de personagem para usar o seletor!', 'info', 3000);
             return;
         }
 
@@ -17998,7 +17971,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     function openAttackContextMenu(event) {
         const attacks = getAttacks();
         if (attacks.length === 0) {
-            createNotification('Nenhum ataque disponível. Adicione ataques na ficha!', 'info', 3000);
+            createNotification('Nenhum ataque configurado! Adicione ataques na ficha de personagem primeiro.', 'warning', 4000);
             return;
         }
 
@@ -18138,6 +18111,12 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const attackCount = getAttacks().length;
 
         if (currentAttack && attackCount > 0) {
+            // Estado ativo - com ataques disponíveis
+            attackBtn.style.opacity = '1';
+            attackBtn.style.filter = 'none';
+            attackBtn.style.cursor = 'pointer';
+            attackBtn.removeAttribute('disabled');
+
             // Mostrar nome do ataque ativo
             const label = attackBtn.querySelector('.hotbar-button-label');
             if (label) {
@@ -18173,10 +18152,17 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 indicator.textContent = attackCount;
             }
         } else {
-            // Restaurar visual padrão
+            // Estado desabilitado - sem ataques
+            attackBtn.style.opacity = '0.5';
+            attackBtn.style.filter = 'grayscale(1)';
+            attackBtn.style.cursor = 'not-allowed';
+            attackBtn.setAttribute('disabled', 'true');
+
+            // Restaurar texto padrão
             const label = attackBtn.querySelector('.hotbar-button-label');
             if (label) label.textContent = 'Atacar';
 
+            // Remover indicador
             const indicator = attackBtn.querySelector('.attack-indicator');
             if (indicator) indicator.remove();
         }
