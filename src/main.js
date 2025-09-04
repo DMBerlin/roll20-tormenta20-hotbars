@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.26927'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.73973'; // Última tag Git
 
     const logger = window.console;
 
@@ -1908,6 +1908,9 @@
 
         // Atualizar seção de defesas
         updateDefensesSection();
+
+        // Atualizar barra de carga
+        updateCargaBar();
     }
 
     // Função para atualizar seção de defesas
@@ -1953,6 +1956,55 @@
                     <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${will}</div>
                 </div>
             </div>
+        `;
+    }
+
+    // Função para atualizar barra de carga
+    function updateCargaBar() {
+        // Buscar a barra de carga na hotbar
+        const cargaCard = document.querySelector('[style*="rgba(255, 193, 7, 0.1)"]');
+        if (!cargaCard) return;
+
+        // Obter valores sincronizados do localStorage
+        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
+        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
+        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
+
+        // Calcular porcentagens e cores baseadas nas regras do T20
+        const cargaNum = parseFloat(currentCarga) || 0;
+        const limiteNum = parseFloat(limiteCarga) || 10;
+        const maximaNum = parseFloat(maximaCarga) || 20;
+
+        // Determinar status da carga
+        let cargaColor = '#4caf50'; // Verde
+        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
+        let cargaText = 'Normal';
+
+        if (cargaNum > limiteNum) {
+            cargaColor = '#ff9800'; // Laranja
+            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
+            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
+        }
+
+        if (cargaNum > maximaNum) {
+            cargaColor = '#f44336'; // Vermelho
+            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
+            cargaText = 'Impossível carregar!';
+        }
+
+        // Calcular porcentagem para a barra (baseada no máximo)
+        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
+
+        // Atualizar o conteúdo da barra de carga
+        cargaCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
+                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
+                <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+            <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
         `;
     }
 
@@ -7325,6 +7377,11 @@
             { key: 'tormenta-20-hotbars-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
             { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
 
+            // Carga
+            { key: 'tormenta-20-hotbars-char-carga-current-attr', label: 'Carga Atual', defaultValue: 'carga' },
+            { key: 'tormenta-20-hotbars-char-carga-limite-attr', label: 'Carga Limite', defaultValue: 'limite' },
+            { key: 'tormenta-20-hotbars-char-carga-maxima-attr', label: 'Carga Máxima', defaultValue: 'maxima' },
+
             // Defesas
             { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init' },
             { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
@@ -11830,6 +11887,11 @@
                 { key: 'tormenta-20-hotbars-char-mp-total-attr', defaultValue: 'manatotal' },
                 { key: 'tormenta-20-hotbars-char-mp-current-attr', defaultValue: 'mana' },
 
+                // Carga
+                { key: 'tormenta-20-hotbars-char-carga-current-attr', defaultValue: 'carga' },
+                { key: 'tormenta-20-hotbars-char-carga-limite-attr', defaultValue: 'limite' },
+                { key: 'tormenta-20-hotbars-char-carga-maxima-attr', defaultValue: 'maxima' },
+
                 // Defesas
                 { key: 'tormenta-20-hotbars-char-iniciativa-attr', defaultValue: 'iniciativatotal' },
                 { key: 'tormenta-20-hotbars-char-ac-attr', defaultValue: 'menace_defense' },
@@ -16148,6 +16210,56 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             </div>
         `;
 
+        // Carga
+        const currentCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-current') || '0';
+        const limiteCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-limite') || '10';
+        const maximaCarga = localStorage.getItem('tormenta-20-hotbars-sync-carga-maxima') || '20';
+
+        // Calcular porcentagens e cores baseadas nas regras do T20
+        const cargaNum = parseFloat(currentCarga) || 0;
+        const limiteNum = parseFloat(limiteCarga) || 10;
+        const maximaNum = parseFloat(maximaCarga) || 20;
+
+        // Determinar status da carga
+        let cargaColor = '#4caf50'; // Verde
+        let cargaGradient = 'linear-gradient(90deg, #4caf50, #81c784)';
+        let cargaText = 'Normal';
+
+        if (cargaNum > limiteNum) {
+            cargaColor = '#ff9800'; // Laranja
+            cargaGradient = 'linear-gradient(90deg, #ff9800, #ffb74d)';
+            cargaText = 'Sobrecarregado (-5 armadura, -3m deslocamento)';
+        }
+
+        if (cargaNum > maximaNum) {
+            cargaColor = '#f44336'; // Vermelho
+            cargaGradient = 'linear-gradient(90deg, #f44336, #ef5350)';
+            cargaText = 'Impossível carregar!';
+        }
+
+        // Calcular porcentagem para a barra (baseada no máximo)
+        const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
+
+        const cargaCard = document.createElement('div');
+        cargaCard.style.cssText = `
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        `;
+
+        cargaCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="font-size: 18px; color: #ffc107; font-weight: bold;">🎒 Carga</div>
+                <div style="font-size: 18px; color: #ecf0f1; font-weight: bold;">${currentCarga} / ${limiteCarga} (máx: ${maximaCarga})</div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; height: 12px; overflow: hidden; margin-bottom: 8px;">
+                <div style="background: ${cargaGradient}; height: 100%; width: ${cargaPercentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+            <div style="font-size: 12px; color: ${cargaColor}; font-weight: bold; text-align: center;">${cargaText}</div>
+        `;
+
         // Defesas
         const iniciativa = localStorage.getItem('tormenta-20-hotbars-sync-iniciativa') || '+0';
         const defense = localStorage.getItem('tormenta-20-hotbars-sync-ac') || '10';
@@ -16197,6 +16309,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         section.appendChild(title);
         section.appendChild(healthCard);
         section.appendChild(manaCard);
+        section.appendChild(cargaCard);
         section.appendChild(defensesCard);
 
         return section;
