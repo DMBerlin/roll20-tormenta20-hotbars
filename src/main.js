@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.51850'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.65497'; // Última tag Git
 
     const logger = window.console;
 
@@ -17573,7 +17573,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         const currentAttack = getCurrentAttack();
 
-        attacks.forEach((attack, index) => {
+        attacks.forEach((attack) => {
             const attackBtn = document.createElement('button');
             const isActive = currentAttack && currentAttack.id === attack.id;
             const attackInfo = parseAttackMacro(attack.macro);
@@ -17595,11 +17595,18 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 position: relative;
             `;
 
+            const rangeText = {
+                'melee': 'Corpo a Corpo',
+                'ranged': 'À Distância',
+                'reach': 'Alcance'
+            };
+            const rangeDisplay = rangeText[attackInfo.range] || 'C.a.C.';
+
             attackBtn.innerHTML = `
                 <div style="font-size: 18px; margin-bottom: 3px;">${weaponIcon}</div>
                 <div style="font-size: 14px; margin-bottom: 3px;">${attackInfo.name}</div>
                 <div style="font-size: 10px; opacity: 0.7;">${damageInfo || `Crit ${attackInfo.criticalThreshold}+`}</div>
-                <div style="font-size: 11px; opacity: 0.8; margin-top: 2px;">Tecla ${index + 1}</div>
+                <div style="font-size: 11px; opacity: 0.8; margin-top: 2px;">${rangeDisplay}</div>
                 ${isActive ? '<div style="position: absolute; top: -5px; right: -5px; background: #4caf50; color: white; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; display: flex; align-items: center; justify-content: center;">✓</div>' : ''}
             `;
 
@@ -17636,15 +17643,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             }
         };
 
-        // Atalhos de teclado (1-5)
+        // Atalho de teclado apenas para ESC (fechar)
         const keyHandler = (e) => {
-            const num = parseInt(e.key);
-            if (num >= 1 && num <= attacks.length) {
-                setCurrentAttack(attacks[num - 1].id);
-                document.body.removeChild(overlay);
-                document.head.removeChild(animation);
-                document.removeEventListener('keydown', keyHandler);
-            } else if (e.key === 'Escape') {
+            if (e.key === 'Escape') {
                 document.body.removeChild(overlay);
                 document.head.removeChild(animation);
                 document.removeEventListener('keydown', keyHandler);
