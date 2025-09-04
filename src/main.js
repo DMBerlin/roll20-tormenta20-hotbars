@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.83960'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.51850'; // Última tag Git
 
     const logger = window.console;
 
@@ -16751,22 +16751,192 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     }
 
     /**
-     * Extrai o nome do ataque do macro Roll20
+     * Parser inteligente de macros Roll20 - Extrai informações detalhadas
      */
-    function extractAttackName(macro) {
-        // Procura por {{attackname=NOME}}
+    function parseAttackMacro(macro) {
+        const attackInfo = {
+            name: 'Ataque Personalizado',
+            damageRoll: null,
+            criticalThreshold: 20,
+            damageType: null,
+            template: null,
+            attackBonus: null,
+            criticalDamage: null,
+            description: null,
+            weaponType: null,
+            range: null
+        };
+
+        // Extrair nome do ataque
         const nameMatch = macro.match(/\{\{attackname=([^}]+)\}\}/);
         if (nameMatch) {
-            return nameMatch[1];
+            attackInfo.name = nameMatch[1];
         }
 
-        // Fallback: procura por nome comum em templates
-        const templateMatch = macro.match(/\{\{character=@\{([^|]+)\|/);
+        // Extrair template usado
+        const templateMatch = macro.match(/&\{template:([^}]+)\}/);
         if (templateMatch) {
-            return 'Ataque';
+            attackInfo.template = templateMatch[1];
         }
 
-        return 'Ataque Personalizado';
+        // Extrair threshold crítico (cs>XX ou cs>=XX)
+        const critMatch = macro.match(/1d20cs>(\d+)/);
+        if (critMatch) {
+            attackInfo.criticalThreshold = parseInt(critMatch[1]);
+        }
+
+        // Extrair dano base (primeiro [[XdY...]] no damageroll)
+        const damageMatch = macro.match(/\{\{damageroll=\[\[([^\]]+)\]\]/);
+        if (damageMatch) {
+            const damageRoll = damageMatch[1];
+            attackInfo.damageRoll = damageRoll;
+
+            // Extrair dados de dano (XdY)
+            const diceMatch = damageRoll.match(/(\d+d\d+)/);
+            if (diceMatch) {
+                attackInfo.weaponDice = diceMatch[1];
+            }
+        }
+
+        // Extrair dano crítico
+        const critDamageMatch = macro.match(/\{\{criticaldamageroll=\[\[([^\]]+)\]\]/);
+        if (critDamageMatch) {
+            attackInfo.criticalDamage = critDamageMatch[1];
+        }
+
+        // Extrair tipo de dano
+        const damageTypeMatch = macro.match(/\{\{typeofdamage=([^}]+)\}\}/);
+        if (damageTypeMatch && damageTypeMatch[1]) {
+            attackInfo.damageType = damageTypeMatch[1];
+        }
+
+        // Extrair descrição
+        const descMatch = macro.match(/\{\{description=([^}]+)\}\}/);
+        if (descMatch && descMatch[1]) {
+            attackInfo.description = descMatch[1];
+        }
+
+        // Identificar tipo de arma baseado no nome e dano
+        attackInfo.weaponType = identifyWeaponType(attackInfo.name, attackInfo.weaponDice);
+
+        // Identificar alcance baseado no template e nome
+        attackInfo.range = identifyWeaponRange(attackInfo.template, attackInfo.name);
+
+        return attackInfo;
+    }
+
+    /**
+     * Identifica o tipo de arma baseado no nome e dados
+     */
+    function identifyWeaponType(name, dice) {
+        const nameLower = name.toLowerCase();
+
+        // Armas específicas
+        if (nameLower.includes('espada')) return 'sword';
+        if (nameLower.includes('machado') || nameLower.includes('axe')) return 'axe';
+        if (nameLower.includes('martelo') || nameLower.includes('mace')) return 'mace';
+        if (nameLower.includes('arco') || nameLower.includes('bow')) return 'bow';
+        if (nameLower.includes('besta') || nameLower.includes('crossbow')) return 'crossbow';
+        if (nameLower.includes('adaga') || nameLower.includes('punhal')) return 'dagger';
+        if (nameLower.includes('lança') || nameLower.includes('spear')) return 'spear';
+        if (nameLower.includes('cajado') || nameLower.includes('staff')) return 'staff';
+        if (nameLower.includes('varinha') || nameLower.includes('wand')) return 'wand';
+        if (nameLower.includes('garra') || nameLower.includes('claw')) return 'claw';
+        if (nameLower.includes('mordida') || nameLower.includes('bite')) return 'bite';
+
+        // Baseado no dano
+        if (dice) {
+            if (dice.includes('1d4')) return 'light';
+            if (dice.includes('1d6')) return 'medium';
+            if (dice.includes('1d8')) return 'heavy';
+            if (dice.includes('1d10') || dice.includes('2d6')) return 'veryheavy';
+            if (dice.includes('1d12') || dice.includes('2d8')) return 'massive';
+        }
+
+        return 'generic';
+    }
+
+    /**
+     * Identifica o alcance da arma
+     */
+    function identifyWeaponRange(template, name) {
+        const nameLower = name.toLowerCase();
+
+        if (nameLower.includes('arco') || nameLower.includes('bow') ||
+            nameLower.includes('besta') || nameLower.includes('crossbow') ||
+            nameLower.includes('dardo') || nameLower.includes('javelin')) {
+            return 'ranged';
+        }
+
+        if (nameLower.includes('lança') || nameLower.includes('spear') ||
+            nameLower.includes('alabarda') || nameLower.includes('halberd')) {
+            return 'reach';
+        }
+
+        return 'melee';
+    }
+
+    /**
+     * Obtém ícone baseado no tipo de arma
+     */
+    function getWeaponIcon(weaponType, range) {
+        const icons = {
+            // Tipos específicos
+            sword: '⚔️',
+            axe: '🪓',
+            mace: '🔨',
+            bow: '🏹',
+            crossbow: '🏹',
+            dagger: '🗡️',
+            spear: '🔱',
+            staff: '🪄',
+            wand: '✨',
+            claw: '🐾',
+            bite: '🦷',
+
+            // Por tamanho/peso
+            light: '🗡️',
+            medium: '⚔️',
+            heavy: '🗡️',
+            veryheavy: '⚔️',
+            massive: '🔨',
+
+            // Genérico por alcance
+            generic: range === 'ranged' ? '🎯' : range === 'reach' ? '🔱' : '⚔️'
+        };
+
+        return icons[weaponType] || icons.generic;
+    }
+
+    /**
+     * Obtém cor baseada no threshold crítico
+     */
+    function getCriticalColor(threshold) {
+        if (threshold <= 18) return '#ff4444'; // Vermelho - crítico fácil
+        if (threshold === 19) return '#ff8800'; // Laranja - crítico médio
+        return '#ffaa00'; // Amarelo - crítico normal (20)
+    }
+
+    /**
+     * Formata informações de dano para exibição
+     */
+    function formatDamageInfo(attackInfo) {
+        if (!attackInfo.weaponDice) return '';
+
+        let damageText = attackInfo.weaponDice;
+        if (attackInfo.damageType) {
+            damageText += ` ${attackInfo.damageType}`;
+        }
+
+        return damageText;
+    }
+
+    /**
+     * Extrai o nome do ataque do macro Roll20 (versão simplificada)
+     */
+    function extractAttackName(macro) {
+        const parsed = parseAttackMacro(macro);
+        return parsed.name;
     }
 
     /**
@@ -16811,9 +16981,15 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     }
 
     /**
-     * Cria um item de ataque individual (Solasta-inspired)
+     * Cria um item de ataque individual enriquecido (Solasta-inspired)
      */
     function createAttackItem(attack) {
+        // Parse das informações do macro
+        const attackInfo = parseAttackMacro(attack.macro);
+        const weaponIcon = getWeaponIcon(attackInfo.weaponType, attackInfo.range);
+        const critColor = getCriticalColor(attackInfo.criticalThreshold);
+        const damageInfo = formatDamageInfo(attackInfo);
+
         const item = document.createElement('div');
         item.style.cssText = `
             background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
@@ -16828,6 +17004,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            min-height: 60px;
         `;
 
         // Efeito hover (Solasta-style)
@@ -16845,33 +17022,139 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             item.style.boxShadow = 'none';
         };
 
+        // Ícone da arma
+        const weaponIconEl = document.createElement('div');
+        weaponIconEl.style.cssText = `
+            font-size: 24px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 193, 7, 0.2);
+            border-radius: 6px;
+            flex-shrink: 0;
+        `;
+        weaponIconEl.textContent = weaponIcon;
+
         // Conteúdo principal
         const mainContent = document.createElement('div');
         mainContent.style.cssText = `
             flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 2px;
         `;
 
+        // Nome do ataque
         const attackName = document.createElement('div');
         attackName.style.cssText = `
             color: #ffc107;
             font-weight: bold;
             font-size: 14px;
-            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         `;
-        attackName.textContent = attack.name;
+        attackName.textContent = attackInfo.name;
 
+        // Informações de dano e crítico
+        const damageRow = document.createElement('div');
+        damageRow.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+        `;
+
+        // Dano
+        if (damageInfo) {
+            const damageChip = document.createElement('span');
+            damageChip.style.cssText = `
+                background: rgba(76, 175, 80, 0.2);
+                color: #4caf50;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 10px;
+            `;
+            damageChip.textContent = damageInfo;
+            damageRow.appendChild(damageChip);
+        }
+
+        // Crítico
+        const critChip = document.createElement('span');
+        critChip.style.cssText = `
+            background: rgba(255, 68, 68, 0.2);
+            color: ${critColor};
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 10px;
+        `;
+        critChip.textContent = `Crit ${attackInfo.criticalThreshold}+`;
+        damageRow.appendChild(critChip);
+
+        // Alcance
+        if (attackInfo.range) {
+            const rangeChip = document.createElement('span');
+            rangeChip.style.cssText = `
+                background: rgba(33, 150, 243, 0.2);
+                color: #2196f3;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 10px;
+            `;
+            const rangeText = {
+                'melee': 'Corpo a Corpo',
+                'ranged': 'À Distância',
+                'reach': 'Alcance'
+            };
+            rangeChip.textContent = rangeText[attackInfo.range] || 'C.a.C.';
+            damageRow.appendChild(rangeChip);
+        }
+
+        // Hint de ação
         const attackHint = document.createElement('div');
         attackHint.style.cssText = `
             color: #90a4ae;
-            font-size: 11px;
+            font-size: 10px;
             font-style: italic;
+            margin-top: 2px;
         `;
         attackHint.textContent = 'Clique para atacar';
 
         mainContent.appendChild(attackName);
+        mainContent.appendChild(damageRow);
         mainContent.appendChild(attackHint);
+
+        // Container de ações (direita)
+        const actionsContainer = document.createElement('div');
+        actionsContainer.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+        `;
+
+        // Indicador de template (se disponível)
+        if (attackInfo.template && attackInfo.template !== 't20-attack') {
+            const templateIndicator = document.createElement('div');
+            templateIndicator.style.cssText = `
+                background: rgba(156, 39, 176, 0.2);
+                color: #9c27b0;
+                padding: 2px 4px;
+                border-radius: 3px;
+                font-size: 8px;
+                font-weight: bold;
+                text-transform: uppercase;
+            `;
+            templateIndicator.textContent = attackInfo.template.replace('t20-', '');
+            actionsContainer.appendChild(templateIndicator);
+        }
 
         // Botão de deletar
         const deleteButton = document.createElement('button');
@@ -16886,7 +17169,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-left: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -16904,20 +17186,23 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         deleteButton.onclick = (e) => {
             e.stopPropagation();
-            if (confirm(`Deseja excluir o ataque "${attack.name}"?`)) {
+            if (confirm(`Deseja excluir o ataque "${attackInfo.name}"?`)) {
                 removeAttack(attack.id);
-                createNotification(`Ataque "${attack.name}" removido!`, 'success', 2000);
+                createNotification(`Ataque "${attackInfo.name}" removido!`, 'success', 2000);
             }
         };
+
+        actionsContainer.appendChild(deleteButton);
 
         // Click principal para executar ataque
         item.onclick = () => {
             executeAttack(attack.macro);
-            createNotification(`Executando ataque: ${attack.name}`, 'info', 2000);
+            createNotification(`${weaponIcon} ${attackInfo.name}`, 'success', 1500);
         };
 
+        item.appendChild(weaponIconEl);
         item.appendChild(mainContent);
-        item.appendChild(deleteButton);
+        item.appendChild(actionsContainer);
 
         return item;
     }
@@ -17291,6 +17576,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         attacks.forEach((attack, index) => {
             const attackBtn = document.createElement('button');
             const isActive = currentAttack && currentAttack.id === attack.id;
+            const attackInfo = parseAttackMacro(attack.macro);
+            const weaponIcon = getWeaponIcon(attackInfo.weaponType, attackInfo.range);
+            const damageInfo = formatDamageInfo(attackInfo);
 
             attackBtn.style.cssText = `
                 background: ${isActive ? 'linear-gradient(135deg, #ffc107, #ff8f00)' : 'linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1))'};
@@ -17302,14 +17590,16 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 font-weight: bold;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                min-width: 120px;
+                min-width: 140px;
                 text-align: center;
                 position: relative;
             `;
 
             attackBtn.innerHTML = `
-                <div style="font-size: 16px; margin-bottom: 5px;">${attack.name}</div>
-                <div style="font-size: 11px; opacity: 0.8;">${index + 1}</div>
+                <div style="font-size: 18px; margin-bottom: 3px;">${weaponIcon}</div>
+                <div style="font-size: 14px; margin-bottom: 3px;">${attackInfo.name}</div>
+                <div style="font-size: 10px; opacity: 0.7;">${damageInfo || `Crit ${attackInfo.criticalThreshold}+`}</div>
+                <div style="font-size: 11px; opacity: 0.8; margin-top: 2px;">Tecla ${index + 1}</div>
                 ${isActive ? '<div style="position: absolute; top: -5px; right: -5px; background: #4caf50; color: white; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; display: flex; align-items: center; justify-content: center;">✓</div>' : ''}
             `;
 
@@ -17409,6 +17699,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         attacks.forEach((attack) => {
             const item = document.createElement('div');
             const isActive = currentAttack && currentAttack.id === attack.id;
+            const attackInfo = parseAttackMacro(attack.macro);
+            const weaponIcon = getWeaponIcon(attackInfo.weaponType, attackInfo.range);
+            const damageInfo = formatDamageInfo(attackInfo);
 
             item.style.cssText = `
                 padding: 10px 15px;
@@ -17423,7 +17716,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             `;
 
             item.innerHTML = `
-                <span>${attack.name}</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px;">${weaponIcon}</span>
+                    <div>
+                        <div>${attackInfo.name}</div>
+                        <div style="font-size: 10px; opacity: 0.7; color: #90a4ae;">${damageInfo || `Crit ${attackInfo.criticalThreshold}+`}</div>
+                    </div>
+                </div>
                 ${isActive ? '<span style="color: #4caf50; font-size: 12px;">ATIVO</span>' : ''}
             `;
 
