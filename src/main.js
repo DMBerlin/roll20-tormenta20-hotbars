@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.64512'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.52835'; // Última tag Git
 
     const logger = window.console;
 
@@ -16369,40 +16369,37 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             gap: 30px;
         `;
 
-        // Coluna esquerda: Informações do personagem + Atributos + Limites de carga
+        // Coluna esquerda: Informações do personagem + Atributos + Ataques
         const leftColumn = document.createElement('div');
         leftColumn.style.cssText = `
             display: flex;
             flex-direction: column;
             gap: 30px;
-            height: fit-content;
+            height: 100%;
             padding: 0 30px;
         `;
 
         const attributesSection = createAttributesSection();
-        const cargaSection = createCargaSection();
+        const attacksSection = createAttacksSection();
 
         leftColumn.appendChild(attributesSection);
-        leftColumn.appendChild(cargaSection);
+        leftColumn.appendChild(attacksSection);
 
-        // Coluna direita: Recursos (com altura igual à coluna esquerda)
+        // Coluna direita: Recursos + Limites de carga
         const rightColumn = document.createElement('div');
         rightColumn.style.cssText = `
             display: flex;
             flex-direction: column;
+            gap: 30px;
             height: 100%;
             padding: 0 30px;
         `;
 
         const resourcesSection = createResourcesSection();
-        resourcesSection.style.cssText += `
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        `;
+        const cargaSection = createCargaSection();
 
         rightColumn.appendChild(resourcesSection);
+        rightColumn.appendChild(cargaSection);
 
         // Seção de equipamentos (ocupa toda a largura inferior)
         const equipmentSection = createEquipmentSection();
@@ -16426,6 +16423,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             border-radius: 15px;
             padding: 25px;
             border: 1px solid rgba(110, 198, 255, 0.2);
+            flex-shrink: 0;
         `;
 
         const title = document.createElement('h3');
@@ -16522,6 +16520,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             border-radius: 15px;
             padding: 25px;
             border: 1px solid rgba(110, 198, 255, 0.2);
+            flex-shrink: 0;
         `;
 
         const title = document.createElement('h3');
@@ -16592,6 +16591,96 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
     }
 
     /**
+     * Cria a seção de ataques
+     */
+    function createAttacksSection() {
+        const section = document.createElement('div');
+        section.style.cssText = `
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(110, 198, 255, 0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = 'Ataques';
+        title.style.cssText = `
+            margin: 0 0 20px 0;
+            color: #6ec6ff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(110, 198, 255, 0.3);
+            padding-bottom: 10px;
+        `;
+
+        // Container do conteúdo que cresce para ocupar o espaço disponível
+        const contentContainer = document.createElement('div');
+        contentContainer.style.cssText = `
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        `;
+
+        // Placeholder para quando não há ataques
+        const placeholder = document.createElement('div');
+        placeholder.style.cssText = `
+            color: #90a4ae;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        `;
+        placeholder.textContent = 'Nenhum ataque registrado';
+
+        // Botão adicionar
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Adicionar';
+        addButton.style.cssText = `
+            background: linear-gradient(135deg, #6ec6ff, #42a5f5);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(110, 198, 255, 0.3);
+        `;
+
+        addButton.onmouseover = () => {
+            addButton.style.transform = 'translateY(-2px)';
+            addButton.style.boxShadow = '0 6px 20px rgba(110, 198, 255, 0.4)';
+            addButton.style.background = 'linear-gradient(135deg, #42a5f5, #1e88e5)';
+        };
+
+        addButton.onmouseout = () => {
+            addButton.style.transform = 'translateY(0)';
+            addButton.style.boxShadow = '0 4px 15px rgba(110, 198, 255, 0.3)';
+            addButton.style.background = 'linear-gradient(135deg, #6ec6ff, #42a5f5)';
+        };
+
+        addButton.onclick = () => {
+            createNotification('Funcionalidade de adicionar ataques será implementada em breve!', 'info', 3000);
+        };
+
+        contentContainer.appendChild(placeholder);
+        contentContainer.appendChild(addButton);
+
+        section.appendChild(title);
+        section.appendChild(contentContainer);
+
+        return section;
+    }
+
+    /**
      * Cria a seção de recursos (vida e mana)
      */
     function createResourcesSection() {
@@ -16601,6 +16690,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             border-radius: 15px;
             padding: 25px;
             border: 1px solid rgba(110, 198, 255, 0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         `;
 
         const title = document.createElement('h3');
