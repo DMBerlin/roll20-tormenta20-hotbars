@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.52221'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.93041'; // Última tag Git
 
     const logger = window.console;
 
@@ -2080,9 +2080,11 @@
 
         // Atualizar barra de vida
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
+        if (!characterInfo.children || !characterInfo.children[1]) return;
         const infoContainer = characterInfo.children[1];
 
         // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
+        if (!infoContainer.children || !infoContainer.children[1]) return;
         const healthBarContainer = infoContainer.children[1];
 
         if (healthBarContainer) {
@@ -2111,6 +2113,7 @@
 
         // Atualizar barra de mana
         // Acessar diretamente pelos índices: infoContainer.children[2] = barra de mana
+        if (!infoContainer.children || !infoContainer.children[2]) return;
         const manaBarContainer = infoContainer.children[2];
 
         if (manaBarContainer) {
@@ -8477,9 +8480,11 @@
                 tabButton.onclick = () => {
                     activeTab = tab;
                     tabs.forEach((t, index) => {
-                        const btn = tabsContainer.children[index];
-                        btn.style.background = t === activeTab ? '#ffb86c' : 'transparent';
-                        btn.style.color = t === activeTab ? '#1e1e28' : '#ffb86c';
+                        if (tabsContainer.children && tabsContainer.children[index]) {
+                            const btn = tabsContainer.children[index];
+                            btn.style.background = t === activeTab ? '#ffb86c' : 'transparent';
+                            btn.style.color = t === activeTab ? '#1e1e28' : '#ffb86c';
+                        }
                     });
                     renderPowersList(filterInput.value);
                 };
@@ -12149,6 +12154,461 @@
         }, 1000);
     });
 
+    // =====================================================
+    // SISTEMA DE EFEITOS CUSTOMIZADOS - INSPIRADO NO FOUNDRY VTT
+    // =====================================================
+
+    // Tipos de aplicação de efeitos disponíveis
+    const EFFECT_APPLICATION_TYPES = {
+        ATTACK: 'attack',
+        DAMAGE: 'damage',
+        SKILL: 'skill',
+        DEFENSE: 'defense',
+        ATTRIBUTE: 'attribute',
+        SPELL: 'spell',
+        INITIATIVE: 'initiative'
+    };
+
+    // Tipos de ativação de efeitos
+    const EFFECT_ACTIVATION_TYPES = {
+        TOGGLE: 'toggle',       // Liga/desliga manualmente
+        CONSUME: 'consume',     // Consome ao usar
+        AUTOMATIC: 'automatic'  // Ativa automaticamente quando disponível
+    };
+
+    // Chave do localStorage para efeitos customizados
+    const CUSTOM_EFFECTS_KEY = 'tormenta-20-hotbars-custom-effects';
+
+    // Função para criar um novo efeito customizado
+    function createCustomEffect(config) {
+        return {
+            id: config.id || generateEffectId(),
+            name: config.name || 'Novo Efeito',
+            description: config.description || '',
+            icon: config.icon || '✨',
+
+            // Tipo de aplicação
+            applicationType: config.applicationType || EFFECT_APPLICATION_TYPES.ATTACK,
+
+            // Modificadores
+            modifiers: {
+                bonus: config.modifiers?.bonus || 0,
+                dice: config.modifiers?.dice || '',
+                multiplier: config.modifiers?.multiplier || 1,
+                threshold: config.modifiers?.threshold || null
+            },
+
+            // Condições de aplicação
+            conditions: {
+                skillTypes: config.conditions?.skillTypes || [],
+                damageTypes: config.conditions?.damageTypes || [],
+                spellSchools: config.conditions?.spellSchools || [],
+                weaponTypes: config.conditions?.weaponTypes || []
+            },
+
+            // Ativação e duração
+            activation: {
+                type: config.activation?.type || EFFECT_ACTIVATION_TYPES.TOGGLE,
+                consumeOnUse: config.activation?.consumeOnUse || false,
+                duration: config.activation?.duration || 'permanent'
+            },
+
+            // Origem do efeito
+            source: {
+                type: config.source?.type || 'custom',
+                sourceId: config.source?.sourceId || null,
+                learned: config.source?.learned || true
+            },
+
+            // Prioridade para ordenação
+            priority: config.priority || 5,
+
+            // Metadados
+            tags: config.tags || [],
+            createdAt: config.createdAt || Date.now(),
+            version: '1.0.0'
+        };
+    }
+
+    // Gerar ID único para efeito
+    function generateEffectId() {
+        return 'custom_effect_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Salvar efeitos customizados
+    function saveCustomEffects(effects) {
+        try {
+            localStorage.setItem(CUSTOM_EFFECTS_KEY, JSON.stringify(effects));
+            return true;
+        } catch (error) {
+            console.error('Erro ao salvar efeitos customizados:', error);
+            return false;
+        }
+    }
+
+    // Carregar efeitos customizados
+    function getCustomEffects() {
+        try {
+            const stored = localStorage.getItem(CUSTOM_EFFECTS_KEY);
+            return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+            console.error('Erro ao carregar efeitos customizados:', error);
+            return [];
+        }
+    }
+
+
+
+    // Deletar efeito customizado
+    function deleteCustomEffect(effectId) {
+        const customEffects = getCustomEffects();
+        const effectIndex = customEffects.findIndex(e => e.id === effectId);
+
+        if (effectIndex === -1) return false;
+
+        const effect = customEffects[effectIndex];
+
+        // Remove o efeito da lista
+        customEffects.splice(effectIndex, 1);
+
+        // Não precisa mais remover dos efeitos ativos, pois não há mais sistema de toggle
+
+        // Salva a lista atualizada
+        if (saveCustomEffects(customEffects)) {
+            showWarningNotification(`Efeito "${effect.name}" deletado.`);
+            updateEffectsBadge();
+            return true;
+        }
+
+        return false;
+    }
+
+    // Editar efeito customizado existente
+    function editCustomEffect(effectId) {
+        const customEffects = getCustomEffects();
+        const effect = customEffects.find(e => e.id === effectId);
+
+        if (!effect) {
+            showWarningNotification('Efeito não encontrado!');
+            return;
+        }
+
+        createCustomEffectBuilder(effect);
+    }
+
+    // Criar interface de construção de efeito customizado
+    function createCustomEffectBuilder(existingEffect = null) {
+        // Remove qualquer builder existente
+        const existingBuilder = document.getElementById('custom-effect-builder');
+        if (existingBuilder) existingBuilder.remove();
+        const existingOverlay = document.getElementById('custom-effect-builder-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'custom-effect-builder-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+                builder.remove();
+            }
+        };
+        document.body.appendChild(overlay);
+
+        // Builder principal
+        const builder = document.createElement('div');
+        builder.id = 'custom-effect-builder';
+        builder.style.position = 'fixed';
+        builder.style.top = '50%';
+        builder.style.left = '50%';
+        builder.style.transform = 'translate(-50%, -50%)';
+        builder.style.background = 'rgba(25,25,35,0.98)';
+        builder.style.border = '2px solid #4CAF50';
+        builder.style.borderRadius = '12px';
+        builder.style.padding = '20px';
+        builder.style.zIndex = '10003';
+        builder.style.minWidth = '400px';
+        builder.style.maxWidth = '500px';
+        builder.style.maxHeight = '80vh';
+        builder.style.overflowY = 'auto';
+        builder.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+        builder.style.color = '#ecf0f1';
+
+        // Header
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+
+        const title = document.createElement('h2');
+        title.textContent = existingEffect ? '⚙️ Editar Efeito Customizado' : '✨ Criar Efeito Customizado';
+        title.style.color = '#4CAF50';
+        title.style.margin = '0';
+        title.style.fontSize = '18px';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#ecf0f1';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.onclick = () => {
+            overlay.remove();
+            builder.remove();
+        };
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        builder.appendChild(header);
+
+        // Formulário
+        const form = document.createElement('div');
+        form.style.display = 'flex';
+        form.style.flexDirection = 'column';
+        form.style.gap = '15px';
+
+        // Nome do efeito
+        const nameGroup = createFormGroup('Nome do Efeito', 'text', existingEffect ? existingEffect.name : 'Meu Efeito Customizado');
+        form.appendChild(nameGroup);
+
+        // Ícone do efeito
+        const iconGroup = createFormGroup('Ícone (Emoji)', 'text', existingEffect ? existingEffect.icon : '✨');
+        form.appendChild(iconGroup);
+
+        // Descrição
+        const descGroup = createFormGroup('Descrição', 'textarea', existingEffect ? existingEffect.description : 'Descrição do efeito...');
+        form.appendChild(descGroup);
+
+        // Tipo de aplicação
+        const typeGroup = document.createElement('div');
+        typeGroup.innerHTML = `
+            <label style="color: #4CAF50; font-weight: bold; margin-bottom: 5px; display: block;">Tipo de Aplicação</label>
+            <select id="effect-type" style="width: 100%; min-width: 200px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1;">
+                <option value="attack">Ataques</option>
+                <option value="damage">Dano</option>
+                <option value="skill">Perícias</option>
+                <option value="defense">Defesas</option>
+                <option value="attribute">Atributos</option>
+                <option value="spell">Magias</option>
+                <option value="initiative">Iniciativa</option>
+            </select>
+        `;
+        form.appendChild(typeGroup);
+
+        // Modificadores
+        const modifiersGroup = document.createElement('div');
+        modifiersGroup.innerHTML = `
+            <label style="color: #4CAF50; font-weight: bold; margin-bottom: 10px; display: block;">Modificadores</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>
+                    <label style="color: #ccc; font-size: 12px;">Bônus Fixo</label>
+                    <input type="number" id="effect-bonus" placeholder="0" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1;">
+                </div>
+                <div>
+                    <label style="color: #ccc; font-size: 12px;">Dados Extra</label>
+                    <input type="text" id="effect-dice" placeholder="1d4" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1;">
+                </div>
+            </div>
+        `;
+        form.appendChild(modifiersGroup);
+
+        // Tipo de ativação
+        const activationGroup = document.createElement('div');
+        activationGroup.innerHTML = `
+            <label style="color: #4CAF50; font-weight: bold; margin-bottom: 5px; display: block;">Tipo de Ativação</label>
+            <select id="effect-activation" style="width: 100%; min-width: 200px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1;">
+                <option value="toggle">Manual (Liga/Desliga)</option>
+                <option value="consume">Consumo (Uma vez por uso)</option>
+                <option value="automatic">Automático</option>
+            </select>
+        `;
+        form.appendChild(activationGroup);
+
+        // Tags
+        const existingTags = existingEffect ? existingEffect.tags.join(', ') : 'combate, dano';
+        const tagsGroup = createFormGroup('Tags (separadas por vírgula)', 'text', existingTags);
+        form.appendChild(tagsGroup);
+
+        builder.appendChild(form);
+
+        // Preencher valores existentes após criar os elementos
+        if (existingEffect) {
+            // Preencher campos de input/textarea
+            const nameInput = builder.querySelector('input[placeholder*="Meu Efeito Customizado"], input[value*="' + existingEffect.name + '"]');
+            if (nameInput) nameInput.value = existingEffect.name;
+
+            const iconInput = builder.querySelector('input[placeholder*="✨"]');
+            if (iconInput) iconInput.value = existingEffect.icon;
+
+            const descTextarea = builder.querySelector('textarea');
+            if (descTextarea) descTextarea.value = existingEffect.description;
+
+            const bonusInput = builder.querySelector('#effect-bonus');
+            if (bonusInput) bonusInput.value = existingEffect.modifiers.bonus || 0;
+
+            const diceInput = builder.querySelector('#effect-dice');
+            if (diceInput) diceInput.value = existingEffect.modifiers.dice || '';
+
+            const tagsInput = builder.querySelector('input[placeholder*="combate, dano"]');
+            if (tagsInput) tagsInput.value = existingTags;
+
+            // Preencher selects
+            const typeSelect = builder.querySelector('#effect-type');
+            if (typeSelect) typeSelect.value = existingEffect.applicationType;
+
+            const activationSelect = builder.querySelector('#effect-activation');
+            if (activationSelect) activationSelect.value = existingEffect.activation.type;
+        }
+
+        // Botões de ação
+        const buttonGroup = document.createElement('div');
+        buttonGroup.style.display = 'flex';
+        buttonGroup.style.gap = '10px';
+        buttonGroup.style.marginTop = '20px';
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.textContent = 'Cancelar';
+        cancelBtn.style.flex = '1';
+        cancelBtn.style.padding = '10px';
+        cancelBtn.style.background = '#666';
+        cancelBtn.style.color = '#fff';
+        cancelBtn.style.border = 'none';
+        cancelBtn.style.borderRadius = '6px';
+        cancelBtn.style.cursor = 'pointer';
+        cancelBtn.onclick = () => {
+            overlay.remove();
+            builder.remove();
+        };
+
+        const saveBtn = document.createElement('button');
+        saveBtn.textContent = existingEffect ? 'Salvar Alterações' : 'Criar Efeito';
+        saveBtn.style.flex = '1';
+        saveBtn.style.padding = '10px';
+        saveBtn.style.background = '#4CAF50';
+        saveBtn.style.color = '#fff';
+        saveBtn.style.border = 'none';
+        saveBtn.style.borderRadius = '6px';
+        saveBtn.style.cursor = 'pointer';
+        saveBtn.onclick = () => {
+            saveCustomEffectFromForm(existingEffect);
+        };
+
+        buttonGroup.appendChild(cancelBtn);
+        buttonGroup.appendChild(saveBtn);
+        builder.appendChild(buttonGroup);
+
+        document.body.appendChild(builder);
+
+        // Aplicar scrollbar customizada
+        applyDirectScrollbarStyles(builder, 'green');
+
+        // Função para criar grupo de formulário
+        function createFormGroup(label, type, placeholder) {
+            const group = document.createElement('div');
+            group.innerHTML = `
+                <label style="color: #4CAF50; font-weight: bold; margin-bottom: 5px; display: block;">${label}</label>
+                ${type === 'textarea'
+                    ? `<textarea placeholder="${placeholder}" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1; resize: vertical; min-height: 60px;"></textarea>`
+                    : `<input type="${type}" placeholder="${placeholder}" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #555; background: #2a2a3a; color: #ecf0f1;">`
+                }
+            `;
+            return group;
+        }
+
+        // Função para salvar efeito do formulário
+        function saveCustomEffectFromForm(existingEffect = null) {
+            // Buscar campos de forma mais robusta
+            const inputs = builder.querySelectorAll('input[type="text"]');
+            const name = inputs[0]?.value.trim(); // Primeiro input de texto (nome)
+            const icon = inputs[1]?.value.trim(); // Segundo input de texto (ícone)
+            const tagsInput = inputs[2]?.value.trim(); // Terceiro input de texto (tags)
+
+            const description = builder.querySelector('textarea').value.trim();
+            const applicationType = builder.querySelector('#effect-type').value;
+            const bonus = parseInt(builder.querySelector('#effect-bonus').value) || 0;
+            const dice = builder.querySelector('#effect-dice').value.trim();
+            const activationType = builder.querySelector('#effect-activation').value;
+
+            // Validações básicas
+            if (!name) {
+                showWarningNotification('Nome do efeito é obrigatório!');
+                return;
+            }
+
+            // Processar tags
+            const tags = tagsInput ? tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag) : [];
+
+            // Criar efeito
+            const effectConfig = {
+                name: name,
+                icon: icon || '✨',
+                description: description,
+                applicationType: applicationType,
+                modifiers: {
+                    bonus: bonus,
+                    dice: dice
+                },
+                activation: {
+                    type: activationType,
+                    consumeOnUse: activationType === 'consume'
+                },
+                tags: tags
+            };
+
+            let customEffects = getCustomEffects();
+            let successMessage;
+
+            if (existingEffect) {
+                // Editando efeito existente
+                effectConfig.id = existingEffect.id; // Manter o mesmo ID
+                effectConfig.createdAt = existingEffect.createdAt; // Manter data de criação
+
+                const effectIndex = customEffects.findIndex(e => e.id === existingEffect.id);
+                if (effectIndex !== -1) {
+                    customEffects[effectIndex] = createCustomEffect(effectConfig);
+                    successMessage = `Efeito "${name}" atualizado com sucesso!`;
+                } else {
+                    showWarningNotification('Efeito não encontrado para edição!');
+                    return;
+                }
+            } else {
+                // Criando novo efeito
+                const newEffect = createCustomEffect(effectConfig);
+                customEffects.push(newEffect);
+                successMessage = `Efeito "${name}" criado com sucesso!`;
+            }
+
+            if (saveCustomEffects(customEffects)) {
+                showSuccessNotification(successMessage);
+
+                // Fechar builder
+                overlay.remove();
+                builder.remove();
+
+                // Atualizar popup de efeitos se estiver aberto
+                const effectsPopup = document.getElementById('effects-popup');
+                if (effectsPopup) {
+                    // Recriar o popup para mostrar o efeito atualizado
+                    effectsPopup.remove();
+                    const effectsOverlay = document.getElementById('effects-overlay');
+                    if (effectsOverlay) effectsOverlay.remove();
+                    setTimeout(() => createEffectsPopup(), 100);
+                }
+            } else {
+                showWarningNotification('Erro ao salvar efeito!');
+            }
+        }
+    }
+
     // Função para obter efeitos de ataque dinâmicos
     function getDynamicAttackEffects(charLevel) {
         const effects = [];
@@ -13646,9 +14106,11 @@
         // Verifica efeitos ativos
         const activeEffects = getActiveEffects();
         const activeSelectableCards = getActiveSelectableCards();
-        const totalActiveEffects = activeEffects.length + activeSelectableCards.length;
+        const customEffects = getCustomEffects(); // Efeitos customizados sempre contam (não mais toggle)
+        const totalActiveEffects = activeEffects.length + activeSelectableCards.length + customEffects.length;
         logger.log('Efeitos ativos:', activeEffects);
         logger.log('Selectable cards ativos:', activeSelectableCards);
+        logger.log('Efeitos customizados:', customEffects);
 
         // Cria novo badge se há efeitos ativos
         if (totalActiveEffects > 0) {
@@ -14715,6 +15177,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         popup.style.borderRadius = '12px';
         popup.style.padding = '18px 20px 16px 20px';
         popup.style.zIndex = '10001';
+        popup.style.minWidth = '280px';
         popup.style.maxWidth = '400px';
         popup.style.maxHeight = '600px';
         popup.style.overflowY = 'auto';
@@ -14725,10 +15188,16 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Cabeçalho
         const header = document.createElement('div');
-        header.style.display = 'flex'; header.style.justifyContent = 'space-between';
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
         header.style.alignItems = 'center';
         header.style.marginBottom = '15px';
         header.style.width = '100%';
+
+        const titleSection = document.createElement('div');
+        titleSection.style.display = 'flex';
+        titleSection.style.alignItems = 'center';
+        titleSection.style.gap = '10px';
 
         const title = document.createElement('h3');
         title.textContent = 'Efeitos';
@@ -14736,6 +15205,24 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         title.style.margin = '0';
         title.style.fontSize = '17px';
         title.style.fontWeight = 'bold';
+
+        // Botão para criar efeito customizado
+        const createEffectBtn = document.createElement('button');
+        createEffectBtn.textContent = '+ Criar';
+        createEffectBtn.style.background = '#4CAF50';
+        createEffectBtn.style.color = '#fff';
+        createEffectBtn.style.border = 'none';
+        createEffectBtn.style.borderRadius = '4px';
+        createEffectBtn.style.padding = '4px 8px';
+        createEffectBtn.style.fontSize = '12px';
+        createEffectBtn.style.cursor = 'pointer';
+        createEffectBtn.style.fontWeight = 'bold';
+        createEffectBtn.onclick = () => {
+            createCustomEffectBuilder();
+        };
+
+        titleSection.appendChild(title);
+        titleSection.appendChild(createEffectBtn);
 
         const closeBtn = window.Roll20Components.createCloseButton({
             text: '×',
@@ -14754,7 +15241,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                     updateEffectsBadge();
                 }, 100);
             }
-        }); header.appendChild(title);
+        }); header.appendChild(titleSection);
         header.appendChild(closeBtn.render());
         popup.appendChild(header);
 
@@ -14864,8 +15351,55 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             };
         });
 
-        // Junta efeitos normais, de comida, bebida, poção, condições e selectable-cards
-        const allEffects = [...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...selectableCards];
+        // Efeitos customizados (convertidos para selectable-cards) - TODOS os efeitos, não apenas os ativos
+        const customEffects = getCustomEffects();
+        const allCustomEffects = customEffects.map(effect => {
+            // Criar chips baseados no tipo de aplicação e modificadores
+            const chips = [];
+
+            // Adicionar tipo de aplicação
+            const typeLabels = {
+                'attack': 'Ataque',
+                'damage': 'Dano',
+                'skill': 'Perícia',
+                'defense': 'Defesa',
+                'attribute': 'Atributo',
+                'spell': 'Magia',
+                'initiative': 'Iniciativa'
+            };
+            chips.push(typeLabels[effect.applicationType] || 'Customizado');
+
+            // Adicionar modificadores
+            if (effect.modifiers.bonus > 0) {
+                chips.push(`+${effect.modifiers.bonus}`);
+            } else if (effect.modifiers.bonus < 0) {
+                chips.push(`${effect.modifiers.bonus}`);
+            }
+
+            if (effect.modifiers.dice) {
+                chips.push(`+${effect.modifiers.dice}`);
+            }
+
+            // Adicionar tipo de ativação
+            const activationLabels = {
+                'toggle': 'Manual',
+                'consume': 'Consumo',
+                'automatic': 'Auto'
+            };
+            chips.push(activationLabels[effect.activation.type] || 'Manual');
+
+            return {
+                title: `${effect.icon} ${effect.name}`,
+                description: effect.description || 'Efeito customizado',
+                chips: chips,
+                type: 'Customizado',
+                effectKey: effect.id,
+                customEffect: true
+            };
+        });
+
+        // Junta efeitos normais, de comida, bebida, poção, condições, customizados e selectable-cards
+        const allEffects = [...allCustomEffects, ...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...selectableCards];
 
         // Lista visual
         const effectsList = document.createElement('div');
@@ -14897,15 +15431,20 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             }
 
             allEffects.forEach(effect => {
-                const isActive = isEffectActive(effect.effectKey);
+                const isActive = effect.customEffect ? true : isEffectActive(effect.effectKey); // Efeitos customizados sempre "ativos"
 
                 const effectContainer = document.createElement('div');
                 effectContainer.style.background = isActive ? '#2d4a3e' : '#23243a';
                 effectContainer.style.border = `1px solid ${isActive ? '#4caf50' : '#6ec6ff'}`;
                 effectContainer.style.borderRadius = '8px';
                 effectContainer.style.padding = '12px';
-                effectContainer.style.cursor = 'pointer';
+                effectContainer.style.cursor = effect.customEffect ? 'default' : 'pointer'; // Efeitos customizados não são clicáveis
                 effectContainer.style.transition = 'all 0.2s';
+
+                // Para efeitos customizados, adicionar botão de deletar
+                if (effect.customEffect) {
+                    effectContainer.style.position = 'relative';
+                }
 
                 effectContainer.onmouseover = () => {
                     effectContainer.style.background = isActive ? '#3d5a4e' : '#2a2b4a';
@@ -14916,8 +15455,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 };
 
                 effectContainer.onclick = () => {
-                    // Todos os efeitos agora são tratados como selectable-cards
-                    if (effect.type === 'Condição') {
+                    // Efeitos customizados não são clicáveis - apenas existem na lista
+                    if (effect.customEffect) {
+                        return; // Não faz nada
+                    } else if (effect.type === 'Condição') {
                         toggleCondition(effect.effectKey);
 
                         // Fechar todos os popups relacionados às condições para limpar a cena
@@ -15031,14 +15572,102 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 effectName.style.fontSize = '15px';
                 effectName.style.fontWeight = 'bold';
 
-                const statusIndicator = document.createElement('div');
-                statusIndicator.textContent = isActive ? '●' : '○';
-                statusIndicator.style.color = isActive ? '#4caf50' : '#6ec6ff';
-                statusIndicator.style.fontSize = '18px';
-                statusIndicator.style.fontWeight = 'bold';
-
                 effectHeader.appendChild(effectName);
-                effectHeader.appendChild(statusIndicator);
+
+                // Para efeitos customizados, criar container de ações
+                if (effect.customEffect) {
+                    const actionsContainer = document.createElement('div');
+                    actionsContainer.style.cssText = `
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                    `;
+
+                    // Botão de editar (engrenagem)
+                    const editButton = document.createElement('button');
+                    editButton.innerHTML = '⚙️';
+                    editButton.style.cssText = `
+                        background: rgba(76, 175, 80, 0.8);
+                        border: none;
+                        border-radius: 6px;
+                        color: white;
+                        width: 28px;
+                        height: 28px;
+                        font-size: 12px;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    `;
+                    editButton.title = 'Editar efeito';
+
+                    editButton.onmouseover = () => {
+                        editButton.style.background = 'rgba(76, 175, 80, 1)';
+                        editButton.style.transform = 'scale(1.1)';
+                    };
+
+                    editButton.onmouseout = () => {
+                        editButton.style.background = 'rgba(76, 175, 80, 0.8)';
+                        editButton.style.transform = 'scale(1)';
+                    };
+
+                    editButton.onclick = (e) => {
+                        e.stopPropagation();
+                        editCustomEffect(effect.effectKey);
+                    };
+
+                    // Botão de deletar
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerHTML = '🗑️';
+                    deleteButton.style.cssText = `
+                        background: rgba(244, 67, 54, 0.8);
+                        border: none;
+                        border-radius: 6px;
+                        color: white;
+                        width: 28px;
+                        height: 28px;
+                        font-size: 12px;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    `;
+                    deleteButton.title = 'Deletar efeito';
+
+                    deleteButton.onmouseover = () => {
+                        deleteButton.style.background = 'rgba(244, 67, 54, 1)';
+                        deleteButton.style.transform = 'scale(1.1)';
+                    };
+
+                    deleteButton.onmouseout = () => {
+                        deleteButton.style.background = 'rgba(244, 67, 54, 0.8)';
+                        deleteButton.style.transform = 'scale(1)';
+                    };
+
+                    deleteButton.onclick = (e) => {
+                        e.stopPropagation(); // Impede que o clique ative/desative o efeito
+                        if (confirm(`Deseja deletar o efeito "${effect.title}"?`)) {
+                            if (deleteCustomEffect(effect.effectKey)) {
+                                // Atualizar a lista
+                                updateEffectsList();
+                            }
+                        }
+                    };
+
+                    actionsContainer.appendChild(editButton);
+                    actionsContainer.appendChild(deleteButton);
+                    effectHeader.appendChild(actionsContainer);
+                } else {
+                    // Para efeitos normais, manter o indicador de status original
+                    const statusIndicator = document.createElement('div');
+                    statusIndicator.textContent = isActive ? '●' : '○';
+                    statusIndicator.style.color = isActive ? '#4caf50' : '#6ec6ff';
+                    statusIndicator.style.fontSize = '18px';
+                    statusIndicator.style.fontWeight = 'bold';
+                    effectHeader.appendChild(statusIndicator);
+                }
                 effectContainer.appendChild(effectHeader);
 
                 // Tipo do efeito
@@ -16665,7 +17294,16 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de atributos com dados atuais do localStorage
      */
     function updateAttributesSection() {
-        const attributesSection = document.querySelector('#character-sheet-modal .container').children[2].children[0].children[0];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children || !modal.children[2]) return;
+
+        const level2 = modal.children[2];
+        if (!level2.children || !level2.children[0]) return;
+
+        const level3 = level2.children[0];
+        if (!level3.children || !level3.children[0]) return;
+
+        const attributesSection = level3.children[0];
         if (!attributesSection) return;
 
         const attributesGrid = attributesSection.querySelector('div:last-child');
@@ -16740,7 +17378,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de recursos com dados atuais do localStorage
      */
     function updateResourcesSection() {
-        const resourcesSection = document.querySelector('#character-sheet-modal .container').children[2].children[1];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children || !modal.children[2]) return;
+
+        const level2 = modal.children[2];
+        if (!level2.children || !level2.children[1]) return;
+
+        const resourcesSection = level2.children[1];
         if (!resourcesSection) return;
 
         // Atualizar vida
@@ -16786,7 +17430,16 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de carga com dados atuais do localStorage
      */
     function updateCargaSection() {
-        const cargaSection = document.querySelector('#character-sheet-modal .container').children[2].children[1].children[2];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children || !modal.children[2]) return;
+
+        const level2 = modal.children[2];
+        if (!level2.children || !level2.children[1]) return;
+
+        const level3 = level2.children[1];
+        if (!level3.children || !level3.children[2]) return;
+
+        const cargaSection = level3.children[2];
         if (!cargaSection) return;
 
         // Carga
@@ -17095,9 +17748,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         }
     }
 
-    function executeAttack(macro) {
-        sendToChat(macro);
-    }
 
     /**
      * Parser inteligente de macros Roll20 - Extrai informações detalhadas
@@ -17397,7 +18047,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Click no ícone executa o ataque
         weaponIconEl.onclick = (e) => {
             e.stopPropagation();
-            executeAttack(attack.macro);
+
+            // Aplicar efeitos de ataque ao macro antes de executar
+            const enhancedMacro = applyAttackEffectsToMacro(attack.macro);
+            executeAttackWithBloodEffect(enhancedMacro);
             createNotification(`${weaponIcon} ${attackInfo.name}`, 'success', 1500);
         };
 
@@ -17816,9 +18469,145 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             return;
         }
 
-        // Executar ataque customizado
-        executeAttackWithBloodEffect(currentAttack.macro);
+        // Aplicar efeitos de ataque salvos ao macro customizado
+        const enhancedMacro = applyAttackEffectsToMacro(currentAttack.macro);
+
+        // Executar ataque customizado com efeitos aplicados
+        executeAttackWithBloodEffect(enhancedMacro);
         createNotification(`${currentAttack.name}`, 'success', 1500);
+    }
+
+    /**
+     * Aplica efeitos de ataque salvos a um macro customizado
+     */
+    function applyAttackEffectsToMacro(originalMacro) {
+        // Carregar efeitos salvos
+        const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
+        let savedAttackEffects = [];
+        try {
+            const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+            if (saved) savedAttackEffects = JSON.parse(saved);
+        } catch (err) {
+            console.error('Erro ao carregar efeitos de ataque:', err);
+            return originalMacro;
+        }
+
+        if (savedAttackEffects.length === 0) {
+            return originalMacro;
+        }
+
+        // Obter efeitos dinâmicos
+        const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
+        const effects = getDynamicAttackEffects(charLevel);
+
+        let extraAttackBonus = 0;
+        let extraDamage = '';
+        let extraDescription = '';
+        let critThreshold = null;
+        let marcaPresaActive = false;
+        let inimigoActive = false;
+
+        // Processar cada efeito ativo
+        effects.forEach(effect => {
+            if (savedAttackEffects.includes(effect.value)) {
+                console.log(`🎯 Applying effect: ${effect.label}`);
+
+                if (effect.dice) {
+                    extraDamage += `+${effect.dice}`;
+                }
+                if (effect.attackMod) {
+                    if (typeof effect.attackMod === 'number') {
+                        extraAttackBonus += effect.attackMod;
+                    } else {
+                        // Para modificadores como '1d4', adicionar diretamente
+                        extraAttackBonus += `+${effect.attackMod}`;
+                    }
+                }
+                if (effect.critMod) {
+                    critThreshold = (critThreshold || 20) + effect.critMod;
+                }
+                extraDescription += '%NEWLINE% ' + effect.desc;
+                if (effect.value === 'marca_presa') marcaPresaActive = true;
+                if (effect.value === 'inimigo') inimigoActive = true;
+            }
+        });
+
+        // Aplicar combo de marca da presa + inimigo
+        if (inimigoActive && marcaPresaActive) {
+            if (critThreshold === 16) critThreshold = 14;
+        }
+
+        let modifiedMacro = originalMacro;
+
+        // Aplicar bônus de ataque
+        if (extraAttackBonus !== 0) {
+            // Padrão mais flexível para capturar a rolagem de ataque
+            const attackRollPattern = /(\{\{attackroll=\[\[1d20[^\]]*)\+@\{[^}]+\|ataquetemp\}(\]\])/;
+            const match = modifiedMacro.match(attackRollPattern);
+
+            if (match) {
+                const beforeTemp = match[1];
+                const afterTemp = match[2];
+
+                // Adicionar o bônus extra antes do ataquetemp
+                const newAttackRoll = `${beforeTemp}+${extraAttackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}${afterTemp}`;
+                modifiedMacro = modifiedMacro.replace(attackRollPattern, newAttackRoll);
+                console.log(`🎯 Added attack bonus: +${extraAttackBonus}`);
+            } else {
+                // Fallback: tentar padrão mais simples
+                const simplePattern = /(\{\{attackroll=\[\[[^\]]+)(\]\])/;
+                const simpleMatch = modifiedMacro.match(simplePattern);
+                if (simpleMatch) {
+                    const rollContent = simpleMatch[1];
+                    const ending = simpleMatch[2];
+                    const newRoll = `${rollContent}+${extraAttackBonus}${ending}`;
+                    modifiedMacro = modifiedMacro.replace(simplePattern, newRoll);
+                    console.log(`🎯 Added attack bonus (simple): +${extraAttackBonus}`);
+                }
+            }
+        }
+
+        // Aplicar dano extra
+        if (extraDamage) {
+            // Padrão mais flexível para capturar a rolagem de dano
+            const damageRollPattern = /(\{\{damageroll=\[\[[^\]]+)(\]\])/;
+            const damageMatch = modifiedMacro.match(damageRollPattern);
+
+            if (damageMatch) {
+                const damageRoll = damageMatch[1];
+                const ending = damageMatch[2];
+                const newDamageRoll = `${damageRoll}${extraDamage}${ending}`;
+                modifiedMacro = modifiedMacro.replace(damageRollPattern, newDamageRoll);
+                console.log(`💥 Added damage bonus: ${extraDamage}`);
+            }
+        }
+
+        // Aplicar threshold crítico modificado
+        if (critThreshold && critThreshold !== 20) {
+            const critPattern = /(1d20cs>)(\d+)/;
+            modifiedMacro = modifiedMacro.replace(critPattern, `$1${critThreshold}`);
+            console.log(`💥 Modified crit threshold to: ${critThreshold}`);
+        }
+
+        // Aplicar descrição extra
+        if (extraDescription) {
+            const descPattern = /(\{\{description=)([^}]*)\}\}/;
+            const descMatch = modifiedMacro.match(descPattern);
+
+            if (descMatch) {
+                const currentDesc = descMatch[2];
+                const newDesc = currentDesc + extraDescription;
+                modifiedMacro = modifiedMacro.replace(descPattern, `$1${newDesc}}`);
+                console.log(`📝 Added description: ${extraDescription}`);
+            } else {
+                // Se não há campo description, adicionar um
+                modifiedMacro = modifiedMacro.replace(/(\}\}$)/, `}}{{description=${extraDescription.replace('%NEWLINE% ', '')}}}$1`);
+                console.log(`📝 Created description field: ${extraDescription}`);
+            }
+        }
+
+        console.log('🔧 Enhanced macro:', modifiedMacro);
+        return modifiedMacro;
     }
 
     // Seletor rápido de ataques (Shift+Click - inspirado em Solasta)
