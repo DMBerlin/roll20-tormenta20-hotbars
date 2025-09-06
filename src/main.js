@@ -13505,7 +13505,7 @@
             });
         }
 
-        // Flanqueado (Bônus Permanente de Combate)
+        // Flanqueado (Condição de Combate - disponível para seleção manual)
         effects.push({
             label: 'Flanqueado (+2 acerto)',
             value: 'flanqueado',
