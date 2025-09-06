@@ -2730,20 +2730,291 @@
         });
     }
 
-    // Função para enviar comando para o chat
-    function sendToChat(command) {
+    // Sistema de interceptação e modificação de macros
+    const MacroInterceptor = {
+        // Armazena efeitos ativos para aplicação
+        activeEffects: {
+            attackBonus: 0,
+            attackDice: '',
+            damageBonus: 0,
+            damageDice: '',
+            criticalModifier: 0,
+            description: ''
+        },
+
+        // Identifica o tipo de macro
+        identifyMacroType(command) {
+            if (command.includes('template:t20-attack')) return 'attack';
+            if (command.includes('template:t20-damage')) return 'damage';
+            if (command.includes('template:t20-spell')) return 'spell';
+            return 'unknown';
+        },
+
+        // Extrai seções específicas do macro
+        extractMacroSections(command) {
+            const sections = {};
+
+            // Regex para capturar seções do macro
+            const patterns = {
+                attackroll: /\{\{attackroll=(\[\[.*?\]\])\}\}/,
+                damageroll: /\{\{damageroll=(\[\[.*?\]\])\}\}/,
+                criticaldamageroll: /\{\{criticaldamageroll=(\[\[.*?\]\])\}\}/,
+                description: /\{\{description=(.*?)\}\}/
+            };
+
+            for (const [key, pattern] of Object.entries(patterns)) {
+                const match = command.match(pattern);
+                if (match) {
+                    sections[key] = {
+                        full: match[0],
+                        content: match[1],
+                        startPos: match.index,
+                        endPos: match.index + match[0].length
+                    };
+                }
+            }
+
+            return sections;
+        },
+
+        // Calcula bônus total de ataque
+        calculateAttackBonus() {
+            let totalBonus = this.activeEffects.attackBonus;
+            let diceBonus = this.activeEffects.attackDice;
+
+            if (diceBonus) {
+                return totalBonus > 0 ? `+${totalBonus}+${diceBonus}` : `+${diceBonus}`;
+            }
+
+            return totalBonus !== 0 ? (totalBonus > 0 ? `+${totalBonus}` : `${totalBonus}`) : '';
+        },
+
+        // Calcula bônus total de dano
+        calculateDamageBonus() {
+            let totalBonus = this.activeEffects.damageBonus;
+            let diceBonus = this.activeEffects.damageDice;
+
+            if (diceBonus) {
+                return totalBonus > 0 ? `+${totalBonus}+${diceBonus}` : `+${diceBonus}`;
+            }
+
+            return totalBonus !== 0 ? (totalBonus > 0 ? `+${totalBonus}` : `${totalBonus}`) : '';
+        },
+
+        // Injeta efeitos no macro de ataque
+        injectAttackEffects(command) {
+            const sections = this.extractMacroSections(command);
+            let modifiedCommand = command;
+
+            // Modificar attackroll
+            if (sections.attackroll) {
+                const attackBonus = this.calculateAttackBonus();
+                const criticalModifier = this.activeEffects.criticalModifier;
+
+                if (attackBonus || criticalModifier !== 0) {
+                    const originalRoll = sections.attackroll.content;
+                    // Remove os colchetes externos para manipulação
+                    let innerRoll = originalRoll.slice(2, -2);
+
+                    // Aplica modificador de crítico se houver
+                    if (criticalModifier !== 0) {
+                        // Extrai o threshold atual do crítico (ex: cs>18)
+                        const critMatch = innerRoll.match(/cs>(\d+)/);
+                        if (critMatch) {
+                            const currentThreshold = parseInt(critMatch[1]);
+                            const newThreshold = Math.max(2, Math.min(20, currentThreshold + criticalModifier));
+                            innerRoll = innerRoll.replace(/cs>\d+/, `cs>${newThreshold}`);
+                        }
+                    }
+
+                    // Aplica bônus de ataque se houver
+                    if (attackBonus) {
+                        innerRoll += attackBonus;
+                    }
+
+                    const newRoll = `[[${innerRoll}]]`;
+
+                    modifiedCommand = modifiedCommand.replace(
+                        sections.attackroll.full,
+                        `{{attackroll=${newRoll}}}`
+                    );
+                }
+            }
+
+            // Modificar damageroll
+            if (sections.damageroll) {
+                const damageBonus = this.calculateDamageBonus();
+                if (damageBonus) {
+                    const originalRoll = sections.damageroll.content;
+                    const innerRoll = originalRoll.slice(2, -2);
+                    const newRoll = `[[${innerRoll}${damageBonus}]]`;
+
+                    modifiedCommand = modifiedCommand.replace(
+                        sections.damageroll.full,
+                        `{{damageroll=${newRoll}}}`
+                    );
+                }
+            }
+
+            // Modificar criticaldamageroll
+            if (sections.criticaldamageroll) {
+                const damageBonus = this.calculateDamageBonus();
+                if (damageBonus) {
+                    const originalRoll = sections.criticaldamageroll.content;
+                    const innerRoll = originalRoll.slice(2, -2);
+                    const newRoll = `[[${innerRoll}${damageBonus}]]`;
+
+                    modifiedCommand = modifiedCommand.replace(
+                        sections.criticaldamageroll.full,
+                        `{{criticaldamageroll=${newRoll}}}`
+                    );
+                }
+            }
+
+            // Modificar description
+            if (sections.description && this.activeEffects.description) {
+                const newDescription = sections.description.content + this.activeEffects.description;
+                modifiedCommand = modifiedCommand.replace(
+                    sections.description.full,
+                    `{{description=${newDescription}}}`
+                );
+            }
+
+            return modifiedCommand;
+        },
+
+        // Aplica efeitos selecionados
+        applySelectedEffects(selectedEffects = []) {
+            // Reset efeitos
+            this.activeEffects = {
+                attackBonus: 0,
+                attackDice: '',
+                damageBonus: 0,
+                damageDice: '',
+                criticalModifier: 0,
+                description: ''
+            };
+
+            // Busca efeitos disponíveis
+            const availableEffects = this.getAvailableEffects();
+
+            // Verifica combinações especiais
+            const marcaPresaActive = selectedEffects.includes('marca_presa');
+            const inimigoActive = selectedEffects.includes('inimigo');
+
+            selectedEffects.forEach(effectValue => {
+                const effect = availableEffects.find(e => e.value === effectValue);
+                if (effect) {
+                    if (effect.attackMod) {
+                        if (typeof effect.attackMod === 'string' && effect.attackMod.includes('d')) {
+                            this.activeEffects.attackDice += `+${effect.attackMod}`;
+                        } else {
+                            this.activeEffects.attackBonus += effect.attackMod;
+                        }
+                    }
+
+                    if (effect.dice) {
+                        this.activeEffects.damageDice += `+${effect.dice}`;
+                    }
+
+                    if (effect.damageBonus) {
+                        this.activeEffects.damageBonus += effect.damageBonus;
+                    }
+
+                    if (effect.critMod) {
+                        this.activeEffects.criticalModifier += effect.critMod;
+                    }
+
+                    if (effect.desc) {
+                        this.activeEffects.description += '%NEWLINE% ' + effect.desc;
+                    }
+                }
+            });
+
+            // Aplica modificador especial da combinação Inimigo + Marca da Presa
+            if (inimigoActive && marcaPresaActive) {
+                // Se o crítico já foi modificado para 16 pela Marca da Presa, muda para 14
+                if (this.activeEffects.criticalModifier === -2) {
+                    this.activeEffects.criticalModifier = -4; // 18 - 4 = 14
+                }
+            }
+        },
+
+        // Obtém efeitos disponíveis usando o sistema existente
+        getAvailableEffects() {
+            // Usa a função existente para obter efeitos dinâmicos
+            const charLevel = parseInt(localStorage.getItem('tormenta-20-hotbars-char-level')) || 1;
+            return getDynamicAttackEffects(charLevel);
+        },
+
+        // Intercepta e processa o comando
+        processCommand(command, selectedEffects = []) {
+            const macroType = this.identifyMacroType(command);
+
+            if (macroType === 'attack' && selectedEffects.length > 0) {
+                this.applySelectedEffects(selectedEffects);
+                return this.injectAttackEffects(command);
+            }
+
+            return command;
+        },
+
+        // Função de demonstração/teste do sistema
+        demonstrateSystem() {
+            logger.log('=== DEMONSTRAÇÃO DO MACRO INTERCEPTOR ===');
+
+            const testMacro = `&{template:t20-attack}{{character=@{Eira Egai|character_name}}}{{attackname=Espada Longa (N)}}{{attackroll=[[1d20cs>18+[[@{Eira Egai|pontariatotal}+@{Eira Egai|condicaomodataquedis}+@{Eira Egai|condicaomodataque}]]+0+@{Eira Egai|ataquetemp}]]}} {{damageroll=[[2d8+@{Eira Egai|des_mod}+0+0+@{Eira Egai|danotemp}+@{Eira Egai|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{Eira Egai|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=Ataque c/ Espada Longa}}`;
+
+            const testEffects = ['flanqueado', 'marca_presa', 'assado_carnes'];
+
+            logger.log('Macro original:', testMacro);
+            logger.log('Efeitos de teste:', testEffects);
+
+            const processedMacro = this.processCommand(testMacro, testEffects);
+
+            logger.log('Macro processado:', processedMacro);
+            logger.log('Efeitos ativos aplicados:', this.activeEffects);
+            logger.log('==========================================');
+
+            return {
+                original: testMacro,
+                processed: processedMacro,
+                effects: testEffects,
+                activeEffects: { ...this.activeEffects }
+            };
+        }
+    };
+
+    // Função para enviar comando para o chat (agora com interceptação)
+    function sendToChat(command, selectedEffects = []) {
         const textarea = document.querySelector('#textchat-input textarea');
         const sendButton = document.querySelector('#chatSendBtn');
 
         if (textarea && sendButton) {
+            // Processa o comando através do interceptor
+            let processedCommand = MacroInterceptor.processCommand(command, selectedEffects);
+
             // Limpa quebras de linha e espaços extras
-            let cleanCommand = command.replace(/\s+/g, ' ').trim();
+            let cleanCommand = processedCommand.replace(/\s+/g, ' ').trim();
+
+            logger.log('=== MACRO INTERCEPTOR DEBUG ===');
+            logger.log('Comando original:', command);
+            logger.log('Efeitos selecionados:', selectedEffects);
+            logger.log('Comando processado:', processedCommand);
+            logger.log('Comando final:', cleanCommand);
+            logger.log('================================');
+
             textarea.value = cleanCommand;
             textarea.dispatchEvent(new Event('input', { bubbles: true }));
             textarea.dispatchEvent(new Event('change', { bubbles: true }));
             sendButton.click();
         }
     }
+
+    // Função global para testar o novo sistema de interceptação de macros
+    window.testMacroInterceptor = function () {
+        return MacroInterceptor.demonstrateSystem();
+    };
 
     // Sistema de coleta de dados do Roll20
 
@@ -8713,14 +8984,14 @@
     }
 
     // Função para executar ataque com efeito de sangue
-    function executeAttackWithBloodEffect(macro) {
+    function executeAttackWithBloodEffect(macro, selectedEffects = []) {
         // Primeiro executa o efeito de sangue no token selecionado
         sendToChat('/fx splatter-blood @{target|token_id}');
 
         // Aguarda um pequeno delay para o efeito ser processado
         setTimeout(() => {
-            // Depois executa a macro de ataque
-            sendToChat(macro);
+            // Depois executa a macro de ataque com efeitos interceptados
+            sendToChat(macro, selectedEffects);
 
             // Por último toca o som de ataque
             setTimeout(() => {
@@ -11510,8 +11781,9 @@
                     if (inimigoActive && marcaPresaActive) {
                         if (critThreshold === 16) critThreshold = 14;
                     }
-                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Investida}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Investida c/ Espada Longa** ${extraDescription}}}`;
-                    executeAttackWithBloodEffect(macro);
+                    // Cria macro base da Investida (sem modificadores - serão aplicados pelo interceptor)
+                    const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Investida}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+2+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Investida c/ Espada Longa**}}`;
+                    executeAttackWithBloodEffect(baseMacro, savedAttackEffects);
                 } else if (maneuver.name === 'Atropelar') {
                     const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Atropelar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|atletismototal}]]]]}}`;
                     sendToChat(macro);
@@ -11534,8 +11806,8 @@
                     const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Esquivar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}`;
                     sendToChat(macro);
                 } else if (maneuver.name === 'Contra-ataque') {
-                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Contra-ataque}}{{attackroll=[[1d20+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Contra-ataque**}}`;
-                    executeAttackWithBloodEffect(macro);
+                    const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Contra-ataque}}{{attackroll=[[1d20cs>20+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Contra-ataque**}}`;
+                    executeAttackWithBloodEffect(baseMacro, savedAttackEffects);
                 }
 
                 // Fechar popup de detalhes
@@ -11718,52 +11990,13 @@
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
 
-                // Se algum efeito de comida ou bebida foi selecionado, executa o ataque e remove o efeito
-                if (assadoCarnesSelected || batataValkarianaSelected || boloCenouraSelected ||
-                    estrogonofeSelected || futomakiSelected || paoQueijoSelected ||
-                    porcoAssadoSelected || saladaElficaSelected || saladaImperialSelected ||
-                    sopaCogumeloSelected || pizzaSelected || babaDeTrollSelected || hidromelUivanteSelected) {
-                    // Executa o ataque com os efeitos selecionados
-                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-                    const effects = getDynamicAttackEffects(charLevel);
-                    let extraDamage = '';
-                    let extraDescription = '';
-                    let critThreshold = 18;
-                    let attackBonus = 0;
-                    let marcaPresaActive = false;
-                    let inimigoActive = false;
+                // Se algum efeito foi selecionado, executa o ataque
+                if (selected.length > 0) {
+                    // Cria macro base (sem modificadores - serão aplicados pelo interceptor)
+                    const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**}}`;
 
-                    effects.forEach(effect => {
-                        if (selected.includes(effect.value)) {
-                            if (effect.dice) {
-                                extraDamage += `+${effect.dice}`;
-                            }
-                            if (effect.critMod) {
-                                critThreshold += effect.critMod;
-                            }
-                            if (effect.attackMod) {
-                                if (typeof effect.attackMod === 'string' && effect.attackMod.includes('d')) {
-                                    // Para efeitos como Batata Valkariana que adicionam dados
-                                    attackBonus += `+${effect.attackMod}`;
-                                } else {
-                                    // Para efeitos que adicionam bônus fixos
-                                    attackBonus += effect.attackMod;
-                                }
-                            }
-                            extraDescription += '%NEWLINE% ' + effect.desc;
-                            if (effect.value === 'marca_presa') marcaPresaActive = true;
-                            if (effect.value === 'inimigo') inimigoActive = true;
-                        }
-                    });
-
-                    if (inimigoActive && marcaPresaActive) {
-                        if (critThreshold === 16) critThreshold = 14;
-                    }
-
-                    const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**${extraDescription}}}`;
-
-                    // Executa o ataque
-                    executeAttackWithBloodEffect(macro);
+                    // Executa o ataque com efeitos interceptados
+                    executeAttackWithBloodEffect(baseMacro, selected);
 
                     // Remove apenas a Batata Valkariana automaticamente (consumível)
                     setTimeout(() => {
@@ -14026,8 +14259,9 @@
                 const emoteMsg = `/em ${getCharacterName()} usa **Bote** (1 PM) para fazer um ataque adicional com sua arma secundária!`;
                 sendToChat(emoteMsg);
 
-                const macro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Ataque Adicional}}{{attackroll=[[1d20cs>${critThreshold}+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+${attackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}${extraDamage}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Bote c/ Espada Longa (1PM)** ${extraDescription}}}`;
-                executeAttackWithBloodEffect(macro);
+                // Cria macro base do Bote (sem modificadores - serão aplicados pelo interceptor)
+                const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Ataque Adicional}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Bote c/ Espada Longa (1PM)**}}`;
+                executeAttackWithBloodEffect(baseMacro, selected);
 
                 // Fechar todos os popups do hotbar para liberar espaço para FX
                 const popupsToClose = [
