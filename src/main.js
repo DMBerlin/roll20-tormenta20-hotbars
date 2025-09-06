@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.93041'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.46607'; // Última tag Git
 
     const logger = window.console;
 
@@ -12277,10 +12277,481 @@
         if (saveCustomEffects(customEffects)) {
             showWarningNotification(`Efeito "${effect.name}" deletado.`);
             updateEffectsBadge();
+
+            // Atualizar lista reativamente se o popup estiver aberto
+            const effectsPopup = document.getElementById('effects-popup');
+            if (effectsPopup) {
+                updateEffectsListReactive();
+            }
+
             return true;
         }
 
         return false;
+    }
+
+    // Atualizar lista de efeitos reativamente (sem recriar popup)
+    function updateEffectsListReactive() {
+        const effectsList = document.querySelector('#effects-popup .effects-list-container');
+        if (!effectsList) return;
+
+        // Recriar a lista de efeitos com dados atualizados
+        const customEffects = getCustomEffects();
+        const allCustomEffects = customEffects.map(effect => {
+            // Criar chips baseados no tipo de aplicação e modificadores
+            const chips = [];
+
+            // Adicionar tipo de aplicação
+            const typeLabels = {
+                'attack': 'Ataque',
+                'damage': 'Dano',
+                'skill': 'Perícia',
+                'defense': 'Defesa',
+                'attribute': 'Atributo',
+                'spell': 'Magia',
+                'initiative': 'Iniciativa'
+            };
+            chips.push(typeLabels[effect.applicationType] || 'Customizado');
+
+            // Adicionar modificadores
+            if (effect.modifiers.bonus > 0) {
+                chips.push(`+${effect.modifiers.bonus}`);
+            } else if (effect.modifiers.bonus < 0) {
+                chips.push(`${effect.modifiers.bonus}`);
+            }
+
+            if (effect.modifiers.dice) {
+                chips.push(`+${effect.modifiers.dice}`);
+            }
+
+            // Adicionar tipo de ativação
+            const activationLabels = {
+                'toggle': 'Manual',
+                'consume': 'Consumo',
+                'automatic': 'Auto'
+            };
+            chips.push(activationLabels[effect.activation.type] || 'Manual');
+
+            return {
+                title: `${effect.icon} ${effect.name}`,
+                description: effect.description || 'Efeito customizado',
+                chips: chips,
+                type: 'Customizado',
+                effectKey: effect.id,
+                customEffect: true
+            };
+        });
+
+        // Obter outros efeitos ativos (comida, bebida, poção, condições)
+        const activeEffects = getActiveEffects();
+        const activeSelectableCards = getActiveSelectableCards();
+
+        // Efeitos de comida
+        let comidaEffects = [];
+        try {
+            comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de comida:', e);
+            comidaEffects = [];
+        }
+        const activeComidaEffects = comidaEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            let bonus = '';
+            let desc = effect.description;
+
+            const bonusPatterns = [
+                /\+[^.]*$/i,
+                /\+[^,]*$/i,
+                /\+[^!]*$/i
+            ];
+
+            for (const pattern of bonusPatterns) {
+                const match = desc.match(pattern);
+                if (match) {
+                    bonus = match[0].trim();
+                    desc = desc.substring(0, desc.lastIndexOf(match[0])).trim();
+                    break;
+                }
+            }
+
+            if (!bonus) {
+                const ponto = desc.lastIndexOf('.');
+                if (ponto !== -1 && ponto < desc.length - 1) {
+                    const afterPonto = desc.substring(ponto + 1).trim();
+                    if (afterPonto && afterPonto.length > 0) {
+                        bonus = afterPonto;
+                        desc = desc.substring(0, ponto + 1).trim();
+                    }
+                }
+            }
+
+            return {
+                title: effect.name,
+                description: desc,
+                chips: bonus ? [bonus, 'Comida', '24h'] : ['Comida', '24h'],
+                type: 'Comida',
+                effectKey: effect.effectKey
+            };
+        });
+
+        // Efeitos de bebida
+        let bebidaEffects = [];
+        try {
+            bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de bebida:', e);
+            bebidaEffects = [];
+        }
+        const activeBebidaEffects = bebidaEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            return {
+                title: effect.name,
+                description: effect.description,
+                chips: ['Bebida', '24h'],
+                type: 'Bebida',
+                effectKey: effect.effectKey
+            };
+        });
+
+        // Efeitos de poção
+        let pocaoEffects = [];
+        try {
+            pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
+        } catch (e) {
+            console.error('Erro ao carregar efeitos de poção:', e);
+            pocaoEffects = [];
+        }
+        const activePocaoEffects = pocaoEffects.filter(e => activeEffects.includes(e.effectKey)).map(effect => {
+            return {
+                title: effect.name,
+                description: effect.description,
+                chips: ['Poção', 'Cena'],
+                type: 'Poção',
+                effectKey: effect.effectKey
+            };
+        });
+
+        // Efeitos de condições
+        const activeConditions = getActiveConditions();
+        const conditionsEffects = activeConditions.map(conditionName => {
+            const conditionData = getConditionData(conditionName);
+            return {
+                title: conditionData ? conditionData.nome : conditionName,
+                description: conditionData ? conditionData.descricao : '',
+                chips: conditionData && conditionData.efeitos ? [conditionData.efeitos.split('•')[0].trim(), 'Condição'] : ['Condição'],
+                type: 'Condição',
+                effectKey: conditionName
+            };
+        });
+
+        // Juntar todos os efeitos
+        const allEffects = [...allCustomEffects, ...activeComidaEffects, ...activeBebidaEffects, ...activePocaoEffects, ...conditionsEffects, ...activeSelectableCards];
+
+        // Limpar lista atual
+        effectsList.innerHTML = '';
+
+        // Recriar lista usando a mesma lógica do updateEffectsList original
+        if (allEffects.length === 0) {
+            const noEffectsMessage = document.createElement('div');
+            noEffectsMessage.style.textAlign = 'center';
+            noEffectsMessage.style.padding = '20px';
+            noEffectsMessage.style.color = '#6ec6ff';
+            noEffectsMessage.style.fontSize = '14px';
+            noEffectsMessage.style.fontStyle = 'italic';
+            noEffectsMessage.style.background = 'rgba(110, 198, 255, 0.1)';
+            noEffectsMessage.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+            noEffectsMessage.style.borderRadius = '8px';
+            noEffectsMessage.style.marginTop = '10px';
+            noEffectsMessage.innerHTML = '⚡<br/>Nenhum efeito disponível<br><small>Adicione efeitos de comida, bebida, poção ou condições</small>';
+            effectsList.appendChild(noEffectsMessage);
+            return;
+        }
+
+        // Recriar cada efeito usando a mesma lógica do updateEffectsList
+        allEffects.forEach(effect => {
+            const isActive = effect.customEffect ? true : isEffectActive(effect.effectKey);
+            // ... (resto da lógica será copiada da função updateEffectsList original)
+            createEffectItem(effect, isActive, effectsList);
+        });
+    }
+
+    // Função auxiliar para criar item de efeito (extraída da updateEffectsList)
+    function createEffectItem(effect, isActive, container) {
+        const effectContainer = document.createElement('div');
+        effectContainer.style.background = isActive ? '#2d4a3e' : '#23243a';
+        effectContainer.style.border = `1px solid ${isActive ? '#4caf50' : '#6ec6ff'}`;
+        effectContainer.style.borderRadius = '8px';
+        effectContainer.style.padding = '12px';
+        effectContainer.style.cursor = effect.customEffect ? 'default' : 'pointer';
+        effectContainer.style.transition = 'all 0.2s';
+
+        effectContainer.onmouseover = () => {
+            effectContainer.style.background = isActive ? '#3d5a4e' : '#2a2b4a';
+        };
+
+        effectContainer.onmouseout = () => {
+            effectContainer.style.background = isActive ? '#2d4a3e' : '#23243a';
+        };
+
+        effectContainer.onclick = () => {
+            if (effect.customEffect) {
+                return; // Efeitos customizados não são clicáveis
+            } else if (effect.type === 'Condição') {
+                toggleCondition(effect.effectKey);
+                // Fechar popups de condições
+                const conditionsPopup = document.getElementById('conditions-popup');
+                if (conditionsPopup) conditionsPopup.remove();
+                const conditionsOverlay = document.getElementById('conditions-overlay');
+                if (conditionsOverlay) conditionsOverlay.remove();
+                const conditionDetailsPopup = document.getElementById('condition-details-popup');
+                if (conditionDetailsPopup) conditionDetailsPopup.remove();
+                const conditionDetailsOverlay = document.getElementById('condition-details-overlay');
+                if (conditionDetailsOverlay) conditionDetailsOverlay.remove();
+                const effectsPopup = document.getElementById('effects-popup');
+                if (effectsPopup) effectsPopup.remove();
+                const effectsOverlay = document.getElementById('effects-overlay');
+                if (effectsOverlay) effectsOverlay.remove();
+            } else if (effect.type === 'Selectable') {
+                toggleSelectableCard(effect.effectKey);
+            } else if (effect.type === 'Comida') {
+                // Lógica para efeitos de comida
+                const activeEffects = getActiveEffects();
+                const index = activeEffects.indexOf(effect.effectKey);
+                if (index > -1) {
+                    activeEffects.splice(index, 1);
+                    let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
+                    comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                    localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
+                    saveActiveEffects(activeEffects);
+                    showWarningNotification(`Efeito "${effect.title}" removido.`);
+                } else {
+                    activeEffects.push(effect.effectKey);
+                    let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
+                    comidaEffects = comidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                    comidaEffects.push({
+                        name: effect.title,
+                        description: effect.description,
+                        type: 'Comida',
+                        effectKey: effect.effectKey
+                    });
+                    localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
+                    saveActiveEffects(activeEffects);
+                    showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                }
+            } else if (effect.type === 'Bebida') {
+                // Lógica similar para bebidas
+                const activeEffects = getActiveEffects();
+                const index = activeEffects.indexOf(effect.effectKey);
+                if (index > -1) {
+                    activeEffects.splice(index, 1);
+                    let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
+                    bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                    localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
+                    saveActiveEffects(activeEffects);
+                    showWarningNotification(`Efeito "${effect.title}" removido.`);
+                } else {
+                    activeEffects.push(effect.effectKey);
+                    let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
+                    bebidaEffects = bebidaEffects.filter(e => e.effectKey !== effect.effectKey);
+                    bebidaEffects.push({
+                        name: effect.title,
+                        description: effect.description,
+                        type: 'Bebida',
+                        effectKey: effect.effectKey
+                    });
+                    localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
+                    saveActiveEffects(activeEffects);
+                    showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                }
+            } else if (effect.type === 'Poção') {
+                // Lógica similar para poções
+                const activeEffects = getActiveEffects();
+                const index = activeEffects.indexOf(effect.effectKey);
+                if (index > -1) {
+                    activeEffects.splice(index, 1);
+                    let pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
+                    pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
+                    localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
+                    saveActiveEffects(activeEffects);
+                    showWarningNotification(`Efeito "${effect.title}" removido.`);
+                } else {
+                    activeEffects.push(effect.effectKey);
+                    let pocaoEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-pocao-effects') || '[]');
+                    pocaoEffects = pocaoEffects.filter(e => e.effectKey !== effect.effectKey);
+                    pocaoEffects.push({
+                        name: effect.title,
+                        description: effect.description,
+                        type: 'Poção',
+                        effectKey: effect.effectKey
+                    });
+                    localStorage.setItem('tormenta-20-hotbars-pocao-effects', JSON.stringify(pocaoEffects));
+                    saveActiveEffects(activeEffects);
+                    showSuccessNotification(`Efeito "${effect.title}" ativado!`);
+                }
+            } else {
+                toggleEffect(effect.effectKey);
+            }
+            updateEffectsListReactive(); // Atualizar lista após mudança
+            updateEffectsBadge();
+            updateEffectsVisualIndicators();
+        };
+
+        // Cabeçalho do efeito
+        const effectHeader = document.createElement('div');
+        effectHeader.style.display = 'flex';
+        effectHeader.style.justifyContent = 'space-between';
+        effectHeader.style.alignItems = 'center';
+        effectHeader.style.marginBottom = '6px';
+
+        const effectName = document.createElement('div');
+        effectName.textContent = effect.title || effect.name;
+        effectName.style.color = isActive ? '#4caf50' : '#6ec6ff';
+        effectName.style.fontSize = '15px';
+        effectName.style.fontWeight = 'bold';
+
+        effectHeader.appendChild(effectName);
+
+        // Para efeitos customizados, criar container de ações
+        if (effect.customEffect) {
+            const actionsContainer = document.createElement('div');
+            actionsContainer.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            `;
+
+            // Botão de editar
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '⚙️';
+            editButton.style.cssText = `
+                background: rgba(76, 175, 80, 0.8);
+                border: none;
+                border-radius: 6px;
+                color: white;
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            editButton.title = 'Editar efeito';
+
+            editButton.onmouseover = () => {
+                editButton.style.background = 'rgba(76, 175, 80, 1)';
+                editButton.style.transform = 'scale(1.1)';
+            };
+
+            editButton.onmouseout = () => {
+                editButton.style.background = 'rgba(76, 175, 80, 0.8)';
+                editButton.style.transform = 'scale(1)';
+            };
+
+            editButton.onclick = (e) => {
+                e.stopPropagation();
+                editCustomEffect(effect.effectKey);
+            };
+
+            // Botão de deletar
+            const deleteButton = document.createElement('button');
+            deleteButton.innerHTML = '🗑️';
+            deleteButton.style.cssText = `
+                background: rgba(244, 67, 54, 0.8);
+                border: none;
+                border-radius: 6px;
+                color: white;
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            deleteButton.title = 'Deletar efeito';
+
+            deleteButton.onmouseover = () => {
+                deleteButton.style.background = 'rgba(244, 67, 54, 1)';
+                deleteButton.style.transform = 'scale(1.1)';
+            };
+
+            deleteButton.onmouseout = () => {
+                deleteButton.style.background = 'rgba(244, 67, 54, 0.8)';
+                deleteButton.style.transform = 'scale(1)';
+            };
+
+            deleteButton.onclick = (e) => {
+                e.stopPropagation();
+                if (confirm(`Deseja deletar o efeito "${effect.title}"?`)) {
+                    if (deleteCustomEffect(effect.effectKey)) {
+                        updateEffectsListReactive(); // Atualizar lista após deletar
+                        updateEffectsBadge();
+                    }
+                }
+            };
+
+            actionsContainer.appendChild(editButton);
+            actionsContainer.appendChild(deleteButton);
+            effectHeader.appendChild(actionsContainer);
+        } else {
+            // Para efeitos normais, manter o indicador de status original
+            const statusIndicator = document.createElement('div');
+            statusIndicator.textContent = isActive ? '●' : '○';
+            statusIndicator.style.color = isActive ? '#4caf50' : '#6ec6ff';
+            statusIndicator.style.fontSize = '18px';
+            statusIndicator.style.fontWeight = 'bold';
+            effectHeader.appendChild(statusIndicator);
+        }
+        effectContainer.appendChild(effectHeader);
+
+        // Tipo do efeito
+        const effectType = document.createElement('div');
+        effectType.textContent = effect.type;
+        effectType.style.background = '#6ec6ff';
+        effectType.style.color = '#23243a';
+        effectType.style.fontSize = '11px';
+        effectType.style.fontWeight = 'bold';
+        effectType.style.borderRadius = '4px';
+        effectType.style.padding = '2px 8px';
+        effectType.style.display = 'inline-block';
+        effectType.style.width = 'fit-content';
+        effectType.style.marginBottom = '6px';
+        effectContainer.appendChild(effectType);
+
+        // Descrição do efeito
+        const effectDesc = document.createElement('div');
+        effectDesc.textContent = effect.description;
+        effectDesc.style.color = '#ecf0f1';
+        effectDesc.style.fontSize = '13px';
+        effectDesc.style.lineHeight = '1.4';
+        effectContainer.appendChild(effectDesc);
+
+        // Chips
+        if (effect.chips && effect.chips.length > 0) {
+            const chipsContainer = document.createElement('div');
+            chipsContainer.style.display = 'flex';
+            chipsContainer.style.flexWrap = 'wrap';
+            chipsContainer.style.gap = '4px';
+            chipsContainer.style.marginTop = '8px';
+
+            effect.chips.forEach(chip => {
+                const chipElement = document.createElement('span');
+                chipElement.textContent = chip;
+                chipElement.style.background = 'rgba(110, 198, 255, 0.2)';
+                chipElement.style.color = '#6ec6ff';
+                chipElement.style.fontSize = '10px';
+                chipElement.style.fontWeight = 'bold';
+                chipElement.style.borderRadius = '12px';
+                chipElement.style.padding = '2px 8px';
+                chipElement.style.border = '1px solid rgba(110, 198, 255, 0.3)';
+                chipsContainer.appendChild(chipElement);
+            });
+
+            effectContainer.appendChild(chipsContainer);
+        }
+
+        container.appendChild(effectContainer);
     }
 
     // Editar efeito customizado existente
@@ -12594,14 +13065,11 @@
                 overlay.remove();
                 builder.remove();
 
-                // Atualizar popup de efeitos se estiver aberto
+                // Atualizar lista de efeitos reativamente se o popup estiver aberto
                 const effectsPopup = document.getElementById('effects-popup');
                 if (effectsPopup) {
-                    // Recriar o popup para mostrar o efeito atualizado
-                    effectsPopup.remove();
-                    const effectsOverlay = document.getElementById('effects-overlay');
-                    if (effectsOverlay) effectsOverlay.remove();
-                    setTimeout(() => createEffectsPopup(), 100);
+                    updateEffectsListReactive();
+                    updateEffectsBadge(); // Atualizar badge também
                 }
             } else {
                 showWarningNotification('Erro ao salvar efeito!');
@@ -15403,6 +15871,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Lista visual
         const effectsList = document.createElement('div');
+        effectsList.className = 'effects-list-container'; // Adicionar classe para identificação
         effectsList.style.display = 'flex';
         effectsList.style.flexDirection = 'column';
         effectsList.style.gap = '8px';
