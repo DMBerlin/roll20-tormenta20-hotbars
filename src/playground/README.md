@@ -1,12 +1,12 @@
 # 🏹 Como Testar o Caçador.js
 
 ## 📁 Arquivo Criado
-- `test-cacador.html` - Simulador Roll20 com hot reload
+- `index.html` - Simulador Roll20 com hot reload
 
 ## 🚀 Como Usar
 
 ### 1. Abrir o Teste
-1. Abra o arquivo `test-cacador.html` no seu navegador
+1. Abra o arquivo `index.html` no seu navegador
 2. O script será carregado automaticamente
 3. A hotbar do Caçador deve aparecer na parte inferior da página
 
