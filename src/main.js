@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.52221'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.48254'; // Última tag Git
 
     const logger = window.console;
 
@@ -2080,10 +2080,11 @@
 
         // Atualizar barra de vida
         // O characterInfo tem 2 filhos: [0] = avatar, [1] = info
-        const infoContainer = characterInfo.children[1];
+        const infoContainer = characterInfo.children && characterInfo.children[1];
+        if (!infoContainer) return;
 
         // Acessar diretamente pelos índices: infoContainer.children[1] = barra de vida
-        const healthBarContainer = infoContainer.children[1];
+        const healthBarContainer = infoContainer.children && infoContainer.children[1];
 
         if (healthBarContainer) {
             // Buscar elementos de forma mais específica
@@ -2111,7 +2112,7 @@
 
         // Atualizar barra de mana
         // Acessar diretamente pelos índices: infoContainer.children[2] = barra de mana
-        const manaBarContainer = infoContainer.children[2];
+        const manaBarContainer = infoContainer.children && infoContainer.children[2];
 
         if (manaBarContainer) {
             // Buscar elementos de forma mais específica
@@ -2697,7 +2698,7 @@
             `;
 
             // Inserir após o primeiro filho (contentOverlay)
-            const contentOverlay = sheetHeader.children[0];
+            const contentOverlay = sheetHeader.children && sheetHeader.children[0];
             if (contentOverlay) {
                 sheetHeader.insertBefore(blurOverlay, contentOverlay);
             } else {
@@ -8477,9 +8478,11 @@
                 tabButton.onclick = () => {
                     activeTab = tab;
                     tabs.forEach((t, index) => {
-                        const btn = tabsContainer.children[index];
-                        btn.style.background = t === activeTab ? '#ffb86c' : 'transparent';
-                        btn.style.color = t === activeTab ? '#1e1e28' : '#ffb86c';
+                        const btn = tabsContainer.children && tabsContainer.children[index];
+                        if (btn) {
+                            btn.style.background = t === activeTab ? '#ffb86c' : 'transparent';
+                            btn.style.color = t === activeTab ? '#1e1e28' : '#ffb86c';
+                        }
                     });
                     renderPowersList(filterInput.value);
                 };
@@ -16665,7 +16668,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de atributos com dados atuais do localStorage
      */
     function updateAttributesSection() {
-        const attributesSection = document.querySelector('#character-sheet-modal .container').children[2].children[0].children[0];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children[2]) return;
+
+        const section = modal.children[2].children[0];
+        if (!section || !section.children[0]) return;
+
+        const attributesSection = section.children[0];
         if (!attributesSection) return;
 
         const attributesGrid = attributesSection.querySelector('div:last-child');
@@ -16740,7 +16749,10 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de recursos com dados atuais do localStorage
      */
     function updateResourcesSection() {
-        const resourcesSection = document.querySelector('#character-sheet-modal .container').children[2].children[1];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children[2]) return;
+
+        const resourcesSection = modal.children[2].children[1];
         if (!resourcesSection) return;
 
         // Atualizar vida
@@ -16748,7 +16760,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const maxHp = localStorage.getItem('tormenta-20-hotbars-sync-hp-total') || '0';
         const hpPercentage = maxHp > 0 ? (currentHp / maxHp) * 100 : 0;
 
-        const healthCard = resourcesSection.children[1];
+        const healthCard = resourcesSection.children && resourcesSection.children[1];
         if (healthCard) {
             healthCard.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
@@ -16766,7 +16778,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const maxMp = localStorage.getItem('tormenta-20-hotbars-sync-mp-total') || '0';
         const mpPercentage = maxMp > 0 ? (currentMp / maxMp) * 100 : 0;
 
-        const manaCard = resourcesSection.children[2];
+        const manaCard = resourcesSection.children && resourcesSection.children[2];
         if (manaCard) {
             manaCard.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
@@ -16786,7 +16798,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
      * Atualiza a seção de carga com dados atuais do localStorage
      */
     function updateCargaSection() {
-        const cargaSection = document.querySelector('#character-sheet-modal .container').children[2].children[1].children[2];
+        const modal = document.querySelector('#character-sheet-modal .container');
+        if (!modal || !modal.children[2]) return;
+
+        const resourcesSection = modal.children[2].children[1];
+        if (!resourcesSection || !resourcesSection.children[2]) return;
+
+        const cargaSection = resourcesSection.children[2];
         if (!cargaSection) return;
 
         // Carga
@@ -16819,7 +16837,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Calcular porcentagem para a barra (baseada no máximo)
         const cargaPercentage = maximaNum > 0 ? Math.min((cargaNum / maximaNum) * 100, 100) : 0;
 
-        const cargaCard = cargaSection.children[1];
+        const cargaCard = cargaSection.children && cargaSection.children[1];
         if (cargaCard) {
             cargaCard.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
