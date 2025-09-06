@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.48254'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.72971'; // Última tag Git
 
     const logger = window.console;
 
@@ -12614,25 +12614,7 @@
                 }));
             });
 
-            // Adicionar habilidades específicas da classe
-            if (hasPower('Ervas Curativas')) {
-                dynamicAbilities.push(abilityTemplates.createAbility({
-                    nome: 'Ervas Curativas',
-                    descricao: 'Você pode gastar uma ação completa e uma quantidade de PM a sua escolha (limitado por sua Sabedoria) para aplicar ervas que curam ou desintoxicam em você ou num aliado adjacente. Para cada PM que gastar, cura 2d6 PV ou remove uma condição envenenado afetando o alvo. (JdA:51)'
-                }));
-            }
-            if (hasPower('Bote')) {
-                dynamicAbilities.push(abilityTemplates.createAbility({
-                    nome: 'Bote',
-                    descricao: 'Se estiver empunhando duas armas e fizer uma investida, você pode pagar 1 PM para fazer um ataque adicional com sua arma secundária. Pré-requisito: Ambidestria, 6º nível de caçador.'
-                }));
-            }
-            if (hasPower('Emboscar')) {
-                dynamicAbilities.push(abilityTemplates.createAbility({
-                    nome: 'Emboscar',
-                    descricao: 'Você pode gastar 2 PM para realizar uma ação padrão adicional em seu turno. Você só pode usar este poder na primeira rodada de um combate. Pré-requisito: treinado em Furtividade.'
-                }));
-            }
+            // Todos os poderes aprendidos já foram adicionados através do sistema de poderes gerais acima
             // Filtrar pelo texto
             const filteredAbilities = dynamicAbilities.filter(a => a.nome.toLowerCase().includes(filter));
             if (filteredAbilities.length === 0) {
