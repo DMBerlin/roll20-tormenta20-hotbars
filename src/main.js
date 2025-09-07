@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.3.1.46607'; // Última tag Git
+    const SCRIPT_VERSION = '0.3.1.51365'; // Última tag Git
 
     const logger = window.console;
 
@@ -11754,33 +11754,7 @@
                         console.error('Erro ao carregar seleção:', err);
                         savedAttackEffects = [];
                     }
-                    const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-                    const effects = getDynamicAttackEffects(charLevel);
-                    let extraDamage = '';
-                    let extraDescription = '';
-                    let critThreshold = 18;
-                    let attackBonus = 2; // +2 da investida
-                    let marcaPresaActive = false;
-                    let inimigoActive = false;
-                    effects.forEach(effect => {
-                        if (savedAttackEffects.includes(effect.value)) {
-                            if (effect.dice) {
-                                extraDamage += `+${effect.dice}`;
-                            }
-                            if (effect.critMod) {
-                                critThreshold += effect.critMod;
-                            }
-                            if (effect.attackMod) {
-                                attackBonus += effect.attackMod;
-                            }
-                            extraDescription += '%NEWLINE% ' + effect.desc;
-                            if (effect.value === 'marca_presa') marcaPresaActive = true;
-                            if (effect.value === 'inimigo') inimigoActive = true;
-                        }
-                    });
-                    if (inimigoActive && marcaPresaActive) {
-                        if (critThreshold === 16) critThreshold = 14;
-                    }
+                    // Variáveis removidas - os efeitos são aplicados pelo MacroInterceptor
                     // Cria macro base da Investida (sem modificadores - serão aplicados pelo interceptor)
                     const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Investida}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+2+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Investida c/ Espada Longa**}}`;
                     executeAttackWithBloodEffect(baseMacro, savedAttackEffects);
@@ -11806,8 +11780,19 @@
                     const macro = `&{template:t20}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{rollname=Manobra Esquivar}}{{theroll=[[1d20+[[@{${getCharacterNameForMacro()}|acrobaciatotal}]]]]}}`;
                     sendToChat(macro);
                 } else if (maneuver.name === 'Contra-ataque') {
+                    // Carregar efeitos de ataque salvos
+                    const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
+                    let contraAttackEffects = [];
+                    try {
+                        const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+                        if (saved) contraAttackEffects = JSON.parse(saved);
+                    } catch (err) {
+                        console.error('Erro ao carregar seleção:', err);
+                        contraAttackEffects = [];
+                    }
+
                     const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Contra-ataque}}{{attackroll=[[1d20cs>20+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Contra-ataque**}}`;
-                    executeAttackWithBloodEffect(baseMacro, savedAttackEffects);
+                    executeAttackWithBloodEffect(baseMacro, contraAttackEffects);
                 }
 
                 // Fechar popup de detalhes
@@ -11964,113 +11949,16 @@
                 const selected = Object.keys(checkboxes).filter(key => checkboxes[key].checked);
                 try {
                     localStorage.setItem(ATTACK_EFFECTS_KEY, JSON.stringify(selected));
+                    createNotification('Efeitos de ataque salvos! Serão aplicados nos próximos ataques.', 'success', 3000);
                 } catch (e) {
                     console.error('Erro ao salvar seleção:', e);
+                    createNotification('Erro ao salvar efeitos de ataque.', 'error', 3000);
                 }
-
-                // Verifica se algum efeito de comida foi selecionado para removê-lo após o ataque
-                const assadoCarnesSelected = selected.includes('assado_carnes');
-                const batataValkarianaSelected = selected.includes('batata_valkariana');
-                const boloCenouraSelected = selected.includes('bolo_cenoura');
-                const estrogonofeSelected = selected.includes('estrogonofe');
-                const futomakiSelected = selected.includes('futomaki');
-                const paoQueijoSelected = selected.includes('pao_queijo');
-                const porcoAssadoSelected = selected.includes('porco_assado');
-                const saladaElficaSelected = selected.includes('salada_elfica');
-                const saladaImperialSelected = selected.includes('salada_imperial');
-                const sopaCogumeloSelected = selected.includes('sopa_cogumelo');
-                const pizzaSelected = selected.includes('pizza');
-
-                // Verifica se algum efeito de bebida foi selecionado
-                const babaDeTrollSelected = selected.includes('baba_de_troll');
-                const hidromelUivanteSelected = selected.includes('hidromel_uivante');
 
                 // Fecha popup
                 popup.remove();
                 const overlay = document.getElementById('attack-effects-overlay');
                 if (overlay) overlay.remove();
-
-                // Se algum efeito foi selecionado, executa o ataque
-                if (selected.length > 0) {
-                    // Cria macro base (sem modificadores - serão aplicados pelo interceptor)
-                    const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Espada Longa}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Ataque c/ Espada Longa**}}`;
-
-                    // Executa o ataque com efeitos interceptados
-                    executeAttackWithBloodEffect(baseMacro, selected);
-
-                    // Remove apenas a Batata Valkariana automaticamente (consumível)
-                    setTimeout(() => {
-                        if (batataValkarianaSelected) {
-                            // Remove o efeito da Batata Valkariana
-                            toggleEffect('prato_batata_valkariana');
-
-                            // Remove também da lista de efeitos de comida
-                            let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
-                            comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
-                            localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
-
-                            showSuccessNotification('🍟 Efeito da Batata Valkariana consumido no ataque!');
-                        }
-
-                        // Para os outros pratos, apenas mostra notificação sem remover o efeito
-                        if (assadoCarnesSelected) {
-                            showSuccessNotification('🥩 Bônus do Assado de Carnes aplicado no ataque!');
-                        }
-
-                        if (boloCenouraSelected) {
-                            showSuccessNotification('🥕 Bônus do Bolo de Cenoura aplicado no ataque!');
-                        }
-
-                        if (estrogonofeSelected) {
-                            showSuccessNotification('🍝 Bônus do Estrogonofe aplicado no ataque!');
-                        }
-
-                        if (futomakiSelected) {
-                            showSuccessNotification('🍣 Bônus do Futomaki aplicado no ataque!');
-                        }
-
-                        if (paoQueijoSelected) {
-                            showSuccessNotification('🧀 Bônus do Pão de Queijo aplicado no ataque!');
-                        }
-
-                        if (porcoAssadoSelected) {
-                            showSuccessNotification('🐷 Bônus do Porco Assado aplicado no ataque!');
-                        }
-
-                        if (saladaElficaSelected) {
-                            showSuccessNotification('🥗 Bônus da Salada Elfica aplicado no ataque!');
-                        }
-
-                        if (saladaImperialSelected) {
-                            showSuccessNotification('🥗 Bônus da Salada Imperial aplicado no ataque!');
-                        }
-
-                        if (sopaCogumeloSelected) {
-                            showSuccessNotification('🍄 Bônus da Sopa de Cogumelo aplicado no ataque!');
-                        }
-
-                        if (pizzaSelected) {
-                            showSuccessNotification('🍕 Bônus da Pizza aplicado no ataque!');
-                        }
-
-                        // Tratamento das bebidas
-                        if (babaDeTrollSelected) {
-                            // Remove o efeito da Baba de Troll (consumível)
-                            toggleEffect('bebida_baba_de_troll');
-
-                            // Remove também da lista de efeitos de bebida
-                            let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
-                            bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
-                            localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
-
-                            showSuccessNotification('🧃 Efeito da Baba de Troll consumido no ataque!');
-                        }
-
-                        if (hidromelUivanteSelected) {
-                            showSuccessNotification('🔥 Bônus do Hidromel Uivante aplicado no ataque!');
-                        }
-                    }, 1000); // Delay para garantir que o ataque foi processado
-                }
             };
             popup.appendChild(saveBtn);
 
@@ -12511,11 +12399,8 @@
             showWarningNotification(`Efeito "${effect.name}" deletado.`);
             updateEffectsBadge();
 
-            // Atualizar lista reativamente se o popup estiver aberto
-            const effectsPopup = document.getElementById('effects-popup');
-            if (effectsPopup) {
-                updateEffectsListReactive();
-            }
+            // Atualiza o modal de efeitos se estiver aberto
+            refreshEffectsModal();
 
             return true;
         }
@@ -14228,40 +14113,13 @@
                     console.error('Erro ao carregar seleção:', err);
                     savedAttackEffects = [];
                 }
-                const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
-                const effects = getDynamicAttackEffects(charLevel);
-                let extraDamage = '';
-                let extraDescription = '';
-                let critThreshold = 18;
-                let attackBonus = 2; // +2 da investida
-                let marcaPresaActive = false;
-                let inimigoActive = false;
-                effects.forEach(effect => {
-                    if (savedAttackEffects.includes(effect.value)) {
-                        if (effect.dice) {
-                            extraDamage += `+${effect.dice}`;
-                        }
-                        if (effect.critMod) {
-                            critThreshold += effect.critMod;
-                        }
-                        if (effect.attackMod) {
-                            attackBonus += effect.attackMod;
-                        }
-                        extraDescription += '%NEWLINE% ' + effect.desc;
-                        if (effect.value === 'marca_presa') marcaPresaActive = true;
-                        if (effect.value === 'inimigo') inimigoActive = true;
-                    }
-                });
-                if (inimigoActive && marcaPresaActive) {
-                    if (critThreshold === 16) critThreshold = 14;
-                }
                 // Enviar mensagem de emote descrevendo a ação
                 const emoteMsg = `/em ${getCharacterName()} usa **Bote** (1 PM) para fazer um ataque adicional com sua arma secundária!`;
                 sendToChat(emoteMsg);
 
                 // Cria macro base do Bote (sem modificadores - serão aplicados pelo interceptor)
                 const baseMacro = `&{template:t20-attack}{{character=@{${getCharacterNameForMacro()}|character_name}}}{{attackname=Ataque Adicional}}{{attackroll=[[1d20cs>18+[[@{${getCharacterNameForMacro()}|pontariatotal}+@{${getCharacterNameForMacro()}|condicaomodataquedis}+@{${getCharacterNameForMacro()}|condicaomodataque}]]+0+@{${getCharacterNameForMacro()}|ataquetemp}]]}} {{damageroll=[[2d8+@{${getCharacterNameForMacro()}|des_mod}+0+0+@{${getCharacterNameForMacro()}|danotemp}+@{${getCharacterNameForMacro()}|rolltemp}]]}} {{criticaldamageroll=[[2d8 + 2d8 + 2d8 + 0 + 0+0+@{${getCharacterNameForMacro()}|des_mod}+0]]}}{{typeofdamage=Cortante}}{{description=**Bote c/ Espada Longa (1PM)**}}`;
-                executeAttackWithBloodEffect(baseMacro, selected);
+                executeAttackWithBloodEffect(baseMacro, savedAttackEffects);
 
                 // Fechar todos os popups do hotbar para liberar espaço para FX
                 const popupsToClose = [
@@ -14909,6 +14767,10 @@
         saveActiveConditions(activeConditions);
         updateEffectsVisualIndicators(); // Atualiza indicadores visuais unificados
         updateEffectsBadge(); // Atualiza o badge de efeitos
+
+        // Atualiza o modal de efeitos se estiver aberto
+        refreshEffectsModal();
+
         const activeEffects = getActiveEffects();
         return activeEffects;
     }
@@ -15489,6 +15351,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
+
+        // Atualiza o modal de efeitos se estiver aberto
+        refreshEffectsModal();
     }
 
     // Função para criar um ícone indicador de bebida consumida
@@ -15609,6 +15474,9 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
+
+        // Atualiza o modal de efeitos se estiver aberto
+        refreshEffectsModal();
     }
 
     // Função para obter dados de uma poção pelo nome
@@ -15731,6 +15599,25 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Atualiza indicadores visuais unificados
         updateEffectsVisualIndicators();
+
+        // Atualiza o modal de efeitos se estiver aberto
+        refreshEffectsModal();
+    }
+
+    // Função para atualizar o modal de efeitos se estiver aberto
+    function refreshEffectsModal() {
+        const effectsPopup = document.getElementById('effects-popup');
+        if (effectsPopup) {
+            // Se o modal está aberto, fecha e reabre para refletir as mudanças
+            const overlay = document.getElementById('effects-overlay');
+            if (overlay) overlay.remove();
+            effectsPopup.remove();
+
+            // Pequeno delay para garantir que o modal anterior foi removido
+            setTimeout(() => {
+                createEffectsPopup();
+            }, 50);
+        }
     }
 
     // NOVO: Sistema de Indicadores Visuais de Condições
@@ -19178,6 +19065,118 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Executar ataque customizado com efeitos aplicados
         executeAttackWithBloodEffect(enhancedMacro);
         createNotification(`${currentAttack.name}`, 'success', 1500);
+
+        // Processar consumo de efeitos consumíveis
+        processConsumableEffectsAfterAttack();
+    }
+
+    /**
+     * Processa o consumo de efeitos consumíveis após um ataque
+     */
+    function processConsumableEffectsAfterAttack() {
+        // Carregar efeitos salvos
+        const ATTACK_EFFECTS_KEY = 'tormenta-20-hotbars-attack-effects';
+        let savedAttackEffects = [];
+        try {
+            const saved = localStorage.getItem(ATTACK_EFFECTS_KEY);
+            if (saved) savedAttackEffects = JSON.parse(saved);
+        } catch (err) {
+            console.error('Erro ao carregar efeitos de ataque:', err);
+            return;
+        }
+
+        if (savedAttackEffects.length === 0) {
+            return;
+        }
+
+        // Delay para garantir que o ataque foi processado
+        setTimeout(() => {
+            // Verificar e consumir efeitos consumíveis
+            const batataValkarianaSelected = savedAttackEffects.includes('batata_valkariana');
+            const babaDeTrollSelected = savedAttackEffects.includes('baba_de_troll');
+
+            // Consumir Batata Valkariana (consumível)
+            if (batataValkarianaSelected) {
+                // Remove o efeito da Batata Valkariana
+                toggleEffect('prato_batata_valkariana');
+
+                // Remove também da lista de efeitos de comida
+                let comidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-comida-effects') || '[]');
+                comidaEffects = comidaEffects.filter(e => e.effectKey !== 'prato_batata_valkariana');
+                localStorage.setItem('tormenta-20-hotbars-comida-effects', JSON.stringify(comidaEffects));
+
+                createNotification('🍟 Efeito da Batata Valkariana consumido no ataque!', 'success', 2000);
+            }
+
+            // Consumir Baba de Troll (consumível)
+            if (babaDeTrollSelected) {
+                // Remove o efeito da Baba de Troll
+                toggleEffect('bebida_baba_de_troll');
+
+                // Remove também da lista de efeitos de bebida
+                let bebidaEffects = JSON.parse(localStorage.getItem('tormenta-20-hotbars-bebida-effects') || '[]');
+                bebidaEffects = bebidaEffects.filter(e => e.effectKey !== 'bebida_baba_de_troll');
+                localStorage.setItem('tormenta-20-hotbars-bebida-effects', JSON.stringify(bebidaEffects));
+
+                createNotification('🧃 Efeito da Baba de Troll consumido no ataque!', 'success', 2000);
+            }
+
+            // Mostrar notificações para efeitos não-consumíveis aplicados
+            const assadoCarnesSelected = savedAttackEffects.includes('assado_carnes');
+            const boloCenouraSelected = savedAttackEffects.includes('bolo_cenoura');
+            const estrogonofeSelected = savedAttackEffects.includes('estrogonofe');
+            const futomakiSelected = savedAttackEffects.includes('futomaki');
+            const paoQueijoSelected = savedAttackEffects.includes('pao_queijo');
+            const porcoAssadoSelected = savedAttackEffects.includes('porco_assado');
+            const saladaElficaSelected = savedAttackEffects.includes('salada_elfica');
+            const saladaImperialSelected = savedAttackEffects.includes('salada_imperial');
+            const sopaCogumeloSelected = savedAttackEffects.includes('sopa_cogumelo');
+            const pizzaSelected = savedAttackEffects.includes('pizza');
+            const hidromelUivanteSelected = savedAttackEffects.includes('hidromel_uivante');
+            const flanqueadoSelected = savedAttackEffects.includes('flanqueado');
+
+            // Notificações para pratos (não-consumíveis)
+            if (assadoCarnesSelected) {
+                createNotification('🥩 Bônus do Assado de Carnes aplicado no ataque!', 'success', 2000);
+            }
+            if (boloCenouraSelected) {
+                createNotification('🥕 Bônus do Bolo de Cenoura aplicado no ataque!', 'success', 2000);
+            }
+            if (estrogonofeSelected) {
+                createNotification('🍝 Bônus do Estrogonofe aplicado no ataque!', 'success', 2000);
+            }
+            if (futomakiSelected) {
+                createNotification('🍣 Bônus do Futomaki aplicado no ataque!', 'success', 2000);
+            }
+            if (paoQueijoSelected) {
+                createNotification('🧀 Bônus do Pão de Queijo aplicado no ataque!', 'success', 2000);
+            }
+            if (porcoAssadoSelected) {
+                createNotification('🐷 Bônus do Porco Assado aplicado no ataque!', 'success', 2000);
+            }
+            if (saladaElficaSelected) {
+                createNotification('🥗 Bônus da Salada Elfica aplicado no ataque!', 'success', 2000);
+            }
+            if (saladaImperialSelected) {
+                createNotification('🥗 Bônus da Salada Imperial aplicado no ataque!', 'success', 2000);
+            }
+            if (sopaCogumeloSelected) {
+                createNotification('🍄 Bônus da Sopa de Cogumelo aplicado no ataque!', 'success', 2000);
+            }
+            if (pizzaSelected) {
+                createNotification('🍕 Bônus da Pizza aplicado no ataque!', 'success', 2000);
+            }
+
+            // Notificações para bebidas (não-consumíveis)
+            if (hidromelUivanteSelected) {
+                createNotification('🔥 Bônus do Hidromel Uivante aplicado no ataque!', 'success', 2000);
+            }
+
+            // Notificações para condições de combate
+            if (flanqueadoSelected) {
+                createNotification('⚔️ Bônus de Flanqueado aplicado no ataque!', 'success', 2000);
+            }
+        }, 1000);
     }
 
     /**
@@ -19203,6 +19202,7 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         const charLevel = parseInt(localStorage.getItem(CHAR_LEVEL_KEY) || '1', 10) || 1;
         const effects = getDynamicAttackEffects(charLevel);
 
+
         let extraAttackBonus = 0;
         let extraDamage = '';
         let extraDescription = '';
@@ -19213,8 +19213,6 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         // Processar cada efeito ativo
         effects.forEach(effect => {
             if (savedAttackEffects.includes(effect.value)) {
-                console.log(`🎯 Applying effect: ${effect.label}`);
-
                 if (effect.dice) {
                     extraDamage += `+${effect.dice}`;
                 }
@@ -19244,29 +19242,17 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
 
         // Aplicar bônus de ataque
         if (extraAttackBonus !== 0) {
-            // Padrão mais flexível para capturar a rolagem de ataque
-            const attackRollPattern = /(\{\{attackroll=\[\[1d20[^\]]*)\+@\{[^}]+\|ataquetemp\}(\]\])/;
+            // Padrão para capturar a rolagem completa e adicionar bônus antes do ]] final
+            const attackRollPattern = /(\{\{attackroll=\[\[[^\]]+)(\]\])/;
             const match = modifiedMacro.match(attackRollPattern);
 
             if (match) {
-                const beforeTemp = match[1];
-                const afterTemp = match[2];
+                const rollContent = match[1]; // {{attackroll=[[1d20cs>18+[[@{...}]]+0+@{ataquetemp}
+                const ending = match[2];       // ]]
 
-                // Adicionar o bônus extra antes do ataquetemp
-                const newAttackRoll = `${beforeTemp}+${extraAttackBonus}+@{${getCharacterNameForMacro()}|ataquetemp}${afterTemp}`;
-                modifiedMacro = modifiedMacro.replace(attackRollPattern, newAttackRoll);
-                console.log(`🎯 Added attack bonus: +${extraAttackBonus}`);
-            } else {
-                // Fallback: tentar padrão mais simples
-                const simplePattern = /(\{\{attackroll=\[\[[^\]]+)(\]\])/;
-                const simpleMatch = modifiedMacro.match(simplePattern);
-                if (simpleMatch) {
-                    const rollContent = simpleMatch[1];
-                    const ending = simpleMatch[2];
-                    const newRoll = `${rollContent}+${extraAttackBonus}${ending}`;
-                    modifiedMacro = modifiedMacro.replace(simplePattern, newRoll);
-                    console.log(`🎯 Added attack bonus (simple): +${extraAttackBonus}`);
-                }
+                // Adicionar bônus no final da rolagem, antes do ]] final
+                const newRoll = `${rollContent} + ${extraAttackBonus} ${ending}`;
+                modifiedMacro = modifiedMacro.replace(attackRollPattern, newRoll);
             }
         }
 
@@ -19300,16 +19286,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
             if (descMatch) {
                 const currentDesc = descMatch[2];
                 const newDesc = currentDesc + extraDescription;
-                modifiedMacro = modifiedMacro.replace(descPattern, `$1${newDesc}}`);
-                console.log(`📝 Added description: ${extraDescription}`);
+                modifiedMacro = modifiedMacro.replace(descPattern, `$1${newDesc}}}`);
             } else {
                 // Se não há campo description, adicionar um
                 modifiedMacro = modifiedMacro.replace(/(\}\}$)/, `}}{{description=${extraDescription.replace('%NEWLINE% ', '')}}}$1`);
-                console.log(`📝 Created description field: ${extraDescription}`);
             }
         }
 
-        console.log('🔧 Enhanced macro:', modifiedMacro);
         return modifiedMacro;
     }
 
