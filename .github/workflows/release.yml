@@ -13,28 +13,37 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22.15.1'
-        cache: 'npm'
-        
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
       with:
         version: 10.15.0
         
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.15.1'
+        cache: 'pnpm'
+        
     - name: Install dependencies
-      run: pnpm install
+      run: pnpm install --frozen-lockfile
       
     - name: Build extension
       run: pnpm run build
+      
+    - name: Verify build output
+      run: |
+        echo "📁 Build output contents:"
+        ls -la dist/package/
+        echo "📦 Extension files:"
+        ls -la dist/package/*.js dist/package/*.json dist/package/*.html dist/package/*.png || true
       
     - name: Create release package
       run: |
         cd dist/package
         zip -r ../../tormenta20-hotbars-${{ github.ref_name }}.zip .
         cd ../..
+        echo "📦 Package created: tormenta20-hotbars-${{ github.ref_name }}.zip"
+        ls -la tormenta20-hotbars-${{ github.ref_name }}.zip
         
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
@@ -44,5 +53,24 @@ jobs:
         generate_release_notes: true
         draft: false
         prerelease: false
+        body: |
+          ## 🚀 Tormenta20 Hotbars ${{ github.ref_name }}
+          
+          ### 📦 Instalação
+          1. Baixe o arquivo `tormenta20-hotbars-${{ github.ref_name }}.zip`
+          2. Extraia o conteúdo em uma pasta
+          3. Abra `chrome://extensions/`
+          4. Ative o "Modo desenvolvedor"
+          5. Clique em "Carregar sem compactação"
+          6. Selecione a pasta extraída
+          7. Recarregue a página do Roll20
+          
+          ### 🔄 Sistema de Auto-Update
+          - Verificação automática a cada 24 horas
+          - Verificação manual nas configurações da extensão
+          - Notificações elegantes para novas versões
+          
+          ### 📋 Changelog
+          Consulte o histórico de commits para detalhes das mudanças.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
