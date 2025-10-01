@@ -7421,6 +7421,81 @@
             <p style="margin: 8px 0;"><strong>Última atualização:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
         `;
 
+        // Botão de verificação manual de updates
+        const updateCheckSection = document.createElement('div');
+        updateCheckSection.style.marginTop = '15px';
+        updateCheckSection.style.padding = '12px';
+        updateCheckSection.style.background = 'rgba(76, 175, 80, 0.1)';
+        updateCheckSection.style.border = '1px solid rgba(76, 175, 80, 0.3)';
+        updateCheckSection.style.borderRadius = '6px';
+
+        const updateCheckTitle = document.createElement('h4');
+        updateCheckTitle.textContent = '🔄 Verificação de Atualizações';
+        updateCheckTitle.style.color = '#4CAF50';
+        updateCheckTitle.style.margin = '0 0 8px 0';
+        updateCheckTitle.style.fontSize = '14px';
+        updateCheckTitle.style.fontWeight = 'bold';
+
+        const updateCheckDescription = document.createElement('p');
+        updateCheckDescription.textContent = 'Verifique manualmente se há uma nova versão disponível. O sistema verifica automaticamente a cada 24 horas.';
+        updateCheckDescription.style.color = '#ecf0f1';
+        updateCheckDescription.style.fontSize = '12px';
+        updateCheckDescription.style.margin = '0 0 10px 0';
+        updateCheckDescription.style.lineHeight = '1.4';
+
+        const updateCheckButton = document.createElement('button');
+        updateCheckButton.textContent = '🔍 Verificar Atualizações';
+        updateCheckButton.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+        updateCheckButton.style.color = 'white';
+        updateCheckButton.style.border = 'none';
+        updateCheckButton.style.padding = '10px 16px';
+        updateCheckButton.style.borderRadius = '6px';
+        updateCheckButton.style.cursor = 'pointer';
+        updateCheckButton.style.fontSize = '13px';
+        updateCheckButton.style.fontWeight = 'bold';
+        updateCheckButton.style.transition = 'all 0.3s ease';
+        updateCheckButton.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+
+        // Efeitos hover
+        updateCheckButton.addEventListener('mouseenter', () => {
+            updateCheckButton.style.transform = 'translateY(-2px)';
+            updateCheckButton.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+        });
+
+        updateCheckButton.addEventListener('mouseleave', () => {
+            updateCheckButton.style.transform = 'translateY(0)';
+            updateCheckButton.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+        });
+
+        // Funcionalidade do botão
+        updateCheckButton.addEventListener('click', () => {
+            updateCheckButton.textContent = '⏳ Verificando...';
+            updateCheckButton.disabled = true;
+            updateCheckButton.style.opacity = '0.7';
+            updateCheckButton.style.cursor = 'not-allowed';
+
+            // Chamar verificação manual de updates
+            if (window.tormenta20CheckForUpdates) {
+                window.tormenta20CheckForUpdates();
+            } else {
+                // Fallback: mostrar instruções de verificação manual
+                showManualUpdateInstructions();
+            }
+
+            // Restaurar botão após 3 segundos
+            setTimeout(() => {
+                updateCheckButton.textContent = '🔍 Verificar Atualizações';
+                updateCheckButton.disabled = false;
+                updateCheckButton.style.opacity = '1';
+                updateCheckButton.style.cursor = 'pointer';
+            }, 3000);
+        });
+
+        updateCheckSection.appendChild(updateCheckTitle);
+        updateCheckSection.appendChild(updateCheckDescription);
+        updateCheckSection.appendChild(updateCheckButton);
+        scriptInfoSection.appendChild(updateCheckSection);
+
         // Seção 2: Sincronização de Dados
         const syncSection = document.createElement('div');
         syncSection.style.marginBottom = '25px';
@@ -7847,6 +7922,79 @@
 
         // Aplicar scrollbars customizadas
         applyDirectScrollbarStyles(modal, 'orange');
+    }
+
+    // Função para mostrar instruções de verificação manual de updates
+    function showManualUpdateInstructions() {
+        const instructions = document.createElement('div');
+        instructions.id = 'tormenta20-manual-update-instructions';
+        instructions.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10001;
+                max-width: 500px;
+                font-family: Arial, sans-serif;
+                color: #333;
+            ">
+                <h3 style="margin-top: 0; color: #667eea;">🔍 Verificação Manual de Atualizações</h3>
+                <p>Para verificar se há uma nova versão disponível:</p>
+                <ol style="line-height: 1.6;">
+                    <li>Visite: <a href="https://github.com/DMBerlin/roll20-tormenta20-hotbars/releases" target="_blank" style="color: #667eea;">GitHub Releases</a></li>
+                    <li>Compare a versão mais recente com a sua (${getGitVersion()})</li>
+                    <li>Se houver uma versão mais nova, baixe o arquivo <code>tormenta20-hotbars-[versão].zip</code></li>
+                    <li>Siga as instruções de instalação</li>
+                </ol>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                    <strong>💡 Dica:</strong> O sistema verifica automaticamente a cada 24 horas. Você pode aguardar a próxima verificação automática.
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="close-manual-instructions" style="
+                        background: #667eea;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        margin-right: 10px;
+                    ">Fechar</button>
+                    <button id="open-github-releases" style="
+                        background: #4CAF50;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    ">Abrir GitHub</button>
+                </div>
+            </div>
+            <div style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 10000;
+            "></div>
+        `;
+
+        document.body.appendChild(instructions);
+
+        instructions.querySelector('#close-manual-instructions').addEventListener('click', () => {
+            instructions.remove();
+        });
+
+        instructions.querySelector('#open-github-releases').addEventListener('click', () => {
+            window.open('https://github.com/DMBerlin/roll20-tormenta20-hotbars/releases', '_blank');
+            instructions.remove();
+        });
     }
 
     // Componente padronizado para mensagens de "nenhum resultado encontrado"

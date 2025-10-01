@@ -1,0 +1,48 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.15.1'
+        cache: 'npm'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 10.15.0
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Build extension
+      run: pnpm run build
+      
+    - name: Create release package
+      run: |
+        cd dist/package
+        zip -r ../../tormenta20-hotbars-${{ github.ref_name }}.zip .
+        cd ../..
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          tormenta20-hotbars-${{ github.ref_name }}.zip
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

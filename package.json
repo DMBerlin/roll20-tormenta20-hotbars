@@ -27,6 +27,7 @@
     "update-version": "node src/core/versioning/update-version.js",
     "sync-version": "node src/core/versioning/sync-version.js",
     "create-tag": "node src/core/versioning/create-tag.js",
+    "release": "node src/core/versioning/release.js",
     "update-landing": "node landing-page/update-landing-page.js"
   },
   "devDependencies": {

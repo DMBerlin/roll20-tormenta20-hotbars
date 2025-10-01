@@ -57,9 +57,37 @@ async function build() {
     const mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
     console.log('📖 Arquivo main.js lido');
 
-    // Combinar componentes bundle com main.js
-    const combinedContent = componentsBundleContent + '\n\n' + mainJsContent;
-    console.log('🔗 Conteúdo combinado (componentes + main.js)');
+    // Ler o arquivo update-checker.js
+    const updateCheckerPath = path.join(__dirname, '..', 'update', 'update-checker.js');
+    let updateCheckerContent = '';
+    if (fs.existsSync(updateCheckerPath)) {
+      updateCheckerContent = fs.readFileSync(updateCheckerPath, 'utf8');
+      console.log('🔄 Sistema de auto-update carregado');
+    } else {
+      console.log('⚠️ Sistema de auto-update não encontrado, continuando sem auto-update');
+    }
+
+    // Ler o arquivo update-installer.js
+    const updateInstallerPath = path.join(__dirname, '..', 'update', 'update-installer.js');
+    let updateInstallerContent = '';
+    if (fs.existsSync(updateInstallerPath)) {
+      updateInstallerContent = fs.readFileSync(updateInstallerPath, 'utf8');
+      console.log('📦 Sistema de instalação de updates carregado');
+    } else {
+      console.log('⚠️ Sistema de instalação de updates não encontrado, continuando sem instalação automática');
+    }
+
+    // Ler o arquivo test-manual-check.js (apenas em modo de desenvolvimento)
+    const testManualCheckPath = path.join(__dirname, '..', 'update', 'test-manual-check.js');
+    let testManualCheckContent = '';
+    if (fs.existsSync(testManualCheckPath) && currentBranch !== 'main') {
+      testManualCheckContent = fs.readFileSync(testManualCheckPath, 'utf8');
+      console.log('🧪 Script de teste de auto-update carregado (modo desenvolvimento)');
+    }
+
+    // Combinar componentes bundle com main.js, update checker, update installer e teste
+    const combinedContent = componentsBundleContent + '\n\n' + updateCheckerContent + '\n\n' + updateInstallerContent + '\n\n' + testManualCheckContent + '\n\n' + mainJsContent;
+    console.log('🔗 Conteúdo combinado (componentes + auto-update + installer + teste + main.js)');
 
     // Inline the generated spells data into the main.js content
     let finalCombinedContent = combinedContent;
