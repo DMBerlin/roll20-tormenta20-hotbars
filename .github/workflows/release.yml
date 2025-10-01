@@ -74,3 +74,4 @@ jobs:
           Consulte o histórico de commits para detalhes das mudanças.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
