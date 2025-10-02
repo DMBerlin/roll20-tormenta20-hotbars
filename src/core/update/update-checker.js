@@ -18,9 +18,39 @@ class UpdateChecker {
   }
 
   getCurrentVersion() {
-    // Extract version from the script itself
-    const versionMatch = /const SCRIPT_VERSION = '([^']+)';/.exec(document.documentElement.innerHTML);
-    return versionMatch ? versionMatch[1] : '0.0.0';
+    // Try multiple methods to get the current version
+    let version = '0.0.0';
+
+    // Method 1: Extract from script tag content
+    const scriptTags = document.querySelectorAll('script');
+    for (const script of scriptTags) {
+      if (script.textContent && script.textContent.includes('SCRIPT_VERSION')) {
+        const versionMatch = /const SCRIPT_VERSION = '([^']+)';/.exec(script.textContent);
+        if (versionMatch) {
+          version = versionMatch[1];
+          console.log('📦 Version found in script tag:', version);
+          break;
+        }
+      }
+    }
+
+    // Method 2: Extract from document HTML (fallback)
+    if (version === '0.0.0') {
+      const versionMatch = /const SCRIPT_VERSION = '([^']+)';/.exec(document.documentElement.innerHTML);
+      if (versionMatch) {
+        version = versionMatch[1];
+        console.log('📦 Version found in document HTML:', version);
+      }
+    }
+
+    // Method 3: Check if SCRIPT_VERSION is available globally
+    if (version === '0.0.0' && typeof window.SCRIPT_VERSION !== 'undefined') {
+      version = window.SCRIPT_VERSION;
+      console.log('📦 Version found in global variable:', version);
+    }
+
+    console.log('📦 Final detected version:', version);
+    return version;
   }
 
   async init() {
@@ -57,7 +87,10 @@ class UpdateChecker {
       console.log(`📦 Current version: ${this.currentVersion}`);
       console.log(`📦 Latest version: ${latestVersion}`);
 
-      if (this.isNewerVersion(latestVersion, this.currentVersion)) {
+      const isNewer = this.isNewerVersion(latestVersion, this.currentVersion);
+      console.log(`📦 Is latest version newer? ${isNewer}`);
+
+      if (isNewer) {
         console.log('🆕 New version available!');
         await this.showUpdateNotification(release);
       } else {
@@ -75,18 +108,32 @@ class UpdateChecker {
   }
 
   isNewerVersion(latest, current) {
-    // Simple version comparison (you might want to use a more robust library)
+    // Simple version comparison with debugging
+    console.log(`🔍 Comparing versions: latest="${latest}" vs current="${current}"`);
+
     const latestParts = latest.split('.').map(Number);
     const currentParts = current.split('.').map(Number);
+
+    console.log(`🔍 Latest parts: [${latestParts.join(', ')}]`);
+    console.log(`🔍 Current parts: [${currentParts.join(', ')}]`);
 
     for (let i = 0; i < Math.max(latestParts.length, currentParts.length); i++) {
       const latestPart = latestParts[i] || 0;
       const currentPart = currentParts[i] || 0;
 
-      if (latestPart > currentPart) return true;
-      if (latestPart < currentPart) return false;
+      console.log(`🔍 Part ${i}: latest=${latestPart}, current=${currentPart}`);
+
+      if (latestPart > currentPart) {
+        console.log(`🔍 Latest is newer: ${latestPart} > ${currentPart}`);
+        return true;
+      }
+      if (latestPart < currentPart) {
+        console.log(`🔍 Current is newer: ${latestPart} < ${currentPart}`);
+        return false;
+      }
     }
 
+    console.log(`🔍 Versions are equal`);
     return false;
   }
 
@@ -264,6 +311,7 @@ class UpdateChecker {
   }
 
   showErrorMessage(error) {
+    console.error('Showing error message:', error);
     const notification = document.createElement('div');
     notification.id = 'tormenta20-error-notification';
     notification.innerHTML = `
@@ -717,6 +765,7 @@ class UpdateChecker {
   }
 
   showCheckError(error) {
+    console.error('Showing check error:', error);
     // Criar notificação de erro
     const errorNotification = document.createElement('div');
     errorNotification.id = 'tormenta20-check-error';

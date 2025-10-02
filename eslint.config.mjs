@@ -11,7 +11,8 @@ export default defineConfig([
       "node_modules/**/*",
       "*.min.js",
       "*.bundle.js",
-      "landing-page/package/**/*"
+      "landing-page/package/**/*",
+      "src/core/update/test-manual-check.js"
     ],
     ...js.configs.recommended
   },
@@ -47,6 +48,17 @@ export default defineConfig([
         __dirname: "readonly",
         module: "writable",
         require: "readonly"
+      }
+    }
+  },
+  {
+    files: ["src/core/update/**/*.js"],
+    languageOptions: {
+      sourceType: "script",
+      globals: {
+        ...globals.browser,
+        ...globals.es2021,
+        MutationObserver: "readonly"
       }
     }
   },
