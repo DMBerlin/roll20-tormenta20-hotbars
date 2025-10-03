@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.2.41238'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.2.65341'; // Última tag Git
 
     const logger = window.console;
 
@@ -7581,6 +7581,380 @@
         modal.appendChild(buttonsContainer);
         document.body.appendChild(modal);
     }
+    // Função para criar modal de configurações de propriedades da ficha
+    function createPropertiesConfigModal() {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('properties-config-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('properties-config-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'properties-config-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'properties-config-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #6ec6ff';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.minWidth = '600px';
+        modal.style.maxWidth = '800px';
+        modal.style.width = 'auto';
+        modal.style.maxHeight = '85vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+        modal.style.boxSizing = 'border-box';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.paddingBottom = '15px';
+        header.style.borderBottom = '1px solid rgba(110,198,255,0.3)';
+
+        const title = document.createElement('h2');
+        title.textContent = '⚙️ Configurar Propriedades da Ficha';
+        title.style.color = '#6ec6ff';
+        title.style.margin = '0';
+        title.style.fontSize = '20px';
+        title.style.fontWeight = 'bold';
+
+        const closeBtn = window.Roll20Components.createCloseButton({
+            text: '×',
+            fontSize: '24px',
+            width: '32px',
+            height: '32px',
+            padding: '0',
+            color: '#6ec6ff',
+            onClick: () => {
+                overlay.remove();
+                modal.remove();
+            }
+        });
+
+        header.appendChild(title);
+        header.appendChild(closeBtn.render());
+
+        // Conteúdo
+        const content = document.createElement('div');
+        content.style.color = '#ecf0f1';
+
+        // Seção de explicação
+        const explanationSection = document.createElement('div');
+        explanationSection.style.marginBottom = '25px';
+        explanationSection.style.padding = '15px';
+        explanationSection.style.background = 'rgba(110,198,255,0.05)';
+        explanationSection.style.borderRadius = '8px';
+        explanationSection.style.border = '1px solid rgba(110,198,255,0.2)';
+        explanationSection.style.boxSizing = 'border-box';
+        explanationSection.style.width = '100%';
+
+        const explanationTitle = document.createElement('h3');
+        explanationTitle.textContent = '📋 Sincronização de Dados da Ficha';
+        explanationTitle.style.color = '#6ec6ff';
+        explanationTitle.style.margin = '0 0 15px 0';
+        explanationTitle.style.fontSize = '16px';
+        explanationTitle.style.fontWeight = 'bold';
+
+        const explanationText = document.createElement('p');
+        explanationText.textContent = 'Configure os campos de atributo da ficha que devem ser usados para preencher os valores das propriedades na hotbar (vida, mana, nível, etc.). Cada campo deve conter o nome exato do atributo como aparece na sua ficha do Roll20.';
+        explanationText.style.color = '#ecf0f1';
+        explanationText.style.fontSize = '14px';
+        explanationText.style.margin = '0';
+        explanationText.style.lineHeight = '1.5';
+
+        explanationSection.appendChild(explanationTitle);
+        explanationSection.appendChild(explanationText);
+
+        // Campo de identificação do personagem
+        const charIdSection = document.createElement('div');
+        charIdSection.style.marginBottom = '20px';
+        charIdSection.style.padding = '12px';
+        charIdSection.style.background = 'rgba(255, 193, 7, 0.1)';
+        charIdSection.style.border = '1px solid rgba(255, 193, 7, 0.3)';
+        charIdSection.style.borderRadius = '6px';
+
+        const charIdTitle = document.createElement('h4');
+        charIdTitle.textContent = '🔑 Chave de Identificação do Personagem';
+        charIdTitle.style.color = '#FFC107';
+        charIdTitle.style.margin = '0 0 8px 0';
+        charIdTitle.style.fontSize = '14px';
+        charIdTitle.style.fontWeight = 'bold';
+
+        const charIdDescription = document.createElement('p');
+        charIdDescription.textContent = 'Nome do personagem como aparece na ficha do Roll20. Esta chave é essencial para que as macros @{nome_do_personagem|atributo} funcionem corretamente.';
+        charIdDescription.style.color = '#ecf0f1';
+        charIdDescription.style.fontSize = '12px';
+        charIdDescription.style.margin = '0 0 10px 0';
+        charIdDescription.style.lineHeight = '1.4';
+
+        const charIdInput = document.createElement('input');
+        charIdInput.type = 'text';
+        charIdInput.id = 'char_identification_key_properties';
+        charIdInput.value = localStorage.getItem('tormenta-20-hotbars-char-identification-key') || getCharacterNameForMacro();
+        charIdInput.placeholder = 'Ex: Aragorn, Gandalf, etc.';
+        charIdInput.style.width = '100%';
+        charIdInput.style.padding = '10px 12px';
+        charIdInput.style.border = '2px solid rgba(255, 193, 7, 0.4)';
+        charIdInput.style.borderRadius = '6px';
+        charIdInput.style.background = 'rgba(30,30,40,0.9)';
+        charIdInput.style.color = '#ecf0f1';
+        charIdInput.style.fontSize = '13px';
+        charIdInput.style.boxSizing = 'border-box';
+        charIdInput.style.fontWeight = 'bold';
+
+        // Salvar valor quando mudar
+        charIdInput.addEventListener('change', () => {
+            localStorage.setItem('tormenta-20-hotbars-char-identification-key', charIdInput.value);
+            localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
+        });
+
+        charIdSection.appendChild(charIdTitle);
+        charIdSection.appendChild(charIdDescription);
+        charIdSection.appendChild(charIdInput);
+
+        // Campos de configuração dos atributos
+        const attributeFields = [
+            // Informações básicas
+            { key: 'tormenta-20-hotbars-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name', category: 'Informações Básicas' },
+            { key: 'tormenta-20-hotbars-char-race-attr', label: 'Raça', defaultValue: 'trace', category: 'Informações Básicas' },
+            { key: 'tormenta-20-hotbars-char-class-attr', label: 'Classe', defaultValue: 'tlevel', category: 'Informações Básicas' },
+            { key: 'tormenta-20-hotbars-char-level-attr', label: 'Nível', defaultValue: 'menace_nd', category: 'Informações Básicas' },
+            { key: 'tormenta-20-hotbars-char-divindade-attr', label: 'Divindade', defaultValue: 'divindade', category: 'Informações Básicas' },
+
+            // Recursos
+            { key: 'tormenta-20-hotbars-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal', category: 'Recursos' },
+            { key: 'tormenta-20-hotbars-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida', category: 'Recursos' },
+            { key: 'tormenta-20-hotbars-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal', category: 'Recursos' },
+            { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana', category: 'Recursos' },
+
+            // Carga
+            { key: 'tormenta-20-hotbars-char-carga-current-attr', label: 'Carga Atual', defaultValue: 'carga', category: 'Carga' },
+            { key: 'tormenta-20-hotbars-char-carga-limite-attr', label: 'Carga Limite', defaultValue: 'limite', category: 'Carga' },
+            { key: 'tormenta-20-hotbars-char-carga-maxima-attr', label: 'Carga Máxima', defaultValue: 'maxima', category: 'Carga' },
+
+            // Riquezas
+            { key: 'tormenta-20-hotbars-char-tibar-attr', label: 'Tibar', defaultValue: 'ts', category: 'Riquezas' },
+            { key: 'tormenta-20-hotbars-char-tibar-ouro-attr', label: 'Tibar de Ouro', defaultValue: 'to', category: 'Riquezas' },
+
+            // Defesas
+            { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init', category: 'Defesas' },
+            { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense', category: 'Defesas' },
+            { key: 'tormenta-20-hotbars-char-deslocamento-attr', label: 'Deslocamento', defaultValue: 'menace_desloc', category: 'Defesas' },
+            { key: 'tormenta-20-hotbars-char-fortitude-attr', label: 'Fortitude', defaultValue: 'menace_fortitude', category: 'Defesas' },
+            { key: 'tormenta-20-hotbars-char-reflex-attr', label: 'Reflexos', defaultValue: 'menace_reflex', category: 'Defesas' },
+            { key: 'tormenta-20-hotbars-char-will-attr', label: 'Vontade', defaultValue: 'menace_will', category: 'Defesas' },
+
+            // Atributos
+            { key: 'tormenta-20-hotbars-char-for-attr', label: 'Força', defaultValue: 'menace_for', category: 'Atributos' },
+            { key: 'tormenta-20-hotbars-char-des-attr', label: 'Destreza', defaultValue: 'menace_des', category: 'Atributos' },
+            { key: 'tormenta-20-hotbars-char-con-attr', label: 'Constituição', defaultValue: 'menace_con', category: 'Atributos' },
+            { key: 'tormenta-20-hotbars-char-int-attr', label: 'Inteligência', defaultValue: 'menace_int', category: 'Atributos' },
+            { key: 'tormenta-20-hotbars-char-sab-attr', label: 'Sabedoria', defaultValue: 'menace_sab', category: 'Atributos' },
+            { key: 'tormenta-20-hotbars-char-car-attr', label: 'Carisma', defaultValue: 'menace_car', category: 'Atributos' },
+
+            // Atributos Fake (modificadores temporários)
+            { key: 'tormenta-20-hotbars-char-fakefor-attr', label: 'Força (Fake)', defaultValue: 'fakefor', category: 'Atributos Temporários' },
+            { key: 'tormenta-20-hotbars-char-fakedes-attr', label: 'Destreza (Fake)', defaultValue: 'fakedes', category: 'Atributos Temporários' },
+            { key: 'tormenta-20-hotbars-char-fakecon-attr', label: 'Constituição (Fake)', defaultValue: 'fakecon', category: 'Atributos Temporários' },
+            { key: 'tormenta-20-hotbars-char-fakeint-attr', label: 'Inteligência (Fake)', defaultValue: 'fakeint', category: 'Atributos Temporários' },
+            { key: 'tormenta-20-hotbars-char-fakesab-attr', label: 'Sabedoria (Fake)', defaultValue: 'fakesab', category: 'Atributos Temporários' },
+            { key: 'tormenta-20-hotbars-char-fakecar-attr', label: 'Carisma (Fake)', defaultValue: 'fakecar', category: 'Atributos Temporários' },
+
+            // Equipamentos
+            { key: 'tormenta-20-hotbars-char-treasure-attr', label: 'Equipamentos/Tesouro', defaultValue: 'menace_treasure', category: 'Equipamentos' }
+        ];
+
+        // Agrupar campos por categoria
+        const fieldsByCategory = {};
+        attributeFields.forEach(field => {
+            if (!fieldsByCategory[field.category]) {
+                fieldsByCategory[field.category] = [];
+            }
+            fieldsByCategory[field.category].push(field);
+        });
+
+        // Criar seções por categoria
+        Object.keys(fieldsByCategory).forEach(categoryName => {
+            const categorySection = document.createElement('div');
+            categorySection.style.marginBottom = '20px';
+            categorySection.style.padding = '15px';
+            categorySection.style.background = 'rgba(110,198,255,0.05)';
+            categorySection.style.borderRadius = '8px';
+            categorySection.style.border = '1px solid rgba(110,198,255,0.2)';
+            categorySection.style.boxSizing = 'border-box';
+            categorySection.style.width = '100%';
+
+            const categoryTitle = document.createElement('h4');
+            categoryTitle.textContent = `📁 ${categoryName}`;
+            categoryTitle.style.color = '#6ec6ff';
+            categoryTitle.style.margin = '0 0 15px 0';
+            categoryTitle.style.fontSize = '14px';
+            categoryTitle.style.fontWeight = 'bold';
+
+            categorySection.appendChild(categoryTitle);
+
+            fieldsByCategory[categoryName].forEach(field => {
+                const fieldContainer = document.createElement('div');
+                fieldContainer.style.marginBottom = '12px';
+                fieldContainer.style.width = '100%';
+                fieldContainer.style.boxSizing = 'border-box';
+
+                const label = document.createElement('label');
+                label.textContent = field.label;
+                label.style.display = 'block';
+                label.style.marginBottom = '5px';
+                label.style.fontSize = '13px';
+                label.style.fontWeight = 'bold';
+                label.style.color = '#ecf0f1';
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = field.key;
+                input.value = localStorage.getItem(field.key) || field.defaultValue;
+                input.style.width = '100%';
+                input.style.padding = '8px 12px';
+                input.style.border = '1px solid rgba(110,198,255,0.3)';
+                input.style.borderRadius = '6px';
+                input.style.background = 'rgba(30,30,40,0.8)';
+                input.style.color = '#ecf0f1';
+                input.style.fontSize = '12px';
+                input.style.boxSizing = 'border-box';
+
+                // Salvar valor quando mudar
+                input.addEventListener('change', () => {
+                    localStorage.setItem(field.key, input.value);
+                });
+
+                // Label para mostrar valor atual
+                const currentValueLabel = document.createElement('div');
+                currentValueLabel.id = `${field.key}_current`;
+                currentValueLabel.style.fontSize = '10px';
+                currentValueLabel.style.color = '#888';
+                currentValueLabel.style.marginTop = '3px';
+                currentValueLabel.style.fontStyle = 'italic';
+
+                // Buscar valor atual do localStorage (valor sincronizado)
+                const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
+                const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
+                if (currentValue) {
+                    currentValueLabel.textContent = `Valor atual: ${currentValue}`;
+                } else {
+                    currentValueLabel.textContent = 'Nenhum valor salvo';
+                }
+
+                fieldContainer.appendChild(label);
+                fieldContainer.appendChild(input);
+                fieldContainer.appendChild(currentValueLabel);
+                categorySection.appendChild(fieldContainer);
+            });
+
+            content.appendChild(categorySection);
+        });
+
+        // Botão de sincronização
+        const syncButton = document.createElement('button');
+        syncButton.id = 'sync-data-btn-properties';
+        syncButton.textContent = '🔄 Sincronizar Dados';
+        syncButton.style.width = '100%';
+        syncButton.style.padding = '12px 20px';
+        syncButton.style.border = '1px solid #6ec6ff';
+        syncButton.style.borderRadius = '6px';
+        syncButton.style.background = 'transparent';
+        syncButton.style.color = '#6ec6ff';
+        syncButton.style.cursor = 'pointer';
+        syncButton.style.fontSize = '14px';
+        syncButton.style.fontWeight = 'bold';
+        syncButton.style.transition = 'all 0.2s ease';
+        syncButton.style.position = 'relative';
+        syncButton.style.boxSizing = 'border-box';
+        syncButton.style.whiteSpace = 'nowrap';
+        syncButton.style.overflow = 'hidden';
+        syncButton.style.textOverflow = 'ellipsis';
+        syncButton.style.marginTop = '20px';
+
+        // Configurar botão de sincronização
+        syncButton.disabled = false;
+        syncButton.style.opacity = '1';
+        syncButton.style.cursor = 'pointer';
+        syncButton.title = 'Sincroniza os dados da ficha com base nos atributos configurados acima';
+
+        // Eventos do botão de sincronização
+        syncButton.onmouseover = () => {
+            if (!syncButton.disabled) {
+                syncButton.style.background = 'rgba(110,198,255,0.1)';
+                syncButton.style.borderColor = '#8ed4ff';
+                syncButton.style.color = '#8ed4ff';
+                syncButton.style.transform = 'scale(1.02)';
+            }
+        };
+
+        syncButton.onmouseout = () => {
+            if (!syncButton.disabled) {
+                syncButton.style.background = 'transparent';
+                syncButton.style.borderColor = '#6ec6ff';
+                syncButton.style.color = '#6ec6ff';
+                syncButton.style.transform = 'scale(1)';
+            }
+        };
+
+        syncButton.onclick = async () => {
+            if (syncButton.disabled) return;
+
+            // Iniciar loading
+            syncButton.disabled = true;
+            syncButton.style.opacity = '0.7';
+            syncButton.style.cursor = 'not-allowed';
+            const originalText = syncButton.textContent;
+            syncButton.textContent = '⏳ Sincronizando...';
+
+            try {
+                await syncCharacterData();
+                showSuccessNotification('Dados sincronizados com sucesso!');
+            } catch (error) {
+                console.error('Erro na sincronização:', error);
+                createNotification('Erro ao sincronizar dados. Verifique o console para mais detalhes.', 'error', 5000);
+            } finally {
+                // Restaurar botão
+                syncButton.disabled = false;
+                syncButton.style.opacity = '1';
+                syncButton.style.cursor = 'pointer';
+                syncButton.textContent = originalText;
+            }
+        };
+
+        // Adicionar elementos ao modal
+        modal.appendChild(header);
+        modal.appendChild(content);
+        content.appendChild(explanationSection);
+        content.appendChild(charIdSection);
+        content.appendChild(syncButton);
+
+        document.body.appendChild(modal);
+    }
+
     // Função para criar modal de configurações
     function createConfigModal() {
         // Remove modal existente se houver
@@ -7709,13 +8083,18 @@
         updateCheckButton.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
         updateCheckButton.style.color = 'white';
         updateCheckButton.style.border = 'none';
-        updateCheckButton.style.padding = '10px 16px';
+        updateCheckButton.style.width = '100%';
+        updateCheckButton.style.padding = '12px 20px';
         updateCheckButton.style.borderRadius = '6px';
         updateCheckButton.style.cursor = 'pointer';
-        updateCheckButton.style.fontSize = '13px';
+        updateCheckButton.style.fontSize = '14px';
         updateCheckButton.style.fontWeight = 'bold';
-        updateCheckButton.style.transition = 'all 0.3s ease';
+        updateCheckButton.style.transition = 'all 0.2s ease';
         updateCheckButton.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+        updateCheckButton.style.boxSizing = 'border-box';
+        updateCheckButton.style.whiteSpace = 'nowrap';
+        updateCheckButton.style.overflow = 'hidden';
+        updateCheckButton.style.textOverflow = 'ellipsis';
 
         // Efeitos hover
         updateCheckButton.addEventListener('mouseenter', () => {
@@ -7757,7 +8136,7 @@
         updateCheckSection.appendChild(updateCheckButton);
         scriptInfoSection.appendChild(updateCheckSection);
 
-        // Seção 2: Sincronização de Dados
+        // Seção 2: Sincronização de Dados (Simplificada)
         const syncSection = document.createElement('div');
         syncSection.style.marginBottom = '25px';
         syncSection.style.padding = '15px';
@@ -7774,216 +8153,60 @@
         syncTitle.style.fontSize = '16px';
         syncTitle.style.fontWeight = 'bold';
 
+        const syncDescription = document.createElement('p');
+        syncDescription.textContent = 'Configure os campos de atributo da ficha que devem ser usados para preencher os valores das propriedades na hotbar (vida, mana, nível, etc.).';
+        syncDescription.style.color = '#ecf0f1';
+        syncDescription.style.fontSize = '14px';
+        syncDescription.style.margin = '0 0 15px 0';
+        syncDescription.style.lineHeight = '1.5';
+
+        // Botão para acessar configurações de propriedades
+        const propertiesButton = document.createElement('button');
+        propertiesButton.textContent = '⚙️ Configurar Propriedades da Ficha';
+        propertiesButton.style.width = '100%';
+        propertiesButton.style.padding = '12px 20px';
+        propertiesButton.style.border = '1px solid #6ec6ff';
+        propertiesButton.style.borderRadius = '6px';
+        propertiesButton.style.background = 'transparent';
+        propertiesButton.style.color = '#6ec6ff';
+        propertiesButton.style.cursor = 'pointer';
+        propertiesButton.style.fontSize = '14px';
+        propertiesButton.style.fontWeight = 'bold';
+        propertiesButton.style.transition = 'all 0.2s ease';
+        propertiesButton.style.position = 'relative';
+        propertiesButton.style.boxSizing = 'border-box';
+        propertiesButton.style.whiteSpace = 'nowrap';
+        propertiesButton.style.overflow = 'hidden';
+        propertiesButton.style.textOverflow = 'ellipsis';
+        propertiesButton.title = 'Abre o modal de configuração detalhada dos campos de atributo da ficha';
+
+        // Efeitos de hover para o botão de propriedades
+        propertiesButton.onmouseover = () => {
+            propertiesButton.style.background = 'rgba(110,198,255,0.1)';
+            propertiesButton.style.borderColor = '#8ed4ff';
+            propertiesButton.style.color = '#8ed4ff';
+            propertiesButton.style.transform = 'scale(1.02)';
+        };
+
+        propertiesButton.onmouseout = () => {
+            propertiesButton.style.background = 'transparent';
+            propertiesButton.style.borderColor = '#6ec6ff';
+            propertiesButton.style.color = '#6ec6ff';
+            propertiesButton.style.transform = 'scale(1)';
+        };
+
+        // Funcionalidade do botão
+        propertiesButton.onclick = () => {
+            // Fechar modal atual
+            overlay.remove();
+            modal.remove();
+            // Abrir modal de propriedades
+            createPropertiesConfigModal();
+        };
+
         syncSection.appendChild(syncTitle);
-
-        // Campo de identificação do personagem (IMPORTANTE)
-        const charIdSection = document.createElement('div');
-        charIdSection.style.marginBottom = '20px';
-        charIdSection.style.padding = '12px';
-        charIdSection.style.background = 'rgba(255, 193, 7, 0.1)';
-        charIdSection.style.border = '1px solid rgba(255, 193, 7, 0.3)';
-        charIdSection.style.borderRadius = '6px';
-
-        const charIdTitle = document.createElement('h4');
-        charIdTitle.textContent = '🔑 Chave de Identificação do Personagem';
-        charIdTitle.style.color = '#FFC107';
-        charIdTitle.style.margin = '0 0 8px 0';
-        charIdTitle.style.fontSize = '14px';
-        charIdTitle.style.fontWeight = 'bold';
-
-        const charIdDescription = document.createElement('p');
-        charIdDescription.textContent = 'Nome do personagem como aparece na ficha do Roll20. Esta chave é essencial para que as macros @{nome_do_personagem|atributo} funcionem corretamente.';
-        charIdDescription.style.color = '#ecf0f1';
-        charIdDescription.style.fontSize = '12px';
-        charIdDescription.style.margin = '0 0 10px 0';
-        charIdDescription.style.lineHeight = '1.4';
-
-        const charIdInput = document.createElement('input');
-        charIdInput.type = 'text';
-        charIdInput.id = 'char_identification_key';
-        charIdInput.value = localStorage.getItem('tormenta-20-hotbars-char-identification-key') || getCharacterNameForMacro();
-        charIdInput.placeholder = 'Ex: Aragorn, Gandalf, etc.';
-        charIdInput.style.width = '100%';
-        charIdInput.style.padding = '10px 12px';
-        charIdInput.style.border = '2px solid rgba(255, 193, 7, 0.4)';
-        charIdInput.style.borderRadius = '6px';
-        charIdInput.style.background = 'rgba(30,30,40,0.9)';
-        charIdInput.style.color = '#ecf0f1';
-        charIdInput.style.fontSize = '13px';
-        charIdInput.style.boxSizing = 'border-box';
-        charIdInput.style.fontWeight = 'bold';
-
-        // Salvar valor quando mudar
-        charIdInput.addEventListener('change', () => {
-            localStorage.setItem('tormenta-20-hotbars-char-identification-key', charIdInput.value);
-            // Atualizar também o nome do personagem para macros
-            localStorage.setItem(CHAR_NAME_KEY, charIdInput.value);
-        });
-
-        charIdSection.appendChild(charIdTitle);
-        charIdSection.appendChild(charIdDescription);
-        charIdSection.appendChild(charIdInput);
-        syncSection.appendChild(charIdSection);
-
-        // Informação sobre os campos de atributos
-        const attributeInfoSection = document.createElement('div');
-        attributeInfoSection.style.marginBottom = '15px';
-        attributeInfoSection.style.padding = '10px';
-        attributeInfoSection.style.background = 'rgba(110, 198, 255, 0.05)';
-        attributeInfoSection.style.border = '1px solid rgba(110, 198, 255, 0.2)';
-        attributeInfoSection.style.borderRadius = '6px';
-
-        const attributeInfoText = document.createElement('p');
-        attributeInfoText.textContent = 'Os campos abaixo são as chaves de atributo da ficha que devem ser usadas para preencher os valores das propriedades na hotbar (vida, mana, nível, etc.). Configure cada campo com o nome exato do atributo como aparece na sua ficha do Roll20.';
-        attributeInfoText.style.color = '#ecf0f1';
-        attributeInfoText.style.fontSize = '12px';
-        attributeInfoText.style.margin = '0';
-        attributeInfoText.style.lineHeight = '1.4';
-
-        attributeInfoSection.appendChild(attributeInfoText);
-        syncSection.appendChild(attributeInfoSection);
-
-        // Campos de configuração dos atributos
-        const attributeFields = [
-            // Informações básicas
-            { key: 'tormenta-20-hotbars-char-name-attr', label: 'Nome do Personagem', defaultValue: 'menace_name' },
-            { key: 'tormenta-20-hotbars-char-race-attr', label: 'Raça', defaultValue: 'trace' },
-            { key: 'tormenta-20-hotbars-char-class-attr', label: 'Classe', defaultValue: 'tlevel' },
-            { key: 'tormenta-20-hotbars-char-level-attr', label: 'Nível', defaultValue: 'menace_nd' },
-            { key: 'tormenta-20-hotbars-char-divindade-attr', label: 'Divindade', defaultValue: 'divindade' },
-
-            // Recursos
-            { key: 'tormenta-20-hotbars-char-hp-total-attr', label: 'Vida Total', defaultValue: 'vidatotal' },
-            { key: 'tormenta-20-hotbars-char-hp-current-attr', label: 'Vida Atual', defaultValue: 'vida' },
-            { key: 'tormenta-20-hotbars-char-mp-total-attr', label: 'Mana Total', defaultValue: 'manatotal' },
-            { key: 'tormenta-20-hotbars-char-mp-current-attr', label: 'Mana Atual', defaultValue: 'mana' },
-
-            // Carga
-            { key: 'tormenta-20-hotbars-char-carga-current-attr', label: 'Carga Atual', defaultValue: 'carga' },
-            { key: 'tormenta-20-hotbars-char-carga-limite-attr', label: 'Carga Limite', defaultValue: 'limite' },
-            { key: 'tormenta-20-hotbars-char-carga-maxima-attr', label: 'Carga Máxima', defaultValue: 'maxima' },
-
-            // Riquezas
-            { key: 'tormenta-20-hotbars-char-tibar-attr', label: 'Tibar', defaultValue: 'ts' },
-            { key: 'tormenta-20-hotbars-char-tibar-ouro-attr', label: 'Tibar de Ouro', defaultValue: 'to' },
-
-            // Defesas
-            { key: 'tormenta-20-hotbars-char-iniciativa-attr', label: 'Iniciativa', defaultValue: 'menace_init' },
-            { key: 'tormenta-20-hotbars-char-ac-attr', label: 'Defesa', defaultValue: 'menace_defense' },
-            { key: 'tormenta-20-hotbars-char-deslocamento-attr', label: 'Deslocamento', defaultValue: 'menace_desloc' },
-            { key: 'tormenta-20-hotbars-char-fortitude-attr', label: 'Fortitude', defaultValue: 'menace_fortitude' },
-            { key: 'tormenta-20-hotbars-char-reflex-attr', label: 'Reflexos', defaultValue: 'menace_reflex' },
-            { key: 'tormenta-20-hotbars-char-will-attr', label: 'Vontade', defaultValue: 'menace_will' },
-
-            // Atributos
-            { key: 'tormenta-20-hotbars-char-for-attr', label: 'Força', defaultValue: 'menace_for' },
-            { key: 'tormenta-20-hotbars-char-des-attr', label: 'Destreza', defaultValue: 'menace_des' },
-            { key: 'tormenta-20-hotbars-char-con-attr', label: 'Constituição', defaultValue: 'menace_con' },
-            { key: 'tormenta-20-hotbars-char-int-attr', label: 'Inteligência', defaultValue: 'menace_int' },
-            { key: 'tormenta-20-hotbars-char-sab-attr', label: 'Sabedoria', defaultValue: 'menace_sab' },
-            { key: 'tormenta-20-hotbars-char-car-attr', label: 'Carisma', defaultValue: 'menace_car' },
-
-            // Atributos Fake (modificadores temporários)
-            { key: 'tormenta-20-hotbars-char-fakefor-attr', label: 'Força (Fake)', defaultValue: 'fakefor' },
-            { key: 'tormenta-20-hotbars-char-fakedes-attr', label: 'Destreza (Fake)', defaultValue: 'fakedes' },
-            { key: 'tormenta-20-hotbars-char-fakecon-attr', label: 'Constituição (Fake)', defaultValue: 'fakecon' },
-            { key: 'tormenta-20-hotbars-char-fakeint-attr', label: 'Inteligência (Fake)', defaultValue: 'fakeint' },
-            { key: 'tormenta-20-hotbars-char-fakesab-attr', label: 'Sabedoria (Fake)', defaultValue: 'fakesab' },
-            { key: 'tormenta-20-hotbars-char-fakecar-attr', label: 'Carisma (Fake)', defaultValue: 'fakecar' },
-
-            // Equipamentos
-            { key: 'tormenta-20-hotbars-char-treasure-attr', label: 'Equipamentos/Tesouro', defaultValue: 'menace_treasure' }
-        ];
-
-        const fieldsContainer = document.createElement('div');
-        fieldsContainer.style.marginBottom = '15px';
-        fieldsContainer.style.width = '100%';
-        fieldsContainer.style.boxSizing = 'border-box';
-
-        attributeFields.forEach(field => {
-            const fieldContainer = document.createElement('div');
-            fieldContainer.style.marginBottom = '12px';
-            fieldContainer.style.width = '100%';
-            fieldContainer.style.boxSizing = 'border-box';
-
-            const label = document.createElement('label');
-            label.textContent = field.label;
-            label.style.display = 'block';
-            label.style.marginBottom = '5px';
-            label.style.fontSize = '14px';
-            label.style.fontWeight = 'bold';
-            label.style.color = '#ecf0f1';
-
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.id = field.key;
-            input.value = localStorage.getItem(field.key) || field.defaultValue;
-            input.style.width = '100%';
-            input.style.padding = '8px 12px';
-            input.style.border = '1px solid rgba(110,198,255,0.3)';
-            input.style.borderRadius = '6px';
-            input.style.background = 'rgba(30,30,40,0.8)';
-            input.style.color = '#ecf0f1';
-            input.style.fontSize = '13px';
-            input.style.boxSizing = 'border-box';
-
-            // Salvar valor quando mudar
-            input.addEventListener('change', () => {
-                localStorage.setItem(field.key, input.value);
-            });
-
-            // Label para mostrar valor atual
-            const currentValueLabel = document.createElement('div');
-            currentValueLabel.id = `${field.key}_current`;
-            currentValueLabel.style.fontSize = '11px';
-            currentValueLabel.style.color = '#888';
-            currentValueLabel.style.marginTop = '3px';
-            currentValueLabel.style.fontStyle = 'italic';
-
-            // Buscar valor atual do localStorage (valor sincronizado)
-            const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
-            const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
-            if (currentValue) {
-                currentValueLabel.textContent = `Valor atual: ${currentValue}`;
-            } else {
-                currentValueLabel.textContent = 'Nenhum valor salvo';
-            }
-
-            fieldContainer.appendChild(label);
-            fieldContainer.appendChild(input);
-            fieldContainer.appendChild(currentValueLabel);
-            fieldsContainer.appendChild(fieldContainer);
-        });
-
-        syncSection.appendChild(fieldsContainer);
-
-        // Botão de sincronização
-        const syncButton = document.createElement('button');
-        syncButton.id = 'sync-data-btn';
-        syncButton.textContent = '🔄 Sincronizar Dados';
-        syncButton.style.width = '100%';
-        syncButton.style.padding = '12px 20px';
-        syncButton.style.border = '1px solid #6ec6ff';
-        syncButton.style.borderRadius = '6px';
-        syncButton.style.background = 'transparent';
-        syncButton.style.color = '#6ec6ff';
-        syncButton.style.cursor = 'pointer';
-        syncButton.style.fontSize = '14px';
-        syncButton.style.fontWeight = 'bold';
-        syncButton.style.transition = 'all 0.2s ease';
-        syncButton.style.position = 'relative';
-        syncButton.style.boxSizing = 'border-box';
-        syncButton.style.whiteSpace = 'nowrap';
-        syncButton.style.overflow = 'hidden';
-        syncButton.style.textOverflow = 'ellipsis';
-
-        // Configurar botão de sincronização (sem bloqueio TTM)
-        syncButton.disabled = false;
-        syncButton.style.opacity = '1';
-        syncButton.style.cursor = 'pointer';
-        syncButton.title = 'Sincroniza os dados da ficha com base nos atributos configurados acima';
-
-        syncSection.appendChild(syncButton);
+        syncSection.appendChild(syncDescription);
+        syncSection.appendChild(propertiesButton);
 
 
 
@@ -8033,24 +8256,6 @@
         content.appendChild(cacheSection);
 
         // Eventos dos botões
-        // Efeitos de hover para botão de sincronização
-        syncButton.onmouseover = () => {
-            if (!syncButton.disabled) {
-                syncButton.style.background = 'rgba(110,198,255,0.1)';
-                syncButton.style.borderColor = '#8ed4ff';
-                syncButton.style.color = '#8ed4ff';
-                syncButton.style.transform = 'scale(1.02)';
-            }
-        };
-
-        syncButton.onmouseout = () => {
-            if (!syncButton.disabled) {
-                syncButton.style.background = 'transparent';
-                syncButton.style.borderColor = '#6ec6ff';
-                syncButton.style.color = '#6ec6ff';
-                syncButton.style.transform = 'scale(1)';
-            }
-        };
 
         // Efeitos de hover para botão de limpar
         clearButton.onmouseover = () => {
@@ -8067,70 +8272,6 @@
             clearButton.style.transform = 'scale(1)';
         };
 
-        // Evento de clique do botão de sincronização
-        syncButton.onclick = async () => {
-            if (syncButton.disabled) return;
-
-            // Iniciar loading
-            syncButton.disabled = true;
-            syncButton.style.opacity = '0.7';
-            syncButton.style.cursor = 'not-allowed';
-            const originalText = syncButton.textContent;
-            syncButton.textContent = '⏳ Sincronizando...';
-
-            try {
-                // Prevenir sincronização sem TTM
-                if (!isTTMActive()) {
-                    sendToChat('/talktomyself');
-                    setTimeout(() => updateTTMToggleVisual(), 500);
-                }
-
-                // Coletar atributos configurados
-                const attributes = {};
-                attributeFields.forEach(field => {
-                    const input = document.getElementById(field.key);
-                    // Extrair apenas o nome do atributo (ex: 'name' de 'tormenta-20-hotbars-char-name-attr')
-                    const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
-                    attributes[attrName] = input.value;
-                });
-
-                // Executar sincronização
-                await syncCharacterData(attributes);
-
-                // Atualizar labels de valores atuais
-                attributeFields.forEach(field => {
-                    const attrName = field.key.replace('tormenta-20-hotbars-char-', '').replace('-attr', '');
-                    const currentValue = localStorage.getItem(`tormenta-20-hotbars-sync-${attrName}`);
-                    const currentValueLabel = document.getElementById(`${field.key}_current`);
-                    if (currentValue) {
-                        currentValueLabel.textContent = `Valor atual: ${currentValue}`;
-                        currentValueLabel.style.color = '#4caf50';
-                    } else {
-                        currentValueLabel.textContent = 'Nenhum valor salvo';
-                        currentValueLabel.style.color = '#888';
-                    }
-                });
-
-                createNotification('Sincronização concluída com sucesso!', 'success', 3000);
-
-                // Forçar atualização da UI da hotbar
-                updateHotbarUI();
-            } catch (error) {
-                console.error('Erro na sincronização:', error);
-                createNotification(`Erro na sincronização: ${error.message}`, 'error', 5000);
-            } finally {
-                // Desligar TTM após sync
-                if (isTTMActive()) {
-                    sendToChat('/talktomyself');
-                    setTimeout(() => updateTTMToggleVisual(), 500);
-                }
-                // Restaurar botão
-                syncButton.disabled = false;
-                syncButton.style.opacity = '1';
-                syncButton.style.cursor = 'pointer';
-                syncButton.textContent = originalText;
-            }
-        };
 
         // Função para limpar apenas os dados do hotbar
         function clearHotbarData() {
