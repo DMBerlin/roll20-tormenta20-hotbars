@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.2'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.2.41238'; // Última tag Git
 
     const logger = window.console;
 
@@ -5632,6 +5632,267 @@
                 custoIngredientes: 'T$ 28',
                 cdTeste: '22',
                 icone: '🌑'
+            },
+            // PRATOS ESPECIAIS DIVINOS
+            {
+                nome: 'Abraço da Noite',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_85.jpg', // Dark Chocolate
+                raridade: 'Raro',
+                descricao: 'Dizem que este doce gelado e aveludado como a noite foi criado por clérigos anões para homenagear sua mãe Ayrelynn (Tenebra). Até o fim do dia, você pode usar o poder Carícia Sombria uma vez. Se já o possui, pode usá-lo uma vez causando 4d6 pontos de dano de trevas (em vez de 2d6). Pela graça da Mãe Noite, mortos-vivos podem receber o benefício deste prato especial.',
+                bonus: 'Pode usar Carícia Sombria uma vez (ou +2d6 dano se já possuir). Mortos-vivos podem se beneficiar.',
+                preco: 'T$ 80',
+                ingredientes: 'Açúcar das fadas, especiaria rara, ingrediente sombrio',
+                custoIngredientes: 'T$ 120',
+                cdTeste: '28',
+                icone: '🌙',
+                deus: 'Tenebra'
+            },
+            {
+                nome: 'Assado de Entranhas',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_60.jpg', // Roasted Meat
+                raridade: 'Comum',
+                descricao: 'Este assado tem uma aparência pouco agradável, mas desperta os instintos mais primais. Feito com técnicas simples dos ermos, pode ser fabricado também com Sobrevivência. Até o fim do dia, você pode invocar esses instintos para receber +1 nas rolagens de dano com armas corpo a corpo por uma cena.',
+                bonus: '+1 nas rolagens de dano com armas corpo a corpo por uma cena.',
+                preco: 'T$ 25',
+                ingredientes: 'Carne, especiaria, ingrediente selvagem',
+                custoIngredientes: 'T$ 35',
+                cdTeste: '18',
+                icone: '🥩',
+                deus: 'Megalokk'
+            },
+            {
+                nome: 'Bênção dos Mares',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_63.jpg', // Fish
+                raridade: 'Comum',
+                descricao: 'Este festival de ostras se tornou uma lenda entre as gentes do mar. Dizem que, em momentos de grande aflição, o próprio deus envia estes presentes para restaurar a força de quem depende do mar. Até o fim do dia, você pode invocar o poder do Deus dos Mares para adquirir deslocamento de natação, igual ao seu deslocamento, por uma cena (se já possuir esse deslocamento, em vez disso ele aumenta em +3m).',
+                bonus: 'Deslocamento de natação igual ao seu deslocamento por uma cena (ou +3m se já possuir).',
+                preco: 'T$ 45',
+                ingredientes: 'Ostra, peixe, algas marinhas',
+                custoIngredientes: 'T$ 60',
+                cdTeste: '20',
+                icone: '🌊',
+                deus: 'Oceano'
+            },
+            {
+                nome: 'Bolinho de Jade',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Apple Pie
+                raridade: 'Comum',
+                descricao: 'Este prosaico bolinho de ervas é como a honra pregada por Lin-Wu: simples, direto e verdadeiro. Até o fim do dia, você pode usar o poder Kiai Divino uma vez. Se já o possui, pode usá-lo uma vez sem pagar seu custo em PM.',
+                bonus: 'Pode usar Kiai Divino uma vez (ou sem custo de PM se já possuir).',
+                preco: 'T$ 30',
+                ingredientes: 'Farinha, ervas sagradas, ingrediente divino',
+                custoIngredientes: 'T$ 45',
+                cdTeste: '22',
+                icone: '🥟',
+                deus: 'Lin-Wu'
+            },
+            {
+                nome: 'Bombas de Saber',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_144_cakeslice.jpg', // Cake Slice
+                raridade: 'Comum',
+                descricao: 'O estudo é a maior paixão dos devotos de Tanna-Toh. Este doce assado recheado com creme lhes dá a energia para estudar noite adentro. Uma vez até o fim do dia, quando vai fazer um teste de perícia, você pode receber os benefícios de ser treinado nessa perícia para esse teste.',
+                bonus: 'Uma vez por dia, pode ser considerado treinado em qualquer perícia para um teste.',
+                preco: 'T$ 35',
+                ingredientes: 'Farinha, açúcar, creme, ingrediente mágico',
+                custoIngredientes: 'T$ 50',
+                cdTeste: '20',
+                icone: '🧁',
+                deus: 'Tanna-Toh'
+            },
+            {
+                nome: 'Caldo de Lena',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_cooked_goldcarpconsomme.jpg', // Soup
+                raridade: 'Comum',
+                descricao: 'Esta sobremesa a base de milho é perfeita para celebrar a fertilidade do campo. Uma comida tão doce é ideal para acalentar aventureiros cansados após um dia difícil. Quando recebe cura mágica de luz, você recupera +2 PV.',
+                bonus: '+2 PV adicionais quando recebe cura mágica de luz.',
+                preco: 'T$ 20',
+                ingredientes: 'Milho, açúcar, ingrediente sagrado',
+                custoIngredientes: 'T$ 25',
+                cdTeste: '15',
+                icone: '🌽',
+                deus: 'Lena'
+            },
+            {
+                nome: 'Coragem de Sangue',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_drink_12.jpg', // Spiced Rum
+                raridade: 'Comum',
+                descricao: 'Açúcar para energia, especiarias com propriedades fortificantes e vinho para coragem são misturados em uma receita de gosto forte e pungente, servida em chamas, que desperta o instinto de luta. Uma vez até o fim do dia, quando faz a ação agredir, você pode executar um ataque extra.',
+                bonus: 'Uma vez por dia, pode fazer um ataque extra quando usa a ação agredir.',
+                preco: 'T$ 40',
+                ingredientes: 'Açúcar, especiaria forte, vinho, ingrediente bélico',
+                custoIngredientes: 'T$ 55',
+                cdTeste: '22',
+                icone: '⚔️',
+                deus: 'Arsenal'
+            },
+            {
+                nome: 'Deleite Mágico',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_144_cakeslice.jpg', // Magical Cake
+                raridade: 'Raro',
+                descricao: 'Em Arton, a magia pode ser comum, mas não deixa de ser especial. Ao consumir este folhado místico, escolha uma magia de 1º círculo. Até o fim do dia, você pode lançá-la uma única vez, sem aprimoramentos, gastando 2 PM (atributo-chave Sabedoria).',
+                bonus: 'Pode lançar uma magia de 1º círculo uma vez (2 PM, Sabedoria).',
+                preco: 'T$ 60',
+                ingredientes: 'Farinha mágica, ingrediente arcano, essência mística',
+                custoIngredientes: 'T$ 90',
+                cdTeste: '25',
+                icone: '✨',
+                deus: 'Wynna'
+            },
+            {
+                nome: 'Frescor de Nimb',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Random Food
+                raridade: 'Raro',
+                descricao: 'Mesmo os paladares mais refinados têm dificuldade em descrever o frescor de Nimb. Ao ingerir este prato, escolha um deus aleatoriamente. Você recebe o benefício do prato desse deus (se for Nimb, role novamente duas vezes, repetindo isso sempre que rolar o Deus do Caos).',
+                bonus: 'Efeito aleatório baseado em um deus escolhido aleatoriamente.',
+                preco: 'T$ 100',
+                ingredientes: 'Ingrediente caótico, essência divina, componente aleatório',
+                custoIngredientes: 'T$ 150',
+                cdTeste: '30',
+                icone: '🎲',
+                deus: 'Nimb'
+            },
+            {
+                nome: 'Joia do Deserto',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Date
+                raridade: 'Comum',
+                descricao: 'Este doce a base de tâmaras mostra o amor do povo de Azgher por seu patrono. Uma vez até o fim do dia, você pode fazer uma arma corpo a corpo de corte que esteja empunhando se cobrir de chamas. Ela causa +1d6 pontos de dano de fogo (ou +2d6 contra mortos-vivos). As chamas duram até você acertar três ataques ou até o fim da cena (o que acontecer primeiro).',
+                bonus: 'Arma corpo a corpo de corte em chamas: +1d6 dano fogo (+2d6 vs mortos-vivos).',
+                preco: 'T$ 35',
+                ingredientes: 'Tâmara, especiaria do deserto, ingrediente flamejante',
+                custoIngredientes: 'T$ 45',
+                cdTeste: '20',
+                icone: '🔥',
+                deus: 'Azgher'
+            },
+            {
+                nome: 'Justos de Khalmyr',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Cookie
+                raridade: 'Comum',
+                descricao: 'Assim como a justiça, este biscoitinho foi criado para chegar a todos. Até o fim do dia, quando fizer um teste de perícia, você pode gastar o efeito deste prato para escolher 10 nesse teste (em vez de usar o valor rolado no d20).',
+                bonus: 'Uma vez por dia, pode escolher 10 em qualquer teste de perícia.',
+                preco: 'T$ 25',
+                ingredientes: 'Farinha, açúcar, ingrediente justo',
+                custoIngredientes: 'T$ 30',
+                cdTeste: '18',
+                icone: '⚖️',
+                deus: 'Khalmyr'
+            },
+            {
+                nome: 'Justos Virtuosos',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Sour Cookie
+                raridade: 'Raro',
+                descricao: 'Este biscoito, propositalmente semelhante à receita de Khalmyr, guarda uma surpresa na forma de um recheio azedo, capaz de estragar qualquer apetite. Uma vez nesse dia, quando um inimigo em alcance curto usa uma habilidade, você pode invocar o poder deste doce para ser afetado por essa habilidade como se fosse um aliado desse inimigo (se aplicável).',
+                bonus: 'Uma vez por dia, pode ser afetado por habilidade inimiga como se fosse aliado.',
+                preco: 'T$ 50',
+                ingredientes: 'Farinha, ingrediente traiçoeiro, essência maligna',
+                custoIngredientes: 'T$ 70',
+                cdTeste: '25',
+                icone: '😈',
+                deus: 'Sszzaas'
+            },
+            {
+                nome: 'Manjar da Paz',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Peaceful Food
+                raridade: 'Comum',
+                descricao: 'Esta delícia, compartilhada com alegria pelos devotos de Marah, é degustada em toda Arton. Uma vez nesse dia, quando uma criatura em alcance curto fizer um ataque, você pode fazer com que ela role dois dados e use o pior resultado.',
+                bonus: 'Uma vez por dia, inimigo em alcance curto rola 2 dados e usa o pior.',
+                preco: 'T$ 30',
+                ingredientes: 'Ingrediente pacífico, essência de harmonia, componente sagrado',
+                custoIngredientes: 'T$ 40',
+                cdTeste: '20',
+                icone: '🕊️',
+                deus: 'Marah'
+            },
+            {
+                nome: 'Ouro de Dragão',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Golden Cream
+                raridade: 'Raro',
+                descricao: 'Este creme doce é considerado uma iguaria reservada aos maiores sacerdotes de Kallyadranoch. Uma vez até o fim do dia, você pode evocar a força de Kallyadranoch para receber +1 em testes de ataque por uma cena.',
+                bonus: '+1 em testes de ataque por uma cena.',
+                preco: 'T$ 80',
+                ingredientes: 'Creme dourado, ingrediente draconiano, essência de poder',
+                custoIngredientes: 'T$ 120',
+                cdTeste: '28',
+                icone: '🐉',
+                deus: 'Kallyadranoch'
+            },
+            {
+                nome: 'Ovos de Raposa',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Stuffed Eggs
+                raridade: 'Comum',
+                descricao: 'O tempero do Deus dos Ladrões garante que estes ovos recheados tenham sempre um sabor diferente e inesperado. Uma vez nesse dia, você pode rolar novamente um teste de Enganação ou Ladinagem recém-feito.',
+                bonus: 'Uma vez por dia, pode rolar novamente teste de Enganação ou Ladinagem.',
+                preco: 'T$ 25',
+                ingredientes: 'Ovo, tempero especial, ingrediente trapaceiro',
+                custoIngredientes: 'T$ 30',
+                cdTeste: '18',
+                icone: '🦊',
+                deus: 'Hyninn'
+            },
+            {
+                nome: 'Pão de Thwor',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Bread
+                raridade: 'Comum',
+                descricao: 'O pão, um alimento tão simples quanto importante, simboliza a tenacidade e resistência duyshidakk. Uma vez até o fim do dia, quando faz um teste de Fortitude ou de perícia baseada em Força, você pode rolá-lo novamente.',
+                bonus: 'Uma vez por dia, pode rolar novamente teste de Fortitude ou Força.',
+                preco: 'T$ 15',
+                ingredientes: 'Farinha, ingrediente resistente, componente duyshidakk',
+                custoIngredientes: 'T$ 20',
+                cdTeste: '15',
+                icone: '🍞',
+                deus: 'Thwor'
+            },
+            {
+                nome: 'Presente da Terra',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Granola
+                raridade: 'Comum',
+                descricao: 'Esta granola especial usa ingredientes acessíveis, encontrados em qualquer ambiente natural; você pode usar Sobrevivência no lugar de Ofício (cozinheiro) para fabricar este prato. Uma vez até o fim do dia, você pode rolar novamente um teste de Adestramento ou Sobrevivência recém-feito.',
+                bonus: 'Uma vez por dia, pode rolar novamente teste de Adestramento ou Sobrevivência.',
+                preco: 'T$ 20',
+                ingredientes: 'Cereal, nozes, ingrediente natural',
+                custoIngredientes: 'T$ 25',
+                cdTeste: '15',
+                icone: '🌿',
+                deus: 'Allihanna'
+            },
+            {
+                nome: 'Renascer Gentil',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Healing Pastille
+                raridade: 'Raro',
+                descricao: 'Esta pastilha refrescante e ardida, tradicionalmente distribuída por devotos a pessoas em dificuldade, é carregada de esperanças. A primeira vez até o fim do dia em que seus PV forem reduzidos a 0 ou menos por dano, em vez disso eles são reduzidos a 1.',
+                bonus: 'Primeira vez que PV seriam reduzidos a 0 ou menos, em vez disso ficam em 1.',
+                preco: 'T$ 60',
+                ingredientes: 'Ingrediente curativo, essência de esperança, componente sagrado',
+                custoIngredientes: 'T$ 85',
+                cdTeste: '25',
+                icone: '💚',
+                deus: 'Thyatis'
+            },
+            {
+                nome: 'Suflê Rubro',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Red Souffle
+                raridade: 'Raro',
+                descricao: 'Quase um alimento ritualístico, este prato oferece um vislumbre do raciocínio alienígena e incompreensível dos lefeu. No início de qualquer cena de ação, role 1d6. Com um resultado ímpar, você fica fascinado na primeira rodada, perdido em devaneios sobre a futilidade da vida. Com um resultado par, entretanto, você enxerga falhas na Criação que podem ser exploradas a seu favor. Você recebe +5 em um teste de perícia a sua escolha feito até o fim de seu próximo turno.',
+                bonus: 'No início da cena: ímpar = fascinado 1 rodada, par = +5 em perícia escolhida.',
+                preco: 'T$ 70',
+                ingredientes: 'Ingrediente lefeu, essência alienígena, componente caótico',
+                custoIngredientes: 'T$ 100',
+                cdTeste: '28',
+                icone: '👁️',
+                deus: 'Aharadak'
+            },
+            {
+                nome: 'Tesouro de Valkaria',
+                iconeUrl: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_10.jpg', // Traveler's Food
+                raridade: 'Comum',
+                descricao: 'Este prato, que mistura grãos com carnes menos nobres e temperos fortes, é popular entre viajantes, sendo frequentemente preparado em acampamentos à beira das estradas. Uma vez nesse dia, você recebe +5 em um teste de resistência contra efeitos de movimento.',
+                bonus: 'Uma vez por dia, +5 em teste de resistência contra efeitos de movimento.',
+                preco: 'T$ 25',
+                ingredientes: 'Grão, carne, tempero forte',
+                custoIngredientes: 'T$ 30',
+                cdTeste: '18',
+                icone: '🎒',
+                deus: 'Valkaria'
             }
         ];
     }
