@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.3'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.3.31826'; // Última tag Git
 
     const logger = window.console;
 
@@ -15956,6 +15956,45 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 });
             }
 
+            // Adiciona poderes
+            try {
+                const powersData = getPowersList();
+                if (powersData) {
+                    // Iterate through all categories and subtypes
+                    Object.values(powersData).forEach(categoria => {
+                        if (typeof categoria === 'object' && categoria !== null) {
+                            Object.values(categoria).forEach(subtipo => {
+                                if (typeof subtipo === 'object' && subtipo !== null) {
+                                    Object.values(subtipo).forEach(power => {
+                                        if (power && typeof power === 'object' && power.nome) {
+                                            const categoryName = power.categoria === 'classe' ? 'Poder de Classe' :
+                                                power.categoria === 'geral' ? 'Poder Geral' :
+                                                    power.categoria === 'origem' ? 'Poder de Origem' :
+                                                        power.categoria === 'racial' ? 'Poder Racial' : 'Poder';
+
+                                            const subtypeName = power.subtipo || '';
+                                            const description = `${categoryName}${subtypeName ? ` - ${subtypeName}` : ''}`;
+
+                                            searchIndex.push({
+                                                name: power.nome,
+                                                category: categoryName,
+                                                description: description,
+                                                effects: power.descricao || power.descricaoCompleta || '',
+                                                icon: '⚔️',
+                                                type: 'power',
+                                                data: power
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            } catch (error) {
+                console.warn('Erro ao carregar poderes para busca:', error);
+            }
+
             return searchIndex;
         }
 
@@ -16132,6 +16171,15 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
                 sendToChat(template);
                 showSuccessNotification(`Poder de Destino "${item.name}" compartilhado no chat!`);
+                // Fechar todos os popups abertos
+                closeAllPopups();
+                break;
+            }
+            case 'power': {
+                // Mostra detalhes do poder no chat
+                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.effects || item.description || ''}}}`;
+                sendToChat(template);
+                showSuccessNotification(`Poder "${item.name}" compartilhado no chat!`);
                 // Fechar todos os popups abertos
                 closeAllPopups();
                 break;
