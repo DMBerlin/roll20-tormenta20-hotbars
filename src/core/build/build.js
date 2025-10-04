@@ -180,7 +180,7 @@ async function build() {
     const packageJsonPath = path.join(__dirname, '..', '..', '..', 'package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
-    const extensionName = packageJson.name || 'Roll20 Hotbar Extra';
+    const extensionName = packageJson.displayName || packageJson.name || 'Roll20 Hotbar Extra';
     const extensionDescription = packageJson.description || 'Adiciona uma hotbar flutuante arrastável com macros extras ao Roll20';
     const extensionVersion = packageJson.version || '1.0.0';
     const extensionAuthor = packageJson.author || 'Daniel Marinho Goncalves';

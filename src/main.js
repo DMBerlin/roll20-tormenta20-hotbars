@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.4'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.4.99438'; // Última tag Git
 
     const logger = window.console;
 
@@ -4210,6 +4210,13 @@
             learnButton.style.border = '1px solid #c0392b';
             learnButton.onclick = () => {
                 toggleLearnedSpell(spell.name);
+                
+                // Update the spell list if it exists (reactive update)
+                const spellListElement = document.getElementById('spells-list');
+                if (spellListElement && typeof window.currentSpellListUpdater === 'function') {
+                    window.currentSpellListUpdater();
+                }
+                
                 closePopup(); // Fechar o popup de detalhes
             };
         } else {
@@ -4218,6 +4225,13 @@
             learnButton.style.border = '1px solid #2ecc71';
             learnButton.onclick = () => {
                 toggleLearnedSpell(spell.name);
+                
+                // Update the spell list if it exists (reactive update)
+                const spellListElement = document.getElementById('spells-list');
+                if (spellListElement && typeof window.currentSpellListUpdater === 'function') {
+                    window.currentSpellListUpdater();
+                }
+                
                 closePopup(); // Fechar o popup de detalhes
             };
         }
@@ -4855,6 +4869,9 @@
                 }
             });
 
+            // Clean up global reference
+            window.currentSpellListUpdater = null;
+
             overlay.remove();
             popup.remove();
         };
@@ -4901,6 +4918,9 @@
                         tooltip.remove();
                     }
                 });
+
+                // Clean up global reference
+                window.currentSpellListUpdater = null;
 
                 popup.remove();
                 const overlay = document.getElementById('spells-overlay');
@@ -5190,6 +5210,10 @@
                 spellList.appendChild(spellContainer);
             });
         }
+        
+        // Make updateSpellList globally accessible for reactive updates
+        window.currentSpellListUpdater = updateSpellList;
+        
         updateSpellList();
 
         document.body.appendChild(popup);
@@ -7213,15 +7237,21 @@
         card.appendChild(chipsContainer);
 
         // Click para abrir modal de detalhes
-        card.onclick = () => {
-            createPowerDetailModal(power, true); // true = fechar apenas o modal, manter popup de poderes gerais
+        card.onclick = (e) => {
+            if (e.ctrlKey) {
+                // Se CTRL estiver pressionado, abrir modal de detalhamento
+                createPowerDetailModal(power);
+            } else {
+                // Clique normal - não faz nada, apenas visual
+                // (O comportamento original era abrir modal, mas vamos manter consistente com spells)
+            }
         };
 
         return card;
     }
 
     // Função para criar modal de detalhes do poder
-    function createPowerDetailModal(power, closeOnlyModal = false) {
+    function createPowerDetailModal(power) {
         // Remove modal existente se houver
         const existingModal = document.getElementById('power-detail-modal');
         if (existingModal) existingModal.remove();
@@ -7511,17 +7541,8 @@
             const template = `&{template:t20-info}{{infoname=${power.nome}}}{{description=${power.descricaoCompleta}}}`;
             sendToChat(template);
             showSuccessNotification(`Poder "${power.nome}" compartilhado no chat!`);
-            // Fechar seletivamente baseado no contexto
-            if (closeOnlyModal) {
-                // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
-                const modal = document.getElementById('power-detail-modal');
-                const overlay = document.getElementById('power-detail-overlay');
-                if (modal) modal.remove();
-                if (overlay) overlay.remove();
-            } else {
-                // Fechar todos os popups
-                closeAllPopups();
-            }
+            // Close all popups (consistent with spell behavior)
+            closeAllPopups();
         };
         buttonsContainer.appendChild(shareBtn);
 
@@ -7537,17 +7558,17 @@
             actionBtn.onclick = () => {
                 removeLearnedPower(power.nome);
                 showSuccessNotification(`Poder "${power.nome}" esquecido!`);
-                // Fechar seletivamente baseado no contexto
-                if (closeOnlyModal) {
-                    // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
-                    const modal = document.getElementById('power-detail-modal');
-                    const overlay = document.getElementById('power-detail-overlay');
-                    if (modal) modal.remove();
-                    if (overlay) overlay.remove();
-                } else {
-                    // Fechar todos os popups
-                    closeAllPopups();
+                
+                // Update the power list if it exists (reactive update)
+                if (typeof window.currentPowerListUpdater === 'function') {
+                    window.currentPowerListUpdater();
                 }
+                
+                // Close the detail modal (consistent with spell behavior)
+                const modal = document.getElementById('power-detail-modal');
+                const overlay = document.getElementById('power-detail-overlay');
+                if (modal) modal.remove();
+                if (overlay) overlay.remove();
             };
         } else {
             actionBtn.textContent = 'Aprender';
@@ -7556,17 +7577,17 @@
             actionBtn.onclick = () => {
                 addLearnedPower(power);
                 showSuccessNotification(`Poder "${power.nome}" aprendido!`);
-                // Fechar seletivamente baseado no contexto
-                if (closeOnlyModal) {
-                    // Fechar apenas o modal de detalhes, manter o popup de poderes gerais
-                    const modal = document.getElementById('power-detail-modal');
-                    const overlay = document.getElementById('power-detail-overlay');
-                    if (modal) modal.remove();
-                    if (overlay) overlay.remove();
-                } else {
-                    // Fechar todos os popups
-                    closeAllPopups();
+                
+                // Update the power list if it exists (reactive update)
+                if (typeof window.currentPowerListUpdater === 'function') {
+                    window.currentPowerListUpdater();
                 }
+                
+                // Close the detail modal (consistent with spell behavior)
+                const modal = document.getElementById('power-detail-modal');
+                const overlay = document.getElementById('power-detail-overlay');
+                if (modal) modal.remove();
+                if (overlay) overlay.remove();
             };
         }
         actionBtn.style.flex = '1';
@@ -8921,6 +8942,9 @@
             overlay.style.background = 'rgba(0,0,0,0.5)';
             overlay.style.zIndex = '10000';
             overlay.onclick = () => {
+                // Clean up global reference
+                window.currentPowerListUpdater = null;
+                
                 overlay.remove();
                 popup.remove();
             };
@@ -8963,6 +8987,9 @@
                 padding: '0',
                 color: '#ffb86c',
                 onClick: () => {
+                    // Clean up global reference
+                    window.currentPowerListUpdater = null;
+                    
                     popup.remove();
                     const overlay = document.getElementById('poderes-overlay');
                     if (overlay) overlay.remove();
@@ -9101,6 +9128,9 @@
 
             // Render inicial
             renderPowersList();
+            
+            // Make renderPowersList globally accessible for reactive updates
+            window.currentPowerListUpdater = () => renderPowersList(filterInput.value);
 
             // Adiciona o popup ao body
             document.body.appendChild(popup);
@@ -13387,7 +13417,7 @@
     }
 
     // Função para mostrar detalhes do poder
-    function showPowerDetails(powerName, closeOnlyModal = false) {
+    function showPowerDetails(powerName) {
         // Buscar o poder nos dados de poderes
         const powersData = getPowersList();
         let power = null;
@@ -13407,7 +13437,7 @@
         }
 
         if (power) {
-            createPowerDetailModal(power, closeOnlyModal);
+            createPowerDetailModal(power);
         } else {
             // Se não encontrar o poder, criar um modal básico
             const basicPower = {
@@ -13416,7 +13446,7 @@
                 categoria: 'Geral',
                 subtipo: 'Poder Aprendido'
             };
-            createPowerDetailModal(basicPower, closeOnlyModal);
+            createPowerDetailModal(basicPower);
         }
     }
 
