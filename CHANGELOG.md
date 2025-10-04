@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Missing Data Sources**: Fixed powers not being indexed in global search
 - **Search Completeness**: Ensured all game data is now searchable through the global search
+- **ESLint Configuration**: Fixed linting errors in scripts/extract-changelog.js by adding Node.js globals
 
 ### Technical Details
 - Updated `createSearchIndex()` function to include powers data with proper categorization

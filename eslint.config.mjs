@@ -116,5 +116,19 @@ export default defineConfig([
         process: "readonly"
       }
     }
+  },
+  {
+    files: ["scripts/**/*.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        __dirname: "readonly",
+        module: "writable",
+        require: "readonly",
+        process: "readonly",
+        console: "readonly"
+      }
+    }
   }
 ]);
