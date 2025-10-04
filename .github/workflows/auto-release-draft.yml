@@ -1,0 +1,138 @@
+name: Auto Draft Release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - 'docs/**'
+
+jobs:
+  draft-release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.15.0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.1'
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build extension
+        run: pnpm run build
+        
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          # Get the latest tag
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+          echo "Latest tag: $LATEST_TAG"
+          echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          
+          # Get the next version number
+          if [[ $LATEST_TAG =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR=${BASH_REMATCH[1]}
+            MINOR=${BASH_REMATCH[2]}
+            PATCH=${BASH_REMATCH[3]}
+            NEXT_PATCH=$((PATCH + 1))
+            NEXT_TAG="v${MAJOR}.${MINOR}.${NEXT_PATCH}"
+          else
+            # Fallback if tag format is unexpected
+            NEXT_TAG="v0.4.4"
+          fi
+          echo "Next tag: $NEXT_TAG"
+          echo "next_tag=$NEXT_TAG" >> $GITHUB_OUTPUT
+          
+      - name: Extract CHANGELOG content
+        id: changelog
+        run: |
+          # Extract the latest version section from CHANGELOG.md
+          if [ -f "CHANGELOG.md" ]; then
+            echo "📋 Extracting CHANGELOG content..."
+            
+            # Find the first version section (most recent)
+            CHANGELOG_CONTENT=$(awk '
+              /^## \[.*\]/ {
+                if (found) exit
+                found = 1
+                next
+              }
+              found && /^## \[/ { exit }
+              found { print }
+            ' CHANGELOG.md)
+            
+            if [ -n "$CHANGELOG_CONTENT" ]; then
+              echo "✅ CHANGELOG content extracted"
+              echo "changelog<<EOF" >> $GITHUB_OUTPUT
+              echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "⚠️ No CHANGELOG content found for latest version"
+              echo "changelog=No changelog content found for this version" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "❌ CHANGELOG.md not found"
+            echo "changelog=CHANGELOG.md not found" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create release package
+        run: |
+          cd dist/package
+          zip -r ../../tormenta20-hotbars-${{ steps.get_tag.outputs.next_tag }}.zip .
+          cd ../..
+          echo "📦 Package created: tormenta20-hotbars-${{ steps.get_tag.outputs.next_tag }}.zip"
+          
+      - name: Create Draft Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_tag.outputs.next_tag }}
+          name: "Release/${{ steps.get_tag.outputs.next_tag }}"
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
+            
+            ## 📦 Instalação
+            1. Baixe o arquivo `tormenta20-hotbars-${{ steps.get_tag.outputs.next_tag }}.zip`
+            2. Extraia o conteúdo em uma pasta
+            3. Abra `chrome://extensions/`
+            4. Ative o "Modo desenvolvedor"
+            5. Clique em "Carregar sem compactação"
+            6. Selecione a pasta extraída
+            7. Recarregue a página do Roll20
+            
+            ## 🔄 Sistema de Auto-Update
+            - Verificação automática a cada 24 horas
+            - Verificação manual nas configurações da extensão
+            - Notificações elegantes para novas versões
+          files: |
+            tormenta20-hotbars-${{ steps.get_tag.outputs.next_tag }}.zip
+          draft: true
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Output release info
+        run: |
+          echo "🎉 Draft release created successfully!"
+          echo "📋 Release: Release/${{ steps.get_tag.outputs.next_tag }}"
+          echo "🏷️  Tag: ${{ steps.get_tag.outputs.next_tag }}"
+          echo "📦 Package: tormenta20-hotbars-${{ steps.get_tag.outputs.next_tag }}.zip"
+          echo "📝 Description: Extracted from CHANGELOG.md"
+          echo ""
+          echo "🔗 To publish: https://github.com/${{ github.repository }}/releases"

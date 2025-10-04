@@ -1,0 +1,121 @@
+name: Manual Release Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to create release for (e.g., v0.4.4)'
+        required: true
+        default: 'v0.4.4'
+      use_changelog:
+        description: 'Use CHANGELOG content for description'
+        type: boolean
+        default: true
+
+jobs:
+  manual-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.15.0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.1'
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build extension
+        run: pnpm run build
+        
+      - name: Extract CHANGELOG content
+        id: changelog
+        if: ${{ inputs.use_changelog }}
+        run: |
+          if [ -f "CHANGELOG.md" ]; then
+            echo "📋 Extracting CHANGELOG content for version ${{ inputs.version }}..."
+            
+            # Extract content for the specific version
+            CHANGELOG_CONTENT=$(awk -v version="${{ inputs.version }}" '
+              BEGIN { found = 0; in_section = 0 }
+              /^## \[/ {
+                if (in_section) exit
+                if ($0 ~ "\\[" version "\\]") {
+                  found = 1
+                  in_section = 1
+                  next
+                }
+              }
+              in_section && /^## \[/ { exit }
+              in_section { print }
+            ' CHANGELOG.md)
+            
+            if [ -n "$CHANGELOG_CONTENT" ]; then
+              echo "✅ CHANGELOG content extracted for ${{ inputs.version }}"
+              echo "changelog<<EOF" >> $GITHUB_OUTPUT
+              echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "⚠️ No CHANGELOG content found for version ${{ inputs.version }}"
+              echo "changelog=No changelog content found for version ${{ inputs.version }}" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "❌ CHANGELOG.md not found"
+            echo "changelog=CHANGELOG.md not found" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create release package
+        run: |
+          cd dist/package
+          zip -r ../../tormenta20-hotbars-${{ inputs.version }}.zip .
+          cd ../..
+          echo "📦 Package created: tormenta20-hotbars-${{ inputs.version }}.zip"
+          
+      - name: Create Draft Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ inputs.version }}
+          name: "Release/${{ inputs.version }}"
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
+            
+            ## 📦 Instalação
+            1. Baixe o arquivo `tormenta20-hotbars-${{ inputs.version }}.zip`
+            2. Extraia o conteúdo em uma pasta
+            3. Abra `chrome://extensions/`
+            4. Ative o "Modo desenvolvedor"
+            5. Clique em "Carregar sem compactação"
+            6. Selecione a pasta extraída
+            7. Recarregue a página do Roll20
+            
+            ## 🔄 Sistema de Auto-Update
+            - Verificação automática a cada 24 horas
+            - Verificação manual nas configurações da extensão
+            - Notificações elegantes para novas versões
+          files: |
+            tormenta20-hotbars-${{ inputs.version }}.zip
+          draft: true
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Output release info
+        run: |
+          echo "🎉 Draft release created successfully!"
+          echo "📋 Release: Release/${{ inputs.version }}"
+          echo "🏷️  Tag: ${{ inputs.version }}"
+          echo "📦 Package: tormenta20-hotbars-${{ inputs.version }}.zip"
+          echo "📝 Description: ${{ steps.changelog.outputs.changelog == '' && 'Manual release' || 'From CHANGELOG.md' }}"
+          echo ""
+          echo "🔗 To publish: https://github.com/${{ github.repository }}/releases"

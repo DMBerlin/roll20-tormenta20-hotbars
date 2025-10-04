@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Poderes Raciais (Racial Powers) - 55 powers
 - **Power Click-to-Chat**: Powers can now be clicked in search results to share details in chat
 - **Complete Search Coverage**: Global search now indexes all 646 powers from the game system
+- **Update System Testing**: New test method `testNewVersionAvailable()` for testing the "new version available" modal
+- **Developer Tools**: Enhanced test suite with comprehensive update system testing capabilities
 
 ### Changed
 - **Search Index Expansion**: Global search now covers all available game data sources
@@ -32,6 +34,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Maintained backward compatibility with existing search functionality
 - Enhanced search indexing with error handling for missing data sources
 - **Build Results**: Successfully processed 646 powers during build process
+
+### Developer Tools
+- **Test Method**: `testNewVersionAvailable()` - Test the "new version available" modal in browser console
+- **Complete Test Suite**: `runAllTests()` - Execute all update system tests
+- **Documentation**: Added `TEST_METHODS.md` with comprehensive testing instructions
+- **Console Commands**: Enhanced test system with 7 different test methods
+- **Visual Testing**: Realistic modal simulation with proper styling and animations
 
 ### Search Statistics
 - **Total Searchable Items**: 1,000+ items across all categories
@@ -107,7 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Key Features |
 |---------|--------------|--------------|
-| 0.4.4   | 2025-10-04   | Complete search indexing (646 Powers) |
+| 0.4.4   | 2025-10-04   | Complete search indexing (646 Powers) + Developer testing tools |
 | 0.4.3   | 2025-10-03   | Food system, enhanced search |
 | 0.4.2   | 2025-09-XX   | Release pipeline fixes |
 | 0.4.1   | 2025-09-XX   | Auto-update system |
@@ -125,6 +134,30 @@ The global search (CTRL+SPACE) now covers:
 - ✅ **Foods & Drinks** (Special dishes and Artonian beverages)
 
 **Total Searchable Items**: 1,000+ items across all game data sources
+
+## Developer Testing
+
+### Browser Console Test Methods
+```javascript
+// Test the "new version available" modal
+testNewVersionAvailable()
+
+// Run all update system tests
+runAllTests()
+
+// Individual test methods
+testManualUpdateCheck()      // Manual update check
+testConfigInterface()        // Configuration modal
+testNotifications()          // Notification system
+testGitHubAPI()             // GitHub API connection
+testNoReleasesScenario()    // No releases scenario
+```
+
+### Test Documentation
+- **`TEST_METHODS.md`**: Comprehensive testing guide
+- **Visual Testing**: Realistic modal simulation with animations
+- **Console Logging**: Detailed interaction logging for debugging
+- **Auto-cleanup**: Prevents UI clutter during testing
 
 ## Installation
 
