@@ -1,7 +1,7 @@
 {
   "name": "roll20-tormenta20-hotbars",
   "displayName": "Tormenta 20 Hotbars",
-  "version": "0.4.4.99438",
+  "version": "0.4.5.60006",
   "description": "Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano",
   "engines": {
     "node": "^22.15.1",
