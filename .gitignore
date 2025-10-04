@@ -4,6 +4,7 @@
 /logs
 /temp
 /test
+/dist
 /test-results
 /test-results-*/
 /.idea
