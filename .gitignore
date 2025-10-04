@@ -1,10 +1,9 @@
 /node_modules
-/build
+/dist
 /coverage
 /logs
 /temp
 /test
-/dist
 /test-results
 /test-results-*/
 /.idea
