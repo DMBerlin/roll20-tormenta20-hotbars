@@ -42,6 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Console Commands**: Enhanced test system with 7 different test methods
 - **Visual Testing**: Realistic modal simulation with proper styling and animations
 
+### GitHub Workflows
+- **Auto Draft Release**: New workflow that automatically creates draft releases on main branch pushes
+- **Manual Release**: Manual trigger workflow for creating releases with specific versions
+- **CHANGELOG Integration**: Automatic extraction of CHANGELOG content for release descriptions
+- **Fixed Deploy Workflow**: Corrected malformed deploy.yml workflow for GitHub Pages
+- **Release Automation**: Complete CI/CD pipeline for automatic release management
+
 ### Search Statistics
 - **Total Searchable Items**: 1,000+ items across all categories
 - **Powers Indexed**: 646 powers (100% coverage)
@@ -116,7 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Key Features |
 |---------|--------------|--------------|
-| 0.4.4   | 2025-10-04   | Complete search indexing (646 Powers) + Developer testing tools |
+| 0.4.4   | 2025-10-04   | Complete search indexing (646 Powers) + Developer tools + GitHub workflows |
 | 0.4.3   | 2025-10-03   | Food system, enhanced search |
 | 0.4.2   | 2025-09-XX   | Release pipeline fixes |
 | 0.4.1   | 2025-09-XX   | Auto-update system |
@@ -134,6 +141,27 @@ The global search (CTRL+SPACE) now covers:
 - ✅ **Foods & Drinks** (Special dishes and Artonian beverages)
 
 **Total Searchable Items**: 1,000+ items across all game data sources
+
+## GitHub Workflows
+
+### Automatic Release Management
+- **Auto Draft Release**: Automatically creates draft releases on main branch pushes
+- **CHANGELOG Integration**: Extracts CHANGELOG content for release descriptions
+- **Version Detection**: Automatic next version detection based on latest tag
+- **Manual Release**: Manual trigger for creating releases with specific versions
+
+### Workflow Files
+- **`auto-release-draft.yml`**: Main automation workflow
+- **`manual-release.yml`**: Manual release creation
+- **`deploy.yml`**: GitHub Pages deployment (fixed)
+- **`extract-changelog.js`**: CHANGELOG extraction utility
+- **`GITHUB_WORKFLOWS.md`**: Complete documentation
+
+### CI/CD Pipeline
+- **Automatic Triggers**: Push to main → Draft release creation
+- **Build Process**: pnpm install → pnpm build → package creation
+- **Release Format**: "Release/[version]" with CHANGELOG content
+- **Draft Releases**: Review before publishing
 
 ## Developer Testing
 
@@ -158,6 +186,12 @@ testNoReleasesScenario()    // No releases scenario
 - **Visual Testing**: Realistic modal simulation with animations
 - **Console Logging**: Detailed interaction logging for debugging
 - **Auto-cleanup**: Prevents UI clutter during testing
+
+### GitHub Workflows
+- **`auto-release-draft.yml`**: Automatic draft release creation on main branch pushes
+- **`manual-release.yml`**: Manual release creation with version selection
+- **`extract-changelog.js`**: Utility script for CHANGELOG content extraction
+- **`GITHUB_WORKFLOWS.md`**: Complete workflow documentation and troubleshooting guide
 
 ## Installation
 
