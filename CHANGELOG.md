@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.5] - 2025-10-04
+
+### Changed
+- **GitHub Workflows**: Completely rebuilt release automation system
+  - Removed all non-working workflow files
+  - Created single, focused workflow that triggers on tag pushes
+  - Automatic draft release creation with CHANGELOG content extraction
+  - Simplified release process - just push a tag and review the draft
+
+### Fixed
+- **Release Pipeline**: Fixed automated release process that wasn't working
+- **Workflow Complexity**: Removed unnecessary workflow files and complexity
+
+### Technical Details
+- New `release.yml` workflow triggers on version tags (v*.*.*)
+- Automatic CHANGELOG content extraction using existing script
+- Draft releases created automatically for review before publishing
+
 ## [0.4.4] - 2025-10-04
 
 ### Added
