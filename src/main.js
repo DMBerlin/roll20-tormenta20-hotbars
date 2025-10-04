@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.3'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.4'; // Última tag Git
 
     const logger = window.console;
 
