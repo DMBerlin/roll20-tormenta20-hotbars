@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.5'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.5.25765'; // Última tag Git
 
     const logger = window.console;
 
@@ -8108,27 +8108,27 @@
         });
 
         // Funcionalidade do botão
-        updateCheckButton.addEventListener('click', () => {
+        updateCheckButton.addEventListener('click', async () => {
             updateCheckButton.textContent = '⏳ Verificando...';
             updateCheckButton.disabled = true;
             updateCheckButton.style.opacity = '0.7';
             updateCheckButton.style.cursor = 'not-allowed';
 
-            // Chamar verificação manual de updates
-            if (window.tormenta20CheckForUpdates) {
-                window.tormenta20CheckForUpdates();
-            } else {
-                // Fallback: mostrar instruções de verificação manual
-                showManualUpdateInstructions();
-            }
-
-            // Restaurar botão após 3 segundos
-            setTimeout(() => {
+            try {
+                // Chamar verificação manual de updates
+                if (window.tormenta20CheckForUpdates) {
+                    await window.tormenta20CheckForUpdates();
+                } else {
+                    // Fallback: mostrar instruções de verificação manual
+                    showManualUpdateInstructions();
+                }
+            } finally {
+                // Restaurar botão após a verificação completar
                 updateCheckButton.textContent = '🔍 Verificar Atualizações';
                 updateCheckButton.disabled = false;
                 updateCheckButton.style.opacity = '1';
                 updateCheckButton.style.cursor = 'pointer';
-            }, 3000);
+            }
         });
 
         updateCheckSection.appendChild(updateCheckTitle);

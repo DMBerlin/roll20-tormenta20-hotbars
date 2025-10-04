@@ -473,7 +473,35 @@ class UpdateChecker {
     });
   }
 
+  stripMarkdown(text) {
+    if (!text) return '';
+
+    return text
+      // Remove CHANGELOG extraction markers
+      .replace(/✅ CHANGELOG content extracted:[\s\S]*?---/g, '')
+      // Remove headers
+      .replace(/#{1,6}\s+/g, '')
+      // Remove bold/italic
+      .replace(/(\*\*|__)(.*?)\1/g, '$2')
+      .replace(/(\*|_)(.*?)\1/g, '$2')
+      // Remove links but keep text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Remove code blocks
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      // Remove list markers
+      .replace(/^\s*[-*+]\s+/gm, '')
+      .replace(/^\s*\d+\.\s+/gm, '')
+      // Clean up extra whitespace
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
   createUpdateNotification(release) {
+    const cleanDescription = this.stripMarkdown(release.body || '');
+    const shortDescription = cleanDescription.substring(0, 100);
+    const displayText = shortDescription + (cleanDescription.length > 100 ? '...' : '');
+
     const notification = document.createElement('div');
     notification.id = 'tormenta20-update-notification';
     notification.innerHTML = `
@@ -486,7 +514,7 @@ class UpdateChecker {
                 padding: 20px;
                 border-radius: 10px;
                 box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-                z-index: 10000;
+                z-index: 99999;
                 max-width: 350px;
                 font-family: Arial, sans-serif;
                 animation: slideIn 0.3s ease-out;
@@ -509,8 +537,8 @@ class UpdateChecker {
                     <div style="font-size: 14px; margin-bottom: 5px;">
                         <strong>Versão ${release.tag_name}</strong> está disponível
                     </div>
-                    <div style="font-size: 12px; opacity: 0.9;">
-                        ${release.body ? release.body.substring(0, 100) + '...' : 'Melhorias e correções'}
+                    <div style="font-size: 12px; opacity: 0.9; line-height: 1.4;">
+                        ${displayText || 'Melhorias e correções'}
                     </div>
                 </div>
                 <div style="display: flex; gap: 10px;">
@@ -640,128 +668,24 @@ class UpdateChecker {
       try {
         console.log('🔍 Verificação manual de updates iniciada...');
 
-        // Mostrar feedback visual
-        this.showCheckingFeedback();
+        // Clear the notification flag to allow re-showing the notification
+        const response = await fetch(this.updateApiUrl);
+        if (response.ok) {
+          await response.json();
+          localStorage.removeItem(this.updateNotificationKey);
+        }
 
         // Forçar verificação imediata
         await this.checkForUpdates();
 
-        // Mostrar resultado
-        this.showCheckResult();
-
       } catch (error) {
         console.error('❌ Erro na verificação manual:', error);
-        this.showCheckError(error);
+        this.showErrorMessage(error);
       }
     };
 
     // Expose manual check function globally
     window.tormenta20CheckForUpdates = checkForUpdates;
-  }
-
-  showCheckingFeedback() {
-    // Criar notificação de verificação
-    const feedback = document.createElement('div');
-    feedback.id = 'tormenta20-checking-feedback';
-    feedback.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                z-index: 10000;
-                font-family: Arial, sans-serif;
-                animation: slideIn 0.3s ease-out;
-            ">
-                <div style="display: flex; align-items: center;">
-                    <div style="
-                        width: 20px;
-                        height: 20px;
-                        border: 2px solid rgba(255,255,255,0.3);
-                        border-top: 2px solid white;
-                        border-radius: 50%;
-                        animation: spin 1s linear infinite;
-                        margin-right: 10px;
-                    "></div>
-                    <div style="font-weight: bold;">Verificando atualizações...</div>
-                </div>
-            </div>
-            <style>
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-            </style>
-        `;
-
-    document.body.appendChild(feedback);
-
-    // Remover após 3 segundos
-    setTimeout(() => {
-      if (feedback.parentNode) {
-        feedback.parentNode.removeChild(feedback);
-      }
-    }, 3000);
-  }
-
-  showCheckResult() {
-    // Criar notificação de resultado
-    const result = document.createElement('div');
-    result.id = 'tormenta20-check-result';
-    result.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                z-index: 10000;
-                font-family: Arial, sans-serif;
-                animation: slideIn 0.3s ease-out;
-            ">
-                <div style="display: flex; align-items: center;">
-                    <div style="
-                        width: 20px;
-                        height: 20px;
-                        background: white;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        margin-right: 10px;
-                        font-size: 12px;
-                        color: #4CAF50;
-                    ">✓</div>
-                    <div style="font-weight: bold;">Verificação concluída!</div>
-                </div>
-            </div>
-            <style>
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            </style>
-        `;
-
-    document.body.appendChild(result);
-
-    // Remover após 2 segundos
-    setTimeout(() => {
-      if (result.parentNode) {
-        result.parentNode.removeChild(result);
-      }
-    }, 2000);
   }
 
   showCheckError(error) {
