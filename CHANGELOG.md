@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Poderes Raciais (Racial Powers) - 55 powers
 - **Power Click-to-Chat**: Powers can now be clicked in search results to share details in chat
 - **Complete Search Coverage**: Global search now indexes all 646 powers from the game system
+- **Search Details Modal**: All search results now open detail modals instead of immediately sharing to chat
+- **Generic Detail Modal**: New `createGenericDetailModal()` function for consistent item detail display
 - **Update System Testing**: New test method `testNewVersionAvailable()` for testing the "new version available" modal
 - **Developer Tools**: Enhanced test suite with comprehensive update system testing capabilities
 
@@ -23,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Search Index Expansion**: Global search now covers all available game data sources
 - **Improved Search Performance**: Enhanced search indexing with proper error handling and fallbacks
 - **Search Placeholder**: Updated search placeholder to include powers reference
+- **Search Click Behavior**: All search results now open detail modals instead of immediately sharing to chat
+- **Item Detail Display**: Consistent detail modal experience for all item types (powers, divinities, combat powers, etc.)
 
 ### Fixed
 - **Missing Data Sources**: Fixed powers not being indexed in global search

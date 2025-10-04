@@ -22,7 +22,7 @@
     const DEFAULT_ICON = 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg';
 
     // Sistema de versão do script (atualizar manualmente conforme as tags Git)
-    const SCRIPT_VERSION = '0.4.4'; // Última tag Git
+    const SCRIPT_VERSION = '0.4.4.69302'; // Última tag Git
 
     const logger = window.console;
 
@@ -16037,6 +16037,157 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
         resultsContainer.appendChild(placeholder);
     }
 
+    // Função para criar modal genérico de detalhes
+    function createGenericDetailModal(name, description, category, icon) {
+        // Remove modal existente se houver
+        const existingModal = document.getElementById('generic-detail-modal');
+        if (existingModal) existingModal.remove();
+        const existingOverlay = document.getElementById('generic-detail-overlay');
+        if (existingOverlay) existingOverlay.remove();
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'generic-detail-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.zIndex = '10002';
+        overlay.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+        document.body.appendChild(overlay);
+
+        // Modal
+        const modal = document.createElement('div');
+        modal.id = 'generic-detail-modal';
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.background = 'rgba(30,30,40,0.98)';
+        modal.style.border = '2px solid #6ec6ff';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '20px';
+        modal.style.zIndex = '10003';
+        modal.style.maxWidth = '500px';
+        modal.style.maxHeight = '80vh';
+        modal.style.overflowY = 'auto';
+        modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+
+        // Cabeçalho
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.alignItems = 'center';
+        header.style.marginBottom = '20px';
+        header.style.paddingBottom = '15px';
+        header.style.borderBottom = '1px solid rgba(110,198,255,0.3)';
+
+        // Ícone
+        const iconElement = document.createElement('div');
+        iconElement.textContent = icon;
+        iconElement.style.fontSize = '24px';
+        iconElement.style.marginRight = '12px';
+
+        // Nome e categoria
+        const titleContainer = document.createElement('div');
+        titleContainer.style.flex = '1';
+
+        const nameElement = document.createElement('div');
+        nameElement.textContent = name;
+        nameElement.style.color = '#6ec6ff';
+        nameElement.style.fontSize = '18px';
+        nameElement.style.fontWeight = 'bold';
+        nameElement.style.marginBottom = '4px';
+
+        const categoryElement = document.createElement('div');
+        categoryElement.textContent = category;
+        categoryElement.style.color = '#888';
+        categoryElement.style.fontSize = '14px';
+
+        titleContainer.appendChild(nameElement);
+        titleContainer.appendChild(categoryElement);
+
+        // Botão de fechar
+        const closeButton = document.createElement('button');
+        closeButton.textContent = '×';
+        closeButton.style.background = 'none';
+        closeButton.style.border = 'none';
+        closeButton.style.color = '#ecf0f1';
+        closeButton.style.fontSize = '20px';
+        closeButton.style.cursor = 'pointer';
+        closeButton.style.padding = '4px 8px';
+        closeButton.style.borderRadius = '4px';
+        closeButton.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+
+        header.appendChild(iconElement);
+        header.appendChild(titleContainer);
+        header.appendChild(closeButton);
+
+        // Descrição
+        const descriptionElement = document.createElement('div');
+        descriptionElement.innerHTML = description || 'Nenhuma descrição disponível.';
+        descriptionElement.style.color = '#ecf0f1';
+        descriptionElement.style.lineHeight = '1.6';
+        descriptionElement.style.fontSize = '14px';
+
+        // Botões de ação
+        const actionsContainer = document.createElement('div');
+        actionsContainer.style.display = 'flex';
+        actionsContainer.style.gap = '10px';
+        actionsContainer.style.marginTop = '20px';
+        actionsContainer.style.paddingTop = '15px';
+        actionsContainer.style.borderTop = '1px solid rgba(110,198,255,0.3)';
+
+        // Botão de compartilhar
+        const shareButton = document.createElement('button');
+        shareButton.textContent = 'Compartilhar no Chat';
+        shareButton.style.background = '#4CAF50';
+        shareButton.style.color = 'white';
+        shareButton.style.border = 'none';
+        shareButton.style.padding = '10px 16px';
+        shareButton.style.borderRadius = '6px';
+        shareButton.style.cursor = 'pointer';
+        shareButton.style.fontSize = '14px';
+        shareButton.onclick = () => {
+            const template = `&{template:t20-info}{{infoname=${name}}}{{description=${description || ''}}}`;
+            sendToChat(template);
+            showSuccessNotification(`${category} "${name}" compartilhado no chat!`);
+            overlay.remove();
+            modal.remove();
+        };
+
+        // Botão de fechar
+        const closeActionButton = document.createElement('button');
+        closeActionButton.textContent = 'Fechar';
+        closeActionButton.style.background = 'transparent';
+        closeActionButton.style.color = '#6ec6ff';
+        closeActionButton.style.border = '1px solid #6ec6ff';
+        closeActionButton.style.padding = '10px 16px';
+        closeActionButton.style.borderRadius = '6px';
+        closeActionButton.style.cursor = 'pointer';
+        closeActionButton.style.fontSize = '14px';
+        closeActionButton.onclick = () => {
+            overlay.remove();
+            modal.remove();
+        };
+
+        actionsContainer.appendChild(shareButton);
+        actionsContainer.appendChild(closeActionButton);
+
+        // Montar modal
+        modal.appendChild(header);
+        modal.appendChild(descriptionElement);
+        modal.appendChild(actionsContainer);
+        overlay.appendChild(modal);
+    }
+
     // Função para lidar com clique em item da busca
     function handleSearchItemClick(item) {
         // Remove o modal de busca
@@ -16144,21 +16295,13 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 break;
             }
             case 'combat_power': {
-                // Mostra detalhes do poder no chat
-                const template = `&{template:t20-info}{{infoname=${item.data.name || 'Poder de Combate'}}}{{description=${item.data.description || ''}}}`;
-                sendToChat(template);
-                showSuccessNotification(`Poder "${item.name}" compartilhado no chat!`);
-                // Fechar todos os popups abertos
-                closeAllPopups();
+                // Abre o modal de detalhes do poder de combate
+                createGenericDetailModal(item.name, item.data.description || '', 'Poder de Combate', '⚔️');
                 break;
             }
             case 'divinity': {
-                // Mostra detalhes da divindade no chat
-                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
-                sendToChat(template);
-                showSuccessNotification(`Divindade "${item.name}" compartilhada no chat!`);
-                // Fechar todos os popups abertos
-                closeAllPopups();
+                // Abre o modal de detalhes da divindade
+                createGenericDetailModal(item.name, item.description || '', 'Divindade', '⚡');
                 break;
             }
             case 'ability': {
@@ -16167,28 +16310,18 @@ ${conditionData.efeitos || conditionData.descricao}}}`;
                 break;
             }
             case 'destiny_power': {
-                // Mostra detalhes do poder de destino no chat
-                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || ''}}}`;
-                sendToChat(template);
-                showSuccessNotification(`Poder de Destino "${item.name}" compartilhado no chat!`);
-                // Fechar todos os popups abertos
-                closeAllPopups();
+                // Abre o modal de detalhes do poder de destino
+                createGenericDetailModal(item.name, item.description || '', 'Poder de Destino', '⭐');
                 break;
             }
             case 'power': {
-                // Mostra detalhes do poder no chat
-                const template = `&{template:t20-info}{{infoname=${item.name}}}{{description=${item.effects || item.description || ''}}}`;
-                sendToChat(template);
-                showSuccessNotification(`Poder "${item.name}" compartilhado no chat!`);
-                // Fechar todos os popups abertos
-                closeAllPopups();
+                // Abre o modal de detalhes do poder
+                createPowerDetailModal(item.data);
                 break;
             }
             default:
-                // Envia para o chat
-                sendToChat(`&{template:t20-info}{{infoname=${item.name}}}{{description=${item.description || item.effects || ''}}}`);
-                // Fechar todos os popups abertos
-                closeAllPopups();
+                // Abre o modal genérico de detalhes
+                createGenericDetailModal(item.name, item.description || item.effects || '', 'Item', '📄');
                 break;
         }
     }
