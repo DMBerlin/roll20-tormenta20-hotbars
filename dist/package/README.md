@@ -1,4 +1,4 @@
-# Tormenta20 Hotbars
+# roll20-tormenta20-hotbars
 
 ## Descrição
 Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo do Ano
@@ -25,9 +25,9 @@ Chrome Extension que adiciona hotbars ao Roll20 para o sistema Tormenta20: Jogo 
 - Uma hotbar flutuante aparecerá na tela
 
 ## Versão
-- Versão: 0.4.4
+- Versão: 0.4.5
 - Branch: main
-- Build: 2025-10-04T19:27:15.205Z
+- Build: 2025-10-04T19:29:53.067Z
 
 ## Autor
 Daniel Marinho Goncalves
