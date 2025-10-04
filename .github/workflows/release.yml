@@ -1,4 +1,4 @@
-name: Create Draft Release
+name: Create Release with Package
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  create-release:
+  build-and-release:
     runs-on: ubuntu-latest
     
     steps:
@@ -21,7 +21,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Extract version from tag
         id: version
@@ -31,6 +39,28 @@ jobs:
           echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+      - name: Update version in files
+        run: |
+          # Update package.json version to match the tag
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            pkg.version = '${{ steps.version.outputs.version }}';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+          "
+          
+          # Update version in main.js
+          sed -i "s/const SCRIPT_VERSION = '[^']*'/const SCRIPT_VERSION = '${{ steps.version.outputs.version }}'/" src/main.js
+
+      - name: Build extension package
+        run: pnpm build
+
+      - name: Create ZIP package
+        run: |
+          cd dist/package
+          zip -r ../../tormenta20-hotbars-${{ steps.version.outputs.version }}.zip .
+          cd ../..
+
       - name: Extract CHANGELOG content
         id: changelog
         run: |
@@ -39,13 +69,25 @@ jobs:
           echo "$CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Create Draft Release
+      - name: Create Release with Package
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: Release ${{ steps.version.outputs.tag }}
-          body: ${{ steps.changelog.outputs.content }}
-          draft: true
+          body: |
+            ${{ steps.changelog.outputs.content }}
+            
+            ## 📦 Installation
+            
+            1. Download `tormenta20-hotbars-${{ steps.version.outputs.version }}.zip`
+            2. Extract the ZIP file
+            3. Open Chrome and go to `chrome://extensions/`
+            4. Enable "Developer mode"
+            5. Click "Load unpacked" and select the extracted folder
+            6. Navigate to Roll20 and enjoy your new hotbars!
+          draft: false
           prerelease: false
+          files: |
+            tormenta20-hotbars-${{ steps.version.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
