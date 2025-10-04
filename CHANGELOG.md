@@ -1,0 +1,139 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.4.4] - 2025-10-04
+
+### Added
+- **Global Search Enhancement**: Powers are now fully indexed in the global search (CTRL+SPACE)
+- **Comprehensive Power Search**: All power categories are now searchable:
+  - Poderes de Classe (Class Powers) - 393 powers
+  - Poderes Gerais (General Powers) - 163 powers
+  - Poderes de Origem (Origin Powers) - 35 powers
+  - Poderes Raciais (Racial Powers) - 55 powers
+- **Power Click-to-Chat**: Powers can now be clicked in search results to share details in chat
+- **Complete Search Coverage**: Global search now indexes all 646 powers from the game system
+
+### Changed
+- **Search Index Expansion**: Global search now covers all available game data sources
+- **Improved Search Performance**: Enhanced search indexing with proper error handling and fallbacks
+- **Search Placeholder**: Updated search placeholder to include powers reference
+
+### Fixed
+- **Missing Data Sources**: Fixed powers not being indexed in global search
+- **Search Completeness**: Ensured all game data is now searchable through the global search
+
+### Technical Details
+- Updated `createSearchIndex()` function to include powers data with proper categorization
+- Added power click handler in `handleSearchItemClick()` for chat integration
+- Maintained backward compatibility with existing search functionality
+- Enhanced search indexing with error handling for missing data sources
+- **Build Results**: Successfully processed 646 powers during build process
+
+### Search Statistics
+- **Total Searchable Items**: 1,000+ items across all categories
+- **Powers Indexed**: 646 powers (100% coverage)
+- **Search Performance**: Optimized for large datasets
+- **Error Handling**: Graceful fallbacks for missing data sources
+
+## [0.4.3] - 2025-10-03
+
+### Added
+- **Food System**: Complete implementation of special dishes and Artonian drinks
+- **Enhanced Search**: Global search now includes foods and drinks
+- **Food Categories**: 
+  - Pratos Especiais (Special Dishes)
+  - Bebidas Artonianas (Artonian Drinks)
+
+### Changed
+- **Search Coverage**: Expanded global search to include all game data sources
+- **UI Improvements**: Enhanced search interface with better categorization
+
+### Fixed
+- **Search Indexing**: Fixed missing data sources in global search
+- **Performance**: Optimized search indexing for better performance
+
+## [0.4.2] - 2025-09-XX
+
+### Fixed
+- **Release Pipeline**: Fixed issues with automated release process
+- **Version Management**: Improved version checking and validation
+
+### Changed
+- **Build Process**: Enhanced build pipeline for better reliability
+
+## [0.4.1] - 2025-09-XX
+
+### Added
+- **Auto-Update System**: Implemented automatic update checking and installation
+- **Version Management**: Added comprehensive version tracking and validation
+- **Update Notifications**: Users receive notifications for available updates
+
+### Changed
+- **User Experience**: Streamlined update process for better user experience
+- **Performance**: Optimized update checking to reduce impact on performance
+
+## [0.4.0] - 2025-09-XX
+
+### Added
+- **Global Search System**: Implemented CTRL+SPACE global search functionality
+- **Smart Search**: Added text normalization and partial matching
+- **Search Categories**: 
+  - Magias (Spells) - All circles and traditions
+  - Poções (Potions)
+  - Condições (Conditions)
+  - Perícias (Skills)
+  - Poderes (Powers) - *Added in 0.4.4*
+  - Pratos e Bebidas (Foods & Drinks) - *Added in 0.4.3*
+
+### Changed
+- **Search Algorithm**: Implemented relevance-based sorting
+- **User Interface**: Enhanced search modal with better visual design
+- **Performance**: Optimized search indexing for large datasets
+
+### Technical Details
+- **Search Features**:
+  - Smart text normalization (removes accents, handles special characters)
+  - Partial word matching (e.g., "bola fogo" finds "Bola de Fogo")
+  - Relevance-based sorting (exact matches first, then partial matches)
+  - Click-to-chat integration for all item types
+
+---
+
+## Version History
+
+| Version | Release Date | Key Features |
+|---------|--------------|--------------|
+| 0.4.4   | 2025-10-04   | Complete search indexing (646 Powers) |
+| 0.4.3   | 2025-10-03   | Food system, enhanced search |
+| 0.4.2   | 2025-09-XX   | Release pipeline fixes |
+| 0.4.1   | 2025-09-XX   | Auto-update system |
+| 0.4.0   | 2025-09-XX   | Global search system |
+
+## Search Coverage
+
+The global search (CTRL+SPACE) now covers:
+
+- ✅ **646 Powers** (Class: 393, General: 163, Origin: 35, Racial: 55)
+- ✅ **200 Spells** (Arcana, Divina, Universal - All circles)
+- ✅ **39 Potions** (All types and effects)
+- ✅ **33 Conditions** (All status effects)
+- ✅ **Skills** (All character skills)
+- ✅ **Foods & Drinks** (Special dishes and Artonian beverages)
+
+**Total Searchable Items**: 1,000+ items across all game data sources
+
+## Installation
+
+For installation instructions, see the [README.md](README.md) file.
+
+## Contributing
+
+Contributions are welcome! Please see the repository for contribution guidelines.
+
+## License
+
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
