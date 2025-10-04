@@ -188,6 +188,186 @@ function testNoReleasesScenario() {
   console.log('✅ Notificação de "nenhuma release" exibida');
 }
 
+// Função para testar modal de "nova versão disponível"
+function testNewVersionAvailable() {
+  console.log('🧪 Testando modal de "nova versão disponível"...');
+
+  // Dados de teste para simular uma nova versão
+  const mockUpdateData = {
+    version: '0.4.4',
+    tag: 'v0.4.4',
+    description: 'Nova versão com melhorias na busca global e indexação de poderes',
+    html_url: 'https://github.com/DMBerlin/roll20-tormenta20-hotbars/releases/tag/v0.4.4',
+    published_at: new Date().toISOString(),
+    name: 'Release 0.4.4: Complete Search Indexing'
+  };
+
+  // Simular notificação de nova versão disponível
+  const notification = document.createElement('div');
+  notification.id = 'tormenta20-update-notification-test';
+  notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10000;
+            max-width: 350px;
+            font-family: Arial, sans-serif;
+            animation: slideIn 0.3s ease-out;
+        ">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <div style="
+                    width: 24px;
+                    height: 24px;
+                    background: #4CAF50;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 10px;
+                    font-size: 14px;
+                ">🆕</div>
+                <div style="font-weight: bold; font-size: 16px;">Nova Versão Disponível!</div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <div style="font-size: 14px; margin-bottom: 5px;">
+                    <strong>Versão ${mockUpdateData.version}</strong> está disponível
+                </div>
+                <div style="font-size: 12px; opacity: 0.9;">
+                    ${mockUpdateData.description}
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="test-update-download-btn" style="
+                    background: #4CAF50;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    font-weight: bold;
+                ">Baixar Atualização</button>
+                <button id="test-update-dismiss-btn" style="
+                    background: transparent;
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 12px;
+                ">Depois</button>
+            </div>
+        </div>
+        <style>
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        </style>
+    `;
+
+  document.body.appendChild(notification);
+
+  // Adicionar event listeners para os botões
+  notification.querySelector('#test-update-download-btn').addEventListener('click', () => {
+    console.log('🔗 Simulando clique em "Baixar Atualização"');
+    console.log('📦 URL da release:', mockUpdateData.html_url);
+
+    // Simular abertura da página de release
+    const releaseUrl = mockUpdateData.html_url;
+    console.log('🌐 Abrindo URL:', releaseUrl);
+
+    // Mostrar instruções de instalação
+    showTestInstallationInstructions();
+
+    notification.remove();
+  });
+
+  notification.querySelector('#test-update-dismiss-btn').addEventListener('click', () => {
+    console.log('❌ Simulando clique em "Depois"');
+    notification.remove();
+  });
+
+  // Auto-remover após 30 segundos
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 30000);
+
+  console.log('✅ Modal de "nova versão disponível" exibido');
+  console.log('📊 Dados da versão:', mockUpdateData);
+}
+
+// Função para mostrar instruções de instalação de teste
+function showTestInstallationInstructions() {
+  const instructions = document.createElement('div');
+  instructions.id = 'tormenta20-test-installation-instructions';
+  instructions.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10001;
+            max-width: 500px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        ">
+            <h3 style="margin-top: 0; color: #667eea;">📦 Instruções de Instalação (TESTE)</h3>
+            <p>Este é um teste do sistema de atualização. Para instalar uma nova versão:</p>
+            <ol style="line-height: 1.6;">
+                <li>Baixe o arquivo <code>tormenta20-hotbars-[versão].zip</code> da release</li>
+                <li>Extraia o arquivo ZIP</li>
+                <li>Abra <code>chrome://extensions/</code></li>
+                <li>Ative o "Modo desenvolvedor"</li>
+                <li>Clique em "Carregar sem compactação"</li>
+                <li>Selecione a pasta extraída</li>
+            </ol>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <strong>🧪 Modo Teste:</strong> Esta é uma simulação do sistema de atualização.
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="close-test-instructions" style="
+                    background: #667eea;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                ">Fechar</button>
+            </div>
+        </div>
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+        "></div>
+    `;
+
+  document.body.appendChild(instructions);
+
+  instructions.querySelector('#close-test-instructions').addEventListener('click', () => {
+    instructions.remove();
+  });
+
+  console.log('📋 Instruções de instalação de teste exibidas');
+}
+
 // Função para executar todos os testes
 function runAllTests() {
   console.log('🚀 Executando todos os testes do sistema de auto-update...');
@@ -213,6 +393,10 @@ function runAllTests() {
   console.log('\n5️⃣ Testando cenário de "nenhuma release"...');
   testNoReleasesScenario();
 
+  // Teste 6: Modal de "nova versão disponível"
+  console.log('\n6️⃣ Testando modal de "nova versão disponível"...');
+  testNewVersionAvailable();
+
   console.log('\n✅ Todos os testes executados!');
   console.log('💡 Verifique os resultados acima e o comportamento visual');
 }
@@ -223,6 +407,7 @@ window.testConfigInterface = testConfigInterface;
 window.testNotifications = testNotifications;
 window.testGitHubAPI = testGitHubAPI;
 window.testNoReleasesScenario = testNoReleasesScenario;
+window.testNewVersionAvailable = testNewVersionAvailable;
 window.runAllTests = runAllTests;
 
 // Executar testes automaticamente se estiver em modo de desenvolvimento
@@ -238,4 +423,5 @@ console.log('   - testConfigInterface()');
 console.log('   - testNotifications()');
 console.log('   - testGitHubAPI()');
 console.log('   - testNoReleasesScenario()');
+console.log('   - testNewVersionAvailable()  ← NOVO: Testa modal de nova versão');
 console.log('   - runAllTests()');
