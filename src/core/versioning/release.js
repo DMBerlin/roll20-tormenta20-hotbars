@@ -120,7 +120,7 @@ function main() {
   const messageArg = process.argv.find(arg => arg.startsWith('--message='));
 
   const newVersion = versionArg ? versionArg.split('=')[1] : null;
-  const releaseMessage = messageArg ? messageArg.split('=')[1] : 'Nova versão com melhorias e correções';
+  const releaseMessage = messageArg ? messageArg.split('=')[1] : `Build: Release/${newVersion}`;
 
   if (!newVersion) {
     console.error('❌ Versão não especificada. Use --version=1.0.0');
